@@ -93,14 +93,23 @@ restore. It does not assert a production signature or remote trust policy.
 The subsequent installed PostgreSQL/object composition attempt failed before
 execution because the source unit fixture's published Core1.0.2 manifest differs
 from the prepared artifact's exact manifest. Its compiler failure and successful
-owned container cleanup are retained locally. A separately labeled exact-manifest
-synthetic source-input retry is in progress; no committed fixture or compiler
-identity check was weakened. Whole Runtime restore remains unqualified.
+owned container cleanup are retained locally. The exact-manifest retry then exposed a PostgreSQL bootstrap readiness race,
+corrected with a TCP probe. Republishing in the acquired home returned the same
+specification but different artifact digest, so the compiler correctly refused
+that identity. An original-home seed later executed successfully, then the
+outdated readback fixture rejected the result's output metadata as an OutputRef
+instead of parsing its nested `ref`. The corrected readback then reached the journal checks and exposed another
+fixture mismatch: direct generated execution stores its launch in `Run.result`,
+while the harness expected the detached dispatcher's separate `RunExecutionIntent`.
+The next owned check retains exact Run-row/launch digests and explicitly requires
+zero detached intents for this direct path. Its result is pending.
+No committed fixture or compiler identity check was weakened. Whole Runtime
+restore remains unqualified.
 
 ## Remaining gates and decisions
 
-The [complete28-row map](../a58-integrity-checkpoint/campaign-gates-current-207300bf.json)
-still controls. Its historical current-source aggregate gap now has the exact
+The [refreshed complete28-row map](matrix-current-a59.json) preserves every
+original acceptance and matrix reference; the original full scope still controls. Its historical current-source aggregate gap now has the exact
 a90 coverage514 passing receipt above; this later fixture/CI source still needs
 its own normal hosted result. Remaining work includes mandatory genuine-client
 typed execution/reconnect, complete authoring/UI/accessibility and domain
@@ -125,3 +134,14 @@ advisory diagnostic limits, quoted Python fallback, capability-local fixture
 gates, raw-byte checkout stability and distinct fresh consumer profiles in the
 canonical repository operations guide. Review proposals are integrated there.
 Upstream disposition: none.
+
+## Durable engineering bundle
+
+Library `libfile_3ad76c34f5e88191a3d66cf5e540f70f` v0 retains
+`actions-327-a59-engineering-qualification.zip`,15,657,713 bytes, SHA256
+`062bee7cd5eb733fd5466d8e04f32c39351a8fe0af16e7f8c09e2bc6aec115f0`.
+Its65 verified members include exact Runtime59/Core8/Work Items2 wheels,
+lock-derived constraints, installed/source qualification and dual-view SBOM
+evidence frozen at checkpoint1f1c7edf. It contains no RCC archive, datadir,
+credentials or screenshots. This is not the immutable a57 owner retest bundle.
+Later restore attempts and matrix edits remain separate source evidence.

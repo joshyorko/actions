@@ -1,0 +1,1124 @@
+{
+  "schema": "actions-next-327-campaign-gate-audit/v1",
+  "audit_date": "2026-10-26",
+  "checkout": {
+    "repo": "joshyorko/actions",
+    "integration_head": "a90d6cdb8af8b07bf534953903f157d003a4d322",
+    "integration_tree": "cd8f99d859bdb9626aed38d96d39a3d8c1f967d6",
+    "product_source_commit": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+    "product_artifact_source_commit": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+    "product_artifact_tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+    "note": "Working tree contains CI/test-only changes; no Runtime/Core/Work Items source, version, or lock changed in this round.",
+    "product_checkpoint": "a59 installed artifact"
+  },
+  "authority": "Issue #327; draft PR #328. Full unreduced matrix in docs/program/actions-next-release-327.md remains controlling.",
+  "campaign_disposition": "NOT READY / NO-GO. No merge, release, publication, production deployment, Dakota action, or artifact download is authorized by this refresh.",
+  "immutable_statuses": {
+    "a56_cancellation": "PASS for bounded installed single-owner cancellation, exact children absent before Runtime stop, public reads/replay/restart; source 88846b55e3b455eb44378bd5ba43bb146706661d.",
+    "a56_postgres_knowledge": "PASS for bounded installed TLS PostgreSQL Knowledge ingest/search, RCC pass/fail, restart readback and transport/auth negatives; source 88846b55e3b455eb44378bd5ba43bb146706661d.",
+    "a56_node_modern_auto": "PASS for installed a56 synchronous generic Robot pass/fail, artifacts, restart reads and natural exit under unmodified SDK2 auto / protocol 2026-07-28. Matrix does not separately require legacy/default Node negotiation. Separately, installed a56 Python/MCP proves bounded single-owner Task cancellation/public read/replay/restart. Earlier a53 Node legacy/default GET hang and SDK2 detached-result decoder rejection remain source/profile-specific failed evidence; keep them disclosed and unchanged, but do not treat those exact profiles as mandatory acceptance gates absent a documented compatibility promise.",
+    "a57_library_view": "Source/component and installed protocol pass; clean 339 member Runtime wheel, pip check, fresh-datadir create/get/open/get and identical resource bytes. Actual ChatGPT render retest PENDING. No compiler/backend/restart/rollback qualification.",
+    "a52_aggregate": "Historical FAILED: 5347 passed / 198 skipped / 3 deselected / 1 failed. Never relabel from narrow fixes or later source suite evidence.",
+    "denied_artifact_and_run": "Parent prohibition: do not retry artifact 12653743795 or run 40331092012 and do not use alternate credentials. No attempt made; denial is preserved as received.",
+    "coverage514": "PASS at exact PR head a90d6cdb8af8b07bf534953903f157d003a4d322 / tree cd8f99d859bdb9626aed38d96d39a3d8c1f967d6: Runtime 5343/58skip, other package counts in a59 checkpoint, all package exits0, coverage70.9216%, complete source inventory and PostgreSQL cleanup. It does not claim complete subprocess or installed-wheel coverage; baseline_written=false.",
+    "a59_installed_profiles": "PASS bounded installed API/compiler/output receipts at product source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Base and data-duckdb locks each qualify separately. Raw CycloneDX and selected-profile graph remain separate. Strict graph comparison is FAILED/exit1 for both, with29 explained inactive edges per profile; do not rewrite as PASS.",
+    "a59_codex_cli": "FAILED before initialize: task-local homes, no MCP configured; EROFS, no model request/inference or MCP acceptance. Model route unverified and no model substitution.",
+    "a59_owner_host": "a57 CONNECT+RENDER remains immutable and actual ChatGPT retest deferred; no desktop authority. Dakota remains unchanged.",
+    "a59_restore_component": "FAILED before successful readback, not running: initial manifest mismatch; corrected bootstrap TCP-readiness race; third manifest-matching attempt failed RCC published-package build. Owned containers cleaned. No Postgres/object readback PASS or full Runtime cold restore qualification."
+  },
+  "rapid_independent_lanes": [
+    {
+      "priority": 1,
+      "lane": "Required MCP client and bounded Task acceptance (profile-specific failures disclosed)",
+      "ready_now": true,
+      "minimal_proof": "Complete the exact installed-client acceptance stated by the matrix: a genuine MCP SDK client, an actual fresh Codex CLI session, and official MCP Apps basic host; prove typed authorized execution with Work Item/Run/Attempt, scoped artifacts, revision pinning, rollback and restart/reconnect. The existing typed bounded long-job/projection row also remains required, including node lineage/cancellation/reconnect where that accepted path uses it. a56 Node modern-auto sync and Python/MCP Task cancellation/replay/restart are separate bounded evidence; a Task result envelope is required only if that is the accepted supported path.",
+      "blocker": "No full installed exact-candidate client/official-host acceptance at integration source 207300 is evidenced. Node legacy/default GET hang and Node SDK2 detached `task` decoder rejection are known failures/unqualified profiles from their recorded source; neither profile is explicitly required by the matrix. Preserve and disclose them; do not add a new compatibility gate or alter server behavior."
+    },
+    {
+      "priority": 2,
+      "lane": "Owned provider and route-security completion",
+      "ready_now": true,
+      "minimal_proof": "Use current route inventory and focused trigger-secret tests as base; add source-bound direct negative/side-effect coverage for uncovered sensitive routes and generated-worker auth/environment, plus owned PG/control-SQL parity after source convergence.",
+      "blocker": "Inventory is not direct denial proof for every route; a55/a56 Knowledge PG is not full control-plane/provider acceptance."
+    },
+    {
+      "priority": 3,
+      "lane": "Coordinated recovery and version compatibility",
+      "ready_now": true,
+      "minimal_proof": "Owned clean-host restore all SQL, objects, journals, source/runtime artifacts and lineage; then installed 1.0.4 upgrade/downgrade with rollback/replay.",
+      "blocker": "No current receipt proves combined clean-host restore or old/new installed compatibility. Use owned fixtures; no destructive live state."
+    },
+    {
+      "priority": 4,
+      "lane": "Final platform and distribution qualification",
+      "ready_now": false,
+      "minimal_proof": "After accepted combined source/version, run fresh source-bound hosted OS/native/wheel/image jobs and clean consumers; produce checksum/SBOM/provenance inventory and local/configurable registry/storage acceptance.",
+      "blocker": "Final source/version and combined candidate not yet accepted; parent forbids artifact rebuild in this audit."
+    },
+    {
+      "priority": 5,
+      "lane": "Actual host gates",
+      "ready_now": false,
+      "minimal_proof": "Owner performs a57 CONNECT+RENDER using prescribed isolated fresh state; later actual invoice E1 on exact cloud-ready candidate.",
+      "blocker": "Owner session required; a57 RENDER PENDING; a44 actual host FAILED. This does not block independent owned engineering lanes."
+    }
+  ],
+  "rows": [
+    {
+      "Feature / state": "Published compatibility baseline — SHIPPED",
+      "Owner, branch / PR": "Existing community/public distribution",
+      "Exact source": "Runtime1.0.4 source d222f94edca26953c1506ab258adc458ded17c56; community checkpoint0e80d41c6b4e5df9579675731e6cdbda733acd35",
+      "Implemented versus missing": "Published baseline exists; current next candidate is not that release.",
+      "Required acceptance": "Preserve public aliases, CLI/API/current packages; qualify actual installed1.0.4 upgrade and safe downgrade/restore.",
+      "Dependency / blocker": "Candidate schema/version changes; final semver remains provisional.",
+      "Smallest next task": "Run installed old/new compatibility over owned coordinated state.",
+      "Genuine owner intervention": "None for engineering; final merge/publication threshold belongs to parent.",
+      "audit_status": "bounded_installed_compatibility_subgate_pass_full_row_open",
+      "later_evidence_reconciliation": "The a58 integrity checkpoint preserves an authentic bounded a57 installed compatibility PASS for the local SQLite queue/attachment scenario. It verified official PyPI Runtime 1.0.4 and companion wheel hashes/payloads, candidate a57 queue/attachment reads and restart, relocated fixture restore/read/restart, exact schema-6-versus-schema-5 downgrade refusal with unchanged bytes, and pre-upgrade backup rollback/read/restart. This is the specified bounded cell only; full Runtime restore remains NOT_QUALIFIED and this earlier candidate evidence is not current a90 acceptance.",
+      "actual_remaining_blocker": "Full coordinated Runtime old/new compatibility remains open beyond the bounded local SQLite queue/attachment cell, including the matrix-required combined SQL/object/journal/source/runtime state and clean-host restore/downgrade behavior.",
+      "next_minimal_proof": "Preserve the bounded a57 cell as PASS at its exact installed artifact/source; qualify the accepted final combined candidate against the coordinated SQL/object/journal/source/runtime fixture with restore, rollback, replay and fail-closed downgrade. Do not repeat or widen the completed SQLite cell unless new evidence requires it.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None for engineering; final merge/publication threshold belongs to parent.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 729,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-gate-summary.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-verified-profile.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-inputs-receipt.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Existing Runtime capability control plane — DRAFT_PR",
+      "Owner, branch / PR": "Integrator / #328",
+      "Exact source": "I; baseline community above",
+      "Implemented versus missing": "Existing multi-package actions, MCPv2, selective catalog/resources, HTTP/CLI and process execution retained. Authenticated normal Runtime now composes the stable SQL Canvas facade when packaged assets and the Linux private provider are available.",
+      "Required acceptance": "Combined current suites, stateless MCPv2/routing, collisions, old aliases and no model catalog growth per app.",
+      "Dependency / blocker": "Generated worker/app audience and managed service wiring remain open.",
+      "Smallest next task": "Preserve existing registrations while joining the fixed native facade.",
+      "Genuine owner intervention": "None.",
+      "audit_status": "open_combined",
+      "later_evidence_reconciliation": "Coverage #514 now passes at exact PR head a90d6cdb/tree cd8f99d, with Runtime 5343 passed/58 skipped and every other package exit 0; measured source coverage is 70.9216% with no missing inventory. This closes that hosted portable source-suite/coverage gate only. Dirty CI/test-only corrections have not changed Runtime/Core/Work Items source or locks; no new wheel was built.",
+      "actual_remaining_blocker": "Combined MCPv2/routing/collision/alias/catalog-growth and managed/generated audience wiring acceptance remains open; the a59 package suite does not close the full control-plane row.",
+      "next_minimal_proof": "On the accepted combined source, complete the matrix-required Runtime/MCPv2/routing/collision/alias/catalog-growth and generated-audience/managed-wiring proof; keep native Windows hosted rerun and published Ubuntu Core failure diagnosis separately visible.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 730,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/windows-review.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/published-browser392.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Public MCP Apps authoring and CanvasSpec — DRAFT_PR (#100)",
+      "Owner, branch / PR": "Contract owner / #330; integrator owns exports/versions/locks",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Closed six-node grammar, aliases, bounds and hide-all semantics. Core1.1.0a2 installed noneditably; full332passed. Public typed validation exists; installed next-Core admission is explicit, not a source overlay.",
+      "Required acceptance": "Python/TS fixture parity, malformed/alias/depth/reference/visibility negatives, real resource metadata and public authored consumer.",
+      "Dependency / blocker": "Official View consumes bounded specs at I; wider grammar/parity and richer component coverage remain open.",
+      "Smallest next task": "Extend and qualify bounded component/operation contracts without another renderer.",
+      "Genuine owner intervention": "None.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "a57 library rendering validates producer-backed authoring/discovery payloads; this does not close Python/TS parity, full malformed-input coverage, metadata behavior, or authored-consumer requirements.",
+      "actual_remaining_blocker": "The current a57 installed protocol proof is UI-only and explicitly does not execute/qualify a compiler.",
+      "next_minimal_proof": "Qualify the authored public consumer against the exact candidate with Python/TypeScript fixtures, malformed/alias/depth/reference/visibility negatives and real resource metadata.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 731,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/installed/connect-render-proof.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Semantic renderer and official bridge — DRAFT_PR (#99-A)",
+      "Owner, branch / PR": "Renderer owner / #329; shared entrypoint/validator integrator",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Official entry now renders authored semantic metadata through the existing renderer; Canvas39 passed/1 optional skip and real installed Basic Host rendered the exact app/revision. Invoice/query projections are preserved. Interactive semantic adapters remain read-only.",
+      "Required acceptance": "Same official MCP Apps View/bridge and Runtime preview; real backend roundtrip, CSP/offline/artifact, unsupported host and scoped negatives.",
+      "Dependency / blocker": "Typed execution/status/artifact adapters and app audience remain.",
+      "Smallest next task": "Connect real scoped app operations and qualify approval/result/artifact interactions.",
+      "Genuine owner intervention": "None for local E2; actual host separately below.",
+      "audit_status": "source_and_install_pass_host_pending",
+      "later_evidence_reconciliation": "a57 fixes the captured app-to-library transition; 287 Runtime frontend tests, 203 Canvas tests plus one existing skip, quality, clean 339-member install, pip check, fresh-datadir get/open/get and exact resource bytes pass. Actual ChatGPT render retest is pending; prior a44 actual-host render failed.",
+      "actual_remaining_blocker": "Owner actual-host retest for a57 CONNECT+RENDER; invoice E1 remains separate.",
+      "next_minimal_proof": "Owner retest the exact a57 Library bundle in the prescribed fresh state and record CONNECT and RENDER separately, without reusing a44 state; then separately satisfy invoice E1.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None for local E2; actual host separately below.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 732,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/README.md",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/installed/connect-render-proof.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Responsive accessible design baseline — DRAFT_PR / SPEC_ONLY gaps",
+      "Owner, branch / PR": "Existing #71/#99 scopes; no new lane admitted",
+      "Exact source": "R + I existing renderer",
+      "Implemented versus missing": "Owned primitives/styles and selected accessibility/state tests exist. Rich themes, charts/cards, approval/log/inspector surfaces and complete responsive coverage are missing.",
+      "Required acceptance": "Credible bounded component catalog/themes; keyboard/focus/contrast/overflow/loading/error/empty and text fallback on packaged UI. No arbitrary JS/HTML/CSS or mount effects.",
+      "Dependency / blocker": "Six minimal nodes alone are insufficient; universal workflow designer/all future archetypes are not presumed mandatory.",
+      "Smallest next task": "Inventory/reuse existing components, extend the canonical bounded catalog and real browser fixture.",
+      "Genuine owner intervention": "Only concrete scope ambiguity escalates; no cosmetic redesign permission hold.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "a57 frontend quality and current component slices pass; this is not full responsive/accessibility coverage across required packaged states.",
+      "actual_remaining_blocker": "Full keyboard/focus/contrast/overflow/loading/error/empty/text fallback coverage and broader bounded component set.",
+      "next_minimal_proof": "Map and run a compact packaged UI matrix for required states and accessibility dimensions on the final combined candidate.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Only concrete scope ambiguity escalates; no cosmetic redesign permission hold.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 733,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "First-boot six-tool authoring lifecycle — DRAFT_PR (#71)",
+      "Owner, branch / PR": "Authoring task01a168bb-b1fa-71df-8c46-4dea107a900c / feature/71-native-authoring-20261023; integrator central wiring",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Typed authoring plus common SQL adapter now stage durable edits without an active head. Exact release/rollback uses one head CAS, receipts/audit and live SQL grants. SDK lifecycle passes on real SQL and normal installed CLI/socket; official host renders the read-only result. External model-generated business execution remains missing.",
+      "Required acceptance": "Fresh no-user-package runtime: external model creates useful app, one atomic revision, validate/activate, revise, fail safely, rollback/restart/reopen; bounded model catalog.",
+      "Dependency / blocker": "Generated business Run dispatch, app operations and actual model client acceptance.",
+      "Smallest next task": "Join generated execution to the existing installed lifecycle and prove two independent Python apps.",
+      "Genuine owner intervention": "None for implementation; parent retains exclusive dispatch.",
+      "audit_status": "open_end_to_end",
+      "later_evidence_reconciliation": "a57 proves UI-only create/get/open/get; it intentionally excludes backend, activation, action execution, restart and rollback.",
+      "actual_remaining_blocker": "External model-authored useful app with generated Python backend, activation, revise/fail/rollback/restart/reopen and two independent apps.",
+      "next_minimal_proof": "On the converged candidate, complete one clean no-user-package end-to-end generated app lifecycle and a second independent Python-backed app.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None for implementation; parent retains exclusive dispatch.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 734,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/installed/CONNECT-RENDER.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Generated Python / immutable Package and RuntimePlan — DRAFT_PR (#130/#135)",
+      "Owner, branch / PR": "Compiler owner / #331; integrator admission adapter",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Compiler imported;27 tests including actual pinned RCC build/import/test pass from ea8f98d1. Canonical preimages and common persisted Package-to-Run admission are verified on both SQL providers; generated business execution remains unintegrated.",
+      "Required acceptance": "Deterministic source/deps/tests and separate source/plan/revision identities; bounded staging; actual RCC prepare and out-of-process import/tests; no source-provided adapter authority; execute pinned generated capability.",
+      "Dependency / blocker": "Common Package registry is qualified; PR331 execution adapter55988663 needs integrated live claim/journal/output review.",
+      "Smallest next task": "Persist verified compiler output through common Package authority and execute a typed capability through Run/Attempt.",
+      "Genuine owner intervention": "Original #130/#135 non-RCC fixture criteria need explicit release interpretation if not met; RCC-first is not a silent waiver.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "Historical compiler/source evidence and a56 real installed Robot execution remain useful component evidence; neither proves current-source compiler admission through generated app Business Run.",
+      "actual_remaining_blocker": "Integrated persisted Package/plan to typed capability execution through Run/Attempt on final source.",
+      "next_minimal_proof": "Run deterministic source/dependency/test build-import through pinned RCC, then execute the pinned generated capability via common Package admission and verify exact revision/plan identity.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Original #130/#135 non-RCC fixture criteria need explicit release interpretation if not met; RCC-first is not a silent waiver.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 735,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Workspace binding/deployment/activation resolver — DRAFT_PR (#129)",
+      "Owner, branch / PR": "Deployment owner / #333, task01a16897-47e8-7472-82b6-668a25afa006",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Consumer uses common Foundry* records, full canonical selection, all Package checks, SQL authorization and exact plan snapshots. Real SQL CAS/replay/restart/rollback passed. UI-only selections need no fake Package.",
+      "Required acceptance": "Authorized immutable selection, complete package/plan/profile validation, same-transaction revocation/idempotency/CAS/audit, N inflight pins under N+1, rollback/restart/replica/mixed-version negatives.",
+      "Dependency / blocker": "Common Package/schema admission and normal UI Runtime factory are qualified; generated execution and app operations remain missing.",
+      "Smallest next task": "Bind verified manifest/plan/schema payloads and retain exact selected execution pins.",
+      "Genuine owner intervention": "None: integration engineering decision, not owner scope hold.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "Earlier SQLite/PostgreSQL CAS/replay/restart/rollback evidence remains component evidence; a56/a57 receipts do not close N+1 inflight pinning and all current-source resolver negatives.",
+      "actual_remaining_blocker": "Exact current source and full grant/revocation/idempotency/CAS/audit plus inflight selection/rollback coverage.",
+      "next_minimal_proof": "Run a source-bound two-provider resolver matrix including revocation, stale/replay, N inflight against N+1, rollback, restart and replica negatives.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None: integration engineering decision, not owner scope hold.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 736,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Common control SQL / schema migration — DRAFT_PR (#84/#129)",
+      "Owner, branch / PR": "Integrator / #328",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Schema18 preserves backend rows/FKs while allowing null Package anchors for UI-only revisions. Real SQLite/PostgreSQL migration rollback, concurrency, fresh-process readback and authoring tests passed; raw records remain non-authorizing.",
+      "Required acceptance": "Legacy preservation, fresh/upgraded parity, transactional failure and current common SQL gates; no Canvas side database activation authority.",
+      "Dependency / blocker": "Joined installed lifecycle and final restore/downgrade gates still required.",
+      "Smallest next task": "Continue common authoring/Package/Run adapters; do not introduce another database.",
+      "Genuine owner intervention": "No production migration allowed by fixture success.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "Coverage #514 runs the complete package suites with all exits 0 at a90d6cdb/tree cd8f99d; it supplies hosted source-suite evidence only. Existing a58 bounded migration/compatibility and rollback evidence remains exact-scope. The root a59 PostgreSQL/object/readback component has no completed receipt yet.",
+      "actual_remaining_blocker": "Full current-source migration/provider parity, cross-version rollback and restore/downgrade qualification remain open; root readback component is pending.",
+      "next_minimal_proof": "Finish and retain the root Postgres/object/readback receipt, then qualify full matrix-required fresh/upgraded SQL parity and rollback/restore/downgrade against the final combined candidate.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "No production migration allowed by fixture success.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 737,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Zero-touch plugin boot, launcher and discovery — DRAFT_PR (#71/#99-B)",
+      "Owner, branch / PR": "Boot task01a168bd-45be-755e-9da9-1b7a4509a039 / feature/71-99-canvas-boot-20261023; central CLI/packaging integrator",
+      "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
+      "Implemented versus missing": "Boot/discovery helpers and isolated unbundled fixture imported; consumer tests pass. External writable roots, private atomic discovery and readonly library projection exist. Normal installed authenticated CLI/MCP startup, library and process restart are proven; complete plugin envelope/health/attach/stdio acceptance remains missing.",
+      "Required acceptance": "Fresh writable state outside immutable plugin, responsive startup/health/discovery, no initial package/manual per-app MCP registration; local no public listener and authenticated standalone HTTP.",
+      "Dependency / blocker": "Generated execution profiles, app authorization and final external plugin envelope remain.",
+      "Smallest next task": "Qualify installed stdio/plugin discovery/health and generated workflow over the same Runtime authority.",
+      "Genuine owner intervention": "Ask before agent-skills/external repo mutation or persistent identity/configuration.",
+      "audit_status": "open",
+      "later_evidence_reconciliation": "Earlier normal CLI/MCP startup and isolated boot helpers exist; new a56/a57 proofs do not exercise the complete stdio/plugin envelope and discovery/health contract.",
+      "actual_remaining_blocker": "Installed stdio/plugin discovery, health, attach and process restart over the same authority.",
+      "next_minimal_proof": "Use a fresh installed consumer to qualify stdio discovery/health/attach and no manual per-app registration, with owned state and restart.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Ask before agent-skills/external repo mutation or persistent identity/configuration.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 738,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Named open data / result plane — DRAFT_PR (#131)",
+      "Owner, branch / PR": "Integrator, existing provider implementation; no new lane",
+      "Exact source": "I data_queries/invoices.py/service.py",
+      "Implemented versus missing": "Real typed parameterized invoice query on DuckDB and PG, bounds/cancel/schema/result handle/paging/export and scope tests. DuckDB reads a prepared DB; source_version is an operator claim, transaction label not retained source hash.",
+      "Required acceptance": "Unchanged immutable Package over owned DuckDB CSV AND Parquet and real PG; named bounded operations, discovery, retained snapshots/provenance, paging/export/cost/cancel/auth negatives.",
+      "Dependency / blocker": "General operation/binding compiler, explicit Parquet ingest and retained source proof missing.",
+      "Smallest next task": "Add bounded manifest-backed operation/Parquet fixture and retained source/snapshot lineage.",
+      "Genuine owner intervention": "No proprietary Data Server, MindsDB, paid/cloud dependency required.",
+      "audit_status": "open",
+      "later_evidence_reconciliation": "PostgreSQL Knowledge passes do not close the Data row: provider discovery, retained source/snapshot proof, Parquet and cost/expiry/access gates remain open.",
+      "actual_remaining_blocker": "Immutable Package over owned DuckDB CSV and Parquet plus real PostgreSQL, bounded operations, retained source identity and scoped negatives.",
+      "next_minimal_proof": "Add one manifest-backed Parquet and retained snapshot fixture; prove binding, source identity, paging/export/cost/cancel and authorization expiry.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "No proprietary Data Server, MindsDB, paid/cloud dependency required.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 739,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Bounded Knowledge collections — DRAFT_PR (#131)",
+      "Owner, branch / PR": "Existing Knowledge component, integration-owned convergence",
+      "Exact source": "I knowledge.py; 105 component gate includes owned provider tests",
+      "Implemented versus missing": "Bounded local documents/CSV ingest, collection binding, lexical search with provenance/paging/access/revocation; real DuckDB/PG providers. Not full semantic KB.",
+      "Required acceptance": "Expose bounded collection/ingest/search through shared binding/authority; restart/provenance/limits/access and durable long ingestion where used.",
+      "Dependency / blocker": "Public binding/lifecycle integration missing. Advanced vector/embedding/rerank, incremental reindex/delete, rich filters/provider discovery remain missing.",
+      "Smallest next task": "Bind existing service through common deployment and qualify bounded public path.",
+      "Genuine owner intervention": "Advanced breadth stays explicitly listed; no mandatory vector service.",
+      "audit_status": "partial_pass",
+      "later_evidence_reconciliation": "Coverage #514 now passes the complete package suite at a90d6cdb/tree cd8f99d; the source aggregate is no longer pending. Previously recorded a55/a56 installed TLS PostgreSQL Knowledge cases remain bounded to their exact older source/profile; they do not become current-source public binding/provider or multi-principal evidence.",
+      "actual_remaining_blocker": "Other providers/corpora, multi-principal and rollback breadth, and public binding/lifecycle integration remain open.",
+      "next_minimal_proof": "On final combined source, exercise provider mapping, multi-principal/revocation and rollback/restart through the integrated public binding/lifecycle path; preserve prior a55/a56 evidence as bounded.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Advanced breadth stays explicitly listed; no mandatory vector service.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 740,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/postgres-knowledge/summary.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132)",
+      "Owner, branch / PR": "Integrator canonical Runtime/SDK; extension owns UI/LSP",
+      "Exact source": "I; managed receipt",
+      "Implemented versus missing": "Versioned14-operation protocol, mounted fail-closed router, live common-SQL Workspace/exact-Deployment grants, server worker identity, review/claim/renew/cancel/Run/artifact subset and evidence-bound invoice RCC completion. Current a20 installed115 includes native execution, retained-input recovery and managed completion; source worker134 passed with exact SDK2. Historical receipts remain source-bound; no usable default managed profile/VSIX claim.",
+      "Required acceptance": "Real installed consumer and VSIX across denial/revocation/isolation/restart, general enqueue/retry/dead-letter/logs and native Run lineage; no direct DB/second queue.",
+      "Dependency / blocker": "Default trusted host profile, generic native projection, remaining operations and VSIX acceptance.",
+      "Smallest next task": "Join the same native Run/output authority into the managed projection, configure explicit supported host policy, then implement missing primitives without bypass.",
+      "Genuine owner intervention": "No engineering permission hold; live identity/credential/security changes still need approval.",
+      "audit_status": "open",
+      "later_evidence_reconciliation": "a56 cancellation and modern-auto synchronous generic execution close narrow installed surfaces; no usable default profile, full operations, VSIX, or complete managed projection acceptance.",
+      "actual_remaining_blocker": "Default trusted host profile, remaining operations, isolation/revocation/restart and VSIX acceptance.",
+      "next_minimal_proof": "Qualify a clean installed consumer and VSIX through the existing common SQL/native Run authority across denial, revocation, isolation and restart.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "No engineering permission hold; live identity/credential/security changes still need approval.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 741,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Fenced business Work Items — DRAFT_PR (#132)",
+      "Owner, branch / PR": "SDK/common queue implementation + #328",
+      "Exact source": "I; exact SDK0.5.0a1 wheel retained",
+      "Implemented versus missing": "DB-time owner/epoch/renew/conditional finish/output, SQLite/real PG parity, lineage and legacy fail-closed; private exact review/worker linkage.",
+      "Required acceptance": "Same queue conformance, denied/stale/duplicate/cancel/restart, atomic output authority; standalone no-Work-Item mode.",
+      "Dependency / blocker": "Generic scheduling/fairness/fanout/dead-letter policies and common generated capability admission not fully qualified.",
+      "Smallest next task": "Reuse existing queue adapter with explicit capability mode and common admission.",
+      "Genuine owner intervention": "None; do not introduce another queue.",
+      "audit_status": "partial_pass",
+      "later_evidence_reconciliation": "a56 installed live Task cancellation passed with exact child absence before Runtime stop and public reads/replay/restart; modern-auto sync pass/fail execution also passed with artifacts and restart.",
+      "actual_remaining_blocker": "Multi-principal, producer/child outputs, generic scheduling/fairness/fanout/dead-letter and integrated admission remain.",
+      "next_minimal_proof": "Run current-source multi-owner and producer/consumer output/fence tests, then explicit queue policy/dead-letter cases without adding a second queue.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None; do not introduce another queue.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 742,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/cancellation-receipt.json",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-node-modern/receipt.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134)",
+      "Owner, branch / PR": "Integrator, existing adapter/worker",
+      "Exact source": "I; worker134/RCC6 plus installed28",
+      "Implemented versus missing": "Distinct approved Work Item/Run/Attempt, dual fences, current common Deployment binding resolution, exact-target SDK2 claim, two generated Python backends through RCC18.19.3, atomic result/log publication and installed fresh-interpreter replay. Execution routes require explicit trusted configuration; ordinary View remains read-only.",
+      "Required acceptance": "Common activated Deployment/plan resolution, app/model typed execution, revision pinning and explicit recovery; no fallback or uncertain relaunch.",
+      "Dependency / blocker": "Mounted trusted execution profiles, scoped public app interaction and common managed native Run projection. Bounded source-expiry replay is qualified; full retention/restore remains open.",
+      "Smallest next task": "Mount the qualified Deployment resolver/typed projection with supported host profiles, then qualify actual official-View review/job/artifact interaction and native managed inspection.",
+      "Genuine owner intervention": "None for owned synthetic engineering.",
+      "audit_status": "partial_pass",
+      "later_evidence_reconciliation": "a56 modern-auto sync generic pass/fail, authorized artifacts, run/item/artifact restart reads and natural Node exit passed; a56 cancellation passed separately.",
+      "actual_remaining_blocker": "These are source-specific component proofs. Final combined deployment/profile selection, typed app interaction, multiple apps and complete recovery/retention remain unqualified. The mandatory matrix client sequence is a genuine MCP SDK client, then fresh Codex CLI and the official host; no specific Node SDK negotiation profile is named.",
+      "next_minimal_proof": "Against final candidate, execute a pinned generated app through approved deployment -> Run/Attempt -> RCC and verify revision pin, approval, artifact and restart/recovery. Use the client sequence and exact installed candidate explicitly named by the matrix; legacy/default Node GET and detached Node Task decoding are not additional gates unless separately required by product support scope.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None for owned synthetic engineering.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 743,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-node-modern/receipt.json",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/cancellation-receipt.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143)",
+      "Owner, branch / PR": "Existing graph; no new workflow-designer lane",
+      "Exact source": "I Run/Attempt types; no claimed general Node/Task implementation",
+      "Implemented versus missing": "Protocol/queue/runtime concepts remain distinct; no evidence that Run or Work Item state implements WorkflowNode or MCPTask lifecycle.",
+      "Required acceptance": "Typed bounded long-job/projection and any required node lineage, cancellation/reconnect; never a second state authority or universal designer requirement by inference.",
+      "Dependency / blocker": "Required bounded Node/Task seam must be reconciled with existing issue acceptance.",
+      "Smallest next task": "Inventory existing task projection/admission and implement only the consumed bounded job path.",
+      "Genuine owner intervention": "Escalate a concrete unsatisfied criterion rather than silently defer an entire named domain.",
+      "audit_status": "open_bounded_task_projection_proof",
+      "later_evidence_reconciliation": "The mandatory actual Codex CLI attempt failed before initialize with EROFS under task-local homes and no configured MCP servers; no model or MCP call occurred. The approved CLI model route remains unverified. Existing a56 bounded Python/MCP Task cancellation/read/replay/restart receipt remains valid at its recorded source; prior a53 Node profile failures stay disclosed and unchanged.",
+      "actual_remaining_blocker": "Full exact-candidate acceptance through the matrix-named genuine MCP SDK client, fresh Codex CLI and official MCP Apps host is absent, including typed bounded long-job/projection and required terminal result/artifact/reconnect. Codex could not reach initialize. Do not convert this probe into a compatibility-scope change.",
+      "next_minimal_proof": "After resolving the task-local EROFS and verifying the approved model route, perform the original supported-client sequence on the exact candidate and prove typed bounded job/Task, Work Item/Run/Attempt, result/artifact and restart/reconnect; retain all earlier profile failures.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Escalate a concrete unsatisfied criterion rather than silently defer an entire named domain.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 744,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/codex-client-next-proof.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/cancellation-receipt.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/node-generated-task-handoff.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "client_task_scope_note": "Task lifecycle/projection is a matrix requirement; the Node SDK2 detached Task envelope and legacy/default negotiation modes are not individually named acceptance profiles.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Exact human approval and authorization negatives — DRAFT_PR",
+      "Owner, branch / PR": "Integrator, existing review/Run/output authority",
+      "Exact source": "I current105+129+130; V actual interactive proof",
+      "Implemented versus missing": "Private approval binds exact sealed result/input/source/app/deployment; explicit click creates one fenced item; stale/revoked/cross-scope/altered/duplicate/cancel probes.",
+      "Required acceptance": "Carry identical invariants into generated app/deployment and all model/app routes; no hidden approval or authorizing by visibility/handle.",
+      "Dependency / blocker": "Foundry service/auth transport wiring.",
+      "Smallest next task": "Reuse review service and add generated-revision grant/race/substitution cases.",
+      "Genuine owner intervention": "None locally; actual authenticated host below.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "a55/a56 Knowledge negatives and route-boundary test additions are component evidence. They do not prove generated revision approval races/substitution or all model/app routes.",
+      "actual_remaining_blocker": "Exact result/input/source/app/deployment approval across generated routes and same-source race/revocation/substitution cases.",
+      "next_minimal_proof": "Run generated-revision approval, stale/revoked/cross-scope/altered/duplicate/cancel race probes against the integrated host path.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "None locally; actual authenticated host below.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 745,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/auth-boundaries/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Retry, effects and dead-letter reconciliation — DRAFT_PR bounded",
+      "Owner, branch / PR": "Integrator, existing #83/#132 scopes",
+      "Exact source": "I implementation; earlier effect receipt at967090d33ae883c52f90ce5e7af5a82281c88191",
+      "Implemented versus missing": "Owned synthetic target has explicit retry/lost-ack reconciliation/close barrier/dead-letter proof. Not generic exactly-once effects.",
+      "Required acceptance": "Separate safe pre-effect retry, proven idempotent retry and uncertain outcome blocked/reconciled; stale lease/cancel/restart/exhaustion/audit.",
+      "Dependency / blocker": "Generic capability effect contracts and broader retry policy remain open.",
+      "Smallest next task": "Reuse existing dispatch evidence and qualify generated capability effect policy.",
+      "Genuine owner intervention": "Operator reconciliation only for genuinely uncertain external outcomes; no real effects in tests.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "Older synthetic effect/lost-ack evidence exists; a56 Node pass/fail and cancellation do not exercise effect retry/uncertain outcome reconciliation.",
+      "actual_remaining_blocker": "Current generated capability effects, cancellation/restart/exhaustion/audit and no duplicate effect under uncertainty.",
+      "next_minimal_proof": "Run safe pre-effect retry, declared idempotent retry and uncertain outcome block/reconcile with stale lease, cancel, restart and dead-letter evidence.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Operator reconciliation only for genuinely uncertain external outcomes; no real effects in tests.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 746,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Scoped durable artifacts/results — DRAFT_PR (#86)",
+      "Owner, branch / PR": "Integrator, existing output provider/HTTP/MCP",
+      "Exact source": "I; current provider/output and worker proofs",
+      "Implemented versus missing": "Immutable scoped sealed bytes with fencing/readback and fresh process restart; secure new filesystem provider is Linux-only.",
+      "Required acceptance": "Distinct source/runtime/output/data planes; expiry/retention/privacy and all relevant routes; another Runtime reads without producer routing.",
+      "Dependency / blocker": "Cross-host/shared-object provider, full platform applicability and restore remain unqualified.",
+      "Smallest next task": "Prove authorized replica readback/expiry against owned shared fixture; keep unsupported-platform cases honest.",
+      "Genuine owner intervention": "No live object store or new credentials needed for local proof.",
+      "audit_status": "partial_pass",
+      "later_evidence_reconciliation": "a56 modern-auto execution verified four authorized artifacts for both pass/fail and exact reads after graceful restart; a57 verifies installed Canvas resource bytes.",
+      "actual_remaining_blocker": "Cross-host/shared-object provider, all-route expiry/privacy and platform support/restore remain open.",
+      "next_minimal_proof": "Against final candidate, prove scoped replica readback and expiry/privacy on owned shared storage with negative cross-run/route checks.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "No live object store or new credentials needed for local proof.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 747,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-node-modern/receipt.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Retention, restore, upgrade/downgrade — BLOCKED",
+      "Owner, branch / PR": "Integrator #83/#84/#86/#327",
+      "Exact source": "I schema17; V cold package/no-build replay",
+      "Implemented versus missing": "Additive migration and documented coordinated backups; retained same-host RCC Artifact replay. No complete coordinated clean-host restore or installed1.0.4 downgrade proof.",
+      "Required acceptance": "Restore SQL+objects+journals/source/runtime artifacts together; preserve Run/effect/audit lineage, GC references and old-version fail-closed behavior.",
+      "Dependency / blocker": "Restore fixtures and explicit state-format/semver compatibility.",
+      "Smallest next task": "Run owned old/new install and coordinated restore/replay with measured retained inputs.",
+      "Genuine owner intervention": "Only destructive/live restore would require approval; current owned fixtures do not.",
+      "audit_status": "open",
+      "later_evidence_reconciliation": "The authentic a57 legacy 1.0.4 gate is PASS for its bounded SQLite queue/attachment subset: official PyPI wheel hashes and installed payloads verified; queue/attachment read/restart, relocated restore/read/restart, exact schema-6-versus-5 refusal with unchanged fixture bytes, and pre-upgrade backup rollback/read/restart passed. Full Runtime restore remains NOT_QUALIFIED. The separate a59 PostgreSQL/object component attempts failed before a successful readback: initial manifest mismatch, a bootstrap TCP-readiness race was corrected, and the third manifest-matching attempt reached but failed the RCC published-package build. Each owned container was cleaned. These failures do not close coordinated restore.",
+      "actual_remaining_blocker": "Full coordinated SQL+objects+journals/source/runtime restore, lineage/GC and replay remain unqualified. The current a59 Postgres/object component failed before successful execution/readback after a manifest-matching third attempt hit RCC published-package build failure; owned containers were cleaned. Bounded a57 SQLite queue/attachment compatibility is PASS only at its recorded artifact/source.",
+      "next_minimal_proof": "Diagnose the manifest-matching a59 RCC published-package build failure from its retained receipt/log, then obtain a clean exact-source Postgres/object component receipt with readback. Separately complete the original matrix full coordinated clean-host Runtime restore, lineage/replay and downgrade proof; do not promote the bounded a57 SQLite cell or failed component attempts.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Only destructive/live restore would require approval; current owned fixtures do not.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 748,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-gate-summary.json",
+        "327-probes/a59-coordinated-restore/README.md",
+        "327-probes/a59-coordinated-restore/run-supervisor.json",
+        "327-probes/a59-coordinated-restore/run.log",
+        "327-probes/a59-coordinated-restore/tcp-ready/run-supervisor.json",
+        "327-probes/a59-coordinated-restore/tcp-ready/run.log",
+        "327-probes/a59-coordinated-restore/tcp-ready/evidence/receipt.json",
+        "327-probes/a59-coordinated-restore/exact-manifest/run-supervisor.json",
+        "327-probes/a59-coordinated-restore/exact-manifest/run.log"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Reusable invoice template/export — DRAFT_PR (#127)",
+      "Owner, branch / PR": "Actions-owned example; boot/template lane queued",
+      "Exact source": "V example0.2 + I preserved source; catalog destination unapproved",
+      "Implemented versus missing": "Actual local interactive invoice/PO/ledger mismatch UI, explicit approval/RCC/scoped Run artifact; private67-wheel consumer/export. Existing canvas-query omits authorized artifact resolution.",
+      "Required acceptance": "Credential-free runtime-consuming template, exact package/RCC/Canvas pins, deterministic creation/build, smoke/QA/text/errors/artifacts/retry/restart. No copied engine.",
+      "Dependency / blocker": "Current foundry/bridge/next candidate bundle; external destination separate from Actions-owned implementation.",
+      "Smallest next task": "Converge one canonical example and verify fresh owned consumer of final candidate wheels.",
+      "Genuine owner intervention": "Approve robot-templates versus dedicated repository/visibility before external changes; not a blocker to local example work.",
+      "audit_status": "open",
+      "later_evidence_reconciliation": "a57 is a UI-only renderer correction; it is not invoice business execution, approved artifact export or fresh final-wheel consumer qualification.",
+      "actual_remaining_blocker": "Canonical Actions-owned template, exact pins, deterministic build and final consumer/export through authorized artifact resolution.",
+      "next_minimal_proof": "Converge one owned template and prove clean pinned install, UI approval, real RCC result/artifact, retry/restart and export; keep external destination choice owner-controlled.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Approve robot-templates versus dedicated repository/visibility before external changes; not a blocker to local example work.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 749,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "All-route auth and safe sharing — BLOCKED (#71/#327)",
+      "Owner, branch / PR": "Integrator security/transport seams",
+      "Exact source": "I private trusted-caller boundaries; no whole-app acceptance claimed",
+      "Implemented versus missing": "Scoped services and default-off private projection exist. Full ASGI/HTTP/WebSocket/OAuth/secret/robot/schedule/trigger/artifact boundary not qualified by those tests.",
+      "Required acceptance": "Enumerate exact public exceptions and negative-auth/SSRF/path/archive/environment cases across every relevant route before remote sharing.",
+      "Dependency / blocker": "Transport auth, generated-worker environment and live host configuration are separate.",
+      "Smallest next task": "Build source-bound route/grant negative matrix using owned local services.",
+      "Genuine owner intervention": "New live auth/tunnel/security/identity changes require approval; never overwrite working Executor.",
+      "audit_status": "partial",
+      "later_evidence_reconciliation": "Current route inventory and focused auth tests include nonempty webhook signature and pre-DB denial for trigger secret read/rotation (10 focused tests); this is not exhaustive direct negative proof for every sensitive route or generated path.",
+      "actual_remaining_blocker": "Direct per-route negatives/side-effect assertions, generated-worker environment, transport/auth and safe-sharing matrix on final source.",
+      "next_minimal_proof": "Run exhaustive source-bound route-to-policy mapping and direct early-denial tests for remaining sensitive exceptions, then generated app all-route auth/SSRF/path/archive/environment cases.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "New live auth/tunnel/security/identity changes require approval; never overwrite working Executor.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 750,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/evidence/actions-next-327/recovery-20261026/auth-boundaries/README.md",
+        "docs/program/evidence/actions-next-327/recovery-20261026/auth-boundaries/test-receipt-final-2.json"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Actual authenticated ChatGPT E1 — BLOCKED / NEEDS_OPERATOR",
+      "Owner, branch / PR": "Owner-operated host; integrator supplies cloud-ready exact candidate",
+      "Exact source": "None VERIFIED_IN_CHATGPT for invoice/foundry",
+      "Implemented versus missing": "Existing Executor read AND write is positive integration evidence. Local component/browser E2 is not actual invoice/foundry MCP App render.",
+      "Required acceptance": "Actual tool/resource MIME/bridge/render, audience grants, explicit exact review, scoped artifact and restart/reconnect with same identity; preserve denied details.",
+      "Dependency / blocker": "No authorized authenticated host/UI session is available to this task.",
+      "Smallest next task": "Provide exact candidate and operator checklist; inspect existing compatible transport without changing it.",
+      "Genuine owner intervention": "Per #327 comment6364844599: no Dakota task yet; after cloud readiness report READY FOR DAKOTA CHATGPT TEST and stop that local action for explicit approval; verify actual ChatGPT client, not Codex/Executor/Inspector/PWA.",
+      "audit_status": "owner_pending",
+      "later_evidence_reconciliation": "The owner has deferred actual a57 CONNECT+RENDER retest while at work. a57 bundle and pinned Dakota remain immutable; no desktop interaction authority is present. Actual invoice E1 remains distinct and unqualified.",
+      "actual_remaining_blocker": "Owner-operated actual ChatGPT host acceptance on the prescribed fresh state, then invoice end-to-end E1 on exact release-ready candidate; no desktop authority during deferral.",
+      "next_minimal_proof": "When owner resumes, retest a57 CONNECT and RENDER separately in prescribed fresh state without touching a57 or reusing a44 state; separately perform exact-candidate invoice E1 with approval/result/artifact/reconnect.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Per #327 comment6364844599: no Dakota task yet; after cloud readiness report READY FOR DAKOTA CHATGPT TEST and stop that local action for explicit approval; verify actual ChatGPT client, not Codex/Executor/Inspector/PWA.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 751,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/installed/CONNECT-RENDER.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Homelab-independent distribution and consumers — BLOCKED",
+      "Owner, branch / PR": "Integrator #327/#127; parent hosted reviewer",
+      "Exact source": "I source; V measured bundle; old59cf13CIgreen",
+      "Implemented versus missing": "Local pinned gateway and owned PG/RCC work; exact local wheels/consumer/native receipts exist at earlier sources. I clean-wheel contract passed; not a complete final release inventory.",
+      "Required acceptance": "Reproducible wheels/native/images/locks/checksums/SBOM/provenance, actual installed final consumers, configurable registry/storage, local build/restore without mandatory GitHubCI/GHCR/vendor/Cloudflare/K8s.",
+      "Dependency / blocker": "Final combined source, new Core/Runtime floors, platform/browser/restore matrix and retained inventory.",
+      "Smallest next task": "Build and verify accepted combined candidate through existing local/CI mechanisms and clean consumers.",
+      "Genuine owner intervention": "Publication credential availability may require owner setup; do not manipulate credentials.",
+      "audit_status": "partial_pass_a59_base_and_data_sbom_subgates",
+      "later_evidence_reconciliation": "Installed a59 base and data-duckdb consumer profiles pass bounded lock/API/compiler/output checks, with 64 and 65 active distributions respectively (pip excluded). Raw CycloneDX and independently lock-derived active graph remain separate. Both strict comparisons exited 1 with all29 inactive edges explained; retain these failures. This does not close native/image, complete inventory, provider, restore, or distribution acceptance.",
+      "actual_remaining_blocker": "Complete matrix row still needs reproducible final combined wheels/native/images/locks/checksums/provenance, final consumers/platforms, configurable registry/storage and local build/restore. Native Windows hosted rerun is pending; published Ubuntu Core pytest failure cause remains unknown.",
+      "next_minimal_proof": "Carry exact a59 raw BOM, lock-qualified selected-profile graphs, reconciliation, locks, wheels and hashes into final release manifest; then qualify matrix-required native/image/platform inventory, combined clean consumers, owned registry/storage and local restore. Keep strict comparison exit1 and both open CI findings visible.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Publication credential availability may require owner setup; do not manipulate credentials.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 752,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/a59-installed/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/a59-installed/base/strict-qualification.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/a59-installed/data-duckdb/strict-qualification.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/windows-review.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/published-browser392.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "sbom_contract_interpretation": {
+        "matrix_requirement": "The #327 row requires SBOM/provenance but does not state that one CycloneDX graph must encode the active selected-profile edges.",
+        "accepted_d_contract": "The integrated #327/#328 continuation says raw declaration graph and active selected-profile graph are separate, all inactive edges are explained, and strict-active failure is retained (docs/program/actions-next-release-327.md:1395).",
+        "strict_checker": "Still FAILED (exit 1) for the original exact graph comparison; preserve it. It is a retained comparison result, not rewritten to pass.",
+        "bounded_subgate": "A57 raw declared SBOM + independently computed/lock-qualified active graph + exact raw-vs-active marker reconciliation meets the accepted two-view Python dependency-evidence subgate at this source/profile.",
+        "full_row": "Still BLOCKED for the other distribution/native/image/platform/registry/storage/final-consumer/restore requirements.",
+        "additional_cyclonedx": "No existing matrix or integrated D contract requires an active-profile CycloneDX derivative. The graph contract says such a derivative is conditional on a downstream consumer requirement (graph-contract.md:53-60); do not invent it."
+      },
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified",
+      "Owner, branch / PR": "Existing #90/#143 path; no new migration campaign",
+      "Exact source": "No qualified new adapter SHA",
+      "Implemented versus missing": "Do not confuse external model authoring or old task activity with a verified controlled execution adapter. Full Devsy migration is not required.",
+      "Required acceptance": "Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery.",
+      "Dependency / blocker": "Inventory and selected existing adapter contract/evidence.",
+      "Smallest next task": "Trace existing interface, then qualify one owned synthetic invocation without live agent credentials.",
+      "Genuine owner intervention": "Approval only if live identity/credential or other-repository change becomes necessary.",
+      "audit_status": "open_scope",
+      "later_evidence_reconciliation": "No later a56/a57 evidence qualifies a controlled Codex/Devsy adapter; full Devsy migration is not a requirement by inference.",
+      "actual_remaining_blocker": "Inventory and qualify only one bounded existing authorized adapter path if explicitly part of required acceptance.",
+      "next_minimal_proof": "Map the existing interface and, if #327 requires it, qualify one owned synthetic invocation through common admission/Run with scoped source/input/environment/result/cancellation.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Approval only if live identity/credential or other-repository change becomes necessary.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 753,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Optional celld experiment — BLOCKED / NO-GO (#326)",
+      "Owner, branch / PR": "Existing research scope, no implementation lane admitted",
+      "Exact source": "24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO evidence",
+      "Implemented versus missing": "No admitted adapter; no backend switch. SQL remains authority. MemoryD/Git migration excluded.",
+      "Required acceptance": "If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default.",
+      "Dependency / blocker": "Pinned storage/failure prerequisites unproven; optional study cannot be advertised shipped.",
+      "Smallest next task": "Retain NO-GO and present the concrete optional inclusion/exclusion decision before final recommendation.",
+      "Genuine owner intervention": "Owner explicitly decides release disposition if study remains unqualified; no silent scope drop.",
+      "audit_status": "owner_no_go",
+      "later_evidence_reconciliation": "No later evidence changes the explicit celld NO-GO; SQL remains authority and there is no adapter/lab qualification.",
+      "actual_remaining_blocker": "Owner disposition if required for release scope; otherwise preserve NO-GO explicitly, with no silent scope deletion.",
+      "next_minimal_proof": "Obtain/record owner inclusion/exclusion decision for the optional study; no celld implementation or backend change absent it.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Owner explicitly decides release disposition if study remains unqualified; no silent scope drop.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 754,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Publisher adversarial source/identity qualification — BLOCKED (#332)",
+      "Owner, branch / PR": "Integrator, existing #323/#325 controls",
+      "Exact source": "5165e429 tests; live metadata18:37:53UTC",
+      "Implemented versus missing": "Existing160 negatives and expanded full devutils268pass; exact repo/head/lookalike/source-tree/workflow/manifest/digest/run/caller controls retained. Public metadata reports unprotected community, empty rulesets and pypi protection/branch policy. No compromise claim.",
+      "Required acceptance": "Source-bound tests plus actual publisher identities/token scope and owner-reviewed stolen-credential residual risk before publication.",
+      "Dependency / blocker": "Actual PyPI token scope unknown; source owner gate is not independent approval.",
+      "Smallest next task": "Review bounded evidence/least-disruptive independent approval options; no automatic settings changes or publication.",
+      "Genuine owner intervention": "Owner security disposition and any live environment/branch/token/identity change require separate approval.",
+      "audit_status": "owner_security_pending",
+      "later_evidence_reconciliation": "No a56/a57 receipt qualifies publisher identity/token scope or stolen-credential residual-risk approval.",
+      "actual_remaining_blocker": "Actual token scope/identities and independent owner security disposition.",
+      "next_minimal_proof": "Complete bounded source-bound tests and owner review of actual identities/token scope/residual risk before any publication action.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Owner security disposition and any live environment/branch/token/identity change require separate approval.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 755,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "docs/program/actions-next-release-327.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    },
+    {
+      "Feature / state": "Final combined acceptance / merge / publication — BLOCKED",
+      "Owner, branch / PR": "Sole integrator #328; parent final evidence reviewer",
+      "Exact source": "I plus future reviewed C/R/P/D union, not yet combined",
+      "Implemented versus missing": "Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional.",
+      "Required acceptance": "Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory.",
+      "Dependency / blocker": "All open rows above; parent evidence threshold.",
+      "Smallest next task": "Converge reviewed lanes in focused checkpoints, keep gates running and prepare exact-source release recommendation.",
+      "Genuine owner intervention": "Separate explicit owner approval is required for community merge/publication; current engineering authority does not include production deployment.",
+      "audit_status": "blocked_by_open_rows",
+      "later_evidence_reconciliation": "Campaign stays NO-GO. Coverage #514 passes at exact PR head a90d6cdb/tree cd8f99d; installed a59 base/data dependency profiles provide bounded passes but both strict graph comparisons remain FAILED; historical a52 aggregate stays FAILED; Windows rerun and published Ubuntu Core assertion cause remain unresolved; Codex failed before initialize; a57 host retest is owner-deferred; full Runtime cold restore is unqualified.",
+      "actual_remaining_blocker": "Every original row must be verified or receive an explicit owner decision; exact-source combined final gates, inventory and separate owner release approval remain absent.",
+      "next_minimal_proof": "Complete all remaining technical and owner gates in the controlling 28-row matrix, then create an exact-source release ledger. Only afterward request the separate owner merge/publication decision; no such action is authorized by this audit.",
+      "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
+      "owner_decision_required": "Separate explicit owner approval is required for community merge/publication; current engineering authority does not include production deployment.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 756,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_immutable_evidence": [
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/codex-client-next-proof.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/README.md",
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/README.md"
+      ],
+      "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
+      "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
+    }
+  ],
+  "canonical_guide_proposal": {
+    "target": "actions/docs/program/actions-next-release-327.md",
+    "exact_delta": "Replace only the current-continuation paragraph with a source-identified a59 update: Coverage #514 run 40358988969 PASS at PR head a90d6cdb/tree cd8f99d (Runtime 5343 passed/58 skipped, all package exits 0, 70.9216%, complete source inventory, PostgreSQL cleanup; baseline_written=false; no full subprocess/installed-wheel claim); record current dirty CI/test-only correction status with Toolkit225, configured Runtime lint/mypy and developer Ruff pass, native Windows rerun pending and published Ubuntu Core pytest cause unknown; state the separate installed artifact source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b with base/data-duckdb lock profiles and dual raw/active evidence while preserving both strict exit-1 comparisons and 29 explained inactive edges; preserve pending a59 root Postgres/object/readback without claiming pass, bounded a58 1.0.4/queue/attachment/rollback results without claiming full cold restore, and frozen a52/512/513 failures; record Codex EROFS before initialize with no model/MCP call and unverified model route; retain owner-deferred immutable a57 CONNECT+RENDER and no desktop authority; keep all 28 original acceptance rows controlling and campaign NO-GO. Correct the compatibility and restore row notes to state the a58-preserved authentic a57 SQLite queue/attachment compatibility cell PASS (with exact public PyPI hashes, safe schema refusal, unchanged bytes and pre-upgrade backup rollback) while full coordinated Runtime compatibility remains open. State that a59 Postgres/object attempts failed pre-readback, the third manifest-matching attempt failed RCC published-package build, and owned containers were cleaned.",
+    "evidence": [
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/README.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/a59-installed/README.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/codex-client-next-proof.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/restore-fixture.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-gate-summary.json",
+      "327-probes/a59-coordinated-restore/README.md",
+      "327-probes/a59-coordinated-restore/tcp-ready/run.log"
+    ],
+    "changed_in_this_readonly_lane": false,
+    "stale_or_ambiguous_guidance_to_remove": "Replace only the now-stale current-continuation summary about the pending coverage run / previous source evidence; retain all original row acceptance, historical failures, and prior immutable receipts.",
+    "remaining_uncertainty": "Native Windows hosted rerun, exact published Ubuntu Core assertion, mandatory actual client acceptance, running Postgres/object/readback component, owner ChatGPT retest and invoice E1, full restore, full distribution and all other open rows. RCC published-package build failure diagnosis and successful Postgres/object readback; full Runtime coordinated compatibility remains unqualified."
+  },
+  "upstream_disposition": "none",
+  "documentation_improvement_receipt": {
+    "canonical_file_changed_or_proposed": "Proposed exact current-continuation delta for actions/docs/program/actions-next-release-327.md; this read-only lane changes no canonical repository file.",
+    "durable_learning_captured": "A successful exact-head full package/coverage aggregate closes only the portable source-suite gate; it does not erase a frozen failed run or imply installed, subprocess, platform, whole-restore or owner-host acceptance. Keep product source and hosted CI/test-only head distinct. Keep raw declared and lock-selected SBOM evidence separate and retain strict-comparison exit codes. A CLI failure before initialize is not client/MCP acceptance.",
+    "evidence": "a59-ci-checkpoint README, coverage-514 JSON, installed profile receipts, Codex client proof and bounded restore fixture; original row contracts/references copied intact from prior audit of canonical matrix.",
+    "stale_or_ambiguous_guidance_removed": "Proposal updates only the top current-continuation summary; none removed in this read-only output.",
+    "remaining_uncertainty": "See current_pending_gates and row-level blockers."
+  },
+  "sbom_acceptance_clarification": {
+    "question": "Does original #327/#328 distribution acceptance require the raw CycloneDX dependency graph to exactly equal active selected-profile edges?",
+    "conclusion": "No such requirement is present in the matrix. The integrated D acceptance explicitly requires separate raw declared and active selected-profile evidence with inactive-edge reconciliation while retaining the strict graph failure. A57 qualifies this bounded Python SBOM evidence slice; the full homelab-independent distribution row remains blocked.",
+    "exact_sources": [
+      {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 752,
+        "text": "The distribution row requires reproducible wheels/native/images/locks/checksums/SBOM/provenance, installed final consumers, configurable registry/storage, and local build/restore without mandatory hosted/vendor services. It does not specify that the raw CycloneDX graph itself equal the active graph."
+      },
+      {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 1395,
+        "text": "D’s dual SBOM contract preserves/validates the raw declaration graph separately from the active selected-profile graph, explains all inactive edges, and retains the strict-active failure."
+      },
+      {
+        "path": "action_server/scripts/produce_consumer_sbom_327.py",
+        "line": 3,
+        "text": "Raw declared dependencies and selected-profile graph remain separate."
+      },
+      {
+        "path": "action_server/scripts/produce_consumer_sbom_327.py",
+        "line": 4,
+        "text": "Strict active-graph failures are retained, never rewritten away."
+      },
+      {
+        "path": "docs/program/evidence/actions-next-327/lane-d-qualification/python-sbom-producer/graph-contract.md",
+        "lines": "43-60",
+        "text": "The selected-profile graph is ordinary evidence JSON, never mislabeled as producer output or a CycloneDX BOM; a separate derived active-profile CycloneDX is conditional on a downstream consumer needing it."
+      }
+    ],
+    "owner_decision_required": false,
+    "reason": "The integrated D contract in the canonical release matrix resolves the evidence shape; no new standard is needed and the strict check remains unchanged.",
+    "a57_evidence": {
+      "source": "bde511d2ba6318d0b100547cc6e777e53b9ebc80",
+      "lock_sha256": "00de76d27a833b63225ce37b5d633b83a761d00bad63f315eaeec77dc9de4c53",
+      "profile": "base Runtime; selected Runtime extras []",
+      "active_distributions": 64,
+      "raw_sbom": "validated reproducible CycloneDX 1.6; producer 7.5.0; DECLARED; sha256:e3e7165e5f18e99c1d853e846ac65e1acf58f918df1cfe3e2308bf220219230b",
+      "active_graph": "resolved-graph.json exact lock-qualified selected-profile graph",
+      "reconciliation": "29 inactive raw declaration edges fully explained (25 unselected extras; 4 inactive Python markers)",
+      "strict_comparison": "FAILED/exit 1 and retained; no filter or rewritten BOM",
+      "limits": "Linux CPython 3.12 only; no native/OS/image SBOM, data-duckdb extra, other provider profile, full release inventory, or publication"
+    }
+  },
+  "client_task_scope_clarification": {
+    "conclusion": "The original contract requires real supported-client acceptance plus a bounded typed job/Task seam; it does not name legacy/default Node negotiation or Node SDK2 detached Task-result decoding as standalone mandatory profiles.",
+    "exact_matrix_sources": [
+      {
+        "path": "docs/program/actions-next-release-327.md",
+        "lines": "503-510",
+        "text": "Mandatory cloud acceptance uses installed exact artifacts with a genuine MCP SDK client, then an actual fresh Codex CLI session and official MCP Apps basic host; the flow includes typed authorized execution, Work Item/Run/Attempt, scoped artifacts, restart/reconnect, and negatives. It does not specify Node SDK2, negotiation mode, or the Task result envelope."
+      },
+      {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 744,
+        "text": "WorkflowNode/MCPTask row requires a typed bounded long-job/projection and any required node lineage, cancellation/reconnect; it expressly avoids inferring a general workflow designer."
+      },
+      {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 730,
+        "text": "Runtime row retains existing MCPv2/routing/collisions/old aliases; this is a general compatibility requirement and does not name a legacy/default Node GET profile."
+      }
+    ],
+    "latest_evidence": [
+      {
+        "path": "docs/program/evidence/actions-next-327/recovery-20261026/a56-node-modern/handoff.md",
+        "result": "a56 Node SDK2 auto / protocol 2026-07-28 sync generic pass/fail, artifacts, restart and natural exit PASS; profile-specific."
+      },
+      {
+        "path": "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/README.md",
+        "result": "a56 installed Python/MCP Task cancellation, exact child absence, terminal cancel, public read/replay/restart PASS; bounded single-owner."
+      },
+      {
+        "path": "docs/program/evidence/actions-next-327/recovery-20261026/node-generated-task-handoff.md",
+        "result": "prior Node SDK2 detached Task attempt fails with UNSUPPORTED_RESULT_TYPE before Task ID; terminal Node Task read/replay/restart not reached."
+      },
+      {
+        "path": "docs/program/evidence/actions-next-327/recovery-20261026/node-generated-sync-failed.json",
+        "result": "prior a53 legacy/default GET/generic Node profile failure/hang; preserve as source/profile-specific evidence, not an a56 result."
+      },
+      {
+        "path": "docs/program/evidence/actions-next-327/recovery-20261026/node-generated-task-handoff.md",
+        "result": "prior a53 Node SDK2 auto + tasks extension receives HTTP 200 but SDK rejects task result type before Task ID; no terminal Task read/replay/restart."
+      }
+    ],
+    "remaining_minimal_proof": "Complete the exact installed acceptance sequence using the supported clients named in the matrix and demonstrate typed bounded job execution/projection, Work Item/Run/Attempt, result/artifact, and restart/reconnect where that accepted path requires it. The matrix does not state that the Node SDK2 detached Task result envelope is mandatory.",
+    "owner_only_scope_ambiguity": "None in the current written matrix. The matrix says engineering API/schema choices belong to the integration owner, but it does not state support for legacy/default Node GET or Node SDK2 detached Task result decoding. If product support scope intends either as a compatibility promise, the owner must state that contract explicitly; that would be new scope relative to the quoted matrix."
+  },
+  "refresh_basis": {
+    "matrix_authority": "Original 28-row matrix in actions/docs/program/actions-next-release-327.md; the previous 207300bf audit is the structured row baseline. Preserve every original acceptance requirement, reference, and historical failure.",
+    "source_scope": "Coverage #514 ran at PR head a90d6cdb8af8b07bf534953903f157d003a4d322 / tree cd8f99d859bdb9626aed38d96d39a3d8c1f967d6. Separate installed artifact source is 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b / tree 7d6658bc3f2d536519c8698503f8b379c7b3ed56. These are distinct identities.",
+    "working_tree_scope": "Current dirty checkout contains CI/test-only changes. Do not represent them as product source changes or as covered by a newly built wheel.",
+    "coverage_514": "PASS, run 40358988969; Runtime 5343 passed / 58 skipped; Core/actions 449/5, HTTP Helper 12, devutils 335, Work Items 285/46 skipped/3 deselected/10 xfailed; all package exits 0; 70.9216% (41665/58748) vs 53.38%; full source inventory, PostgreSQL cleanup and receipt upload passed; baseline_written=false. Complete subprocess and installed-wheel coverage not claimed.",
+    "ci_followups": "Toolkit 225 passed; configured Runtime lint and mypy passed; developer Ruff passed; Linux focused gates 27 process/Robot, 26 logical, 27 restore/refusal, 1 wire-schema passed. Native Windows rerun pending. Published Ubuntu Core pytest cause remains unknown; no artifact downloaded.",
+    "installed_a59": "Installed artifact/API and compiler/output receipts pass at product source above. Base and data-duckdb lock profiles qualify 64 and 65 active distributions respectively (excluding pip). Raw CycloneDX remains distinct from active graph; strict graph comparison exited 1 for each profile with 29 explained inactive edges. Preserve exit 1; this is a bounded two-view profile result, not complete distribution acceptance.",
+    "codex_client": "Genuine Codex CLI attempt used supported task-local homes and no configured MCP servers; app-server exited 1 with EROFS before initialize. No model inference, model-list request, or MCP acceptance occurred; approved model route remains unverified; no fallback model substituted.",
+    "owner_host": "a57 CONNECT+RENDER bundle and pinned Dakota remain immutable. Actual ChatGPT retest is deferred while owner is at work; no desktop authority. No change to a57 status.",
+    "pending_component": "The root a59 Postgres/object/readback component failed before successful readback: first manifest mismatch; a bootstrap TCP-readiness race was corrected; the third attempt matched the manifest but failed during RCC published-package build. Owned containers were cleaned. No component PASS is claimed. The authentic a57 old/new SQLite queue/attachment compatibility cell is PASS but full Runtime coordinated compatibility remains open.",
+    "frozen_failures": [
+      "Historical a52 aggregate remains FAILED: 5347 passed / 198 skipped / 3 deselected / 1 failed.",
+      "Historical a52, coverage512 and coverage513 remain FAILED as recorded.",
+      "Both a59 installed base and data-duckdb strict graph comparisons remain FAILED/exit 1; 29 inactive edges are explained in each."
+    ],
+    "prohibited_operations": [
+      "No artifact download.",
+      "No retry of denied artifact 12653743795 or run 40331092012; no alternate credentials.",
+      "No a57 mutation, Dakota dispatch, desktop interaction, merge, publication, release, or deployment."
+    ]
+  },
+  "current_pending_gates": [
+    "Native Windows hosted rerun for current CI/test-only changes.",
+    "Published Ubuntu Core acceptance test failure: pytest exit 1; exact assertion/cause remains unknown.",
+    "Mandatory supported-client typed execution/reconnect; Codex app-server hit EROFS before initialize and made no model/MCP request.",
+    "Full authoring/UI/accessibility, multi-principal/provider/effect recovery, and approval/security breadth.",
+    "Diagnose the manifest-matching a59 RCC published-package build failure; obtain successful Postgres/object component readback, then complete full coordinated Runtime cold restore.",
+    "Native/platform/image/final distribution and operator breadth; actual invoice E1; publisher security #332; celld owner decision; final owner release approval."
+  ],
+  "row_count": 28,
+  "row_refresh_rule": "Original fields, exact matrix_reference values, required acceptance text and historical states are retained. Refresh fields alter only latest reconciliation, status where a bounded new subgate changes it, and next minimal proof. Every prior 207300bf row claim is explicitly labeled historical context, not current a90 acceptance, unless an exact a90 receipt is named."
+}
