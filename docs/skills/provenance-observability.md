@@ -289,6 +289,14 @@ The private filesystem provider requires Linux descriptor features and trusted
 kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
 bounded bytes. It rejects special objects through an O_PATH pin before any
 read-capable open. Its root must be separate from legacy artifact/static mounts.
+At open it verifies the whole-object digest and records a digest for each
+64 KiB block. Each read freshly verifies every complete touched block before
+returning its requested slice; metadata checks alone cannot detect every
+same-size rewrite. Reader position advances only after the complete requested
+read and final descriptor check succeed. Failed reads leave the cursor unchanged.
+The provider requires callable `pread` before allocating owned descriptors.
+These checks preserve the trusted-writer boundary; they do not establish an
+atomic snapshot of an entire concurrently changing tree.
 It is not a hostile-tree snapshot, public HTTP Range/HEAD service or Windows
 runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope,
 64 output records per Run (including aborted records), 64 MiB per object,
