@@ -1,5 +1,12 @@
 # Repository Operations
 
+Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
+through the activated cloud toolchain for an arbitrary bounded qualification
+script. `rcc run` selects manifest tasks and is not a generic command gateway.
+Use a real script file: a heredoc supplied to the outer launcher can be consumed
+without executing the intended Python body. Check produced files and receipts,
+not only the launcher's successful exit.
+
 ## Recovering installed qualification evidence
 
 A recovered Runtime wheel does not recover its companion Core/Work Items bytes,
@@ -21,6 +28,13 @@ both ACTIONS_HOME and ROBOTS_HOME as task-local writable roots for fresh cloud
 probes. Record installed payload identity separately from dependency-profile
 identity: identical application wheels can resolve different allowed public
 dependency versions at a later clean installation.
+
+The locked Node client2.0.0 profile can negotiate the Task extension and receive
+HTTP200 for detached invocation, yet its wire decoder rejects `resultType:task`
+as UNSUPPORTED_RESULT_TYPE before applying a custom result schema. This is a
+client support limitation; do not count admission as terminal execution or
+restart qualification. Preserve supported synchronous invocation evidence
+separately and keep Task-client acceptance open.
 
 ## Cloud source handoff
 

@@ -1,0 +1,71 @@
+{
+  "qualification": "Installed generated claimed Robot Task via Node SDK 2; synthetic single-owner fixture",
+  "status": "FAILED",
+  "state": "/workspace/327-probes/node-generated-luna",
+  "node_client_seconds_limit": 90,
+  "outer_supervisor_seconds_limit": 600,
+  "source_fixture_read_only": "/workspace/327-probes/a53-claimed/terminal-success-failure",
+  "base": "/workspace/327-artifacts/a53",
+  "candidate_versions": {
+    "actions-runtime": "1.1.0a53",
+    "actions-core": "1.1.0a8",
+    "actions-work-items": "0.5.0a2"
+  },
+  "installed_identity": {
+    "runtime": "1.1.0a53",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a53/consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "wheel_sha256": {
+    "wheels/actions_runtime-1.1.0a53-cp312-cp312-linux_x86_64.whl": "2013b8fc54163d10c3c0edddb3bb1ea8e59cb95b88f9a05a2d810110cdd0d117",
+    "wheels/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f"
+  },
+  "sdk_version": "2.0.0",
+  "sdk_root": "/workspace/actions/action_server/frontend/node_modules/@modelcontextprotocol/client",
+  "node_binary": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+  "node_version": "v20.19.3",
+  "fixture_copy": {
+    "datadir_bytes": 1122513,
+    "profile_source_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "profile_copy_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f"
+  },
+  "runtime_ready": true,
+  "failure_type": "RuntimeError",
+  "failure": "node_client_exit_1_case_pass",
+  "runtime_final_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  },
+  "attempt_result": {
+    "phase": "pass",
+    "node_http_statuses": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "public_enqueue_replay": "passed",
+    "public_claim": "passed",
+    "detached_invoke_http_status": 200,
+    "detached_invoke_client_result": "rejected by SDK before Task ID was exposed",
+    "sdk_error": {
+      "name": "SdkError",
+      "code": "UNSUPPORTED_RESULT_TYPE",
+      "message": "Unsupported result type 'task' for tools/call"
+    },
+    "terminal_get_replay": "not reached",
+    "natural_node_exit_code": 1,
+    "client_close_completed": true,
+    "http_abort_observed": true,
+    "last_private_fixture_run": {
+      "id": "d4f248e3-32e0-4467-9ecf-fbffdd9b0ad6",
+      "db_status": 1,
+      "attempt_state": "running",
+      "item_state": "IN_PROGRESS"
+    },
+    "restart_read": "not run because terminal Task response was unsupported"
+  },
+  "qualification_status": "BLOCKED"
+}

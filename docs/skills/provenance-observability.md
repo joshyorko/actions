@@ -8,6 +8,14 @@ does not renew a lease or grant execution/output authority; mutation paths still
 use their existing live fences. Pending cancellation without an Attempt cannot
 be projected as an executed Attempt.
 
+RCC compilation and execution can materialize the same pinned artifact in
+different local environment roots with different interpreter bytes. A live-child
+observer must use an executable hash measured inside the actual execution
+context, after revalidating artifact and installed Core/Work Items bytes. A
+compiler interpreter hash alone can reject the genuine child. Keep exact
+executable/argument/launch/ancestry checks; do not replace the failed assumption
+with acceptance of arbitrary Python processes under the prepared home.
+
 For an active claimed Robot Task, cancellation intent and externally observed
 child absence are not terminal evidence. Runtime a53 retains launch-bound adapter
 cleanup confirmation and validates the original Task, input, claim and Attempt,

@@ -9,6 +9,14 @@ current-source aggregate QA remain open. The original full matrix in
 `docs/program/actions-next-release-327.md` still governs omitted summary rows.
 Pinned Dakota post2/Core6 remains unchanged and separately owned.
 
+**a54 follow-up:** source47ef271d, wheelSHAfa95745d, now passes installed terminal
+claimed Robot Task cancellation, exact observed child absence before Runtime stop,
+public item/Run read, replay and real restart with one unchanged Run/Attempt.
+See `../recovery-20261026/a54-installed-cancellation-receipt.json`. This closes
+the earlier terminal-cancellation gap at that bounded single-owner scope. Node
+Task-client decoding and synchronous generated-client natural exit remain
+distinct open gates; sourcebound failed trials stay retained.
+
 Frozen full-suite source: **5b9c70e00e5e019a751aec5385591e5a2bbd615e**, Runtime **1.1.0a49**, Core **1.1.0a7**. Installed **1.1.0a51 / Core 1.1.0a8**, source **ea3448e2b40741c5a21369c24cc20e84b8258809**, passes terminal claimed Task success/failure, replay and restart. The next source correction is Runtime **1.1.0a52** for disappearing child metadata during shutdown; a52 is not installed-qualified. Installed proofs remain source-specific: a48 Data, a47 claimed Robot, a46 Knowledge. Separate a44.post2/Core a6 UI artifact source **46488e59f419d6bb55ab594031a0f227b4e0d817** has completed the parent-owned managed run06 evaluation. Release acceptance remains OPEN; this is one existing campaign.
 
 | Original acceptance area | Exact accepted proof | Remaining gate |

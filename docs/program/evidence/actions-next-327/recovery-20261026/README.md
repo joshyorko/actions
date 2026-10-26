@@ -155,3 +155,22 @@ New focused SQLite tests pass7/7PostgreSQLskips; existing read-seam regressions
 pass3/3PostgreSQLskips/37deselected. Configured lint/typecheck passes655sourcefiles.
 Early test-fixture expectation failures are not claimed as pre-fix RED evidence.
 Installed a54 public projection and replay/restart remain the next exact gate.
+
+## Installed a54 cancellation closure
+
+Installed Runtimea54 wheel
+`fa95745dcb50f2ea0527d504ee6d965a7261d9aa094a9c4508e18d9e4cc7582a`
+now passes the complete bounded cancellation trial: exact live RCC/Python pair,
+terminal Task cancelled, both original children absent before Runtime stop in
+1.145seconds from Python birth, public item/Run reads, replay and restart. Counts
+remain1Run/1Attempt/1intent/1Taskreceipt; supervisor PASS reaped its exited adoptee
+and found no owned descendants. See `a54-installed-cancellation-receipt.json`.
+The compiler profile is explicitly reused from measured a53 preparation because
+Core8/WorkItems2/Robot7.4.2 and artifact inputs are unchanged; it is not relabeled
+as an a54 compiler build. a53's earlier public-read409 remains FAILED evidence.
+
+The exact a54 bundle is Library `libfile_196f305e697081919e9d0e8aa881eea4`, v0,
+archive SHA256 `e18c9565eaf95f2e242ac7d6fac8d3a2b7aefa41a2b3cd16bc58a1930ffc92c6`.
+This closes a synthetic single-owner installed Task cancellation path only.
+Multi-principal/producer/output breadth, PostgreSQL/current-source aggregate,
+native/platform/restore, actual clients and the full original matrix remain open.
