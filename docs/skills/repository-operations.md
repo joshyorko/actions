@@ -15,6 +15,13 @@ Runtime MCP route requests stateless JSON responses; establish an observed open
 stream before attributing a hang to SSE. Record natural client exit separately
 from Runtime shutdown and descendant cleanup.
 
+An actual SDK2 probe observed a GET SSE response even with stateless JSON MCP
+configuration; the transport delivered its abort and exited naturally. Configure
+both ACTIONS_HOME and ROBOTS_HOME as task-local writable roots for fresh cloud
+probes. Record installed payload identity separately from dependency-profile
+identity: identical application wheels can resolve different allowed public
+dependency versions at a later clean installation.
+
 ## Cloud source handoff
 
 Checkpoint each writer branch separately; never fold a worker's unreviewed source

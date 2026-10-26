@@ -407,10 +407,13 @@ def test_orphaned_same_group_child_is_stopped(case):
     result = _execute((runner, selected, archive, actor, fence, host))
     pid = int((runner.root / result.launch.launch_id / "child.pid").read_text())
     assert result.cleanup.execution_stopped
-    assert (
-        not psutil.pid_exists(pid)
-        or psutil.Process(pid).status() == psutil.STATUS_ZOMBIE
-    )
+    try:
+        assert psutil.Process(pid).status() == psutil.STATUS_ZOMBIE
+    except psutil.NoSuchProcess:
+        # An outer subreaper can reap the stopped orphan while we inspect it.
+        # Absence is already the stronger accepted outcome; do not race a
+        # separate pid_exists() check against process metadata access.
+        pass
 
 
 def test_xml_identity_tampering_refuses_staging(case, monkeypatch):

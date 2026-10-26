@@ -474,14 +474,18 @@ class TaskService:
                 )
                 return TaskSnapshot(
                     run.id,
-                    "cancelled" if cancellation == "pending_cancelled" else "working",
+                    "working" if cancellation == "active_unconfirmed" else "cancelled",
                     int(receipt.created_ms),
                     int(pin.state_updated_ms),
                     int(receipt.ttl_ms),
                     self.policy.poll_interval_ms,
                     "Cancelled before execution."
                     if cancellation == "pending_cancelled"
-                    else "Cancellation requested; outcome not confirmed.",
+                    else (
+                        "Cancelled; execution stopped and descendants reaped."
+                        if cancellation == "active_cancelled"
+                        else "Cancellation requested; outcome not confirmed."
+                    ),
                     None,
                 )
             if not pin.current_attempt_id:

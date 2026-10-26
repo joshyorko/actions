@@ -10,6 +10,7 @@ from threading import Event
 from typing import Callable, Protocol
 
 from actions.work_items import State
+from actions.work_items._fencing import ClaimRejected
 
 from actions.server._models import Run, RunStatus
 from actions.server.foundry.generic_work_item_execution import (
@@ -20,6 +21,7 @@ from actions.server.foundry.robot_execution import (
     DISCRIMINATOR,
     DirectRobotPreparation,
     RccRobotPreparation,
+    RobotCancellationStopped,
     RobotExecution,
     RobotExecutionResult,
     RobotSelection,
@@ -446,16 +448,55 @@ class PinnedRobotRunner:
         )
         if is_cancelled():
             raise FenceRejected("Robot execution cancelled")
-        result = self.adapter_factory(self.execution_root, self.preparation).execute(
-            caller.actor,
-            ticket.fence,
-            selection=prepared.selection,
-            source_archive=prepared.source_archive,
-            lifecycle=lifecycle,
-            cancelled=is_cancelled,
-            timeout_seconds=self.timeout_seconds,
-        )
+        try:
+            result = self.adapter_factory(
+                self.execution_root, self.preparation
+            ).execute(
+                caller.actor,
+                ticket.fence,
+                selection=prepared.selection,
+                source_archive=prepared.source_archive,
+                lifecycle=lifecycle,
+                cancelled=is_cancelled,
+                timeout_seconds=self.timeout_seconds,
+            )
+        except RobotCancellationStopped as stopped:
+            from actions.server.run_outputs.cancellation_confirmation import (
+                confirm_claimed_robot_cancellation,
+            )
+
+            return confirm_claimed_robot_cancellation(service, caller, ticket, stopped)
         if is_cancelled():
-            raise FenceRejected("Robot execution cancelled before publication")
-        lifecycle.check_live(caller.actor, ticket.fence, prepared.selection)
-        return outputs.publish_robot(result, journal)
+            from actions.server.run_outputs.cancellation_confirmation import (
+                confirm_claimed_robot_cancellation,
+            )
+
+            return confirm_claimed_robot_cancellation(
+                service,
+                caller,
+                ticket,
+                RobotCancellationStopped(
+                    result.launch, result.cleanup, directory=self.execution_root
+                ),
+            )
+        try:
+            lifecycle.check_live(caller.actor, ticket.fence, prepared.selection)
+            return outputs.publish_robot(result, journal)
+        except (FenceRejected, ClaimRejected) as error:
+            if (
+                type(error) not in (FenceRejected, ClaimRejected)
+                or is_cancelled() is not True
+            ):
+                raise
+            from actions.server.run_outputs.cancellation_confirmation import (
+                confirm_claimed_robot_cancellation,
+            )
+
+            return confirm_claimed_robot_cancellation(
+                service,
+                caller,
+                ticket,
+                RobotCancellationStopped(
+                    result.launch, result.cleanup, directory=self.execution_root
+                ),
+            )

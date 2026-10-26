@@ -1,0 +1,29 @@
+{
+  "qualification": "SOURCE init/list only",
+  "status": "PASS",
+  "state": "/workspace/327-probes/state-20261026T110918",
+  "git_head": "5be17fb0ffc61e313e37999c46e4a527d67adae6",
+  "fingerprints": {
+    "action_server/src/actions/server/_api_action_routes.py": "01b14663e763311284ca86a0ab47bc967b8d75817ba2b0c6a452465162f13279",
+    "action_server/src/actions/server/mcp/gateway_metadata.py": "247d2f6b7e9199501b3dc82fb9b7c97c1839d83177be2547efa5b67bcb6a543c",
+    "action_server/frontend/node_modules/@modelcontextprotocol/client/dist/index.mjs": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414"
+  },
+  "probe_sha256": "38a95189b0bcc80dad67649b7b997d41b0e99259ca3fc47c2a4d608a039e6a9c",
+  "runtime_ready": true,
+  "node_natural_exit": 0,
+  "before_shutdown_children": [
+    {
+      "pid": 3786,
+      "status": "sleeping"
+    },
+    {
+      "pid": 3787,
+      "status": "zombie"
+    }
+  ],
+  "runtime_graceful_exit": -15,
+  "remaining_owned": [],
+  "remaining_descendants": [],
+  "reaped_adoptees": [],
+  "elapsed_seconds": 10.02
+}

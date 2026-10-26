@@ -133,8 +133,12 @@ class DetachedActions:
                     state = validate_claimed_cancellation(
                         service, retained, run, pin, fence
                     )
-                    expected = "active_unconfirmed" if fence else "pending_cancelled"
-                    if state != expected:
+                    expected = (
+                        {"active_unconfirmed", "active_cancelled"}
+                        if fence
+                        else {"pending_cancelled"}
+                    )
+                    if state not in expected:
                         raise FenceRejected("claimed cancellation replay differs")
                     return RunAdmissionOutcome(run, False)
                 if run.status in (RunStatus.PASSED, RunStatus.FAILED):

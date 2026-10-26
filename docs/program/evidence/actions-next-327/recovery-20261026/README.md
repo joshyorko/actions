@@ -36,3 +36,74 @@ owned. Its handoff is not invoice E1 or full release acceptance.
 
 Upstream disposition: none. Recovery and source inspection have not established
 an upstream defect.
+
+## Exact candidate recovery and Node diagnostics
+
+Core a8 and Work Items a2 were rebuilt through the prepared RCC/Poetry gateway;
+their wheel hashes match the retained original artifacts exactly. Clean a52
+installation then verified every payload member (338 Runtime / 87 Core / 26 Work
+Items) and METADATA. See `installed-a52-payload.json`. This clean install resolved
+current allowed public dependencies, including MCP 2.3.0; `installed-a52-freeze.txt`
+records that profile rather than claiming the disappeared environment's profile.
+
+Source and installed Node initialize/list probes exited naturally. A separate
+installed draft-only call also exited naturally, retaining one inactive revision
+and zero Runs/Attempts/Admissions. Actual GET SSE was observed and aborted by the
+SDK transport. These observations do not close execution/restart or reproduce the
+reported 650-second execution hang. Receipts/events are adjacent `node-*` files.
+The initial source launch failure from unwritable default ROBOTS_HOME is retained.
+
+A separate ordinary-action execution diagnostic subsequently called the harmless
+greet action twice through official SDK2, obtained both expected results and
+exited naturally in 1.069 seconds. Authenticated restart reads retained the same
+two PASSED Runs, without new execution. Both Runtime processes stopped and no
+owned descendants remained. This closes that ordinary-action diagnostic only;
+generated-app/claimed-Task execution exit/restart remains open. See
+`node-installed-execution-receipt.json` and its events.
+
+## Cancellation implementation
+
+The recovered a52 adapter discarded successful cleanup evidence when raising its
+original cancellation exception. The claimed Task reader intentionally required
+terminal evidence that no owner persisted. The new a53 source retains exact
+launch/fence/cleanup evidence, checks original Task/input/claim/Attempt plus live
+queue and Run cancellation permissions, and atomically records cancellation.
+Normal live fences stay closed. Identical replay does not renew leases or publish
+outputs; altered identity, revoked authority and postvalidation failure reject or
+roll back. Host shutdown without persisted cancellation stays unconfirmed.
+
+The adapter preserves unrelated failures and handles cancellation races at
+heartbeat/lifecycle/staging; the owner also handles the final publication race.
+Prelaunch interruption still has no launched-child confirmation. This is a scoped
+source correction, not installed RCC cancellation qualification or broad release
+acceptance. Direct actual-child/SQLite Task observation, termination and replay
+passed separately; PostgreSQL was unavailable for that run.
+
+Earlier unsupervised actual-process tests left PID 5086 owned by PID 1 in zombie
+state. That process cannot be reaped by this supervisor. Passing assertions do
+not supersede this cleanup limitation. Subsequent process-bearing verification
+uses `supervise_command.py`, whose self-check reaped an exited adoptee during
+normal execution and left no owned descendants. No general environment cleanup
+success is claimed.
+
+## Source validation receipt
+
+Configured Runtime lint/typecheck passed, 654 source files. Independent bounded
+source review cleared the transition and identified fixes now covered by tests:
+live queue cancellation permission, supplied claim/input identity and late
+publication cancellation. No execution fence was relaxed.
+
+The final supervised seven-module run recorded **114 passed, 52 skipped, 1
+failed** in 268.20 seconds. All newly added transition tests passed. The failure
+was the existing orphan test's separate existence/status observation racing the
+outer subreaper. The corrected assertion preserves absent-or-zombie semantics
+and accepts only NoSuchProcess as absence. Its supervised adapter follow-up
+passed **65 tests, 2 skipped** in 12.23 seconds, reaped its exited adoptee and left
+no owned descendants. This is corrected follow-up coverage, not a rewritten
+original-run PASS. JUnit and both supervisor receipts are retained here.
+
+Fifty PostgreSQL parameter cases were skipped for missing owned PostgreSQL
+configuration; two adapter RCC cases require a genuine prepared Robot RCC
+receipt. They are not passes. Independent aggregate QA remains on its frozen
+source; a53 still needs coordinated PostgreSQL/current-source and installed RCC
+qualification. No full package or release PASS is claimed.

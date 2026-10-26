@@ -64,7 +64,7 @@ def validate_claimed_cancellation(
     run: Run,
     pin: RunPin,
     fence: AttemptFence | None = None,
-) -> Literal["pending_cancelled", "active_unconfirmed"]:
+) -> Literal["pending_cancelled", "active_unconfirmed", "active_cancelled"]:
     """Verify retained cancellation facts without acquiring any mutation right.
 
     No provider access, lease renewal, queue mutation, live-fence acquisition or
@@ -183,8 +183,9 @@ def validate_claimed_cancellation(
             return "pending_cancelled"
         fence = AttemptFence.model_validate(fence)
         attempt = _one(db, RunAttempt, fence.attempt_id)
+        terminal = run.status == RunStatus.CANCELLED
         if (
-            run.status != RunStatus.RUNNING
+            run.status not in (RunStatus.RUNNING, RunStatus.CANCELLED)
             or pin.current_attempt_id != fence.attempt_id
             or pin.epoch != fence.epoch
             or run.id != fence.run_id
@@ -193,7 +194,7 @@ def validate_claimed_cancellation(
             or attempt.owner_id != fence.owner_id
             or fence.owner_id != claim.owner_id
             or attempt.epoch != fence.epoch
-            or attempt.state != "running"
+            or attempt.state != ("cancelled" if terminal else "running")
             or not _integer(pin.epoch, 2_147_483_647)
             or not _integer(attempt.epoch, 2_147_483_647)
         ):
@@ -210,7 +211,11 @@ def validate_claimed_cancellation(
         }
         if (
             not isinstance(record, dict)
-            or set(record) != {"version", "mode", "claim", "fence", "launch"}
+            or set(record)
+            != (
+                {"version", "mode", "claim", "fence", "launch"}
+                | ({"cancellation"} if terminal else set())
+            )
             or record["version"] != DISCRIMINATOR
             or record["mode"] != "work-items"
             or not _same(record["claim"], expected_claim)
@@ -218,6 +223,24 @@ def validate_claimed_cancellation(
         ):
             raise ValueError("closed original Robot dispatch required")
         launch = record["launch"]
+        if terminal:
+            confirmation = record["cancellation"]
+            if (
+                launch is None
+                or not isinstance(confirmation, dict)
+                or set(confirmation)
+                != {
+                    "version",
+                    "confirmed_ms",
+                    "execution_stopped",
+                    "descendants_reaped",
+                }
+                or confirmation["version"] != "actions.robot-cancellation/v1"
+                or confirmation["confirmed_ms"] != pin.state_updated_ms
+                or confirmation["execution_stopped"] is not True
+                or confirmation["descendants_reaped"] is not True
+            ):
+                raise ValueError("closed stopped-launch confirmation required")
         if launch is not None:
             if not isinstance(launch, dict) or set(launch) != {
                 "discriminator",
@@ -261,6 +284,6 @@ def validate_claimed_cancellation(
                 _launch(RobotLaunchIntent(decoded, fence, launch["launch_id"])), launch
             ):
                 raise ValueError("original Robot launch selection differs")
-        return "active_unconfirmed"
+        return "active_cancelled" if terminal else "active_unconfirmed"
     except (ValueError, TypeError, KeyError, AttributeError) as exc:
         raise FenceRejected("Claimed Task cancellation evidence unavailable") from exc

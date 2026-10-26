@@ -294,6 +294,27 @@ class RobotCleanupIncomplete(RobotExecutionError):
     """Keep resources and launch intent: observed process shutdown unconfirmed."""
 
 
+class RobotCancellationStopped(RobotExecutionError):
+    """Adapter cleanup evidence, not durable cancellation or mutation authority.
+
+    The owner must independently verify persisted user cancellation: the adapter
+    cancellation callback can also represent a host shutdown request.
+    """
+
+    def __init__(
+        self,
+        launch: RobotLaunchIntent,
+        cleanup: ProcessTreeCleanupResult,
+        *,
+        directory: Path,
+    ):
+        if not cleanup.execution_stopped:
+            raise ValueError("confirmed Robot execution shutdown required")
+        super().__init__("Robot execution cancelled", directory=directory)
+        self.launch = launch
+        self.cleanup = cleanup
+
+
 _CHILD = r"""
 import json, platform, sys
 from pathlib import Path
@@ -378,13 +399,42 @@ class RobotExecution:
         if direct != (selection.plan_kind == "direct"):
             raise ValueError("plan/preparation mismatch; no fallback")
         deadline = time.monotonic() + timeout_seconds
+        cancellation_error = RobotExecutionError("Robot execution cancelled")
+        stopped_cleanup: ProcessTreeCleanupResult | None = None
+
+        from actions.work_items._fencing import ClaimRejected
+
+        from actions.server.run_outputs.service import FenceRejected
+
+        def confirm_stopped_cancellation(error):
+            if stopped_cleanup is None:
+                return
+            confirmed = error is cancellation_error
+            if type(error) in (FenceRejected, ClaimRejected):
+                try:
+                    confirmed = cancelled() is True
+                except BaseException as recheck_error:
+                    raise recheck_error from error
+            if confirmed:
+                raise RobotCancellationStopped(
+                    intent, stopped_cleanup, directory=directory
+                ) from error
 
         def check():
             if cancelled():
-                raise RobotExecutionError("Robot execution cancelled")
+                if stopped_cleanup is not None:
+                    raise RobotCancellationStopped(
+                        intent, stopped_cleanup, directory=directory
+                    )
+                raise cancellation_error
             if time.monotonic() >= deadline:
                 raise RobotExecutionError("Robot execution deadline exceeded")
-            if lifecycle.check_live(actor, fence, selection) != selection.snapshot:
+            try:
+                current = lifecycle.check_live(actor, fence, selection)
+            except (FenceRejected, ClaimRejected) as exc:
+                confirm_stopped_cancellation(exc)
+                raise
+            if current != selection.snapshot:
                 raise RobotExecutionError("live execution snapshot differs")
 
         check()
@@ -542,7 +592,12 @@ class RobotExecution:
                 "Robot process cleanup unconfirmed; retain resources",
                 directory=directory,
             ) from error
+        stopped_cleanup = cleanup
         if error is not None:
+            # Cancellation can commit between the callback and a lifecycle
+            # fence/claim check. Recheck only those exact authority failures;
+            # unrelated errors must never become cancellation evidence.
+            confirm_stopped_cancellation(error)
             if isinstance(error, RobotExecutionError):
                 error.directory = directory
             raise error
@@ -631,9 +686,13 @@ class RobotExecution:
         outputs = []
         for name, media, content, seen in payloads:
             check()
-            ref = lifecycle.stage_output(
-                actor, fence, name=name, media_type=media, content=content
-            )
+            try:
+                ref = lifecycle.stage_output(
+                    actor, fence, name=name, media_type=media, content=content
+                )
+            except (FenceRejected, ClaimRejected) as exc:
+                confirm_stopped_cancellation(exc)
+                raise
             ref = OutputRef.model_validate(ref)
             if ref.run_id != fence.run_id or ref.workspace_id != str(
                 selection.snapshot.deployment.workspace_id.root

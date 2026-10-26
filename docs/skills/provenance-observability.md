@@ -1,5 +1,25 @@
 # Provenance and Observability Contract
 
+For an active claimed Robot Task, cancellation intent and externally observed
+child absence are not terminal evidence. Runtime a53 retains launch-bound adapter
+cleanup confirmation and validates the original Task, input, claim and Attempt,
+plus current queue/Run cancellation permissions, before atomically recording
+terminal cancellation. It neither renews execution authority nor publishes
+outputs. Host stop alone, prelaunch interruption, incomplete cleanup, zombies
+and mismatched identities remain unconfirmed. Replay reads the retained receipt;
+the ordinary execution fence still rejects cancelled work.
+
+Cancellation can race lifecycle, heartbeat, staging or publication checks. After
+confirmed cleanup, only explicit fence/claim rejection and a fresh positive
+cancellation observation permit the confirmation path; unrelated failures retain
+their original meaning. Test assertions and descendant reaping are separate
+results. Process-bearing tests need an outer subreaper that reaps exited adoptees
+during normal execution, not just shutdown; a PID-1-owned zombie cannot be reaped
+by another process and must remain a recorded cleanup limitation.
+Process-exit assertions should inspect status directly and accept NoSuchProcess
+as absence; a separate existence check races with a subreaper. A stopped/zombie
+assertion remains distinct from proof of complete reaping.
+
 Installed restart acceptance does not qualify coordinated restore or version
 compatibility. A restore receipt must identify SQL state, sealed objects,
 journals, retained source/runtime artifacts and their pins; demonstrate
