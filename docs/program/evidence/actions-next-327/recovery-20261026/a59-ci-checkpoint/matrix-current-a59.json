@@ -65,7 +65,7 @@
   ],
   "rows": [
     {
-      "Feature / state": "Published compatibility baseline — SHIPPED",
+      "Feature / state": "Published compatibility baseline \u2014 SHIPPED",
       "Owner, branch / PR": "Existing community/public distribution",
       "Exact source": "Runtime1.0.4 source d222f94edca26953c1506ab258adc458ded17c56; community checkpoint0e80d41c6b4e5df9579675731e6cdbda733acd35",
       "Implemented versus missing": "Published baseline exists; current next candidate is not that release.",
@@ -100,7 +100,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Existing Runtime capability control plane — DRAFT_PR",
+      "Feature / state": "Existing Runtime capability control plane \u2014 DRAFT_PR",
       "Owner, branch / PR": "Integrator / #328",
       "Exact source": "I; baseline community above",
       "Implemented versus missing": "Existing multi-package actions, MCPv2, selective catalog/resources, HTTP/CLI and process execution retained. Authenticated normal Runtime now composes the stable SQL Canvas facade when packaged assets and the Linux private provider are available.",
@@ -134,7 +134,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Public MCP Apps authoring and CanvasSpec — DRAFT_PR (#100)",
+      "Feature / state": "Public MCP Apps authoring and CanvasSpec \u2014 DRAFT_PR (#100)",
       "Owner, branch / PR": "Contract owner / #330; integrator owns exports/versions/locks",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Closed six-node grammar, aliases, bounds and hide-all semantics. Core1.1.0a2 installed noneditably; full332passed. Public typed validation exists; installed next-Core admission is explicit, not a source overlay.",
@@ -165,7 +165,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Semantic renderer and official bridge — DRAFT_PR (#99-A)",
+      "Feature / state": "Semantic renderer and official bridge \u2014 DRAFT_PR (#99-A)",
       "Owner, branch / PR": "Renderer owner / #329; shared entrypoint/validator integrator",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Official entry now renders authored semantic metadata through the existing renderer; Canvas39 passed/1 optional skip and real installed Basic Host rendered the exact app/revision. Invoice/query projections are preserved. Interactive semantic adapters remain read-only.",
@@ -197,7 +197,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Responsive accessible design baseline — DRAFT_PR / SPEC_ONLY gaps",
+      "Feature / state": "Responsive accessible design baseline \u2014 DRAFT_PR / SPEC_ONLY gaps",
       "Owner, branch / PR": "Existing #71/#99 scopes; no new lane admitted",
       "Exact source": "R + I existing renderer",
       "Implemented versus missing": "Owned primitives/styles and selected accessibility/state tests exist. Rich themes, charts/cards, approval/log/inspector surfaces and complete responsive coverage are missing.",
@@ -228,7 +228,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "First-boot six-tool authoring lifecycle — DRAFT_PR (#71)",
+      "Feature / state": "First-boot six-tool authoring lifecycle \u2014 DRAFT_PR (#71)",
       "Owner, branch / PR": "Authoring task01a168bb-b1fa-71df-8c46-4dea107a900c / feature/71-native-authoring-20261023; integrator central wiring",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Typed authoring plus common SQL adapter now stage durable edits without an active head. Exact release/rollback uses one head CAS, receipts/audit and live SQL grants. SDK lifecycle passes on real SQL and normal installed CLI/socket; official host renders the read-only result. External model-generated business execution remains missing.",
@@ -259,7 +259,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Generated Python / immutable Package and RuntimePlan — DRAFT_PR (#130/#135)",
+      "Feature / state": "Generated Python / immutable Package and RuntimePlan \u2014 DRAFT_PR (#130/#135)",
       "Owner, branch / PR": "Compiler owner / #331; integrator admission adapter",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Compiler imported;27 tests including actual pinned RCC build/import/test pass from ea8f98d1. Canonical preimages and common persisted Package-to-Run admission are verified on both SQL providers; generated business execution remains unintegrated.",
@@ -290,7 +290,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Workspace binding/deployment/activation resolver — DRAFT_PR (#129)",
+      "Feature / state": "Workspace binding/deployment/activation resolver \u2014 DRAFT_PR (#129)",
       "Owner, branch / PR": "Deployment owner / #333, task01a16897-47e8-7472-82b6-668a25afa006",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Consumer uses common Foundry* records, full canonical selection, all Package checks, SQL authorization and exact plan snapshots. Real SQL CAS/replay/restart/rollback passed. UI-only selections need no fake Package.",
@@ -321,7 +321,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Common control SQL / schema migration — DRAFT_PR (#84/#129)",
+      "Feature / state": "Common control SQL / schema migration \u2014 DRAFT_PR (#84/#129)",
       "Owner, branch / PR": "Integrator / #328",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Schema18 preserves backend rows/FKs while allowing null Package anchors for UI-only revisions. Real SQLite/PostgreSQL migration rollback, concurrency, fresh-process readback and authoring tests passed; raw records remain non-authorizing.",
@@ -330,8 +330,8 @@
       "Smallest next task": "Continue common authoring/Package/Run adapters; do not introduce another database.",
       "Genuine owner intervention": "No production migration allowed by fixture success.",
       "audit_status": "partial",
-      "later_evidence_reconciliation": "Coverage #514 runs the complete package suites with all exits 0 at a90d6cdb/tree cd8f99d; it supplies hosted source-suite evidence only. Existing a58 bounded migration/compatibility and rollback evidence remains exact-scope. The root a59 PostgreSQL/object/readback component has no completed receipt yet.",
-      "actual_remaining_blocker": "Full current-source migration/provider parity, cross-version rollback and restore/downgrade qualification remain open; root readback component is pending.",
+      "later_evidence_reconciliation": "Coverage #514 runs the complete package suites with all exits 0 at a90d6cdb/tree cd8f99d; it supplies hosted source-suite evidence only. Existing a58 bounded migration/compatibility and rollback evidence remains exact-scope. The root a59 PostgreSQL/object/readback component has no completed receipt yet. a59 installed common PostgreSQL/object component PASS at123e772e: one actual generated Run seeded in original home; dump/objects relocated; two fresh authorized terminal readback processes retain exact Run/Attempt/output/audit/request/pin and Run.result launch journal without growth. Backup bytes unchanged, owned cleanup PASS. Separate selected RCC cold exec PASS; not whole Runtime/ordinary CLI recovery.",
+      "actual_remaining_blocker": "Full current-source migration/provider parity, cross-version rollback and whole Runtime restore/downgrade remain open; the bounded a59 installed PostgreSQL/object terminal readback component now passes.",
       "next_minimal_proof": "Finish and retain the root Postgres/object/readback receipt, then qualify full matrix-required fresh/upgraded SQL parity and rollback/restore/downgrade against the final combined candidate.",
       "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
       "owner_decision_required": "No production migration allowed by fixture success.",
@@ -347,13 +347,14 @@
       },
       "latest_immutable_evidence": [
         "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/coverage-514.json",
-        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/README.md"
+        "actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/README.md",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/postgres-object-restore/receipt.json"
       ],
       "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Zero-touch plugin boot, launcher and discovery — DRAFT_PR (#71/#99-B)",
+      "Feature / state": "Zero-touch plugin boot, launcher and discovery \u2014 DRAFT_PR (#71/#99-B)",
       "Owner, branch / PR": "Boot task01a168bd-45be-755e-9da9-1b7a4509a039 / feature/71-99-canvas-boot-20261023; central CLI/packaging integrator",
       "Exact source": "I; combined ea8f98d1 (see exact source receipts above)",
       "Implemented versus missing": "Boot/discovery helpers and isolated unbundled fixture imported; consumer tests pass. External writable roots, private atomic discovery and readonly library projection exist. Normal installed authenticated CLI/MCP startup, library and process restart are proven; complete plugin envelope/health/attach/stdio acceptance remains missing.",
@@ -384,7 +385,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Named open data / result plane — DRAFT_PR (#131)",
+      "Feature / state": "Named open data / result plane \u2014 DRAFT_PR (#131)",
       "Owner, branch / PR": "Integrator, existing provider implementation; no new lane",
       "Exact source": "I data_queries/invoices.py/service.py",
       "Implemented versus missing": "Real typed parameterized invoice query on DuckDB and PG, bounds/cancel/schema/result handle/paging/export and scope tests. DuckDB reads a prepared DB; source_version is an operator claim, transaction label not retained source hash.",
@@ -415,7 +416,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Bounded Knowledge collections — DRAFT_PR (#131)",
+      "Feature / state": "Bounded Knowledge collections \u2014 DRAFT_PR (#131)",
       "Owner, branch / PR": "Existing Knowledge component, integration-owned convergence",
       "Exact source": "I knowledge.py; 105 component gate includes owned provider tests",
       "Implemented versus missing": "Bounded local documents/CSV ingest, collection binding, lexical search with provenance/paging/access/revocation; real DuckDB/PG providers. Not full semantic KB.",
@@ -447,7 +448,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132)",
+      "Feature / state": "Managed Runtime Work Items / installed VSIX \u2014 DRAFT_PR / BLOCKED (#132)",
       "Owner, branch / PR": "Integrator canonical Runtime/SDK; extension owns UI/LSP",
       "Exact source": "I; managed receipt",
       "Implemented versus missing": "Versioned14-operation protocol, mounted fail-closed router, live common-SQL Workspace/exact-Deployment grants, server worker identity, review/claim/renew/cancel/Run/artifact subset and evidence-bound invoice RCC completion. Current a20 installed115 includes native execution, retained-input recovery and managed completion; source worker134 passed with exact SDK2. Historical receipts remain source-bound; no usable default managed profile/VSIX claim.",
@@ -478,7 +479,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Fenced business Work Items — DRAFT_PR (#132)",
+      "Feature / state": "Fenced business Work Items \u2014 DRAFT_PR (#132)",
       "Owner, branch / PR": "SDK/common queue implementation + #328",
       "Exact source": "I; exact SDK0.5.0a1 wheel retained",
       "Implemented versus missing": "DB-time owner/epoch/renew/conditional finish/output, SQLite/real PG parity, lineage and legacy fail-closed; private exact review/worker linkage.",
@@ -510,7 +511,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134)",
+      "Feature / state": "Pinned Run/Attempt and real RCC worker \u2014 DRAFT_PR (#83/#90/#133/#134)",
       "Owner, branch / PR": "Integrator, existing adapter/worker",
       "Exact source": "I; worker134/RCC6 plus installed28",
       "Implemented versus missing": "Distinct approved Work Item/Run/Attempt, dual fences, current common Deployment binding resolution, exact-target SDK2 claim, two generated Python backends through RCC18.19.3, atomic result/log publication and installed fresh-interpreter replay. Execution routes require explicit trusted configuration; ordinary View remains read-only.",
@@ -519,7 +520,7 @@
       "Smallest next task": "Mount the qualified Deployment resolver/typed projection with supported host profiles, then qualify actual official-View review/job/artifact interaction and native managed inspection.",
       "Genuine owner intervention": "None for owned synthetic engineering.",
       "audit_status": "partial_pass",
-      "later_evidence_reconciliation": "a56 modern-auto sync generic pass/fail, authorized artifacts, run/item/artifact restart reads and natural Node exit passed; a56 cancellation passed separately.",
+      "later_evidence_reconciliation": "a56 modern-auto sync generic pass/fail, authorized artifacts, run/item/artifact restart reads and natural Node exit passed; a56 cancellation passed separately. a59 installed common PostgreSQL/object component PASS at123e772e: one actual generated Run seeded in original home; dump/objects relocated; two fresh authorized terminal readback processes retain exact Run/Attempt/output/audit/request/pin and Run.result launch journal without growth. Backup bytes unchanged, owned cleanup PASS. Separate selected RCC cold exec PASS; not whole Runtime/ordinary CLI recovery.",
       "actual_remaining_blocker": "These are source-specific component proofs. Final combined deployment/profile selection, typed app interaction, multiple apps and complete recovery/retention remain unqualified. The mandatory matrix client sequence is a genuine MCP SDK client, then fresh Codex CLI and the official host; no specific Node SDK negotiation profile is named.",
       "next_minimal_proof": "Against final candidate, execute a pinned generated app through approved deployment -> Run/Attempt -> RCC and verify revision pin, approval, artifact and restart/recovery. Use the client sequence and exact installed candidate explicitly named by the matrix; legacy/default Node GET and detached Node Task decoding are not additional gates unless separately required by product support scope.",
       "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
@@ -536,13 +537,14 @@
       },
       "latest_immutable_evidence": [
         "docs/program/evidence/actions-next-327/recovery-20261026/a56-node-modern/receipt.json",
-        "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/cancellation-receipt.json"
+        "docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/cancellation-receipt.json",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/postgres-object-restore/receipt.json"
       ],
       "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143)",
+      "Feature / state": "WorkflowNode / MCPTask / Adapter distinction \u2014 SPEC_ONLY gaps (#85/#141/#143)",
       "Owner, branch / PR": "Existing graph; no new workflow-designer lane",
       "Exact source": "I Run/Attempt types; no claimed general Node/Task implementation",
       "Implemented versus missing": "Protocol/queue/runtime concepts remain distinct; no evidence that Run or Work Item state implements WorkflowNode or MCPTask lifecycle.",
@@ -576,7 +578,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Exact human approval and authorization negatives — DRAFT_PR",
+      "Feature / state": "Exact human approval and authorization negatives \u2014 DRAFT_PR",
       "Owner, branch / PR": "Integrator, existing review/Run/output authority",
       "Exact source": "I current105+129+130; V actual interactive proof",
       "Implemented versus missing": "Private approval binds exact sealed result/input/source/app/deployment; explicit click creates one fenced item; stale/revoked/cross-scope/altered/duplicate/cancel probes.",
@@ -607,7 +609,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Retry, effects and dead-letter reconciliation — DRAFT_PR bounded",
+      "Feature / state": "Retry, effects and dead-letter reconciliation \u2014 DRAFT_PR bounded",
       "Owner, branch / PR": "Integrator, existing #83/#132 scopes",
       "Exact source": "I implementation; earlier effect receipt at967090d33ae883c52f90ce5e7af5a82281c88191",
       "Implemented versus missing": "Owned synthetic target has explicit retry/lost-ack reconciliation/close barrier/dead-letter proof. Not generic exactly-once effects.",
@@ -638,7 +640,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Scoped durable artifacts/results — DRAFT_PR (#86)",
+      "Feature / state": "Scoped durable artifacts/results \u2014 DRAFT_PR (#86)",
       "Owner, branch / PR": "Integrator, existing output provider/HTTP/MCP",
       "Exact source": "I; current provider/output and worker proofs",
       "Implemented versus missing": "Immutable scoped sealed bytes with fencing/readback and fresh process restart; secure new filesystem provider is Linux-only.",
@@ -669,7 +671,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Retention, restore, upgrade/downgrade — BLOCKED",
+      "Feature / state": "Retention, restore, upgrade/downgrade \u2014 BLOCKED",
       "Owner, branch / PR": "Integrator #83/#84/#86/#327",
       "Exact source": "I schema17; V cold package/no-build replay",
       "Implemented versus missing": "Additive migration and documented coordinated backups; retained same-host RCC Artifact replay. No complete coordinated clean-host restore or installed1.0.4 downgrade proof.",
@@ -678,8 +680,8 @@
       "Smallest next task": "Run owned old/new install and coordinated restore/replay with measured retained inputs.",
       "Genuine owner intervention": "Only destructive/live restore would require approval; current owned fixtures do not.",
       "audit_status": "open",
-      "later_evidence_reconciliation": "The authentic a57 legacy 1.0.4 gate is PASS for its bounded SQLite queue/attachment subset: official PyPI wheel hashes and installed payloads verified; queue/attachment read/restart, relocated restore/read/restart, exact schema-6-versus-5 refusal with unchanged fixture bytes, and pre-upgrade backup rollback/read/restart passed. Full Runtime restore remains NOT_QUALIFIED. The separate a59 PostgreSQL/object component attempts failed before a successful readback: initial manifest mismatch, a bootstrap TCP-readiness race was corrected, and the third manifest-matching attempt reached but failed the RCC published-package build. Each owned container was cleaned. These failures do not close coordinated restore.",
-      "actual_remaining_blocker": "Full coordinated SQL+objects+journals/source/runtime restore, lineage/GC and replay remain unqualified. The current a59 Postgres/object component failed before successful execution/readback after a manifest-matching third attempt hit RCC published-package build failure; owned containers were cleaned. Bounded a57 SQLite queue/attachment compatibility is PASS only at its recorded artifact/source.",
+      "later_evidence_reconciliation": "The authentic a57 legacy 1.0.4 gate is PASS for its bounded SQLite queue/attachment subset: official PyPI wheel hashes and installed payloads verified; queue/attachment read/restart, relocated restore/read/restart, exact schema-6-versus-5 refusal with unchanged fixture bytes, and pre-upgrade backup rollback/read/restart passed. Full Runtime restore remains NOT_QUALIFIED. The separate a59 PostgreSQL/object component attempts failed before a successful readback: initial manifest mismatch, a bootstrap TCP-readiness race was corrected, and the third manifest-matching attempt reached but failed the RCC published-package build. Each owned container was cleaned. These failures do not close coordinated restore. a59 installed common PostgreSQL/object component PASS at123e772e: one actual generated Run seeded in original home; dump/objects relocated; two fresh authorized terminal readback processes retain exact Run/Attempt/output/audit/request/pin and Run.result launch journal without growth. Backup bytes unchanged, owned cleanup PASS. Separate selected RCC cold exec PASS; not whole Runtime/ordinary CLI recovery.",
+      "actual_remaining_blocker": "Whole Runtime coordinated cold startup/restore and broader migration/effect lineage remain open. Bounded a57 legacy SQLite queue/attachment compatibility and a59 common PostgreSQL/object readback plus separate RCC cold execution pass only their recorded cells.",
       "next_minimal_proof": "Diagnose the manifest-matching a59 RCC published-package build failure from its retained receipt/log, then obtain a clean exact-source Postgres/object component receipt with readback. Separately complete the original matrix full coordinated clean-host Runtime restore, lineage/replay and downgrade proof; do not promote the bounded a57 SQLite cell or failed component attempts.",
       "evidence_scope": "Use cited immutable receipt at its exact recorded source; no result is promoted to current source 207300 unless it names that source.",
       "owner_decision_required": "Only destructive/live restore would require approval; current owned fixtures do not.",
@@ -703,13 +705,14 @@
         "327-probes/a59-coordinated-restore/tcp-ready/run.log",
         "327-probes/a59-coordinated-restore/tcp-ready/evidence/receipt.json",
         "327-probes/a59-coordinated-restore/exact-manifest/run-supervisor.json",
-        "327-probes/a59-coordinated-restore/exact-manifest/run.log"
+        "327-probes/a59-coordinated-restore/exact-manifest/run.log",
+        "docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/postgres-object-restore/receipt.json"
       ],
       "source_scope_warning": "Each receipt is limited to the exact source, artifact and profile stated inside it. Absence of a newer receipt means the matrix recorded source remains the latest identified acceptance baseline, not a fresh pass at integration HEAD.",
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Reusable invoice template/export — DRAFT_PR (#127)",
+      "Feature / state": "Reusable invoice template/export \u2014 DRAFT_PR (#127)",
       "Owner, branch / PR": "Actions-owned example; boot/template lane queued",
       "Exact source": "V example0.2 + I preserved source; catalog destination unapproved",
       "Implemented versus missing": "Actual local interactive invoice/PO/ledger mismatch UI, explicit approval/RCC/scoped Run artifact; private67-wheel consumer/export. Existing canvas-query omits authorized artifact resolution.",
@@ -740,7 +743,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "All-route auth and safe sharing — BLOCKED (#71/#327)",
+      "Feature / state": "All-route auth and safe sharing \u2014 BLOCKED (#71/#327)",
       "Owner, branch / PR": "Integrator security/transport seams",
       "Exact source": "I private trusted-caller boundaries; no whole-app acceptance claimed",
       "Implemented versus missing": "Scoped services and default-off private projection exist. Full ASGI/HTTP/WebSocket/OAuth/secret/robot/schedule/trigger/artifact boundary not qualified by those tests.",
@@ -772,7 +775,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Actual authenticated ChatGPT E1 — BLOCKED / NEEDS_OPERATOR",
+      "Feature / state": "Actual authenticated ChatGPT E1 \u2014 BLOCKED / NEEDS_OPERATOR",
       "Owner, branch / PR": "Owner-operated host; integrator supplies cloud-ready exact candidate",
       "Exact source": "None VERIFIED_IN_CHATGPT for invoice/foundry",
       "Implemented versus missing": "Existing Executor read AND write is positive integration evidence. Local component/browser E2 is not actual invoice/foundry MCP App render.",
@@ -804,7 +807,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Homelab-independent distribution and consumers — BLOCKED",
+      "Feature / state": "Homelab-independent distribution and consumers \u2014 BLOCKED",
       "Owner, branch / PR": "Integrator #327/#127; parent hosted reviewer",
       "Exact source": "I source; V measured bundle; old59cf13CIgreen",
       "Implemented versus missing": "Local pinned gateway and owned PG/RCC work; exact local wheels/consumer/native receipts exist at earlier sources. I clean-wheel contract passed; not a complete final release inventory.",
@@ -848,7 +851,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified",
+      "Feature / state": "Controlled Codex/Devsy adapter path \u2014 SPEC_ONLY / unqualified",
       "Owner, branch / PR": "Existing #90/#143 path; no new migration campaign",
       "Exact source": "No qualified new adapter SHA",
       "Implemented versus missing": "Do not confuse external model authoring or old task activity with a verified controlled execution adapter. Full Devsy migration is not required.",
@@ -879,7 +882,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Optional celld experiment — BLOCKED / NO-GO (#326)",
+      "Feature / state": "Optional celld experiment \u2014 BLOCKED / NO-GO (#326)",
       "Owner, branch / PR": "Existing research scope, no implementation lane admitted",
       "Exact source": "24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO evidence",
       "Implemented versus missing": "No admitted adapter; no backend switch. SQL remains authority. MemoryD/Git migration excluded.",
@@ -910,7 +913,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Publisher adversarial source/identity qualification — BLOCKED (#332)",
+      "Feature / state": "Publisher adversarial source/identity qualification \u2014 BLOCKED (#332)",
       "Owner, branch / PR": "Integrator, existing #323/#325 controls",
       "Exact source": "5165e429 tests; live metadata18:37:53UTC",
       "Implemented versus missing": "Existing160 negatives and expanded full devutils268pass; exact repo/head/lookalike/source-tree/workflow/manifest/digest/run/caller controls retained. Public metadata reports unprotected community, empty rulesets and pypi protection/branch policy. No compromise claim.",
@@ -941,7 +944,7 @@
       "evidence_scope_warning": "Claims/evidence inherited from the 207300bf audit or earlier candidates are historical, source/profile-bounded context and are not current a90d6cdb acceptance. The only a90 head evidence added here is Coverage #514 and explicitly named CI/test-only checks; the product artifact remains source 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b. Do not promote a prior row status to a90 acceptance without an exact-source receipt."
     },
     {
-      "Feature / state": "Final combined acceptance / merge / publication — BLOCKED",
+      "Feature / state": "Final combined acceptance / merge / publication \u2014 BLOCKED",
       "Owner, branch / PR": "Sole integrator #328; parent final evidence reviewer",
       "Exact source": "I plus future reviewed C/R/P/D union, not yet combined",
       "Implemented versus missing": "Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional.",
@@ -1014,7 +1017,7 @@
       {
         "path": "docs/program/actions-next-release-327.md",
         "line": 1395,
-        "text": "D’s dual SBOM contract preserves/validates the raw declaration graph separately from the active selected-profile graph, explains all inactive edges, and retains the strict-active failure."
+        "text": "D\u2019s dual SBOM contract preserves/validates the raw declaration graph separately from the active selected-profile graph, explains all inactive edges, and retains the strict-active failure."
       },
       {
         "path": "action_server/scripts/produce_consumer_sbom_327.py",
@@ -1093,13 +1096,13 @@
   "refresh_basis": {
     "matrix_authority": "Original 28-row matrix in actions/docs/program/actions-next-release-327.md; the previous 207300bf audit is the structured row baseline. Preserve every original acceptance requirement, reference, and historical failure.",
     "source_scope": "Coverage #514 ran at PR head a90d6cdb8af8b07bf534953903f157d003a4d322 / tree cd8f99d859bdb9626aed38d96d39a3d8c1f967d6. Separate installed artifact source is 123e772ee36c44cfd96ea62a6c599bb4f55c8f1b / tree 7d6658bc3f2d536519c8698503f8b379c7b3ed56. These are distinct identities.",
-    "working_tree_scope": "Current dirty checkout contains CI/test-only changes. Do not represent them as product source changes or as covered by a newly built wheel.",
+    "working_tree_scope": "CI/test-only corrections pushed atdaf41283/treee27a3b6b; product source/version/lock unchanged. Later component and matrix documentation are local checkpoint evidence while coverage515 runs atdaf41283.",
     "coverage_514": "PASS, run 40358988969; Runtime 5343 passed / 58 skipped; Core/actions 449/5, HTTP Helper 12, devutils 335, Work Items 285/46 skipped/3 deselected/10 xfailed; all package exits 0; 70.9216% (41665/58748) vs 53.38%; full source inventory, PostgreSQL cleanup and receipt upload passed; baseline_written=false. Complete subprocess and installed-wheel coverage not claimed.",
-    "ci_followups": "Toolkit 225 passed; configured Runtime lint and mypy passed; developer Ruff passed; Linux focused gates 27 process/Robot, 26 logical, 27 restore/refusal, 1 wire-schema passed. Native Windows rerun pending. Published Ubuntu Core pytest cause remains unknown; no artifact downloaded.",
+    "ci_followups": "Toolkit 225 passed; configured Runtime lint and mypy passed; developer Ruff passed; Linux focused gates 27 process/Robot, 26 logical, 27 restore/refusal, 1 wire-schema passed. Native Windows rerun pending. Published Ubuntu Core pytest cause remains unknown; denied artifact12653743795 was not retried.",
     "installed_a59": "Installed artifact/API and compiler/output receipts pass at product source above. Base and data-duckdb lock profiles qualify 64 and 65 active distributions respectively (excluding pip). Raw CycloneDX remains distinct from active graph; strict graph comparison exited 1 for each profile with 29 explained inactive edges. Preserve exit 1; this is a bounded two-view profile result, not complete distribution acceptance.",
     "codex_client": "Genuine Codex CLI attempt used supported task-local homes and no configured MCP servers; app-server exited 1 with EROFS before initialize. No model inference, model-list request, or MCP acceptance occurred; approved model route remains unverified; no fallback model substituted.",
     "owner_host": "a57 CONNECT+RENDER bundle and pinned Dakota remain immutable. Actual ChatGPT retest is deferred while owner is at work; no desktop authority. No change to a57 status.",
-    "pending_component": "The root a59 Postgres/object/readback component failed before successful readback: first manifest mismatch; a bootstrap TCP-readiness race was corrected; the third attempt matched the manifest but failed during RCC published-package build. Owned containers were cleaned. No component PASS is claimed. The authentic a57 old/new SQLite queue/attachment compatibility cell is PASS but full Runtime coordinated compatibility remains open.",
+    "pending_component": "a59 installed common PostgreSQL/object component PASS at123e772e: one actual generated Run seeded in original home; dump/objects relocated; two fresh authorized terminal readback processes retain exact Run/Attempt/output/audit/request/pin and Run.result launch journal without growth. Backup bytes unchanged, owned cleanup PASS. Separate selected RCC cold exec PASS; not whole Runtime/ordinary CLI recovery.",
     "frozen_failures": [
       "Historical a52 aggregate remains FAILED: 5347 passed / 198 skipped / 3 deselected / 1 failed.",
       "Historical a52, coverage512 and coverage513 remain FAILED as recorded.",
@@ -1116,7 +1119,7 @@
     "Published Ubuntu Core acceptance test failure: pytest exit 1; exact assertion/cause remains unknown.",
     "Mandatory supported-client typed execution/reconnect; Codex app-server hit EROFS before initialize and made no model/MCP request.",
     "Full authoring/UI/accessibility, multi-principal/provider/effect recovery, and approval/security breadth.",
-    "Diagnose the manifest-matching a59 RCC published-package build failure; obtain successful Postgres/object component readback, then complete full coordinated Runtime cold restore.",
+    "Whole Runtime coordinated cold restore, including ordinary startup and full SQL/object/source/journal/audit/effect lineage; bounded PostgreSQL/object and selected RCC components now separately pass.",
     "Native/platform/image/final distribution and operator breadth; actual invoice E1; publisher security #332; celld owner decision; final owner release approval."
   ],
   "row_count": 28,

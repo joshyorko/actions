@@ -1,0 +1,52 @@
+[
+  {
+    "file": "before.json",
+    "bytes": 6075,
+    "sha256": "653856a376fd1e6b6714caa8d8e7a536501796e9e7bd148f2417843179c2edea"
+  },
+  {
+    "file": "run-supervisor.json",
+    "bytes": 192,
+    "sha256": "b15f4b412f3f155cb8ebf2de74006b5dd59476beada5d3916f9fcfee6835604e"
+  },
+  {
+    "file": "qualify.py",
+    "bytes": 14827,
+    "sha256": "fbc0e650d76e7e2a70f37db6a87b0de66ca2b31acfd1e09101a8d8dda49d6c02"
+  },
+  {
+    "file": "build-cache-reclamation.json",
+    "bytes": 3857,
+    "sha256": "369ae96917b1bd3f0de61495d7ec0ad271f94101a00b92f49cfd9cebe39c4fea"
+  },
+  {
+    "file": "restored-process-0.json",
+    "bytes": 6075,
+    "sha256": "653856a376fd1e6b6714caa8d8e7a536501796e9e7bd148f2417843179c2edea"
+  },
+  {
+    "file": "readback.py",
+    "bytes": 7734,
+    "sha256": "709b14e95b51f15e8525b0b01386fc33f548bc07f8e3c23ee8e966fc1a86bb51"
+  },
+  {
+    "file": "restored-prepared.json",
+    "bytes": 423,
+    "sha256": "37a4ab3c48a3099989e3fad967875219890eb5752623ceb95fb73d9f30359325"
+  },
+  {
+    "file": "restored-process-1.json",
+    "bytes": 6075,
+    "sha256": "653856a376fd1e6b6714caa8d8e7a536501796e9e7bd148f2417843179c2edea"
+  },
+  {
+    "file": "rcc-execution-receipt.json",
+    "bytes": 55202,
+    "sha256": "d8cc42d9aab96d425b3b75fcebe092806d328b124599d1c00d34700b6a0a1714"
+  },
+  {
+    "file": "receipt.json",
+    "bytes": 2666,
+    "sha256": "75e9531ababeb53ef203a9f84cf2f15865284cbb15f2891e114fbacd591de654"
+  }
+]

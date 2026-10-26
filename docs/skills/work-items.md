@@ -147,17 +147,26 @@ acquire the archive into a new owned home with the unchanged existing trust
 carrier and policy. Compare artifact, specification, provenance, SBOM, revocation
 and policy identities. A relocated prepared receipt changes only its home path;
 the exact package YAML digest remains mandatory. Read pins from the actual
-receipt bytes and validate64 hexadecimal characters, not copied prose. A
+receipt bytes and validate 64 hexadecimal characters, not copied prose. A
 successful no-build execution with the original owned cache path absent proves
 that selected artifact's cold execution, not whole Runtime recovery. Preserve
 the original directory identity and restore it on every exit when isolating an
 owned fixture. Measure the selected artifact before treating the entire cache
 home's size as a storage blocker.
 
-For owned PostgreSQL containers, probe TCP readiness with `pg_isready -h
-127.0.0.1` before opening a host TCP connection. A socket-only readiness probe
+For owned PostgreSQL containers, use `pg_isready -h 127.0.0.1` to probe TCP
+readiness before opening a host TCP connection. A socket-only readiness probe
 can observe the temporary initialization server before its stop/restart and
 does not establish readiness of the published TCP port.
+
+Direct generated Work Item execution stores its retained launch journal in
+`Run.result.result.launch`. `RunExecutionIntent` belongs to the detached
+dispatcher. Restore checks must validate the actual path's journal and lineage,
+retain exact Run/Attempt/output/audit/request/pin row inventories around terminal
+reads, and require no extra launch. Do not manufacture a detached intent to make
+a direct-path fixture resemble a Task. Generated result output metadata wraps
+the typed output identity in `ref`; validate that nested `OutputRef`, then use
+the ordinary authorized output service and compare sealed byte digests.
 
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.

@@ -101,8 +101,15 @@ outdated readback fixture rejected the result's output metadata as an OutputRef
 instead of parsing its nested `ref`. The corrected readback then reached the journal checks and exposed another
 fixture mismatch: direct generated execution stores its launch in `Run.result`,
 while the harness expected the detached dispatcher's separate `RunExecutionIntent`.
-The next owned check retains exact Run-row/launch digests and explicitly requires
-zero detached intents for this direct path. Its result is pending.
+The corrected owned check then passed in59.45 seconds. Two fresh readback
+processes each repeated the authorized terminal read, retained one Run/Attempt,
+four output digests, exact Run-row/launch and audit/request/pin inventories,
+and zero detached intents for this direct generated path. The88,497-byte dump
+and source object manifest stayed unchanged. Its installed product modules
+came only from the a59 consumer. Owned PostgreSQL cleanup passed and the
+supervisor reported no remaining owned processes. [Exact component receipts](postgres-object-restore/receipt.json)
+and scripts retain every assertion. No whole Runtime or ordinary CLI recovery
+acceptance is inferred.
 No committed fixture or compiler identity check was weakened. Whole Runtime
 restore remains unqualified.
 
@@ -145,3 +152,21 @@ lock-derived constraints, installed/source qualification and dual-view SBOM
 evidence frozen at checkpoint1f1c7edf. It contains no RCC archive, datadir,
 credentials or screenshots. This is not the immutable a57 owner retest bundle.
 Later restore attempts and matrix edits remain separate source evidence.
+
+## Capacity and next running source
+
+The repeated compiler probes created additional private RCC materializations.
+Free space fell below the10GiB reserve. The last component had already completed
+before the stop check, so no signal was sent. Only inactive, untracked npm caches
+in task-created a53/a54/a55/a56/a58/a59 build checkouts were removed, after live
+path-use and tracked-file checks. Candidate wheel/lock hashes stayed unchanged;
+a57 and all RCC materializations, artifacts, catalog and trust were untouched.
+Measured free space recovered from9,173,016,576 to11,165,786,112 bytes. This is
+bounded build-cache reclamation, not general cleanup. No new heavy local gate
+is started with the remaining narrow reserve.
+
+Remote checkpointdaf41283a8507b4807c404a1683add9c3750d456/treee27a3b6b1338913f7c241b5f891b94891034435c
+was verified after the normal push. Coverage515/run40370948150 is the one running
+aggregate there, alongside normal Windows/Runtime/browser CI. This later
+component evidence is a local documentation checkpoint while that run continues;
+it does not silently change515's source or start another aggregate.
