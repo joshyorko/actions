@@ -1,0 +1,55 @@
+{
+  "status": "PASS_A60_INSTALLED_PAYLOADS_AND_DIRECT_URLS",
+  "candidate_source": {
+    "commit": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897"
+  },
+  "runtime_lock_sha256": "00de76d27a833b63225ce37b5d633b83a761d00bad63f315eaeec77dc9de4c53",
+  "constraints_sha256": "ce77892478fff64afbd8cb71885c3832097e2514858bbe5223fe1d241d423758",
+  "main_group_constraint_count": 68,
+  "selected_runtime_extras": [],
+  "verified_candidates": {
+    "actions-runtime": {
+      "version": "1.1.0a60",
+      "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+      "payload_members_excluding_record": 342,
+      "metadata_identical": true
+    },
+    "actions-core": {
+      "version": "1.1.0a8",
+      "wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+      "payload_members_excluding_record": 90,
+      "metadata_identical": true
+    },
+    "actions-work-items": {
+      "version": "0.5.0a2",
+      "wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "payload_members_excluding_record": 29,
+      "metadata_identical": true
+    }
+  },
+  "direct_urls": {
+    "actions-runtime": {
+      "scheme": "file",
+      "filename": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+      "sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+      "raw_url_retained": false
+    },
+    "actions-core": {
+      "scheme": "file",
+      "filename": "actions_core-1.1.0a8-py3-none-any.whl",
+      "sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+      "raw_url_retained": false
+    },
+    "actions-work-items": {
+      "scheme": "file",
+      "filename": "actions_work_items-0.5.0a2-py3-none-any.whl",
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "raw_url_retained": false
+    }
+  },
+  "pip_check": "No broken requirements found.",
+  "distribution_count_including_bootstrap": 65,
+  "source_overlay": false,
+  "raw_pip_output_or_network_urls_retained": false
+}

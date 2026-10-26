@@ -1,0 +1,49 @@
+{
+  "result": "pass",
+  "scope": "installed Python consumer only",
+  "producer_version": "7.5.0",
+  "consumer_prefix": "/workspace/327-probes/a60-consumer/consumer",
+  "producer_prefix": "/workspace/327-probes/a57-locked-consumer/tool-venvs/actions-local-devutils-oom2Wud_-py3.12",
+  "consumer_trust": "trusted interpreter and site/.pth execution required",
+  "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+  "runtime_version": "1.1.0a60",
+  "runtime-lock.toml_sha256": "00de76d27a833b63225ce37b5d633b83a761d00bad63f315eaeec77dc9de4c53",
+  "producer-lock.toml_sha256": "a64d58d50b4ed3eb6f19c36212af6996e0643e40d5266843307f51d703c20200",
+  "inspect_sha256": "a5613df76748d3c3fcda028cfa9cc8d01e2c065e5b8cb0364c56ea234b5a65ba",
+  "selected_extras": {
+    "psycopg": [
+      "binary"
+    ],
+    "pyjwt": [
+      "crypto"
+    ]
+  },
+  "producer_command": [
+    "/workspace/327-probes/a57-locked-consumer/tool-venvs/actions-local-devutils-oom2Wud_-py3.12/bin/python",
+    "-m",
+    "cyclonedx_py",
+    "environment",
+    "/workspace/327-probes/a60-consumer/consumer/bin/python",
+    "--spec-version",
+    "1.6",
+    "--output-format",
+    "JSON",
+    "--output-reproducible",
+    "--validate",
+    "--output-file",
+    "-"
+  ],
+  "sbom_sha256": "4916b0b180cf85d71b7569067f8d23a62c72cc825b803239ec908da460df3a19",
+  "sbom_dependencies": "DECLARED",
+  "qualification_scope": "dependency inventory and provenance evidence only",
+  "active_graph_evidence": "resolved-graph.json",
+  "strict_active_graph": {
+    "result": "failed",
+    "error": "CycloneDX graph differs from active resolved dependencies"
+  },
+  "explained_inactive_edges": 29,
+  "evidence_sha256": {
+    "resolved-graph.json": "d28fbd08f62811d3fd3c4037ba0234e32a735cdabdbf6a3a02fbc404068dd481",
+    "declaration-reconciliation.json": "f334181e0cb2bd6fcd1a7b247474c0b99da254fd4e7b82458aa7ad043f80a6af"
+  }
+}

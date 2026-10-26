@@ -1,0 +1,48 @@
+{
+  "exception_types": [
+    "ExceptionGroup",
+    "ValueError"
+  ],
+  "traceback_frames": [
+    {
+      "file": "corrected_mcp_retry.py",
+      "function": "main",
+      "line": 199
+    },
+    {
+      "file": "runners.py",
+      "function": "run",
+      "line": 195
+    },
+    {
+      "file": "runners.py",
+      "function": "run",
+      "line": 118
+    },
+    {
+      "file": "base_events.py",
+      "function": "run_until_complete",
+      "line": 691
+    },
+    {
+      "file": "corrected_mcp_retry.py",
+      "function": "discover_catalog",
+      "line": 70
+    },
+    {
+      "file": "contextlib.py",
+      "function": "__aexit__",
+      "line": 231
+    },
+    {
+      "file": "streamable_http.py",
+      "function": "streamable_http_client",
+      "line": 688
+    },
+    {
+      "file": "_asyncio.py",
+      "function": "__aexit__",
+      "line": 815
+    }
+  ]
+}

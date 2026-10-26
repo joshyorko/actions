@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "command_exit": 0,
+  "reason": null,
+  "elapsed_seconds": 25.15,
+  "pidfd_supervision": true,
+  "deadline_seconds": 180,
+  "workspace_free_bytes_before": 11133517824,
+  "workspace_min_free_bytes_during": 10882932736,
+  "required_run_floor_bytes": 10787749888,
+  "prestart_margin_bytes": 314572800,
+  "remaining_owned": [],
+  "adoptees_reaped": [],
+  "command_args": [
+    "rcc task script",
+    "developer/toolkit.yaml",
+    "python prepare_consumer.py"
+  ],
+  "stdout_stderr_retained": false
+}

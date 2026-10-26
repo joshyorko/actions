@@ -1,0 +1,54 @@
+{
+  "status": "PASS_A60_BASIC_RESTORED_COPY_START_RESTART_MCP",
+  "sigint_expected_cli_exit": 1,
+  "scope": "two installed basic loopback lifecycles on credential-free copy only; not trusted recovery, protected API read, Canvas/Task/Run or whole Runtime restore",
+  "cycles": [
+    {
+      "receipt": "reviewed-cycle-4.json",
+      "mcp": {
+        "canvas_tools_advertised": false,
+        "discover_capability_fields": [
+          "prompts",
+          "resources",
+          "tools"
+        ],
+        "discover_result_type": "complete",
+        "handshake": "server/discover",
+        "resource_uris": [],
+        "resources_count": 0,
+        "sdk_mcp_version": "2.0.0",
+        "supported_versions": [
+          "2026-07-28"
+        ],
+        "tool_names": [],
+        "tools_count": 0
+      },
+      "exit_code": 1
+    },
+    {
+      "receipt": "reviewed-cycle-5.json",
+      "mcp": {
+        "canvas_tools_advertised": false,
+        "discover_capability_fields": [
+          "prompts",
+          "resources",
+          "tools"
+        ],
+        "discover_result_type": "complete",
+        "handshake": "server/discover",
+        "resource_uris": [],
+        "resources_count": 0,
+        "sdk_mcp_version": "2.0.0",
+        "supported_versions": [
+          "2026-07-28"
+        ],
+        "tool_names": [],
+        "tools_count": 0
+      },
+      "exit_code": 1
+    }
+  ],
+  "source_and_copy_unchanged": true,
+  "keys_absent_and_sql_lineage_stable": true,
+  "upstream_disposition": "none"
+}

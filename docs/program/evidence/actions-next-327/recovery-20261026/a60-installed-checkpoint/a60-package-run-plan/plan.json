@@ -1,0 +1,80 @@
+{
+  "schema": "actions.a60-package-run-readiness/v1",
+  "disposition": "not_ready_without_fixture_preparation",
+  "scope": "read-only; no test, CI, build, execution, database mutation, grant creation, credential access, network/container operation, or additional materialization",
+  "candidate": {
+    "source": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+    "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7"
+  },
+  "prepared_rcc_receipt": {
+    "path": "/workspace/327-probes/a53-claimed/compiler/prepared.json",
+    "rcc_version": "v18.19.3",
+    "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "package_yaml_digest": "sha256:a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+    "specification_digest": "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d"
+  },
+  "fixture_assessment": {
+    "real_rcc_generic_execution": {
+      "path": "actions/action_server/tests/action_server_tests/test_generic_work_item_execution.py::generic.setup(real=True)",
+      "proves": "real pinned RCC generic package build/import/test and generic capability execution via Deployment and Run/Attempt in its opt-in branch",
+      "does_not_prove": "logical Data binding/provider execution",
+      "materialization": "compiles/builds during test; incremental RCC view/materialization and peak are unmeasured"
+    },
+    "logical_data_binding": {
+      "path": "actions/action_server/tests/action_server_tests/test_logical_execution.py::logical",
+      "proves": "logical records.scan/v1 binding and synthetic logical read preparation/recheck with persisted test state",
+      "does_not_prove": "real RCC compilation/execution; module explicitly labels compiler synthetic"
+    },
+    "installed_data_sqlite": {
+      "path": "actions/action_server/tests/action_server_tests/test_sealed_scan.py and /workspace/327-probes/a59-installed-data/service-path/package-run/README.md",
+      "proves": "bounded installed sealed provider/SQLite component only",
+      "does_not_prove": "immutable Data Package/Deployment/Run/Attempt; retained fixture lacks these records"
+    }
+  },
+  "authority": {
+    "existing_test_fixture": "grant helper inserts synthetic FoundryAccessGrant rows in test DB; logical fixture also creates test-only provider grants. These are not operator PostgreSQL authority.",
+    "real_operator_setup": "PostgreSQL role/password/grant/security setup was denied before execution; no alternate route is authorized and none was attempted.",
+    "protected_auth_profiles": "not read"
+  },
+  "dependency_dag": [
+    "Compiler-verified immutable Package manifest with logical Data binding and matching identity (not present in retained installed SQLite fixture)",
+    "Persist same Package/capability/RuntimePlan identity through Data binding selection, Deployment, Run/Attempt, pins, output state and test-only authority in an ephemeral supported fixture",
+    "Run that exact Package through real pinned RCC; read back result bound to same Run and verify required restart/recovery behavior"
+  ],
+  "disk": {
+    "free_bytes": 10875568128,
+    "floor_bytes_10_gib": 10737418240,
+    "headroom_bytes": 138149888,
+    "additional_rcc_materialization_peak": "unknown; no measured bound",
+    "execution_recommendation": "do not execute until identity-matched reuse avoids new materialization or measured/approved capacity proves the floor remains intact"
+  },
+  "rows": [
+    {
+      "id": 7,
+      "name": "Generated Python / immutable Package and RuntimePlan",
+      "reuse": "historical compiler and common admission components remain valid at their exact source; no promotion to a60",
+      "minimum_next_proof": "same-identity compiler-verified Data Package/capability/RuntimePlan through Run/Attempt, real RCC execution and result readback"
+    },
+    {
+      "id": 11,
+      "name": "Named open data / result plane",
+      "reuse": "a59 installed CSV/Parquet plus SQLite authority-service component remains valid; relevant modules are byte-identical in a60 wheel",
+      "minimum_next_proof": "Data-bound immutable Package/Run integration; independently retain PG, lineage, paging/export/cost/cancel and scoped-negative gaps",
+      "stale_claim_correction": "do not repeat blanket Parquet-missing claim"
+    },
+    {
+      "id": 15,
+      "name": "Pinned Run/Attempt and real RCC worker",
+      "reuse": "a39 two-app/RCC/restart E2E is valid historical evidence for exact a39 source; a59 installed PG/object is a bounded component",
+      "minimum_next_proof": "exact-candidate pinned Package-to-Run/Attempt-to-RCC with revision pins and result/restart readback; full supported-host/client and recovery/retention criteria remain open"
+    }
+  ],
+  "historical_scope": "All earlier matrix scope claims are historical; they do not establish current a90/a60 acceptance. Immutable a57 owner lane unchanged.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "actions/docs/skills/repository-operations.md",
+    "changed": false,
+    "delta": "Document layered Data qualification; require one compiler-verified logical Data Package identity across Deployment, Run/Attempt and result readback; distinguish synthetic test compiler/SQLite grants from real RCC and operator PostgreSQL authority; verify materialization headroom before running."
+  },
+  "upstream_disposition": "none"
+}

@@ -84,3 +84,5 @@ Canonical repository operations guidance now records source-gate ordering,
 platform-specific inventories, exact resource/layout qualification, layered Data
 proof, native restore limits, installed negative boundaries and proposal limits.
 All lane proposals were consolidated there. Upstream disposition: none.
+
+Follow-up: the [exact installed a60 checkpoint](../a60-installed-checkpoint/README.md) records the subsequently built wheel, new locked consumer and packaged browser result. This source-only checkpoint remains historical at its original scope.

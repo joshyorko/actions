@@ -1,0 +1,41 @@
+{
+  "status": "PASS_A60_BASE_LOCKED_CONSUMER",
+  "source_commit": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+  "source_tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+  "runtime_lock_sha256": "00de76d27a833b63225ce37b5d633b83a761d00bad63f315eaeec77dc9de4c53",
+  "constraints_sha256": "ce77892478fff64afbd8cb71885c3832097e2514858bbe5223fe1d241d423758",
+  "main_group_constraint_count": 68,
+  "selected_runtime_extras": [],
+  "candidate_wheels": {
+    "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+    "actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "verified_nonrecord_payload_members": {
+    "actions-runtime": 342,
+    "actions-core": 90,
+    "actions-work-items": 29
+  },
+  "metadata_identical": true,
+  "direct_local_wheel_urls_and_hashes_verified": true,
+  "pip_check": "No broken requirements found.",
+  "installed_distribution_count_including_bootstrap": 65,
+  "consumer_size_bytes_apparent": 205135028,
+  "consumer_size_human": "207M",
+  "disk": {
+    "available_before_run_bytes": 11133517824,
+    "available_minimum_during_run_bytes": 10882932736,
+    "required_run_floor_bytes": 10787749888,
+    "available_after_run_bytes": 10900840448
+  },
+  "successful_supervisor": "supervisor-activated.json",
+  "setup_failure_retained": "supervisor.json",
+  "raw_pip_output_or_install_report_retained": false,
+  "a57_and_a59_consumers_written": false,
+  "source_repository_edited": false,
+  "canonical_documentation": {
+    "file": "actions/docs/skills/repository-operations.md",
+    "status": "exact proposal in README.md; no repo edit"
+  },
+  "upstream_disposition": "none"
+}

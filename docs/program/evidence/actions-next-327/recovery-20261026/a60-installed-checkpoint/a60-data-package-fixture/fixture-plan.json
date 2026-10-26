@@ -1,0 +1,93 @@
+{
+  "schema": "actions.a60-data-package-fixture-proposal/v1",
+  "status": "review_required_before_execution",
+  "scope": "proposal only; no tests, RCC, provider execution, grants, credential/profile access, DB/security changes, network/container actions, PostgreSQL, or materialization",
+  "candidate": {
+    "source": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+    "runtime_wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+    "installed_consumer": "/workspace/327-probes/a60-consumer/consumer"
+  },
+  "static_blocker": {
+    "existing_fixture": "actions/action_server/tests/action_server_tests/test_generic_work_item_execution.py::_generated_action_entries",
+    "existing_fixture_manifest_sha256": "sha256:5dcc9dadd6157278933f036532bcf26643b6c1e100d87fa176e6736f4e8e3bf8",
+    "prepared_receipt_manifest_sha256": "sha256:a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+    "exact_manifest_source": "/workspace/327-probes/a53-claimed/compiler/package.yaml",
+    "a53_prepared_home": "not validated as acquired/compatible for the proposed run",
+    "result": "existing fixture cannot be used unchanged; its package manifest mismatches before RCC"
+  },
+  "source_inputs": {
+    "csv": {
+      "revision": "sha256:ae5c17541c9732fd0f2413b5f8c5f3dd6b122ee9d3f40f6381eee4411e82426f",
+      "object": "sha256:82deaa1b42aa71c43d2f189d5bd34e8da1cf4a1c1a5de119bfa80edefc61d84c",
+      "operation": "records.scan/v1",
+      "fixture": "existing fixed synthetic rows from a59-installed-data/service-path/run_installed_data_service.py"
+    },
+    "parquet": {
+      "revision": "sha256:9102abb5c4cbcbe78d65aa7475cbd4ea762dc5e1de80805563e7e7f04eb94642",
+      "object": "sha256:195963e40c3c38c7a7d8af232db0062fa2a82f552497a752b9791231f25448ea",
+      "operation": "records.scan/v1",
+      "fixture": "retained 717-byte a59-installed-data/service-path/fixture.parquet; do not regenerate"
+    }
+  },
+  "proposed_route": [
+    "Assert installed Runtime imports resolve under a60 consumer site-packages and pin exact wheel SHA.",
+    "Use exact a53 manifest and assert its digest equals prepared receipt before compiling.",
+    "Construct two exact existing sealed provider revisions and two operation requirements for one generated Package; action uses actions.data.scan for both IDs.",
+    "Use real PinnedRccPackageBuildExecutor; admit compiler result through FoundryPackageRegistry; select bindings with RuntimeDeploymentSelection.select_specification_with_bindings.",
+    "Persist and resolve Deployment, admit/claim Run/Attempt via RunOutputService, then use GeneratedRccExecution with the same canonical LogicalExecution.",
+    "Read back logical receipt/provider source pins and result output from the same Run; terminal replay must not launch RCC."
+  ],
+  "synthetic_test_fixture_grants_only": {
+    "workspace": [
+      "provider.register",
+      "deploy",
+      "execute",
+      "generate_backend",
+      "apply_revision",
+      "cancel_execution",
+      "read_application",
+      "work_items.read",
+      "work_items.enqueue",
+      "work_items.claim",
+      "work_items.complete",
+      "work_items.retry",
+      "work_items.cancel",
+      "work_items.review",
+      "work_items.artifact.read"
+    ],
+    "provider_reference_each": ["provider.inspect", "data.read"],
+    "worker_policy_output_provider_references": ["deploy", "execute"],
+    "deployment_reference": ["execute", "cancel_execution", "read_application", "work_items.* required by exact dispatch/read path"],
+    "run_output_control_plane": ["execute", "read", "cancel"],
+    "boundary": "FoundryAccessGrant rows in disposable in-process SQLite only; no operator PostgreSQL roles, credentials, protected profiles, or settings"
+  },
+  "rcc_budget": {
+    "static_subprocess_count_one_compile_one_execution_no_replay": 6,
+    "phases": [
+      "compiler RCC version",
+      "compiler env publish",
+      "compiler import_action RCC run",
+      "compiler run_tests RCC run",
+      "GeneratedRccExecution RCC version",
+      "GeneratedRccExecution actual RCC run"
+    ],
+    "allowed_new_materializations": 0,
+    "precondition": "receipt-verified compatible existing prepared home; fail closed if no-build cannot reuse it",
+    "current_peak": "unknown; not executed",
+    "postgres_action": "remains unapproved; do not execute"
+  },
+  "canonical_doc_delta": {
+    "file_proposed": "actions/docs/skills/repository-operations.md",
+    "changed": false,
+    "delta": "Document manifest/artifact identity continuity across real-RCC Data Package Runs; distinguish separated synthetic compiler and generic RCC tests until composed through normal public Package/Deployment/Run/output APIs; require acquired receipt-matched no-build home and explicit disk capacity; separate SQLite fixture grants from operator DB authority."
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "actions/docs/skills/repository-operations.md (proposed)",
+    "durable_learning": "Existing real generic RCC fixture and synthetic logical Data fixtures are not composable as-is; generic fixture manifest SHA mismatches prepared a53 receipt.",
+    "evidence": "Static source, receipt, and fixed synthetic source-fixture inspection only.",
+    "stale_or_ambiguous_guidance_removed": "Clarify separated evidence and no-build cache/capacity prerequisites.",
+    "remaining_uncertainty": "Compatible acquired Core8 home and exact materialization peak not verified; composed run unexecuted."
+  },
+  "upstream_disposition": "none"
+}

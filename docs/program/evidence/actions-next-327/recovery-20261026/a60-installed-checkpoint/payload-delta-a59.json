@@ -1,0 +1,21 @@
+{
+  "status": "OBSERVED_EXACT_PAYLOAD_DELTA",
+  "a59_wheel_sha256": "cca5383bd331bfc68227bf5c2749f867cc3d9e7cc7daaeb3f13fbe9125d5960a",
+  "a60_wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+  "a59_payload_count": 339,
+  "a60_payload_count": 339,
+  "unchanged_payload_count": 337,
+  "changed": [
+    {
+      "path": "actions/server/__init__.py",
+      "a59_sha256": "95f531cc8776f5179551beb1f372421af89cab13996f0bbe3eaeb9a9d91b98ef",
+      "a60_sha256": "353dea74029699606a7ab556713ae524e6960009d5213e6e7280d530ba33f0c9"
+    },
+    {
+      "path": "actions/server/_static_contents.py",
+      "a59_sha256": "e7d6d588d43089c9102ad0cddce844e850fb6ff17ab67c9ff80d586256529db0",
+      "a60_sha256": "8b9fbb7c7543645771a969568f43b68c5b4fbefe9b57cab3ef8be111ca059ed6"
+    }
+  ],
+  "qualification": "Byte identity supports explicit scoped reuse of unchanged module evidence; does not qualify changed renderer, package metadata, current installed consumer, hosted CI or complete original acceptance matrix."
+}

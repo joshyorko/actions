@@ -2307,6 +2307,11 @@ document and paragraph scroll widths with their client widths. Preserve the full
 text rather than hiding overflow. A CSS overlay proves a proposed rule only;
 repeat the assertion against the newly built exact wheel before closing the
 packaged gate. Keep table/log scrollers and malformed-metadata rejection active.
+Exercise empty Canvas → empty library → Canvas on the same resource and reject
+malformed metadata with stale-view clearing. Keep keyboard focus and tested
+light/dark accessibility results scoped to the actual packaged states exercised;
+these local host-fixture checks do not establish Runtime transport or ChatGPT
+acceptance.
 
 Installed sealed Data qualification is layered. Direct CSV/Parquet checks prove
 codec, manifest and object-seal behavior. A persisted registry/authorization
@@ -2315,6 +2320,23 @@ a reduced synthetic SQLite schema is component authority, not full Runtime or
 compiler-created Package/Run admission. `FoundryAccessGrant` has an operations
 list without an expiry field: revocation does not establish grant expiry.
 Keep PostgreSQL engine qualification separate from these DuckDB passes.
+A real-RCC Data Package claim must retain one compiler-verified manifest and
+Package/capability/plan identity through binding, Deployment, Run/Attempt and
+output readback. Generic real-RCC tests and synthetic-compiler logical Data
+tests are separate evidence until composed. Check the prepared manifest digest
+before RCC and budget every import, generated-test and execution phase; a
+prepared artifact does not establish zero new materializations. Test-only
+SQLite authority rows do not grant operator PostgreSQL authority.
+
+For a basic copied-store startup check, avoid the root UI route when the scope
+forbids new keys or sessions: that route creates UI storage/session state.
+Use only the explicitly permitted basic MCP discovery/catalog methods. The
+source CLI catches KeyboardInterrupt and returns1 after shutdown; record the
+requested SIGINT, expected code and owned-child absence separately from a
+normal-zero-exit claim. A no-key basic server does not mount private Canvas,
+Task or managed execution authority and cannot qualify their recovery.
+Use the pinned SDK's actual transport tuple and model fields; propagate harness
+projection/schema errors rather than retrying them as startup failures.
 
 The offline attachment helper only rebases recognized `workitems.db` layouts.
 Absence of that database yields zero rebases; copying native `server.db` and
@@ -6483,8 +6505,12 @@ without requesting platform-inactive or optional dependencies such as `duckdb`.
 Do not convert all constraint lines into install requirements or enable undeclared
 extras to make a graph check pass.
 
-Retain pip's install report, `pip inspect --local`, `pip check`, exact lock and
-constraint hashes, selected Runtime extras, and the qualifier implementation hash.
+Retain sanitized installer provenance, `pip inspect --local`, `pip check`, exact
+lock and constraint hashes, selected Runtime extras, and the qualifier
+implementation hash. The installer report may contain credential-bearing index
+URLs: preserve the verified local wheel filename and archive hash without
+publishing raw output. Keep any necessary raw report private, or discard it after
+extracting and verifying the required provenance.
 Use separate fresh consumers for the base profile and each selected optional
 profile. A lock pin for an optional distribution does not request that extra.
 Record full-wheel payload counts separately from package-only member counts;
@@ -7092,6 +7118,17 @@ an already prepared target toolchain; bind generated frontend, OAuth and RCC
 inputs to the wheel. Reuse unchanged Core and Work Items bytes at the integration
 owner instead of rebuilding immutable versions. Return a supported Library object
 identity and actual byte hashes; target-local paths, caches and trust do not transfer.
+
+After freezing an exact source, run independent hosted CI and artifact build,
+consumer and browser checks concurrently and join their receipts by source/tree
+and wheel identity. Compare wheel payload members before repeating component
+qualification. Byte-identical relevant modules support explicitly scoped reuse
+of their earlier evidence; changed static assets, version metadata and the new
+installed artifact need their own checks. Preserve every original receipt at its
+original candidate and scope. This does not close an original acceptance flow
+that was never exercised or turn earlier component evidence into a full release
+pass. An independently delivered owner CONNECT+RENDER candidate does not depend
+on a later invoice or full-release qualification sequence.
 
 A client phase receipt written after client.close is execution evidence, not
 process-lifetime proof. Require the supervised child to exit successfully before

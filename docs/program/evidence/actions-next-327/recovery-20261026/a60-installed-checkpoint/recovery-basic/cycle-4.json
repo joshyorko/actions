@@ -1,0 +1,370 @@
+{
+  "first_attempt": {
+    "first_attempt_failed_before_receipt": true,
+    "outer_error_type": "ExceptionGroup",
+    "root_cause_evidence": "UNKNOWN first nested exception; static inspection found tuple-arity and camelCase model projection bugs. Second attempt confirmed tuple ValueError.",
+    "server_log": "/workspace/327-probes/a60-recovery-startup/logs/server-1.log",
+    "supervisor_receipt": "/workspace/327-probes/a60-recovery-startup/run-supervisor.json"
+  },
+  "hololib_materialized_files_after": [],
+  "hololib_materialized_files_before": [],
+  "key_file_state_after": {
+    "api_key_file_exists": false,
+    "local_storage_key_exists": false,
+    "ui_storage_key_exists": false
+  },
+  "key_file_state_before": {
+    "api_key_file_exists": false,
+    "local_storage_key_exists": false,
+    "ui_storage_key_exists": false
+  },
+  "mcp": {
+    "canvas_tools_advertised": false,
+    "discover_capability_fields": [
+      "prompts",
+      "resources",
+      "tools"
+    ],
+    "discover_result_type": "complete",
+    "handshake": "server/discover",
+    "resource_uris": [],
+    "resources_count": 0,
+    "sdk_mcp_version": "2.0.0",
+    "supported_versions": [
+      "2026-07-28"
+    ],
+    "tool_names": [],
+    "tools_count": 0
+  },
+  "protected_or_stored_api_calls": [],
+  "qualification_scope": "ordinary installed a60 BASIC loopback startup/restart and MCP discover/tools/list_resources only; not trusted recovery, native Canvas/Task/Run access, output replay or whole Runtime restore",
+  "rcc": {
+    "bundled_version": "18.19.3",
+    "cli_was_invoked_during_supported_startup": true,
+    "compiler_or_build": false,
+    "materialized_files": false,
+    "task_local_home_contains_only_config_lock_metadata": true
+  },
+  "retry_authorization": "root-reviewed SDK2 tuple and model schema correction after retaining two harness failures",
+  "reused_after_safe_check": true,
+  "root_health_request": "skipped: root UI creates a UI key and user_session; no health route exists",
+  "runtime": {
+    "mcp_import_origin": "/workspace/327-probes/a60-consumer/consumer/lib/python3.12/site-packages/mcp/__init__.py",
+    "mcp_sdk_version": "2.0.0",
+    "python": "/workspace/327-probes/a60-consumer/consumer/bin/python",
+    "source_commit": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "source_tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+    "version": "1.1.0a60",
+    "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7"
+  },
+  "source_capture_hashes_unchanged": true,
+  "sql_after_corrected_retry": {
+    "action_catalog_count": 0,
+    "database_version": [
+      1,
+      22
+    ],
+    "fenced_item": [
+      [
+        "22a75d16-8c7e-4ec3-8fad-a903bc186d85",
+        "0f18d842-ce0b-44ff-bd11-e1123cddf2c8",
+        "robot-cancel-input",
+        "",
+        "FAILED",
+        1,
+        "0",
+        1,
+        "actions.review-work-item/v1"
+      ]
+    ],
+    "foundry_access_grant_count": 16,
+    "oauth_record_count": 0,
+    "quick_check": "ok",
+    "run": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      4,
+      "0f69c475-1924-5c13-91b2-797e861fe6a2",
+      "2026-10-26T13:35:49.641000+00:00",
+      "",
+      1,
+      "action"
+    ],
+    "run_access_grant_count": 1,
+    "run_attempt": [
+      [
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        1,
+        "cancelled"
+      ]
+    ],
+    "run_output_count": 0,
+    "run_pin": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "4682ae4016b8976a146bafb6a5d2389c65e9814e4a3bcc2e287aa1768dc2c7bb",
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        1,
+        1,
+        -1,
+        "1793021755159"
+      ]
+    ],
+    "table_counts": {
+      "action": 0,
+      "action_package": 0,
+      "counter": 1,
+      "fenced_work_item": 1,
+      "foundry_access_grant": 16,
+      "foundry_audit": 10,
+      "foundry_deployment_head": 1,
+      "foundry_deployment_revision": 2,
+      "foundry_package_revision": 1,
+      "foundry_provider_availability": 0,
+      "foundry_provider_revision": 0,
+      "foundry_request": 10,
+      "foundry_source_revision": 0,
+      "invoice_review": 0,
+      "knowledge_collection_revision": 0,
+      "mcp_catalog_name": 0,
+      "mcp_resource_routing": 0,
+      "migration": 1,
+      "o_auth2_user_data": 0,
+      "run": 1,
+      "run_access_grant": 1,
+      "run_admission": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_output": 0,
+      "run_pin": 1,
+      "run_task_receipt": 1,
+      "schedule": 0,
+      "schedule_execution": 0,
+      "schedule_group": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0,
+      "workspace": 1
+    },
+    "task_receipt_lifetime": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "actions.run-task-receipt/claimed-v1",
+        "tools/call",
+        "capability_invoke",
+        "actions.detached-invocation-result/v1",
+        "1793021749641",
+        "600000",
+        "installed-claimed-task-327"
+      ]
+    ],
+    "temporary_session_record_count": 0,
+    "trigger_count": 0,
+    "trigger_invocation_count": 0,
+    "user_session_count": 0
+  },
+  "sql_before": {
+    "action_catalog_count": 0,
+    "database_version": [
+      1,
+      22
+    ],
+    "fenced_item": [
+      [
+        "22a75d16-8c7e-4ec3-8fad-a903bc186d85",
+        "0f18d842-ce0b-44ff-bd11-e1123cddf2c8",
+        "robot-cancel-input",
+        "",
+        "FAILED",
+        1,
+        "0",
+        1,
+        "actions.review-work-item/v1"
+      ]
+    ],
+    "foundry_access_grant_count": 16,
+    "oauth_record_count": 0,
+    "quick_check": "ok",
+    "run": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      4,
+      "0f69c475-1924-5c13-91b2-797e861fe6a2",
+      "2026-10-26T13:35:49.641000+00:00",
+      "",
+      1,
+      "action"
+    ],
+    "run_access_grant_count": 1,
+    "run_attempt": [
+      [
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        1,
+        "cancelled"
+      ]
+    ],
+    "run_output_count": 0,
+    "run_pin": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "4682ae4016b8976a146bafb6a5d2389c65e9814e4a3bcc2e287aa1768dc2c7bb",
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        1,
+        1,
+        -1,
+        "1793021755159"
+      ]
+    ],
+    "table_counts": {
+      "action": 0,
+      "action_package": 0,
+      "counter": 1,
+      "fenced_work_item": 1,
+      "foundry_access_grant": 16,
+      "foundry_audit": 10,
+      "foundry_deployment_head": 1,
+      "foundry_deployment_revision": 2,
+      "foundry_package_revision": 1,
+      "foundry_provider_availability": 0,
+      "foundry_provider_revision": 0,
+      "foundry_request": 10,
+      "foundry_source_revision": 0,
+      "invoice_review": 0,
+      "knowledge_collection_revision": 0,
+      "mcp_catalog_name": 0,
+      "mcp_resource_routing": 0,
+      "migration": 1,
+      "o_auth2_user_data": 0,
+      "run": 1,
+      "run_access_grant": 1,
+      "run_admission": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_output": 0,
+      "run_pin": 1,
+      "run_task_receipt": 1,
+      "schedule": 0,
+      "schedule_execution": 0,
+      "schedule_group": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0,
+      "workspace": 1
+    },
+    "task_receipt_lifetime": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "actions.run-task-receipt/claimed-v1",
+        "tools/call",
+        "capability_invoke",
+        "actions.detached-invocation-result/v1",
+        "1793021749641",
+        "600000",
+        "installed-claimed-task-327"
+      ]
+    ],
+    "temporary_session_record_count": 0,
+    "trigger_count": 0,
+    "trigger_invocation_count": 0,
+    "user_session_count": 0
+  },
+  "sql_lineage_unchanged_from_pre_first_start": true,
+  "startup": {
+    "actions_sync": false,
+    "address": "127.0.0.1",
+    "api_key": "omitted; default None",
+    "cli_exit_code": 1,
+    "expose": false,
+    "https": false,
+    "listener_ready_elapsed_seconds": 2.729,
+    "log": "/workspace/327-probes/a60-recovery-startup/logs/server-4.log",
+    "min_processes": 0,
+    "natural_sigint_stop": true,
+    "port": 46385,
+    "sigint_exit_contract": "CLI _main_retcode catches KeyboardInterrupt, logs Exiting action server and returns1; not a normal-zero-exit claim",
+    "total_elapsed_seconds": 3.28
+  },
+  "status": "PASS_A60_BASIC_LOOPBACK_START_MCP_DISCOVER_EMPTY_CATALOG",
+  "target_copy": "/workspace/327-probes/a60-recovery-startup/target-copy/datadir",
+  "target_copy_hashes_unchanged": true,
+  "task_local_rcc_home_names_and_sizes_after": {
+    "directories": [
+      "actions/",
+      "actions/action-server/",
+      "actions/bin/",
+      "actions/hololib/",
+      "actions/hololib/catalog/",
+      "actions/hololib/library/",
+      "actions/hololib/pids/",
+      "actions/hololib/used/",
+      "actions/journals/",
+      "actions/pipcache/",
+      "actions/pkgs/",
+      "actions/robots/",
+      "actions/templates/",
+      "actions/uv/",
+      "actions/uvcache/",
+      "actions/uvpython/",
+      "actions/wheels/",
+      "robots/"
+    ],
+    "files": [
+      {
+        "bytes": 0,
+        "path": "actions/rcc.yaml.lck"
+      },
+      {
+        "bytes": 42,
+        "path": "actions/rcccache.yaml"
+      },
+      {
+        "bytes": 0,
+        "path": "actions/rcccache.yaml.lck"
+      }
+    ]
+  },
+  "task_local_rcc_home_names_and_sizes_before": {
+    "directories": [
+      "actions/",
+      "actions/action-server/",
+      "actions/bin/",
+      "actions/hololib/",
+      "actions/hololib/catalog/",
+      "actions/hololib/library/",
+      "actions/hololib/pids/",
+      "actions/hololib/used/",
+      "actions/journals/",
+      "actions/pipcache/",
+      "actions/pkgs/",
+      "actions/robots/",
+      "actions/templates/",
+      "actions/uv/",
+      "actions/uvcache/",
+      "actions/uvpython/",
+      "actions/wheels/",
+      "robots/"
+    ],
+    "files": [
+      {
+        "bytes": 0,
+        "path": "actions/rcc.yaml.lck"
+      },
+      {
+        "bytes": 42,
+        "path": "actions/rcccache.yaml"
+      },
+      {
+        "bytes": 0,
+        "path": "actions/rcccache.yaml.lck"
+      }
+    ]
+  },
+  "task_run_canvas_execution": false,
+  "upstream_disposition": "none"
+}

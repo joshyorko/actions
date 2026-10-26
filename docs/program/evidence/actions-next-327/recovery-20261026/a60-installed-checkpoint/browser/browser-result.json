@@ -1,0 +1,119 @@
+{
+  "scope": "exact packaged a60 Runtime wheel embedded canvas.html through local MCP Apps host fixture; no CSS overlay; not Runtime service, not MCP transport, not ChatGPT host acceptance",
+  "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+  "html_bytes": 490853,
+  "html_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+  "chromium": "151.0.7922.173",
+  "protocol_version": "2026-01-26",
+  "states": [
+    {
+      "name": "valid empty Canvas",
+      "heading": "Empty fixture canvas",
+      "alert_count": 0
+    },
+    {
+      "name": "empty library",
+      "heading": "Action Canvas library",
+      "status": "No apps are available to you yet. Ask your assistant to create one.",
+      "controls": 0
+    },
+    {
+      "name": "valid Canvas",
+      "heading": "Packaged fixture canvas",
+      "alert_count": 0
+    },
+    {
+      "name": "malformed library rejected",
+      "alert": "Canvas content could not be validated.",
+      "stale_canvas_count": 0
+    },
+    {
+      "name": "post-fix malformed library rejected",
+      "alert": "Canvas content could not be validated.",
+      "stale_canvas_count": 0
+    }
+  ],
+  "keyboard_focus": {
+    "tag": "BUTTON",
+    "role": null,
+    "label": "Search",
+    "outlineStyle": "solid",
+    "outlineWidth": "3px"
+  },
+  "narrow_overflow": {
+    "viewport_width": 300,
+    "body_scroll_width": 284,
+    "body_client_width": 284,
+    "document_scroll_width": 300,
+    "document_client_width": 300,
+    "canvas_scroll_width": 284,
+    "text_node_rect_width": 252,
+    "text_node_scroll_width": 252,
+    "text_node_overflow_wrap": "anywhere",
+    "text_node_white_space": "normal",
+    "parent_class": "semantic-stack",
+    "parent_scroll_width": 252
+  },
+  "text_fallback": {
+    "rendered_as_text": true,
+    "long_text_characters": 455,
+    "body_text": "Host connection details\n\nThis app is displayed read-only; interactive actions are disabled.\n\nCANVAS VIEW\n\nPackaged fixture canvas\nRevision\nRevision sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nAudience\nApp audience\n\nRead-only packaged fixture text remains available.\n\nWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+  },
+  "theme_before": [
+    {
+      "data_theme": "light",
+      "color_scheme": "light",
+      "canvas_present": true,
+      "background": "rgba(0, 0, 0, 0)",
+      "text": "rgb(0, 0, 0)"
+    },
+    {
+      "data_theme": "dark",
+      "color_scheme": "dark",
+      "canvas_present": true,
+      "background": "rgba(0, 0, 0, 0)",
+      "text": "rgb(255, 255, 255)"
+    }
+  ],
+  "axe_before": [
+    {
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "theme": "dark",
+      "violations": []
+    }
+  ],
+  "theme_after": [
+    {
+      "data_theme": "light",
+      "color_scheme": "light"
+    },
+    {
+      "data_theme": "dark",
+      "color_scheme": "dark"
+    }
+  ],
+  "axe_after": [
+    {
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "theme": "dark",
+      "violations": []
+    }
+  ],
+  "external_requests": 0,
+  "tool_calls": 0,
+  "page_errors": [],
+  "profile_removed": true,
+  "keyboard_focus_after": {
+    "tag": "BUTTON",
+    "role": null,
+    "label": "Search",
+    "outlineStyle": "solid",
+    "outlineWidth": "3px"
+  }
+}

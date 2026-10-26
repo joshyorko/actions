@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/327-probes/a57-locked-consumer/tool-venvs/actions-local-devutils-oom2Wud_-py3.12/bin/python",
+    "/workspace/actions/action_server/scripts/qualify_consumer_inventory_327.py",
+    "--inspect",
+    "/workspace/327-probes/a60-installed-qualification/sbom-output/inspect-before.stdout",
+    "--lock",
+    "/workspace/actions/action_server/poetry.lock",
+    "--expected-runtime",
+    "1.1.0a60",
+    "--sbom",
+    "/workspace/327-probes/a60-installed-qualification/sbom-output/python-consumer.cdx.json",
+    "--output",
+    "/workspace/327-probes/a60-installed-qualification/strict-qualification.json"
+  ],
+  "returncode": 1,
+  "qualification_output_exists": true,
+  "strict_comparison_expected_failure_retained": true
+}

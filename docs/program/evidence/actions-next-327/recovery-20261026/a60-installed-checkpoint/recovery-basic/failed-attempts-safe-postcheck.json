@@ -1,0 +1,99 @@
+{
+  "attempt": "single parent-authorized corrected MCP harness attempt",
+  "cause": {
+    "detail": "Installed streamable_http_client yields exactly (read_stream, write_stream); harness expected three tuple values. No SDK request ran.",
+    "nested": "ValueError",
+    "outer": "ExceptionGroup"
+  },
+  "harness_provenance": {
+    "current_harness": "/workspace/327-probes/a60-recovery-startup/corrected_mcp_retry.py",
+    "server_cli": "/workspace/327-probes/a60-consumer/consumer/bin/action-server",
+    "sdk_version": "2.0.0",
+    "session_module": "/workspace/327-probes/a60-consumer/consumer/lib/python3.12/site-packages/mcp/client/session.py",
+    "transport_module": "/workspace/327-probes/a60-consumer/consumer/lib/python3.12/site-packages/mcp/client/streamable_http.py"
+  },
+  "installed_sdk_source": {
+    "file": "mcp/client/streamable_http.py",
+    "function": "streamable_http_client",
+    "line": 705,
+    "yield": "yield read_stream, write_stream"
+  },
+  "key_files": {
+    "api_key_file_exists": false,
+    "local_storage_key_exists": false,
+    "ui_storage_key_exists": false
+  },
+  "listener_ready": true,
+  "rcc_hololib_files_after": [],
+  "first_attempt": {
+    "exact_nested_cause": "unknown; nested exception was not retained",
+    "outer_error": "ExceptionGroup",
+    "static_harness_defects_found_afterward": [
+      "streamable_http_client returns two streams but first harness unpacked three values",
+      "first harness projected camelCase field names from snake_case Pydantic models"
+    ]
+  },
+  "scope": "BASIC startup and loopback listener were observed, but MCP discovery/tool/resource catalog behavior is unqualified; no stored/protected API route called.",
+  "server_natural_cleanup": true,
+  "source_capture_sha256_unchanged": true,
+  "status": "HARNESS_FAILED_AFTER_SUPPORTED_SERVER_START",
+  "supervisor": {
+    "adoptees_reaped": [],
+    "command_exit": 1,
+    "elapsed_seconds": 7.01,
+    "qualification": "command assertions and separately owned cleanup",
+    "remaining_owned": [],
+    "status": "FAILED"
+  },
+  "target_attempt_rows": 1,
+  "target_db_blob_hashes_match_capture_after_stop": true,
+  "target_foundry_access_grant_count": 16,
+  "target_migration_version": [
+    1,
+    22
+  ],
+  "target_oauth_rows": 0,
+  "target_run_access_grant_count": 1,
+  "target_run_output_rows": 0,
+  "target_run_rows": 1,
+  "target_session_rows": 0,
+  "target_sql_quick_check": "ok",
+  "target_temp_session_rows": 0,
+  "task_local_homes_after": {
+    "directories": [
+      "actions/",
+      "actions/action-server/",
+      "actions/bin/",
+      "actions/hololib/",
+      "actions/hololib/catalog/",
+      "actions/hololib/library/",
+      "actions/hololib/pids/",
+      "actions/hololib/used/",
+      "actions/journals/",
+      "actions/pipcache/",
+      "actions/pkgs/",
+      "actions/robots/",
+      "actions/templates/",
+      "actions/uv/",
+      "actions/uvcache/",
+      "actions/uvpython/",
+      "actions/wheels/",
+      "robots/"
+    ],
+    "files": [
+      {
+        "bytes": 0,
+        "path": "actions/rcc.yaml.lck"
+      },
+      {
+        "bytes": 42,
+        "path": "actions/rcccache.yaml"
+      },
+      {
+        "bytes": 0,
+        "path": "actions/rcccache.yaml.lck"
+      }
+    ]
+  },
+  "upstream_disposition": "none"
+}

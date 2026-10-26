@@ -1,0 +1,681 @@
+{
+  "schema": "actions-next-327-a60-evidence-carryforward/v1",
+  "date": "2026-10-26",
+  "mode": "bounded read-only; no tests, builds, remote queries or source edits",
+  "authority": "Original #327/#328 28-row acceptance matrix; no new features, profiles, gates, grants, credentials or optional research added.",
+  "candidate": {
+    "commit": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+    "wheel": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7",
+    "artifact_status": "PASS_ARTIFACT_ONLY; wheel built, not pending; other lanes handle fresh install/exact-wheel UI and receipts not yet integrated here"
+  },
+  "prior_artifact": {
+    "candidate": "a59",
+    "source": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+    "tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+    "wheel_sha256": "cca5383bd331bfc68227bf5c2749f867cc3d9e7cc7daaeb3f13fbe9125d5960a"
+  },
+  "payload_continuity": {
+    "a59_members": 339,
+    "a60_members": 339,
+    "byte_identical_members": 337,
+    "changed_members": [
+      "actions/server/__init__.py (version 1.1.0a59 -> 1.1.0a60)",
+      "actions/server/_static_contents.py (newly embedded Canvas CSS/static bundle)"
+    ],
+    "source_production_delta_since_a59": [
+      "action_server/frontend/apps/canvas-view/src/semantic-renderer/semantic-renderer.css",
+      "action_server/pyproject.toml (version only)",
+      "action_server/src/actions/server/__init__.py (version only)"
+    ],
+    "nonproduct_qualification_delta": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_tests.yml",
+      ".github/workflows/frontend-build-unauthenticated.yml",
+      "action_server/frontend/apps/canvas-view/host-harness.spec.ts",
+      "action_server/tests/action_server_tests/mcp/test_mcp_integration.py",
+      "action_server/tests/action_server_tests/test_datadir_restore.py",
+      "action_server/tests/action_server_tests/test_logical_preparation.py",
+      "action_server/tests/contract_tests/test_generated_failure_cleanup.py",
+      "action_server/tests/contract_tests/test_generated_result_serialization.py",
+      "action_server/tests/contract_tests/test_robot_cleanup_race_327.py",
+      "action_server/tests/contract_tests/test_robot_runtime_profile.py",
+      "developer/tests/test_canvas_candidate_failure_summary_327.py",
+      "developer/tests/test_canvas_candidate_receipt_327.py",
+      "developer/tests/test_canvas_published_workflow.py",
+      "developer/tests/test_evidence_publication.py"
+    ],
+    "assessment": "337 unchanged payload members support scoped carryforward for tests of those exact module bytes; the two changed members and new source/tree/wheel identity require targeted checks for renderer/static packaging and version/package identity. This does not make any old artifact receipt an a60 installed PASS."
+  },
+  "current_hosted_status_supplied_by_parent": {
+    "coverage516_run": "40385053161 RUNNING at exact source642; do not query.",
+    "runtime394_run": "40385052663 RUNNING at exact source642; do not query.",
+    "toolkit817": "Windows primary and n-1 PASS",
+    "ubuntu_runtime_published_source_gate": "PASS before embedding only; full hosted jobs remain in progress",
+    "retained_failures": "Coverage #515 PASS is exact prior head only. Runtime #393 Windows/macOS resource inventory and Ubuntu published-Core/browser failures stay preserved; new runs do not rewrite them."
+  },
+  "parallelism_and_owner_lane": {
+    "source_freeze": "Source642/tree1ed445 is frozen. Hosted CI and local a60 wheel/install/exact-wheel browser checks may run in parallel and must be joined by exact identity; do not serialize wheel work behind CI.",
+    "owner_a57": "The exact owner a57 CONNECT+RENDER test is independently ready now and does not depend on invoice-template work, full CI completion, or the separate a60 CSS/installed-wheel UI checks. It remains distinct from invoice E1."
+  },
+  "protected_blocks": {
+    "data_postgres": "The retained PG role/password/grant setup was denied before execution; corrected proposal remains preparation-only/unapproved. No workaround, credentials, grant change, or alternate auth path.",
+    "owner_e1": "Actual ChatGPT host render and invoice E1 require owner/operator.",
+    "publisher": "Real publisher identities/token scope/residual-risk disposition require owner security review before publication.",
+    "optional_celld": "Not a release blocker unless owner explicitly includes it."
+  },
+  "rows": [
+    {
+      "row_id": 1,
+      "matrix_row": "Published compatibility baseline — SHIPPED",
+      "original_acceptance": "Preserve public aliases, CLI/API/current packages; qualify actual installed1.0.4 upgrade and safe downgrade/restore.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 729,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Published Runtime 1.0.4 wheel SHA256 ab0925dd…f5eba; installed compatibility fixture is a57; canonical release source d222f94…",
+      "reusable_proof": "The bounded local SQLite queue/attachment old/new refusal, unchanged bytes and pre-upgrade rollback remains a valid historical cell; a60 changes no restore or queue module.",
+      "relevant_production_delta_since_a59": "No relevant restore/queue production path changed between a59 source and a60; only version metadata/static asset changed in the Runtime payload.",
+      "carryforward_decision": "Do not rerun this bounded cell solely for version bump. Final candidate compatibility still needs coordinated-state proof and must remain distinct from this older 1.0.4 cell.",
+      "remaining_mandatory_gap": "Combined final Runtime/SQL/object/journal/source state, clean-host restore, rollback/replay and fail-closed downgrade.",
+      "production_changes_since_latest_receipt": "Since a57’s installed cell, the current-side restore helper actions/server/_datadir_restore.py changed. Its old-schema refusal/rollback remains an exact historical PASS, but it does not verify the changed current helper or whole Runtime restore."
+    },
+    {
+      "row_id": 2,
+      "matrix_row": "Existing Runtime capability control plane — DRAFT_PR",
+      "original_acceptance": "Combined current suites, stateless MCPv2/routing, collisions, old aliases and no model catalog growth per app.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 730,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Coverage #515 PASS at PR head daf41283a8507b4807c404a1683add9c3750d456/tree e27a3b6; Runtime #393 failures retained. #516 and #394 current source642 runs supplied as RUNNING.",
+      "reusable_proof": "#515 package coverage remains PASS for its exact head; Runtime #393 Windows/macOS resource-inventory and Ubuntu published-Core failures remain historical failures. Toolkit817 primary/n-1 and Ubuntu published-source gate are current partial receipts as supplied.",
+      "relevant_production_delta_since_a59": "Current test/workflow-only changes affect MCP inventory expectations, source-browser ordering before tracked static embedding, sanitized candidate diagnostics and Windows fixtures. No Runtime service API changed.",
+      "carryforward_decision": "Await terminal #516/#394 at exact source642/tree1ed445d; reconcile each required job. Preserve old failures; new runs only supersede at their exact scope. Do not wait for CI to install/build the frozen wheel: source freeze allows parallel lanes.",
+      "remaining_mandatory_gap": "Complete terminal hosted coverage, cross-platform Runtime integration, published-Core/browser and packaged candidate acceptance at exact identities.",
+      "production_changes_since_latest_receipt": "After #515, source qualification files changed: workflow generator/runtime/frontend-build workflows, MCP integration fixture expectations, candidate failure/receipt validators and toolkit publication tests. These are exactly why #516/#394 terminal results are required; no Runtime service API change."
+    },
+    {
+      "row_id": 3,
+      "matrix_row": "Public MCP Apps authoring and CanvasSpec — DRAFT_PR (#100)",
+      "original_acceptance": "Python/TS fixture parity, malformed/alias/depth/reference/visibility negatives, real resource metadata and public authored consumer.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 731,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Earlier combined/CanvasSpec receipts are source-bound; a57 installed CONNECT proof is UI-only and does not compile or execute. Current a60 wheel: source642/tree1ed445d, SHA256 b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7.",
+      "reusable_proof": "Python/TypeScript schema, validation and malformed-input evidence remains valid for the unchanged contract module bytes; a60 payload delta changes only server __init__.py and generated _static_contents.py out of 339 members.",
+      "relevant_production_delta_since_a59": "The rendered CSS/static bundle changes, but CanvasSpec grammar/type/validator files do not. Version metadata changes in pyproject and server __init__.",
+      "carryforward_decision": "No blanket contract-suite reset. Tie same-source browser/public-consumer checks to exact a60 wheel where relevant; retain a57 CONNECT as only UI protocol evidence.",
+      "remaining_mandatory_gap": "Original parity, full negatives, resource metadata and authored consumer on required final candidate.",
+      "production_changes_since_latest_receipt": "Since the a57 public renderer evidence, current production change relevant here is semantic-renderer.css plus generated _static_contents.py. Python/TS grammar/validator modules are unchanged."
+    },
+    {
+      "row_id": 4,
+      "matrix_row": "Semantic renderer and official bridge — DRAFT_PR (#99-A)",
+      "original_acceptance": "Same official MCP Apps View/bridge and Runtime preview; real backend roundtrip, CSP/offline/artifact, unsupported host and scoped negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 732,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a57 exact Library UI protocol/resource proof; separate actual ChatGPT a57 CONNECT+RENDER is owner-ready; a60 wheel built as above, exact-wheel UI qualification is active in another lane and receipt pending.",
+      "reusable_proof": "a57 protocol/resource bytes and previous host/browser findings remain true for that exact artifact; they neither qualify nor replace a60. Local a60 source browser is green after CSS fix, not a packaged-wheel PASS.",
+      "relevant_production_delta_since_a59": "Direct production delta: semantic-renderer.css; generated _static_contents.py bytes; host-harness.spec.ts regression. No backend/bridge/API code changed since a59.",
+      "carryforward_decision": "Finish exact a60 installed wheel UI/browser check in the active lane: narrow viewport text wrap, official bridge, strict CSP/offline/no external requests, real result flow and packaged asset identity. Owner a57 CONNECT+RENDER may proceed independently now.",
+      "remaining_mandatory_gap": "Complete required current-candidate renderer/backend/CSP/offline/artifact/scoped negatives; actual owner E1 remains separate.",
+      "production_changes_since_latest_receipt": "Since the a57 UI receipt, semantic-renderer.css changed and is embedded in _static_contents.py; host-harness.spec.ts adds the narrow viewport regression. Backend bridge/API modules have no a59→a60 diff."
+    },
+    {
+      "row_id": 5,
+      "matrix_row": "Responsive accessible design baseline — DRAFT_PR / SPEC_ONLY gaps",
+      "original_acceptance": "Credible bounded component catalog/themes; keyboard/focus/contrast/overflow/loading/error/empty and text fallback on packaged UI. No arbitrary JS/HTML/CSS or mount effects.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 733,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a57 frontend/accessibility slices; a60 source browser regression and frontend tests/quality pass are local evidence; a60 exact-wheel UI receipt pending.",
+      "reusable_proof": "Prior focus and tested light/dark accessibility checks remain valid for their source/artifact. New CSS specifically corrects unbroken-text overflow while preserving content.",
+      "relevant_production_delta_since_a59": "semantic-renderer.css and generated _static_contents.py only in production UI; host-harness.spec.ts adds narrow 300px/455-character overflow case.",
+      "carryforward_decision": "Use a60 exact-wheel host test for the new wrapping behavior and retained focus/axe cases; then complete the broader original accessibility/state matrix.",
+      "remaining_mandatory_gap": "Keyboard/focus/contrast/overflow/loading/error/empty/text fallback coverage across required packaged states.",
+      "production_changes_since_latest_receipt": "Since prior accessibility/browser evidence, semantic-renderer.css and embedded _static_contents.py changed; host-harness.spec.ts adds narrow unbroken-text overflow coverage. This change needs candidate UI qualification."
+    },
+    {
+      "row_id": 6,
+      "matrix_row": "First-boot six-tool authoring lifecycle — DRAFT_PR (#71)",
+      "original_acceptance": "Fresh no-user-package runtime: external model creates useful app, one atomic revision, validate/activate, revise, fail safely, rollback/restart/reopen; bounded model catalog.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 734,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Prior first-boot/authoring evidence at earlier combined source; a57 UI-only create/get/open/get explicitly excluded backend, activation, run, rollback and restart.",
+      "reusable_proof": "UI protocol passes remain narrow historical components; no full lifecycle evidence to carry forward. a60 does not change authoring/backend product modules.",
+      "relevant_production_delta_since_a59": "No authoring/backend production file changed since a59; version/static UI delta does not supply missing execution.",
+      "carryforward_decision": "No retest just for a60 UI where not consumed; build a real end-to-end authoring gate on exact candidate when implementation/fixtures are ready.",
+      "remaining_mandatory_gap": "External model-authored useful app, generated Python backend, activation/revision/failure rollback, restart/reopen and second independent app.",
+      "production_changes_since_latest_receipt": "The a57 UI receipt is not a backend lifecycle receipt; the relevant authoring/backend code path was never exercised there. No a60 authoring backend module changed."
+    },
+    {
+      "row_id": 7,
+      "matrix_row": "Generated Python / immutable Package and RuntimePlan — DRAFT_PR (#130/#135)",
+      "original_acceptance": "Deterministic source/deps/tests and separate source/plan/revision identities; bounded staging; actual RCC prepare and out-of-process import/tests; no source-provided adapter authority; execute pinned generated capability.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 735,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Earlier source-bound compiler/RuntimePlan components; a59 installed API proof covers snapshot/archive/materialization only, not Runtime service/Package admission.",
+      "reusable_proof": "Unchanged server module payloads from a59 to a60 are 337/339; prior compiler component evidence remains at its recorded source.",
+      "relevant_production_delta_since_a59": "No Package/compiler/RuntimePlan source path changed from a59 to a60; version and generated UI asset changed.",
+      "carryforward_decision": "Do not repeat unaffected component proofs solely for a60. For final acceptance, prove a compiler-verified immutable Package and RuntimePlan through typed capability execution and Run/Attempt on accepted candidate.",
+      "remaining_mandatory_gap": "Integrated immutable Package/plan binding, execution, Run/Attempt and sealed result.",
+      "production_changes_since_latest_receipt": "Between the a56-era compiler receipts and current HEAD, deployments/package_revision_compiler.py changed; the current a59 installed API proof only checks source snapshot/materialization, not Package admission/Run execution."
+    },
+    {
+      "row_id": 8,
+      "matrix_row": "Workspace binding/deployment/activation resolver — DRAFT_PR (#129)",
+      "original_acceptance": "Authorized immutable selection, complete package/plan/profile validation, same-transaction revocation/idempotency/CAS/audit, N inflight pins under N+1, rollback/restart/replica/mixed-version negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 736,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Earlier integration receipts at their recorded source; no a60 binding/deployment code change.",
+      "reusable_proof": "Historical binding, grant, head and audit evidence remains scoped to its original candidate and unchanged server-module behavior.",
+      "relevant_production_delta_since_a59": "No deployment/binding/resolver production module changed a59->a60; version/static asset only.",
+      "carryforward_decision": "Reuse existing subgate receipts; target only the unproved integrated persisted binding/deployment flow on final candidate.",
+      "remaining_mandatory_gap": "Exact-source grant/revocation/idempotency/CAS/audit and inflight selection/rollback.",
+      "production_changes_since_latest_receipt": "Between earlier binding receipts and current HEAD, _local_authorization.py and _local_provider_setup.py changed. No a59→a60 delta in those modules, but older standalone results do not qualify final integrated flow."
+    },
+    {
+      "row_id": 9,
+      "matrix_row": "Common control SQL / schema migration — DRAFT_PR (#84/#129)",
+      "original_acceptance": "Legacy preservation, fresh/upgraded parity, transactional failure and current common SQL gates; no Canvas side database activation authority.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 737,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Coverage #515 at daf41283 passed; #516 is running at current source. Earlier schema/migration component receipts retain their exact identities.",
+      "reusable_proof": "Existing migration contract results remain valid for their source. a60 changes no migration/schema production module.",
+      "relevant_production_delta_since_a59": "Only workflow/test fixtures changed in the CI lane; no migration production source changed between a59 and a60.",
+      "carryforward_decision": "Use current hosted #516 and terminal exact-source migration suite; do not restart completed a59 component gates absent failure/change.",
+      "remaining_mandatory_gap": "Required fresh/upgraded SQL parity, rollback and final coordinated restore/downgrade.",
+      "production_changes_since_latest_receipt": "The earlier receipt is exact-source. No migration/schema production path changed a59→a60; changed workflow/test fixtures are included in the running #516/#394 lanes."
+    },
+    {
+      "row_id": 10,
+      "matrix_row": "Zero-touch plugin boot, launcher and discovery — DRAFT_PR (#71/#99-B)",
+      "original_acceptance": "Fresh writable state outside immutable plugin, responsive startup/health/discovery, no initial package/manual per-app MCP registration; local no public listener and authenticated standalone HTTP.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 738,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Existing source-only/plugin components remain recorded; no exact installed zero-touch plugin full-flow PASS identified.",
+      "reusable_proof": "Existing discovery components retain their own scope; no plugin/server production module changed a59->a60.",
+      "relevant_production_delta_since_a59": "No plugin boot/stdio/discovery production module changed; only version/UI asset.",
+      "carryforward_decision": "No version-only full rerun. Qualify exact installed CLI/plugin flow once final candidate/host wiring is available.",
+      "remaining_mandatory_gap": "Installed discovery, health, attach and process restart on shared authority.",
+      "production_changes_since_latest_receipt": "Since earlier provider/discovery evidence, foundry/provider_catalog.py and _local_provider_setup.py changed before a59; no a59→a60 provider/discovery module delta. Current zero-touch installed flow remains unproved."
+    },
+    {
+      "row_id": 11,
+      "matrix_row": "Named open data / result plane — DRAFT_PR (#131)",
+      "original_acceptance": "Unchanged immutable Package over owned DuckDB CSV AND Parquet and real PG; named bounded operations, discovery, retained snapshots/provenance, paging/export/cost/cancel/auth negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 739,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Installed a59 Runtime source123e772ee36c44cfd96ea62a6c599bb4f55c8f1b/tree7d6658bc3f2d536519c8698503f8b379c7b3ed56/wheel cca5383b…; direct + SQLite persisted-service PASS.",
+      "reusable_proof": "CSV/Parquet decoder and SQLite SqlProviderRegistry/SqlFoundryAuthorization evidence includes identical typed scans, no-grant denial, persisted revocation, bounds, cancellation and request/audit readback. Those product payload modules are unchanged in a60 (global payload comparison: 337 identical members).",
+      "relevant_production_delta_since_a59": "No data query/provider production module changed a59->a60. New a60 artifact changes only version module and generated static contents; PostgreSQL setup attempt remains DENIED before execution.",
+      "carryforward_decision": "Carry exact a59 service component as valid bounded evidence; use current a60 fresh install identity when other-lane receipt arrives. Do not redo SQLite path absent a relevant diff. PG acceptance requires an already authorized path or action-time authority; do not use corrected proposal as execution permission. Then Package/Run integration.",
+      "remaining_mandatory_gap": "Compiler-created immutable Data Package/capability, admission and Run/Attempt; PG engine readback; source lineage/restart; paging/export/cost/cancel API. No expiry claim.",
+      "production_changes_since_latest_receipt": "The a59 installed Data modules (sealed_sources, sealed_duckdb, provider_registry, logical_bindings and authorization) have no a60 production diff; payload delta reports only __init__.py and _static_contents.py changed. The blocked PostgreSQL attempt was not executed."
+    },
+    {
+      "row_id": 12,
+      "matrix_row": "Bounded Knowledge collections — DRAFT_PR (#131)",
+      "original_acceptance": "Expose bounded collection/ingest/search through shared binding/authority; restart/provenance/limits/access and durable long ingestion where used.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 740,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Installed Knowledge PASS source88846b55e3b455eb44378bd5ba43bb146706661d/treea6544920; TLS PostgreSQL Knowledge ingest/search and restart readback at a56.",
+      "reusable_proof": "Keep bounded two-path/single-owner result as exact a56 component. #515/#516 aggregate suites do not broaden providers or principals.",
+      "relevant_production_delta_since_a59": "No Knowledge production module changed from a59 to a60; earlier a56->a60 evolution is source-scoped and aggregate current suite cannot replace installed multi-principal/provider proof.",
+      "carryforward_decision": "No broad rerun prompted by a60 UI/version delta. On final candidate, qualify integrated binding and required provider/principal/revocation/rollback matrix.",
+      "remaining_mandatory_gap": "Other required providers/corpora, multi-principal/revocation/rollback and public binding/lifecycle.",
+      "production_changes_since_latest_receipt": "Since a56 Knowledge installed evidence, _local_provider_setup.py and foundry/provider_catalog.py changed. The a56 proof remains valid at its artifact/source but needs current integrated mapping/provider qualification; no a59→a60 Knowledge code change."
+    },
+    {
+      "row_id": 13,
+      "matrix_row": "Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132)",
+      "original_acceptance": "Real installed consumer and VSIX across denial/revocation/isolation/restart, general enqueue/retry/dead-letter/logs and native Run lineage; no direct DB/second queue.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 741,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Managed/VSIX evidence source-bound older candidate; not full installed VSIX acceptance.",
+      "reusable_proof": "Previous managed operation slices retain their bounded status; no corresponding a60 server/runtime product module change.",
+      "relevant_production_delta_since_a59": "No managed Work Items/VSIX production module changed a59->a60.",
+      "carryforward_decision": "Retain the bounded slices; test exact installed consumer/VSIX when integrated candidate exists.",
+      "remaining_mandatory_gap": "Default trusted profile, remaining operations, isolation/revocation/restart and VSIX.",
+      "production_changes_since_latest_receipt": "Since a56 installed Work Items evidence, _local_authorization.py and run_outputs/task_host.py changed; this warrants current integrated host/Task qualification for those paths. No a59→a60 managed/VSIX code delta."
+    },
+    {
+      "row_id": 14,
+      "matrix_row": "Fenced business Work Items — DRAFT_PR (#132)",
+      "original_acceptance": "Same queue conformance, denied/stale/duplicate/cancel/restart, atomic output authority; standalone no-Work-Item mode.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 742,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a56 installed cancellation + a56 modern-auto synchronous generic Robot pass/fail, exact source88846b55; a60 Work Items product modules unchanged.",
+      "reusable_proof": "Exact single-owner cancellation and sync Robot components remain valid historical receipts. a60 changes only Runtime UI/version plus test/workflow files; no Work Items execution product path changed.",
+      "relevant_production_delta_since_a59": "Test changes include robot cleanup race/runtime profile and integration fixtures; product adapter/queue implementation unchanged a59->a60. Current #516/#394 will qualify changed test suite at their own scope.",
+      "carryforward_decision": "Do not relabel a56 as a60. Reuse bounded passes; use current hosted result for changed tests and add only missing multi-owner/producer-consumer policy cases.",
+      "remaining_mandatory_gap": "Multi-principal, producer/child output, fairness/fanout/dead-letter and integrated admission.",
+      "production_changes_since_latest_receipt": "Since a56 cancellation/Robot evidence, foundry/robot_execution.py, run_outputs/filesystem.py and run_outputs/task_host.py changed. The a56 receipts remain exact historical passes; a59→a60 payload has no delta in these modules."
+    },
+    {
+      "row_id": 15,
+      "matrix_row": "Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134)",
+      "original_acceptance": "Common activated Deployment/plan resolution, app/model typed execution, revision pinning and explicit recovery; no fallback or uncertain relaunch.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 743,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a56 sync Robot receipt at 88846b55 plus a59 installed Postgres/object component source123e772e/wheel cca5383b; a59 output readbacks are same installed Runtime.",
+      "reusable_proof": "a59 component proves generated consumer Run, four artifact byte/digest reads, stable SQL/object inventories and separately cold-acquired RCC. Keep it as component evidence, not whole deployment/Runtime acceptance.",
+      "relevant_production_delta_since_a59": "Worker, run/output and RCC execution modules have no a59->a60 payload delta; only runtime version/static UI changed.",
+      "carryforward_decision": "No blanket RCC component rerun. If final matrix requires current a60 artifact, run one exact-wheel pinned Package->Run/Attempt->RCC path through ordinary supported host, which also fills row 7/19 gaps.",
+      "remaining_mandatory_gap": "Current candidate deployment/profile, typed app interaction, multiple apps and full recovery/retention.",
+      "production_changes_since_latest_receipt": "Since a56 RCC/Run evidence, deployments/package_revision_compiler.py, foundry/robot_execution.py, run_outputs/filesystem.py and run_outputs/task_host.py changed. The later a59 PG/object component covers a bounded current installed Run/readback; final ordinary supported-host acceptance remains missing. None of these modules changed a59→a60."
+    },
+    {
+      "row_id": 16,
+      "matrix_row": "WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143)",
+      "original_acceptance": "Typed bounded long-job/projection and any required node lineage, cancellation/reconnect; never a second state authority or universal designer requirement by inference.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 744,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a56 Python/MCP Task cancellation pass at 88846b55; current Codex EROFS before initialize recorded in a59 checkpoint; no MCP/model call.",
+      "reusable_proof": "a56 bounded server-side cancellation remains valid; Codex attempt remains a pre-initialize environment failure. These do not establish full current-client acceptance.",
+      "relevant_production_delta_since_a59": "No MCP Task/transport server module changed a59->a60; Codex host-home failure is environment-side. No new client profiles added.",
+      "carryforward_decision": "Resolve approved task-local CLI initialization environment and run only original required supported-client sequence; do not re-run unrelated Task server behavior due UI change.",
+      "remaining_mandatory_gap": "Genuine MCP SDK, fresh Codex CLI, official Apps host with typed job/Task, Run/Attempt, result/artifact, reconnect/restart.",
+      "production_changes_since_latest_receipt": "Since a56 Python/MCP Task evidence, run_outputs/task_host.py changed; the current Codex EROFS probe never reached MCP/server initialization. No a59→a60 Task transport module changed."
+    },
+    {
+      "row_id": 17,
+      "matrix_row": "Exact human approval and authorization negatives — DRAFT_PR",
+      "original_acceptance": "Carry identical invariants into generated app/deployment and all model/app routes; no hidden approval or authorizing by visibility/handle.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 745,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "auth-boundaries/direct-denial receipts at their stated source; a59 installed domain-security receipt source123e772e/wheel cca5383b.",
+      "reusable_proof": "Existing direct route denials and a59 traversal/environment checks remain at their exact scopes; no auth or generated-worker implementation path changed a59->a60.",
+      "relevant_production_delta_since_a59": "No auth/approval production module changed in a60; only version/static UI. Test-only cleanup/result serializer files changed and are covered by current hosted jobs when terminal.",
+      "carryforward_decision": "Reuse bounded negatives; complete only missing approval race/substitution/revocation checks on integrated exact candidate.",
+      "remaining_mandatory_gap": "Generated revision approval race, stale/revoked/cross-scope/altered/duplicate/cancel cases.",
+      "production_changes_since_latest_receipt": "Since earlier auth-boundary receipts, _local_authorization.py changed; later a59 domain/security receipt directly exercises two separate installed worker boundaries, not route approval races. No auth production module changed a59→a60."
+    },
+    {
+      "row_id": 18,
+      "matrix_row": "Retry, effects and dead-letter reconciliation — DRAFT_PR bounded",
+      "original_acceptance": "Separate safe pre-effect retry, proven idempotent retry and uncertain outcome blocked/reconciled; stale lease/cancel/restart/exhaustion/audit.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 746,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Prior effects evidence source967090d33ae883c52f90ce5e7af5a82281c88191; synchronous Robot and cancellation receipts are not effect retries.",
+      "reusable_proof": "Historical synthetic effect result remains source-specific; no a60 effect implementation change.",
+      "relevant_production_delta_since_a59": "No effect/reconciliation production module changed a59->a60.",
+      "carryforward_decision": "No blanket reset; perform required current integrated effect retry cases because they were never fully qualified, not because of a60 diff.",
+      "remaining_mandatory_gap": "Pre-effect/idempotent retry, uncertain outcome block/reconcile, audit, cancel, restart and dead-letter.",
+      "production_changes_since_latest_receipt": "No effect/reconciliation production file is in the a59→a60 diff. Older effect evidence remains exact-source and does not cover the missing current generated-effect cases."
+    },
+    {
+      "row_id": 19,
+      "matrix_row": "Scoped durable artifacts/results — DRAFT_PR (#86)",
+      "original_acceptance": "Distinct source/runtime/output/data planes; expiry/retention/privacy and all relevant routes; another Runtime reads without producer routing.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 747,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a56 node artifact readback source88846b55; a59 PG/object restore readback source123e772e/wheel cca5383b.",
+      "reusable_proof": "Keep both exact bounded reads. a60 payload leaves output modules unchanged; new a59 component reads already verify four exact bytes on restored objects.",
+      "relevant_production_delta_since_a59": "No run-output/artifact provider module changed a59->a60; only version and static asset.",
+      "carryforward_decision": "Do not rerun same-object component proof solely for UI change. Final candidate needs matrix-required scoped replica/expiry/privacy negative coverage.",
+      "remaining_mandatory_gap": "Cross-host/shared storage, expiry/privacy, cross-run/route and platform/restore scope.",
+      "production_changes_since_latest_receipt": "Since a56 output reads, run_outputs/filesystem.py changed; the later a59 PG/object receipt is the more current bounded proof and verifies four bytes/digests. No output module changed a59→a60."
+    },
+    {
+      "row_id": 20,
+      "matrix_row": "Retention, restore, upgrade/downgrade — BLOCKED",
+      "original_acceptance": "Restore SQL+objects+journals/source/runtime artifacts together; preserve Run/effect/audit lineage, GC references and old-version fail-closed behavior.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 748,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a57 authenticated official 1.0.4 SQLite legacy cell; a59 PostgreSQL/object restore source123e772e/tree7d6658bc/wheel cca5383b and independent cold RCC receipt.",
+      "reusable_proof": "a57 exact-schema refusal/unchanged bytes/rollback remains bounded. a59 component passes SQL/object restore readback (two fresh processes, four artifact byte/digests) plus separately qualified cold acquire/no-build RCC. a59 composition is not whole Runtime.",
+      "relevant_production_delta_since_a59": "No migration/restore/DB/object/RCC product module changed a59->a60; version/static resource only. a60 packaging identity is new, but no code-path diff invalidates component evidence.",
+      "carryforward_decision": "Do not reset the a59 components. If claiming exact a60 recovery, run only a candidate-identity bridge or targeted exact-wheel restore check as required by release policy, then complete full Runtime coordination.",
+      "remaining_mandatory_gap": "Whole Runtime SQL+objects+journals/effects/source/runtime, lineage/GC, ordinary clean-host startup/replay and cross-version downgrade.",
+      "production_changes_since_latest_receipt": "Since the a57 compatibility receipt, _datadir_restore.py changed; current a59 recovery composition exercises the a59 helper only as database/blob copy and safe store projection. PostgreSQL/object + cold-RCC a59 component is separate and current to its recorded wheel. No restore module changed a59→a60."
+    },
+    {
+      "row_id": 21,
+      "matrix_row": "Reusable invoice template/export — DRAFT_PR (#127)",
+      "original_acceptance": "Credential-free runtime-consuming template, exact package/RCC/Canvas pins, deterministic creation/build, smoke/QA/text/errors/artifacts/retry/restart. No copied engine.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 749,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Example/template receipts at recorded earlier source; no final approved catalog destination or exact end-to-end current candidate.",
+      "reusable_proof": "Existing template examples remain demonstrations; no invoice business/template production path changed a59->a60.",
+      "relevant_production_delta_since_a59": "No invoice/template/export code changed; CSS changes do not make invoice E1 or export proof.",
+      "carryforward_decision": "No UI delta invalidates backend examples. On accepted candidate, complete deterministic template build and approved real export. a57 owner retest does not wait on this row.",
+      "remaining_mandatory_gap": "Owned reusable template, clean pin/build, approval, real RCC artifact and scoped export/retry/restart.",
+      "production_changes_since_latest_receipt": "Since earlier compiler/template evidence, deployments/package_revision_compiler.py changed; no invoice template/catalog code changed a59→a60. Owner a57 UI test is independent; it does not qualify invoice E1."
+    },
+    {
+      "row_id": 22,
+      "matrix_row": "All-route auth and safe sharing — BLOCKED (#71/#327)",
+      "original_acceptance": "Enumerate exact public exceptions and negative-auth/SSRF/path/archive/environment cases across every relevant route before remote sharing.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 750,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a59 installed domain/security source123e772e/tree7d6658bc/wheel cca5383b; archive traversal refusal + worker environment allowlist PASS.",
+      "reusable_proof": "Exact a59 installed negative contracts remain valid: path traversal denied and destination removed; synthetic proxy/account/secrets excluded from constructed env. No child, live route or sandbox claim.",
+      "relevant_production_delta_since_a59": "foundry/rcc_execution.py and auth/route production modules unchanged a59->a60; wheel payload module bytes same.",
+      "carryforward_decision": "Reuse these exact component checks; no re-run driven by a60 visual/version delta. Complete live route and environment/host gaps on integrated final path.",
+      "remaining_mandatory_gap": "All-sensitive-route denial/side effects, generated-app auth/SSRF/path/archive/sharing and execution isolation.",
+      "production_changes_since_latest_receipt": "Since a56 worker-security evidence, foundry/rcc_execution.py changed; the newer a59 installed domain/security receipt directly tests traversal and environment construction against the a59 wheel. No rcc_execution.py change a59→a60."
+    },
+    {
+      "row_id": 23,
+      "matrix_row": "Actual authenticated ChatGPT E1 — BLOCKED / NEEDS_OPERATOR",
+      "original_acceptance": "Actual tool/resource MIME/bridge/render, audience grants, explicit exact review, scoped artifact and restart/reconnect with same identity; preserve denied details.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 751,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Owner a57 CONNECT+RENDER bundle is immutable and independent; separate actual invoice E1 is not yet performed.",
+      "reusable_proof": "The specific a57 owner test is ready and may proceed independently of invoice template, full CI completion and a60 exact-wheel UI. It is not replaced by a60 UI and does not qualify invoice E1.",
+      "relevant_production_delta_since_a59": "No change to a57 bundle; CSS/static changes are a different candidate.",
+      "carryforward_decision": "Owner can execute a57 CONNECT then RENDER now using its prescribed fresh state; record separately. Later invoice E1 uses exact cloud-ready candidate.",
+      "remaining_mandatory_gap": "Owner host retest for a57, then separate invoice E1 with actual grants, review, result/artifact, reconnect.",
+      "production_changes_since_latest_receipt": "No change to the a57 CONNECT+RENDER artifact or bundle. Current a60 CSS/static payload is a separate artifact; it neither invalidates nor replaces the owner’s ready a57 test."
+    },
+    {
+      "row_id": 24,
+      "matrix_row": "Homelab-independent distribution and consumers — BLOCKED",
+      "original_acceptance": "Reproducible wheels/native/images/locks/checksums/SBOM/provenance, actual installed final consumers, configurable registry/storage, local build/restore without mandatory GitHubCI/GHCR/vendor/Cloudflare/K8s.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 752,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "a59 base/data-duckdb installed lock profiles, 64/65 active distributions; raw CycloneDX and active graph distinct; strict comparison exit1; a60 artifact source642/tree1ed445/wheel b4b039a4.",
+      "reusable_proof": "a59 bounded dependency profile and explained 29 inactive-edge reconciliations remain valid for those exact locks/profiles; strict exit failures remain failures. 337/339 wheel payload members unchanged.",
+      "relevant_production_delta_since_a59": "a60 version metadata/static asset changes artifact identity; workflow/candidate acceptance logic changed since a59. No native/image/platform distribution contents have been qualified for a60.",
+      "carryforward_decision": "Carry unchanged graph evidence with exact a59 profile identity; build/install/cross-platform/native/image/final consumers and provenance must identify a60 exact source/artifact. Parallelize wheel and hosted CI after source freeze.",
+      "remaining_mandatory_gap": "Final combined wheels/native/images/checksums/SBOM/provenance, required platforms/clean consumers, configurable storage/registry and local restore.",
+      "production_changes_since_latest_receipt": "Since a59 dependency receipts, a60 runtime version metadata and generated _static_contents.py changed; payload delta otherwise 337/339 members byte-identical. Current artifact identity is new; the a59 lock/SBOM profile remains scoped to its exact base/data-duckdb locks."
+    },
+    {
+      "row_id": 25,
+      "matrix_row": "Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified",
+      "original_acceptance": "Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 753,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "No qualified new adapter SHA; row is scope-conditional in original matrix.",
+      "reusable_proof": "No evidence to promote; original row does not authorize migration or new adapter scope.",
+      "relevant_production_delta_since_a59": "No identified adapter production path changed a59->a60.",
+      "carryforward_decision": "Only if the existing accepted #327 scope explicitly requires it, qualify one existing authorized path; otherwise do not add as a release gate.",
+      "remaining_mandatory_gap": "Conditional only: one bounded common admission/Run invocation if explicitly required.",
+      "production_changes_since_latest_receipt": "No qualified adapter receipt exists; no identified adapter module changed a59→a60. This row remains conditional on original scope."
+    },
+    {
+      "row_id": 26,
+      "matrix_row": "Optional celld experiment — BLOCKED / NO-GO (#326)",
+      "original_acceptance": "If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 754,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "celld NO-GO disposition remains explicit at source24fbd91c…",
+      "reusable_proof": "NO-GO continues to carry forward; optional celld research is not mandatory unless owner opts in.",
+      "relevant_production_delta_since_a59": "No celld code/path change.",
+      "carryforward_decision": "None unless owner changes release scope.",
+      "remaining_mandatory_gap": "Owner inclusion decision only if relevant; not a default release blocker.",
+      "production_changes_since_latest_receipt": "No celld product or study code changed; its explicit NO-GO remains conditional scope, not a current release blocker."
+    },
+    {
+      "row_id": 27,
+      "matrix_row": "Publisher adversarial source/identity qualification — BLOCKED (#332)",
+      "original_acceptance": "Source-bound tests plus actual publisher identities/token scope and owner-reviewed stolen-credential residual risk before publication.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 755,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Source-bound publisher tests at 5165e429 and recorded public metadata; current 817 toolkit jobs pass as supplied.",
+      "reusable_proof": "Bounded source-side publisher tests remain; toolkit pass does not establish real token scope, publisher identities or stolen-credential residual risk.",
+      "relevant_production_delta_since_a59": "a60 changes workflow/test publication receipt validation; no credentials/settings changed. Current toolkit jobs pass but hosted #516 still running.",
+      "carryforward_decision": "Consume terminal current toolkit/CI evidence for changed receipt logic; owner must review actual identity/token scope and risk before publication.",
+      "remaining_mandatory_gap": "Actual tokens/identities, independent owner security disposition and publication gate.",
+      "production_changes_since_latest_receipt": "Since prior publisher tests, current workflow/receipt-validator/test files changed; this needs terminal #516/Toolkit evidence. No actual publisher identity/token scope has been qualified; no credentials/settings changed."
+    },
+    {
+      "row_id": 28,
+      "matrix_row": "Final combined acceptance / merge / publication — BLOCKED",
+      "original_acceptance": "Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 756,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "latest_receipt_identity": "Coverage #515 prior head; a60 artifact-only receipt now identifies exact source642/tree1ed445/wheel b4b039a4; #516/#394 in progress as supplied.",
+      "reusable_proof": "Retain original frozen failures and all exact-source component receipts; none alone closes final union. a60 is BUILT, not pending.",
+      "relevant_production_delta_since_a59": "New source and artifact identities supersede a59 for final acceptance; only two of 339 wheel payload members differ (version module + generated static UI).",
+      "carryforward_decision": "Freeze source642; run hosted CI and a60 install/consumer/browser in parallel, then join by source/tree/wheel identity. Owner a57 lane remains independent. After all mandatory technical gates, prepare ledger and request separate owner publication decision.",
+      "remaining_mandatory_gap": "All original mandatory rows accepted on an exact candidate, protected/owner gates resolved, final inventory and explicit owner publication authorization.",
+      "production_changes_since_latest_receipt": "Source/tree and wheel identity changed from a59 to a60. Payload delta isolates the two wheel members; CI/workflow/evidence-publication tests changed. Current hosted results are in progress; existing frozen failures remain unchanged."
+    }
+  ],
+  "next_milestone": "One joined candidate record containing source642/tree1ed445, hosted #516/#394 terminal outcomes, exact a60 wheel hash/install/browser results, then row-scoped carryforward and remaining mandatory receipts. This is a measurable gate, not an ETA or percentage.",
+  "canonical_documentation_proposal": {
+    "target": "actions/docs/skills/repository-operations.md and actions/docs/program/actions-next-release-327.md",
+    "exact_delta": "Add a short candidate-continuity rule: after freezing an exact source/tree, report changed wheel payload members and production paths. Reuse a prior installed component receipt only for byte-identical relevant modules and only at its stated scope; requalify changed generated UI/static assets and artifact identity, and never promote a source-only receipt to an installed pass. Start hosted CI and the candidate wheel/install/browser lane in parallel after source freeze; join by source/tree/wheel hashes. Record separately that owner a57 CONNECT+RENDER is ready independently of invoice E1 and full-CI work. Update the stale blanket Parquet-missing statement with the a59 installed CSV/Parquet + SQLite authority service component PASS and its remaining Package/Run/PG limits.",
+    "evidence": [
+      "327-artifacts/a60/artifact-receipt.json",
+      "327-artifacts/a60/payload-delta-a59.json",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a60-ui-ci-checkpoint/README.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a60-ui-ci-checkpoint/MANDATORY-GATES.md",
+      "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/postgres-object-restore/receipt.json",
+      "327-probes/a59-installed-data/service-path/README.md"
+    ],
+    "changed_here": false,
+    "stale_guidance": "Replace serial “wait for hosted CI before build” sequencing; correct prior blanket Parquet component gap while preserving full row requirements."
+  },
+  "documentation_improvement_receipt": {
+    "canonical_file_changed_or_proposed": "Propose exact delta above; no source or canonical documentation edits in this lane.",
+    "durable_learning": "A byte-level payload delta permits bounded evidence reuse for unchanged modules while keeping two changed members, version identity and packaged static assets separate. Freeze once, then parallelize independent CI/build/install lanes and join by identities.",
+    "evidence": "a60 artifact-receipt.json and payload-delta-a59.json; a60 UI CI checkpoint; a59 installed Data and PostgreSQL/object restore receipts.",
+    "stale_or_ambiguous_guidance_removed": "Proposal corrects serial dependency and stale blanket Parquet status only; original 28 acceptance rows remain controlling.",
+    "remaining_uncertainty": "#516/#394 terminal results and exact a60 install/UI receipt are pending in other lanes; all row-specific gaps are in rows."
+  },
+  "upstream_disposition": "none; no upstream defect was investigated and no external reporting authority was exercised."
+}

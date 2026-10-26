@@ -1,0 +1,52 @@
+{
+  "source_commit": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+  "source_tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+  "synthetic_merge_commit": "08e8a7c0db71fe5a3c29779100a5b368121d78f9",
+  "build756": {
+    "run_id": 40385052426,
+    "status": "success",
+    "jobs": [
+      121791003559,
+      121791003957,
+      121791004006
+    ]
+  },
+  "runtime_distribution669": {
+    "run_id": 40385052455,
+    "status": "success",
+    "platform_wheel_jobs": [
+      121791001239,
+      121791001421,
+      121791001497
+    ],
+    "sdist_job": 121791000939,
+    "publish_job": 121795853586,
+    "check_publish_credential": "skipped",
+    "publish_verified_artifacts": "skipped",
+    "public_package_publication": false
+  },
+  "work_items386": {
+    "run_id": 40385052659,
+    "verify": "success",
+    "publish": "skipped"
+  },
+  "toolkit817": {
+    "run_id": 40385052648,
+    "attempt1": "failure: one macOS n-1 cancelled before steps, five other jobs success",
+    "attempt2": "success",
+    "replacement_macos_n1_job": 121800563195,
+    "replacement_macos_n1_tests": "226 passed, 4 skipped in64.15s"
+  },
+  "coverage516": {
+    "run_id": 40385053161,
+    "job": 121791097172,
+    "status": "in_progress",
+    "phase": "Measure portable package suite coverage"
+  },
+  "runtime394": {
+    "run_id": 40385052663,
+    "status": "in_progress",
+    "ubuntu_source_browser": "success before frontend embedding"
+  },
+  "qualification": "snapshot only; terminal aggregate/runtime evidence pending; no public publication"
+}
