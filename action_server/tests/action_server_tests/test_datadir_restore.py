@@ -7,11 +7,15 @@ import pytest
 from actions.server._datadir_restore import capture_offline_manifest, restore_offline
 
 
-def snapshot(tmp_path):
+def require_posix_manifest_capability():
     import os
 
     if os.name != "posix" or not hasattr(os, "O_NOFOLLOW"):
         pytest.skip("offline manifest capture requires POSIX O_NOFOLLOW")
+
+
+def snapshot(tmp_path):
+    require_posix_manifest_capability()
 
     source = tmp_path / "source"
     source.mkdir()
@@ -265,6 +269,8 @@ def test_file_permissions_are_preserved_without_changing_source(tmp_path):
 
 
 def test_restored_attachment_passes_unchanged_sdk_containment(tmp_path):
+    require_posix_manifest_capability()
+
     from actions.server._work_items_import import load_work_items_types
 
     adapter_type, _ = load_work_items_types()

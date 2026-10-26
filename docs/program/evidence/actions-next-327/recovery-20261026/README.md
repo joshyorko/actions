@@ -1,18 +1,27 @@
 # Fresh saved-environment recovery
 
-Latest [a59 platform and browser checkpoint](a59-platform-checkpoint/README.md)
-qualifies source123e772e/tree7d6658bc: safe-path candidate/published-Core browser
-gates2 passed, compiler45 passed/1 exact-RCC skip, affected callers49 passed,
-private execution/provider96 passed/33 explicit service/RCC skips, joined operator
-fixtures75 passed, configured quality and Linux/Windows-target mypy665 files pass.
-It preserves platform refusal and strict provider gates. These source checks do
-not establish native Windows acceptance, a frozen a59 install or actual ChatGPT.
-Coverage513 at d878 remains FAILED2/5331/58 solely on the missing-Docker wording
-contract; that exact pair was reproduced and repaired before the new source
-qualification. Original failed receipts stay unchanged. A fresh aggregate is
-required after the a59 checkpoint push. The [complete28-row map](a58-integrity-checkpoint/campaign-gates-current-207300bf.json)
-and the [coordinated-restore next proof](a59-platform-checkpoint/coordinated-restore-next-proof.md)
-retain the remaining scope. Delivered a57 owner retest and pinned Dakota are unchanged.
+Latest [a59 CI and installed checkpoint](a59-ci-checkpoint/README.md) preserves
+coverage514 PASS at exact a90d6cdb/treecd8f99d8: Runtime5343 passed/58 skipped,
+all package exits0,70.9216% statements with complete source inventory and no new
+baseline written. PostgreSQL cleanup and receipt upload passed. Later CI/test
+corrections align outer receipt checks with the safe `-P` launcher, add bounded
+published-test diagnostics, resolve quoted Python in Git Bash and gate only
+unsupported POSIX fixture mechanics. Final RCC Toolkit225, configured Runtime
+lint/typecheck and developer Ruff pass; actual Windows CI remains pending.
+Runtime392's separate published-Core pytest assertion remains unknown.
+No product source/version/lock changed in this correction round.
+
+The installed a59 artifact at source123e772e/tree7d6658bc has clean exact payload,
+METADATA, compiler archive/source and sealed-output qualification. Its lock-derived
+base/data-duckdb and dual-view SBOM evidence is retained separately from the
+immutable a57 owner bundle. Both strict raw graph checks remain FAILED with29
+explained inactive edges. The [earlier platform checkpoint](a59-platform-checkpoint/README.md)
+retains source browser2 passed and Linux/Windows-target mypy665 files passed;
+these do not establish actual ChatGPT or native Windows acceptance. Historical
+coverage512/513 and frozen a52 failures stay FAILED. The complete28-row map and
+remaining full Runtime recovery, client, provider/security, UI/domain and final
+distribution gates remain controlling. Delivered a57 owner retest is deferred;
+pinned Dakota and candidate bytes are unchanged.
 
 The [a58 integrity checkpoint](a58-integrity-checkpoint/README.md) preserves
 terminal coverage512 FAILED (Runtime5313passed/58skipped/1failure), the actual

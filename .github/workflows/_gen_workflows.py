@@ -753,6 +753,9 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
           source_sha="$(git rev-parse HEAD)"
           source_tree="$(git rev-parse 'HEAD^{tree}')"
           source_parents="$(git show -s --format=%P HEAD)"
+          if ! poetry_cmd run python scripts/summarize_candidate_failure_327.py "$junit_raw" published; then
+            echo 'Published Canvas failure-location diagnostics unavailable.'
+          fi
           poetry_cmd run python - "$junit_raw" "$junit_safe" "$pytest_status" \
             "$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH" "$receipt_safe" \
             "$source_sha" "$source_tree" "$source_parents" "$browser_sha256" "$browser_version" <<'PY'
@@ -899,9 +902,9 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
                   ('runtime_origin', lambda: Path(runtime.get('module_origin', '')).resolve() == Path('src/actions/server/__init__.py').resolve()),
                   ('runtime_module_digest', lambda: runtime.get('module_sha256') == hashlib.sha256(Path('src/actions/server/__init__.py').read_bytes()).hexdigest()),
                   ('runtime_args_list', lambda: isinstance(runtime_args, list)),
-                  ('runtime_args_count', lambda: len(runtime_args) >= 3),
+                  ('runtime_args_count', lambda: len(runtime_args) >= 4),
                   ('runtime_interpreter_absolute', lambda: Path(runtime_args[0]).is_absolute()),
-                  ('runtime_module_entry', lambda: runtime_args[1:3] == ['-m', 'actions.server']),
+                  ('runtime_module_entry', lambda: runtime_args[1:4] == ['-P', '-m', 'actions.server']),
                   ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped') is True),
                   ('runtime_live_descendants_empty', lambda: runtime.get('live_descendant_pids') == []),
                   ('runtime_readers_empty', lambda: runtime.get('active_readers') == []),
@@ -978,8 +981,8 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
                       and all(Path(path).is_absolute() and Path(path).is_relative_to(prefix) for path in modules.values())
                       and Path(runtime.get("module_origin", "")).resolve() == Path("src/actions/server/__init__.py").resolve()
                       and runtime.get("module_sha256") == hashlib.sha256(Path("src/actions/server/__init__.py").read_bytes()).hexdigest()
-                      and isinstance(runtime_args, list) and len(runtime_args) >= 3
-                      and Path(runtime_args[0]).is_absolute() and runtime_args[1:3] == ["-m", "actions.server"]
+                      and isinstance(runtime_args, list) and len(runtime_args) >= 4
+                      and Path(runtime_args[0]).is_absolute() and runtime_args[1:4] == ["-P", "-m", "actions.server"]
                       and runtime.get("wrapper_reaped") is True
                       and runtime.get("live_descendant_pids") == []
                       and runtime.get("active_readers") == []

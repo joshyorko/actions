@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 
@@ -10,7 +11,20 @@ import pytest
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
 
 
-@pytest.mark.parametrize("logical", [False, True], ids=["plain", "logical"])
+@pytest.mark.parametrize(
+    "logical",
+    [
+        pytest.param(False, id="plain"),
+        pytest.param(
+            True,
+            id="logical",
+            marks=pytest.mark.skipif(
+                os.name != "posix" or not hasattr(os, "O_NOFOLLOW"),
+                reason="logical context helper requires POSIX O_NOFOLLOW",
+            ),
+        ),
+    ],
+)
 @pytest.mark.parametrize("kind", ["model", "mapping", "unsupported", "nonfinite"])
 def test_generated_helper_serializes_core_json_outputs(tmp_path, logical, kind):
     source = tmp_path / "source"

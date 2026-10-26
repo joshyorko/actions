@@ -2233,6 +2233,17 @@ permission fallback. Resolve required extraction capabilities before creating
 owned destination state. This fixes typing without promising Windows support
 for private Linux providers or POSIX operator APIs.
 
+Put platform admission at the fixture or test that consumes the POSIX capability,
+rather than at module scope. Keep receipt, trust, cleanup-result and refusal
+decisions portable with platform-neutral fakes. Gate real process-group, signal
+and descriptor mechanics on their required capabilities. Assert POSIX permission
+bits only on POSIX; they do not establish Windows ACL behavior.
+
+Pin checkout line endings for fixtures whose raw released bytes are hashed.
+A narrow `text eol=lf` attribute preserves the task schema's original digest under
+`core.autocrlf=true`; do not normalize the bytes inside the assertion or replace
+the released digest with a host-dependent value.
+
 Compiler temporary workspaces and canonical archives have distinct mode
 contracts. Preserve exact source bytes and canonical POSIX modes in snapshot
 identity and ZIP metadata on every host. Windows workspace mode bits do not
@@ -2244,12 +2255,21 @@ The source Runtime test launcher uses `[python, "-P", "-m", "actions.server"]`.
 Candidate and published-Core browser receipts must assert this exact safe-path
 prefix. A stale three-argument assertion fails before browser launch; correct
 the assertion while retaining `-P`, module-origin and source-byte checks.
+Keep the producer assertion, outer receipt validator and its diagnostic mirror
+on the same prefix. A passing pytest case can still fail receipt admission;
+record both outcomes independently. Historical measured fixtures stay unchanged;
+forward projections used by admission unit tests are synthetic test inputs.
 
 On Windows, a child `bash` lookup can select the WSL launcher even when the
 Actions step itself uses Git Bash. Resolve the existing Git for Windows Bash
 beside the resolved Git executable and fail clearly if it is absent; do not
 enable WSL to repair a test launcher. Negative publication tests must prove the
 wrapper started before accepting an expected failure exit.
+The publication wrapper resolves prepared `python3`, then `python`, and fails
+closed when neither exists. Quote interpreter and scanner paths. Fake Git
+launchers in Windows Git Bash tests use the active interpreter explicitly;
+they must not depend on a bare `python3` shebang. Interpreter fallback never
+skips the staged-evidence scan or changes commit/push failure ordering.
 
 Retain terminal coverage receipts with both PR head and actual merge checkout,
 per-package counts, first failing assertion and owned-service cleanup. A failed
@@ -2259,6 +2279,10 @@ For candidate browser diagnostics, publish only bounded allowlisted exception
 classes and numeric source lines from the exact candidate test, never raw JUnit
 messages, paths or credentials. Diagnostics are advisory; pytest, strict JUnit
 and source-bound receipt validation still determine acceptance.
+The published-Core profile selects only its own exact test name under the same
+bounded diagnostic contract. Unknown profiles refuse before reading JUnit.
+Keep a hidden assertion unknown until this permitted diagnostic exposes it;
+a validator defect does not explain a separate pytest failure by implication.
 
 An assembled route inventory classifies exposure; it does not prove denial.
 Probe every configured-key method with missing and wrong bearer credentials,
@@ -6401,6 +6425,10 @@ extras to make a graph check pass.
 
 Retain pip's install report, `pip inspect --local`, `pip check`, exact lock and
 constraint hashes, selected Runtime extras, and the qualifier implementation hash.
+Use separate fresh consumers for the base profile and each selected optional
+profile. A lock pin for an optional distribution does not request that extra.
+Record full-wheel payload counts separately from package-only member counts;
+METADATA, WHEEL and entry-point metadata add members without adding source files.
 `qualify_consumer_inventory_327.qualify` runs in the prepared package toolchain so
 its `packaging` dependency need not contaminate the candidate consumer. It checks
 the active marker/extra-selected dependency graph, rejects versions outside the

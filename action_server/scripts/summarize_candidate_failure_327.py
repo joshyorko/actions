@@ -18,6 +18,10 @@ TEST_CLASS = "tests.action_server_tests.mcp.test_canvas_query_template"
 TEST_NAME = (
     "test_canvas_template_candidate_source_runs_through_runtime_and_real_browser"
 )
+PROFILE_TEST_NAMES = {
+    "candidate": TEST_NAME,
+    "published": "test_canvas_template_runs_through_runtime_and_real_browser",
+}
 EXCEPTIONS = frozenset(
     {
         "AssertionError",
@@ -52,8 +56,11 @@ def _exception(name: str) -> str:
     return name if name in EXCEPTIONS else "OTHER"
 
 
-def summarize(path: Path) -> dict[str, object]:
+def summarize(path: Path, *, profile: str = "candidate") -> dict[str, object]:
     """Return fixed enums and known test line numbers, never input text."""
+    test_name = PROFILE_TEST_NAMES.get(profile)
+    if test_name is None:
+        return _unavailable("UNKNOWN_PROFILE")
     try:
         with path.open("rb") as stream:
             raw = stream.read(MAX_BYTES + 1)
@@ -70,7 +77,7 @@ def summarize(path: Path) -> dict[str, object]:
     cases = [
         case
         for case in root.iter("testcase")
-        if case.get("classname") == TEST_CLASS and case.get("name") == TEST_NAME
+        if case.get("classname") == TEST_CLASS and case.get("name") == test_name
     ]
     if not cases:
         return _unavailable("NO_CANDIDATE_CASE")
@@ -103,8 +110,11 @@ def summarize(path: Path) -> dict[str, object]:
 
 def main() -> None:
     result = (
-        summarize(Path(sys.argv[1]))
-        if len(sys.argv) == 2
+        summarize(
+            Path(sys.argv[1]),
+            profile=sys.argv[2] if len(sys.argv) == 3 else "candidate",
+        )
+        if len(sys.argv) in (2, 3)
         else _unavailable("ARGUMENT_COUNT")
     )
     print(json.dumps(result, sort_keys=True))

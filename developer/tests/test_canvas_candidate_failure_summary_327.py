@@ -44,14 +44,18 @@ def load_helper():
     return module
 
 
-def junit_file(path: Path, *, failure: str | None, classname: str = TEST_CLASS):
+def junit_file(
+    path: Path,
+    *,
+    failure: str | None,
+    classname: str = TEST_CLASS,
+    name: str = TEST_NAME,
+):
     root = ET.Element(
         "testsuite",
         {"name": "candidate", "tests": "1", "failures": "1" if failure else "0"},
     )
-    case = ET.SubElement(
-        root, "testcase", {"classname": classname, "name": TEST_NAME}
-    )
+    case = ET.SubElement(root, "testcase", {"classname": classname, "name": name})
     if failure is not None:
         node = ET.SubElement(case, "failure", {"message": "PRIVATE_ASSERTION_TEXT"})
         node.text = failure
@@ -62,6 +66,37 @@ def junit_file(path: Path, *, failure: str | None, classname: str = TEST_CLASS):
 def availability(summary):
     assert summary["availability"] in {"AVAILABLE", "UNAVAILABLE", "NOT_NEEDED"}
     return summary["availability"]
+
+
+def test_published_profile_reports_only_its_allowlisted_case(tmp_path):
+    helper = load_helper()
+    path = junit_file(
+        tmp_path / "published.xml",
+        failure="/private/test_canvas_query_template.py:1173: AssertionError: secret",
+        name="test_canvas_template_runs_through_runtime_and_real_browser",
+    )
+    summary = helper.summarize(path, profile="published")
+    assert summary["locations"] == [{"line": 1173, "exception_class": "AssertionError"}]
+    assert "secret" not in json.dumps(summary)
+    assert availability(helper.summarize(path)) == "UNAVAILABLE"
+
+
+def test_published_profile_does_not_report_candidate_case(tmp_path):
+    helper = load_helper()
+    path = junit_file(
+        tmp_path / "candidate.xml",
+        failure="test_canvas_query_template.py:688: AssertionError",
+    )
+    assert availability(helper.summarize(path, profile="published")) == "UNAVAILABLE"
+
+
+def test_unknown_profile_is_rejected_without_reading_junit(tmp_path):
+    helper = load_helper()
+    assert helper.summarize(tmp_path / "missing", profile="untrusted") == {
+        "availability": "UNAVAILABLE",
+        "locations": [],
+        "reason": "UNKNOWN_PROFILE",
+    }
 
 
 def assert_private(summary, *canaries):
@@ -86,7 +121,7 @@ def test_workflow_runs_advisory_summary_without_changing_candidate_gate():
     )
     run = candidate["run"]
     summary_call = (
-        'poetry_cmd run python scripts/summarize_candidate_failure_327.py '
+        "poetry_cmd run python scripts/summarize_candidate_failure_327.py "
         '"$junit_raw"'
     )
 
@@ -104,14 +139,14 @@ def test_workflow_runs_advisory_summary_without_changing_candidate_gate():
 
 def test_summary_extracts_only_known_candidate_locations_and_fixed_classes(tmp_path):
     raw = (
-        'Traceback (most recent call last):\n'
+        "Traceback (most recent call last):\n"
         '  File "/home/runner/work/actions/action_server/tests/action_server_tests/mcp/'
         'test_canvas_query_template.py", line 42, in run_candidate\n'
-        'AssertionError: PRIVATE_ASSERTION_TEXT token=PRIVATE_TOKEN\n'
-        'Traceback (most recent call last):\n'
+        "AssertionError: PRIVATE_ASSERTION_TEXT token=PRIVATE_TOKEN\n"
+        "Traceback (most recent call last):\n"
         r'  File "C:\actions\action_server\tests\action_server_tests\mcp\test_canvas_query_template.py", line 77, in run_candidate'
         + "\n"
-        'AssertionError: PRIVATE_ASSERTION_TEXT token=PRIVATE_TOKEN\n'
+        "AssertionError: PRIVATE_ASSERTION_TEXT token=PRIVATE_TOKEN\n"
     )
     summary = load_helper().summarize(
         junit_file(tmp_path / "candidate.xml", failure=raw)
@@ -133,14 +168,15 @@ def test_summary_extracts_only_known_candidate_locations_and_fixed_classes(tmp_p
 
 
 def test_summary_deduplicates_sorts_and_caps_candidate_locations(tmp_path):
-    trace = "\n".join(
-        f'  File "/tmp/action_server/tests/action_server_tests/mcp/'
-        f'test_canvas_query_template.py", line {line}, in candidate'
-        for line in [30, *range(30, 50)]
-    ) + "\nRuntimeError: PRIVATE_DETAIL"
-    summary = load_helper().summarize(
-        junit_file(tmp_path / "many.xml", failure=trace)
+    trace = (
+        "\n".join(
+            f'  File "/tmp/action_server/tests/action_server_tests/mcp/'
+            f'test_canvas_query_template.py", line {line}, in candidate'
+            for line in [30, *range(30, 50)]
+        )
+        + "\nRuntimeError: PRIVATE_DETAIL"
     )
+    summary = load_helper().summarize(junit_file(tmp_path / "many.xml", failure=trace))
 
     assert availability(summary) == "AVAILABLE"
     locations = summary["locations"]
@@ -156,13 +192,9 @@ def test_pytest_short_location_never_exposes_its_assertion(tmp_path, separator):
         separator.join(("private", "tests", "mcp", "test_canvas_query_template.py"))
         + ":644: AssertionError: PRIVATE_TOKEN_327\n"
     )
-    summary = load_helper().summarize(
-        junit_file(tmp_path / "short.xml", failure=trace)
-    )
+    summary = load_helper().summarize(junit_file(tmp_path / "short.xml", failure=trace))
     assert availability(summary) == "AVAILABLE"
-    assert summary["locations"] == [
-        {"line": 644, "exception_class": "AssertionError"}
-    ]
+    assert summary["locations"] == [{"line": 644, "exception_class": "AssertionError"}]
     assert_private(summary, "private", "PRIVATE_TOKEN_327")
 
 
@@ -170,22 +202,16 @@ def test_pytest_short_location_never_exposes_its_assertion(tmp_path, separator):
     "exception_class",
     sorted(ALLOWED_EXCEPTION_CLASSES - {"OTHER"}),
 )
-def test_allowlisted_exception_classes_remain_fixed_enums(
-    tmp_path, exception_class
-):
+def test_allowlisted_exception_classes_remain_fixed_enums(tmp_path, exception_class):
     trace = (
         '  File "/tmp/action_server/tests/action_server_tests/mcp/'
         f'test_canvas_query_template.py", line 92, in candidate\n'
         f"{exception_class}: PRIVATE_DETAIL"
     )
-    summary = load_helper().summarize(
-        junit_file(tmp_path / "known.xml", failure=trace)
-    )
+    summary = load_helper().summarize(junit_file(tmp_path / "known.xml", failure=trace))
 
     assert availability(summary) == "AVAILABLE"
-    assert summary["locations"] == [
-        {"line": 92, "exception_class": exception_class}
-    ]
+    assert summary["locations"] == [{"line": 92, "exception_class": exception_class}]
     assert_private(summary, "PRIVATE_DETAIL", "/tmp/action_server")
 
 

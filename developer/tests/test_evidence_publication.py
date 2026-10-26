@@ -2,8 +2,10 @@
 
 import json
 import os
+import shlex
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -60,9 +62,9 @@ def test_windows_bash_resolver_uses_git_install_layout(tmp_path):
     )
 
     assert _resolve_bash_executable("unused", windows=False) == "bash"
-    assert _path_for_bash(r"C:\work\repo\scripts\publish_evidence.sh", windows=True) == (
-        "/c/work/repo/scripts/publish_evidence.sh"
-    )
+    assert _path_for_bash(
+        r"C:\work\repo\scripts\publish_evidence.sh", windows=True
+    ) == ("/c/work/repo/scripts/publish_evidence.sh")
 
 
 def test_windows_bash_resolver_fails_without_git_bash(tmp_path):
@@ -80,7 +82,14 @@ def test_windows_bash_resolver_fails_without_git_bash(tmp_path):
 
 class EvidencePublicationTests(unittest.TestCase):
     def run_pipeline(
-        self, payload, *, commit_exit=0, working_copy=None, raw_json=None, mode=None
+        self,
+        payload,
+        *,
+        commit_exit=0,
+        working_copy=None,
+        raw_json=None,
+        mode=None,
+        python_fallback_only=False,
     ):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -97,9 +106,22 @@ class EvidencePublicationTests(unittest.TestCase):
             calls = root / "publication-calls"
             fake_bin = root / "bin"
             fake_bin.mkdir()
-            fake_git = fake_bin / "git"
-            fake_git.write_text(
-                "#!/usr/bin/env python3\n"
+            python_launcher = fake_bin / "python"
+            python_executable = _path_for_bash(sys.executable)
+            python_launcher.write_text(
+                "#!/bin/sh\n" f'exec {shlex.quote(python_executable)} "$@"\n'
+            )
+            python_launcher.chmod(0o755)
+            dirname = fake_bin / "dirname"
+            dirname.write_text(
+                "#!/bin/sh\n"
+                '[ "$1" = -- ] && shift\n'
+                "case $1 in */*) printf '%s\\n' \"${1%/*}\";; "
+                "*) printf '.\\n';; esac\n"
+            )
+            dirname.chmod(0o755)
+            fake_git_script = root / "fake_git.py"
+            fake_git_script.write_text(
                 "import os,subprocess,sys\n"
                 "args=sys.argv[1:]\n"
                 "operation=args[2] if args[:1]==['-C'] else args[0]\n"
@@ -110,15 +132,26 @@ class EvidencePublicationTests(unittest.TestCase):
                 " sys.exit(int(os.environ['TEST_COMMIT_EXIT']) if operation=='commit' else 0)\n"
                 "sys.exit(subprocess.call([os.environ['TEST_REAL_GIT'],*args]))\n"
             )
+            fake_git = fake_bin / "git"
+            fake_git.write_text(
+                "#!/bin/sh\n"
+                "exec python "
+                f'{shlex.quote(_path_for_bash(fake_git_script))} "$@"\n'
+            )
             fake_git.chmod(0o755)
+            path = str(fake_bin)
+            if not python_fallback_only:
+                path += os.pathsep + os.environ["PATH"]
             environment = dict(
                 os.environ,
-                PATH=str(fake_bin) + os.pathsep + os.environ["PATH"],
+                PATH=path,
                 TEST_REAL_GIT=real_git,
                 TEST_PUBLICATION_CALLS=str(calls),
                 TEST_COMMIT_EXIT=str(commit_exit),
             )
             bash = _resolve_bash_executable(real_git)
+            if not Path(bash).is_absolute():
+                bash = shutil.which(bash)
             wrapper_path = _path_for_bash(WRAPPER)
             result = subprocess.run(
                 [bash, wrapper_path, "existing-test-branch", "test evidence"]
@@ -177,6 +210,22 @@ class EvidencePublicationTests(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(calls, ["start"])
+
+    def test_python_fallback_allows_safe_scan_commit_and_push(self):
+        result, calls = self.run_pipeline(
+            {"token": "[redacted]"}, python_fallback_only=True
+        )
+        self.assertEqual(calls, ["start", "commit", "push"])
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_python_fallback_scan_failure_never_commits_or_pushes(self):
+        secret = "synthetic-do-not-print-" + "x" * 43
+        result, calls = self.run_pipeline({"token": secret}, python_fallback_only=True)
+        self.assertEqual(calls, ["start"])
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("credential-valued field 'token'", result.stdout + result.stderr)
+        self.assertIn("Evidence scan failed", result.stdout + result.stderr)
+        self.assertNotIn(secret, result.stdout + result.stderr)
 
     def test_unknown_mode_cannot_fall_through_to_push(self):
         result, calls = self.run_pipeline({}, mode="--unknown")

@@ -1,4 +1,6 @@
 """Owned preparation lifecycle; deterministic barriers, no RCC."""
+
+import os
 import threading
 import time
 
@@ -162,13 +164,18 @@ def test_unbound_helper_serialization_and_result_boundary(tmp_path, monkeypatch,
             if kind == "model":
                 expected_result["date"] = "2026-10-25"
             assert json.loads(result.read_bytes()) == expected_result
-            assert result.stat().st_mode & 0o777 == 0o600
+            if os.name == "posix":
+                assert result.stat().st_mode & 0o777 == 0o600
     finally:
         sys.modules.pop(module, None)
 
 
 @pytest.mark.parametrize(
     "fault", ["none", "digest", "symlink", "oversize", "action", "import"]
+)
+@pytest.mark.skipif(
+    os.name != "posix" or not hasattr(os, "O_NOFOLLOW"),
+    reason="logical context helper requires POSIX O_NOFOLLOW",
 )
 def test_bound_helper_private_context_and_reset(tmp_path, monkeypatch, fault):
     import hashlib

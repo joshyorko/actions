@@ -216,8 +216,10 @@ jobs:
         \ \\\n  -q -n 0 \\\n  --basetemp \"$TMPDIR/pytest\" \\\n  --junitxml \"$junit_raw\"\
         \ >\"$TMPDIR/pytest.log\" 2>&1\npytest_status=$?\nset -e\nsource_sha=\"$(git\
         \ rev-parse HEAD)\"\nsource_tree=\"$(git rev-parse 'HEAD^{tree}')\"\nsource_parents=\"\
-        $(git show -s --format=%P HEAD)\"\npoetry_cmd run python - \"$junit_raw\"\
-        \ \"$junit_safe\" \"$pytest_status\" \\\n  \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\"\
+        $(git show -s --format=%P HEAD)\"\nif ! poetry_cmd run python scripts/summarize_candidate_failure_327.py\
+        \ \"$junit_raw\" published; then\n  echo 'Published Canvas failure-location\
+        \ diagnostics unavailable.'\nfi\npoetry_cmd run python - \"$junit_raw\" \"\
+        $junit_safe\" \"$pytest_status\" \\\n  \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\"\
         \ \"$receipt_safe\" \\\n  \"$source_sha\" \"$source_tree\" \"$source_parents\"\
         \ \"$browser_sha256\" \"$browser_version\" <<'PY'\nimport copy\nimport hashlib\n\
         import json\nimport re\nimport sys\nimport xml.etree.ElementTree as ET\nimport\
@@ -297,10 +299,10 @@ jobs:
         \ == Path('src/actions/server/__init__.py').resolve()),\n        ('runtime_module_digest',\
         \ lambda: runtime.get('module_sha256') == hashlib.sha256(Path('src/actions/server/__init__.py').read_bytes()).hexdigest()),\n\
         \        ('runtime_args_list', lambda: isinstance(runtime_args, list)),\n\
-        \        ('runtime_args_count', lambda: len(runtime_args) >= 3),\n       \
+        \        ('runtime_args_count', lambda: len(runtime_args) >= 4),\n       \
         \ ('runtime_interpreter_absolute', lambda: Path(runtime_args[0]).is_absolute()),\n\
-        \        ('runtime_module_entry', lambda: runtime_args[1:3] == ['-m', 'actions.server']),\n\
-        \        ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped')\
+        \        ('runtime_module_entry', lambda: runtime_args[1:4] == ['-P', '-m',\
+        \ 'actions.server']),\n        ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped')\
         \ is True),\n        ('runtime_live_descendants_empty', lambda: runtime.get('live_descendant_pids')\
         \ == []),\n        ('runtime_readers_empty', lambda: runtime.get('active_readers')\
         \ == []),\n        ('runtime_zombies_empty', lambda: runtime.get('zombie_descendant_pids')\
@@ -368,20 +370,20 @@ jobs:
         src/actions/server/__init__.py\").resolve()\n            and runtime.get(\"\
         module_sha256\") == hashlib.sha256(Path(\"src/actions/server/__init__.py\"\
         ).read_bytes()).hexdigest()\n            and isinstance(runtime_args, list)\
-        \ and len(runtime_args) >= 3\n            and Path(runtime_args[0]).is_absolute()\
-        \ and runtime_args[1:3] == [\"-m\", \"actions.server\"]\n            and runtime.get(\"\
-        wrapper_reaped\") is True\n            and runtime.get(\"live_descendant_pids\"\
-        ) == []\n            and runtime.get(\"active_readers\") == []\n         \
-        \   and runtime.get(\"zombie_descendant_pids\") == []\n            and runtime.get(\"\
-        descendant_snapshot_complete\") is True\n            and runtime.get(\"descendant_reap_complete\"\
-        ) is True\n            and runtime.get(\"cleanup_errors\") == []\n       \
-        \     and receipt.get(\"runtime_calls\") == [\"published_core_identity\",\
-        \ \"canvas_fixture_search:alpha\", \"canvas_fixture_search:unmatched-query\"\
-        ]\n            and receipt.get(\"template_zip_sha256\") == hashlib.sha256(Path(\"\
-        src/actions/server/templates/zips/canvas-query.zip\").read_bytes()).hexdigest()\n\
-        \            and receipt.get(\"production_package_manifest_sha256\") == hashlib.sha256(Path(\"\
-        ../templates/canvas-query/package.yaml\").read_bytes()).hexdigest()\n    \
-        \        and receipt.get(\"built_resource_sha256\") == expected_resource_sha256\n\
+        \ and len(runtime_args) >= 4\n            and Path(runtime_args[0]).is_absolute()\
+        \ and runtime_args[1:4] == [\"-P\", \"-m\", \"actions.server\"]\n        \
+        \    and runtime.get(\"wrapper_reaped\") is True\n            and runtime.get(\"\
+        live_descendant_pids\") == []\n            and runtime.get(\"active_readers\"\
+        ) == []\n            and runtime.get(\"zombie_descendant_pids\") == []\n \
+        \           and runtime.get(\"descendant_snapshot_complete\") is True\n  \
+        \          and runtime.get(\"descendant_reap_complete\") is True\n       \
+        \     and runtime.get(\"cleanup_errors\") == []\n            and receipt.get(\"\
+        runtime_calls\") == [\"published_core_identity\", \"canvas_fixture_search:alpha\"\
+        , \"canvas_fixture_search:unmatched-query\"]\n            and receipt.get(\"\
+        template_zip_sha256\") == hashlib.sha256(Path(\"src/actions/server/templates/zips/canvas-query.zip\"\
+        ).read_bytes()).hexdigest()\n            and receipt.get(\"production_package_manifest_sha256\"\
+        ) == hashlib.sha256(Path(\"../templates/canvas-query/package.yaml\").read_bytes()).hexdigest()\n\
+        \            and receipt.get(\"built_resource_sha256\") == expected_resource_sha256\n\
         \            and browser.get(\"status\") == \"passed\" and browser.get(\"\
         selection\") == \"explicit\"\n            and browser.get(\"version\") ==\
         \ browser_version\n            and is_sha256(browser_sha256) and browser.get(\"\

@@ -1,6 +1,7 @@
 """Real local process cleanup; receipt fixtures are not real RCC evidence."""
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -60,21 +61,7 @@ def child(tmp_path):
         raise
 
 
-@pytest.mark.parametrize(
-    "case",
-    [
-        "valid",
-        "missing",
-        "wrong-artifact",
-        "wrong-exit",
-        "invalid-trust",
-        "uncertain-cleanup",
-    ],
-)
-def test_only_matching_receipt_and_complete_cleanup_permit_failure(tmp_path, case):
-    runner, process, owner, captures = child(tmp_path)
-    artifact = "sha256:" + "a" * 64
-    receipt = tmp_path / "receipt.json"
+def _receipt_value(case, artifact):
     value = {
         "artifactDigest": artifact,
         "verification": {"valid": True},
@@ -88,8 +75,33 @@ def test_only_matching_receipt_and_complete_cleanup_permit_failure(tmp_path, cas
         value["exitCode"] = 4
     if case == "invalid-trust":
         value["verification"]["valid"] = False
+    return value
+
+
+def _write_receipt(tmp_path, case, value):
+    receipt = tmp_path / "receipt.json"
     if case != "missing":
         receipt.write_text(json.dumps(value))
+    return receipt
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "valid",
+        "missing",
+        "wrong-artifact",
+        "wrong-exit",
+        "invalid-trust",
+        "uncertain-cleanup",
+    ],
+)
+@pytest.mark.skipif(os.name != "posix", reason="owned POSIX process-group pipe capture")
+def test_only_matching_receipt_and_complete_cleanup_permit_failure(tmp_path, case):
+    runner, process, owner, captures = child(tmp_path)
+    artifact = "sha256:" + "a" * 64
+    value = _receipt_value(case, artifact)
+    receipt = _write_receipt(tmp_path, case, value)
     if case == "uncertain-cleanup":
         owner.failed = True
     try:
@@ -109,6 +121,39 @@ def test_only_matching_receipt_and_complete_cleanup_permit_failure(tmp_path, cas
         # The helper cleanup already stops observed descendants, including on
         # missing/mismatched receipts; no domain publication exists in this test.
         owner.cleanup()
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "valid",
+        "missing",
+        "wrong-artifact",
+        "wrong-exit",
+        "invalid-trust",
+        "uncertain-cleanup",
+    ],
+)
+def test_receipt_and_cleanup_decisions_are_platform_neutral(tmp_path, case):
+    from types import SimpleNamespace
+
+    runner = object.__new__(GeneratedRccExecution)
+    process = SimpleNamespace(returncode=3)
+    cleanup = SimpleNamespace(execution_stopped=case != "uncertain-cleanup")
+    owner = SimpleNamespace(cleanup=lambda: cleanup)
+    artifact = "sha256:" + "a" * 64
+    value = _receipt_value(case, artifact)
+    receipt = _write_receipt(tmp_path, case, value)
+
+    if case == "valid":
+        raw, result = runner._confirmed_failed_receipt(
+            process, owner, receipt, artifact
+        )
+        assert result.execution_stopped
+        assert json.loads(raw) == value
+    else:
+        with pytest.raises((RuntimeError, ValueError, OSError, RccCleanupIncomplete)):
+            runner._confirmed_failed_receipt(process, owner, receipt, artifact)
 
 
 def test_already_exited_wrapper_without_descendant_snapshot_is_uncertain(tmp_path):

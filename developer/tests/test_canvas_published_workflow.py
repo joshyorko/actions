@@ -78,6 +78,7 @@ def _validate(
     input_repository: Path = ROOT,
     changed_input: str | None = None,
     expected_browser_version: str | None = None,
+    safe_path: bool = True,
 ):
     # Git checkout may convert text inputs to CRLF. Preserve the measured
     # fixture's byte contract with canonical inputs, not normalized work files.
@@ -101,6 +102,12 @@ def _validate(
             "<removed-browser-temp>": tmp_path / "removed-browser-temp",
         },
     )
+    # Project only the launcher into the current safe-path contract. The
+    # retained historical receipt and its measured module bytes stay unchanged;
+    # this owned admission fixture is not new historical execution evidence.
+    assert receipt["runtime"]["process_args"][1:3] == ["-m", "actions.server"]
+    if safe_path:
+        receipt["runtime"]["process_args"].insert(1, "-P")
     suites = ET.Element("testsuites")
     suite = ET.SubElement(
         suites,
@@ -566,6 +573,25 @@ def test_failure_diagnostics_cover_each_existing_receipt_predicate():
     ]
 
 
+def test_current_safe_path_launcher_admitted_and_unsafe_prefix_rejected(tmp_path):
+    accepted = tmp_path / "safe"
+    accepted.mkdir()
+    result, _, receipt = _validate(accepted)
+    assert result.returncode == 0, result.stderr
+    assert receipt.is_file()
+
+    rejected = tmp_path / "unsafe"
+    rejected.mkdir()
+    result, _, receipt = _validate(rejected, safe_path=False)
+    assert result.returncode != 0
+    assert not receipt.exists()
+    diagnostic = _failure_diagnostics(receipt)
+    assert any(
+        item["code"] == "runtime_module_entry" and item["status"] == "FAIL"
+        for item in diagnostic["checks"]
+    )
+
+
 def test_generated_published_gate_matches_generator(tmp_path: Path):
     spec = importlib.util.spec_from_file_location(
         "canvas_workflow_generator", ROOT / ".github/workflows/_gen_workflows.py"
@@ -591,6 +617,9 @@ def test_generated_published_gate_matches_generator(tmp_path: Path):
     )
     assert steps.index(setup) < steps.index(gate) < steps.index(upload)
     assert gate["if"] == "matrix.os == 'ubuntu-22.04'"
+    diagnostic = 'scripts/summarize_candidate_failure_327.py "$junit_raw" published'
+    assert diagnostic in gate["run"]
+    assert gate["run"].index("pytest_status=$?") < gate["run"].index(diagnostic)
     assert upload["if"] == "always() && matrix.os == 'ubuntu-22.04'"
     assert "receipt.sanitized.json" in upload["with"]["path"]
     assert "published-core-failure-diagnostics.json" in upload["with"]["path"]

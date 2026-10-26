@@ -1,0 +1,36 @@
+{
+  "qualification": "selected RCC artifact cold execution with original owned cache path absent; not coordinated Runtime restore",
+  "argv": [
+    "/workspace/actions-cloud/bin/rcc",
+    "env",
+    "exec",
+    "--artifact",
+    "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "--provider",
+    "local",
+    "--permissive-local",
+    "--trust-carrier",
+    "/workspace/327-probes/a59-cold-rcc/acquire/trust",
+    "--trust-carrier-type",
+    "filesystem",
+    "--no-build",
+    "--inherit-streams",
+    "--receipt-file",
+    "/workspace/327-probes/a59-cold-rcc/rcc-exec-receipt.json",
+    "--",
+    "python",
+    "-I",
+    "/workspace/327-probes/a59-cold-rcc/verify_core.py"
+  ],
+  "original_identity": {
+    "device": 27,
+    "inode": 1596530
+  },
+  "old_cache_users_before": [],
+  "original_prepared_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+  "command_exit": 0,
+  "original_cache_restored": true,
+  "original_prepared_unchanged": true,
+  "elapsed_seconds": 1.88,
+  "status": "PASS"
+}

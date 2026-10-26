@@ -135,11 +135,29 @@ Refusal evidence does not qualify restore or authorization on unsupported hosts.
 Full recovery evidence must join coordinated SQL, sealed output/source objects,
 Runtime journals, audit/Run/effect lineage and exact RCC material in distinct
 owned restored roots. A prepared-cache receipt or path is not an archived cache.
-The retained common-PostgreSQL restore recipe leaves RCC independently available;
+The historical a27 common-PostgreSQL recipe leaves RCC independently available;
 it does not prove cold reconstruction. Require current authorized terminal
 replay and exact retained bytes after a fresh process, unchanged backup bytes,
 and no additional Run/Attempt/launch. Keep installed1.0.4 queue/attachment
 upgrade/refusal/rollback as a separate compatibility cell.
+
+For a selected local RCC artifact, archive size and hash are distinct from the
+artifact digest. Pinned RCC18.19.3 exports through the required local provider;
+acquire the archive into a new owned home with the unchanged existing trust
+carrier and policy. Compare artifact, specification, provenance, SBOM, revocation
+and policy identities. A relocated prepared receipt changes only its home path;
+the exact package YAML digest remains mandatory. Read pins from the actual
+receipt bytes and validate64 hexadecimal characters, not copied prose. A
+successful no-build execution with the original owned cache path absent proves
+that selected artifact's cold execution, not whole Runtime recovery. Preserve
+the original directory identity and restore it on every exit when isolating an
+owned fixture. Measure the selected artifact before treating the entire cache
+home's size as a storage blocker.
+
+For owned PostgreSQL containers, probe TCP readiness with `pg_isready -h
+127.0.0.1` before opening a host TCP connection. A socket-only readiness probe
+can observe the temporary initialization server before its stop/restart and
+does not establish readiness of the published TCP port.
 
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.
