@@ -431,7 +431,11 @@ it("reproduces request error retained after same Run continuation succeeds", asy
         screen.getByText("Unable to complete this action. Try again."),
     ).toBeTruthy();
     expect(
-        (screen.getByLabelText("Replacement value") as unknown as { value: string }).value,
+        (
+            screen.getByLabelText("Replacement value") as unknown as {
+                value: string;
+            }
+        ).value,
     ).toBe("alpha beta");
 });
 

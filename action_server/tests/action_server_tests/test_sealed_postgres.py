@@ -1,6 +1,7 @@
 """Owned TLS PostgreSQL, synthetic authority; no ordinary worker proof."""
 import json
 import os
+import shutil
 import subprocess
 import threading
 import time
@@ -26,6 +27,12 @@ def disable_feedback():
 
 @pytest.fixture(scope="module")
 def tls_postgres(tmp_path_factory):
+    if shutil.which("docker") is None:
+        message = "Docker CLI required for owned TLS PostgreSQL fixture"
+        if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
+            pytest.fail(message)
+        pytest.skip(message)
+
     import psycopg
     from psycopg import sql
 

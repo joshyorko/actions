@@ -7,8 +7,11 @@
 - [`actions`](./actions.md#module-actions): Sema4.ai Actions enables running your AI actions in the Sema4.ai Action Server.
 - [`actions.agent`](./actions.agent.md#module-actionsagent)
 - [`actions.api`](./actions.api.md#module-actionsapi): This module contains the public API for the actions.
+- [`actions.canvas_contract`](./actions.canvas_contract.md#module-actionscanvas_contract): Public authoring contract for safe, declarative Action Canvas views.
 - [`actions.chat`](./actions.chat.md#module-actionschat)
 - [`actions.cli`](./actions.cli.md#module-actionscli)
+- [`actions.data`](./actions.data.md#module-actionsdata): Read declared, eagerly prepared logical data in a trusted Action execution.
+- [`actions.knowledge`](./actions.knowledge.md#module-actionsknowledge): Select bounded Knowledge results prepared by the trusted Runtime.
 - [`actions.mcp`](./actions.mcp.md#module-actionsmcp): Sema4.ai MCP (Model Context Protocol) bindings for Python.
 - [`actions.server_integration`](./actions.server_integration.md#module-actionsserver_integration): Versioned Actions Runtime integration contracts.
 
@@ -58,6 +61,22 @@
 - [`api.DiagnosticsTypedDict`](./actions.api.md#class-diagnosticstypeddict)
 - [`api.PositionTypedDict`](./actions.api.md#class-positiontypeddict)
 - [`api.RangeTypedDict`](./actions.api.md#class-rangetypeddict)
+- [`_models.CanvasArtifact`](./actions.canvas_contract._models.md#class-canvasartifact)
+- [`_models.CanvasCard`](./actions.canvas_contract._models.md#class-canvascard)
+- [`_models.CanvasChart`](./actions.canvas_contract._models.md#class-canvaschart)
+- [`_models.CanvasForm`](./actions.canvas_contract._models.md#class-canvasform)
+- [`_models.CanvasFormField`](./actions.canvas_contract._models.md#class-canvasformfield)
+- [`_models.CanvasInspector`](./actions.canvas_contract._models.md#class-canvasinspector)
+- [`_models.CanvasLog`](./actions.canvas_contract._models.md#class-canvaslog)
+- [`_models.CanvasSpec`](./actions.canvas_contract._models.md#class-canvasspec): Closed v1 reader; its canonical serialization is unchanged.
+- [`_models.CanvasSpecV2`](./actions.canvas_contract._models.md#class-canvasspecv2): Explicit v2 reader adding bounded card, chart, log and inspector syntax.
+- [`_models.CanvasSpecValidationError`](./actions.canvas_contract._models.md#class-canvasspecvalidationerror): A CanvasSpec document violates the versioned authoring contract.
+- [`_models.CanvasStack`](./actions.canvas_contract._models.md#class-canvasstack)
+- [`_models.CanvasStackV2`](./actions.canvas_contract._models.md#class-canvasstackv2)
+- [`_models.CanvasStatus`](./actions.canvas_contract._models.md#class-canvasstatus)
+- [`_models.CanvasTable`](./actions.canvas_contract._models.md#class-canvastable)
+- [`_models.CanvasTableColumn`](./actions.canvas_contract._models.md#class-canvastablecolumn)
+- [`_models.CanvasText`](./actions.canvas_contract._models.md#class-canvastext)
 - [`_extension_points.EPManagedParameters`](./actions._customization._extension_points.md#class-epmanagedparameters): The protocol for a class that describes the managed parameters when
 - [`_managed_parameters.ManagedParameters`](./actions._managed_parameters.md#class-managedparameters): Default implementation of EPManagedParameters.
 - [`_plugin_manager.PluginManager`](./actions._customization._plugin_manager.md#class-pluginmanager): This is a manager of plugins (which we refer to extension points and implementations).
@@ -77,6 +96,8 @@
 - [`agent.list_data_frames`](./actions.agent.md#function-list_data_frames): List all data frames available in the current thread.
 - [`agent.prompt_generate`](./actions.agent.md#function-prompt_generate): Gives a prompt to an agent.
 - [`api.collect_lint_errors`](./actions.api.md#function-collect_lint_errors): Provides lint errors from the contents of a file containing the `@action`s.
+- [`_models.parse_canvas_spec`](./actions.canvas_contract._models.md#function-parse_canvas_spec): Parse bounded JSON and dispatch only an explicitly supported version.
+- [`_models.validate_canvas_spec`](./actions.canvas_contract._models.md#function-validate_canvas_spec): Validate either explicit version without upgrading retained documents.
 - [`chat.attach_file`](./actions.chat.md#function-attach_file): Attaches a file to the current chat.
 - [`chat.attach_file_content`](./actions.chat.md#function-attach_file_content): Set the content of a file to be used in the current chat.
 - [`chat.attach_json`](./actions.chat.md#function-attach_json): Attach a file with JSON content to the current chat.
@@ -87,7 +108,12 @@
 - [`chat.get_text`](./actions.chat.md#function-get_text): Get the text content of a file in the current action chat.
 - [`chat.list_files`](./actions.chat.md#function-list_files): Lists all files in the current chat thread.
 - [`cli.main`](./actions.cli.md#function-main): Entry point for running actions from actions-core.
+- [`_context.scan`](./actions.data._context.md#function-scan): Return fresh rows from one declared eager scan in the current execution.
+- [`knowledge.ingest`](./actions.knowledge.md#function-ingest): Return a fresh prepared ingestion result, not publication authority.
+- [`knowledge.search`](./actions.knowledge.md#function-search): Return the prepared search result only when every parameter matches.
 - [`mcp.prompt`](./actions.mcp.md#function-prompt): Decorator for functions that generate prompts for the LLM.
 - [`mcp.resource`](./actions.mcp.md#function-resource): Decorator for resources which provide data to the LLM.
 - [`mcp.tool`](./actions.mcp.md#function-tool): Decorator for tools which can be used by AI agents to perform actions.
 - [`_lint_action.format_lint_results`](./actions._lint_action.md#function-format_lint_results)
+- [`_logging.get_log_viewer_html`](./actions._logging.md#function-get_log_viewer_html): Return the owned HTML viewer template matching this log encoder.
+- [`_logging.html`](./actions._logging.md#function-html): Adds html contents to the log.

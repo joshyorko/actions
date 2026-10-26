@@ -398,6 +398,11 @@ class BaseWorkflow:
             "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
             if pinned
             else "actions/checkout@v5",
+            "env": {
+                "GIT_CONFIG_COUNT": "${{ runner.os == 'Windows' && '1' || '0' }}",
+                "GIT_CONFIG_KEY_0": "core.longpaths",
+                "GIT_CONFIG_VALUE_0": "true",
+            },
         }
 
     def install_devutils(self, additional_packages: list[str] | None = None):
@@ -638,6 +643,61 @@ class ActionServerTests(BaseTests):
     require_go = True
     require_build_frontend = True
     require_build_oauth2_config = True
+
+    def start_owned_postgres(self):
+        return {
+            "name": "Start owned PostgreSQL for portable Runtime tests",
+            "if": "runner.os == 'Linux'",
+            "shell": "bash",
+            "run": r"""set -euo pipefail
+image=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+docker pull "$image"
+cid=$(docker run --detach --pull=never --rm \
+  --name "actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+  --memory=3g --cpus=2 --pids-limit=256 \
+  --tmpfs /var/lib/postgresql/data:size=2g \
+  --publish 127.0.0.1::5432 \
+  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only "$image")
+[[ "$cid" =~ ^[0-9a-f]{64}$ ]]
+echo "ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid" >> "$GITHUB_ENV"
+ready=false
+for attempt in {1..60}; do
+  if docker exec "$cid" pg_isready -U postgres; then ready=true; break; fi
+  sleep 1
+done
+[[ "$ready" == true ]]
+port=$(docker port "$cid" 5432/tcp)
+[[ "$port" =~ ^127\.0\.0\.1:([0-9]+)$ ]]
+url="postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres"
+echo "::add-mask::$url"
+echo "ACTIONS_INVOICE_TEST_POSTGRES=$url" >> "$GITHUB_ENV"
+echo "ACTIONS_TEST_POSTGRES_URL=$url" >> "$GITHUB_ENV"
+echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" >> "$GITHUB_ENV"
+""",
+        }
+
+    def stop_owned_postgres(self):
+        return {
+            "name": "Remove owned portable-test PostgreSQL",
+            "if": "always() && runner.os == 'Linux'",
+            "shell": "bash",
+            "run": r"""set -euo pipefail
+cid="${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}"
+if [[ -n "$cid" ]]; then
+  [[ "$cid" =~ ^[0-9a-f]{64}$ ]]
+  docker rm --force "$cid"
+  for attempt in {1..10}; do
+    remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+    if [[ -z "$remaining" ]]; then break; fi
+    sleep 1
+  done
+  [[ -z "$remaining" ]]
+fi
+echo "ACTIONS_INVOICE_TEST_POSTGRES=" >> "$GITHUB_ENV"
+echo "ACTIONS_TEST_POSTGRES_URL=" >> "$GITHUB_ENV"
+echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
+""",
+        }
 
     @override
     def on_part(self, dep_paths):
@@ -1040,6 +1100,7 @@ class ActionServerTests(BaseTests):
             self.upload_artifact(
                 name="action-server-${{ matrix.os }}", path="action_server/dist/final/"
             ),
+            self.start_owned_postgres(),
             {
                 "name": "Test (not integration)",
                 "env": {
@@ -1049,6 +1110,7 @@ class ActionServerTests(BaseTests):
                 },
                 "run": f"{run_in_env}poetry run inv test-not-integration",
             },
+            self.stop_owned_postgres(),
             {
                 "name": "Install Playwright Chromium for Runtime browser acceptance",
                 "working-directory": "action_server/frontend",

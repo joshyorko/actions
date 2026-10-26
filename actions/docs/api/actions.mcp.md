@@ -8,7 +8,7 @@ This package provides the concepts around MCP (such as tools, resources, and pro
 
 Packages developed with actions.mcp can run as an actual MCP server, by loading it into the `Sema4.ai Action Server`, which loads this package and provides the actual MCP server implementation.
 
-This approach enables: 1. Automatic generation of the environment to run the server (the Action Server will read the related `package.yaml` and then run the tools/resources/prompts in thetarget environment, enabling multiple MCPs to have different environments).2. Automated logging and execution tracking (i.e.: `robocorp.log` is used to automatically log the Python execution and the results of the tools/resources/prompts).3. It's possible to inspect in the Action Server all the tools/resources/prompts calls made and inspect the details on the execution.
+This approach enables: 1. Automatic generation of the environment to run the server (the Action Server will read the related `package.yaml` and then run the tools/resources/prompts in thetarget environment, enabling multiple MCPs to have different environments).2. Automated logging and execution tracking (i.e.: `actions._logging` is used to automatically log the Python execution and the results of the tools/resources/prompts).3. It's possible to inspect in the Action Server all the tools/resources/prompts calls made and inspect the details on the execution.
 
 # Functions
 

@@ -67,6 +67,10 @@ jobs:
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@v5
+      env:
+        GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+        GIT_CONFIG_KEY_0: core.longpaths
+        GIT_CONFIG_VALUE_0: 'true'
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@v5
       with:
@@ -138,12 +142,39 @@ jobs:
       with:
         name: action-server-${{ matrix.os }}
         path: action_server/dist/final/
+    - name: Start owned PostgreSQL for portable Runtime tests
+      if: runner.os == 'Linux'
+      shell: bash
+      run: "set -euo pipefail\nimage=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81\n\
+        docker pull \"$image\"\ncid=$(docker run --detach --pull=never --rm \\\n \
+        \ --name \"actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
+        \ \\\n  --memory=3g --cpus=2 --pids-limit=256 \\\n  --tmpfs /var/lib/postgresql/data:size=2g\
+        \ \\\n  --publish 127.0.0.1::5432 \\\n  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only\
+        \ \"$image\")\n[[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\necho \"ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid\"\
+        \ >> \"$GITHUB_ENV\"\nready=false\nfor attempt in {1..60}; do\n  if docker\
+        \ exec \"$cid\" pg_isready -U postgres; then ready=true; break; fi\n  sleep\
+        \ 1\ndone\n[[ \"$ready\" == true ]]\nport=$(docker port \"$cid\" 5432/tcp)\n\
+        [[ \"$port\" =~ ^127\\.0\\.0\\.1:([0-9]+)$ ]]\nurl=\"postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres\"\
+        \necho \"::add-mask::$url\"\necho \"ACTIONS_INVOICE_TEST_POSTGRES=$url\" >>\
+        \ \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=$url\" >> \"$GITHUB_ENV\"\
+        \necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=1\" >> \"$GITHUB_ENV\"\n"
     - name: Test (not integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
         CI_CREDENTIALS: ${{ secrets.CI_CREDENTIALS }}
         CI_ENDPOINT: ${{ secrets.CI_ENDPOINT }}
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv test-not-integration
+    - name: Remove owned portable-test PostgreSQL
+      if: always() && runner.os == 'Linux'
+      shell: bash
+      run: "set -euo pipefail\ncid=\"${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}\"\nif\
+        \ [[ -n \"$cid\" ]]; then\n  [[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\n  docker rm\
+        \ --force \"$cid\"\n  for attempt in {1..10}; do\n    remaining=$(docker ps\
+        \ --all --no-trunc --quiet --filter \"id=$cid\")\n    if [[ -z \"$remaining\"\
+        \ ]]; then break; fi\n    sleep 1\n  done\n  [[ -z \"$remaining\" ]]\nfi\n\
+        echo \"ACTIONS_INVOICE_TEST_POSTGRES=\" >> \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=\"\
+        \ >> \"$GITHUB_ENV\"\necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=0\" >> \"$GITHUB_ENV\"\
+        \n"
     - name: Install Playwright Chromium for Runtime browser acceptance
       working-directory: action_server/frontend
       run: npx playwright install chromium

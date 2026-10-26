@@ -57,7 +57,9 @@ def versions(request, tmp_path):
 
     base = os.environ.get("ACTIONS_INVOICE_TEST_POSTGRES")
     if not base:
-        pytest.fail("owned PostgreSQL fixture required")
+        if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
+            pytest.fail("owned PostgreSQL fixture required")
+        pytest.skip("owned PostgreSQL fixture not configured")
     schema = "knowledge_execution_" + uuid4().hex
     with psycopg.connect(base, autocommit=True) as owner:
         owner.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))

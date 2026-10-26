@@ -95,6 +95,8 @@ def insert_action(db, snap):
 
 @pytest.fixture
 def store(tmp_path):
+    if sys.platform != "linux":
+        pytest.skip("Linux private output-provider proof")
     root = tmp_path / "objects"
     root.mkdir()
     fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY"))

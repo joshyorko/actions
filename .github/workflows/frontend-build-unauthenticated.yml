@@ -41,6 +41,10 @@ jobs:
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
+        env:
+          GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.longpaths
+          GIT_CONFIG_VALUE_0: 'true'
       
       - name: Verify no .npmrc with credentials
         run: |

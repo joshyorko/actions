@@ -341,6 +341,9 @@ sys.exit(result.return_code)
 
 
 class RobotExecution:
+    root: Path
+    preparation: DirectRobotPreparation | RccRobotPreparation
+
     def __init__(
         self,
         execution_root: Path,
@@ -359,7 +362,8 @@ class RobotExecution:
             raise ValueError("private execution root required")
         if type(preparation) not in (DirectRobotPreparation, RccRobotPreparation):
             raise ValueError("trusted typed Robot preparation required")
-        self.root, self.preparation = execution_root, preparation
+        self.root = execution_root
+        self.preparation = preparation
 
     def execute(
         self,

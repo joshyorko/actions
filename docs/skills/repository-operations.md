@@ -2165,6 +2165,31 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+For hosted CI failures, inspect the first failing step and the actual job log.
+Deduplicate a shared cause across matrix jobs. A Windows checkout failure with
+`Filename too long` happens before package tests. Checkout steps use process-scoped
+`core.longpaths` on Windows; preserve publisher conditions, credentials and job
+permissions when correcting checkout configuration. A local Bash or source test
+does not establish that the hosted Windows checkout now passes.
+
+The Linux Runtime portable suite and measured coverage workflow provision the
+same digest-pinned, bounded owned PostgreSQL container. Both export
+`ACTIONS_INVOICE_TEST_POSTGRES`, `ACTIONS_TEST_POSTGRES_URL` and strict provider
+mode `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1`. Record the exact container ID before
+readiness checks, run cleanup with `always()`, and verify that exact container is
+absent before resetting provider variables. Docker inspection errors fail cleanup.
+Ordinary portable runs may skip unavailable provider fixtures; strict qualification
+must fail instead. Shared Linux-only fixtures check their own platform because
+module-level pytest marks do not travel with an imported fixture. Shell-stub
+contracts cover setup, bounded readiness failure, cleanup and workflow parity;
+they do not replace hosted execution or real provider qualification.
+
+For a frontend formatting failure, format the reported file and run
+`npm run test:quality` from `action_server/frontend`. For Actions Core API docs,
+run package-local `poetry run invoke docs` through the prepared RCC package
+gateway. Review every generated page and its index links, including newly exported
+modules, then regenerate again and check that the file hashes remain stable.
+
 ### Action Server OpenAPI golden snapshots
 
 When an OpenAPI snapshot fails, compare parsed expected and observed JSON before
@@ -6427,6 +6452,13 @@ still omitted the root API and re-exported classes. Active package locks now use
 the owned adapter and official checker; orphan locks in retired common, mcp and
 build_common directories have no pyproject or active toolkit package and remain
 historical evidence, not active dependencies.
+
+Owned-doc validation filters private directories relative to the selected root,
+not its absolute ancestors. A checkout beneath `_temp` still validates its public
+modules. Nested private directories remain excluded; selecting an explicit file
+validates that file regardless of private parent directories. Regression controls
+must check real D420/D212 violations and private-descendant exclusions, rather than
+accepting an empty discovery result.
 
 A Runtime preload can run inside an explicitly selected older Core package. Prefer
 `actions._logging` whenever its module spec exists; import errors inside that owned

@@ -75,7 +75,7 @@ def validate_path(target: str) -> list[str]:
             if re.match(r"^(?!_(?!_))(?!test_).*\.py$", p.name)
             and not any(
                 part.startswith("_") and not part.startswith("__")
-                for part in p.parts[:-1]
+                for part in (p.relative_to(root).parts[:-1] if root.is_dir() else ())
             )
         }
     )

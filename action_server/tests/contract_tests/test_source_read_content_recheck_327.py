@@ -11,7 +11,9 @@ import pytest
 
 from actions.server.deployments import source_manifest
 
-pytestmark = pytest.mark.skipif(sys.platform != "linux", reason="Linux descriptor proof")
+pytestmark = pytest.mark.skipif(
+    sys.platform != "linux", reason="Linux descriptor proof"
+)
 
 
 @pytest.fixture
@@ -55,7 +57,11 @@ def _assert_rejected_or_expose_stale_result(
     try:
         call()
     except ValueError as error:
-        assert "changed" in str(error) or "binding" in str(error) or "content" in str(error)
+        assert (
+            "changed" in str(error)
+            or "binding" in str(error)
+            or "content" in str(error)
+        )
     else:
         measured = call.measured
         assert measured.inventory == expected_inventory

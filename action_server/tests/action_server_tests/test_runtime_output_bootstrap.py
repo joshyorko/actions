@@ -53,6 +53,7 @@ def test_native_output_transport_requires_task_policy(
                     }
                 )
             )
+            policy.chmod(0o600)
             monkeypatch.setenv("ACTIONS_FOUNDRY_TASK_POLICY", str(policy))
             monkeypatch.setattr(
                 "actions.server.run_outputs.task_host.DetachedTaskHost",
