@@ -1,4 +1,6 @@
-> Storage handoff 2026-10-25: latest source is explicitly WIP, not a qualified installed release. See [frozen handoff and critical path](evidence/actions-next-327/storage-handoff-20261025/README.md). All helpers freeze before sole integration ownership transfers. No further heavyweight build in the old container.
+> Current continuation 2026-10-26: sole integration ownership is recovered on the existing release branch. [a54 source, installed receipts and remaining gates](evidence/actions-next-327/recovery-20261026/README.md) now qualify bounded live claimed-Task cancellation, exact child absence, public reads/replay/restart. Original full matrix below still governs. Generated Node exit/client breadth, PostgreSQL Knowledge and remaining release gates stay open; pinned Dakota post2 remains separate. No whole-release, merge or publication approval is implied.
+
+> Historical storage handoff 2026-10-25: source was explicitly WIP. See [frozen handoff and critical path](evidence/actions-next-327/storage-handoff-20261025/README.md). The old-container freeze is historical; current transfer and qualification are recorded above.
 
 ## Current convergence and remaining blockers — a41 continuation
 
