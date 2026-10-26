@@ -170,3 +170,23 @@ was verified after the normal push. Coverage515/run40370948150 is the one runnin
 aggregate there, alongside normal Windows/Runtime/browser CI. This later
 component evidence is a local documentation checkpoint while that run continues;
 it does not silently change515's source or start another aggregate.
+
+## Windows Toolkit816 follow-up
+
+Both Windows Toolkit816 jobs failed9/203/13 after safe scans because the fixture
+never intercepted Git. Missing author identity was the real Git refusal, not a
+reason to configure identity or relax the assertions. A new startup-PATH-reset
+control reproduced the missing interception on Linux before the correction.
+The fixture now installs a checked readonly Git function in the same Bash that
+sources the unchanged wrapper. Native Python still scans the real staged index
+through native Git. Normal and no-python3 shell profiles remain distinct.
+All13 focused controls and the full RCC Toolkit226 cases passed; Ruff and diff
+checks passed, and an independent Luna review found no blocker. Actual native
+Windows confirmation remains pending. No production wrapper/scanner changed.
+
+A separate initialize-only Codex diagnostic identified protected-home EROFS
+operations including `installation_id` creation even with ordinary task-local
+SQLite/log homes. No initialize response, model-list, model inference or MCP
+request occurred. Protected permissions, credentials/session material and
+security settings were not changed. Further attempts to reroute that denied
+write are not authorized; preserve the environment blocker.

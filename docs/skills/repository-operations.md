@@ -2270,6 +2270,12 @@ closed when neither exists. Quote interpreter and scanner paths. Fake Git
 launchers in Windows Git Bash tests use the active interpreter explicitly;
 they must not depend on a bare `python3` shebang. Interpreter fallback never
 skips the staged-evidence scan or changes commit/push failure ordering.
+An inherited PATH does not prove shell interception. The publication fixture
+installs and checks a readonly Git function inside the same Bash process that
+sources the real wrapper. Its selected Python uses native Git for the unchanged
+scanner's actual staged-index reads. Keep the no-python3 shell profile separate
+from the native scanner's PATH. A startup-PATH reset must not allow a real commit
+or push; preserve exact call-order and controlled-failure assertions.
 
 Retain terminal coverage receipts with both PR head and actual merge checkout,
 per-package counts, first failing assertion and owned-service cleanup. A failed
@@ -6229,6 +6235,15 @@ Independently verify the exact installed client, reachable endpoint, supported
 authentication and owned-resource cleanup plan; protocol/reference-host proof
 does not establish those host-specific prerequisites or permit changes to Executor.
 
+Pinned Codex0.159.0-alpha.3 app-server initialization can still attempt protected
+home writes with supported task-local SQLite/log homes. An initialize-only file
+syscall trace observed EROFS for home `installation_id` creation, alias-directory
+chmod and a relative `uid_map` open; no initialize response or model/MCP request
+occurred. Keep that as an environment blocker, not product acceptance. Do not
+change protected permissions, copy authentication/session material or reroute
+the denied write. Ordinary task-local options do not authorize bypassing the
+same restriction or establish an approved model identifier.
+
 
 ### Generated Knowledge publication and retained source validation
 
@@ -7017,6 +7032,9 @@ Bind exact view IDs to retained receipts, verify producers have stopped, and use
 the pinned CLI's exact selection. A dry run is not an atomic lease guarantee.
 Retain compiler proof views and artifact/catalog/trust state. Repeated receipts
 using one view prove that reuse only, not automatic reclamation.
+Pinned RCC18.19.3 exposes `rcc holotree delete <identity> --space <space>`.
+Use the full observed identity and its actual metadata space. `--dryrun` reviews
+selector behavior; it does not establish the absence of active leases.
 
 Manifest compatibility does not establish client-protocol support. Record whether
 an independent client exercised synchronous invocation or Task lifecycle methods.

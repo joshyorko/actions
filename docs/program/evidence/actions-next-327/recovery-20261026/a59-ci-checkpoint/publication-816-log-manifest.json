@@ -1,0 +1,17 @@
+[
+  {
+    "source": "/tmp/327-publication-startup-red.log",
+    "bytes": 5294,
+    "sha256": "8cff755b09fa14a73692294f37342a04632f012ddc7ef021182761c5111b0734"
+  },
+  {
+    "source": "/tmp/327-publication-startup-green.log",
+    "bytes": 3799,
+    "sha256": "77ca7e0b8eebffdcd0e42c6bff1254af94ff6860ddacc05bf0b93532094a3c26"
+  },
+  {
+    "source": "/tmp/327-publication-final-toolkit.log",
+    "bytes": 15214,
+    "sha256": "9b58a505f45614d820d861981f5cea1461f17342e7658ee33609a37fd68eab94"
+  }
+]

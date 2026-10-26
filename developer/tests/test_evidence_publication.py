@@ -2,7 +2,6 @@
 
 import json
 import os
-import shlex
 import shutil
 import subprocess
 import sys
@@ -12,6 +11,40 @@ from pathlib import Path
 
 
 WRAPPER = Path(__file__).resolve().parents[2] / "scripts/publish_evidence.sh"
+
+# Shell commands use the controlled Git function. The native Python scanner
+# receives only the real Git directory and still reads the actual staged index.
+PUBLICATION_SHELL = r"""
+set -euo pipefail
+fixture_python=$1
+fixture_git_script=$2
+fixture_native_git_dir=$3
+fixture_bin=$4
+fixture_fallback=$5
+shift 5
+git() { "$fixture_python" "$fixture_git_script" "$@"; }
+fixture_run_python() { PATH="$fixture_native_git_dir" "$fixture_python" "$@"; }
+python() { fixture_run_python "$@"; }
+if [ "$fixture_fallback" = 1 ]; then
+    PATH="$fixture_bin"
+    unset -f python3 2>/dev/null || true
+    if command -v python3 >/dev/null; then
+        echo 'fixture unexpectedly exposes python3' >&2
+        exit 98
+    fi
+else
+    PATH="$fixture_bin:$PATH"
+    python3() { fixture_run_python "$@"; }
+fi
+export PATH
+if [ "$(type -t git)" != function ]; then
+    echo 'fixture Git interception unavailable' >&2
+    exit 97
+fi
+readonly -f git
+# Stay in this shell: a second Bash process could rewrite PATH at startup.
+source "$@"
+"""
 
 
 def _resolve_bash_executable(real_git, *, windows=None):
@@ -90,6 +123,7 @@ class EvidencePublicationTests(unittest.TestCase):
         raw_json=None,
         mode=None,
         python_fallback_only=False,
+        rewrite_startup_path=False,
     ):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -106,12 +140,6 @@ class EvidencePublicationTests(unittest.TestCase):
             calls = root / "publication-calls"
             fake_bin = root / "bin"
             fake_bin.mkdir()
-            python_launcher = fake_bin / "python"
-            python_executable = _path_for_bash(sys.executable)
-            python_launcher.write_text(
-                "#!/bin/sh\n" f'exec {shlex.quote(python_executable)} "$@"\n'
-            )
-            python_launcher.chmod(0o755)
             dirname = fake_bin / "dirname"
             dirname.write_text(
                 "#!/bin/sh\n"
@@ -132,29 +160,35 @@ class EvidencePublicationTests(unittest.TestCase):
                 " sys.exit(int(os.environ['TEST_COMMIT_EXIT']) if operation=='commit' else 0)\n"
                 "sys.exit(subprocess.call([os.environ['TEST_REAL_GIT'],*args]))\n"
             )
-            fake_git = fake_bin / "git"
-            fake_git.write_text(
-                "#!/bin/sh\n"
-                "exec python "
-                f'{shlex.quote(_path_for_bash(fake_git_script))} "$@"\n'
-            )
-            fake_git.chmod(0o755)
-            path = str(fake_bin)
-            if not python_fallback_only:
-                path += os.pathsep + os.environ["PATH"]
             environment = dict(
                 os.environ,
-                PATH=path,
                 TEST_REAL_GIT=real_git,
                 TEST_PUBLICATION_CALLS=str(calls),
                 TEST_COMMIT_EXIT=str(commit_exit),
             )
+            if rewrite_startup_path:
+                startup = root / "bash-startup.sh"
+                startup.write_text('export PATH="/usr/bin:/bin"\n')
+                environment["BASH_ENV"] = _path_for_bash(startup)
             bash = _resolve_bash_executable(real_git)
             if not Path(bash).is_absolute():
                 bash = shutil.which(bash)
             wrapper_path = _path_for_bash(WRAPPER)
             result = subprocess.run(
-                [bash, wrapper_path, "existing-test-branch", "test evidence"]
+                [
+                    bash,
+                    "-c",
+                    PUBLICATION_SHELL,
+                    "publication-fixture",
+                    _path_for_bash(sys.executable),
+                    _path_for_bash(fake_git_script),
+                    _path_for_bash(Path(real_git).parent),
+                    _path_for_bash(fake_bin),
+                    "1" if python_fallback_only else "0",
+                    wrapper_path,
+                    "existing-test-branch",
+                    "test evidence",
+                ]
                 + ([mode] if mode is not None else []),
                 cwd=root,
                 env=environment,
@@ -226,6 +260,13 @@ class EvidencePublicationTests(unittest.TestCase):
         self.assertIn("credential-valued field 'token'", result.stdout + result.stderr)
         self.assertIn("Evidence scan failed", result.stdout + result.stderr)
         self.assertNotIn(secret, result.stdout + result.stderr)
+
+    def test_shell_startup_path_cannot_bypass_git_interception(self):
+        result, calls = self.run_pipeline(
+            {"token": "[redacted]"}, rewrite_startup_path=True
+        )
+        self.assertEqual(calls, ["start", "commit", "push"])
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_unknown_mode_cannot_fall_through_to_push(self):
         result, calls = self.run_pipeline({}, mode="--unknown")

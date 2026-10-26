@@ -1,0 +1,18 @@
+{
+  "source": "daf41283a8507b4807c404a1683add9c3750d456",
+  "run": 40370948136,
+  "run_number": 816,
+  "job": 121741208313,
+  "job_url": "https://github.com/joshyorko/actions/actions/runs/40370948136/job/121741208313",
+  "status": "FAILED",
+  "counts": {
+    "failed": 9,
+    "passed": 203,
+    "skipped": 13
+  },
+  "duration_seconds": 67.06,
+  "failed_module": "developer/tests/test_evidence_publication.py",
+  "symptom": "calls shim empty; safe wrapper scans pass then real Git author-identity refusal exit128; controlled commit23 not observed",
+  "disposition": "test-fixture shell PATH/shim diagnosis in progress, no real commit/push or identity configuration authorized",
+  "current_aggregate": "coverage515/run40370948150 still running atdaf41283, no duplicate launched"
+}
