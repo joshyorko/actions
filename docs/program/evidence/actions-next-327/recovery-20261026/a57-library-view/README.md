@@ -40,3 +40,23 @@ is separate; no local plugin, tunnel, credential, public release or deployment
 was changed. Documentation improvement: the canonical guide now records both
 library producer shapes, strict read-only rendering and ordered host acceptance.
 Upstream disposition:none; this is an Actions-owned mismatch.
+
+## Verified delivery
+
+The [installed handoff](installed/CONNECT-RENDER.md) and
+[target-local prompt](installed/target-local-prompt.md) contain only CONNECT+RENDER
+scope. Clean Runtime a57 verifies339payload members/METADATA and pip check;
+portable constraints contain65version pins without cloud-local file URLs.
+The [protocol receipt](installed/protocol-receipt.json) records fresh empty state,
+one UI-only draft, get/open/get, zero Run/Attempt/Task receipts and resource bytes
+identical to the490733-byte installed HTML. Both clients and Runtime stopped
+normally; the supervisor reports no remaining owned processes.
+
+Immutable Library bundle libfile_b8698ad6b2248191b766830900a27c06 v0 is15525289bytes,
+SHA256870bd78d18bfd5c47c380870b5cd776e69d421252595cbfb673fba0e0dbb46d4.
+Sourcebde511d2ba6318d0b100547cc6e777e53b9ebc80,
+tree58e3beed765765e13724928d26acefb729d8aeab. Exact wheel and HTML hashes are in
+[the delivery proof](installed/connect-render-proof.json) and manifest. The
+existing a44 installation and evidence are preserved. This fresh-state profile
+avoids migration; it does not qualify reusing a44 state. Actual ChatGPT rendering
+is still PENDING, and the old actual-host failure is unchanged.

@@ -6840,6 +6840,16 @@ unique app identities and exact current-selection membership. Test a successful
 empty/inactive listings and malformed/oversized lists. A transport or app-only
 host pass does not cover that list transition.
 
+Keep a CONNECT+RENDER owner retest short and isolated. Reuse verified platform
+and Python checks, exact compatible wheels, portable version constraints and the
+source/embedded-HTML hashes. Use a fresh datadir rather than exercising an old
+candidate's migration path. An initially empty library and one unpublished
+UI-only draft can qualify authenticated discovery and get/open/get with zero
+Runs, Attempts and Task receipts, without a backend or compiler task. Resource
+byte equality and component tests remain separate from actual ChatGPT rendering.
+Preserve the older candidate, working endpoints and tunnels; credentials stay in
+the already approved native local entry/helper, never the handoff prompt.
+
 When rebuilding a candidate with reused dependencies, verify exact expected
 Work Items/Core wheel names and hashes before copying or installing, and pin the
 RCC binary before using it as a build input. Recording a hash afterward does not

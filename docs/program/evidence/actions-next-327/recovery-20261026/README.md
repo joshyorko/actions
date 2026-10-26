@@ -1,6 +1,20 @@
 # Fresh saved-environment recovery
 
-Current checkpoint: source88846b55e3b455eb44378bd5ba43bb146706661d,
+Current a57 source is bde511d2ba6318d0b100547cc6e777e53b9ebc80,
+tree58e3beed765765e13724928d26acefb729d8aeab. The captured actual ChatGPT
+app-to-library failure is reproduced and repaired by a separate strict library
+renderer. [Source tests, review and exact payload shapes](a57-library-view/README.md)
+retain the original failures. The [installed CONNECT+RENDER handoff](a57-library-view/installed/CONNECT-RENDER.md)
+provides exact wheels, portable constraints and source/HTML hashes; fresh-datadir
+MCP get/open/get and resource byte equality passed with zero Runs/Attempts/Task
+receipts. The new immutable Library bundle is
+libfile_b8698ad6b2248191b766830900a27c06 v0, SHA256
+870bd78d18bfd5c47c380870b5cd776e69d421252595cbfb673fba0e0dbb46d4.
+Actual ChatGPT owner RENDER retest remains PENDING; a44's host failure remains
+FAILED. Pinned a44 installation, evidence and handoff files are unchanged. No
+compiler/execution or restart/rollback matrix belongs to this short owner retest.
+
+Earlier a56 checkpoint: source88846b55e3b455eb44378bd5ba43bb146706661d,
 treea65449200ec36981b6ad4002147f19cf8da8a265. The reviewed
 [hosted CI corrections](hosted-ci/README.md) are pushed; fresh Core, HTTP Helper
 and frontend-test jobs passed, while other platform/provider checks remain
@@ -29,8 +43,7 @@ gates. Historical setup and candidate observations below remain source-specific.
 Actual ChatGPT desktop at pinned Dakota post2 passed authenticated discovery,
 then displayed the Actions-owned validation alert. Captured host metadata has
 ordinary `canvas_get` app-spec state followed by `canvas_open` applications-list
-state, with no execution/session metadata. A narrow frontend reproduction/fix is
-in progress; the pinned candidate and handoff stay unchanged. This is actual-host
+state, with no execution/session metadata. The separate a57 source fix and installed handoff above are complete; the pinned candidate and handoff stay unchanged. This is actual-host
 UI failure, distinct from the earlier reference-host pass and current a56 Node
 transport acceptance. Fresh hosted Ubuntu browser acceptance also failed; its
 underlying assertion remains inaccessible, and its artifact download returned
