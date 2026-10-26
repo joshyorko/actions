@@ -1,0 +1,17 @@
+{"event":"sdk_package_loaded","elapsed_ms":1}
+{"event":"sdk_module_loaded","elapsed_ms":159}
+{"event":"prior_fixture_loaded","elapsed_ms":160}
+{"event":"transport_ready","elapsed_ms":161}
+{"event":"http_start","elapsed_ms":208,"request_id":1,"method":"POST","path":"/mcp"}
+{"event":"http_response","elapsed_ms":235,"request_id":1,"status":200}
+{"event":"protocol_negotiated","elapsed_ms":267,"version":"2026-07-28"}
+{"event":"http_start","elapsed_ms":270,"request_id":2,"method":"POST","path":"/mcp"}
+{"event":"http_response","elapsed_ms":280,"request_id":2,"status":200}
+{"event":"catalog_checked","elapsed_ms":289,"canvas_get_present":true,"capability_invoke_present":true}
+{"event":"canvas_get_call_start","elapsed_ms":289}
+{"event":"http_start","elapsed_ms":292,"request_id":3,"method":"POST","path":"/mcp"}
+{"event":"http_response","elapsed_ms":555,"request_id":3,"status":200}
+{"event":"canvas_get_response","elapsed_ms":558,"is_error":false,"generic_error_text":false,"has_structured_content":true}
+{"event":"client_close_complete","elapsed_ms":559}
+{"event":"transport_close_complete","elapsed_ms":560}
+{"event":"client_probe_done","elapsed_ms":560}

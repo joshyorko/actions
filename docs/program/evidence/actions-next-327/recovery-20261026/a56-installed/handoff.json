@@ -1,0 +1,65 @@
+{
+  "candidate": "a56",
+  "qualification": "PASS_CLEAN_INSTALL_ARTIFACT_ONLY",
+  "source": {
+    "path": "/workspace/327-artifacts/a56-build-repo",
+    "commit": "88846b55e3b455eb44378bd5ba43bb146706661d",
+    "tree": "a65449200ec36981b6ad4002147f19cf8da8a265",
+    "clean_after_build": true,
+    "runtime_version": "1.1.0a56"
+  },
+  "artifact": {
+    "file": "actions_runtime-1.1.0a56-cp312-cp312-linux_x86_64.whl",
+    "sha256": "f06526ab99c8df7a769a03c67efb771f0bdcf4fbeb00caa74afc85b0c035f046",
+    "payload_members": 339,
+    "installed_payload_verified_members": 339,
+    "metadata_identical": true,
+    "artifact_receipt": "artifact-receipt.json",
+    "install_receipt": "install-receipt.json"
+  },
+  "inputs": {
+    "tracked_action_server_files": 1081,
+    "tracked_action_server_ls_tree_manifest_sha256": "ebebde63f8a4b852efd4e1267b3f66581580513de3fd80d2bebd2f18f0f908d0",
+    "public_rcc_version": "18.19.3",
+    "public_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "companion_wheels": {
+      "actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+      "actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+    }
+  },
+  "install": {
+    "fresh_venv": true,
+    "pip_check": "passed",
+    "freeze": "installed-freeze.txt",
+    "pip_report": "pip-install-report.json",
+    "runtime_execution": "not run"
+  },
+  "supervision": {
+    "build": "build-supervisor-receipt.json",
+    "install": "install-supervisor-receipt.json",
+    "both_exit_zero": true,
+    "remaining_owned_processes": [],
+    "disk_free_after_build": "20 GiB"
+  },
+  "remaining_gates": [
+    "Runtime service and execution qualification",
+    "Library upload and acceptance",
+    "Signed/public publication",
+    "Deployment"
+  ],
+  "canonical_documentation_proposal": {
+    "file": "docs/skills/repository-operations.md",
+    "status": "proposed for integration; source checkout left unchanged",
+    "evidence": [
+      "artifact-receipt.json",
+      "install-receipt.json",
+      "pip-install-report.json",
+      "installed-freeze.txt",
+      "build-supervisor-receipt.json",
+      "install-supervisor-receipt.json"
+    ],
+    "delta": "For a bounded detached-worktree Runtime wheel qualification, bind the exact source commit and tree, generate frontend and public OAuth inputs in that worktree, and hash the public RCC binary copied from a verified retained wheel. Run the build through the prepared RCC toolkit gateway and retain the source build-input manifest, wheel payload hashes, build receipt and owned process-supervisor receipt. A clean consumer qualification should install the candidate alongside byte-pinned retained Core and Work Items wheels, compare every Runtime payload file and METADATA to the wheel, run pip check, and record the resolved dependency profile. This proves package installation only; it does not qualify Runtime execution, Library acceptance or publication."
+  },
+  "upstream_disposition": "none",
+  "scope_note": "No Runtime execution or Library upload was performed. No signed/public publish, deploy, credential, grant, or tracked source mutation occurred."
+}

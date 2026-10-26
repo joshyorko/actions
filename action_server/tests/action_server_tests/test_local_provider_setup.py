@@ -43,6 +43,8 @@ def disable_feedback():
 
 @pytest.fixture
 def provider(local):
+    if sys.platform != "linux":
+        pytest.skip("Linux private provider setup proof")
     g = local
     (g.root / "blobs").mkdir(mode=0o700)
     payload = b"record_id\nsynthetic\n"

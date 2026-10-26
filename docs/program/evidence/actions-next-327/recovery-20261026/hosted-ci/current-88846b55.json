@@ -1,0 +1,131 @@
+{
+  "schema": "hosted-ci-status/v1",
+  "observed_at_utc": "2026-10-26T13:34:40Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "head_sha": "88846b55e3b455eb44378bd5ba43bb146706661d",
+  "tree_sha": "a65449200ec36981b6ad4002147f19cf8da8a265",
+  "event": "pull_request",
+  "read_only": true,
+  "failure_observed_at_snapshot": false,
+  "workflows": [
+    {
+      "name": "Frontend tests",
+      "run_number": 370,
+      "run_id": 40331091927,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331091927",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [{"id": 121600404041, "name": "action-server-frontend-tests", "status": "completed", "conclusion": "success", "failed_steps": []}]
+    },
+    {
+      "name": "Actions Core Tests",
+      "run_number": 426,
+      "run_id": 40331092061,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092061",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {"id": 121600403838, "runner": "ubuntu-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600404204, "runner": "windows-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600404321, "runner": "macos-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600404498, "runner": "candidate-wheel", "status": "completed", "conclusion": "success", "failed_steps": []}
+      ]
+    },
+    {
+      "name": "Actions Runtime Tests",
+      "run_number": 387,
+      "run_id": 40331092235,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092235",
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {"id": 121600409136, "runner": "windows-py3.12-devmode", "status": "in_progress", "conclusion": null, "current_step": "Test Go wrapper child lifecycle", "failed_steps": []},
+        {"id": 121600409458, "runner": "ubuntu-py3.12-devmode", "status": "in_progress", "conclusion": null, "current_step": "Test (not integration)", "failed_steps": []},
+        {"id": 121600409621, "runner": "macos-py3.12-devmode", "status": "in_progress", "conclusion": null, "current_step": "Build binary", "failed_steps": []}
+      ]
+    },
+    {
+      "name": "Measured Python coverage gate",
+      "run_number": 509,
+      "run_id": 40331092255,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092255",
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [{"id": 121600408768, "name": "coverage", "status": "in_progress", "conclusion": null, "current_step": "Measure portable package suite coverage", "failed_steps": []}]
+    },
+    {
+      "name": "HTTP Helper Tests",
+      "run_number": 268,
+      "run_id": 40331092011,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092011",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {"id": 121600404950, "runner": "macos-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600405189, "runner": "ubuntu-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600405389, "runner": "windows-py3.10-devmode", "status": "completed", "conclusion": "success", "failed_steps": []}
+      ]
+    },
+    {
+      "name": "Actions Runtime PYPI Release",
+      "run_number": 662,
+      "run_id": 40331091950,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331091950",
+      "status": "in_progress",
+      "conclusion": null,
+      "event": "pull_request",
+      "jobs": [
+        {"id": 121600403618, "name": "build-sdist (ubuntu-py3.12)", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600403847, "name": "build-wheels (ubuntu-22.04)", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600403996, "name": "build-wheels (windows-2022)", "status": "in_progress", "conclusion": null, "current_step": "Verify Runtime wheel with published Core and Helper", "failed_steps": []},
+        {"id": 121600404232, "name": "build-wheels (macos-15)", "status": "completed", "conclusion": "success", "failed_steps": []}
+      ],
+      "publisher_job_status": "not_listed_while_run_in_progress",
+      "publisher_job_id": null,
+      "publication_attempted_or_observed": false,
+      "final_publish_skip_status": "not_yet_known"
+    },
+    {
+      "name": "Frontend Build",
+      "run_number": 401,
+      "run_id": 40331092208,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092208",
+      "status": "queued",
+      "conclusion": null,
+      "jobs": [
+        {"id": 121600405444, "runner": "ubuntu-latest", "status": "completed", "conclusion": "success", "failed_steps": []},
+        {"id": 121600405960, "runner": "windows-latest", "status": "in_progress", "conclusion": null, "current_step": "Determinism Check", "failed_steps": []},
+        {"id": 121600406091, "runner": "macos-latest", "status": "queued", "conclusion": null, "failed_steps": []}
+      ]
+    },
+    {
+      "name": "RCC developer toolkit",
+      "run_number": 810,
+      "run_id": 40331092288,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092288",
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {"id": 121600410283, "runner": "n-1 macos-15", "status": "in_progress", "conclusion": null, "current_step": "Run toolkit contract tests", "failed_steps": []},
+        {"id": 121600410708, "runner": "n-1 ubuntu-22.04", "status": "in_progress", "conclusion": null, "current_step": "Package task smoke (Linux)", "failed_steps": []},
+        {"id": 121600410733, "runner": "primary windows-2022", "status": "in_progress", "conclusion": null, "current_step": "Run toolkit contract tests", "failed_steps": []},
+        {"id": 121600410806, "runner": "primary ubuntu-22.04", "status": "in_progress", "conclusion": null, "current_step": "Bootstrap toolkit (Linux)", "failed_steps": []},
+        {"id": 121600410914, "runner": "n-1 windows-2022", "status": "in_progress", "conclusion": null, "current_step": "Run toolkit contract tests", "failed_steps": []},
+        {"id": 121600413353, "runner": "primary macos-15", "status": "in_progress", "conclusion": null, "current_step": "Run toolkit contract tests", "failed_steps": []}
+      ]
+    }
+  ],
+  "checkout_path_length": {
+    "fresh_failures_observed": false,
+    "evidence": "Core Tests and HTTP Helper Windows jobs succeeded. Frontend Build Windows and Runtime PYPI Windows jobs proceeded past Checkout to later steps; their final results remain pending."
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "Propose compact hosted matrix triage guidance. Existing guide covers general evidence and release gates but not the specific first-failure/platform/checkout classification rule.",
+    "evidence": "This run set shows previous Windows checkout issue cleared on fresh head; Core and HTTP Helper Windows pass, other Windows jobs advance beyond Checkout."
+  },
+  "upstream_disposition": "none",
+  "mutations": "none"
+}

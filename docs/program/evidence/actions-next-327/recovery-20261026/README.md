@@ -1,5 +1,41 @@
 # Fresh saved-environment recovery
 
+Current checkpoint: source88846b55e3b455eb44378bd5ba43bb146706661d,
+treea65449200ec36981b6ad4002147f19cf8da8a265. The reviewed
+[hosted CI corrections](hosted-ci/README.md) are pushed; fresh Core, HTTP Helper
+and frontend-test jobs passed, while other platform/provider checks remain
+pending in the [timestamped snapshot](hosted-ci/current-88846b55.md).
+[Installed a56](a56-installed/README.md) verifies clean consumer bytes and live
+single-owner claimed-Task cancellation, exact child absence before Runtime stop,
+public reads/replay/restart. Its [installed PostgreSQL Knowledge gate](a56-installed/postgres-knowledge/summary.json)
+also passes generated ingest/search, RCC exits0/0/expected1, restart/artifact reads
+and exact owned-container/private-material cleanup. The separately pinned
+[a55 PostgreSQL Knowledge join](a55-postgres-knowledge/README.md) passed.
+Both immutable bundles are saved to Library with exact identities and hashes
+in their adjacent `library.json` and `bundle-receipt.json` files.
+
+The [full gate audit](campaign-gate-audit.md) retains the unreduced campaign
+scope. Frozen a52 aggregate remains FAILED5347/198skipped/3deselected/1failure.
+Its fixture repair and later focused checks do not convert that result to green.
+The [installed a56 modern-auto Node profile](a56-node-modern/handoff.md) now passes
+synchronous claimed Robot success/failure, four authorized artifacts per case,
+strict XML, restart reads and natural client/transport exit. Legacy/default
+negotiation and detached Task SDK interoperability remain open; this does not
+explain earlier differently instrumented a53 failures. Current-source aggregate QA remains open,
+alongside producer/effect recovery, multi-principal/provider breadth, plugin
+stdio/discovery, restore/upgrade, platform/distribution and actual-host/operator
+gates. Historical setup and candidate observations below remain source-specific.
+
+Actual ChatGPT desktop at pinned Dakota post2 passed authenticated discovery,
+then displayed the Actions-owned validation alert. Captured host metadata has
+ordinary `canvas_get` app-spec state followed by `canvas_open` applications-list
+state, with no execution/session metadata. A narrow frontend reproduction/fix is
+in progress; the pinned candidate and handoff stay unchanged. This is actual-host
+UI failure, distinct from the earlier reference-host pass and current a56 Node
+transport acceptance. Fresh hosted Ubuntu browser acceptance also failed; its
+underlying assertion remains inaccessible, and its artifact download returned
+Forbidden before materialization. See the [terminal CI follow-up](hosted-ci/followup-88846b55-terminal.md).
+
 Remote source and tree were independently fetched and matched the delegated pin;
 see `source-recovery.json`. The clean saved checkout was older and was moved to
 the existing release branch. Parent transferred sole integration ownership;

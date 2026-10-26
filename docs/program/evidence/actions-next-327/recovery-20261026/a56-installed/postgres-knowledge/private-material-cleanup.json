@@ -1,0 +1,25 @@
+{
+  "status": "PRIVATE_SYNTHETIC_MATERIAL_REMOVED_AFTER_SERVICE_CLEANUP",
+  "controller_status": "PASS",
+  "child_supervisor_status": "PASS",
+  "outer_supervisor_status": "PASS",
+  "runtime_shutdowns": 4,
+  "runtime_forced_kills": 0,
+  "container_id": "523800e970de74ec29116356e87db1cf2273b64111fea45b5d3c4d205c6c9a62",
+  "container_absence_after_cleanup": true,
+  "removed_private_file_count": 11,
+  "removed_private_files": [
+    "writer-password",
+    "postgres-ca.pem",
+    "owned-pg-tls/server.csr",
+    "owned-pg-tls/server.key",
+    "owned-pg-tls/ca.srl",
+    "owned-pg-tls/ca.crt",
+    "owned-pg-tls/ca.key",
+    "owned-pg-tls/server.crt",
+    "owned-pg-tls/extensions",
+    "fixture/datadir/provider-state/secrets/b3ed09f3-a5ff-45c2-8d10-d846fae79ea8-76e8490b-9b6d-41ee-9292-2d4ecc28722a",
+    "fixture/datadir/provider-state/secrets/c1d873bf-eab2-4f4d-bf00-fdb79d015fda-742812bd-8620-451a-9fa9-f14002bc03db"
+  ],
+  "synthetic_provider_secret_files_removed": 2
+}

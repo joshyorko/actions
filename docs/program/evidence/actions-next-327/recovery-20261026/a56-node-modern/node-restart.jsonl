@@ -1,0 +1,9 @@
+{"event":"client_config","elapsed_ms":156,"sdk_version":"2.0.0","node_version":"v20.19.3","undici_version":"6.21.2","phase":"restart","version_negotiation":"auto"}
+{"event":"protocol_negotiated","elapsed_ms":279,"version":"2026-07-28"}
+{"event":"catalog_ready","elapsed_ms":301,"canvas_get_present":true,"capability_invoke_present":true}
+{"event":"restart_read_complete","elapsed_ms":7914,"case":"pass","run_id":"2c674eaf-aff4-4fc7-9026-bd78199141b9","queue_state":"DONE","artifacts_verified":4}
+{"event":"restart_read_complete","elapsed_ms":16379,"case":"fail","run_id":"ca45f666-8673-4406-9677-468673cb6046","queue_state":"FAILED","artifacts_verified":4}
+{"event":"phase_complete","elapsed_ms":16380,"phase":"restart"}
+{"event":"client_close_complete","elapsed_ms":16382}
+{"event":"transport_close_complete","elapsed_ms":16383}
+{"event":"natural_before_exit","elapsed_ms":16386,"code":0}

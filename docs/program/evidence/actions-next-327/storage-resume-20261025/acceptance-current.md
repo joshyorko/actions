@@ -24,6 +24,14 @@ owned PostgreSQL, auth negatives and same-state restart artifact rereads. See
 artifact remains explicitly reused from sourceaca51868; other corpus/provider/
 principal breadth and complete current-source release qualification remain open.
 
+**a56 current-source checkpoint:** source88846b55/treea6544920, wheelSHAf06526ab,
+passes clean339-member installation/METADATA and installed live claimed-Task
+cancellation, exact child absence before Runtime stop, public reads/replay/restart.
+See [exact source and receipts](../recovery-20261026/a56-installed/README.md).
+The existing compiler artifact remains explicitly reused from sourceaca51868.
+Fresh hosted Core/HTTP/frontend checks pass at that source; other hosted and
+full-campaign gates remain open. This is separate from pinned Dakota post2.
+
 Frozen full-suite source: **5b9c70e00e5e019a751aec5385591e5a2bbd615e**, Runtime **1.1.0a49**, Core **1.1.0a7**. Installed **1.1.0a51 / Core 1.1.0a8**, source **ea3448e2b40741c5a21369c24cc20e84b8258809**, passes terminal claimed Task success/failure, replay and restart. The next source correction is Runtime **1.1.0a52** for disappearing child metadata during shutdown; a52 is not installed-qualified. Installed proofs remain source-specific: a48 Data, a47 claimed Robot, a46 Knowledge. Separate a44.post2/Core a6 UI artifact source **46488e59f419d6bb55ab594031a0f227b4e0d817** has completed the parent-owned managed run06 evaluation. Release acceptance remains OPEN; this is one existing campaign.
 
 | Original acceptance area | Exact accepted proof | Remaining gate |

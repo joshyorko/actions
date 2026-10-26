@@ -57,6 +57,8 @@ def codec():
 
 @pytest.fixture
 def local(tmp_path):
+    if sys.platform != "linux":
+        pytest.skip("Linux private provider catalog proof")
     root = tmp_path / "owned"
     root.mkdir(mode=0o700)
     (root / "blobs").mkdir(mode=0o700)

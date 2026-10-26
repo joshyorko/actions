@@ -1,0 +1,80 @@
+{
+  "status": "FAILED",
+  "scope": "single canvas_get call; stop before enqueue or capability invocation",
+  "candidate": "actions-runtime 1.1.0a53; actions-core 1.1.0a8; actions-work-items 0.5.0a2",
+  "node_sdk": "@modelcontextprotocol/client 2.0.0",
+  "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+  "protocol_expected": "2026-07-28",
+  "auth_mode": "existing synthetic loopback bearer; unchanged fixture profile and grants",
+  "instrumentation": {
+    "location": "test-only PYTHONPATH sitecustomize import-loader transformation",
+    "modules": [
+      "actions.server.foundry.mcp",
+      "actions.server.foundry.authoring"
+    ],
+    "records": [
+      "authenticated caller present",
+      "Canvas port entered and returned",
+      "appId parse passed",
+      "read_application authorization returned",
+      "latest revision found",
+      "revision ownership validation returned",
+      "caught exception class only"
+    ],
+    "does_not_record": [
+      "exception messages",
+      "request headers",
+      "credentials",
+      "source paths",
+      "object values"
+    ]
+  },
+  "fixture": {
+    "source_profile_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "task_profile_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "source_datadir_sqlite_sha256": "62cde2395224a116ff2e377ebd69918256da96c7747792aaf2444ebf63669534",
+    "task_datadir_sqlite_sha256_before": "62cde2395224a116ff2e377ebd69918256da96c7747792aaf2444ebf63669534",
+    "same_profile_bytes": true,
+    "same_database_bytes_before": true,
+    "app_id_source": "saved pass snapshot; exact value intentionally not copied into receipt",
+    "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0"
+  },
+  "source_hashes": {
+    "candidate_mcp_py": "9410f44a24d836e9edc350e625c699b2375194c4a0ef8ca8ed90d2b2e81ae49f",
+    "candidate_authoring_py": "155bcf821e196d63e9a4c7e1a8bf58f17d00c312822aac97d165912952fef790",
+    "node_client_entry": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414",
+    "node_client_types": "309cc5f76da5abff0be678d958aba0e875e52909f5f6f0544a45a34ac596cc9c",
+    "node_probe": "240c8064dd4c61d4e08555103275c8f44bc2bb47535942517092071e5e2aab78",
+    "sitecustomize": "71148183fbf13874127762d141942184169d39e3c233deee4506cbb95c2cd5c5"
+  },
+  "installed_identity": {
+    "runtime": "1.1.0a53",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a53/consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "node_version": "v20.19.3",
+  "node_undici_version": "6.21.2",
+  "runtime_ready": true,
+  "client": {
+    "exit_code": 1,
+    "natural_exit": true,
+    "events": [
+      {
+        "event": "client_failure",
+        "elapsed_ms": 154,
+        "exception_class": "Error"
+      },
+      {
+        "event": "client_probe_done",
+        "elapsed_ms": 156
+      }
+    ]
+  },
+  "failure_class": "RuntimeError",
+  "failure_phase": "runtime_shutdown_or_receipt",
+  "runtime_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  }
+}

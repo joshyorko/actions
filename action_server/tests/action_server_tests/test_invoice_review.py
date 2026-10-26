@@ -33,6 +33,8 @@ postgresql_database = data_fixtures.postgresql_database
 
 @pytest.fixture(params=["sqlite", "postgresql"])
 def reviewed(request, tmp_path, provider):
+    if sys.platform != "linux":
+        pytest.skip("Linux private provider review proof")
     from action_server_tests.test_database_shared import _postgresql_schema_url
 
     location = tmp_path / "review.db"

@@ -2172,6 +2172,13 @@ Deduplicate a shared cause across matrix jobs. A Windows checkout failure with
 permissions when correcting checkout configuration. A local Bash or source test
 does not establish that the hosted Windows checkout now passes.
 
+If a CI wrapper redirects pytest output to a temporary file and retains only
+aggregate JUnit/receipt counts, those counts do not identify the failing
+assertion. Mark the underlying cause unresolved until an authorized log or
+artifact read reveals it. A successful matrix job also does not establish that
+every step ran: check each platform condition and skipped-step status. The
+candidate-source Canvas browser step is Linux-only.
+
 The Linux Runtime portable suite and measured coverage workflow provision the
 same digest-pinned, bounded owned PostgreSQL container. Both export
 `ACTIONS_INVOICE_TEST_POSTGRES`, `ACTIONS_TEST_POSTGRES_URL` and strict provider
@@ -2183,6 +2190,13 @@ must fail instead. Shared Linux-only fixtures check their own platform because
 module-level pytest marks do not travel with an imported fixture. Shell-stub
 contracts cover setup, bounded readiness failure, cleanup and workflow parity;
 they do not replace hosted execution or real provider qualification.
+
+Keep platform admission at the shared private-provider fixture owners, including
+`test_local_provider_setup.provider`, `test_invoice_review.reviewed` and
+`test_provider_catalog.local`, before state creation or provider construction.
+The native Canvas factory intentionally returns `None` on unsupported platforms;
+assert that outcome without dereferencing it, while preserving Linux Task-policy
+validation and cleanup assertions.
 
 For a frontend formatting failure, format the reported file and run
 `npm run test:quality` from `action_server/frontend`. For Actions Core API docs,
@@ -2217,6 +2231,16 @@ counts and timestamps. For credential read and rotation endpoints, assert that
 missing and incorrect bearer credentials fail before database or secret-generation
 access. `test_trigger_secret_boundary_327.py` covers these boundaries with local
 synthetic credentials and a patched work-item dispatch control.
+
+Distinguish basic server readiness from native Canvas readiness. Normal startup
+initializes native Canvas only when a private Runtime API key is configured;
+`--api-key None` disables authentication and does not establish Canvas readiness.
+The local key authenticates this Runtime instance. It is not an account password
+or an OAuth login. Use the supported native credential entry or existing key
+helper for the chosen client, and keep the key out of prompts and receipts.
+An owned loopback setup does not require introducing OAuth or a new tunnel merely
+to supply that key. Verify authenticated Canvas discovery separately from an HTTP
+health response, and keep frozen candidate handoff files unchanged.
 
 ### Action Server shared database
 
@@ -6555,6 +6579,27 @@ Audit an unpublished Canvas client fixture by its single idempotent
 legitimately creates a Deployment revision. Preserve failed run receipts
 separately from subsequent corrected complete runs.
 
+An HTTP200 MCP tool error can come from a server adapter catch-all and does not
+identify the failing authorization or domain boundary. Before retrying generated
+execution, compare copied profile, application and snapshot identities with the
+saved successful fixture. If they match, retain the sanitized error and diagnose
+with allowlisted phase booleans and exception classes in a task-local test copy.
+Do not infer an SDK defect or change grants from the generic message alone.
+
+Preflight every local file a Node qualification client reads, including saved
+pass/fail snapshots. Record its last allowlisted stage. Exiting before the first
+MCP request is setup evidence, separate from a tool error. A test-only boundary
+trace that succeeds does not qualify an uninstrumented execution or explain an
+earlier failure. Keep direct SDK calls, diagnostic wrappers and negotiated
+protocol profiles distinct when comparing results.
+
+Installed Node execution acceptance belongs to its exact candidate and supported
+negotiation profile. Require unmodified SDK/native transport, synchronous generic
+pass and deliberate failure, exact terminal claim/Run state, all four authorized
+artifact digests, strict Robot XML, unchanged restart reads and natural client
+and transport exit. That result does not qualify legacy/default negotiation or
+detached Task decoding, or explain a differently instrumented earlier failure.
+
 Candidate transfer verification must compare embedded qualifier assertions with
 the candidate configuration, not merely verify a manifest of internally
 consistent bytes. Retain a defective immutable bundle and publish a separately
@@ -6788,6 +6833,19 @@ RCC binary before using it as a build input. Recording a hash afterward does not
 prove it was the intended input. Pip check and import/version checks are not
 installed-byte proof: compare every wheel payload member in the clean consumer
 and explicitly handle relocated data rather than silently omitting it.
+
+Bind a detached-worktree build to both commit and tree before generating frontend
+and public OAuth inputs. Retain the tracked build-input manifest, wheel hashes and
+owned-process supervisor receipt. Clean-consumer proof includes METADATA equality
+and the resolved dependency profile; byte-pinned companion wheels do not make
+freshly resolved public dependencies lock-identical. Package identity, actual
+Runtime execution and Library delivery require separate receipts.
+
+Controllers that import repository pytest fixtures run inside the prepared RCC
+package environment with their declared test dependencies. Keep the outer
+pidfd/subreaper supervisor on its capability-checked host Python. Pin imported
+fixture files and installed wheel bytes before starting providers, and retain
+setup-only failures separately from execution and final cleanup results.
 
 RCC holotree delete dry-run support does not establish atomic lease protection.
 Reclaim only proven owned, reconstructible materializations after all producers

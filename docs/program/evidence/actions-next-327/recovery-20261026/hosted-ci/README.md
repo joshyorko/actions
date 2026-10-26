@@ -51,3 +51,22 @@ Every completed helper proposal in these scopes is integrated. The suggested
 alternate PostgreSQL image in the portability findings was rejected in favor of
 the already-qualified exact pinned image used by existing campaign fixtures.
 Upstream disposition: none.
+
+## Fresh macOS continuation
+
+The first correction left three more imported private-provider fixtures without
+their own platform admission. Fresh run40331092235 macOS reported21failed and
+183setup errors, traced in [the diagnosis](mac-fresh-88846b55.md). Guards now live
+inside those exact fixture owners before state/provider creation. The native
+factory test explicitly checks its documented unsupported-platform `None` result;
+Linux Task-policy assertions and production guards are unchanged. The
+[review](mac-fresh-fix-review.md) found no weakened Linux or auth contract.
+New controls were RED3failed/7passed, then the affected five modules passed
+72tests with52external-provider skips in59.96s. Configured Runtime lint passed.
+Both supervisors report no remaining owned processes. This Linux verification
+does not relabel the failed macOS hosted job; fresh hosted confirmation is pending.
+
+The [terminal follow-up](followup-88846b55-terminal.md) also records the separate
+Ubuntu candidate-source browser failure and artifact-read block. Its underlying
+assertion remains unresolved. macOS/Windows jobs succeeded but skipped that
+Linux-only browser step. Runtime wheel builds passed; publisher steps were skipped.

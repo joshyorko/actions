@@ -1,4 +1,5 @@
 """Resource ownership and default-off Task wiring, not actual worker proof."""
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -51,6 +52,9 @@ def test_default_off_and_policy_without_runtime_fails(
     refs = _refs()
     with _runtime_database(database_location, refs.workspace, ()) as db:
         native = create_runtime_canvas(db, tmp_path / "native", "owned-key", html=HTML)
+        if sys.platform != "linux":
+            assert native is None
+            return
         try:
             assert native.task_host is None and native.task_service is None
             native.start()

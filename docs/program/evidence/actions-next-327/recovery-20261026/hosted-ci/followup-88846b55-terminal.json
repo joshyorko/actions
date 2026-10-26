@@ -1,0 +1,98 @@
+{
+  "schema": "hosted-ci-terminal-followup/v1",
+  "observed_at_utc": "2026-10-26T13:42:30Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "head_sha": "88846b55e3b455eb44378bd5ba43bb146706661d",
+  "event": "pull_request",
+  "read_only": true,
+  "workflows": [
+    {
+      "name": "Unauthenticated Build",
+      "run_number": 747,
+      "run_id": 40331092012,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331092012",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 121600405417,
+          "runner": "ubuntu-22.04",
+          "job_url": "https://github.com/joshyorko/actions/actions/runs/40331092012/job/121600405417",
+          "status": "completed",
+          "conclusion": "failure",
+          "first_failing_step": "Verify Canvas candidate-source Runtime and browser acceptance",
+          "sanitized_error": "Candidate acceptance did not produce one verified pass (pytest=1, tests=1, skipped=0, failures=1, errors=0, receipt_valid=False)",
+          "wrapper_message": "Candidate source/browser acceptance failed verification.",
+          "detailed_pytest_log": "redirected to temporary $TMPDIR/pytest.log; not present in downloaded job log",
+          "underlying_assertion": "unresolved",
+          "root_cause": "unresolved from accessible evidence; aggregate indicates one failed test and invalid receipt",
+          "artifact_id": 12653743795,
+          "artifact_name": "canvas-query-candidate-40331092012-1",
+          "artifact_size_bytes": 373,
+          "artifact_contents_inspected": false,
+          "artifact_inspection_blocker": "GitHub artifact tool returned temporary file reference without a supported local reader; gh run download returned Forbidden before archive materialized",
+          "proposed_delta": "Preserve a sanitized failing assertion/receipt summary in CI output or inspect retained artifact through authorized owner-side path; do not infer cause from aggregate counts"
+        },
+        {
+          "id": 121600405014,
+          "runner": "macos-15",
+          "job_url": "https://github.com/joshyorko/actions/actions/runs/40331092012/job/121600405014",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121600405237,
+          "runner": "windows-2022",
+          "job_url": "https://github.com/joshyorko/actions/actions/runs/40331092012/job/121600405237",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "artifact_inspection": {
+        "artifact_id": 12653743795,
+        "name": "canvas-query-candidate-40331092012-1",
+        "size_in_bytes": 373,
+        "expired": false,
+        "download_tool_returned_file_reference": true,
+        "gh_run_download_result": "Forbidden; no local archive materialized",
+        "assertion_or_receipt_read": false
+      }
+    },
+    {
+      "name": "Actions Runtime PYPI Release",
+      "run_number": 662,
+      "run_id": 40331091950,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40331091950",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "pull_request",
+      "jobs": [
+        {"id": 121600403618, "name": "build-sdist (ubuntu-py3.12)", "status": "completed", "conclusion": "success"},
+        {"id": 121600403847, "name": "build-wheels (ubuntu-22.04)", "status": "completed", "conclusion": "success"},
+        {"id": 121600403996, "name": "build-wheels (windows-2022)", "status": "completed", "conclusion": "success"},
+        {"id": 121600404232, "name": "build-wheels (macos-15)", "status": "completed", "conclusion": "success"},
+        {
+          "id": 121602965020,
+          "name": "publish (3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {"name": "Verify merged tag provenance and version", "conclusion": "skipped"},
+            {"name": "Check Runtime publish credential", "conclusion": "skipped"},
+            {"name": "Publish verified artifacts", "conclusion": "skipped"}
+          ],
+          "publication_attempted": false
+        }
+      ]
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "propose concise guidance for aggregate-only test wrappers: preserve sanitized assertion/receipt detail or report root cause unresolved until authorized artifact/log inspection",
+    "evidence": "Ubuntu candidate acceptance job reports pytest=1/tests=1/failures=1/errors=0/receipt_valid=false but redirects the detailed pytest log to a temporary file; the artifact read attempt could not materialize an accessible archive"
+  },
+  "upstream_disposition": "none",
+  "mutations": "none"
+}
