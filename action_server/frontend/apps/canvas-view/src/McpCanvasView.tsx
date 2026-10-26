@@ -22,11 +22,12 @@ import {
     createInvoiceAdapter,
     parseInvoicePage,
 } from "./query-results/invoice-bridge";
+import { readOnlyCanvasAdapters } from "./semantic-renderer/mcp-bridge";
 import {
-    parseCanvasViewMetadata,
-    readOnlyCanvasAdapters,
-} from "./semantic-renderer/mcp-bridge";
-import type { CanvasViewMetadata } from "./semantic-renderer/mcp-bridge";
+    CanvasLibraryView,
+    parseCanvasContentMetadata,
+    type CanvasContentMetadata,
+} from "./semantic-renderer/canvas-library";
 import { SemanticCanvasRenderer } from "./semantic-renderer";
 import {
     createReviewedExecutionAdapter,
@@ -178,9 +179,12 @@ export function McpCanvasView() {
     const [hostContext, setHostContext] = useState<DisplayHostContext | null>(
         null,
     );
-    const [canvasView, setCanvasView] = useState<CanvasViewMetadata | null>(
-        null,
-    );
+    const [canvasContent, setCanvasContent] =
+        useState<CanvasContentMetadata | null>(null);
+    const canvasView =
+        canvasContent?.kind === "app" ? canvasContent.canvas : null;
+    const canvasLibrary =
+        canvasContent?.kind === "library" ? canvasContent.library : null;
     const [canvasViewError, setCanvasViewError] = useState(false);
     const [genericExecution, setGenericExecution] =
         useState<GenericExecutionContext | null>(null);
@@ -202,7 +206,7 @@ export function McpCanvasView() {
                             FIXTURE_HANDLE_PATTERN.test(toolArguments.handle),
                     );
                     inputRevision.current += 1;
-                    setCanvasView(null);
+                    setCanvasContent(null);
                     setReviewedExecution(null);
                     setGenericExecution(null);
                     setCanvasViewError(false);
@@ -217,7 +221,7 @@ export function McpCanvasView() {
                 setGenericExecution(null);
                 const invoicePage = result._meta?.["actions.invoicePage"];
                 if (invoicePage !== undefined) {
-                    setCanvasView(null);
+                    setCanvasContent(null);
                     setCanvasViewError(false);
                     setInvoiceMode(true);
                     try {
@@ -249,13 +253,33 @@ export function McpCanvasView() {
                             result: null,
                         });
                         if (result.isError) {
-                            setCanvasView(null);
+                            setCanvasContent(null);
                             setCanvasViewError(true);
                         } else {
                             try {
-                                const parsed =
-                                    parseCanvasViewMetadata(metadata);
-                                setCanvasView(parsed);
+                                const content =
+                                    parseCanvasContentMetadata(metadata);
+                                if (content.kind === "library") {
+                                    if (
+                                        [
+                                            "actions.appSession",
+                                            "actions.reviewedExecution",
+                                            "actions.genericExecution",
+                                        ].some(
+                                            (key) =>
+                                                result._meta?.[key] !==
+                                                undefined,
+                                        )
+                                    )
+                                        throw new Error(
+                                            "Library content cannot carry execution metadata.",
+                                        );
+                                    setCanvasContent(content);
+                                    setCanvasViewError(false);
+                                    return;
+                                }
+                                const parsed = content.canvas;
+                                setCanvasContent(content);
                                 setGenericExecution(null);
                                 setReviewedExecution(null);
                                 if (
@@ -291,7 +315,7 @@ export function McpCanvasView() {
                                 }
                                 setCanvasViewError(false);
                             } catch {
-                                setCanvasView(null);
+                                setCanvasContent(null);
                                 setCanvasViewError(true);
                                 setHostResultState("error");
                             }
@@ -320,7 +344,7 @@ export function McpCanvasView() {
         if (isConnected && app) {
             setHostContext(displayContext(app.getHostContext()));
         } else {
-            setCanvasView(null);
+            setCanvasContent(null);
             setReviewedExecution(null);
             setGenericExecution(null);
             setCanvasViewError(false);
@@ -387,7 +411,9 @@ export function McpCanvasView() {
                     </div>
                 </dl>
             </details>
-            {canvasView ? (
+            {canvasLibrary ? (
+                <CanvasLibraryView library={canvasLibrary} />
+            ) : canvasView ? (
                 <section aria-label="Semantic Canvas app">
                     {genericExecution && app && !canvasView.preview ? (
                         <GenericSemanticView

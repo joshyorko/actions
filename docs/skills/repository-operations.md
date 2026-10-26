@@ -6827,6 +6827,19 @@ acceptance does not qualify invoice review/reconciliation. Actual client/platfor
 supported authenticated route, isolated configuration and owned cleanup remain
 operator prerequisites; never substitute Executor or reference-host proof for E1.
 
+The shared MCP UI resource receives distinct `actions.canvas` wire shapes.
+Authoring `canvas_open` returns `applications` entries with `applicationId`,
+`title` and nullable `activeRevisionId`; read-only discovery returns
+`apps/currentApp/empty/emptyMessage` with validated spec projections. Both
+producers cap the library at200 entries. Discriminate and validate these closed
+library shapes separately from existing strict app/preview metadata. A library
+is a read-only list, never execution authority: reject attached app-session or
+execution contexts and expose no tool-calling controls. Validate projected specs,
+unique app identities and exact current-selection membership. Test a successful
+`canvas_get` followed by `canvas_open` on the same resource, reverse state changes,
+empty/inactive listings and malformed/oversized lists. A transport or app-only
+host pass does not cover that list transition.
+
 When rebuilding a candidate with reused dependencies, verify exact expected
 Work Items/Core wheel names and hashes before copying or installing, and pin the
 RCC binary before using it as a build input. Recording a hash afterward does not
