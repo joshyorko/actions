@@ -1,5 +1,20 @@
 # Repository Operations
 
+## Recovering installed qualification evidence
+
+A recovered Runtime wheel does not recover its companion Core/Work Items bytes,
+prepared child environments, local harnesses or receipts. Verify the source/tree
+and each artifact hash independently; label a rebuilt artifact as a reproduction
+unless byte identity is established. Probe host Python's pidfd capabilities
+separately from the candidate interpreter before selecting a process supervisor.
+
+Node protocol-only exit evidence does not qualify execution or restart. When a
+client remains alive after execution, retain whether `client.close()` completed
+and identify remaining resource types before supervisor cleanup. The current
+Runtime MCP route requests stateless JSON responses; establish an observed open
+stream before attributing a hang to SSE. Record natural client exit separately
+from Runtime shutdown and descendant cleanup.
+
 ## Cloud source handoff
 
 Checkpoint each writer branch separately; never fold a worker's unreviewed source

@@ -1,5 +1,12 @@
 # Provenance and Observability Contract
 
+Installed restart acceptance does not qualify coordinated restore or version
+compatibility. A restore receipt must identify SQL state, sealed objects,
+journals, retained source/runtime artifacts and their pins; demonstrate
+authorized replay from a distinct restored root; and separately record old/new
+installed compatibility. Synthetic attachment-path relocation tests establish
+only that relocation contract.
+
 This guide is the repository contract for capability/execution provenance. It
 does not define agent or LLM tracing, and it does not make telemetry a source
 of execution authority.
