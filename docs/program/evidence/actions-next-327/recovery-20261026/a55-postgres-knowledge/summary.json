@@ -1,0 +1,184 @@
+{
+  "status": "PASS",
+  "scope": "One bounded installed PostgreSQL Knowledge qualification, source a55/Core8",
+  "source": {
+    "commit": "a4e5b2b66c79da3c083d315cf5865ca70bd4d025",
+    "tree": "a42956371f768504b0824eb09b860522b0df7eda",
+    "runtime": "1.1.0a55",
+    "runtime_wheel_sha256": "2daacf9c44a160cda0280854fd8038866be783ba40bf78103bf69e1b84b33e64",
+    "core": "1.1.0a8",
+    "core_wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "work_items": "0.5.0a2",
+    "work_items_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "compiler": {
+    "prepared_source_sha": "aca51868d14e916c8034c69309e222100d5d50f3",
+    "same_source": false,
+    "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+    "package_yaml_sha256": "a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+    "core_proof_sha256": "15ce604623a341efaeddbffd649caa4dc5f081634d1020a6f9faa347591e6dcb",
+    "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "rcc": "v18.19.3"
+  },
+  "fixture": {
+    "postgres_image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "image_id": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+    "tls_fixture_source_sha256": "5c2fe2def1cfa8b1c1d381eec9dcea7fd530380c0a59fc4c4dda2d1d6c65a520",
+    "knowledge_postgres_contract_source_sha256": "620bb8eee9199ff4af11446962452dd3ca322ebee0aef18711326e8044b44c4c",
+    "configure_provision": {
+      "configure-host": {
+        "readiness": "configured-not-probed",
+        "sha256": "ab2350ee50aeb1f48caf690639ad9c6a5d7daa91872f249e5f7e9ebce2423f30"
+      },
+      "provision-knowledge-host": {
+        "readiness": "provisioned-not-ingested",
+        "sha256": "d7c27ced1b3c2ba332b8939212da6b623d0da131a4a29e602596ddc7c4738e07"
+      }
+    },
+    "container_id": "2c1e1ba8a6c95a869b0d4146591cde9254b227b4ccc3d725f74763a259e1812d",
+    "container_cleanup": {
+      "status": "REMOVED",
+      "container_id": "2c1e1ba8a6c95a869b0d4146591cde9254b227b4ccc3d725f74763a259e1812d",
+      "warnings": [
+        {
+          "phase": "remove",
+          "classification": "removal-in-progress"
+        }
+      ]
+    },
+    "container_absent": true,
+    "free_bytes_after": 21776629760
+  },
+  "public_canvas": {
+    "02-canvas_apply.json": {
+      "isError": false,
+      "revisionId": "sha256:58a39359546af7ffbcf69027b3aa9a161c97510b3ee09a440a3f35b04877659f",
+      "buildStatus": "passed",
+      "importStatus": "passed",
+      "testStatus": "passed",
+      "validationStatus": "passed",
+      "sha256": "4848c04ad9d145a999a2e142a7defd1d3afe0a7c9b857b978e2b62f4ccd37ffe"
+    },
+    "06-canvas_apply.json": {
+      "isError": false,
+      "revisionId": "sha256:7de751bfa15ca69f3e6f5610b280d5fdfd85edb80d7e04c5010e6a29e1794d7b",
+      "buildStatus": "passed",
+      "importStatus": "passed",
+      "testStatus": "passed",
+      "validationStatus": "passed",
+      "sha256": "f5f90e2b74909962dd534499a6454c3a0a83c791da608dfde9fa71c27bea9274"
+    }
+  },
+  "protocol_denials": {
+    "missing": 403,
+    "wrong": 403,
+    "host": 421,
+    "origin": 403
+  },
+  "runs": [
+    {
+      "app_id": "7f5dfef5-4ee3-4348-a0ce-2bc1f3a5ca3c",
+      "run_id": "1e8424e2-8dea-4a32-8a1e-4c6be7c493e0",
+      "state": "completed",
+      "rcc": [
+        {
+          "exitCode": 0,
+          "artifactDigest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24"
+        }
+      ],
+      "artifact_count": 5
+    },
+    {
+      "app_id": "f39b73d3-723d-4a39-924d-59fb5d648779",
+      "run_id": "3dd39035-cdd4-4897-8e96-5abf9bd7ef33",
+      "state": "completed",
+      "rcc": [
+        {
+          "exitCode": 0,
+          "artifactDigest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24"
+        }
+      ],
+      "artifact_count": 4
+    },
+    {
+      "app_id": "f39b73d3-723d-4a39-924d-59fb5d648779",
+      "run_id": "752798f5-ca1d-402c-987b-a4b8c8e9cc85",
+      "state": "failed",
+      "rcc": [
+        {
+          "exitCode": 1,
+          "artifactDigest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+          "reason": "child exited non-zero"
+        }
+      ],
+      "artifact_count": 3
+    }
+  ],
+  "restart_readback": "PASS: all three run states and output artifacts matched byte-for-byte after restart",
+  "runtime_stops": {
+    "count": 4,
+    "forced_kills": 0,
+    "lifespan_shutdown_complete": true
+  },
+  "supervisors": {
+    "outer_status": "PASS",
+    "outer_elapsed_seconds": 150.83,
+    "outer_remaining": [],
+    "child_status": "PASS",
+    "child_elapsed_seconds": 142.696,
+    "child_remaining": [],
+    "controller_status": "PASS",
+    "controller_cleanup_errors": []
+  },
+  "private_material_cleanup": {
+    "status": "PRIVATE_SYNTHETIC_MATERIAL_REMOVED_AFTER_SERVICE_CLEANUP",
+    "controller_status": "PASS",
+    "child_supervisor_status": "PASS",
+    "outer_supervisor_status": "PASS",
+    "runtime_shutdowns": 4,
+    "runtime_forced_kills": 0,
+    "container_id": "2c1e1ba8a6c95a869b0d4146591cde9254b227b4ccc3d725f74763a259e1812d",
+    "container_absence_after_cleanup": true,
+    "removed_private_file_count": 11,
+    "removed_private_files": [
+      "writer-password",
+      "postgres-ca.pem",
+      "owned-pg-tls/server.csr",
+      "owned-pg-tls/server.key",
+      "owned-pg-tls/ca.srl",
+      "owned-pg-tls/ca.crt",
+      "owned-pg-tls/ca.key",
+      "owned-pg-tls/server.crt",
+      "owned-pg-tls/extensions",
+      "fixture/datadir/provider-state/secrets/4dfbd34c-c864-4c8c-b46c-108b1a1a7efe-007f2a52-da1a-4745-9ce3-4d77f747f9cb",
+      "fixture/datadir/provider-state/secrets/b086921f-5d7f-4cd6-9a6b-96a7879b9bfb-c47d451c-3948-415e-a0a8-1872eccaa8e9"
+    ],
+    "synthetic_provider_secret_files_removed": 2
+  },
+  "receipt_hashes": {
+    "candidate_config_sha256": "324e880ec9e90ab6eb53cabf192194a328845bb26de6d98f3ef7a244de557234",
+    "controller_script_sha256": "d6f91187c05fec34f0ea33fcf3b478537d3eaf37d04471eed9c7400b9605dbcf",
+    "qualifier_sha256": "03bf8bd35f692818ac93e587ad4780421edc0e1743ff20ad3f7a02deb0b40558",
+    "ingest_helper_sha256": "1e3befdcf75cb1f469525802300206c957830a2db51415573fb4b574caa5bc89",
+    "search_helper_sha256": "775ab1b6297993a503f9f54510fddd66b777989b9fd6198bec25c94e0b717281",
+    "controller_receipt_sha256": "a2e5bfd62253c23f06f8b22d1c69575aeb45e85773a5d149f519379ac257384e",
+    "knowledge_receipt_sha256": "ce97e1d70f6122b76549ee80161bad91ed6a1f270b039c31878091f3b4f290a6",
+    "child_supervisor_receipt_sha256": "5c61e039faaad562d6a16b2d92e6954799a373019fe07e10a15740a72e4044e5",
+    "outer_supervisor_receipt_sha256": "385ca895a5000c4bde8e945ac85d2bf43971097633441d026294928aa38f0e6b",
+    "private_material_cleanup_sha256": "14bfe2df63181ecb2945606e2c68e23d2f552d47fbe142e27a236a3a1c5dbaca"
+  },
+  "setup_only_attempt": {
+    "status": "FAILED_BEFORE_FIXTURE_START",
+    "cause": "controller interpreter lacked pytest while importing the source test helper",
+    "postgres_or_runtime_started": false,
+    "evidence": {
+      "outer_log_sha256": "015318c7601190a67af3be09ecf69465a1f1bdf41814853400e823ac632d28eb",
+      "outer_receipt_sha256": "230c4200bbdab43849c0dda3ed24ea9938bb4f3c08d814e2977ca5dba126edf6"
+    }
+  },
+  "unproven_scope": [
+    "cross-principal isolation",
+    "other Knowledge providers",
+    "production credentials or services"
+  ]
+}

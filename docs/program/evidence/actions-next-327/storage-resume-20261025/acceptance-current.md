@@ -17,6 +17,13 @@ the earlier terminal-cancellation gap at that bounded single-owner scope. Node
 Task-client decoding and synchronous generated-client natural exit remain
 distinct open gates; sourcebound failed trials stay retained.
 
+**a55 PostgreSQL Knowledge:** sourcea4e5b2b6/Core8, wheelSHA2daacf9c, passes
+public generated ingest/search, actual RCC exits0/0 and expected1, verify-full
+owned PostgreSQL, auth negatives and same-state restart artifact rereads. See
+`../recovery-20261026/a55-postgres-knowledge/summary.json`. Prepared Core8 compiler
+artifact remains explicitly reused from sourceaca51868; other corpus/provider/
+principal breadth and complete current-source release qualification remain open.
+
 Frozen full-suite source: **5b9c70e00e5e019a751aec5385591e5a2bbd615e**, Runtime **1.1.0a49**, Core **1.1.0a7**. Installed **1.1.0a51 / Core 1.1.0a8**, source **ea3448e2b40741c5a21369c24cc20e84b8258809**, passes terminal claimed Task success/failure, replay and restart. The next source correction is Runtime **1.1.0a52** for disappearing child metadata during shutdown; a52 is not installed-qualified. Installed proofs remain source-specific: a48 Data, a47 claimed Robot, a46 Knowledge. Separate a44.post2/Core a6 UI artifact source **46488e59f419d6bb55ab594031a0f227b4e0d817** has completed the parent-owned managed run06 evaluation. Release acceptance remains OPEN; this is one existing campaign.
 
 | Original acceptance area | Exact accepted proof | Remaining gate |

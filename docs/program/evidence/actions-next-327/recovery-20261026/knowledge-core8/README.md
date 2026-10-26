@@ -20,3 +20,7 @@ This is source qualification. Installed a55 generated PostgreSQL ingest/search
 and restart still need actual receipts. No broad future-version acceptance or
 whole-release claim. Canonical repository operations now states the exact bounded
 Core4/7/8 contract. Upstream disposition:none.
+
+Follow-up installed a55 PostgreSQL Knowledge now PASS at that exact bounded
+scope; see `../a55-postgres-knowledge/summary.json`. Earlier a54 refusal remains
+FAILED evidence and the source qualification is not itself relabeled installed.
