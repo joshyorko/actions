@@ -82,9 +82,15 @@ or full service, cross-platform or release acceptance.
 
 The complete28-row map in
 `../a58-integrity-checkpoint/campaign-gates-current-207300bf.json` remains
-controlling. Coverage513/run40352516551 at pushed d878 was running when this
-source checkpoint was prepared; no duplicate aggregate was launched. It cannot
-qualify these later a59 changes. Frozen a52 and coverage512 remain FAILED.
+controlling. Coverage513/run40352516551 at pushed d878 completed FAILED:
+Runtime2 failed/5331 passed/58 skipped in1851.97 seconds. Both failures are
+the exact Docker wording assertions reproduced before the a59 fixture-message
+repair and passing in the unchanged focused controls afterward. The prior
+streaming-integrity test is not in its failure list. Other package suites and
+owned PostgreSQL cleanup passed; missing package coverage/incomplete inventory
+withheld the baseline. See `hosted-d878-terminal.md/json`. No duplicate aggregate
+was launched. This failed run cannot qualify later a59 changes; one fresh
+aggregate follows their normal branch push. Frozen a52 and coverage512 remain FAILED.
 Current-source aggregate and native OS/browser proof, mandatory supported-client
 typed execution/Task flow, provider/security/effect recovery breadth, coordinated
 whole-Runtime restore, final distribution/operator acceptance, actual ChatGPT

@@ -132,6 +132,15 @@ on every host using module-local OS facades and missing paths. Patching global
 `os.name` also changes `pathlib` behavior and is not a faithful isolated test.
 Refusal evidence does not qualify restore or authorization on unsupported hosts.
 
+Full recovery evidence must join coordinated SQL, sealed output/source objects,
+Runtime journals, audit/Run/effect lineage and exact RCC material in distinct
+owned restored roots. A prepared-cache receipt or path is not an archived cache.
+The retained common-PostgreSQL restore recipe leaves RCC independently available;
+it does not prove cold reconstruction. Require current authorized terminal
+replay and exact retained bytes after a fresh process, unchanged backup bytes,
+and no additional Run/Attempt/launch. Keep installed1.0.4 queue/attachment
+upgrade/refusal/rollback as a separate compatibility cell.
+
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.
 Disable the trusted review binding to stop new admission while retaining audit

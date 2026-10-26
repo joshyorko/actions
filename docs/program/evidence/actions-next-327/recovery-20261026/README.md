@@ -1,5 +1,19 @@
 # Fresh saved-environment recovery
 
+Latest [a59 platform and browser checkpoint](a59-platform-checkpoint/README.md)
+qualifies source123e772e/tree7d6658bc: safe-path candidate/published-Core browser
+gates2 passed, compiler45 passed/1 exact-RCC skip, affected callers49 passed,
+private execution/provider96 passed/33 explicit service/RCC skips, joined operator
+fixtures75 passed, configured quality and Linux/Windows-target mypy665 files pass.
+It preserves platform refusal and strict provider gates. These source checks do
+not establish native Windows acceptance, a frozen a59 install or actual ChatGPT.
+Coverage513 at d878 remains FAILED2/5331/58 solely on the missing-Docker wording
+contract; that exact pair was reproduced and repaired before the new source
+qualification. Original failed receipts stay unchanged. A fresh aggregate is
+required after the a59 checkpoint push. The [complete28-row map](a58-integrity-checkpoint/campaign-gates-current-207300bf.json)
+and the [coordinated-restore next proof](a59-platform-checkpoint/coordinated-restore-next-proof.md)
+retain the remaining scope. Delivered a57 owner retest and pinned Dakota are unchanged.
+
 The [a58 integrity checkpoint](a58-integrity-checkpoint/README.md) preserves
 terminal coverage512 FAILED (Runtime5313passed/58skipped/1failure), the actual
 sealed-output stream defect and its separate reviewed repair at

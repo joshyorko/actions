@@ -125,6 +125,16 @@
       "source": "/workspace/327-probes/a59-browser/supervisor.json",
       "copy": "browser/supervisor.json",
       "sha256": "64eedb4413abdb36ddec71d2d9848f27d800c7620fc324c29aff1829e664a566"
+    },
+    {
+      "source": "/workspace/327-probes/hosted-ci-luna/current-d878068e.md",
+      "copy": "hosted-d878-terminal.md",
+      "sha256": "34e565d8c178f853ed481c45894eb316b660bfb09db19fbd34426729e9c8d308"
+    },
+    {
+      "source": "/workspace/327-probes/hosted-ci-luna/current-d878068e.json",
+      "copy": "hosted-d878-terminal.json",
+      "sha256": "1714fef5465cc24c5c423de3ba3adad094a2d31624ab659ce1620bceabdbc688"
     }
   ],
   "raw_log_sha256": {
