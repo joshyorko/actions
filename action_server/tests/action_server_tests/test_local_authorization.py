@@ -1,5 +1,6 @@
 """Synthetic offline owner authorization; no RCC, network, or production grants."""
 import json
+import os
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
@@ -30,6 +31,9 @@ def private_write(path, value):
 
 @pytest.fixture
 def local(tmp_path):
+    if os.name != "posix":
+        pytest.skip("local authorization requires POSIX private ownership semantics")
+
     root = tmp_path / "owner"
     root.mkdir(mode=0o700)
     with create_db(root / "server.db") as db:
@@ -185,8 +189,16 @@ def test_offline_boundary_rejections(local, monkeypatch, kind):
         inspect(local)
 
 
-def test_no_arbitrary_recipient_or_permission(local):
-    raw = local.request.model_dump(mode="json")
+def test_no_arbitrary_recipient_or_permission():
+    request = LocalAuthorizationRequest(
+        schema_version="actions.local-authorization/v1",
+        operation="authorize-generated-source",
+        target="generated-source",
+        request_id="schema-test",
+        workspace_id=str(uuid4()),
+        runtime_profile="/tmp/synthetic-profile.json",
+    )
+    raw = request.model_dump(mode="json")
     raw["principal_id"] = str(uuid4())
     with pytest.raises(ValueError):
         LocalAuthorizationRequest.model_validate_json(json.dumps(raw))

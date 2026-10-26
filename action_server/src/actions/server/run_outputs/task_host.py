@@ -10,6 +10,7 @@ import time
 import zipfile
 from io import BytesIO
 from pathlib import Path
+from typing import Callable, cast
 
 from actions.server._rcc_runtime_adapter import verify_rcc_version
 from actions.server.deployments.ids import WorkerProfileRevisionRef
@@ -27,6 +28,20 @@ from actions.server.run_outputs.types import Actor, ExecutionSnapshot
 
 _POLICY_LIMIT = 16 * 1024
 _POLICY_VERSION = "actions.runtime-task-policy/v1"
+
+
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
+def _posix_getuid() -> int:
+    value = getattr(os, "getuid", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires getuid")
+    return cast(Callable[[], int], value)()
 
 
 def _unique_object(pairs):
@@ -58,13 +73,15 @@ def load_task_policy(path: Path) -> TaskPolicy:
         original = path.stat()
         if (
             not stat.S_ISREG(original.st_mode)
-            or original.st_uid != os.getuid()
+            or original.st_uid != _posix_getuid()
             or original.st_mode & 0o077
             or original.st_nlink != 1
             or not 1 <= original.st_size <= _POLICY_LIMIT
         ):
             raise ValueError("private bounded policy required")
-        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        fd = os.open(
+            path, os.O_RDONLY | _posix_flag("O_NOFOLLOW") | _posix_flag("O_NONBLOCK")
+        )
         before = os.fstat(fd)
         if (
             before.st_dev,

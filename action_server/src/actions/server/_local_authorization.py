@@ -12,7 +12,7 @@ import os
 import stat
 from dataclasses import asdict
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal, cast
 from uuid import NAMESPACE_URL, uuid5
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -115,6 +115,20 @@ class LocalAuthorizationRequest(BaseModel):
         return self
 
 
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
+def _posix_getuid() -> int:
+    value = getattr(os, "getuid", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires getuid")
+    return cast(Callable[[], int], value)()
+
+
 def _digest(value) -> str:
     return (
         "sha256:" + hashlib.sha256(_canonical(value, 128 * 1024).encode()).hexdigest()
@@ -128,7 +142,7 @@ def _owned(path: Path, *, directory: bool = False) -> Path:
         if parent.is_symlink():
             raise ValueError("symlink paths are unsupported")
     info = path.stat()
-    if info.st_uid != os.getuid() or info.st_mode & 0o077:
+    if info.st_uid != _posix_getuid() or info.st_mode & 0o077:
         raise ValueError("private owner-only filesystem permissions required")
     if not (stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode)):
         raise ValueError("existing regular file or directory required")
@@ -613,7 +627,7 @@ def run_local_authorization(
         lock_info = lock_path.lstat()
         if (
             not stat.S_ISREG(lock_info.st_mode)
-            or lock_info.st_uid != os.getuid()
+            or lock_info.st_uid != _posix_getuid()
             or lock_info.st_nlink != 1
         ):
             raise ValueError("existing canonical lock must be an owned regular file")
@@ -655,7 +669,12 @@ def run_local_authorization(
                 )
 
                 blobs = _owned(root / "blobs", directory=True)
-                fd = os.open(blobs, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+                fd = os.open(
+                    blobs,
+                    os.O_RDONLY
+                    | _posix_flag("O_DIRECTORY")
+                    | _posix_flag("O_NOFOLLOW"),
+                )
                 try:
                     provider = FilesystemOutputProvider(fd)
                 finally:

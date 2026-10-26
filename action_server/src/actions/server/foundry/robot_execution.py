@@ -60,6 +60,13 @@ _HEARTBEAT_SECONDS = 1.0
 _DIGEST = re.compile(r"sha256:[0-9a-f]{64}\Z")
 
 
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
 def _digest(content: bytes) -> str:
     return "sha256:" + hashlib.sha256(content).hexdigest()
 
@@ -801,7 +808,12 @@ class RobotExecution:
     @staticmethod
     def _write_log(path: Path, content: bytes | bytearray):
         fd = os.open(
-            path, os.O_WRONLY | os.O_CREAT | os.O_NOFOLLOW | os.O_NONBLOCK, 0o600
+            path,
+            os.O_WRONLY
+            | os.O_CREAT
+            | _posix_flag("O_NOFOLLOW")
+            | _posix_flag("O_NONBLOCK"),
+            0o600,
         )
         try:
             info = os.fstat(fd)
@@ -819,7 +831,9 @@ class RobotExecution:
         # forever after the workload exits, outside the execution deadline.
         if any(parent.is_symlink() for parent in path.parents):
             raise ValueError("Robot evidence parent alias refused")
-        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        fd = os.open(
+            path, os.O_RDONLY | _posix_flag("O_NOFOLLOW") | _posix_flag("O_NONBLOCK")
+        )
         try:
             before = os.fstat(fd)
             if (

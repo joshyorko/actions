@@ -9,7 +9,7 @@ import hashlib
 import os
 import stat
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal, cast
 from uuid import UUID, uuid4
 
 from pydantic import Field, field_validator, model_validator
@@ -28,6 +28,27 @@ from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.types import Actor, SealReceipt
 
 MAX_PRIVATE_BYTES = 1024 * 1024
+
+
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
+def _posix_getuid() -> int:
+    value = getattr(os, "getuid", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires getuid")
+    return cast(Callable[[], int], value)()
+
+
+def _posix_fchmod() -> Callable[[int, int], None]:
+    value = getattr(os, "fchmod", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires fchmod")
+    return cast(Callable[[int, int], None], value)
 
 
 def _uuid(value: str) -> str:
@@ -203,7 +224,7 @@ class CatalogIntent(_Value):
 
 def _private(info: os.stat_result, *, directory: bool) -> None:
     if (
-        info.st_uid != os.getuid()
+        info.st_uid != _posix_getuid()
         or stat.S_IMODE(info.st_mode) & 0o077
         or not (stat.S_ISDIR(info.st_mode) if directory else stat.S_ISREG(info.st_mode))
         or (not directory and info.st_nlink != 1)
@@ -235,7 +256,10 @@ class PrivateProviderStore:
         ):
             raise ValueError("canonical owned datadir required")
         _private(datadir.stat(), directory=True)
-        datafd = os.open(datadir, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        datafd = os.open(
+            datadir,
+            os.O_RDONLY | _posix_flag("O_DIRECTORY") | _posix_flag("O_NOFOLLOW"),
+        )
         try:
             _private(os.fstat(datafd), directory=True)
             if create:
@@ -246,7 +270,7 @@ class PrivateProviderStore:
                     pass
             self._root = os.open(
                 "provider-state",
-                os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                os.O_RDONLY | _posix_flag("O_DIRECTORY") | _posix_flag("O_NOFOLLOW"),
                 dir_fd=datafd,
             )
             _private(os.fstat(self._root), directory=True)
@@ -259,7 +283,9 @@ class PrivateProviderStore:
                         pass
                 fd = os.open(
                     name,
-                    os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                    os.O_RDONLY
+                    | _posix_flag("O_DIRECTORY")
+                    | _posix_flag("O_NOFOLLOW"),
                     dir_fd=self._root,
                 )
                 self._fds[name] = fd
@@ -291,7 +317,9 @@ class PrivateProviderStore:
 
     def _read(self, group: str, name: str, limit: int = MAX_PRIVATE_BYTES) -> bytes:
         fd = os.open(
-            name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=self._fd(group)
+            name,
+            os.O_RDONLY | _posix_flag("O_NOFOLLOW") | _posix_flag("O_NONBLOCK"),
+            dir_fd=self._fd(group),
         )
         try:
             before = os.fstat(fd)
@@ -343,7 +371,7 @@ class PrivateProviderStore:
         temporary = ".stage-" + str(uuid4())
         fd = os.open(
             temporary,
-            os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | _posix_flag("O_NOFOLLOW"),
             0o600,
             dir_fd=directory,
         )
@@ -356,7 +384,7 @@ class PrivateProviderStore:
                     raise ValueError("private write made no progress")
                 view = view[count:]
             os.fsync(fd)
-            os.fchmod(fd, 0o400)
+            _posix_fchmod()(fd, 0o400)
             os.fsync(fd)
             # The documented mutex/exclusive same-user writer precondition makes
             # this check + rename safe; there is no concurrent-adversary claim.

@@ -1,0 +1,36 @@
+{
+  "status": "PASS_INSTALLED_FILESYSTEM_API",
+  "scope": "installed A58 filesystem output provider only; no Runtime service",
+  "runtime_version": "1.1.0a58",
+  "runtime_wheel_sha256": "d4865a0a9d509d853897d7c97f23b4b371f10d6e5c27b0bce91cca406bb3629d",
+  "consumer_prefix": "/workspace/327-artifacts/a58/consumer",
+  "module_origin": "/workspace/327-artifacts/a58/consumer/lib/python3.12/site-packages/actions/server/run_outputs/filesystem.py",
+  "module_origin_inside_consumer": true,
+  "untampered_partial_crossblock_eof": {
+    "partial_reads": 4,
+    "cross_block_read": true,
+    "eof_read_empty": true,
+    "payload_sha256": "e4e1f654a2861b428f59f6ae07daccb2e7d8710031f2b0cb4e63561d30a5c68a"
+  },
+  "unmasked_same_inode_equal_length_rewrite": {
+    "rejected": true,
+    "error": "sealed output changed during read",
+    "device": 27,
+    "inode": 674008,
+    "size": 19,
+    "mode_unchanged": true,
+    "mtime_changed": true,
+    "ctime_changed": true
+  },
+  "timestamp_masked_diagnostic_only": {
+    "rejected_by_hash_when_timestamps_masked": true,
+    "error": "sealed output changed during read",
+    "device": 27,
+    "inode": 674822,
+    "size": 26,
+    "mode_unchanged": true,
+    "mtime_changed": true,
+    "ctime_changed": true
+  },
+  "source_or_guard_modified": false
+}

@@ -123,6 +123,15 @@ process. Other absolute references and external stores require separate
 qualification. Unit and SDK readback evidence does not establish installed
 whole-Runtime recovery.
 
+The datadir capture and offline authorization APIs rely on POSIX filesystem
+contracts. Capture requires explicit offline acknowledgement and `O_NOFOLLOW`;
+local authorization rejects non-POSIX hosts before inspecting owned paths.
+Gate only POSIX success fixtures before creating state. Keep portable
+acknowledgement/schema checks enabled and exercise actual early-refusal guards
+on every host using module-local OS facades and missing paths. Patching global
+`os.name` also changes `pathlib` behavior and is not a faithful isolated test.
+Refusal evidence does not qualify restore or authorization on unsupported hosts.
+
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.
 Disable the trusted review binding to stop new admission while retaining audit

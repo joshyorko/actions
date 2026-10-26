@@ -8,6 +8,11 @@ from actions.server._datadir_restore import capture_offline_manifest, restore_of
 
 
 def snapshot(tmp_path):
+    import os
+
+    if os.name != "posix" or not hasattr(os, "O_NOFOLLOW"):
+        pytest.skip("offline manifest capture requires POSIX O_NOFOLLOW")
+
     source = tmp_path / "source"
     source.mkdir()
     attachment = source / "work_item_files" / "item-1" / "report.txt"
@@ -80,14 +85,26 @@ def test_invalid_stored_attachment_never_changes_source(tmp_path, bad_path):
 
 
 def test_explicit_offline_and_absent_target_required(tmp_path):
-    source, manifest = snapshot(tmp_path)
+    from actions.server._datadir_restore import OfflineManifest
+
+    source = tmp_path / "source"
+    manifest = OfflineManifest(str(source), str(source), ())
     with pytest.raises(ValueError):
         capture_offline_manifest(source, offline=False)
     with pytest.raises(ValueError):
         restore_offline(manifest, tmp_path / "unused", offline=False)
+    assert not source.exists()
+    assert not (tmp_path / "unused").exists()
+
+
+def test_restore_refuses_source_as_target(tmp_path):
+    source, manifest = snapshot(tmp_path)
+    original = (source / "other.bin").read_bytes()
+
     with pytest.raises(ValueError):
         restore_offline(manifest, source, offline=True)
-    assert (source / "other.bin").read_bytes() == b"other state"
+
+    assert (source / "other.bin").read_bytes() == original
 
 
 def test_copy_failure_cleans_only_owned_target(tmp_path, monkeypatch):

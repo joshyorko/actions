@@ -116,6 +116,6 @@ def test_missing_cli_is_unavailable_and_strict_mode_fails(monkeypatch):
     )
     monkeypatch.setenv("ACTIONS_REQUIRE_INVOICE_PROVIDERS", "1")
 
-    with pytest.raises(pytest.fail.Exception, match="Docker CLI is unavailable"):
+    with pytest.raises(pytest.fail.Exception, match="Docker CLI required"):
         next(sealed_postgres.tls_postgres.__wrapped__(_NoFixtureFiles()))
     assert calls == []

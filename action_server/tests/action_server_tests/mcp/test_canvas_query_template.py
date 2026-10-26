@@ -685,7 +685,7 @@ def canvas_candidate_core_provenance() -> dict[str, object]:
         assert module_path.as_posix().endswith(wheel_path)
 
     server_args = action_server_process.process._args
-    assert server_args[:3] == [sys.executable, "-m", "actions.server"]
+    assert server_args[:4] == [sys.executable, "-P", "-m", "actions.server"]
     runtime_module_sha256 = hashlib.sha256(
         expected_runtime_origin.read_bytes()
     ).hexdigest()
@@ -1170,7 +1170,7 @@ def published_core_identity() -> dict[str, object]:
     process = action_server_process.process
     try:
         server_args = process._args
-        assert server_args[:3] == [sys.executable, "-m", "actions.server"]
+        assert server_args[:4] == [sys.executable, "-P", "-m", "actions.server"]
         assert run_async_in_new_thread(check_runtime_contract) is None
         worker_prefix = worker_provenance["worker_prefix"]
         assert isinstance(worker_prefix, str)

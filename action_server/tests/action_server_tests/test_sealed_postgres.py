@@ -23,7 +23,7 @@ setup = _scan_setup
 def _docker_engine_ostype():
     """Return the Docker server OS type, or a capability diagnostic."""
     if shutil.which("docker") is None:
-        return None, "Docker CLI is unavailable"
+        return None, "Docker CLI required for owned TLS PostgreSQL fixture"
 
     try:
         result = subprocess.run(

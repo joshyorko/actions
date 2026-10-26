@@ -1,0 +1,122 @@
+{
+  "base_commit": "d878068ed3149e448830b0abfd5183412f185f21",
+  "copies": [
+    {
+      "source": "/workspace/327-probes/compiler-platform-final-review.md",
+      "copy": "compiler-review.md",
+      "sha256": "5d8a622ff65fd46f98e127d201170120cb345d00028d0ddbab7fca97e9dc54f4"
+    },
+    {
+      "source": "/workspace/327-probes/windows-posix-typing-proposal.md",
+      "copy": "typing-proposal.md",
+      "sha256": "4e3c6e2232899cd36fcca1dd97d61dbb5332b09ac2419647d7fa43f45e763b76"
+    },
+    {
+      "source": "/workspace/327-probes/posix-fixture-admission-327.md",
+      "copy": "fixture-admission.md",
+      "sha256": "3d08af1862f478e8ea85370b3b46f890eb27ce399c09c77fe2afd7189a73b904"
+    },
+    {
+      "source": "/workspace/327-probes/hosted-ci-luna/current-d878068e.md",
+      "copy": "hosted-d878-snapshot.md",
+      "sha256": "3ea5f7a7ac93a3f1b75785f40aa127cfd23d62d27185454156ad14a79ff68ac6"
+    },
+    {
+      "source": "/workspace/327-probes/hosted-ci-luna/current-d878068e.json",
+      "copy": "hosted-d878-snapshot.json",
+      "sha256": "82093c4942d6e84ca2be4d792e93a67f4118868a1d73911f27fc19ec6a553acd"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/README.md",
+      "copy": "a58-artifact/README.md",
+      "sha256": "5bac6a1a64fe822c5fb3cd57a0ff72f62eaedfc237278cd6f4ace92c4129baae"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/artifact-receipt.json",
+      "copy": "a58-artifact/artifact-receipt.json",
+      "sha256": "f0c0e4be1bac6ab2547fb41db68752793ef398cc6d4fb40041c844953a71021a"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/install-receipt.json",
+      "copy": "a58-artifact/install-receipt.json",
+      "sha256": "eb4cedb75ca9b7f280b36ff62a1ee59ae5b01d73e8c7bcce4844f122c2cfc938"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/filesystem-api-proof.json",
+      "copy": "a58-artifact/filesystem-api-proof.json",
+      "sha256": "5e6dcfb83bc1159a295e233f85452409f30fc57ac19678bf90482c1a14cb23fe"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/library.json",
+      "copy": "a58-artifact/library.json",
+      "sha256": "1369eb3de28711a99c170ae7c41498a623a6e3c9f4432363211db632c06dc69e"
+    },
+    {
+      "source": "/workspace/327-artifacts/a58/bundle-receipt.json",
+      "copy": "a58-artifact/bundle-receipt.json",
+      "sha256": "3711d7436ecbc3fde08c9fec4844979e9e0075a5148c7e38ce51ca865b57e65d"
+    },
+    {
+      "source": "/tmp/327-compiler-platform-red-supervisor.json",
+      "copy": "compiler-red-supervisor.json",
+      "sha256": "40331fd59afdef09b0aa251ced01c26342c631278a48bd2cc62c02178e541cc6"
+    },
+    {
+      "source": "/tmp/327-compiler-platform-green-supervisor.json",
+      "copy": "compiler-green-supervisor.json",
+      "sha256": "8bbdb177af605ac14fd95601c8ff78d37ed97da4114635d88584a994d5a236ce"
+    },
+    {
+      "source": "/tmp/327-compiler-callers-supervisor.json",
+      "copy": "compiler-callers-supervisor.json",
+      "sha256": "bcd50f7c7dc201b4c7583f2e6806f836199d9b11ba833db7d794c4a9d7dc5b3e"
+    },
+    {
+      "source": "/tmp/327-posix-extraction-red-supervisor.json",
+      "copy": "private-extraction-red-supervisor.json",
+      "sha256": "f26fd5efa30ce3e7b663b8b0a07ea89a60b06c510012337e1a5f42c73b356254"
+    },
+    {
+      "source": "/tmp/327-a59-posix-extraction-supervisor.json",
+      "copy": "private-paths-supervisor.json",
+      "sha256": "da7fa678ed8c66f558205b45a8fe670852b57bf473e067569cc50a57a6bb85d8"
+    },
+    {
+      "source": "/tmp/327-platform-win32-type-red-supervisor.json",
+      "copy": "win32-types-red-supervisor.json",
+      "sha256": "b9964ef11303e11e1c7724b85a4f13e57de4ddb15a4d7ab0d64834e623140c06"
+    },
+    {
+      "source": "/tmp/327-a59-posix-type-win32-supervisor.json",
+      "copy": "win32-types-green-supervisor.json",
+      "sha256": "da25e15aad15ea05c6d181acccde05b240874b4c594c514bbde9c7468518ac8b"
+    },
+    {
+      "source": "/tmp/327-a59-operators-supervisor.json",
+      "copy": "operator-fixtures-supervisor.json",
+      "sha256": "93932aae7134b7281f6b59b36852629b75183a343adf01f037eaa05f49d38c17"
+    },
+    {
+      "source": "/tmp/327-a59-quality-fixed-supervisor.json",
+      "copy": "configured-quality-supervisor.json",
+      "sha256": "3c2ffaad3bdc06cd2cff967a63a150401d730a2bba463250b839f411258c7d14"
+    },
+    {
+      "source": "/tmp/327-docker-message-red-supervisor.json",
+      "copy": "docker-message-red-supervisor.json",
+      "sha256": "ae59d12004f42acc25aa774e9131e5e53b9044d50136a3b05971f680af7d080c"
+    }
+  ],
+  "raw_log_sha256": {
+    "/tmp/327-compiler-platform-red.log": "1f1ecb40a7fe4e2f3571980d3c24bf6166183768500791e6b9c94e77e6c35ae6",
+    "/tmp/327-compiler-platform-green.log": "3849bc3178eb05aa4539b1abd13b3f2c4f16a62896cc1d98957e3fd3a3e7d90c",
+    "/tmp/327-compiler-callers.log": "80eed03ec62ae7b5eabf9442733191637ca9f66ddaf139ac71e770c67b0f6109",
+    "/tmp/327-posix-extraction-red.log": "2586b7278895927dcb20370ee9a7f604312b016c0cd646fceb1c2dbe279d7004",
+    "/tmp/327-a59-posix-extraction.log": "6f17ac67d2afd6053522b96a12a9947bc83e747f7d7d62cf6bfb5c9a7c5d5881",
+    "/tmp/327-platform-win32-type-red.log": "dc3bfeceaf1e04acf87150676cdab28cf3c0bb7f4265a2aa9ff82181a0a883fe",
+    "/tmp/327-a59-posix-type-win32.log": "bdad24c098297e360ea25a57c7793c0b58516b454230aaba712778e44d38fd4d",
+    "/tmp/327-a59-operators.log": "61a685d104883d1fe9a5364c2d3f3ed22ef5ecd6f727d020184c6cdb8d10d828",
+    "/tmp/327-a59-quality-fixed.log": "175af291123db0611a322f1112d42e61e06f8d0ab4795c587b532a764b497d73",
+    "/tmp/327-docker-message-red.log": "76ee9654720b8b1c206934c51d5c89536b2597c712e74f7644ca88c3c06842a9"
+  }
+}

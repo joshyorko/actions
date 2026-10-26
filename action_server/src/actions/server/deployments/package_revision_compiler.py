@@ -17,11 +17,11 @@ import subprocess
 import sys
 import tempfile
 import zipfile
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal, Protocol
+from typing import Any, Literal, Protocol, cast
 
 import yaml
 
@@ -1053,6 +1053,14 @@ def _validate_package_inputs(
 
 def _write_source_snapshot(snapshot: SourceByteSnapshot, package_dir: Path) -> None:
     root = package_dir.resolve()
+    # Canonical source and archive identity retain POSIX modes on every host.
+    # Windows workspace files preserve bytes; mode bits do not establish ACLs.
+    fchmod: Callable[[int, int], None] | None = None
+    if os.name != "nt":
+        candidate = getattr(os, "fchmod", None)
+        if not callable(candidate):
+            raise RuntimeError("POSIX source snapshot materialization requires fchmod")
+        fchmod = cast(Callable[[int, int], None], candidate)
     for item in snapshot.files:
         target = package_dir.joinpath(*PurePosixPath(item.path).parts)
         target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -1066,7 +1074,8 @@ def _write_source_snapshot(snapshot: SourceByteSnapshot, package_dir: Path) -> N
         try:
             with os.fdopen(fd, "wb", closefd=False) as stream:
                 stream.write(item.content)
-            os.fchmod(fd, item.mode)
+            if fchmod is not None:
+                fchmod(fd, item.mode)
         finally:
             os.close(fd)
 

@@ -21,6 +21,7 @@ import stat
 from contextlib import closing
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import Callable, cast
 
 from ._work_items_paths import validate_attachment_name
 
@@ -55,6 +56,20 @@ class RestoreReceipt:
     rebased_attachments: int
 
 
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
+def _posix_getuid() -> int:
+    value = getattr(os, "getuid", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires getuid")
+    return cast(Callable[[], int], value)()
+
+
 def _identity(value: os.stat_result) -> tuple[int, ...]:
     return (
         value.st_dev,
@@ -83,15 +98,21 @@ def _open_member(root: Path, relative: str) -> int:
         raise ValueError("invalid backup member")
     if Path(relative).is_absolute():
         raise ValueError("absolute backup member")
-    directory = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    directory = os.open(
+        root, os.O_RDONLY | _posix_flag("O_DIRECTORY") | _posix_flag("O_NOFOLLOW")
+    )
     try:
         for part in parts[:-1]:
             child = os.open(
-                part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+                part,
+                os.O_RDONLY | _posix_flag("O_DIRECTORY") | _posix_flag("O_NOFOLLOW"),
+                dir_fd=directory,
             )
             os.close(directory)
             directory = child
-        return os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+        return os.open(
+            parts[-1], os.O_RDONLY | _posix_flag("O_NOFOLLOW"), dir_fd=directory
+        )
     finally:
         os.close(directory)
 
@@ -251,7 +272,7 @@ def restore_offline(
     source = _path(Path(manifest.source))
     target = _path(target)
     parent = target.parent.stat(follow_symlinks=False)
-    if parent.st_uid != os.getuid() or parent.st_mode & 0o022:
+    if parent.st_uid != _posix_getuid() or parent.st_mode & 0o022:
         raise ValueError("restore requires a private caller-owned target parent")
     if target.exists() or source == target or source in target.parents:
         raise ValueError("restore target must be absent and outside the backup")

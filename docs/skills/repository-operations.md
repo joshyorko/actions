@@ -22,6 +22,12 @@ and each artifact hash independently; label a rebuilt artifact as a reproduction
 unless byte identity is established. Probe host Python's pidfd capabilities
 separately from the candidate interpreter before selecting a process supervisor.
 
+For sealed-output changes, exercise the fresh installed candidate with partial,
+cross-block and EOF reads plus an actual same-inode equal-length post-open
+rewrite. Bind module origin/version and wheel bytes to that proof. Retain any
+timestamp-masked hash diagnostic separately from the normal unmasked API result;
+neither API proof establishes a complete Runtime/service qualification.
+
 Node protocol-only exit evidence does not qualify execution or restart. When a
 client remains alive after execution, retain whether `client.close()` completed
 and identify remaining resource types before supervisor cleanup. The current
@@ -2219,6 +2225,25 @@ success mechanics. Missing POSIX names in Windows typing do not establish runtim
 support and do not justify suppressing the matrix typecheck. Shell-stub
 contracts cover setup, bounded readiness failure, cleanup and workflow parity;
 they do not replace hosted execution or real provider qualification.
+
+Express explicitly POSIX-only APIs through checked, precisely typed `getattr`
+helpers when Windows typeshed omits them. Require integer security flags and
+callable functions; missing capability fails closed, never as a zero flag or
+permission fallback. Resolve required extraction capabilities before creating
+owned destination state. This fixes typing without promising Windows support
+for private Linux providers or POSIX operator APIs.
+
+Compiler temporary workspaces and canonical archives have distinct mode
+contracts. Preserve exact source bytes and canonical POSIX modes in snapshot
+identity and ZIP metadata on every host. Windows workspace mode bits do not
+represent POSIX execute bits or establish private ACLs. On POSIX, require
+callable descriptor `fchmod` before creating files, propagate its failures and
+close the owned descriptor. Preserve exclusive creation and containment checks.
+
+The source Runtime test launcher uses `[python, "-P", "-m", "actions.server"]`.
+Candidate and published-Core browser receipts must assert this exact safe-path
+prefix. A stale three-argument assertion fails before browser launch; correct
+the assertion while retaining `-P`, module-origin and source-byte checks.
 
 On Windows, a child `bash` lookup can select the WSL launcher even when the
 Actions step itself uses Git Bash. Resolve the existing Git for Windows Bash

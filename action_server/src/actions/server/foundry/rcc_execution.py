@@ -65,6 +65,13 @@ _HEARTBEAT_SECONDS = 8
 _MAX_TIMEOUT_SECONDS = 600
 
 
+def _posix_fchmod() -> Callable[[int, int], None]:
+    value = getattr(os, "fchmod", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires fchmod")
+    return cast(Callable[[int, int], None], value)
+
+
 class RccCleanupIncomplete(RuntimeError):
     """Owned process termination is unconfirmed; retain host resources."""
 
@@ -1166,6 +1173,7 @@ class GeneratedRccExecution:
 
     @staticmethod
     def _extract_snapshot(source_archive: bytes, destination: Path) -> None:
+        fchmod = _posix_fchmod()
         destination.mkdir(mode=0o700)
         total = 0
         count = 0
@@ -1215,7 +1223,7 @@ class GeneratedRccExecution:
                     try:
                         with os.fdopen(fd, "wb", closefd=False) as stream:
                             stream.write(content)
-                        os.fchmod(fd, stat.S_IMODE(mode))
+                        fchmod(fd, stat.S_IMODE(mode))
                     finally:
                         os.close(fd)
         except (OSError, zipfile.BadZipFile, ValueError):

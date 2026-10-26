@@ -12,7 +12,7 @@ import stat
 import time
 from dataclasses import asdict
 from pathlib import Path
-from typing import Literal
+from typing import Callable, Literal, cast
 from uuid import NAMESPACE_URL, uuid5
 
 from pydantic import Field, model_serializer, model_validator
@@ -219,6 +219,20 @@ class LocalProviderRequest(_Value):
         ):
             raise ValueError("exact provider availability CAS required")
         return self
+
+
+def _posix_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuntimeError("POSIX operation requires " + name)
+    return value
+
+
+def _posix_getuid() -> int:
+    value = getattr(os, "getuid", None)
+    if not callable(value):
+        raise RuntimeError("POSIX operation requires getuid")
+    return cast(Callable[[], int], value)()
 
 
 def _key(actor: Actor, workspace: WorkspaceId, name: str) -> str:
@@ -483,7 +497,9 @@ def _evidence(
 
 def _stream(path: Path, maximum: int):
     path = _owned(path)
-    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    fd = os.open(
+        path, os.O_RDONLY | _posix_flag("O_NOFOLLOW") | _posix_flag("O_NONBLOCK")
+    )
     try:
         before = os.fstat(fd)
         if before.st_size > maximum:
@@ -923,7 +939,7 @@ def run_local_provider_setup(
         info = lock.lstat()
         if (
             not stat.S_ISREG(info.st_mode)
-            or info.st_uid != os.getuid()
+            or info.st_uid != _posix_getuid()
             or info.st_nlink != 1
         ):
             raise ValueError("owned regular Runtime lock required")
@@ -1033,7 +1049,10 @@ def run_local_provider_setup(
                     )
                     return {"generation": generation, "enabled": False}
             blob_path = _owned(root / "blobs", directory=True)
-            fd = os.open(blob_path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            fd = os.open(
+                blob_path,
+                os.O_RDONLY | _posix_flag("O_DIRECTORY") | _posix_flag("O_NOFOLLOW"),
+            )
             try:
                 blobs = FilesystemOutputProvider(fd)
             finally:
