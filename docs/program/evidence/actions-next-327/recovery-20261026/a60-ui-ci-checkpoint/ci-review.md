@@ -20,3 +20,15 @@ No dependency error, validation/authority weakening, or new evidence-attribution
 - Remaining uncertainty: No tests were run in this read-only lane, and the exact tracked path affected by the historical Ubuntu failure remains unknown. The source-clean guard is still intentionally strict.
 
 Upstream disposition: none
+
+## Final placement correction review (against `63b8c5b2ecad5d25f9eab0f5e7add44bcd3c919e`)
+
+This read-only follow-up reviewed the final two-file diff that moves the gate ahead of tracked frontend embedding. It supersedes the earlier documentation proposal above where that proposal said to run the gate after the full frontend build.
+
+No issue found. `BaseTests.before_frontend_build()` defaults to an empty list; the only subclass overriding it is `ActionServerTests`. That keeps other `BaseTests` workflows unchanged. The Action Server hook installs the locked npm dependencies, builds the OAuth config, installs the existing locked Chromium, and runs the same published-Core gate and upload before `build_frontend` can write tracked `action_server/src/actions/server/_static_contents.py` (`.github/workflows/_gen_workflows.py:588-623,642-673,1117+`). The normal frontend build then runs with `--no-install`; the implementation of `build_frontend(install=True)` gates its `npm ci` on that flag, so this avoids repeating the already completed dependency installation while preserving the build and embed itself (`action_server/tasks.py:87-92,130-145`; root reports Invoke help confirms the option).
+
+The strict `git diff HEAD --name-only` source-clean assertion and source, JUnit, browser, and receipt predicates were not changed. No clean/reset exception, artifact/receipt change, or authentication change appears in this diff. The earlier positive/negative MCP resource and authentication assertions remain outside this latest two-file change. Root reports the four ordering controls first failed only on the `Build frontend` ordering, then the full Toolkit230 run passed; I did not run tests or independently reproduce that result.
+
+Updated documentation improvement proposal: in `docs/skills/repository-operations.md`, describe the ordering as: “Install the locked frontend dependencies and prepare the required OAuth/browser prerequisites, then run the source-bound Runtime/browser gate before the frontend embedding build, because that build rewrites tracked `_static_contents.py`. Keep the tracked-clean source check and all source/receipt predicates strict; run the ordinary frontend build afterward with its supported no-install option to avoid repeating `npm ci`.” This supersedes the earlier draft wording in this receipt that put the gate after frontend build. Evidence is the `BaseTests` hook and `ActionServerTests` override, the generated workflow order, and `build_frontend`’s `install` conditional; the assignment reports the ordering controls and Toolkit230 results. No specific CI-mutated path is claimed beyond the tracked `_static_contents.py` rewrite established by the build task.
+
+Upstream disposition: none

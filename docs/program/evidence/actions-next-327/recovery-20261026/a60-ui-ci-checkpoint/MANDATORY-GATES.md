@@ -4,11 +4,11 @@
 
 ## Next measurable milestone
 
-One exact-source candidate must complete current hosted CI/browser qualification, be built and installed with its source/tree/wheel identities recorded, then carry the remaining owned gates. #515 SUCCESS belongs to prior head `daf41283`/tree `e27a3b6`; it does not validate dirty local a60 changes. Runtime #393 then failed the Windows/macOS resource-URI integration assertion and Ubuntu published-Core/browser acceptance. Current a60 native-resource/source-browser/CSS changes have local frontend tests/quality PASS, Toolkit229 PASS, and a green browser after CSS wrapping (old HTML body 6786/284); the held 7b35422 Windows fixture has 226 PASS. No a60 wheel is built. Next: finish root-owned source corrections and rerun full hosted gates at the exact resulting head, then build/install that same candidate. This is a gate definition, not an ETA or percentage.
+One exact-source candidate must complete current hosted CI/browser qualification, be built and installed with its source/tree/wheel identities recorded, then carry the remaining owned gates. #515 SUCCESS belongs to prior head `daf41283`/tree `e27a3b6`; it does not validate dirty local a60 changes. Runtime #393 then failed the Windows/macOS resource-URI integration assertion and Ubuntu published-Core/browser acceptance. Current a60 native-resource/source-browser/CSS changes have local frontend tests/quality PASS, Toolkit230 PASS, and a green browser after CSS wrapping (old HTML body 6786/284); the held 7b35422 Windows fixture has 226 PASS. No a60 wheel is built. Next: finish root-owned source corrections and rerun full hosted gates at the exact resulting head, build/install that same candidate in parallel, then join both exact-source results. This is a gate definition, not an ETA or percentage.
 
 ## Priority order
 
-1. **P0 — Source/hosted baseline:** row 2 plus the exact-source checks affecting rows 3–5 and 24. Resolve the #393 cross-platform and published-browser failures; verify the local a60 changes on hosted current head before building the candidate.
+1. **P0 — Source/hosted baseline:** row 2 plus the exact-source checks affecting rows 3–5 and 24. Resolve the #393 cross-platform and published-browser failures; verify the local a60 changes on hosted current head while building the frozen-source candidate in parallel.
 2. **P1 — Candidate-bound product gates:** rows 3–19, 21–22, and conditional row 25 only if already required. Complete authoring, package/Run, bindings, SQL, plugin, Data/Knowledge, Work Items, RCC/Task, authorization, effects and artifacts on the exact installed candidate. Row 11 PostgreSQL setup is blocked because the setup action was denied before execution; do not bypass it.
 3. **P2 — Compatibility, recovery and distribution:** rows 1, 20 and 24. Preserve bounded SQLite compatibility and a59 PostgreSQL/object+cold-RCC component PASS, but prove full coordinated Runtime restore/old-new compatibility and final native/image/distribution consumers.
 4. **OWNER — Host, security, release:** row 23 actual ChatGPT CONNECT/RENDER and separate invoice E1; row 27 publisher/security disposition; row 28 final evidence review and separate owner publication decision. These follow concrete exact-candidate technical evidence.
@@ -58,3 +58,12 @@ One exact-source candidate must complete current hosted CI/browser qualification
 Propose updating only the current-continuation text and row 11 evidence in `actions/docs/program/actions-next-release-327.md`: replace stale blanket Parquet/component-missing wording with the bounded installed CSV/Parquet + SQLite service proof and its limits; record #515/#393 and a60 local-only status; distinguish a59 PostgreSQL/object+cold-RCC component PASS and copied-store projection from full Runtime restore. Preserve all original row acceptance and owner boundaries. No repository documentation was changed.
 
 Upstream disposition: none.
+
+
+Execution dependency clarification: freeze the exact reviewed source first, then
+run hosted CI and the local candidate wheel/install/host-fixture checks in
+parallel within measured capacity. Final acceptance joins their exact identities;
+it does not require waiting for hosted CI before beginning an authorized build.
+The delivered a57 short CONNECT+RENDER test is already independently ready and
+only awaits owner availability. It does not wait on invoice-template completion;
+actual invoice E1 is the separate later product flow.

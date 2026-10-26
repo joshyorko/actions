@@ -95,10 +95,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20.x
-    - name: Build frontend
-      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
-      env:
-        CI: true
+    - name: Install frontend dependencies for source Runtime browser acceptance
+      working-directory: action_server/frontend
+      run: npm ci --no-audit --no-fund
     - name: Build OAuth2 config
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env: {}
@@ -371,6 +370,10 @@ jobs:
           '
         if-no-files-found: error
         retention-days: 7
+    - name: Build frontend
+      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend --no-install
+      env:
+        CI: true
     - name: Test Go wrapper child lifecycle
       working-directory: action_server/go-wrapper
       env:

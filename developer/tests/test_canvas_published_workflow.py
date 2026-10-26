@@ -37,12 +37,17 @@ def _steps() -> list[dict]:
 
 
 @pytest.mark.parametrize(
-    "later_stage", ["Build binary", "Test (not integration)", "Test (integration)"]
+    "later_stage",
+    ["Build frontend", "Build binary", "Test (not integration)", "Test (integration)"],
 )
 def test_source_browser_gate_precedes_mutating_build_and_test_stages(later_stage):
     names = [step["name"] for step in _steps()]
     browser = names.index("Verify Canvas published-Core Runtime and browser acceptance")
-    assert names.index("Build frontend") < browser
+    dependencies = names.index(
+        "Install frontend dependencies for source Runtime browser acceptance"
+    )
+    assert dependencies < browser
+    assert _steps()[dependencies]["run"] == "npm ci --no-audit --no-fund"
     assert names.index("Build OAuth2 config") < browser
     assert (
         names.index("Install Playwright Chromium for Runtime browser acceptance")

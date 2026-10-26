@@ -24,9 +24,12 @@ or production authorization was weakened.
 Ubuntu Runtime393 passed5351 portable tests/56 skips, then the published-Core
 browser case failed at its strict clean-source assertion1025. The bounded
 diagnostic exposed the exact assertion; the particular dirty tracked path is
-unknown. The source gate now runs after frontend/OAuth preparation and before
-build/test phases that can regenerate tracked fixtures. Three ordering controls
-first produced2 failures/1 pass; all229 Toolkit cases now pass. The clean-source,
+unknown. The source gate now runs after dependency-only npm/OAuth preparation and before tracked frontend
+embedding, native build and test phases. The tracked `_static_contents.py` is a
+known generated build output, so the earlier post-frontend order was insufficient.
+Four final ordering controls first produced1 failure/3 passes at that boundary;
+all230 Toolkit cases now pass. Frontend embedding uses its supported `--no-install`
+option after the single locked dependency install. The clean-source,
 pytest/JUnit, source/worker/browser and cleanup admission checks are unchanged.
 
 The exact frozen a59 Canvas resource passed controlled empty Canvas/library/Canvas

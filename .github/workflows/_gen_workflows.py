@@ -592,6 +592,9 @@ class BaseTests(BaseWorkflow):
     require_build_oauth2_config = False
     validate_docstrings = False
 
+    def before_frontend_build(self) -> list[dict]:
+        return []
+
     def run_tests(self):
         return {
             "name": "Test",
@@ -616,6 +619,7 @@ class BaseTests(BaseWorkflow):
             steps.append(self.setup_node())
 
         if self.require_build_frontend:
+            steps.extend(self.before_frontend_build())
             steps.append(self.build_frontend())
 
         if self.require_build_oauth2_config:
@@ -642,7 +646,31 @@ class ActionServerTests(BaseTests):
     require_node = True
     require_go = True
     require_build_frontend = True
-    require_build_oauth2_config = True
+    # OAuth is prepared before the source-bound browser gate, not after embedding.
+    require_build_oauth2_config = False
+
+    @override
+    def before_frontend_build(self) -> list[dict]:
+        return [
+            {
+                "name": "Install frontend dependencies for source Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npm ci --no-audit --no-fund",
+            },
+            self.build_oauth2_config(),
+            {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
+            },
+            *self.published_canvas_acceptance(),
+        ]
+
+    @override
+    def build_frontend(self):
+        step = super().build_frontend()
+        step["run"] = f"{run_in_env}inv build-frontend --no-install"
+        return step
 
     def start_owned_postgres(self):
         return {
@@ -1089,14 +1117,6 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
     @override
     def run_tests(self):
         return [
-            # This source-bound gate requires the original tracked checkout.
-            # Run before build/test phases can regenerate tracked fixtures.
-            {
-                "name": "Install Playwright Chromium for Runtime browser acceptance",
-                "working-directory": "action_server/frontend",
-                "run": "npx playwright install chromium",
-            },
-            *self.published_canvas_acceptance(),
             {
                 "name": "Test Go wrapper child lifecycle",
                 "working-directory": "action_server/go-wrapper",
