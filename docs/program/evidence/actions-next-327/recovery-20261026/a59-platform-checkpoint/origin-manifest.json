@@ -105,6 +105,26 @@
       "source": "/tmp/327-docker-message-red-supervisor.json",
       "copy": "docker-message-red-supervisor.json",
       "sha256": "ae59d12004f42acc25aa774e9131e5e53b9044d50136a3b05971f680af7d080c"
+    },
+    {
+      "source": "/workspace/327-probes/a59-posix-final-review.md",
+      "copy": "posix-final-review.md",
+      "sha256": "72421e9720933bed5a464cb3ebc6888262128dac7dd6c909ff53dd4b7dcf4976"
+    },
+    {
+      "source": "/workspace/327-probes/a59-browser/candidate-receipt.json",
+      "copy": "browser/candidate-receipt.json",
+      "sha256": "e4c035ec07bc0b215a87688959cc2e34b5e008c7826482966829c9d6ef7e2b05"
+    },
+    {
+      "source": "/workspace/327-probes/a59-browser/published-receipt.json",
+      "copy": "browser/published-receipt.json",
+      "sha256": "8f94989156a9272aa78af3260300de0d67599f08f9e9d5396adb8497df25a969"
+    },
+    {
+      "source": "/workspace/327-probes/a59-browser/supervisor.json",
+      "copy": "browser/supervisor.json",
+      "sha256": "64eedb4413abdb36ddec71d2d9848f27d800c7620fc324c29aff1829e664a566"
     }
   ],
   "raw_log_sha256": {
@@ -117,6 +137,7 @@
     "/tmp/327-a59-posix-type-win32.log": "bdad24c098297e360ea25a57c7793c0b58516b454230aaba712778e44d38fd4d",
     "/tmp/327-a59-operators.log": "61a685d104883d1fe9a5364c2d3f3ed22ef5ecd6f727d020184c6cdb8d10d828",
     "/tmp/327-a59-quality-fixed.log": "175af291123db0611a322f1112d42e61e06f8d0ab4795c587b532a764b497d73",
-    "/tmp/327-docker-message-red.log": "76ee9654720b8b1c206934c51d5c89536b2597c712e74f7644ca88c3c06842a9"
+    "/tmp/327-docker-message-red.log": "76ee9654720b8b1c206934c51d5c89536b2597c712e74f7644ca88c3c06842a9",
+    "/workspace/327-probes/a59-browser/gates.log": "538b29bd149550e04f813e01c859f098405e24c696253ec12bbcc0009eb7d0bc"
   }
 }

@@ -49,8 +49,9 @@ New permitted Ubuntu753 logs expose the exact safe diagnostic
 and omitted the launcher's intentional `-P`. Both candidate and published-Core
 checks now require the actual4-entry safe-path prefix. `-P`, source/module origin,
 wheel API byte identity and strict browser/receipt admission remain mandatory.
-Actual browser retest is still PENDING in this source checkpoint; the original
-Ubuntu753 result stays FAILED. The inaccessible older artifact was not retried,
+The [subsequent exact-source browser retest](BROWSER.md) passed both candidate
+and published-Core cases at123e772e; the original Ubuntu753 stays FAILED.
+The inaccessible older artifact was not retried,
 and its unobserved assertion is not identified by implication.
 
 Configured Runtime Ruff checks, configured format, Isort and Linux mypy pass;
