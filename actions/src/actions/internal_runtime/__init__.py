@@ -1,3 +1,4 @@
+# ruff: noqa: E721 - input primitives require exact types, excluding bool/subclasses
 """Internal asynchronous child Run operations explicitly delegated by Runtime.
 
 The Runtime must install a trusted local transport for the current Action.
@@ -13,12 +14,7 @@ import re
 from typing import Mapping
 
 from ._context import current_transport
-from ._models import (
-    ChildResultReference,
-    ChildRunHandle,
-    ChildRunState,
-    ChildRunStatus,
-)
+from ._models import ChildResultReference, ChildRunHandle, ChildRunState, ChildRunStatus
 
 MAX_BINDING_NAME_BYTES = 128
 MAX_INVOCATION_KEY_BYTES = 128
@@ -147,10 +143,7 @@ def child_run_status(handle: ChildRunHandle) -> ChildRunStatus:
     if type(handle) is not ChildRunHandle:  # noqa: E721 -- reject caller lookalikes
         raise ChildRunContractError("typed child Run handle required")
     response = current_transport().child_run_status(handle)
-    if (
-        type(response) is not ChildRunStatus
-        or response.handle != handle
-    ):
+    if type(response) is not ChildRunStatus or response.handle != handle:
         raise ChildRunUnavailable("Runtime returned an invalid child Run status")
     return response
 
@@ -160,10 +153,7 @@ def cancel_child_run(handle: ChildRunHandle) -> ChildRunStatus:
     if type(handle) is not ChildRunHandle:  # noqa: E721 -- reject caller lookalikes
         raise ChildRunContractError("typed child Run handle required")
     response = current_transport().cancel_child_run(handle)
-    if (
-        type(response) is not ChildRunStatus
-        or response.handle != handle
-    ):
+    if type(response) is not ChildRunStatus or response.handle != handle:
         raise ChildRunUnavailable("Runtime returned an invalid child Run status")
     return response
 

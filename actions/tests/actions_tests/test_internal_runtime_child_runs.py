@@ -147,9 +147,7 @@ def test_child_handle_and_runtime_state_are_validated():
     "references",
     [
         tuple(
-            ChildResultReference(
-                f"result-{index}", "out.json", "application/json", 1
-            )
+            ChildResultReference(f"result-{index}", "out.json", "application/json", 1)
             for index in range(MAX_RESULT_REFERENCE_COUNT + 1)
         ),
         tuple(

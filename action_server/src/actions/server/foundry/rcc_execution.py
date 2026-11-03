@@ -197,6 +197,7 @@ class GeneratedRccExecution:
         execution_root: Path,
         *,
         logical_execution=None,
+        internal_child_ipc_factory=None,
     ) -> None:
         if not isinstance(prepared, PreparedRccEnvironment):
             raise TypeError("exact retained PreparedRccEnvironment required")
@@ -226,6 +227,13 @@ class GeneratedRccExecution:
         self.prepared = prepared
         self.rcc = rcc
         self.execution_root = execution_root.resolve()
+        if internal_child_ipc_factory is not None and not callable(
+            internal_child_ipc_factory
+        ):
+            raise TypeError("trusted internal child IPC host factory required")
+        if internal_child_ipc_factory is not None and os.name != "posix":
+            raise ValueError("internal child IPC requires POSIX descriptor passing")
+        self.internal_child_ipc_factory = internal_child_ipc_factory
 
     def execute(
         self,
@@ -474,10 +482,16 @@ class GeneratedRccExecution:
         self._check_cancel(is_cancelled, actor, fence)
 
         self._check_deadline(deadline)
+        ipc_host = None
+        ipc_socket = None
         helper = (
-            self._bound_execution_helper(action)
+            self._bound_execution_helper(action, ipc_enabled=True)
+            if bound and self.internal_child_ipc_factory is not None
+            else self._bound_execution_helper(action)
             if bound
-            else self._execution_helper(action)
+            else self._execution_helper(
+                action, ipc_enabled=self.internal_child_ipc_factory is not None
+            )
         )
         logical_args = (
             [str(directory / "logical-context.json"), logical_summary["contextDigest"]]
@@ -514,6 +528,17 @@ class GeneratedRccExecution:
         completed = False
         try:
             self._check_deadline(deadline)
+            if self.internal_child_ipc_factory is not None:
+                from actions.server.foundry.internal_child_ipc_server import (
+                    InternalChildIPCServerHost,
+                )
+
+                candidate_host = self.internal_child_ipc_factory(fence)
+                if type(candidate_host) is not InternalChildIPCServerHost:
+                    raise TypeError("trusted invocation-scoped child IPC host required")
+                ipc_host = candidate_host
+                ipc_socket = ipc_host.start(timeout_seconds=10.0)
+                command.append(str(ipc_socket.fileno()))
             process = subprocess.Popen(
                 command,
                 cwd=source,
@@ -524,6 +549,7 @@ class GeneratedRccExecution:
                 shell=False,
                 close_fds=True,
                 start_new_session=os.name == "posix",
+                pass_fds=(ipc_socket.fileno(),) if ipc_socket is not None else (),
             )
             ownership = _OwnedProcessCapture(process, owns_session=os.name == "posix")
             setattr(process, "_actions_capture_owned", ownership.capture)
@@ -585,12 +611,18 @@ class GeneratedRccExecution:
             self._verify_snapshot_unchanged(source, compiled.source_archive)
             completed = True
         finally:
-            if ownership is not None and (
-                ownership.owns_session or ownership.process.poll() != 0
-            ):
-                cleanup = ownership.cleanup()
-                if not cleanup.execution_stopped:
-                    raise RccCleanupIncomplete("RCC process cleanup incomplete")
+            try:
+                if ownership is not None and (
+                    ownership.owns_session or ownership.process.poll() != 0
+                ):
+                    cleanup = ownership.cleanup()
+                    if not cleanup.execution_stopped:
+                        raise RccCleanupIncomplete("RCC process cleanup incomplete")
+            finally:
+                if ipc_host is not None and not ipc_host.stop(timeout_seconds=10.0):
+                    raise RccCleanupIncomplete(
+                        "internal child IPC host cleanup incomplete"
+                    )
 
         if not completed:
             raise RuntimeError("generated Action execution did not complete")
@@ -1278,46 +1310,78 @@ class GeneratedRccExecution:
         }
 
     @staticmethod
-    def _execution_helper(entrypoint: dict) -> str:
+    def _execution_helper(entrypoint: dict, *, ipc_enabled: bool = False) -> str:
         # Schema bytes are bound by the immutable Package; the host validates
         # both sides too. The child only imports/calls the verified entrypoint.
+        ipc = (
+            "import socket\n"
+            "from actions.internal_runtime._context import install_runtime_transport\n"
+            "from actions.internal_runtime._fd_transport import InternalChildFDTransport\n"
+            "ipc_socket=socket.socket(fileno=int(sys.argv[4]))\n"
+            "ipc_transport=InternalChildFDTransport(ipc_socket)\n"
+            "ipc_transport.handshake()\n"
+            if ipc_enabled
+            else ""
+        )
+        invoke = (
+            "with install_runtime_transport(ipc_transport): value=action(**inputs)\n"
+            if ipc_enabled
+            else "value=action(**inputs)\n"
+        )
         return (
             "import importlib,json,os,sys\n"
             "source,input_file,result_file=sys.argv[1:4]\n"
             "with open(input_file,'rb') as stream: inputs=json.load(stream)\n"
-            "sys.path.insert(0,source)\n"
-            f"module=importlib.import_module({entrypoint['module']!r})\n"
-            f"action=getattr(module,{entrypoint['actionName']!r})\n"
-            "value=action(**inputs)\n"
-            "if hasattr(value,'model_dump'): value=value.model_dump(mode='json')\n"
-            "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
-            f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
-            "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"
-            "with os.fdopen(fd,'wb') as stream: stream.write(payload)\n"
+            + ipc
+            + "sys.path.insert(0,source)\n"
+            + f"module=importlib.import_module({entrypoint['module']!r})\n"
+            + f"action=getattr(module,{entrypoint['actionName']!r})\n"
+            + invoke
+            + "if hasattr(value,'model_dump'): value=value.model_dump(mode='json')\n"
+            + "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
+            + f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
+            + "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"
+            + "with os.fdopen(fd,'wb') as stream: stream.write(payload)\n"
         )
 
     @staticmethod
-    def _bound_execution_helper(entrypoint: dict) -> str:
+    def _bound_execution_helper(entrypoint: dict, *, ipc_enabled: bool = False) -> str:
+        ipc = (
+            "import socket\n"
+            "from actions.internal_runtime._context import install_runtime_transport\n"
+            "from actions.internal_runtime._fd_transport import InternalChildFDTransport\n"
+            "ipc_socket=socket.socket(fileno=int(sys.argv[6]))\n"
+            "ipc_transport=InternalChildFDTransport(ipc_socket)\n"
+            "ipc_transport.handshake()\n"
+            if ipc_enabled
+            else ""
+        )
         return (
             "import importlib,json,os,stat,sys\n"
             "source,input_file,result_file,context_file,context_digest=sys.argv[1:6]\n"
-            "with open(input_file,'rb') as stream: inputs=json.load(stream)\n"
-            "fd=os.open(context_file,os.O_RDONLY|os.O_NOFOLLOW)\n"
-            "with os.fdopen(fd,'rb') as stream:\n"
-            " status=os.fstat(stream.fileno())\n"
-            " if not stat.S_ISREG(status.st_mode) or not 0<status.st_size<=262144: raise SystemExit(87)\n"
-            " raw=stream.read(262145)\n"
-            " if len(raw)!=status.st_size: raise SystemExit(87)\n"
-            "from actions.data._context import install_context\n"
-            "sys.path.insert(0,source)\n"
-            f"module=importlib.import_module({entrypoint['module']!r})\n"
-            f"action=getattr(module,{entrypoint['actionName']!r})\n"
-            "with install_context(raw,expected_digest=context_digest): value=action(**inputs)\n"
-            "if hasattr(value,'model_dump'): value=value.model_dump(mode='json')\n"
-            "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
-            f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
-            "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"
-            "with os.fdopen(fd,'wb') as stream: stream.write(payload)\n"
+            + "with open(input_file,'rb') as stream: inputs=json.load(stream)\n"
+            + "fd=os.open(context_file,os.O_RDONLY|os.O_NOFOLLOW)\n"
+            + "with os.fdopen(fd,'rb') as stream:\n"
+            + " status=os.fstat(stream.fileno())\n"
+            + " if not stat.S_ISREG(status.st_mode) or not 0<status.st_size<=262144: raise SystemExit(87)\n"
+            + " raw=stream.read(262145)\n"
+            + " if len(raw)!=status.st_size: raise SystemExit(87)\n"
+            + "from actions.data._context import install_context\n"
+            + ipc
+            + "sys.path.insert(0,source)\n"
+            + f"module=importlib.import_module({entrypoint['module']!r})\n"
+            + f"action=getattr(module,{entrypoint['actionName']!r})\n"
+            + (
+                "with install_context(raw,expected_digest=context_digest):\n"
+                " with install_runtime_transport(ipc_transport): value=action(**inputs)\n"
+                if ipc_enabled
+                else "with install_context(raw,expected_digest=context_digest): value=action(**inputs)\n"
+            )
+            + "if hasattr(value,'model_dump'): value=value.model_dump(mode='json')\n"
+            + "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
+            + f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
+            + "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"
+            + "with os.fdopen(fd,'wb') as stream: stream.write(payload)\n"
         )
 
     @staticmethod

@@ -11,9 +11,7 @@ MAX_RESULT_REFERENCE_COUNT = 32
 MAX_RESULT_REFERENCE_BYTES = 16 * 1024
 _OPAQUE_REFERENCE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,255}\Z", re.ASCII)
 _DIGEST = re.compile(r"sha256:[0-9a-f]{64}\Z", re.ASCII)
-_MEDIA_TYPE = re.compile(
-    r"[A-Za-z0-9!#$&^_.+-]+/[A-Za-z0-9!#$&^_.+-]+\Z", re.ASCII
-)
+_MEDIA_TYPE = re.compile(r"[A-Za-z0-9!#$&^_.+-]+/[A-Za-z0-9!#$&^_.+-]+\Z", re.ASCII)
 
 
 class ChildRunState(str, Enum):
@@ -102,9 +100,10 @@ class ChildRunStatus:
             or type(self.state) is not ChildRunState
         ):
             raise ValueError("typed child status required")
-        if type(self.result_references) is not tuple or len(
-            self.result_references
-        ) > MAX_RESULT_REFERENCE_COUNT:
+        if (
+            type(self.result_references) is not tuple
+            or len(self.result_references) > MAX_RESULT_REFERENCE_COUNT
+        ):
             raise ValueError("bounded result reference tuple required")
         if any(type(ref) is not ChildResultReference for ref in self.result_references):
             raise ValueError("typed result references required")
