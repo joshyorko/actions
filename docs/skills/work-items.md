@@ -1534,3 +1534,10 @@ admission must verify both references and their Workspace inside the same
 transaction as the fenced, authorized child admission. The model and SQLite
 migration alone do not provide delegation policy, a Runtime transport, detach
 or cancellation semantics, PostgreSQL qualification, or a working child Run.
+
+For a model queue mutation, check the current exact Deployment revision and its
+explicit queue-operation selection in the same transaction as the bounded domain
+call, acquiring the Run Counter and then Workspace lock. The authenticated model
+caller has no worker identity; the domain service must still check live grants.
+The standalone guard is not native MCP wiring, and component concurrency tests
+on SQLite do not establish PostgreSQL parity or installed host behavior.
