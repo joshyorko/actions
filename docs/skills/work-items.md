@@ -1552,3 +1552,8 @@ its own worker-thread database connection. It scopes to the trusted actor and
 Workspace and intersects current queue grants; overflow or ambiguity denies the
 catalog. Its preflight result is not authority for a later call: the atomic
 queue guard must recheck publication and the domain port must recheck grants.
+Native Canvas startup attaches the managed model facade using the existing
+trusted model principal, its configured Actor and Workspace, current publication
+policy, and the atomic guard. It does not inherit the worker identity. The MCP
+assembler reserves the managed tool names against Action collisions. Source
+startup tests do not qualify installed Runtime behavior or PostgreSQL parity.
