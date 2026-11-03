@@ -25,8 +25,9 @@ changes. It strips free-form schema annotations and fails closed for unsupported
 schema resource semantics. Publishing an input contract exposes its property
 names and validation constraints; authors must keep secrets out of those fields.
 The current resolver still requires Workspace-wide execute authority, even
-when a Deployment-specific grant exists. The component is not yet native MCP
-startup or installed-client proof.
+when a Deployment-specific grant exists. The candidate `capability_discover`
+tool is model-only and does not attach a Canvas resource; its source-level MCP
+tests do not establish ordinary installed startup or real-client proof.
 
 Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
 through the activated cloud toolchain for an arbitrary bounded qualification

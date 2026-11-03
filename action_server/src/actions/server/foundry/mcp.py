@@ -42,7 +42,7 @@ APP_TOOLS = frozenset(
         "canvas_artifact",
     }
 )
-CAPABILITY_TOOLS = frozenset({"capability_invoke"})
+CAPABILITY_TOOLS = frozenset({"capability_invoke", "capability_discover"})
 RESERVED_TOOLS = (
     MODEL_TOOLS | APP_TOOLS | CAPABILITY_TOOLS | {"canvas_query", "canvas_page"}
 )
@@ -57,6 +57,7 @@ _READ_ONLY = frozenset(
         "canvas_execution_status",
         "canvas_artifact",
         "canvas_projection",
+        "capability_discover",
     }
 )
 _JSON = TypeAdapter(dict[str, JsonValue])
@@ -218,7 +219,7 @@ class CanvasMcp:
                     idempotent_hint=name in _READ_ONLY,
                     open_world_hint=False,
                 ),
-                _meta={
+                _meta={} if name == "capability_discover" else {
                     "ui": {
                         "resourceUri": URI,
                         "visibility": ["model"]
