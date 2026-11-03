@@ -43,3 +43,12 @@ the guard. Controls include stale publication and a revoked domain queue grant.
 The workspace list path and native startup remain unwired. The supervisor
 reported no owned processes remaining; the raw focused log is in Library archive
 `libfile_b1e3d498c26c8191b3f02281a7f5d57f`, version 4.
+
+The atomic queue-list component at `31cc605ea5113c89dea1f233e1d24668ca7acb84`
+passed 20 combined facade/guard cases with 10 PostgreSQL skips, including a
+two-connection multi-page scan and concurrent publication revocation. On the
+same source, existing Canvas/MCP tests passed 12 cases and protected-route
+initial-denial checks passed both shutdown configurations. All were source
+checks supervised with the capacity guard and no owned process remaining; they
+do not qualify packaged native startup, a real ChatGPT host, or PostgreSQL.
+The SQLite domain test does not replace live PostgreSQL authorization parity.
