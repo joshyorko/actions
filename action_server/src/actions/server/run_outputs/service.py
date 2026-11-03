@@ -994,10 +994,15 @@ class RunOutputService:
     def cancel(self, actor: Actor, run_id: str) -> bool:
         with _transaction(self.db):
             pin = _lock_run(self.db, run_id)
-            self._authorize(actor, self._pinned(pin), "cancel")
+            snapshot = self._pinned(pin)
+            self._authorize(actor, snapshot, "cancel")
             run = _one(self.db, Run, run_id)
             if run.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
                 return False
+            if run.status == RunStatus.RUNNING:
+                # Cancellation intent is irreversible and fences new child
+                # admission. Record the pinned child policy in the same lock.
+                self._apply_parent_exit_policy(pin, snapshot)
             if not pin.cancel_requested:
                 _update(self.db, RunPin, run_id, {"cancel_requested": 1})
                 _advance_lifecycle(self.db, run_id)

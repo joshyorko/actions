@@ -4,18 +4,24 @@
 from __future__ import annotations
 
 import sys
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
 from uuid import uuid4
 
 import pytest
 from action_server_tests.test_internal_child_admission import (
+    _independent_invoker,
     admitted as admitted,  # noqa: F811
 )
-from actions.server._models import Run, RunStatus
+from action_server_tests.test_foundry_package_registry import _registry
+from actions.server._database import Database
+from actions.server._models import Run, RunStatus, get_all_model_classes
 from actions.server.managed_work_items.contracts import ManagedCaller
 from actions.server.run_outputs.models import RunAttempt, RunChildLineage, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    RunOutputService,
     _one,
     _update,
 )
@@ -100,6 +106,82 @@ def test_cancel_children_parent_exit_records_intent_for_active_child(admitted):
 
     assert child_run.status == RunStatus.RUNNING
     assert child_pin.cancel_requested == 1
+
+
+def test_parent_cancel_request_atomically_cancels_pending_child(admitted):
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "cancel-parent", {"value": "child"}
+    ).run
+    assert admitted.outputs.cancel(admitted.actor, admitted.parent_run.id)
+    assert _one(admitted.db, RunPin, admitted.parent_run.id).cancel_requested == 1
+    assert _one(admitted.db, RunPin, child.id).cancel_requested == 1
+    assert _one(admitted.db, Run, child.id).status == RunStatus.CANCELLED
+    assert _one(admitted.db, Run, admitted.parent_run.id).status == RunStatus.RUNNING
+
+
+def test_parent_cancel_request_keeps_active_child_nonterminal(admitted):
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "cancel-parent-active", {"value": "child"}
+    ).run
+    admitted.outputs.claim(child.id, str(uuid4()), lease_seconds=60)
+    assert admitted.outputs.cancel(admitted.actor, admitted.parent_run.id)
+    assert _one(admitted.db, RunPin, child.id).cancel_requested == 1
+    assert _one(admitted.db, Run, child.id).status == RunStatus.RUNNING
+
+
+def test_active_child_cancel_intent_survives_database_reopen(admitted):
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "cancel-before-reopen", {"value": "child"}
+    ).run
+    admitted.outputs.claim(child.id, str(uuid4()), lease_seconds=60)
+    assert admitted.outputs.cancel(admitted.actor, admitted.parent_run.id)
+    reopened = Database(admitted.database_location)
+    reopened.initialize(get_all_model_classes())
+    with reopened.connect():
+        assert _one(reopened, RunPin, child.id).cancel_requested == 1
+        assert _one(reopened, Run, child.id).status == RunStatus.RUNNING
+
+
+def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(admitted):
+    output = _stage_parent_result(admitted)
+    snapshot = admitted.outputs._pinned(_one(admitted.db, RunPin, admitted.parent_run.id))
+    barrier = Barrier(2)
+
+    def admit():
+        try:
+            return _independent_invoker(admitted, barrier, "race-parent-exit", {"value": "child"})
+        except (AccessDenied, FenceRejected):
+            return None
+
+    def publish():
+        db = Database(admitted.database_location)
+        with db.connect():
+            db.initialize(get_all_model_classes())
+            registry = _registry(db, admitted.store)
+            outputs = RunOutputService(db, {snapshot.provider_key: admitted.store}, capabilities=registry)
+            barrier.wait(timeout=10)
+            return outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        admission_result = pool.submit(admit)
+        publication_result = pool.submit(publish)
+        outcome = admission_result.result(timeout=30)
+        assert publication_result.result(timeout=30).status == RunStatus.PASSED
+    if outcome is not None:
+        assert _one(admitted.db, Run, outcome.run.id).status == RunStatus.CANCELLED
+        assert _one(admitted.db, RunPin, outcome.run.id).cancel_requested == 1
+    else:
+        assert admitted.db.all(RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]) == []
+
+
+@pytest.mark.parametrize("admitted", [{"parent_exit": "allow-authorized-detach"}], indirect=True)
+def test_parent_cancel_request_preserves_authorized_detached_child(admitted):
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "detach-parent-cancel", {"value": "child"}
+    ).run
+    assert admitted.outputs.cancel(admitted.actor, admitted.parent_run.id)
+    assert _one(admitted.db, RunPin, child.id).cancel_requested == 0
+    assert _one(admitted.db, Run, child.id).status == RunStatus.NOT_RUN
 
 
 def test_corrupt_child_lineage_rolls_back_parent_terminal_publication(admitted):
