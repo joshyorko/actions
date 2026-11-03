@@ -120,7 +120,7 @@ def _grant_deployment_ref(db, workspace, actor, deployment_ref):
 
 
 @pytest.fixture
-def admitted(database_location, foundry_package_store, tmp_path):
+def admitted(database_location, foundry_package_store, tmp_path, request):
     refs = _refs()
     workspace = refs.workspace
     actor = Actor(principal_id=str(uuid4()))
@@ -255,7 +255,9 @@ def admitted(database_location, foundry_package_store, tmp_path):
                 ),
             ),
             max_children=1,
-            parent_exit="cancel-children",
+            parent_exit=getattr(request, "param", {}).get(
+                "parent_exit", "cancel-children"
+            ),
         )
         parent_spec = specification(action_ref, action_cap, action_plan, (policy,))
         parent_revision = deployments.create(

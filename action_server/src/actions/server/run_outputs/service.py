@@ -24,9 +24,11 @@ from actions.server.run_outputs.models import (
     RunAccessGrant,
     RunAdmission,
     RunAttempt,
+    RunChildLineage,
     RunOutput,
     RunPin,
     Workspace,
+    run_child_identity_digest,
 )
 from actions.server.run_outputs.types import (
     Actor,
@@ -378,6 +380,81 @@ class RunOutputService:
         self.db = db
         self.providers = dict(providers)
         self.capabilities = capabilities
+
+    def _apply_parent_exit_policy(self, pin: RunPin, snapshot: ExecutionSnapshot) -> None:
+        """Apply a pinned parent's child policy inside its terminal transaction."""
+        lineage = self.db.all(RunChildLineage, where="parent_run_id=?", values=[pin.run_id])
+        if not lineage:
+            return
+        from actions.server.deployments.foundry_repository import FoundryRepository
+
+        stored = FoundryRepository(self.db).get_revision(snapshot.deployment)
+        if stored is None or stored.revision.ref != snapshot.deployment:
+            raise FenceRejected("parent delegation revision unavailable")
+        policies = [
+            policy
+            for policy in stored.revision.specification.internal_robot_delegations
+            if policy.parent_capability == snapshot.capability
+        ]
+        if len(policies) != 1 or len(lineage) > policies[0].max_children:
+            raise FenceRejected("parent delegation policy unavailable")
+        policy = policies[0]
+        bindings = {item.name: item for item in policy.bindings}
+        for row in sorted(lineage, key=lambda item: item.child_run_id):
+            binding = bindings.get(row.binding_name)
+            if (
+                row.workspace_id != pin.workspace_id
+                or row.parent_run_id != pin.run_id
+                or binding is None
+                or not row.logical_key_digest.startswith("sha256:")
+                or len(row.logical_key_digest) != 71
+                or any(char not in "0123456789abcdef" for char in row.logical_key_digest[7:])
+                or row.identity_digest != run_child_identity_digest(
+                    row.parent_run_id, row.binding_name, row.logical_key_digest
+                )
+            ):
+                raise FenceRejected("child lineage differs from parent policy")
+            child_pin = _lock_run(self.db, row.child_run_id)
+            child_snapshot = self._pinned(child_pin)
+            child = _one(self.db, Run, row.child_run_id)
+            if (
+                child_pin.workspace_id != pin.workspace_id
+                or child_pin.run_id != row.child_run_id
+                or child_snapshot.deployment != binding.target_deployment
+                or child_snapshot.capability != binding.target_capability
+                or child_snapshot.runtime_plan != binding.target_runtime_plan
+            ):
+                raise FenceRejected("child lineage target differs from policy")
+            if policy.parent_exit == "allow-authorized-detach":
+                continue
+            if policy.parent_exit != "cancel-children":
+                raise FenceRejected("parent exit policy unavailable")
+            if child.status in (RunStatus.PASSED, RunStatus.FAILED, RunStatus.CANCELLED):
+                continue
+            if child.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
+                raise FenceRejected("child lifecycle unavailable")
+            if child_pin.cancel_requested not in (0, 1):
+                raise FenceRejected("child cancellation state unavailable")
+            if child.status == RunStatus.NOT_RUN:
+                if child_pin.current_attempt_id or child_pin.epoch != 0 or child.result:
+                    raise FenceRejected("pending child lifecycle unavailable")
+            else:
+                if not child_pin.current_attempt_id:
+                    raise FenceRejected("active child Attempt unavailable")
+                child_attempt = _one(self.db, RunAttempt, child_pin.current_attempt_id)
+                if (
+                    child_attempt.run_id != child.id
+                    or child_attempt.workspace_id != pin.workspace_id
+                    or child_attempt.epoch != child_pin.epoch
+                    or child_attempt.state != "running"
+                ):
+                    raise FenceRejected("active child Attempt unavailable")
+            if not child_pin.cancel_requested:
+                _update(self.db, RunPin, row.child_run_id, {"cancel_requested": 1})
+            if child.status == RunStatus.NOT_RUN:
+                _update(self.db, Run, row.child_run_id, {"status": RunStatus.CANCELLED})
+            if not child_pin.cancel_requested or child.status == RunStatus.NOT_RUN:
+                _advance_lifecycle(self.db, row.child_run_id)
 
     def _authorize(
         self, actor: Actor, snapshot: ExecutionSnapshot, operation: str
@@ -882,6 +959,7 @@ class RunOutputService:
                     )
             # The live-lease predicate is evaluated at the terminal write itself.
             self._fence(fence)
+            self._apply_parent_exit_policy(pin, snapshot)
             if not _returning(
                 self.db,
                 "UPDATE run SET status=?, result=? WHERE id=? AND status=? AND EXISTS (SELECT 1 FROM run_pin p JOIN run_attempt a ON a.id=p.current_attempt_id WHERE p.run_id=run.id AND p.current_attempt_id=? AND p.epoch=? AND p.cancel_requested=0 AND a.owner_id=? AND a.state='running' AND CAST(a.lease_deadline_ms AS BIGINT)>"
