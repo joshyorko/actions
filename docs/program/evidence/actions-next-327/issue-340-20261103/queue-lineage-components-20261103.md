@@ -52,3 +52,20 @@ initial-denial checks passed both shutdown configurations. All were source
 checks supervised with the capacity guard and no owned process remaining; they
 do not qualify packaged native startup, a real ChatGPT host, or PostgreSQL.
 The SQLite domain test does not replace live PostgreSQL authorization parity.
+
+The current publication-policy adapter at `9df0482330a54af1c8531f7329ca6bbc317c5a2b`
+passed five SQLite cases with five PostgreSQL skips. Its first test attempt
+failed four tuple/list fixture assertions; the corrected worker-thread test also
+proved the real selected queue was resolved. The combined guard, facade, list
+and policy suite after lint corrections passed 25 cases with 15 PostgreSQL
+skips. The policy remains a preflight; the guard and domain port recheck actual
+publication and permissions.
+
+Source native MCP wiring at `a3529268ed493e0d7b45e34776213c87a1e0cef9`
+passed 18 startup, existing Canvas/MCP and protected-route cases with one
+PostgreSQL skip. The initial startup attempt failed because a test double lacked
+catalog identity; the corrected run includes a real SQLite policy/guard fixture.
+It does not prove a built or installed native Runtime, actual ChatGPT transport,
+or PostgreSQL. All supervisors reported no owned processes left. The failed and
+passing logs are in Library archive `libfile_b1e3d498c26c8191b3f02281a7f5d57f`,
+version 9.
