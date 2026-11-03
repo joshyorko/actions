@@ -97,5 +97,5 @@ provenance remains unverified. Existing Deployment service regressions passed
 26 cases with 25 skips. The first target-check attempt failed setup because its
 database-location fixture was not registered. All test supervisors reported
 no owned processes remaining. Raw passing and failed logs are retained in
-Library archive `libfile_b1e3d498c26c8191b3f02281a7f5d57f`; the final archive
-version for these checks must be recorded when uploaded.
+Library archive `libfile_b1e3d498c26c8191b3f02281a7f5d57f`, version 12 (SHA-256
+`10e574a16e53abd1b5a9a3dcf30894092c95b2c61e8c8edc8dbf789315e45d2d`).
