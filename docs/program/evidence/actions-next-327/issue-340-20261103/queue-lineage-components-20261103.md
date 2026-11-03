@@ -80,3 +80,22 @@ there is no immutable persisted Deployment delegation, host authorization,
 atomic child admission, process transport or installed RCC child proof. The
 failed and passing logs are retained in Library archive
 `libfile_b1e3d498c26c8191b3f02281a7f5d57f`, version 10.
+
+A reviewed completion supplied a concrete counterexample to queue publication
+isolation: an authorized input ItemView included the ID of a child in its
+unpublished `_output` queue. The model projection at
+`a5da58bc` omits parent/child IDs because ItemView does not identify their
+queues; domain and REST views remain unchanged. The focused suite passed 15
+cases with seven skips, including the SQLite/DuckDB reviewed-output regression.
+The first attempt stopped at missing provider fixture setup. This result does
+not establish PostgreSQL behavior.
+
+The persisted delegation schema and aligned value passed 36 combined cases.
+Deploy-time target checks at `c46572c6` passed five SQLite cases with five
+PostgreSQL skips using a registry-shaped test double; real installed registry
+provenance remains unverified. Existing Deployment service regressions passed
+26 cases with 25 skips. The first target-check attempt failed setup because its
+database-location fixture was not registered. All test supervisors reported
+no owned processes remaining. Raw passing and failed logs are retained in
+Library archive `libfile_b1e3d498c26c8191b3f02281a7f5d57f`; the final archive
+version for these checks must be recorded when uploaded.
