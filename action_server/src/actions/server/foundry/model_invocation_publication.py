@@ -107,7 +107,15 @@ class ModelInvocationPublicationGuard:
             return False
         if specification.canvas_application is None:
             return False
-        return any(
+        has_binding = any(
             binding.capability == snapshot.capability
             for binding in specification.canvas_bindings
+        )
+        if not has_binding:
+            return False
+        return any(
+            policy.capability == snapshot.capability
+            and policy.default_plan is not None
+            and policy.default_plan == snapshot.runtime_plan
+            for policy in specification.capability_plans
         )

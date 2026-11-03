@@ -252,3 +252,28 @@ def test_stale_and_revoked_snapshots_fail_before_admission(generic_world):
             lambda resolved: revoked_called.append(resolved),
         )
     assert revoked_called == []
+
+
+def test_canvas_binding_publishes_only_its_default_runtime_plan(generic_world):
+    from actions.server.deployments.foundry_values import CapabilityPlanPolicy
+    from actions.server.deployments.ids import PlanDigest
+
+    world = generic_world
+    selection = _selection(world, canvas_visibility="model")
+    original = selection.capability_plans[0]
+    alternate = original.default_plan.model_copy(
+        update={"plan_digest": PlanDigest("sha256:" + "f" * 64)}
+    )
+    plan = CapabilityPlanPolicy(
+        capability=original.capability,
+        mode="default-among-allowed",
+        allowed_plans=(original.default_plan, alternate),
+        default_plan=original.default_plan,
+    )
+    selection = selection.model_copy(update={"capability_plans": (plan,)})
+    snapshot = world.owner.snapshot
+    guard = ModelInvocationPublicationGuard(world.owner.deployments)
+    assert guard._published_to_model(selection, snapshot)
+    assert not guard._published_to_model(
+        selection, snapshot.model_copy(update={"runtime_plan": alternate})
+    )

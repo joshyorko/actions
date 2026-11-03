@@ -15,7 +15,9 @@ unchanged. Generic synchronous invocation and detached Task admission must
 check the exact current snapshot, live authorization and publication while
 holding the Run-counter and Workspace admission locks. A current model-visible
 Canvas binding also preserves existing Canvas invocation; an app-only binding
-does not publish its capability to a model. Release the locks before executing
+does not publish its capability to a model. Canvas-derived publication covers
+the binding's discovered default Runtime Plan, not every allowed alternate.
+Release the locks before executing
 the worker. Source-level checks alone do not establish installed or released
 support; qualify native discovery, real clients and backend parity separately.
 
