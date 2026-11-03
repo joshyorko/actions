@@ -69,7 +69,7 @@ def _admission_rows(db):
     )
 
 
-def test_unpublished_claimed_task_denied_without_admission_or_claim_mutation(claimed):
+def test_unpublished_claimed_task_denied_without_admission_or_claim_mutation(claimed):  # noqa: F811
     c = claimed()
     task = _context(c)
     spec = c.owner.deployments._repository.get_revision(task.snapshot.deployment)
@@ -91,3 +91,23 @@ def test_unpublished_claimed_task_denied_without_admission_or_claim_mutation(cla
 
     assert _admission_rows(c.db) == admission_before
     assert c.db.all(FencedWorkItem, where="id=?", values=[c.item]) == claim_rows_before
+
+
+def test_unpublished_claim_is_denied_as_model_task_but_trusted_admission_works(claimed):  # noqa: F811
+    """The model-publication boundary must not block the trusted worker path."""
+    c = claimed()
+    task = _context(c)
+    before = _admission_rows(c.db)
+    claim_before = c.db.all(FencedWorkItem, where="id=?", values=[c.item])
+    with pytest.raises(DeploymentAccessDenied):
+        task.tasks.create_claimed(
+            c.caller.actor, task.snapshot.workspace_id, task.snapshot, task.ref
+        )
+    assert _admission_rows(c.db) == before
+    assert c.db.all(FencedWorkItem, where="id=?", values=[c.item]) == claim_before
+
+    # The unpublished fixture already exercised the trusted claimed-worker
+    # dispatch path before model Task admission was attempted.
+    assert c.ticket.claim is not None and c.ticket.claim.item_id == c.item
+    assert c.db.all(Run, where="id=?", values=[c.ticket.fence.run_id])
+    assert not c.db.all(RunTaskReceipt, where="run_id=?", values=[c.ticket.fence.run_id])

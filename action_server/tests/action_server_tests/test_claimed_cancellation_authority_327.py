@@ -65,7 +65,7 @@ def state(c, ticket):
 def test_changed_ticket_rejected_before_transition(
     claimed, tmp_path, monkeypatch, damage
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     _, _, ticket, outcome = pending(c, tmp_path, monkeypatch)
     changed = ticket.model_copy(
         update=(
@@ -85,7 +85,7 @@ def test_changed_ticket_rejected_before_transition(
 def test_live_queue_cancel_revocation_blocks_confirmation(
     claimed, tmp_path, monkeypatch
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     _, _, ticket, outcome = pending(c, tmp_path, monkeypatch)
     changed = 0
     with c.db.transaction():
@@ -112,7 +112,7 @@ def test_live_queue_cancel_revocation_blocks_confirmation(
 def test_validation_failure_rolls_back_all_terminal_writes(
     claimed, tmp_path, monkeypatch
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     _, _, ticket, outcome = pending(c, tmp_path, monkeypatch)
     original = confirmation.validate_claimed_cancellation
     observed = []
@@ -139,7 +139,7 @@ def test_validation_failure_rolls_back_all_terminal_writes(
 def test_post_adapter_cancellation_requires_persisted_intent(
     claimed, tmp_path, user_cancel
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     ticket = t.worker.claim(first.task_id)

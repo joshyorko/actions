@@ -1586,3 +1586,6 @@ key. SQLite tests cover competing admissions and rollback inventories; the
 fixture uses synthetic compilation/preparation and PostgreSQL locking remains
 unverified. This component is not connected to Runtime IPC, child status or
 cancellation, and does not enforce parent-exit lifecycle yet.
+Positive model Task fixtures must explicitly publish the selected capability
+before resolving its immutable Deployment snapshot. Keep unpublished cases for
+model-denial coverage; trusted claimed-worker dispatch remains a separate path.

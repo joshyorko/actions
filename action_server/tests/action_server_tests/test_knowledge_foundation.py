@@ -131,6 +131,25 @@ def foundation(database_location, foundry_package_store):
         )
 
 
+def _migrate_historical_schema16(database_location, to_version):
+    from action_server_tests.foundry_historical import create_historical_schema
+
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes
+    from actions.server.migrations import MIGRATION_ID_TO_NAME, Migration, migrate_db
+    from actions.server.run_outputs.models import Workspace
+
+    db = Database(database_location)
+    with db.connect():
+        db.initialize(get_all_model_classes())
+        with db.transaction():
+            create_historical_schema(db, 16)
+            db.insert(Migration(16, MIGRATION_ID_TO_NAME[16]))
+            db.insert(Workspace(str(uuid4()), "active", 0))
+    assert migrate_db(database_location, to_version=to_version)
+    return db
+
+
 def register(g, key="definition"):
     return g.authority.register_definition(
         g.actor, g.spec, source_provider=g.descriptor.reference, idempotency_key=key
@@ -378,13 +397,15 @@ def test_revision_identity_and_strict_limits(foundation):
             KnowledgeRevisionSpec.model_validate_json(json.dumps(payload))
 
 
-def test_migration22_is_empty_forward_only_and_old_reader_refuses(foundation):
+def test_migration22_is_empty_forward_only_and_old_reader_refuses(database_location):
     from actions.server import migrations
 
-    g = foundation
-    # Fixture upgrades frozen schema16 through every migration including22.
-    assert max(row.id for row in g.db.all(migrations.Migration)) == 22
-    assert not g.db.all(KnowledgeCollectionRevision)
+    # Stop at 22 so these assertions remain about migration22 after newer
+    # migrations are added.
+    db = _migrate_historical_schema16(database_location, to_version=22)
+    with db.connect():
+        assert max(row.id for row in db.all(migrations.Migration)) == 22
+        assert not db.all(KnowledgeCollectionRevision)
     # Execute the exact prior migration-status implementation with its actual
     # version21 map, rather than simulating a hypothetical old-reader predicate.
     import base64
@@ -398,17 +419,17 @@ def test_migration22_is_empty_forward_only_and_old_reader_refuses(foundation):
     )
     from actions.server._database import Database
 
-    old_db = Database(g.db.db_path)
+    old_db = Database(db.db_path)
     with old_db.connect():
         status = namespace["_db_migration_status"](old_db)
     assert status == namespace["MigrationStatus"].TOO_NEW
 
 
 def test_fresh_schema22_has_empty_definitions(database_location):
-    from actions.server._models import create_db
     from actions.server.migrations import Migration
 
-    with create_db(database_location) as db:
+    db = _migrate_historical_schema16(database_location, to_version=22)
+    with db.connect():
         assert max(row.id for row in db.all(Migration)) == 22
         assert db.all(KnowledgeCollectionRevision) == []
         assert db.all(FoundryAccessGrant) == []

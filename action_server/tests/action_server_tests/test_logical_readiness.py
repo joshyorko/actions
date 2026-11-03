@@ -64,6 +64,61 @@ def task_host(g, snapshot):
     return host
 
 
+def publish_model_snapshot(g):
+    """Publish the selected capability before constructing a model Task."""
+    from uuid import uuid4
+
+    from actions.server.foundry.models import FoundryAccessGrant
+    from actions.server.foundry.sql_authorization import reference_grant_subject
+    from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputService
+
+    deployments = g.execution.deployments
+    current_snapshot = g.outputs.execution_context(g.actor, g.fence)[0]
+    current = deployments._repository.current(
+        current_snapshot.workspace_id, current_snapshot.deployment.deployment_id
+    )
+    specification = current.revision.specification.model_copy(
+        update={"model_published_capabilities": (current_snapshot.capability,)}
+    )
+    revision = deployments.publish(
+        g.actor,
+        current_snapshot.workspace_id,
+        current_snapshot.deployment.deployment_id,
+        current.revision.ref,
+        specification,
+        idempotency_key="readiness-model-published",
+    )
+    with g.db.transaction():
+        g.db.insert(
+            FoundryAccessGrant(
+                str(uuid4()),
+                current_snapshot.workspace_id,
+                g.actor.principal_id,
+                "reference",
+                reference_grant_subject(revision.ref),
+                '["deploy","execute"]',
+            )
+        )
+    snapshot = deployments.resolve(
+        g.actor,
+        current_snapshot.workspace_id,
+        current_snapshot.deployment.deployment_id,
+        current_snapshot.capability,
+    ).snapshot
+    control = RunOutputControlPlane(g.db, capabilities=g.registry)
+    control.register(snapshot)
+    control.grant(g.actor, revision.ref, {"execute", "read", "cancel"})
+    outputs = RunOutputService(
+        g.db, {snapshot.provider_key: g.blobs}, capabilities=g.registry
+    )
+    published = SimpleNamespace(**vars(g))
+    published.outputs = outputs
+    published.execution = type(g.execution)(
+        deployments, g.registry, outputs, g.factory
+    )
+    return published, snapshot
+
+
 def test_missing_selected_dependency_blocks_task_admission(logical, monkeypatch):
     g = logical
     snapshot = g.outputs.execution_context(g.actor, g.fence)[0]
@@ -139,7 +194,7 @@ def test_selected_postgres_csv_does_not_require_unused_duckdb(logical, monkeypat
 
 def test_present_dependency_keeps_task_admission_unchanged(logical):
     g = logical
-    snapshot = g.outputs.execution_context(g.actor, g.fence)[0]
+    g, snapshot = publish_model_snapshot(g)
     tasks = TaskService(
         DetachedActions(g.execution.deployments, g.outputs),
         readiness=task_host(g, snapshot),

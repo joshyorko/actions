@@ -7140,3 +7140,11 @@ process-lifetime proof. Require the supervised child to exit successfully before
 restart or aggregate acceptance. Diagnose residual resources with type/count-only
 instrumentation, preserve timeouts as failures, and close only resources owned by
 the adapter; never force a successful exit to conceal unknown handles.
+
+Historical migration tests must pin the version they assert and separately test
+newer migrations; `CURRENT_VERSION` is not a stable substitute for schema 22.
+Release-branch pull requests must exercise the generated Action Server Tests
+workflow. Its Linux PostgreSQL fixture is disposable CI state, not authority to
+create roles, grants or credentials in a separate environment. Its startup and
+`always()` cleanup handle ordinary step failures; runner loss cannot be proven
+clean by a local Docker double and must be reported from actual CI evidence.

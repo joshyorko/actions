@@ -292,6 +292,7 @@ def admitted(database_location, foundry_package_store, tmp_path):
         admission = InternalChildAdmission(detached)
         yield SimpleNamespace(
             db=db,
+            database_location=database_location,
             store=foundry_package_store,
             workspace=workspace,
             actor=actor,
@@ -330,7 +331,7 @@ def _durable_ids(db):
 
 def _independent_invoker(admitted, barrier, key, payload):
     """Create a second SQL Database and connection, as a separate worker uses."""
-    db = Database(admitted.db.db_path)
+    db = Database(admitted.database_location)
     with db.connect():
         db.initialize(get_all_model_classes())
         registry = _registry(db, admitted.store)
@@ -436,13 +437,7 @@ def test_internal_child_rejects_parent_already_lineaged_as_child(admitted):
     assert len(admitted.db.all(Run)) == before
 
 
-def _require_sqlite_admission_test(admitted):
-    if admitted.db.backend_name != "sqlite":
-        pytest.skip("deterministic two-connection race is qualified on SQLite only")
-
-
 def test_internal_child_concurrent_same_key_replays_one_child(admitted):
-    _require_sqlite_admission_test(admitted)
     before = _durable_ids(admitted.db)
     barrier = Barrier(2)
     with ThreadPoolExecutor(max_workers=2) as pool:
@@ -476,7 +471,6 @@ def test_internal_child_concurrent_same_key_replays_one_child(admitted):
 
 
 def test_internal_child_concurrent_distinct_keys_quota_leaves_no_orphans(admitted):
-    _require_sqlite_admission_test(admitted)
     before = _durable_ids(admitted.db)
     barrier = Barrier(2)
 
