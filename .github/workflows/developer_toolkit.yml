@@ -110,6 +110,30 @@ jobs:
             test -x "${package}/.venv/bin/python"
           done
           rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+      - name: Verify RCC env exec descriptor forwarding (Linux primary)
+        if: runner.os == 'Linux' && matrix.lane == 'primary' && github.event_name == 'pull_request' && startsWith(github.base_ref, 'release/')
+        shell: bash
+        timeout-minutes: 25
+        env:
+          ACTIONS_REAL_RCC_FD_TEST: '1'
+          ACTIONS_RUNTIME_RCC_BINARY: ${{ github.workspace }}/rcc
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+        run: |
+          set -Eeuo pipefail
+          python3 -m venv "$RUNNER_TEMP/actions-rcc-fd-python"
+          probe_python="$RUNNER_TEMP/actions-rcc-fd-python/bin/python"
+          "$probe_python" -m pip install pytest==8.3.4 psutil==7.2.2
+          "$probe_python" -c 'import ctypes, os, signal; assert hasattr(os, "pidfd_open") and hasattr(signal, "pidfd_send_signal") and hasattr(ctypes.CDLL(None), "prctl")'
+          "$probe_python" -m pytest -s -q --basetemp "$RUNNER_TEMP/actions-rcc-fd-test" \
+            --junitxml "$RUNNER_TEMP/actions-rcc-fd-junit.xml" \
+            developer/tests/test_rcc_env_exec_fd_real.py
+      - name: Upload RCC descriptor test receipt
+        if: always() && runner.os == 'Linux' && matrix.lane == 'primary' && github.event_name == 'pull_request' && startsWith(github.base_ref, 'release/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: rcc-descriptor-test-receipt
+          path: ${{ runner.temp }}/actions-rcc-fd-junit.xml
+          if-no-files-found: error
       - name: Package task smoke (Linux)
         if: runner.os == 'Linux'
         shell: bash
