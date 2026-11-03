@@ -11,9 +11,13 @@ authorization of the exact immutable reference.
 The candidate Deployment value supports an explicit, scoped
 `model_published_capabilities` selection. Its empty value is omitted from the
 canonical wire representation so earlier Deployment revision identities stay
-unchanged. This value alone does not establish discovery or invocation
-enforcement, nor does it prove installed or released support; qualify those
-paths separately, including detached Tasks and Canvas compatibility.
+unchanged. Generic synchronous invocation and detached Task admission must
+check the exact current snapshot, live authorization and publication while
+holding the Run-counter and Workspace admission locks. A current model-visible
+Canvas binding also preserves existing Canvas invocation; an app-only binding
+does not publish its capability to a model. Release the locks before executing
+the worker. Source-level checks alone do not establish installed or released
+support; qualify native discovery, real clients and backend parity separately.
 
 Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
 through the activated cloud toolchain for an arbitrary bounded qualification

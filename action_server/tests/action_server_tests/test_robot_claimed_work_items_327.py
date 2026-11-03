@@ -60,7 +60,7 @@ def claimed(database_location, foundry_package_store, tmp_path):
     with _runtime_database(database_location, refs.workspace, ()) as db:
         _grant(db, refs, actor)
 
-        def setup(mode="consumer", with_claim=True):
+        def setup(mode="consumer", with_claim=True, model_published=False):
             registry = _registry(db, foundry_package_store)
             request = request_for().model_copy(
                 update={"work_items": WorkItemDeclaration(mode=mode)}
@@ -127,6 +127,7 @@ def claimed(database_location, foundry_package_store, tmp_path):
                 policy=refs.policy,
                 output_provider=refs.output_provider,
                 work_item_policies=(policy,),
+                model_published_capabilities=(cap,) if model_published else (),
             )
             revision = deployments.create(
                 actor,

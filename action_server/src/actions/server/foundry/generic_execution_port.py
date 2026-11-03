@@ -262,6 +262,11 @@ class GenericCanvasExecution(CanvasPort):
                     policies[0],
                     self.authorization,
                 )
+            from actions.server.foundry.model_invocation_publication import (
+                ModelInvocationPublicationGuard,
+            )
+
+            publication_guard = ModelInvocationPublicationGuard(self.deployments)
             if isinstance(request, GenericClaimInvocation):
                 if not isinstance(service, GenericWorkItemExecution):
                     raise AccessDenied("ordinary none cannot consume a claim")
@@ -272,14 +277,22 @@ class GenericCanvasExecution(CanvasPort):
                     or claim.owner_id != self.worker_id
                 ):
                     raise AccessDenied("exact trusted-worker input claim required")
-                ticket = service.dispatch(
-                    caller,
-                    WorkItemClaim(claim.item_id, self.worker_id, claim.epoch),
-                    lease_seconds=60,
+                ticket = publication_guard.admit(
+                    actor,
+                    snapshot,
+                    lambda _resolved: service.dispatch(
+                        caller,
+                        WorkItemClaim(claim.item_id, self.worker_id, claim.epoch),
+                        lease_seconds=60,
+                    ),
                 )
             else:
-                ticket = service.dispatch_standalone(
-                    caller, request.inputs, request.idempotency_key, lease_seconds=60
+                ticket = publication_guard.admit(
+                    actor,
+                    snapshot,
+                    lambda _resolved: service.dispatch_standalone(
+                        caller, request.inputs, request.idempotency_key, lease_seconds=60
+                    ),
                 )
             run = _one(self.outputs.db, Run, ticket.fence.run_id)
             if run.status in (RunStatus.PASSED, RunStatus.FAILED):
