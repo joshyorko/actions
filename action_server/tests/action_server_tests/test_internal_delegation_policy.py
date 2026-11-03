@@ -27,6 +27,10 @@ from actions.server.deployments.ids import (
     WorkerProfileRevisionRef,
     WorkspacePolicyRevisionRef,
 )
+from actions.server.deployments.foundry_values import (
+    InternalRobotBinding as PersistedRobotBinding,
+    InternalRobotDelegationPolicy as PersistedRobotPolicy,
+)
 from actions.server.foundry.internal_delegation import (
     ActionParentSnapshot,
     DetachPolicy,
@@ -140,6 +144,57 @@ def test_policy_resolves_only_named_exact_robot_snapshot_and_is_immutable():
         policy.target_for("arbitrary-child")
     with pytest.raises(FrozenInstanceError):
         policy.max_child_runs = 99
+
+
+def test_persisted_policy_maps_to_exact_resolved_snapshots_and_exit_choice():
+    parent_snapshot = _snapshot(capability="parent")
+    target_snapshot = _snapshot(
+        workspace=parent_snapshot.deployment.workspace_id,
+        capability="robot",
+        runtime="rcc",
+    )
+    persisted = PersistedRobotPolicy(
+        parent_capability=parent_snapshot.capability,
+        bindings=(
+            PersistedRobotBinding(
+                name="billing",
+                target_deployment=target_snapshot.deployment,
+                target_capability=target_snapshot.capability,
+                target_runtime_plan=target_snapshot.runtime_plan,
+            ),
+        ),
+        max_children=4,
+        parent_exit="cancel-children",
+    )
+
+    resolved = InternalDelegationPolicy.from_deployment_policy(
+        _parent(parent_snapshot),
+        persisted,
+        {"billing": _robot(target_snapshot)},
+    )
+
+    assert resolved.target_for("billing").snapshot == target_snapshot
+    assert resolved.max_child_runs == persisted.max_children
+    assert resolved.detach_policy is DetachPolicy.CANCEL_ON_PARENT_EXIT
+
+    other_snapshot = _snapshot(
+        workspace=parent_snapshot.deployment.workspace_id,
+        capability="other-robot",
+        runtime="rcc",
+    )
+    with pytest.raises(ValueError, match="differs from persisted target"):
+        InternalDelegationPolicy.from_deployment_policy(
+            _parent(parent_snapshot),
+            persisted,
+            {"billing": _robot(other_snapshot)},
+        )
+
+
+@pytest.mark.parametrize("name", ["", "1billing", "billing:run", "x" * 65, "écho"])
+def test_binding_name_matches_persisted_schema(name):
+    target = _snapshot(capability="robot")
+    with pytest.raises(ValueError, match="binding name"):
+        InternalDelegationBinding(name=name, target=_robot(target))
 
 
 @pytest.mark.parametrize(
