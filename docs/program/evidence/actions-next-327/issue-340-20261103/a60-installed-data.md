@@ -32,6 +32,12 @@ pidfd/subreaper supervisor returned PASS, command exit 0, and no remaining
 owned processes. The capacity guard recorded minimum 12,483,379,200 bytes
 free, above the unchanged 10 GiB floor plus 48 MiB guard.
 
+The portable receipt bundle is Library `libfile_c99c13a9d4848191aec4f1d047674113`
+version 0, 35,076 bytes, ZIP SHA-256
+`4fd955f2854a6f00d2ac8a008b52bfdd9d29f8f5c2b325fbb070662d8148f41e`.
+It retains the three harness versions, their logs and supervisors, and the
+passing runner; it does not contain the candidate wheels or fixture database.
+
 Two earlier attempts remain failures. The original harness
 `0f0ccc79a5e182999bda66a3abfe0dd7a883be89dec5017d0f90c804e8e31530`
 stopped on the second provider setup because it omitted the current catalog CAS
