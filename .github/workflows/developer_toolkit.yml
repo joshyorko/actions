@@ -123,6 +123,9 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/actions-rcc-fd-python"
           probe_python="$RUNNER_TEMP/actions-rcc-fd-python/bin/python"
           "$probe_python" -m pip install pytest==8.3.4 psutil==7.2.2
+          "$probe_python" --version
+          "$probe_python" -m pip show pytest psutil
+          git rev-parse HEAD HEAD^{tree}
           "$probe_python" -c 'import ctypes, os, signal; assert hasattr(os, "pidfd_open") and hasattr(signal, "pidfd_send_signal") and hasattr(ctypes.CDLL(None), "prctl")'
           "$probe_python" -m pytest -s -q --basetemp "$RUNNER_TEMP/actions-rcc-fd-test" \
             --junitxml "$RUNNER_TEMP/actions-rcc-fd-junit.xml" \
