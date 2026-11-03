@@ -21,9 +21,12 @@ Release the locks before executing
 the worker. Source-level checks alone do not establish installed or released
 support; qualify native discovery, real clients and backend parity separately.
 
-The headless discovery component enumerates bounded active Deployment heads,
-checks publication and live grants, and invalidates pagination after head
-changes. It strips free-form schema annotations and fails closed for unsupported
+The headless discovery component scans bounded active Deployment heads, checks
+publication and live grants, and binds pagination to the authorized visible
+descriptor set. Hidden-head changes do not alter its cursor; visible-set changes
+invalidate it. Overflow returns no partial page, but the fixed inventory
+threshold and variable scan time can reveal coarse hidden inventory information.
+It strips free-form schema annotations and fails closed for unsupported
 schema resource semantics. Publishing an input contract exposes its property
 names and validation constraints; authors must keep secrets out of those fields.
 The current resolver still requires Workspace-wide execute authority, even

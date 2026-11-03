@@ -46,9 +46,10 @@ from actions.server.run_outputs.service import (
 from actions.server.run_outputs.types import ExecutionSnapshot
 
 MAX_PAGE_SIZE = 3
-MAX_DEPLOYMENTS_PER_PAGE = 100
+MAX_DISCOVERY_DEPLOYMENTS = 100
 MAX_CANDIDATES_PER_PAGE = 256
 MAX_DESCRIPTOR_BYTES = 128 * 1024
+MAX_PAGE_BYTES = 128 * 1024
 MAX_CURSOR_BYTES = 1024
 MAX_CURSOR_OFFSET = 100_000
 
@@ -87,7 +88,6 @@ _SCHEMA_FIELDS = {
     "minLength",
     "maxLength",
     "pattern",
-    "format",
     "minimum",
     "maximum",
     "exclusiveMinimum",
@@ -116,6 +116,10 @@ _SCHEMA_ANNOTATIONS = {
     "writeOnly",
     "examples",
     "example",
+    # Runtime input validation uses Draft202012Validator without a
+    # FormatChecker, so `format` is informational here. Keeping it would echo
+    # arbitrary schema-author text without changing accepted input values.
+    "format",
     # Draft 2020-12 content keywords annotate string content; they do not
     # assert validation constraints for the runtime's Draft202012Validator.
     "contentEncoding",
@@ -167,28 +171,21 @@ class HeadlessDiscoveryPage(BaseModel):
 class _Cursor(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
     workspace_id: str = Field(alias="workspaceId", min_length=36, max_length=36)
-    deployment_offset: int = Field(
-        alias="deploymentOffset", ge=0, le=MAX_CURSOR_OFFSET
-    )
-    candidate_offset: int = Field(
-        alias="candidateOffset", ge=0, le=MAX_CURSOR_OFFSET
-    )
-    inventory_digest: str = Field(
-        alias="inventoryDigest", pattern=r"^sha256:[0-9a-f]{64}$"
+    visible_offset: int = Field(alias="visibleOffset", ge=0, le=MAX_CURSOR_OFFSET)
+    visible_digest: str = Field(
+        alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$"
     )
 
 
 def _encode_cursor(
     workspace: WorkspaceId,
-    deployment_offset: int,
-    candidate_offset: int,
-    inventory_digest: str,
+    visible_offset: int,
+    visible_digest: str,
 ) -> str:
     payload = _Cursor(
         workspaceId=str(workspace.root),
-        deploymentOffset=deployment_offset,
-        candidateOffset=candidate_offset,
-        inventoryDigest=inventory_digest,
+        visibleOffset=visible_offset,
+        visibleDigest=visible_digest,
     ).model_dump(mode="json", by_alias=True)
     raw = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()
     encoded = base64.urlsafe_b64encode(raw).decode().rstrip("=")
@@ -296,46 +293,42 @@ class HeadlessCapabilityDiscovery:
             raise ValueError("discovery page size outside bound")
         workspace = WorkspaceId.model_validate(caller.workspace_id)
         after = _decode_cursor(cursor, workspace)
-        descriptors: list[HeadlessInvocationDescriptor] = []
-        scanned_candidates = 0
-        deployment_offset = after.deployment_offset if after else 0
-        candidate_offset = after.candidate_offset if after else 0
-        next_position: tuple[int, int] | None = None
-
         with self.db.connect(), _transaction(self.db):
             # Establish Workspace authority on the connected SQL worker before
             # enumerating even internal IDs, within the same read transaction.
             self.deployments._authorization.require_workspace(
                 caller.actor, workspace, "execute"
             )
-            inventory_digest = self._inventory_digest(workspace)
-            if after is not None and after.inventory_digest != inventory_digest:
-                raise AccessDenied("discovery catalog changed; restart pagination")
-            deployments_scanned = 0
-            while deployments_scanned < MAX_DEPLOYMENTS_PER_PAGE:
-                raw_deployment_id = self._deployment_at(workspace, deployment_offset)
-                if raw_deployment_id is None:
-                    break
+            deployment_ids = self._bounded_deployment_ids(workspace)
+            if deployment_ids is None:
+                # Do not return a partial visible prefix or continuation whose
+                # completion would depend on private rows beyond this bound.
+                return HeadlessDiscoveryPage(
+                    descriptors=(), availability="unavailable", nextCursor=None
+                )
+            descriptors: list[HeadlessInvocationDescriptor] = []
+            candidate_count = 0
+            for raw_deployment_id in deployment_ids:
                 deployment_id = DeploymentId.model_validate(raw_deployment_id)
                 stored = self.deployments._repository.current(workspace, deployment_id)
                 if stored is None:
-                    deployment_offset += 1
-                    candidate_offset = 0
-                    deployments_scanned += 1
                     continue
                 revision = stored.revision
                 selection = revision.specification
                 plan_by_capability = {
                     item.capability: item for item in selection.capability_plans
                 }
-                paused = False
                 candidates = self._candidates(
                     selection.model_published_capabilities, plan_by_capability
                 )
-                for index, (capability, runtime_plan) in enumerate(candidates):
-                    if index < candidate_offset:
-                        continue
-                    scanned_candidates += 1
+                for capability, runtime_plan in candidates:
+                    candidate_count += 1
+                    if candidate_count > MAX_CANDIDATES_PER_PAGE:
+                        return HeadlessDiscoveryPage(
+                            descriptors=(),
+                            availability="unavailable",
+                            nextCursor=None,
+                        )
                     descriptor = self._project(
                         caller,
                         workspace,
@@ -345,84 +338,100 @@ class HeadlessCapabilityDiscovery:
                         runtime_plan,
                     )
                     if descriptor is not None:
-                        candidate = [
-                            item.model_dump(mode="json", by_alias=True)
-                            for item in (*descriptors, descriptor)
-                        ]
                         try:
-                            _canonical(candidate, MAX_DESCRIPTOR_BYTES)
+                            _canonical(
+                                descriptor.model_dump(mode="json", by_alias=True),
+                                MAX_DESCRIPTOR_BYTES,
+                            )
                         except ValueError:
-                            if index == 0 and not descriptors:
-                                raise AccessDenied(
-                                    "discovery descriptor exceeds its bound"
-                                ) from None
-                            next_position = (deployment_offset, index)
-                            paused = True
-                            break
+                            return HeadlessDiscoveryPage(
+                                descriptors=(),
+                                availability="unavailable",
+                                nextCursor=None,
+                            )
                         descriptors.append(descriptor)
-                    candidate_offset = index + 1
-                    if len(descriptors) >= limit:
-                        next_position = (deployment_offset, candidate_offset)
-                        paused = True
-                        break
-                    if scanned_candidates >= MAX_CANDIDATES_PER_PAGE:
-                        next_position = (deployment_offset, candidate_offset)
-                        paused = True
-                        break
-                if paused:
+            visible_digest = self._visible_digest(descriptors)
+            if after is not None and after.visible_digest != visible_digest:
+                raise AccessDenied("visible discovery set changed; restart pagination")
+            offset = after.visible_offset if after else 0
+            if offset > len(descriptors):
+                raise AccessDenied("invalid discovery cursor")
+            page_descriptors: list[HeadlessInvocationDescriptor] = []
+            for descriptor in descriptors[offset : offset + limit]:
+                candidate_count = len(page_descriptors) + 1
+                candidate_offset = offset + candidate_count
+                candidate_cursor = (
+                    _encode_cursor(workspace, candidate_offset, visible_digest)
+                    if candidate_offset < len(descriptors)
+                    else None
+                )
+                candidate_page = HeadlessDiscoveryPage(
+                    descriptors=tuple((*page_descriptors, descriptor)),
+                    availability="authorized",
+                    nextCursor=candidate_cursor,
+                )
+                if self._page_size(candidate_page) > MAX_PAGE_BYTES:
+                    if not page_descriptors:
+                        return HeadlessDiscoveryPage(
+                            descriptors=(),
+                            availability="unavailable",
+                            nextCursor=None,
+                        )
                     break
-                deployment_offset += 1
-                candidate_offset = 0
-                deployments_scanned += 1
-            if (
-                next_position is None
-                and deployments_scanned == MAX_DEPLOYMENTS_PER_PAGE
-            ):
-                next_position = (deployment_offset, 0)
-            if self._inventory_digest(workspace) != inventory_digest:
-                raise AccessDenied("discovery catalog changed; restart pagination")
+                page_descriptors.append(descriptor)
+            next_offset = offset + len(page_descriptors)
+            next_cursor = (
+                _encode_cursor(workspace, next_offset, visible_digest)
+                if next_offset < len(descriptors)
+                else None
+            )
+            result = HeadlessDiscoveryPage(
+                descriptors=tuple(page_descriptors),
+                availability="authorized" if page_descriptors else "unavailable",
+                nextCursor=next_cursor,
+            )
+            if self._page_size(result) > MAX_PAGE_BYTES:
+                return HeadlessDiscoveryPage(
+                    descriptors=(), availability="unavailable", nextCursor=None
+                )
+            return result
 
-        next_cursor = (
-            _encode_cursor(workspace, *next_position, inventory_digest)
-            if next_position is not None
-            else None
-        )
-        return HeadlessDiscoveryPage(
-            descriptors=tuple(descriptors),
-            availability="authorized" if descriptors else "unavailable",
-            nextCursor=next_cursor,
-        )
+    @staticmethod
+    def _page_size(page: HeadlessDiscoveryPage) -> int:
+        # Match the Canvas MCP envelope's json.dumps sizing before its JSON
+        # canonicalization; default separators include the same whitespace.
+        encoded = json.dumps(
+            page.model_dump(mode="json", by_alias=True),
+            ensure_ascii=False,
+            allow_nan=False,
+        ).encode("utf-8")
+        return len(encoded)
 
-    def _deployment_at(self, workspace: WorkspaceId, offset: int) -> str | None:
+    def _bounded_deployment_ids(self, workspace: WorkspaceId) -> tuple[str, ...] | None:
+        """Return the bounded active-head inventory, or None on generic overflow."""
         db = self.db
         with db.cursor() as cursor:
             db.execute_query(
                 cursor,
                 "SELECT deployment_id FROM foundry_deployment_head "
-                "WHERE workspace_id=? ORDER BY deployment_id LIMIT 1 OFFSET ?",
-                [str(workspace.root), offset],
-            )
-            row = cursor.fetchone()
-            return str(row[0]) if row else None
-
-    def _inventory_digest(self, workspace: WorkspaceId) -> str:
-        with self.db.cursor() as cursor:
-            self.db.execute_query(
-                cursor,
-                "SELECT deployment_id, active_revision_id "
-                "FROM foundry_deployment_head WHERE workspace_id=? "
-                "ORDER BY deployment_id LIMIT ?",
-                [str(workspace.root), MAX_CURSOR_OFFSET + 1],
+                "WHERE workspace_id=? ORDER BY deployment_id LIMIT ?",
+                [str(workspace.root), MAX_DISCOVERY_DEPLOYMENTS + 1],
             )
             rows = cursor.fetchall()
-        if len(rows) > MAX_CURSOR_OFFSET:
-            raise AccessDenied("discovery catalog exceeds its bound")
-        digest = hashlib.sha256(b"actions.headless-discovery-inventory/v1\x00")
-        for deployment_id, revision_id in rows:
-            digest.update(str(deployment_id).encode("ascii"))
-            digest.update(b"\x00")
-            digest.update(str(revision_id).encode("ascii"))
-            digest.update(b"\x00")
+        if len(rows) > MAX_DISCOVERY_DEPLOYMENTS:
+            return None
+        return tuple(str(row[0]) for row in rows)
+
+    @staticmethod
+    def _visible_digest(descriptors: list[HeadlessInvocationDescriptor]) -> str:
+        digest = hashlib.sha256(b"actions.headless-discovery-visible/v1\x00")
+        for descriptor in descriptors:
+            payload = _canonical(
+                descriptor.model_dump(mode="json", by_alias=True),
+                MAX_DESCRIPTOR_BYTES,
+            ).encode("utf-8")
+            digest.update(len(payload).to_bytes(8, "big"))
+            digest.update(payload)
         return "sha256:" + digest.hexdigest()
 
     @staticmethod
