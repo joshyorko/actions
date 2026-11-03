@@ -55,6 +55,7 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     20: "add_run_execution_intent",
     21: "add_run_task_receipts",
     22: "add_knowledge_revisions",
+    23: "add_run_child_lineage",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())

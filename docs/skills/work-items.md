@@ -1525,3 +1525,12 @@ actual selected runner. Standalone eligibility must continue rejecting Work Item
 consumers. Preserve claim-policy/declaration agreement, no-output restrictions,
 current activation, host identity and preparation checks. Synthetic readiness
 stubs prove sequencing only; include the actual runner in admission regressions.
+
+Internal child Run lineage is identity metadata, not a Task receipt or an
+authorization grant. The additive lineage table records a stable parent,
+binding and logical-key digest without an attempt epoch, and uniquely associates
+one child Run. Its Run IDs have no database foreign keys: the eventual host
+admission must verify both references and their Workspace inside the same
+transaction as the fenced, authorized child admission. The model and SQLite
+migration alone do not provide delegation policy, a Runtime transport, detach
+or cancellation semantics, PostgreSQL qualification, or a working child Run.
