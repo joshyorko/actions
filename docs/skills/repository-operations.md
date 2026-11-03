@@ -19,6 +19,15 @@ does not publish its capability to a model. Release the locks before executing
 the worker. Source-level checks alone do not establish installed or released
 support; qualify native discovery, real clients and backend parity separately.
 
+The headless discovery component enumerates bounded active Deployment heads,
+checks publication and live grants, and invalidates pagination after head
+changes. It strips free-form schema annotations and fails closed for unsupported
+schema resource semantics. Publishing an input contract exposes its property
+names and validation constraints; authors must keep secrets out of those fields.
+The current resolver still requires Workspace-wide execute authority, even
+when a Deployment-specific grant exists. The component is not yet native MCP
+startup or installed-client proof.
+
 Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
 through the activated cloud toolchain for an arbitrary bounded qualification
 script. `rcc run` selects manifest tasks and is not a generic command gateway.
