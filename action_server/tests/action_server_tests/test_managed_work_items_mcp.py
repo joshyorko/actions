@@ -5,12 +5,20 @@ import json
 import threading
 from uuid import uuid4
 
+import pytest
+from action_server_tests import test_generic_work_item_execution as generic_fixtures
+from actions.server.deployments.foundry_values import DeploymentSpecification
+from actions.server.foundry.models import FoundryAccessGrant
+from actions.server.foundry.sql_authorization import reference_grant_subject
 from actions.server.managed_work_items.contracts import (
     Capabilities,
     ManagedCaller,
     Operation,
     Permission,
     QueueRef,
+)
+from actions.server.managed_work_items.model_publication import (
+    ModelWorkItemPublicationGuard,
 )
 from actions.server.managed_work_items.mcp import (
     ManagedWorkItemsMcp,
@@ -21,6 +29,75 @@ from actions.server.managed_work_items.mcp import (
 )
 from actions.server.run_outputs.types import Actor
 
+pytest_plugins = ["action_server_tests.foundry_fixtures"]
+
+
+@pytest.fixture
+def generic_world(database_location, foundry_package_store):
+    source = generic_fixtures.generic.__wrapped__(
+        database_location, foundry_package_store
+    )
+    setup = next(source)
+    try:
+        yield setup("optional")
+    finally:
+        try:
+            next(source)
+        except StopIteration:
+            pass
+
+
+def _publish_model_queue(g, queue_selection, idempotency_key):
+    snapshot = g.owner.snapshot
+    current = g.owner.deployments._repository.current(
+        snapshot.deployment.workspace_id, snapshot.deployment.deployment_id
+    )
+    generic_fixtures.grant(
+        g.db,
+        g.caller.actor,
+        snapshot.deployment.workspace_id,
+        "reference",
+        reference_grant_subject(current.revision.ref),
+        ["deploy"],
+    )
+    values = current.revision.specification.model_dump(mode="json", by_alias=True)
+    values["model_published_work_item_queues"] = queue_selection
+    specification = DeploymentSpecification.model_validate_json(json.dumps(values))
+    revision = g.owner.deployments.publish(
+        g.caller.actor,
+        snapshot.deployment.workspace_id,
+        snapshot.deployment.deployment_id,
+        current.revision.ref,
+        specification,
+        idempotency_key=idempotency_key,
+    )
+    generic_fixtures.grant(
+        g.db,
+        g.caller.actor,
+        snapshot.deployment.workspace_id,
+        "reference",
+        reference_grant_subject(revision.ref),
+        [
+            "deploy",
+            "execute",
+            "read_application",
+            *[permission.value for permission in Permission],
+        ],
+    )
+    return QueueRef(
+        workspace_id=snapshot.deployment.workspace_id,
+        deployment=revision.ref,
+        queue_id="generic-input",
+    )
+
+
+class _PassingPublicationGuard:
+    def __init__(self):
+        self.calls = []
+
+    def call(self, caller, queue, operation, domain_call):
+        self.calls.append((caller, queue, operation))
+        return domain_call(caller, queue, operation)
 
 def _queue(workspace: str, queue_id: str, deployment: str | None = None) -> QueueRef:
     deployment_id = deployment or str(uuid4())
@@ -56,6 +133,59 @@ def test_missing_publication_or_authentication_denies_catalog_and_calls():
         assert result.is_error
         unauthenticated = ManagedWorkItemsMcp(object(), None, object())
         assert await unauthenticated.tools(object()) == []
+
+    asyncio.run(check())
+
+
+def test_queue_targeted_facade_fails_closed_without_atomic_guard():
+    workspace = str(uuid4())
+    queue = _queue(workspace, "published")
+    caller = ManagedCaller(actor=Actor(principal_id=str(uuid4())))
+
+    class Policy:
+        def workspaces(self, _):
+            return [workspace]
+
+        def allows(self, _, requested, operation):
+            return requested == queue.workspace_id and operation == Operation.LIST
+
+        def queues(self, _, requested, operation):
+            if requested == queue.workspace_id and operation == Operation.LIST:
+                return [queue]
+            return []
+
+    class Port:
+        calls = 0
+
+        def capabilities(self, _, requested):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=requested,
+                operations=(Operation.LIST,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, *_):
+            self.calls += 1
+            return {"items": [], "next_cursor": None, "server_time_ms": "1"}
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        port = Port()
+        facade = ManagedWorkItemsMcp(port, auth, Policy())
+        assert await facade.tools(object()) == []
+        result = await facade.call(
+            object(),
+            "managed_items_list",
+            {"operation": "items.list", "queue": queue.model_dump(mode="json")},
+        )
+        assert result.is_error
+        assert port.calls == 0
 
     asyncio.run(check())
 
@@ -448,8 +578,10 @@ def test_exact_queue_publication_is_rechecked_and_guessed_queue_never_reaches_po
         return caller
 
     async def check():
-        policy, port = Policy(), Port()
-        facade = ManagedWorkItemsMcp(port, auth, policy)
+        policy, port, guard = Policy(), Port(), _PassingPublicationGuard()
+        facade = ManagedWorkItemsMcp(
+            port, auth, policy, publication_guard=guard
+        )
         catalog = await facade.tools(object())
         assert [tool.name for tool in catalog] == ["managed_items_list"]
         request = {
@@ -457,6 +589,7 @@ def test_exact_queue_publication_is_rechecked_and_guessed_queue_never_reaches_po
             "queue": published_queue.model_dump(mode="json"),
         }
         assert not (await facade.call(object(), "managed_items_list", request)).is_error
+        assert guard.calls == [(caller, published_queue, Operation.LIST.value)]
         guessed = {
             **request,
             "queue": guessed_queue.model_dump(mode="json"),
@@ -470,6 +603,164 @@ def test_exact_queue_publication_is_rechecked_and_guessed_queue_never_reaches_po
         assert await facade.tools(object()) == []
         assert (await facade.call(object(), "managed_items_list", request)).is_error
         assert port.calls == 1
+
+    asyncio.run(check())
+
+
+def test_guard_denies_stale_cached_publication_before_domain_port(generic_world):
+    g = generic_world
+    queue = _publish_model_queue(
+        g,
+        [{"queue_id": "generic-input", "operations": ["items.list"]}],
+        "mcp-model-queue-publish",
+    )
+    _publish_model_queue(g, [], "mcp-model-queue-revoke")
+    caller = ManagedCaller(actor=g.caller.actor)
+
+    class Policy:
+        def workspaces(self, _):
+            return [str(queue.workspace_id.root)]
+
+        def allows(self, _, workspace, operation):
+            return (
+                workspace == queue.workspace_id and operation == Operation.LIST
+            )
+
+        def queues(self, _, workspace, operation):
+            # Simulate a stale catalog snapshot. The SQL guard is authoritative
+            # at call time and must reject the retired exact revision.
+            if workspace == queue.workspace_id and operation == Operation.LIST:
+                return [queue]
+            return []
+
+    class Port:
+        calls = 0
+
+        def capabilities(self, _, workspace):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=workspace,
+                operations=(Operation.LIST,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, *_):
+            self.calls += 1
+            raise AssertionError("stale publication must be rejected first")
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        port = Port()
+        facade = ManagedWorkItemsMcp(
+            port,
+            auth,
+            Policy(),
+            publication_guard=ModelWorkItemPublicationGuard(g.owner.deployments),
+        )
+        result = await facade.call(
+            object(),
+            "managed_items_list",
+            {
+                "operation": "items.list",
+                "queue": queue.model_dump(mode="json"),
+            },
+        )
+        assert result.is_error
+        assert port.calls == 0
+
+    asyncio.run(check())
+
+
+def test_guarded_domain_call_rechecks_live_read_grant(generic_world):
+    g = generic_world
+    queue = _publish_model_queue(
+        g,
+        [{"queue_id": "generic-input", "operations": ["items.list"]}],
+        "mcp-live-grant-publish",
+    )
+    grant = g.db.all(
+        FoundryAccessGrant,
+        where="principal_id=? AND subject_kind='reference' AND subject_id=?",
+        values=[g.caller.actor.principal_id, reference_grant_subject(queue.deployment)],
+    )
+    assert len(grant) == 1
+    with g.db.connect(), g.db.transaction():
+        g.db.update_by_id(
+            FoundryAccessGrant,
+            grant[0].id,
+            {"operations_json": json.dumps(["deploy", "execute"])},
+        )
+    caller = ManagedCaller(actor=g.caller.actor)
+
+    class Policy:
+        def workspaces(self, _):
+            return [str(queue.workspace_id.root)]
+
+        def allows(self, _, workspace, operation):
+            return (
+                workspace == queue.workspace_id and operation == Operation.LIST
+            )
+
+        def queues(self, _, workspace, operation):
+            if workspace == queue.workspace_id and operation == Operation.LIST:
+                return [queue]
+            return []
+
+    class Port:
+        calls = 0
+        side_effects = 0
+        thread_ids = set()
+
+        def capabilities(self, _, workspace):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=workspace,
+                operations=(Operation.LIST,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, identity, command):
+            self.calls += 1
+            self.thread_ids.add(threading.get_ident())
+            assert g.db.in_transaction()
+            g.owner.authorization.require_queue(
+                identity, command.queue, Permission.READ
+            )
+            self.side_effects += 1
+            return {"items": [], "next_cursor": None, "server_time_ms": "1"}
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        event_loop_thread = threading.get_ident()
+        port = Port()
+        facade = ManagedWorkItemsMcp(
+            port,
+            auth,
+            Policy(),
+            publication_guard=ModelWorkItemPublicationGuard(g.owner.deployments),
+        )
+        result = await facade.call(
+            object(),
+            "managed_items_list",
+            {
+                "operation": "items.list",
+                "queue": queue.model_dump(mode="json"),
+            },
+        )
+        assert result.is_error
+        assert port.calls == 1
+        assert port.side_effects == 0
+        assert port.thread_ids and event_loop_thread not in port.thread_ids
 
     asyncio.run(check())
 

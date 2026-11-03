@@ -1,8 +1,9 @@
 """Closed, model-facing projection over the managed Work Items domain port.
 
 This module is deliberately not wired into server startup. The host must supply
-an authenticated caller resolver and an explicit publication policy; absent
-policy is deny-all. Domain grants and publication are checked on every call.
+an authenticated caller resolver, an explicit publication policy, and the
+atomic guard required for queue-targeted operations; absent authority is deny-all.
+Domain grants and publication are checked on every call.
 """
 
 from __future__ import annotations
@@ -12,12 +13,13 @@ import hashlib
 import json
 from collections.abc import Awaitable, Callable, Iterable
 from itertools import islice
-from typing import Literal, Protocol
+from typing import Literal, Protocol, cast
 
 from mcp.types import CallToolResult, TextContent, Tool, ToolAnnotations
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter, ValidationError
 from starlette.concurrency import run_in_threadpool
 
+from actions.server.deployments.foundry_values import ModelPublishedWorkItemOperation
 from actions.server.deployments.ids import WorkspaceId
 
 from .contracts import (
@@ -36,6 +38,7 @@ from .contracts import (
     QueueRef,
     Queues,
 )
+from .model_publication import ModelWorkItemPublicationGuard
 
 MAX_REQUEST_BYTES = 512 * 1024
 MAX_RESULT_BYTES = 64 * 1024
@@ -311,10 +314,12 @@ class ManagedWorkItemsMcp:
         port: ManagedWorkItemsPort | None,
         authenticate: Authenticate | None,
         publication: ModelPublicationPolicy | None = None,
+        publication_guard: ModelWorkItemPublicationGuard | None = None,
     ):
         self.port = port
         self.authenticate = authenticate
         self.publication = publication
+        self.publication_guard = publication_guard
 
     async def _caller(self, ctx: object) -> ManagedCaller | None:
         if self.authenticate is None:
@@ -380,6 +385,8 @@ class ManagedWorkItemsMcp:
         self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
     ) -> bool:
         if self.port is None or self.publication is None:
+            return False
+        if operation != Operation.QUEUES and self.publication_guard is None:
             return False
         try:
             published = await run_in_threadpool(
@@ -485,10 +492,13 @@ class ManagedWorkItemsMcp:
                     caller, command, queues
                 )
             else:
-                queue = command.queue
-                if _queue_key(queue) not in queues:
+                if _queue_key(command.queue) not in queues:
                     raise ValueError
-                result = await run_in_threadpool(self.port.call, caller, command)
+                if self.publication_guard is None:
+                    raise ValueError
+                result = await run_in_threadpool(
+                    self._guarded_domain_call, caller, command, operation
+                )
                 next_cursor = None
             if hasattr(result, "__await__") or not isinstance(result, dict):
                 raise ValueError
@@ -526,6 +536,32 @@ class ManagedWorkItemsMcp:
                 ],
                 is_error=True,
             )
+
+    def _guarded_domain_call(
+        self,
+        caller: ManagedCaller,
+        command: Inspect | Enqueue | Intervention,
+        operation: Operation,
+    ) -> dict[str, JsonValue]:
+        """Keep the guard and synchronous domain port on one DB worker thread."""
+        if self.port is None or self.publication_guard is None:
+            raise ValueError("atomic model queue guard unavailable")
+
+        def domain_call(identity, queue, selected_operation):
+            if (
+                identity != caller
+                or queue != command.queue
+                or selected_operation != operation.value
+            ):
+                raise ValueError("guarded model queue target changed")
+            return self.port.call(identity, command)
+
+        return self.publication_guard.call(
+            caller,
+            command.queue,
+            cast(ModelPublishedWorkItemOperation, operation.value),
+            domain_call,
+        )
 
     async def _list_visible_queues(
         self,

@@ -1541,3 +1541,8 @@ call, acquiring the Run Counter and then Workspace lock. The authenticated model
 caller has no worker identity; the domain service must still check live grants.
 The standalone guard is not native MCP wiring, and component concurrency tests
 on SQLite do not establish PostgreSQL parity or installed host behavior.
+The model facade sends validated queue-targeted calls through the atomic guard
+and existing domain port on one worker thread; without a guard those tools are
+hidden and their calls are denied. Workspace queue listing still needs a single
+transaction spanning the bounded scan and current publication filtering before
+native startup can expose this facade safely.
