@@ -36,3 +36,13 @@ a replacement epoch and verifies an old Task cannot cancel or change its
 cancellation state. The supervisor reported no remaining owned processes. This
 is real SQL state with a synthetic Robot adapter, not a real RCC process or
 PostgreSQL parity proof.
+
+At `55c24dab` the standalone child-admission component passed seven SQLite
+cases, including two competing-admission races and post-admission fence-failure
+rollback inventories; seven PostgreSQL cells skipped. Tests use the real SQL
+and PackageRegistry paths with synthetic compiler and Robot RCC preparation,
+not a Robot execution. Earlier runs failed on fixture setup, missing synthetic
+grants, and a test import; those failures are retained. IPC, parent-exit and
+child status/cancellation remain unwired and unverified. Logs and supervisor
+receipt are Library `libfile_7e323767a0b48191870a46a66641bf5a` version 0,
+SHA-256 `2f028921b1294b7a68a438d54aec950ae234a737680c9397cab50f31b382432e`.
