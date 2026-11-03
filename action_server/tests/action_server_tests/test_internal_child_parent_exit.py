@@ -294,6 +294,21 @@ def test_corrupt_lineage_identity_rolls_back_parent_terminal_publication(admitte
     assert _one(admitted.db, RunPin, child.id).cancel_requested == 0
 
 
+def test_child_principal_mismatch_rolls_back_parent_terminal_publication(admitted):
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "corrupt-principal", {"value": "child"}
+    ).run
+    output = _stage_parent_result(admitted)
+    with admitted.db.transaction():
+        _update(admitted.db, RunPin, child.id, {"admission_principal_id": str(uuid4())})
+    with pytest.raises(FenceRejected):
+        admitted.outputs.publish(
+            admitted.actor, admitted.fence, [output], {"result": "completed"}
+        )
+    assert _one(admitted.db, Run, admitted.parent_run.id).status == RunStatus.RUNNING
+    assert _one(admitted.db, RunPin, child.id).cancel_requested == 0
+
+
 @pytest.mark.parametrize(
     "admitted",
     [{"parent_exit": "allow-authorized-detach"}],

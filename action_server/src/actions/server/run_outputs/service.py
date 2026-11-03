@@ -409,6 +409,7 @@ class RunOutputService:
             if (
                 row.workspace_id != pin.workspace_id
                 or row.parent_run_id != pin.run_id
+                or row.child_run_id == pin.run_id
                 or binding is None
                 or not row.logical_key_digest.startswith("sha256:")
                 or len(row.logical_key_digest) != 71
@@ -428,6 +429,7 @@ class RunOutputService:
             if (
                 child_pin.workspace_id != pin.workspace_id
                 or child_pin.run_id != row.child_run_id
+                or child_pin.admission_principal_id != pin.admission_principal_id
                 or child_snapshot.deployment != binding.target_deployment
                 or child_snapshot.capability != binding.target_capability
                 or child_snapshot.runtime_plan != binding.target_runtime_plan
