@@ -1,5 +1,20 @@
 # Repository Operations
 
+## OpenAPI, MCP and publication boundaries
+
+OpenAPI schema inclusion, MCP discovery and authorization are separate
+contracts: `full_openapi_spec` controls route schema visibility, not route
+mounting or the separately assembled MCP catalog. New native catalog surfaces
+need stable revision identity, and a cached descriptor must not replace live
+authorization of the exact immutable reference.
+
+The candidate Deployment value supports an explicit, scoped
+`model_published_capabilities` selection. Its empty value is omitted from the
+canonical wire representation so earlier Deployment revision identities stay
+unchanged. This value alone does not establish discovery or invocation
+enforcement, nor does it prove installed or released support; qualify those
+paths separately, including detached Tasks and Canvas compatibility.
+
 Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
 through the activated cloud toolchain for an arbitrary bounded qualification
 script. `rcc run` selects manifest tasks and is not a generic command gateway.

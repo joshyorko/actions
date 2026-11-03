@@ -257,12 +257,19 @@ class DeploymentSpecification(_FrozenValue):
     canvas_application: CanvasApplicationRef | None = None
     canvas_bindings: tuple[CanvasCapabilityBinding, ...] = ()
     work_item_policies: tuple[CapabilityWorkItemPolicy, ...] = ()
+    # Empty means no capability is published to model callers. Canvas visibility
+    # and identifiers do not implicitly populate this selection.
+    model_published_capabilities: tuple[CapabilityRef, ...] = ()
 
     @model_serializer(mode="wrap")
     def preserve_legacy_serialization(self, handler):
         value = handler(self)
         if not self.work_item_policies:
             value.pop("work_item_policies", None)
+        if not self.model_published_capabilities:
+            # Preserve the canonical wire bytes and immutable revision hashes
+            # of selections created before explicit model publication existed.
+            value.pop("model_published_capabilities", None)
         return value
 
     @field_validator("canvas_spec", mode="before")
@@ -304,6 +311,7 @@ class DeploymentSpecification(_FrozenValue):
                 or self.bindings
                 or self.canvas_bindings
                 or self.work_item_policies
+                or self.model_published_capabilities
                 or any(ref is not None for ref in profiles)
             ):
                 raise ValueError(
@@ -329,6 +337,13 @@ class DeploymentSpecification(_FrozenValue):
         ):
             raise ValueError("Canvas application is outside the Deployment Workspace")
         capabilities = {policy.capability for policy in self.capability_plans}
+        published_capabilities = set(self.model_published_capabilities)
+        if len(published_capabilities) != len(self.model_published_capabilities):
+            raise ValueError("model-published capabilities must be unique")
+        for capability in self.model_published_capabilities:
+            require_workspace_scope(capability, workspace_id)
+            if capability not in capabilities:
+                raise ValueError("model-published capability is not deployed")
         for canvas_binding in self.canvas_bindings:
             if canvas_binding.capability not in capabilities:
                 raise ValueError(

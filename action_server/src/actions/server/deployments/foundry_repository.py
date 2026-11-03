@@ -106,6 +106,15 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
                 policy["capability"]["capability_id"],
             )
         )
+    if "model_published_capabilities" in value:
+        value["model_published_capabilities"].sort(
+            key=lambda capability: (
+                capability["package_revision"]["workspace_id"],
+                capability["package_revision"]["package_id"],
+                capability["package_revision"]["revision_id"],
+                capability["capability_id"],
+            )
+        )
     return _canonical_object(value)
 
 
