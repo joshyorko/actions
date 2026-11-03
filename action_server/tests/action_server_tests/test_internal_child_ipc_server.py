@@ -203,8 +203,10 @@ def test_peer_closure_stops_invocation_server(admitted):
 def test_host_wrapper_peer_close_settles_and_stop_joins(admitted):
     host = _host(admitted)
     action_socket = host.start(timeout_seconds=2)
-
-    action_socket.close()
+    transport = InternalChildFDTransport(action_socket, timeout_seconds=2)
+    transport.handshake()
+    assert not admitted.db.all(RunChildLineage)
+    transport.close()
 
     assert host.wait(timeout_seconds=2)
     assert host.settled

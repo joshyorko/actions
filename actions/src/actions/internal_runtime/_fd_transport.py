@@ -1,3 +1,4 @@
+# ruff: noqa: E721 - wire primitives require exact types, excluding bool/subclasses
 """Bounded invocation-scoped socket transport for delegated child Runs.
 
 This is a local IPC codec only. The host must bind the connected socket to one
@@ -192,10 +193,16 @@ class InternalChildFDTransport:
             ):
                 raise ValueError("response correlation mismatch")
             if response["ok"] is False:
-                if set(response) != common | {"error"} or type(response["error"]) is not str:  # noqa: E721 - require exact JSON string type
+                if (
+                    set(response) != common | {"error"}
+                    or type(response["error"]) is not str
+                ):  # noqa: E721 - require exact JSON string type
                     raise ValueError("malformed error response")
                 raise _unavailable()
-            if set(response) != common | {"result"} or type(response["result"]) is not dict:  # noqa: E721 - reject mapping subclasses from the wire
+            if (
+                set(response) != common | {"result"}
+                or type(response["result"]) is not dict
+            ):  # noqa: E721 - reject mapping subclasses from the wire
                 raise ValueError("malformed success response")
             return response["result"]
         except BaseException as exc:
@@ -205,6 +212,13 @@ class InternalChildFDTransport:
             raise
         finally:
             self._lock.release()
+
+    def handshake(self) -> None:
+        """Confirm the invocation endpoint before loading user Action code."""
+        result = self._exchange("hello", {})
+        if set(result) != {"ready"} or result["ready"] is not True:
+            self.close()
+            raise _unavailable() from None
 
     @staticmethod
     def _parse_handle(result: dict) -> ChildRunHandle:

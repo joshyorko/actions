@@ -222,6 +222,10 @@ class InternalChildIPCServer:
 
     def _dispatch(self, request: dict[str, object]) -> dict[str, object]:
         operation = request["operation"]
+        if operation == "hello":
+            if set(request) != {"version", "request_id", "operation"}:
+                raise ValueError("invalid handshake fields")
+            return {"ready": True}
         if operation == "submit":
             if set(request) != {
                 "version",

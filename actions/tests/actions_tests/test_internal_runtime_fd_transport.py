@@ -79,6 +79,18 @@ def _serve(peer, handler, *, count=1):
     return thread, errors
 
 
+@pytest.mark.parametrize("ready", [False, 1, "true", None])
+def test_handshake_rejects_non_boolean_ready_and_closes(ready):
+    client, peer = socket.socketpair()
+    thread, errors = _serve(peer, lambda request: _reply(request, {"ready": ready}))
+    transport = InternalChildFDTransport(client, timeout_seconds=2)
+    with pytest.raises(ChildRunUnavailable):
+        transport.handshake()
+    assert client.fileno() == -1
+    thread.join(timeout=2)
+    assert not thread.is_alive() and not errors
+
+
 def test_fd_transport_round_trips_only_closed_typed_operations():
     client, peer = socket.socketpair()
     handle_id = str(uuid4())
@@ -122,9 +134,7 @@ def test_fd_transport_round_trips_only_closed_typed_operations():
         child = transport.submit_child_run("billing", "invoice-9", '{"amount":2}')
         assert child == ChildRunHandle(handle_id)
         status = transport.child_run_status(child)
-        assert status == ChildRunStatus(
-            child, ChildRunState.SUCCEEDED, (reference,)
-        )
+        assert status == ChildRunStatus(child, ChildRunState.SUCCEEDED, (reference,))
         cancelled = transport.cancel_child_run(child)
         assert cancelled.state is ChildRunState.CANCEL_PENDING
     thread.join(timeout=2)
@@ -144,7 +154,9 @@ def test_fd_transport_round_trips_only_closed_typed_operations():
         "inputs_json": '{"amount":2}',
     }
     for request in seen:
-        assert not ({"parent", "parent_id", "actor", "fence", "target"} & request.keys())
+        assert not (
+            {"parent", "parent_id", "actor", "fence", "target"} & request.keys()
+        )
     assert client.fileno() == -1
 
 
@@ -274,7 +286,7 @@ def test_fd_transport_call_timeout_closes_owned_socket():
     assert client.fileno() == -1
 
 
-@pytest.mark.parametrize("value", ["{\"x\":1,\"x\":2}", "[1]", "{ \"x\": 1 }"])
+@pytest.mark.parametrize("value", ['{"x":1,"x":2}', "[1]", '{ "x": 1 }'])
 def test_fd_transport_requires_canonical_plain_object_input(value):
     client, peer = socket.socketpair()
     transport = InternalChildFDTransport(client)
