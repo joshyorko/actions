@@ -28,3 +28,11 @@ It is retained only as unqualified Library file
 It must not be treated as host implementation. A real fixture must cover both
 synchronous and detached parent Runs, fenced cancellation, policy revocation,
 replay conflicts and transaction rollback with a verified RCC Robot registry.
+
+At source `e334b9988d0434e6fd47a04b858616cea1cb7a72`, the existing
+`test_claimed_task_service.py::test_old_task_cannot_cancel_new_claim_epoch`
+passed its SQLite case and skipped PostgreSQL. It moves the Work Item claim to
+a replacement epoch and verifies an old Task cannot cancel or change its
+cancellation state. The supervisor reported no remaining owned processes. This
+is real SQL state with a synthetic Robot adapter, not a real RCC process or
+PostgreSQL parity proof.
