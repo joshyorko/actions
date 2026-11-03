@@ -174,6 +174,14 @@ def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(
         assert admitted.db.all(RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]) == []
 
 
+def test_terminal_parent_rejects_new_child_admission(admitted):
+    output = _stage_parent_result(admitted)
+    admitted.outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+    with pytest.raises((AccessDenied, FenceRejected)):
+        admitted.admission.invoke(admitted.fence, "scan", "after-terminal", {"value": "child"})
+    assert admitted.db.all(RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]) == []
+
+
 @pytest.mark.parametrize("admitted", [{"parent_exit": "allow-authorized-detach"}], indirect=True)
 def test_parent_cancel_request_preserves_authorized_detached_child(admitted):
     child = admitted.admission.invoke(
