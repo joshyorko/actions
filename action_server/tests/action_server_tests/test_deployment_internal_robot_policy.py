@@ -17,6 +17,7 @@ from actions.server.deployments.foundry_values import (
     InternalRobotDelegationPolicy,
 )
 from actions.server.deployments.ids import (
+    CapabilityId,
     CapabilityRef,
     DeploymentId,
     DeploymentRevisionId,
@@ -32,7 +33,8 @@ def _target(
     # Different capability/plan selection in the same Package Revision; target
     # Deployment and revision are exact pins, not an assertion of Robot kind.
     capability = CapabilityRef(
-        package_revision=refs.package, capability_id=f"robot-{suffix}"
+        package_revision=refs.package,
+        capability_id=CapabilityId(f"robot-{suffix}"),
     )
     plan = RuntimePlanRef(
         package_revision=refs.package,
@@ -41,9 +43,11 @@ def _target(
     deployment = DeploymentRevisionRef(
         workspace_id=refs.workspace,
         deployment_id=DeploymentId(
-            "00000000-0000-4000-8000-000000000001"
-            if suffix == "a"
-            else "00000000-0000-4000-8000-000000000002"
+            UUID(
+                "00000000-0000-4000-8000-000000000001"
+                if suffix == "a"
+                else "00000000-0000-4000-8000-000000000002"
+            )
         ),
         revision_id=DeploymentRevisionId(
             "sha256:" + ("c" if suffix == "a" else "d") * 64

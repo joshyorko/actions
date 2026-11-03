@@ -507,13 +507,13 @@ class DeploymentSpecification(_FrozenValue):
                     )
 
         binding_ids: set[BindingRequirementRef] = set()
-        for binding in self.bindings:
-            require_workspace_scope(binding.requirement, workspace_id)
-            if binding.requirement.package_revision not in packages:
+        for assignment in self.bindings:
+            require_workspace_scope(assignment.requirement, workspace_id)
+            if assignment.requirement.package_revision not in packages:
                 raise ValueError("binding Package Revision is not deployed")
-            if binding.requirement in binding_ids:
+            if assignment.requirement in binding_ids:
                 raise ValueError("binding requirement is assigned more than once")
-            binding_ids.add(binding.requirement)
+            binding_ids.add(assignment.requirement)
         return self
 
     @property

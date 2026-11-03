@@ -205,7 +205,7 @@ class GenericCanvasExecution(CanvasPort):
                 HeadlessCapabilityDiscovery,
             )
 
-            request = _HeadlessDiscoveryRequest.model_validate_json(
+            discovery_request = _HeadlessDiscoveryRequest.model_validate_json(
                 _canonical(arguments, 4096)
             )
             page = await asyncio.to_thread(
@@ -213,8 +213,8 @@ class GenericCanvasExecution(CanvasPort):
                     self.deployments, self.outputs, self.authorization
                 ).page,
                 caller,
-                limit=request.limit,
-                cursor=request.cursor,
+                limit=discovery_request.limit,
+                cursor=discovery_request.cursor,
             )
             return CanvasReply(
                 summary="Authorized capability discovery.",

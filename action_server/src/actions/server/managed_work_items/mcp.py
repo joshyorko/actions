@@ -13,7 +13,7 @@ import hashlib
 import json
 from collections.abc import Awaitable, Callable, Iterable
 from itertools import islice
-from typing import Literal, Protocol, cast
+from typing import Any, Literal, Protocol, cast
 
 from mcp.types import CallToolResult, TextContent, Tool, ToolAnnotations
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter
@@ -66,7 +66,7 @@ _READ_ONLY = frozenset(
     for name, operation in _TOOL_OPERATIONS.items()
     if operation not in {Operation.ENQUEUE, Operation.CANCEL}
 )
-_ARGUMENT_MODELS = {
+_ARGUMENT_MODELS: dict[Operation, type[BaseModel]] = {
     Operation.QUEUES: Queues,
     Operation.LIST: Inspect,
     Operation.GET: Inspect,
@@ -76,7 +76,7 @@ _ARGUMENT_MODELS = {
     Operation.ENQUEUE: Enqueue,
     Operation.CANCEL: Intervention,
 }
-_ARGUMENT_ADAPTERS = {
+_ARGUMENT_ADAPTERS: dict[Operation, TypeAdapter[Any]] = {
     operation: TypeAdapter(model) for operation, model in _ARGUMENT_MODELS.items()
 }
 _JSON = TypeAdapter(dict[str, JsonValue])
@@ -190,9 +190,11 @@ def _normalize_published_queues(
 Authenticate = Callable[[object], Awaitable[ManagedCaller | None]]
 
 
-def _safe_projection(value: object) -> object:
+def _safe_projection(value: dict[str, object]) -> dict[str, object]:
     """Keep only schema-validated output references from the artifact DTO."""
     artifact = value["artifact"]
+    if not isinstance(artifact, dict):
+        raise ValueError("validated artifact DTO required")
     return {
         "artifact": {
             "handle": artifact["handle"],
@@ -286,7 +288,7 @@ def _project_result(operation: Operation, result: dict) -> dict:
             "server_time_ms": result["server_time_ms"],
         }
     if operation == Operation.ARTIFACT:
-        return _safe_projection(result)
+        return _safe_projection(cast(dict[str, object], result))
     raise ValueError("operation has no model-safe result projection")
 
 
@@ -578,6 +580,7 @@ class ManagedWorkItemsMcp:
         """
         if self.port is None or self.publication_guard is None:
             raise ValueError("atomic model queue-list guard unavailable")
+        port = self.port
 
         if command.cursor is None:
             offset = 0
@@ -605,7 +608,7 @@ class ManagedWorkItemsMcp:
                 request = command.model_copy(
                     update={"cursor": backend_cursor, "limit": MAX_QUEUE_PAGE_SIZE}
                 )
-                raw_page = self.port.call(identity, request)
+                raw_page = port.call(identity, request)
                 if hasattr(raw_page, "__await__") or not isinstance(raw_page, dict):
                     raise ValueError("invalid backend queue page")
                 page_raw = json.dumps(

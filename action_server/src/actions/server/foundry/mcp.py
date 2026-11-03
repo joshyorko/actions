@@ -11,13 +11,16 @@ import hashlib
 import json
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
-from typing import Literal, Protocol
+from typing import TYPE_CHECKING, Literal, Protocol
 
 from mcp.types import CallToolResult, Resource, TextContent, Tool, ToolAnnotations
 from pydantic import JsonValue, TypeAdapter
 
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.run_outputs.types import Actor, CanvasResultScope, canonical_uuid
+
+if TYPE_CHECKING:
+    from actions.server.managed_work_items.mcp import ManagedWorkItemsMcp
 
 URI = "ui://action-canvas/v1/canvas.html"
 MODEL_TOOLS = frozenset(
@@ -176,6 +179,7 @@ class CanvasMcp:
         from actions.server.foundry.app_sessions import AppSessions
 
         self._sessions = AppSessions()
+        self.managed_work_items_mcp: ManagedWorkItemsMcp | None = None
         self.port, self.authenticate, self.html = port, authenticate, html
         self.uri = URI
         self.resource = Resource(
