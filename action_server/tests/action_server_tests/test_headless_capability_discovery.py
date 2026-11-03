@@ -11,10 +11,10 @@ from actions.server.deployments.foundry_values import DeploymentSpecification
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
 from actions.server.foundry import headless_discovery
 from actions.server.foundry.headless_discovery import (
-    HeadlessCapabilityDiscovery,
-    HeadlessInvocationDescriptor,
     MAX_CURSOR_OFFSET,
     MAX_PAGE_SIZE,
+    HeadlessCapabilityDiscovery,
+    HeadlessInvocationDescriptor,
     _encode_cursor,
 )
 from actions.server.foundry.mcp import CanvasCaller
@@ -45,9 +45,7 @@ def _published(world, deployment_id=None):
     workspace_id = old_snapshot.deployment.workspace_id
     deployments = world.owner.deployments
     deployment_id = deployment_id or old_snapshot.deployment_id
-    current = deployments._repository.current(
-        workspace_id, old_snapshot.deployment_id
-    )
+    current = deployments._repository.current(workspace_id, old_snapshot.deployment_id)
     values = current.revision.specification.model_dump(mode="json", by_alias=True)
     values["model_published_capabilities"] = [
         old_snapshot.capability.model_dump(mode="json")
@@ -244,9 +242,7 @@ def test_projection_drops_untrusted_schema_descriptions_and_unknown_metadata(
         "approved",
         "pending",
     ]
-    assert (
-        projected["properties"]["value"]["pattern"] == "^[a-z]+$"
-    )
+    assert projected["properties"]["value"]["pattern"] == "^[a-z]+$"
 
 
 def test_projection_preserves_supported_assertions_and_internal_references(
@@ -277,9 +273,7 @@ def test_projection_preserves_supported_assertions_and_internal_references(
 
     projected = headless_discovery._model_input_schema(None, None)
 
-    assert projected["dependentRequired"] == {
-        "credit_card": ["billing_address"]
-    }
+    assert projected["dependentRequired"] == {"credit_card": ["billing_address"]}
     assert projected["properties"]["rows"]["minContains"] == 2
     assert projected["properties"]["rows"]["maxContains"] == 4
     assert projected["properties"]["value"]["$ref"] == "#/$defs/positive"
@@ -336,9 +330,7 @@ def test_revoked_run_authority_omits_cached_publication(world):
     discovery = _discovery(world)
     caller = _model_caller(snapshot, world.caller.actor)
     assert discovery.page(caller).descriptors
-    RunOutputControlPlane(world.db).revoke(
-        world.caller.actor, snapshot.deployment
-    )
+    RunOutputControlPlane(world.db).revoke(world.caller.actor, snapshot.deployment)
     page = discovery.page(caller)
     assert page.descriptors == ()
     assert page.availability == "unavailable"
@@ -352,9 +344,7 @@ def test_cursor_is_workspace_bound_and_page_size_is_bounded(world):
         discovery.page(caller, limit=MAX_PAGE_SIZE + 1)
     with pytest.raises(AccessDenied, match="cursor"):
         discovery.page(caller, cursor="not-a-cursor")
-    foreign_cursor = _encode_cursor(
-        WorkspaceId(uuid4()), 0, "sha256:" + "0" * 64
-    )
+    foreign_cursor = _encode_cursor(WorkspaceId(uuid4()), 0, "sha256:" + "0" * 64)
     with pytest.raises(AccessDenied, match="outside authenticated Workspace"):
         discovery.page(caller, cursor=foreign_cursor)
     with pytest.raises(AccessDenied, match="model context"):
@@ -429,15 +419,19 @@ def test_cursor_rejects_visible_set_change_and_excessive_offsets(world):
     with pytest.raises(AccessDenied, match="visible discovery set changed"):
         discovery.page(caller, limit=1, cursor=page.next_cursor)
 
-    oversized = base64.urlsafe_b64encode(
-        json.dumps(
-            {
-                "workspaceId": first.workspace_id,
-                "visibleOffset": MAX_CURSOR_OFFSET + 1,
-                "visibleDigest": "sha256:" + "0" * 64,
-            }
-        ).encode()
-    ).decode().rstrip("=")
+    oversized = (
+        base64.urlsafe_b64encode(
+            json.dumps(
+                {
+                    "workspaceId": first.workspace_id,
+                    "visibleOffset": MAX_CURSOR_OFFSET + 1,
+                    "visibleDigest": "sha256:" + "0" * 64,
+                }
+            ).encode()
+        )
+        .decode()
+        .rstrip("=")
+    )
     with pytest.raises(AccessDenied, match="cursor"):
         discovery.page(caller, cursor=oversized)
 
@@ -454,12 +448,9 @@ def test_cursor_rechecks_grants_after_page(world):
     remaining = next(
         snapshot
         for snapshot in snapshots
-        if snapshot.deployment_id
-        != first_page.descriptors[0].snapshot.deployment_id
+        if snapshot.deployment_id != first_page.descriptors[0].snapshot.deployment_id
     )
-    RunOutputControlPlane(world.db).revoke(
-        world.caller.actor, remaining.deployment
-    )
+    RunOutputControlPlane(world.db).revoke(world.caller.actor, remaining.deployment)
     with pytest.raises(AccessDenied, match="visible discovery set changed"):
         discovery.page(caller, limit=1, cursor=first_page.next_cursor)
 
@@ -480,9 +471,7 @@ def test_page_wire_bound_returns_cursor_at_first_omitted_visible_descriptor(
     world, monkeypatch
 ):
     snapshots = [_published(world), _published(world, DeploymentId(uuid4()))]
-    by_deployment = {
-        snapshot.deployment_id: snapshot for snapshot in snapshots
-    }
+    by_deployment = {snapshot.deployment_id: snapshot for snapshot in snapshots}
     discovery = _discovery(world)
 
     def near_limit_projection(

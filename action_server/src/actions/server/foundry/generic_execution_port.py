@@ -168,7 +168,9 @@ class GenericCanvasExecution(CanvasPort):
             runner,
         )
         self.schemas = dict(reviewed.schemas, capability_invoke=_SCHEMA)
-        self.schemas["capability_discover"] = _HeadlessDiscoveryRequest.model_json_schema()
+        self.schemas[
+            "capability_discover"
+        ] = _HeadlessDiscoveryRequest.model_json_schema()
         self.schemas["capability_discover"]["description"] = (
             "Discover explicitly model-published capabilities with exact immutable "
             "references and typed inputs. Discovery is not an execution grant or "
@@ -325,7 +327,10 @@ class GenericCanvasExecution(CanvasPort):
                     actor,
                     snapshot,
                     lambda _resolved: service.dispatch_standalone(
-                        caller, request.inputs, request.idempotency_key, lease_seconds=60
+                        caller,
+                        request.inputs,
+                        request.idempotency_key,
+                        lease_seconds=60,
                     ),
                 )
             run = _one(self.outputs.db, Run, ticket.fence.run_id)

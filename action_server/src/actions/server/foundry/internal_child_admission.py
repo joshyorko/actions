@@ -10,6 +10,7 @@ import hashlib
 import uuid
 
 from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
+from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import (
     RunChildLineage,
@@ -17,7 +18,6 @@ from actions.server.run_outputs.models import (
     RunTaskReceipt,
     run_child_identity_digest,
 )
-from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.run_outputs.service import (
     AccessDenied,
     _insert,
@@ -102,7 +102,11 @@ class InternalChildAdmission:
                 raise AccessDenied("Current internal delegation unavailable")
             policy = policies[0]
             binding = next(
-                (candidate for candidate in policy.bindings if candidate.name == binding_name),
+                (
+                    candidate
+                    for candidate in policy.bindings
+                    if candidate.name == binding_name
+                ),
                 None,
             )
             if binding is None:
@@ -123,12 +127,10 @@ class InternalChildAdmission:
             if child_snapshot.runtime_kind != "rcc":
                 raise AccessDenied("Internal child must be an RCC Robot")
 
-            key_digest = "sha256:" + hashlib.sha256(
-                logical_key.encode("utf-8")
-            ).hexdigest()
-            identity = run_child_identity_digest(
-                fence.run_id, binding_name, key_digest
+            key_digest = (
+                "sha256:" + hashlib.sha256(logical_key.encode("utf-8")).hexdigest()
             )
+            identity = run_child_identity_digest(fence.run_id, binding_name, key_digest)
             outcome = self.detached.admit_outcome(
                 actor,
                 child_snapshot,
@@ -186,8 +188,6 @@ class InternalChildAdmission:
                         identity_digest=identity,
                     ),
                 )
-            if self.db.all(
-                RunTaskReceipt, where="run_id=?", values=[outcome.run.id]
-            ):
+            if self.db.all(RunTaskReceipt, where="run_id=?", values=[outcome.run.id]):
                 raise AccessDenied("Internal child cannot be an MCP Task")
             return outcome

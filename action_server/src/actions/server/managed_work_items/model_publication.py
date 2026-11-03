@@ -10,13 +10,13 @@ from typing import cast, get_args
 from pydantic import JsonValue
 
 from actions.server._models import RUN_ID_COUNTER
-from actions.server.deployments.ids import DeploymentId, WorkspaceId
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
     AccessDenied,
     ModelPublishedWorkItemOperation,
     StoredDeploymentRevision,
 )
+from actions.server.deployments.ids import DeploymentId, WorkspaceId
 from actions.server.managed_work_items.contracts import (
     ManagedCaller,
     Permission,
@@ -183,10 +183,10 @@ class ModelWorkItemPublicationGuard:
                     raise AccessDenied("managed queue scan scope changed")
                 deployment_key = str(queue.deployment.deployment_id.root)
                 if deployment_key not in current_by_deployment:
-                    current_by_deployment[deployment_key] = (
-                        self.deployments._repository.current(
-                            workspace_id, queue.deployment.deployment_id
-                        )
+                    current_by_deployment[
+                        deployment_key
+                    ] = self.deployments._repository.current(
+                        workspace_id, queue.deployment.deployment_id
                     )
                 current = current_by_deployment[deployment_key]
                 if current is None or current.revision.ref != queue.deployment:

@@ -5,6 +5,12 @@ from uuid import uuid4
 
 import pytest
 
+from actions.server.deployments.foundry_values import (
+    InternalRobotBinding as PersistedRobotBinding,
+)
+from actions.server.deployments.foundry_values import (
+    InternalRobotDelegationPolicy as PersistedRobotPolicy,
+)
 from actions.server.deployments.ids import (
     CapabilityId,
     CapabilityRef,
@@ -14,22 +20,18 @@ from actions.server.deployments.ids import (
     PackageId,
     PackageRevisionId,
     PackageRevisionRef,
+    PlanDigest,
     PolicyId,
     PolicyRevisionId,
-    PlanDigest,
     ProviderProfileId,
     ProviderProfileRevisionId,
     ProviderProfileRevisionRef,
     RuntimePlanRef,
-    WorkspaceId,
     WorkerProfileId,
     WorkerProfileRevisionId,
     WorkerProfileRevisionRef,
+    WorkspaceId,
     WorkspacePolicyRevisionRef,
-)
-from actions.server.deployments.foundry_values import (
-    InternalRobotBinding as PersistedRobotBinding,
-    InternalRobotDelegationPolicy as PersistedRobotPolicy,
 )
 from actions.server.foundry.internal_delegation import (
     ActionParentSnapshot,
@@ -45,7 +47,9 @@ from actions.server.foundry.package_registry import (
 from actions.server.run_outputs.types import ExecutionSnapshot
 
 
-def _snapshot(*, workspace=None, deployment=None, package=None, capability="echo", runtime="rcc"):
+def _snapshot(
+    *, workspace=None, deployment=None, package=None, capability="echo", runtime="rcc"
+):
     workspace = workspace or WorkspaceId(uuid4())
     package_ref = PackageRevisionRef(
         workspace_id=workspace,
@@ -116,7 +120,13 @@ def _robot(snapshot):
     )
 
 
-def _policy(parent, targets, *, max_child_runs=4, detach_policy=DetachPolicy.CANCEL_ON_PARENT_EXIT):
+def _policy(
+    parent,
+    targets,
+    *,
+    max_child_runs=4,
+    detach_policy=DetachPolicy.CANCEL_ON_PARENT_EXIT,
+):
     return InternalDelegationPolicy(
         parent=_parent(parent),
         bindings=tuple(

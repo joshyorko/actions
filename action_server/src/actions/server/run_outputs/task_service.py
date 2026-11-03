@@ -245,7 +245,9 @@ class TaskService:
                 actor,
                 snapshot,
                 lambda _resolved: self.detached.admit_claimed(
-                    ManagedCaller(actor=actor, worker_id=claim.owner_id), snapshot, claim
+                    ManagedCaller(actor=actor, worker_id=claim.owner_id),
+                    snapshot,
+                    claim,
                 ),
             )
             self._require_claimed_ready(actor, snapshot, claim, scope_only=True)

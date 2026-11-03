@@ -6,9 +6,9 @@ from unittest.mock import patch
 from uuid import UUID
 
 import pytest
+from action_server_tests.test_foundry_deployments import _refs, _spec
 from pydantic import ValidationError
 
-from action_server_tests.test_foundry_deployments import _refs, _spec
 from actions.server.deployments.foundry_repository import canonical_specification
 from actions.server.deployments.foundry_values import (
     CapabilityPlanPolicy,
@@ -98,12 +98,14 @@ def test_policy_is_canonical_and_changes_revision_identity():
     selected = DeploymentSpecification.model_validate(raw)
     encoded = canonical_specification(selected)
     wire = json.loads(encoded)
-    assert (
-        wire["internal_robot_delegations"][0]["parent_capability"]
-        == refs.capability.model_dump(mode="json")
-    )
+    assert wire["internal_robot_delegations"][0][
+        "parent_capability"
+    ] == refs.capability.model_dump(mode="json")
     assert "parent_deployment" not in wire["internal_robot_delegations"][0]
-    assert canonical_specification(DeploymentSpecification.model_validate_json(encoded)) == encoded
+    assert (
+        canonical_specification(DeploymentSpecification.model_validate_json(encoded))
+        == encoded
+    )
     assert encoded != canonical_specification(base)
 
 
@@ -235,7 +237,9 @@ def test_target_scope_and_capability_plan_package_must_match():
         package_id=refs.package.package_id,
         revision_id=PackageRevisionId("sha256:" + "e" * 64),
     )
-    wrong_plan = RuntimePlanRef(package_revision=other_package, plan_digest=plan.plan_digest)
+    wrong_plan = RuntimePlanRef(
+        package_revision=other_package, plan_digest=plan.plan_digest
+    )
     with pytest.raises(ValidationError):
         InternalRobotBinding(
             name="mismatched-package",

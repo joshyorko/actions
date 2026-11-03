@@ -26,13 +26,20 @@ def test_release_branch_pr_uses_generated_runtime_workflow_and_owned_postgres():
     start = steps[names.index("Start owned PostgreSQL for portable Runtime tests")]
     test = steps[names.index("Test (not integration)")]
     cleanup = steps[names.index("Remove owned portable-test PostgreSQL")]
-    assert names.index(start["name"]) < names.index(test["name"]) < names.index(cleanup["name"])
+    assert (
+        names.index(start["name"])
+        < names.index(test["name"])
+        < names.index(cleanup["name"])
+    )
     assert start["if"] == "runner.os == 'Linux'"
-    assert "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81" in start["run"]
-    assert 'ACTIONS_REQUIRE_INVOICE_PROVIDERS=1' in start["run"]
-    assert 'poetry run inv test-not-integration' in test["run"]
+    assert (
+        "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81"
+        in start["run"]
+    )
+    assert "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" in start["run"]
+    assert "poetry run inv test-not-integration" in test["run"]
     assert cleanup["if"] == "always() && runner.os == 'Linux'"
-    assert 'docker rm' in cleanup["run"] and 'docker ps' in cleanup["run"]
+    assert "docker rm" in cleanup["run"] and "docker ps" in cleanup["run"]
 
 
 @pytest.mark.skipif(sys.platform != "linux", reason="PostgreSQL CI shell runs on Linux")

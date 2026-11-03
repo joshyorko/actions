@@ -16,15 +16,17 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
-
 from action_server_tests.test_foundry_deployments import _refs, _runtime_database
 from action_server_tests.test_foundry_package_registry import _grant, _registry
-from action_server_tests.test_generic_work_item_execution import grant as grant_authority
+from action_server_tests.test_generic_work_item_execution import (
+    grant as grant_authority,
+)
+from action_server_tests.test_robot_package_admission import request_for
 from contract_tests.test_package_revision_compiler import (
     _FakeCompilerExecutor,
     _generated_action_entries,
 )
-from action_server_tests.test_robot_package_admission import request_for
+
 from actions.server._database import Database
 from actions.server._models import Run, get_all_model_classes
 from actions.server.deployments.foundry_repository import FoundryRepository
@@ -36,30 +38,28 @@ from actions.server.deployments.foundry_values import (
     InternalRobotBinding,
     InternalRobotDelegationPolicy,
 )
-from actions.server.deployments.ids import (
-    DeploymentId,
-)
+from actions.server.deployments.ids import DeploymentId
 from actions.server.deployments.package_revision_compiler import (
     PreparedRccEnvironment,
     RccBuildIdentity,
     TrustedDeveloperExecutionAdmission,
 )
+from actions.server.foundry.internal_child_admission import InternalChildAdmission
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
+from actions.server.foundry.robot_execution import RccRobotPreparation
 from actions.server.foundry.sql_authorization import (
     SqlFoundryAuthorization,
     reference_grant_subject,
 )
-from actions.server.foundry.internal_child_admission import InternalChildAdmission
-from actions.server.foundry.robot_execution import RccRobotPreparation
 from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import (
+    RunAdmission,
+    RunAttempt,
     RunChildLineage,
     RunExecutionIntent,
     RunOutput,
     RunPin,
-    RunAdmission,
-    RunAttempt,
     RunTaskReceipt,
 )
 from actions.server.run_outputs.service import (
@@ -144,7 +144,9 @@ def admitted(database_location, foundry_package_store, tmp_path, request):
             workspace_id=workspace,
             application_id=refs.deployment_id,
         )
-        action_ref = registry.admit_compiled(actor, workspace, compilation.compiled_package)
+        action_ref = registry.admit_compiled(
+            actor, workspace, compilation.compiled_package
+        )
         # Real SQL/blob reload validates the immutable package identity and
         # proves the provider staged the source under a fresh object reference.
         assert registry.load_verified(action_ref) == compilation.compiled_package
@@ -279,11 +281,11 @@ def admitted(database_location, foundry_package_store, tmp_path, request):
             str(refs.deployment_id.root),
             ["cancel_execution"],
         )
-        resolved = deployments.resolve(
-            actor, workspace, refs.deployment_id, action_cap
-        )
+        resolved = deployments.resolve(actor, workspace, refs.deployment_id, action_cap)
         control.register(resolved.snapshot)
-        control.grant(actor, resolved.snapshot.deployment, {"execute", "read", "cancel"})
+        control.grant(
+            actor, resolved.snapshot.deployment, {"execute", "read", "cancel"}
+        )
         outputs = RunOutputService(db, {}, capabilities=robot_registry)
         parent_run = outputs.admit(
             actor, resolved.snapshot, {"value": "parent"}, "synchronous-parent"
@@ -350,15 +352,23 @@ def _independent_invoker(admitted, barrier, key, payload):
 
 
 def test_internal_child_replay_conflict_count_and_no_task_receipt(admitted):
-    child = admitted.admission.invoke(admitted.fence, "scan", "logical-1", {"value": "x"})
+    child = admitted.admission.invoke(
+        admitted.fence, "scan", "logical-1", {"value": "x"}
+    )
     assert child.created
-    same = admitted.admission.invoke(admitted.fence, "scan", "logical-1", {"value": "x"})
+    same = admitted.admission.invoke(
+        admitted.fence, "scan", "logical-1", {"value": "x"}
+    )
     assert not same.created and same.run.id == child.run.id
     assert len(_child_rows(admitted.db, admitted.parent_run.id)) == 1
-    assert admitted.db.all(RunTaskReceipt, where="run_id=?", values=[child.run.id]) == []
+    assert (
+        admitted.db.all(RunTaskReceipt, where="run_id=?", values=[child.run.id]) == []
+    )
     before = len(admitted.db.all(Run))
     with pytest.raises(ValueError, match="conflicts"):
-        admitted.admission.invoke(admitted.fence, "scan", "logical-1", {"value": "changed"})
+        admitted.admission.invoke(
+            admitted.fence, "scan", "logical-1", {"value": "changed"}
+        )
     assert len(admitted.db.all(Run)) == before
     with pytest.raises(AccessDenied, match="count bound"):
         admitted.admission.invoke(admitted.fence, "scan", "logical-2", {"value": "y"})
@@ -462,13 +472,18 @@ def test_internal_child_concurrent_same_key_replays_one_child(admitted):
     after = _durable_ids(admitted.db)
     for model_name, old_ids in before.items():
         added = after[model_name] - old_ids
-        expected = 1 if model_name in {
-            "Run",
-            "RunPin",
-            "RunAdmission",
-            "RunExecutionIntent",
-            "RunChildLineage",
-        } else 0
+        expected = (
+            1
+            if model_name
+            in {
+                "Run",
+                "RunPin",
+                "RunAdmission",
+                "RunExecutionIntent",
+                "RunChildLineage",
+            }
+            else 0
+        )
         assert len(added) == expected, (model_name, added)
 
 
@@ -478,9 +493,7 @@ def test_internal_child_concurrent_distinct_keys_quota_leaves_no_orphans(admitte
 
     def attempt(key):
         try:
-            return _independent_invoker(
-                admitted, barrier, key, {"value": key}
-            )
+            return _independent_invoker(admitted, barrier, key, {"value": key})
         except AccessDenied:
             return None
 
@@ -491,13 +504,18 @@ def test_internal_child_concurrent_distinct_keys_quota_leaves_no_orphans(admitte
     after = _durable_ids(admitted.db)
     for model_name, old_ids in before.items():
         added = after[model_name] - old_ids
-        expected = 1 if model_name in {
-            "Run",
-            "RunPin",
-            "RunAdmission",
-            "RunExecutionIntent",
-            "RunChildLineage",
-        } else 0
+        expected = (
+            1
+            if model_name
+            in {
+                "Run",
+                "RunPin",
+                "RunAdmission",
+                "RunExecutionIntent",
+                "RunChildLineage",
+            }
+            else 0
+        )
         assert len(added) == expected, (model_name, added)
     lineage = _child_rows(admitted.db, admitted.parent_run.id)
     assert len(lineage) == 1

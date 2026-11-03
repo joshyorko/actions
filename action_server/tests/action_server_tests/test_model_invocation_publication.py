@@ -3,17 +3,17 @@
 import json
 
 import pytest
-from actions.canvas_contract import validate_canvas_spec
 from action_server_tests import test_generic_work_item_execution as fixtures
+from actions.canvas_contract import validate_canvas_spec
 
 import actions.server.foundry.model_invocation_publication as publication_module
 from actions.server.deployments.foundry_values import (
+    AccessDenied,
     CanvasCapabilityBinding,
     DeploymentSpecification,
     canvas_revision_digest,
 )
 from actions.server.deployments.ids import WorkspaceId
-from actions.server.deployments.foundry_values import AccessDenied
 from actions.server.foundry.model_invocation_publication import (
     ModelInvocationPublicationGuard,
 )
@@ -85,9 +85,7 @@ def _selection(g, *, model_publish=False, canvas_visibility=None):
     )
     value = current.revision.specification.model_dump(mode="json", by_alias=True)
     if model_publish:
-        value["model_published_capabilities"] = [
-            old.capability.model_dump(mode="json")
-        ]
+        value["model_published_capabilities"] = [old.capability.model_dump(mode="json")]
     if canvas_visibility is not None:
         binding_ids = ["lookup"]
         spec = validate_canvas_spec(
@@ -109,10 +107,14 @@ def _selection(g, *, model_publish=False, canvas_visibility=None):
                 },
             }
         )
-        bindings = (CanvasCapabilityBinding(binding_id="lookup", capability=old.capability),)
+        bindings = (
+            CanvasCapabilityBinding(binding_id="lookup", capability=old.capability),
+        )
         app_id = old.deployment.deployment_id
         value["canvas_spec"] = spec.model_dump(mode="json", by_alias=True)
-        value["canvas_bindings"] = [binding.model_dump(mode="json") for binding in bindings]
+        value["canvas_bindings"] = [
+            binding.model_dump(mode="json") for binding in bindings
+        ]
         value["canvas_application"] = CanvasApplicationRef(
             workspace_id=old.workspace_id,
             app_id=str(app_id.root),

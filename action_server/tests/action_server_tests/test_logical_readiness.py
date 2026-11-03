@@ -70,7 +70,10 @@ def publish_model_snapshot(g):
 
     from actions.server.foundry.models import FoundryAccessGrant
     from actions.server.foundry.sql_authorization import reference_grant_subject
-    from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputService
+    from actions.server.run_outputs.service import (
+        RunOutputControlPlane,
+        RunOutputService,
+    )
 
     deployments = g.execution.deployments
     current_snapshot = g.outputs.execution_context(g.actor, g.fence)[0]
@@ -113,9 +116,7 @@ def publish_model_snapshot(g):
     )
     published = SimpleNamespace(**vars(g))
     published.outputs = outputs
-    published.execution = type(g.execution)(
-        deployments, g.registry, outputs, g.factory
-    )
+    published.execution = type(g.execution)(deployments, g.registry, outputs, g.factory)
     return published, snapshot
 
 

@@ -13,7 +13,9 @@ from actions.server.run_outputs.models import RunChildLineage, Workspace
 
 
 @pytest.mark.postgresql
-def test_postgresql_schema_22_to_23_adds_empty_child_lineage_with_fresh_parity() -> None:
+def test_postgresql_schema_22_to_23_adds_empty_child_lineage_with_fresh_parity() -> (
+    None
+):
     base_url = os.environ.get("ACTIONS_INVOICE_TEST_POSTGRES")
     if not base_url:
         if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
@@ -21,11 +23,11 @@ def test_postgresql_schema_22_to_23_adds_empty_child_lineage_with_fresh_parity()
         pytest.skip("owned PostgreSQL deployment fixture not configured")
 
     import psycopg
-
     from action_server_tests.test_database_shared import (
         _drop_postgresql_schema,
         _postgresql_schema_url,
     )
+
     from actions.server._models import get_all_model_classes, get_model_db_rules
 
     migrated_schema = "child_lineage_migration_" + uuid4().hex
@@ -50,10 +52,9 @@ def test_postgresql_schema_22_to_23_adds_empty_child_lineage_with_fresh_parity()
                 if model is RunChildLineage:
                     continue
                 old_db.execute(old_db.create_table_sql(model, rules))
-                for statement in (
-                    old_db.create_unique_indexes_sql(model, rules)
-                    + old_db.create_non_unique_indexes_sql(model, rules)
-                ):
+                for statement in old_db.create_unique_indexes_sql(
+                    model, rules
+                ) + old_db.create_non_unique_indexes_sql(model, rules):
                     old_db.execute(statement)
             old_db.insert(Migration(22, MIGRATION_ID_TO_NAME[22]))
             workspace = Workspace(str(uuid4()), "active", 7)
@@ -95,4 +96,6 @@ def test_postgresql_schema_22_to_23_adds_empty_child_lineage_with_fresh_parity()
         finally:
             owner.close()
         if cleanup_errors:
-            raise RuntimeError("failed to remove a task-owned migration schema") from cleanup_errors[0]
+            raise RuntimeError(
+                "failed to remove a task-owned migration schema"
+            ) from cleanup_errors[0]

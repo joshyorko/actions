@@ -6,13 +6,13 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
-from mcp.types import Tool
-
 from action_server_tests import test_generic_work_item_execution as generic_fixtures
 from action_server_tests.test_managed_work_items_publication_policy import (
     _composite_port,
     _publish_queues,
 )
+from mcp.types import Tool
+
 from actions.server.foundry import bootstrap
 from actions.server.foundry.mcp import CanvasCaller
 from actions.server.managed_work_items.contracts import (
@@ -129,9 +129,9 @@ def test_setup_helper_lists_and_routes_only_attached_managed_tool():
     app = SimpleNamespace(audience="app")
 
     async def check():
-        assert [item.name for item in (await helper._list_tools(model, None)).tools] == [
-            "managed_queues_list"
-        ]
+        assert [
+            item.name for item in (await helper._list_tools(model, None)).tools
+        ] == ["managed_queues_list"]
         assert (await helper._list_tools(app, None)).tools == []
         routed = await helper._call_tool(
             model,
@@ -147,6 +147,7 @@ def test_native_startup_real_policy_guard_and_helper_enforce_model_scope(
     generic_world,
 ):
     from actions.server.foundry.mcp import APP_TOOLS, MODEL_TOOLS, CanvasMcp
+
     g = generic_world
     queue = _publish_queues(
         g,
@@ -211,8 +212,7 @@ def test_native_startup_real_policy_guard_and_helper_enforce_model_scope(
         }
         assert "managed_items_list" in model_tools
         app_tools = {
-            tool.name: tool
-            for tool in (await helper._list_tools(app_ctx, None)).tools
+            tool.name: tool for tool in (await helper._list_tools(app_ctx, None)).tools
         }
         assert "managed_items_list" not in app_tools
 

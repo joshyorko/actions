@@ -3,8 +3,8 @@
 from types import SimpleNamespace
 
 import pytest
+from action_server_tests.test_robot_claimed_work_items_327 import claimed as claimed
 from action_server_tests.test_robot_claimed_work_items_327 import (
-    claimed as claimed,
     disable_feedback as disable_feedback,
 )
 
@@ -110,4 +110,6 @@ def test_unpublished_claim_is_denied_as_model_task_but_trusted_admission_works(c
     # dispatch path before model Task admission was attempted.
     assert c.ticket.claim is not None and c.ticket.claim.item_id == c.item
     assert c.db.all(Run, where="id=?", values=[c.ticket.fence.run_id])
-    assert not c.db.all(RunTaskReceipt, where="run_id=?", values=[c.ticket.fence.run_id])
+    assert not c.db.all(
+        RunTaskReceipt, where="run_id=?", values=[c.ticket.fence.run_id]
+    )

@@ -7,20 +7,16 @@ import sys
 from uuid import uuid4
 
 import pytest
-from action_server_tests.test_internal_child_admission import admitted as admitted
 from action_server_tests.test_generic_work_item_execution import (
     grant as grant_authority,
 )
+from action_server_tests.test_internal_child_admission import admitted as admitted
 from actions.internal_runtime import ChildRunHandle, ChildRunState
 
 from actions.server._models import Run, RunStatus
 from actions.server.foundry.internal_child_lifecycle import InternalChildRunLifecycle
 from actions.server.run_outputs.models import RunPin
-from actions.server.run_outputs.service import (
-    AccessDenied,
-    RunOutputControlPlane,
-    _one,
-)
+from actions.server.run_outputs.service import AccessDenied, RunOutputControlPlane, _one
 from actions.server.run_outputs.types import Actor
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
@@ -52,13 +48,10 @@ def test_child_status_and_pending_cancel_use_only_exact_lineage(admitted):
     lifecycle = InternalChildRunLifecycle(admitted.detached)
 
     assert (
-        lifecycle.status(admitted.fence, "scan", handle).state
-        is ChildRunState.PENDING
+        lifecycle.status(admitted.fence, "scan", handle).state is ChildRunState.PENDING
     )
     with pytest.raises(AccessDenied):
-        lifecycle.status(
-            admitted.fence, "scan", ChildRunHandle(str(uuid4()))
-        )
+        lifecycle.status(admitted.fence, "scan", ChildRunHandle(str(uuid4())))
 
     cancelled = lifecycle.cancel(admitted.fence, "scan", handle)
     assert cancelled.state is ChildRunState.CANCELLED
@@ -98,9 +91,7 @@ def test_recovered_child_status_validates_lost_history_and_current_attempt(admit
             first.attempt_id,
             {"lease_deadline_ms": "0"},
         )
-    control = RunOutputControlPlane(
-        admitted.db, capabilities=admitted.registry
-    )
+    control = RunOutputControlPlane(admitted.db, capabilities=admitted.registry)
     control.authorize_recovery(
         run.id, first.epoch, receipt="fixture-verified-no-effects"
     )
@@ -109,8 +100,7 @@ def test_recovered_child_status_validates_lost_history_and_current_attempt(admit
 
     lifecycle = InternalChildRunLifecycle(admitted.detached)
     assert (
-        lifecycle.status(admitted.fence, "scan", handle).state
-        is ChildRunState.RUNNING
+        lifecycle.status(admitted.fence, "scan", handle).state is ChildRunState.RUNNING
     )
 
     # A current Attempt with a valid epoch but corrupted historical state is
@@ -134,8 +124,7 @@ def test_child_read_and_cancel_permissions_are_rechecked(admitted):
 
     control.grant(admitted.actor, child_snapshot.deployment, {"execute", "read"})
     assert (
-        lifecycle.status(admitted.fence, "scan", handle).state
-        is ChildRunState.PENDING
+        lifecycle.status(admitted.fence, "scan", handle).state is ChildRunState.PENDING
     )
     with pytest.raises(AccessDenied):
         lifecycle.cancel(admitted.fence, "scan", handle)

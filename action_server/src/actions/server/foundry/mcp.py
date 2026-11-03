@@ -223,7 +223,9 @@ class CanvasMcp:
                     idempotent_hint=name in _READ_ONLY,
                     open_world_hint=False,
                 ),
-                _meta={} if name == "capability_discover" else {
+                _meta={}
+                if name == "capability_discover"
+                else {
                     "ui": {
                         "resourceUri": URI,
                         "visibility": ["model"]

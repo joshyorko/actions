@@ -23,9 +23,9 @@ from actions.server.deployments.foundry_values import ModelPublishedWorkItemOper
 from actions.server.deployments.ids import WorkspaceId
 
 from .contracts import (
+    CONTRACT_VERSION,
     OPERATION_PERMISSION,
     RESULT_MODELS,
-    CONTRACT_VERSION,
     Capabilities,
     Enqueue,
     Inspect,
@@ -36,8 +36,8 @@ from .contracts import (
     Permission,
     QueuePage,
     QueueRef,
-    QueueView,
     Queues,
+    QueueView,
 )
 from .model_publication import ModelWorkItemPublicationGuard
 
@@ -108,14 +108,15 @@ class _PublishedQueueCursor(BaseModel):
         alias="deploymentId", default=None, min_length=36, max_length=36
     )
     offset: int = Field(ge=0, le=MAX_PUBLISHED_QUEUES)
-    visible_digest: str = Field(
-        alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$"
-    )
+    visible_digest: str = Field(alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$")
 
 
 def _queue_key(queue: QueueRef) -> str:
     return json.dumps(
-        queue.model_dump(mode="json"), ensure_ascii=False, separators=(",", ":"), sort_keys=True
+        queue.model_dump(mode="json"),
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
     )
 
 
@@ -223,8 +224,14 @@ def _queue_ref(value: dict) -> dict:
 
 def _item_view(value: dict) -> dict:
     fields = (
-        "id", "queue_state", "business_state", "delivery_count",
-        "available_after_ms", "created_ms", "run_ids", "review_id",
+        "id",
+        "queue_state",
+        "business_state",
+        "delivery_count",
+        "available_after_ms",
+        "created_ms",
+        "run_ids",
+        "review_id",
     )
     result = {key: value[key] for key in fields if key in value}
     result["queue"] = _queue_ref(value["queue"])
@@ -355,9 +362,7 @@ class ManagedWorkItemsMcp:
         if self.publication is None:
             return set()
         try:
-            return await run_in_threadpool(
-                self._normalize_published_workspaces, caller
-            )
+            return await run_in_threadpool(self._normalize_published_workspaces, caller)
         except Exception:
             return set()
 
@@ -422,9 +427,7 @@ class ManagedWorkItemsMcp:
         for workspace in workspaces:
             workspace_id = WorkspaceId.model_validate(workspace)
             for operation in _TOOL_OPERATIONS.values():
-                queues = await self._published_queues(
-                    caller, workspace_id, operation
-                )
+                queues = await self._published_queues(caller, workspace_id, operation)
                 if queues and await self._allowed(caller, workspace_id, operation):
                     visible.add(operation)
         return [
@@ -461,10 +464,7 @@ class ManagedWorkItemsMcp:
                 raise ValueError
             if operation == Operation.ENQUEUE and "review" in parsed:
                 raise ValueError
-            if (
-                operation == Operation.CANCEL
-                and "reconciliation_receipt" in parsed
-            ):
+            if operation == Operation.CANCEL and "reconciliation_receipt" in parsed:
                 raise ValueError
             command_raw = json.dumps(
                 parsed, ensure_ascii=False, allow_nan=False
@@ -519,13 +519,16 @@ class ManagedWorkItemsMcp:
             if operation == Operation.QUEUES:
                 result["next_cursor"] = next_cursor
             projected = _project_result(operation, result)
-            encoded = json.dumps(projected, ensure_ascii=False, allow_nan=False).encode()
+            encoded = json.dumps(
+                projected, ensure_ascii=False, allow_nan=False
+            ).encode()
             if len(encoded) > MAX_RESULT_BYTES:
                 raise ValueError
             return CallToolResult(
                 content=[
                     TextContent(
-                        type="text", text=f"Managed operation {operation.value} completed."
+                        type="text",
+                        text=f"Managed operation {operation.value} completed.",
                     )
                 ],
                 structured_content=_JSON.validate_python(projected),
@@ -586,11 +589,13 @@ class ManagedWorkItemsMcp:
             offset = 0
         else:
             cursor = _decode_queue_cursor(
-                command.cursor, command.workspace_id, (
+                command.cursor,
+                command.workspace_id,
+                (
                     str(command.deployment_id.root)
                     if command.deployment_id is not None
                     else None
-                )
+                ),
             )
             offset = cursor.offset
 
@@ -659,11 +664,13 @@ class ManagedWorkItemsMcp:
         digest = _visible_queue_digest(visible_queues)
         if command.cursor is not None:
             cursor = _decode_queue_cursor(
-                command.cursor, command.workspace_id, (
+                command.cursor,
+                command.workspace_id,
+                (
                     str(command.deployment_id.root)
                     if command.deployment_id is not None
                     else None
-                )
+                ),
             )
             if cursor.visible_digest != digest:
                 raise ValueError("visible Queue set changed")

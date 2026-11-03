@@ -6,11 +6,15 @@ from uuid import uuid4
 
 import pytest
 from action_server_tests import test_generic_work_item_execution as generic_fixtures
+from starlette.concurrency import run_in_threadpool
+
 from actions.server.data_queries.review import InvoiceReviewService
 from actions.server.data_queries.service import InvoiceQueryService
 from actions.server.deployments.foundry_values import DeploymentSpecification
 from actions.server.foundry.models import FoundryAccessGrant, FoundryDeploymentHead
 from actions.server.foundry.sql_authorization import reference_grant_subject
+from actions.server.managed_work_items import publication_policy as policy_module
+from actions.server.managed_work_items.authorization import SqlQueueAuthorization
 from actions.server.managed_work_items.composite import CompositeManagedWorkItemsService
 from actions.server.managed_work_items.contracts import (
     ManagedCaller,
@@ -18,14 +22,11 @@ from actions.server.managed_work_items.contracts import (
     Permission,
     QueueRef,
 )
-from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
-from actions.server.managed_work_items.authorization import SqlQueueAuthorization
-from actions.server.managed_work_items import publication_policy as policy_module
 from actions.server.managed_work_items.publication_policy import (
     DeploymentModelWorkItemPublicationPolicy,
 )
+from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
 from actions.server.run_outputs.types import Actor
-from starlette.concurrency import run_in_threadpool
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
@@ -91,12 +92,8 @@ def _publish_queues(g, selections, key):
 
 def _composite_port(g):
     reviews = InvoiceReviewService(InvoiceQueryService(g.owner.base, {}))
-    reviewed = SQLManagedWorkItemsService(
-        reviews, SqlQueueAuthorization(g.db)
-    )
-    return CompositeManagedWorkItemsService(
-        reviewed, g.owner.deployments, g.owner.base
-    )
+    reviewed = SQLManagedWorkItemsService(reviews, SqlQueueAuthorization(g.db))
+    return CompositeManagedWorkItemsService(reviewed, g.owner.deployments, g.owner.base)
 
 
 def test_policy_intersects_current_exact_publication_with_composite_catalog(
@@ -200,19 +197,25 @@ def test_policy_rejects_wrong_actor_worker_identity_and_other_workspace(generic_
         queue.workspace_id,
     )
 
-    assert policy.workspaces(
-        ManagedCaller(actor=Actor(principal_id=str(uuid4())))
-    ) == ()
-    assert policy.queues(
-        ManagedCaller(actor=caller.actor, worker_id=str(uuid4())),
-        queue.workspace_id,
-        Operation.LIST,
-    ) == ()
-    assert policy.queues(
-        caller,
-        type(queue.workspace_id)(uuid4()),
-        Operation.LIST,
-    ) == ()
+    assert (
+        policy.workspaces(ManagedCaller(actor=Actor(principal_id=str(uuid4())))) == ()
+    )
+    assert (
+        policy.queues(
+            ManagedCaller(actor=caller.actor, worker_id=str(uuid4())),
+            queue.workspace_id,
+            Operation.LIST,
+        )
+        == ()
+    )
+    assert (
+        policy.queues(
+            caller,
+            type(queue.workspace_id)(uuid4()),
+            Operation.LIST,
+        )
+        == ()
+    )
 
 
 def test_policy_fails_closed_on_bounded_current_head_overflow(

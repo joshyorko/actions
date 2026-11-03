@@ -2,13 +2,10 @@
 import pytest
 from action_server_tests.fixtures import database_v0
 
-from actions.server._database import DBError, Database
+from actions.server._database import Database, DBError
 from actions.server._models import create_db, get_all_model_classes, get_model_db_rules
 from actions.server.migrations import CURRENT_VERSION, migrate_db
-from actions.server.run_outputs.models import (
-    RunChildLineage,
-    run_child_identity_digest,
-)
+from actions.server.run_outputs.models import RunChildLineage, run_child_identity_digest
 
 
 def test_migration_preserves_legacy_runs_without_synthetic_lineage(tmp_path):

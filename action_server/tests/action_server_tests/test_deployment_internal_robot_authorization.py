@@ -4,7 +4,6 @@ from contextlib import contextmanager
 from types import SimpleNamespace
 
 import pytest
-
 from action_server_tests.test_foundry_deployments import (
     _PackagePort,
     _refs,
@@ -13,6 +12,7 @@ from action_server_tests.test_foundry_deployments import (
     _spec,
     _uuid,
 )
+
 from actions.server.deployments.foundry_values import (
     AccessDenied,
     CapabilityPlanPolicy,
@@ -41,7 +41,9 @@ pytest_plugins = ["action_server_tests.foundry_fixtures"]
 class _RegistryPackagePort(_PackagePort):
     """Small registry-shaped test port with explicit registered target kinds."""
 
-    def __init__(self, refs, target_package, target_capability, target_plan, *, target_kind="rcc"):
+    def __init__(
+        self, refs, target_package, target_capability, target_plan, *, target_kind="rcc"
+    ):
         super().__init__(refs)
         self.package_refs.add(target_package)
         self.capabilities[target_capability] = SimpleNamespace(
@@ -80,9 +82,7 @@ class _RegistryPackagePort(_PackagePort):
                 plan_digest=PlanDigest("sha256:" + "b" * 64),
             )
         robot = SimpleNamespace(
-            robot=SimpleNamespace(
-                plan=SimpleNamespace(runtime_kind=self.target_kind)
-            )
+            robot=SimpleNamespace(plan=SimpleNamespace(runtime_kind=self.target_kind))
         )
         return RegistryRobotSelection(
             self.target_package, capability, selected_plan, robot
@@ -110,7 +110,10 @@ def _setup(database_location, *, target_kind="rcc"):
         database_location, refs.workspace, (refs.package, target_package)
     ) as db:
         package_port = _RegistryPackagePort(
-            refs, target_package, target_capability, target_plan,
+            refs,
+            target_package,
+            target_capability,
+            target_plan,
             target_kind=target_kind,
         )
         service, _, authorization = _service(db, refs, package_port)
@@ -168,14 +171,21 @@ def _parent_spec(refs, target_ref, target_capability, target_plan):
     return DeploymentSpecification.model_validate(value)
 
 
-def test_deploy_persists_policy_only_for_registered_activated_rcc_robot(database_location):
+def test_deploy_persists_policy_only_for_registered_activated_rcc_robot(
+    database_location,
+):
     with _setup(database_location) as (
-        _, service, package_port, authorization, refs, actor,
-        target_ref, target_capability, target_plan,
+        _,
+        service,
+        package_port,
+        authorization,
+        refs,
+        actor,
+        target_ref,
+        target_capability,
+        target_plan,
     ):
-        specification = _parent_spec(
-            refs, target_ref, target_capability, target_plan
-        )
+        specification = _parent_spec(refs, target_ref, target_capability, target_plan)
         parent = service.create(
             actor,
             refs.workspace,
@@ -196,14 +206,21 @@ def test_deploy_persists_policy_only_for_registered_activated_rcc_robot(database
 def test_deploy_rejects_action_direct_or_mismatched_registry_targets(
     database_location, selection_mode
 ):
-    with _setup(database_location, target_kind="direct" if selection_mode == "direct" else "rcc") as (
-        _, service, package_port, _, refs, actor,
-        target_ref, target_capability, target_plan,
+    with _setup(
+        database_location, target_kind="direct" if selection_mode == "direct" else "rcc"
+    ) as (
+        _,
+        service,
+        package_port,
+        _,
+        refs,
+        actor,
+        target_ref,
+        target_capability,
+        target_plan,
     ):
         package_port.selection_mode = selection_mode
-        specification = _parent_spec(
-            refs, target_ref, target_capability, target_plan
-        )
+        specification = _parent_spec(refs, target_ref, target_capability, target_plan)
         with pytest.raises(AccessDenied):
             service.create(
                 actor,
@@ -214,14 +231,21 @@ def test_deploy_rejects_action_direct_or_mismatched_registry_targets(
             )
 
 
-def test_deploy_rechecks_target_activation_and_live_reference_permission(database_location):
+def test_deploy_rechecks_target_activation_and_live_reference_permission(
+    database_location,
+):
     with _setup(database_location) as (
-        db, service, _, authorization, refs, actor,
-        target_ref, target_capability, target_plan,
+        db,
+        service,
+        _,
+        authorization,
+        refs,
+        actor,
+        target_ref,
+        target_capability,
+        target_plan,
     ):
-        specification = _parent_spec(
-            refs, target_ref, target_capability, target_plan
-        )
+        specification = _parent_spec(refs, target_ref, target_capability, target_plan)
         authorization.revoked_references.add(target_ref)
         with pytest.raises(AccessDenied):
             service.create(

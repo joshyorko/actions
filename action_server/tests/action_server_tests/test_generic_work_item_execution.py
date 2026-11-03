@@ -90,9 +90,7 @@ def generic(database_location, foundry_package_store):
     with _runtime_database(database_location, refs.workspace, ()) as db:
         _grant(db, refs, actor)
 
-        def setup(
-            mode="consumer", outputs=False, real=False, model_publication=False
-        ):
+        def setup(mode="consumer", outputs=False, real=False, model_publication=False):
             executor = OutputExecutor() if outputs else None
             entries = _generated_action_entries()
             if real:
@@ -190,9 +188,7 @@ def generic(database_location, foundry_package_store):
                 policy=refs.policy,
                 output_provider=refs.output_provider,
                 work_item_policies=(policy,),
-                model_published_capabilities=(capability,)
-                if model_publication
-                else (),
+                model_published_capabilities=(capability,) if model_publication else (),
             )
             revision = deployments.create(
                 actor,

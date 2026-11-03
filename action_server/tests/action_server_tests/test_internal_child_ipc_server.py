@@ -14,9 +14,9 @@ from action_server_tests.test_generic_work_item_execution import (
     grant as grant_authority,
 )
 from action_server_tests.test_internal_child_admission import admitted as admitted
-from actions.internal_runtime import ChildRunState
-from actions.internal_runtime import ChildRunHandle, ChildRunUnavailable
+from actions.internal_runtime import ChildRunHandle, ChildRunState, ChildRunUnavailable
 from actions.internal_runtime._fd_transport import InternalChildFDTransport
+
 from actions.server.foundry.internal_child_ipc_server import InternalChildIPCServer
 from actions.server.foundry.internal_child_lifecycle import InternalChildRunLifecycle
 from actions.server.run_outputs.models import RunChildLineage
@@ -52,9 +52,7 @@ def test_real_authorities_submit_status_cancel_and_close(admitted):
     )
     sock, server, thread = _server(admitted)
     transport = InternalChildFDTransport(sock, timeout_seconds=2)
-    handle = transport.submit_child_run(
-        "scan", "ipc-lifecycle", '{"value":"test"}'
-    )
+    handle = transport.submit_child_run("scan", "ipc-lifecycle", '{"value":"test"}')
     assert transport.child_run_status(handle).state is ChildRunState.PENDING
     assert transport.cancel_child_run(handle).state is ChildRunState.CANCELLED
     assert transport.child_run_status(handle).state is ChildRunState.CANCELLED

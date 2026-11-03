@@ -208,7 +208,10 @@ class InternalRobotBinding(_FrozenValue):
             != self.target_capability.package_revision.workspace_id
         ):
             raise ValueError("internal Robot target references must share a Workspace")
-        if self.target_capability.package_revision != self.target_runtime_plan.package_revision:
+        if (
+            self.target_capability.package_revision
+            != self.target_runtime_plan.package_revision
+        ):
             raise ValueError(
                 "internal Robot capability and plan must share a Package Revision"
             )

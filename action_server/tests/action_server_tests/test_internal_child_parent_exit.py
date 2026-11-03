@@ -9,11 +9,12 @@ from threading import Barrier
 from uuid import uuid4
 
 import pytest
-from action_server_tests.test_internal_child_admission import (
-    _independent_invoker,
-    admitted as admitted,  # noqa: F811
-)
 from action_server_tests.test_foundry_package_registry import _registry
+from action_server_tests.test_internal_child_admission import _independent_invoker
+from action_server_tests.test_internal_child_admission import (  # noqa: F811
+    admitted as admitted,
+)
+
 from actions.server._database import Database
 from actions.server._models import Run, RunStatus, get_all_model_classes
 from actions.server.managed_work_items.contracts import ManagedCaller
@@ -64,13 +65,16 @@ def _terminal_parent_with_child(admitted, *, active_child=False):
         terminal_status=RunStatus.PASSED,
     )
     assert _one(admitted.db, Run, admitted.parent_run.id).status == RunStatus.PASSED
-    assert len(
-        admitted.db.all(
-            RunChildLineage,
-            where="parent_run_id=? AND child_run_id=?",
-            values=[admitted.parent_run.id, child.id],
+    assert (
+        len(
+            admitted.db.all(
+                RunChildLineage,
+                where="parent_run_id=? AND child_run_id=?",
+                values=[admitted.parent_run.id, child.id],
+            )
         )
-    ) == 1
+        == 1
+    )
     return child, admitted.outputs._pinned(_one(admitted.db, RunPin, child.id))
 
 
@@ -142,14 +146,20 @@ def test_active_child_cancel_intent_survives_database_reopen(admitted):
         assert _one(reopened, Run, child.id).status == RunStatus.RUNNING
 
 
-def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(admitted):
+def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(
+    admitted,
+):
     output = _stage_parent_result(admitted)
-    snapshot = admitted.outputs._pinned(_one(admitted.db, RunPin, admitted.parent_run.id))
+    snapshot = admitted.outputs._pinned(
+        _one(admitted.db, RunPin, admitted.parent_run.id)
+    )
     barrier = Barrier(2)
 
     def admit():
         try:
-            return _independent_invoker(admitted, barrier, "race-parent-exit", {"value": "child"})
+            return _independent_invoker(
+                admitted, barrier, "race-parent-exit", {"value": "child"}
+            )
         except (AccessDenied, FenceRejected):
             return None
 
@@ -158,9 +168,13 @@ def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(
         with db.connect():
             db.initialize(get_all_model_classes())
             registry = _registry(db, admitted.store)
-            outputs = RunOutputService(db, {snapshot.provider_key: admitted.store}, capabilities=registry)
+            outputs = RunOutputService(
+                db, {snapshot.provider_key: admitted.store}, capabilities=registry
+            )
             barrier.wait(timeout=10)
-            return outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+            return outputs.publish(
+                admitted.actor, admitted.fence, [output], {"result": "completed"}
+            )
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         admission_result = pool.submit(admit)
@@ -171,18 +185,36 @@ def test_concurrent_admission_and_parent_publication_never_leave_runnable_child(
         assert _one(admitted.db, Run, outcome.run.id).status == RunStatus.CANCELLED
         assert _one(admitted.db, RunPin, outcome.run.id).cancel_requested == 1
     else:
-        assert admitted.db.all(RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]) == []
+        assert (
+            admitted.db.all(
+                RunChildLineage,
+                where="parent_run_id=?",
+                values=[admitted.parent_run.id],
+            )
+            == []
+        )
 
 
 def test_terminal_parent_rejects_new_child_admission(admitted):
     output = _stage_parent_result(admitted)
-    admitted.outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+    admitted.outputs.publish(
+        admitted.actor, admitted.fence, [output], {"result": "completed"}
+    )
     with pytest.raises((AccessDenied, FenceRejected)):
-        admitted.admission.invoke(admitted.fence, "scan", "after-terminal", {"value": "child"})
-    assert admitted.db.all(RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]) == []
+        admitted.admission.invoke(
+            admitted.fence, "scan", "after-terminal", {"value": "child"}
+        )
+    assert (
+        admitted.db.all(
+            RunChildLineage, where="parent_run_id=?", values=[admitted.parent_run.id]
+        )
+        == []
+    )
 
 
-@pytest.mark.parametrize("admitted", [{"parent_exit": "allow-authorized-detach"}], indirect=True)
+@pytest.mark.parametrize(
+    "admitted", [{"parent_exit": "allow-authorized-detach"}], indirect=True
+)
 def test_parent_cancel_request_preserves_authorized_detached_child(admitted):
     child = admitted.admission.invoke(
         admitted.fence, "scan", "detach-parent-cancel", {"value": "child"}
@@ -234,7 +266,9 @@ def test_corrupt_active_attempt_rolls_back_parent_terminal_publication(admitted)
     with admitted.db.transaction():
         _update(admitted.db, RunAttempt, child_fence.attempt_id, {"state": "failed"})
     with pytest.raises(FenceRejected):
-        admitted.outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+        admitted.outputs.publish(
+            admitted.actor, admitted.fence, [output], {"result": "completed"}
+        )
     assert _one(admitted.db, Run, admitted.parent_run.id).status == RunStatus.RUNNING
     assert _one(admitted.db, RunPin, child.id).cancel_requested == 0
 
@@ -244,12 +278,18 @@ def test_corrupt_lineage_identity_rolls_back_parent_terminal_publication(admitte
         admitted.fence, "scan", "corrupt-digest", {"value": "child"}
     ).run
     output = _stage_parent_result(admitted)
-    lineage = admitted.db.all(RunChildLineage, where="child_run_id=?", values=[child.id])
+    lineage = admitted.db.all(
+        RunChildLineage, where="child_run_id=?", values=[child.id]
+    )
     assert len(lineage) == 1
     with admitted.db.transaction():
-        _update(admitted.db, RunChildLineage, lineage[0].id, {"identity_digest": "a" * 64})
+        _update(
+            admitted.db, RunChildLineage, lineage[0].id, {"identity_digest": "a" * 64}
+        )
     with pytest.raises(FenceRejected):
-        admitted.outputs.publish(admitted.actor, admitted.fence, [output], {"result": "completed"})
+        admitted.outputs.publish(
+            admitted.actor, admitted.fence, [output], {"result": "completed"}
+        )
     assert _one(admitted.db, Run, admitted.parent_run.id).status == RunStatus.RUNNING
     assert _one(admitted.db, RunPin, child.id).cancel_requested == 0
 

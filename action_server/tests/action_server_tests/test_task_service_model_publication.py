@@ -3,13 +3,16 @@
 import json
 
 import pytest
-from actions.canvas_contract import validate_canvas_spec
 from action_server_tests import test_detached_action as detached
-from action_server_tests.test_generic_work_item_execution import grant
 from action_server_tests import test_task_service as task_service_tests
+from action_server_tests.test_generic_work_item_execution import grant
+from actions.canvas_contract import validate_canvas_spec
 
+from actions.server._models import Run
 from actions.server.deployments.foundry_values import (
     AccessDenied as DeploymentAccessDenied,
+)
+from actions.server.deployments.foundry_values import (
     CanvasCapabilityBinding,
     DeploymentSpecification,
     canvas_revision_digest,
@@ -17,7 +20,6 @@ from actions.server.deployments.foundry_values import (
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.sql_authorization import reference_grant_subject
 from actions.server.managed_work_items.contracts import Permission
-from actions.server._models import Run
 from actions.server.run_outputs.models import (
     RunAdmission,
     RunAttempt,
@@ -70,9 +72,7 @@ def _app_only_selection(c, snapshot):
         for binding in value.get("canvas_bindings", [])
     )
     value["canvas_spec"] = canvas_spec.model_dump(mode="json", by_alias=True)
-    value["canvas_bindings"] = [
-        binding.model_dump(mode="json") for binding in bindings
-    ]
+    value["canvas_bindings"] = [binding.model_dump(mode="json") for binding in bindings]
     value["canvas_application"] = CanvasApplicationRef(
         workspace_id=snapshot.workspace_id,
         app_id=snapshot.deployment_id,

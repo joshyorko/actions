@@ -54,23 +54,17 @@ def _stable_refs():
     )
     provider = ProviderProfileRevisionRef(
         workspace_id=workspace,
-        provider_profile_id=ProviderProfileId(
-            "00000000-0000-4000-8000-000000000003"
-        ),
+        provider_profile_id=ProviderProfileId("00000000-0000-4000-8000-000000000003"),
         revision_id=ProviderProfileRevisionId("sha256:" + "3" * 64),
     )
     output_provider = ProviderProfileRevisionRef(
         workspace_id=workspace,
-        provider_profile_id=ProviderProfileId(
-            "00000000-0000-4000-8000-000000000004"
-        ),
+        provider_profile_id=ProviderProfileId("00000000-0000-4000-8000-000000000004"),
         revision_id=ProviderProfileRevisionId("sha256:" + "4" * 64),
     )
     worker = WorkerProfileRevisionRef(
         workspace_id=workspace,
-        worker_profile_id=WorkerProfileId(
-            "00000000-0000-4000-8000-000000000005"
-        ),
+        worker_profile_id=WorkerProfileId("00000000-0000-4000-8000-000000000005"),
         revision_id=WorkerProfileRevisionId("sha256:" + "5" * 64),
     )
     policy = WorkspacePolicyRevisionRef(
@@ -310,9 +304,9 @@ def test_explicit_publication_is_scoped_unique_and_changes_request_identity():
     assert canonical_specification(published) != canonical_specification(unpublished)
 
     common = (refs.workspace, refs.deployment_id, None)
-    assert request_digest(
-        *common, unpublished, "create", None
-    ) != request_digest(*common, published, "create", None)
+    assert request_digest(*common, unpublished, "create", None) != request_digest(
+        *common, published, "create", None
+    )
 
     with pytest.raises(ValueError, match="unique"):
         DeploymentSpecification.model_validate(
@@ -336,9 +330,7 @@ def test_explicit_publication_is_scoped_unique_and_changes_request_identity():
         update={
             "package_revision": foreign.package.model_copy(
                 update={
-                    "workspace_id": WorkspaceId(
-                        "00000000-0000-4000-8000-000000000008"
-                    )
+                    "workspace_id": WorkspaceId("00000000-0000-4000-8000-000000000008")
                 }
             )
         }
@@ -378,11 +370,10 @@ def test_model_publication_canonical_order_is_independent_of_input_order():
 def test_model_publication_is_explicit_selection_and_round_trips():
     refs = _stable_refs()
     values = _stable_spec(refs).model_dump(mode="json", by_alias=True)
-    values["model_published_capabilities"] = [
-        refs.capability.model_dump(mode="json")
-    ]
+    values["model_published_capabilities"] = [refs.capability.model_dump(mode="json")]
     selected = DeploymentSpecification.model_validate_json(json.dumps(values))
     assert selected.model_published_capabilities == (refs.capability,)
-    assert DeploymentSpecification.model_validate_json(
-        canonical_specification(selected)
-    ) == selected
+    assert (
+        DeploymentSpecification.model_validate_json(canonical_specification(selected))
+        == selected
+    )

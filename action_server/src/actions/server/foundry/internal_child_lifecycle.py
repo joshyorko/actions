@@ -111,9 +111,7 @@ class InternalChildRunLifecycle:
                 self.outputs._authorize(actor, parent_snapshot, "execute")
                 parent_run = _one(self.db, Run, parent_fence.run_id)
                 if parent_run.status != RunStatus.RUNNING:
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
 
                 current = self.deployments._repository.current(
                     parent_snapshot.deployment.workspace_id,
@@ -123,9 +121,7 @@ class InternalChildRunLifecycle:
                     current is None
                     or current.revision.ref != parent_snapshot.deployment
                 ):
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 specification = current.revision.specification
                 policies = [
                     policy
@@ -133,9 +129,7 @@ class InternalChildRunLifecycle:
                     if policy.parent_capability == parent_snapshot.capability
                 ]
                 if len(policies) != 1:
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 binding = next(
                     (
                         item
@@ -145,9 +139,7 @@ class InternalChildRunLifecycle:
                     None,
                 )
                 if binding is None:
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 self.deployments._validate_internal_robot_delegations(
                     actor, specification
                 )
@@ -160,9 +152,7 @@ class InternalChildRunLifecycle:
                     runtime_plan=binding.target_runtime_plan,
                 ).snapshot
                 if target.runtime_kind != "rcc":
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
 
                 lineage = self.db.all(
                     RunChildLineage,
@@ -170,9 +160,7 @@ class InternalChildRunLifecycle:
                     values=[parent_fence.run_id, handle.id],
                 )
                 if len(lineage) != 1:
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 row = lineage[0]
                 if (
                     row.workspace_id != parent_pin.workspace_id
@@ -185,13 +173,9 @@ class InternalChildRunLifecycle:
                         values=[parent_fence.run_id],
                     )
                 ):
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 if self.db.all(RunTaskReceipt, where="run_id=?", values=[handle.id]):
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
 
                 child_snapshot, run, child_pin = self.detached._integrity(
                     actor, handle.id
@@ -203,9 +187,7 @@ class InternalChildRunLifecycle:
                     or child_pin.admission_principal_id != actor.principal_id
                     or run.id != handle.id
                 ):
-                    raise AccessDenied(
-                        "Internal child unavailable or not authorized"
-                    )
+                    raise AccessDenied("Internal child unavailable or not authorized")
                 self.outputs._authorize(actor, child_snapshot, operation)
                 self.outputs._fence(parent_fence)
                 yield {
@@ -248,10 +230,7 @@ class InternalChildRunLifecycle:
                 (item for item in attempts if item.id == pin.current_attempt_id),
                 None,
             )
-            if (
-                attempt is None
-                or attempt.epoch != pin.epoch
-            ):
+            if attempt is None or attempt.epoch != pin.epoch:
                 raise AccessDenied("Internal child lifecycle unavailable")
             expected_attempt = {
                 RunStatus.RUNNING: "running",

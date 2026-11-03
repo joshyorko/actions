@@ -472,7 +472,9 @@ class FoundryDeploymentService:
                         or selected.capability != binding.target_capability
                         or selected.runtime_plan != binding.target_runtime_plan
                     ):
-                        raise AccessDenied("Registered Robot selection differs from target")
+                        raise AccessDenied(
+                            "Registered Robot selection differs from target"
+                        )
 
                     selected_runtime_kind = selected.robot.robot.plan.runtime_kind
                     if selected_runtime_kind != "rcc":
@@ -492,10 +494,17 @@ class FoundryDeploymentService:
                         or resolved.snapshot.runtime_plan != binding.target_runtime_plan
                         or resolved.snapshot.runtime_kind != "rcc"
                     ):
-                        raise AccessDenied("Activated Robot target differs from selection")
+                        raise AccessDenied(
+                            "Activated Robot target differs from selection"
+                        )
                 except AccessDenied:
                     raise
-                except (AttributeError, TypeError, ValueError, PackageContractError) as exc:
+                except (
+                    AttributeError,
+                    TypeError,
+                    ValueError,
+                    PackageContractError,
+                ) as exc:
                     raise AccessDenied(
                         "Internal Robot target unavailable or not authorized"
                     ) from exc

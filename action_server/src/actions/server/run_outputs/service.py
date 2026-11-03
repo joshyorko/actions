@@ -381,9 +381,13 @@ class RunOutputService:
         self.providers = dict(providers)
         self.capabilities = capabilities
 
-    def _apply_parent_exit_policy(self, pin: RunPin, snapshot: ExecutionSnapshot) -> None:
+    def _apply_parent_exit_policy(
+        self, pin: RunPin, snapshot: ExecutionSnapshot
+    ) -> None:
         """Apply a pinned parent's child policy inside its terminal transaction."""
-        lineage = self.db.all(RunChildLineage, where="parent_run_id=?", values=[pin.run_id])
+        lineage = self.db.all(
+            RunChildLineage, where="parent_run_id=?", values=[pin.run_id]
+        )
         if not lineage:
             return
         from actions.server.deployments.foundry_repository import FoundryRepository
@@ -408,8 +412,12 @@ class RunOutputService:
                 or binding is None
                 or not row.logical_key_digest.startswith("sha256:")
                 or len(row.logical_key_digest) != 71
-                or any(char not in "0123456789abcdef" for char in row.logical_key_digest[7:])
-                or row.identity_digest != run_child_identity_digest(
+                or any(
+                    char not in "0123456789abcdef"
+                    for char in row.logical_key_digest[7:]
+                )
+                or row.identity_digest
+                != run_child_identity_digest(
                     row.parent_run_id, row.binding_name, row.logical_key_digest
                 )
             ):
@@ -429,7 +437,11 @@ class RunOutputService:
                 continue
             if policy.parent_exit != "cancel-children":
                 raise FenceRejected("parent exit policy unavailable")
-            if child.status in (RunStatus.PASSED, RunStatus.FAILED, RunStatus.CANCELLED):
+            if child.status in (
+                RunStatus.PASSED,
+                RunStatus.FAILED,
+                RunStatus.CANCELLED,
+            ):
                 continue
             if child.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
                 raise FenceRejected("child lifecycle unavailable")

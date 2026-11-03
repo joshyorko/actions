@@ -187,9 +187,9 @@ class DeploymentModelWorkItemPublicationPolicy:
                 if callable(close):
                     close()
                 raise AccessDenied("synchronous managed queue catalog required")
-            encoded = json.dumps(
-                raw, ensure_ascii=False, allow_nan=False
-            ).encode("utf-8")
+            encoded = json.dumps(raw, ensure_ascii=False, allow_nan=False).encode(
+                "utf-8"
+            )
             bytes_seen += len(encoded)
             if (
                 len(encoded) > MAX_CATALOG_SCAN_BYTES

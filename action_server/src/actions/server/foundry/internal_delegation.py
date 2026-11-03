@@ -13,12 +13,12 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from enum import Enum
 
+from actions.server.deployments.foundry_values import (
+    InternalRobotDelegationPolicy as DeploymentRobotDelegationPolicy,
+)
 from actions.server.foundry.package_registry import (
     RegistryCapabilitySelection,
     RegistryRobotSelection,
-)
-from actions.server.deployments.foundry_values import (
-    InternalRobotDelegationPolicy as DeploymentRobotDelegationPolicy,
 )
 from actions.server.run_outputs.types import ExecutionSnapshot
 
@@ -194,7 +194,9 @@ class InternalDelegationPolicy:
                 or target.snapshot.capability != binding.target_capability
                 or target.snapshot.runtime_plan != binding.target_runtime_plan
             ):
-                raise ValueError("resolved Robot snapshot differs from persisted target")
+                raise ValueError(
+                    "resolved Robot snapshot differs from persisted target"
+                )
             bindings.append(InternalDelegationBinding(name=binding.name, target=target))
 
         return cls(

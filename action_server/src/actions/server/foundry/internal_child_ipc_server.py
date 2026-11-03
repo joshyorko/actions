@@ -10,13 +10,14 @@ import struct
 import time
 from typing import Any
 
+from actions.internal_runtime import ChildRunHandle, ChildRunStatus
 from actions.internal_runtime._fd_transport import (
     MAX_FRAME_BYTES,
     PROTOCOL,
     _json_bytes,
     _loads,
 )
-from actions.internal_runtime import ChildRunHandle, ChildRunStatus
+
 from actions.server.foundry.internal_child_admission import InternalChildAdmission
 from actions.server.foundry.internal_child_lifecycle import InternalChildRunLifecycle
 from actions.server.run_outputs.types import AttemptFence
@@ -234,7 +235,10 @@ class InternalChildIPCServer:
             key = self._identifier(request["invocation_key"], _KEY)
             inputs = self._inputs(request["inputs_json"])
             identity = (binding, key)
-            if len(self._bindings_by_handle) >= MAX_CHILD_HANDLES and identity not in self._handles_by_key:
+            if (
+                len(self._bindings_by_handle) >= MAX_CHILD_HANDLES
+                and identity not in self._handles_by_key
+            ):
                 raise ValueError("invocation child handle bound exceeded")
             outcome = self._admission.invoke(self._fence, binding, key, inputs)
             handle = ChildRunHandle(outcome.run.id)
@@ -258,7 +262,9 @@ class InternalChildIPCServer:
             status = (
                 self._lifecycle.status(self._fence, lifecycle_binding, lifecycle_handle)
                 if operation == "status"
-                else self._lifecycle.cancel(self._fence, lifecycle_binding, lifecycle_handle)
+                else self._lifecycle.cancel(
+                    self._fence, lifecycle_binding, lifecycle_handle
+                )
             )
             return self._status(status)
 

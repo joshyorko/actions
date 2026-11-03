@@ -7,13 +7,15 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from uuid import uuid4
 
-import actions.server.deployments.foundry_repository as repository_module
 import pytest
 from action_server_tests import test_generic_work_item_execution as generic_fixtures
 from action_server_tests import test_invoice_review as review_fixtures
 from action_server_tests import (
     test_managed_work_items_sql_service as sql_service_fixtures,
 )
+from actions.work_items import State
+
+import actions.server.deployments.foundry_repository as repository_module
 from actions.server.data_queries.review_models import FencedWorkItem
 from actions.server.deployments.foundry_values import DeploymentSpecification
 from actions.server.deployments.ids import WorkspaceId
@@ -27,9 +29,6 @@ from actions.server.managed_work_items.contracts import (
     Permission,
     QueueRef,
 )
-from actions.server.managed_work_items.model_publication import (
-    ModelWorkItemPublicationGuard,
-)
 from actions.server.managed_work_items.mcp import (
     ManagedWorkItemsMcp,
     _item_view,
@@ -37,8 +36,10 @@ from actions.server.managed_work_items.mcp import (
     _queue_key,
     _schema,
 )
+from actions.server.managed_work_items.model_publication import (
+    ModelWorkItemPublicationGuard,
+)
 from actions.server.run_outputs.types import Actor
-from actions.work_items import State
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 reviewed = review_fixtures.reviewed
@@ -115,6 +116,7 @@ class _PassingPublicationGuard:
 
     def list_queues(self, caller, workspace_id, domain_scan, *, deployment_id=None):
         return domain_scan(caller)
+
 
 def _queue(workspace: str, queue_id: str, deployment: str | None = None) -> QueueRef:
     deployment_id = deployment or str(uuid4())
@@ -393,7 +395,9 @@ def test_explicit_projections_drop_free_text_claims_logs_and_artifact_bytes():
 
     async def check():
         facade = ManagedWorkItemsMcp(object(), auth, object())
-        denied = await facade.call(object(), "arbitrary_operation", {"operation": "items.claim"})
+        denied = await facade.call(
+            object(), "arbitrary_operation", {"operation": "items.claim"}
+        )
         assert denied.is_error
 
     asyncio.run(check())
@@ -446,11 +450,7 @@ def test_model_projection_omits_unscoped_item_lineage_from_real_sql_service(revi
             )
 
         def queues(self, caller, workspace, operation):
-            return (
-                (queue,)
-                if self.allows(caller, workspace, operation)
-                else ()
-            )
+            return (queue,) if self.allows(caller, workspace, operation) else ()
 
     async def authenticate(_ctx):
         return ManagedCaller(actor=actor)
@@ -684,9 +684,7 @@ def test_exact_queue_publication_is_rechecked_and_guessed_queue_never_reaches_po
 
     async def check():
         policy, port, guard = Policy(), Port(), _PassingPublicationGuard()
-        facade = ManagedWorkItemsMcp(
-            port, auth, policy, publication_guard=guard
-        )
+        facade = ManagedWorkItemsMcp(port, auth, policy, publication_guard=guard)
         catalog = await facade.tools(object())
         assert [tool.name for tool in catalog] == ["managed_items_list"]
         request = {
@@ -727,9 +725,7 @@ def test_guard_denies_stale_cached_publication_before_domain_port(generic_world)
             return [str(queue.workspace_id.root)]
 
         def allows(self, _, workspace, operation):
-            return (
-                workspace == queue.workspace_id and operation == Operation.LIST
-            )
+            return workspace == queue.workspace_id and operation == Operation.LIST
 
         def queues(self, _, workspace, operation):
             # Simulate a stale catalog snapshot. The SQL guard is authoritative
@@ -807,9 +803,7 @@ def test_guarded_domain_call_rechecks_live_read_grant(generic_world):
             return [str(queue.workspace_id.root)]
 
         def allows(self, _, workspace, operation):
-            return (
-                workspace == queue.workspace_id and operation == Operation.LIST
-            )
+            return workspace == queue.workspace_id and operation == Operation.LIST
 
         def queues(self, _, workspace, operation):
             if workspace == queue.workspace_id and operation == Operation.LIST:
@@ -976,7 +970,9 @@ def test_queue_publication_iterator_is_bounded_and_fails_closed():
             return [workspace]
 
         def allows(self, *_):
-            raise AssertionError("unbounded queue scope must not reach capability checks")
+            raise AssertionError(
+                "unbounded queue scope must not reach capability checks"
+            )
 
         def queues(self, _, requested, operation):
             if operation != Operation.QUEUES:
@@ -1096,9 +1092,9 @@ def test_queue_cursor_paginates_only_recomputed_visible_set():
             },
         )
         assert not second_page.is_error
-        assert [row["queue"]["queue_id"] for row in second_page.structured_content["queues"]] == [
-            expected_order[1].queue_id
-        ]
+        assert [
+            row["queue"]["queue_id"] for row in second_page.structured_content["queues"]
+        ] == [expected_order[1].queue_id]
         assert second_page.structured_content["next_cursor"] is None
 
     asyncio.run(check())
@@ -1114,9 +1110,7 @@ def test_queue_scan_and_current_publication_filter_share_one_guard_transaction(
         "mcp-atomic-queue-list-publish",
     )
     hidden = queue.model_copy(update={"queue_id": "unpublished-secret"})
-    old = queue.model_copy(
-        update={"deployment": g.owner.snapshot.deployment}
-    )
+    old = queue.model_copy(update={"deployment": g.owner.snapshot.deployment})
     caller = ManagedCaller(actor=g.caller.actor)
 
     class Policy:
@@ -1248,9 +1242,7 @@ def test_inflight_guarded_queue_scan_serializes_with_publication_revocation(
         with repository_transaction(db):
             yield
 
-    monkeypatch.setattr(
-        repository_module, "_transaction", observe_publish_transaction
-    )
+    monkeypatch.setattr(repository_module, "_transaction", observe_publish_transaction)
 
     class Policy:
         def workspaces(self, _):
@@ -1343,9 +1335,7 @@ def test_inflight_guarded_queue_scan_serializes_with_publication_revocation(
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         first_list = pool.submit(
-            lambda: asyncio.run(
-                facade.call(object(), "managed_queues_list", request)
-            )
+            lambda: asyncio.run(facade.call(object(), "managed_queues_list", request))
         )
         try:
             assert scan_started.wait(timeout=15)
@@ -1362,8 +1352,7 @@ def test_inflight_guarded_queue_scan_serializes_with_publication_revocation(
 
     assert not first_result.is_error
     first_queue_ids = [
-        row["queue"]["queue_id"]
-        for row in first_result.structured_content["queues"]
+        row["queue"]["queue_id"] for row in first_result.structured_content["queues"]
     ]
     assert first_queue_ids == ["generic-input"]
     assert revoked_revision.ref != queue.deployment

@@ -118,9 +118,7 @@ def test_selected_exact_queue_runs_callback_under_counter_workspace_locks(
         assert operation == "items.list"
         return {"authorized": True}
 
-    assert guard.call(caller, queue, "items.list", domain_call) == {
-        "authorized": True
-    }
+    assert guard.call(caller, queue, "items.list", domain_call) == {"authorized": True}
     assert order == ["counter", "workspace"]
 
 
@@ -130,6 +128,7 @@ def test_unselected_queue_or_operation_is_denied_before_domain_call(generic_worl
     caller = ManagedCaller(actor=g.caller.actor)
     guard = ModelWorkItemPublicationGuard(g.owner.deployments)
     invoked = []
+
     def domain_call(*args):
         invoked.append(args)
 
@@ -212,12 +211,8 @@ def test_inflight_queue_mutation_serializes_with_publication_revocation(
     callback_started = Event()
     finish_callback = Event()
     workspace_id = str(queue.workspace_id.root)
-    current = repository.current(
-        queue.workspace_id, queue.deployment.deployment_id
-    )
-    revoked_spec = current.revision.specification.model_dump(
-        mode="json", by_alias=True
-    )
+    current = repository.current(queue.workspace_id, queue.deployment.deployment_id)
+    revoked_spec = current.revision.specification.model_dump(mode="json", by_alias=True)
     revoked_spec["model_published_work_item_queues"] = []
     revoked_specification = DeploymentSpecification.model_validate_json(
         json.dumps(revoked_spec)

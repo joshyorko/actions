@@ -103,9 +103,7 @@ class McpServerSetupHelper:
         self._init_state()
         self._invoice_canvas = invoice_canvas
         self._canvas_foundry = canvas_foundry
-        managed_work_items = getattr(
-            canvas_foundry, "managed_work_items_mcp", None
-        )
+        managed_work_items = getattr(canvas_foundry, "managed_work_items_mcp", None)
         if managed_work_items is not None and not (
             callable(getattr(managed_work_items, "tools", None))
             and callable(getattr(managed_work_items, "call", None))
@@ -784,8 +782,11 @@ class McpServerSetupHelper:
         self.publish_validated_catalog(replacement)
 
     def _validate_bound_catalog(self, catalog: _McpCatalog) -> None:
-        if self._managed_work_items is not None and MANAGED_WORK_ITEM_TOOL_NAMES.intersection(
-            catalog.tool_name_to_action_info
+        if (
+            self._managed_work_items is not None
+            and MANAGED_WORK_ITEM_TOOL_NAMES.intersection(
+                catalog.tool_name_to_action_info
+            )
         ):
             raise ValueError("managed Work Items catalog identity collision")
         if self._canvas_foundry is not None:

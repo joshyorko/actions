@@ -22,9 +22,7 @@ from actions.server.deployments.ids import (
     RuntimePlanRef,
     WorkspaceId,
 )
-from actions.server.foundry.generic_work_item_execution import (
-    GenericWorkItemExecution,
-)
+from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
 from actions.server.foundry.invocation_discovery import _input_schema
 from actions.server.foundry.mcp import CanvasCaller
 from actions.server.foundry.package_registry import (
@@ -172,9 +170,7 @@ class _Cursor(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
     workspace_id: str = Field(alias="workspaceId", min_length=36, max_length=36)
     visible_offset: int = Field(alias="visibleOffset", ge=0, le=MAX_CURSOR_OFFSET)
-    visible_digest: str = Field(
-        alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$"
-    )
+    visible_digest: str = Field(alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$")
 
 
 def _encode_cursor(
