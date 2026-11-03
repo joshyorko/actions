@@ -67,7 +67,9 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
     entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
     assert (
         "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}"
-        in (REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml").read_text()
+        in (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
     )
 
     assert {
@@ -145,7 +147,9 @@ def test_ci_verifies_bootstrap_environment_isolation() -> None:
     package_smoke = workflow.index("- name: Package task smoke (Linux)")
     assert bootstrap < isolation < package_smoke
     assert 'test -x "${package}/.venv/bin/python"' in workflow
-    assert "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
+    assert (
+        "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
+    )
 
 
 def test_ci_builds_and_launches_community_binary_on_linux() -> None:
@@ -157,6 +161,29 @@ def test_ci_builds_and_launches_community_binary_on_linux() -> None:
     assert "rcc run -r developer/toolkit.yaml --dev -t InstallCommunity" in workflow
     assert "Build" + "Community" not in workflow
     assert "build-" + "community" not in workflow
+
+
+def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
+    workflow = yaml.safe_load(
+        (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
+    )
+    job = workflow["jobs"]["rcc_descriptor"]
+    assert "pull_request" in job["if"] and "release/" in job["if"]
+    assert job["permissions"] == {"contents": "read"}
+    assert job["runs-on"] == "ubuntu-22.04"
+    checkout, install, probe, receipt = job["steps"]
+    assert checkout["with"]["persist-credentials"] is False
+    assert (
+        "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+        in install["run"]
+    )
+    assert probe["env"]["ACTIONS_REAL_RCC_FD_TEST"] == "1"
+    assert "test_rcc_env_exec_fd_real.py" in probe["run"]
+    assert (
+        receipt["if"] == "always()" and receipt["with"]["if-no-files-found"] == "error"
+    )
 
 
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
@@ -240,9 +267,7 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
             "ROBOT_ARTIFACTS": "/rcc/artifacts",
             "ROBOT_ROOT": "/rcc/robot",
         },
-    ), patch(
-        "toolkit.subprocess.run"
-    ) as run:
+    ), patch("toolkit.subprocess.run") as run:
         toolkit.run(["python", "--version"])
 
     assert "shell" not in run.call_args.kwargs
@@ -284,9 +309,13 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
 
 
 def test_install_community_builds_installs_and_verifies() -> None:
-    executable = "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
+    executable = (
+        "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
+    )
     target = Path("/custom/bin") / executable
-    with patch.object(toolkit, "poetry") as poetry, patch.object(toolkit, "run") as run, patch.object(
+    with patch.object(toolkit, "poetry") as poetry, patch.object(
+        toolkit, "run"
+    ) as run, patch.object(
         toolkit, "resolve_install_target", return_value=target
     ) as resolve, patch.object(toolkit, "install_executable") as install:
         toolkit.install_community()
