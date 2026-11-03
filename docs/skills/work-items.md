@@ -13,6 +13,14 @@ QueueRefs per operation; queue listing intersects that scope with READ authority
 and returns a cursor for the visible set, not the backend cursor. Host wiring
 must still prove that publication revocation cannot race a mutating admission.
 
+The candidate internal child-Run client is a contract only until Runtime
+installs its scoped transport. It exposes bounded submit, status and cancellation
+operations for a delegated binding, with a stable Action-supplied logical key.
+Result references contain metadata, not output bytes, and confer no read
+authority. `cancel_pending` is not terminal cancellation. Internal child Runs
+need host-side delegation and lineage; they must not manufacture MCP Task
+receipts or infer model publication.
+
 ## Current Boundary
 
 `actions-work-items` exposes `actions.work_items`, `actions.workitems`, and `actions_work_items`. Preserve import identity and the producer-consumer lifecycle: reserve input, create parent-linked output, then release done or failed.
