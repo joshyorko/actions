@@ -35,3 +35,11 @@ unqualified; both that log and the frozen rerun log are retained. The guard
 requires the domain callback to recheck live permissions on the same connection.
 Native startup, exact live queue resolution and the guarded callback adapter
 remain unwired; the component test is not an installed authorization proof.
+
+The queue-targeted facade path at `4eb1f3f7b794915dae695eba9af7b24188e104b2`
+passed 12 focused cases with two PostgreSQL skips. It calls the atomic guard and
+existing domain port in one worker-thread transaction, and fails closed without
+the guard. Controls include stale publication and a revoked domain queue grant.
+The workspace list path and native startup remain unwired. The supervisor
+reported no owned processes remaining; the raw focused log is in Library archive
+`libfile_b1e3d498c26c8191b3f02281a7f5d57f`, version 4.
