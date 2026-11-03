@@ -1546,3 +1546,9 @@ and existing domain port on one worker thread; without a guard those tools are
 hidden and their calls are denied. Workspace queue listing runs its bounded scan and current publication filtering
 in one transaction; backend cursors remain private. Native startup, PostgreSQL
 parity and installed host behavior still require qualification.
+The model publication policy adapter must resolve bounded current Deployment
+heads and exact selected queue references against the live managed catalog on
+its own worker-thread database connection. It scopes to the trusted actor and
+Workspace and intersects current queue grants; overflow or ambiguity denies the
+catalog. Its preflight result is not authority for a later call: the atomic
+queue guard must recheck publication and the domain port must recheck grants.
