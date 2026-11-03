@@ -25,3 +25,13 @@ floor plus 48 MiB guard, and a host subreaper supervisor which reported no owned
 processes remaining. Raw logs and the failed attempts are preserved in the
 Library evidence archive, alongside the unpushed git bundle. These are source
 component checks, not an installed Action-to-Robot vertical or release proof.
+
+The standalone model queue guard at `1650f342e07da56c6a66bd346eb88f3b40503cb8`
+passed six SQLite cases with six PostgreSQL skips, including an in-flight
+callback and subsequent publication revocation on separate connections. The
+supervisor confirmed no owned processes remained. The preceding concurrency
+attempt failed while its test file was being edited, so its source identity is
+unqualified; both that log and the frozen rerun log are retained. The guard
+requires the domain callback to recheck live permissions on the same connection.
+Native startup, exact live queue resolution and the guarded callback adapter
+remain unwired; the component test is not an installed authorization proof.
