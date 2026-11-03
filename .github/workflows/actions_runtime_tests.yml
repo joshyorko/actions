@@ -33,6 +33,7 @@ permissions:
     - master
     - community
     - integration/**
+    - release/**
     paths:
     - action_server/**
     - .github/workflows/actions_runtime_tests.yml
@@ -418,8 +419,12 @@ jobs:
       if: runner.os == 'Linux'
       shell: bash
       run: "set -euo pipefail\nimage=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81\n\
-        docker pull \"$image\"\ncid=$(docker run --detach --pull=never --rm \\\n \
-        \ --name \"actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
+        cid=\"\"\ncleanup_failed_start() {\n  status=$?\n  trap - EXIT\n  if [[ \"\
+        $status\" -ne 0 && \"$cid\" =~ ^[0-9a-f]{64}$ ]]; then\n    docker rm --force\
+        \ \"$cid\" >/dev/null\n    remaining=$(docker ps --all --no-trunc --quiet\
+        \ --filter \"id=$cid\")\n    [[ -z \"$remaining\" ]]\n  fi\n  exit \"$status\"\
+        \n}\ntrap cleanup_failed_start EXIT\ndocker pull \"$image\"\ncid=$(docker\
+        \ run --detach --pull=never --rm \\\n  --name \"actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
         \ \\\n  --memory=3g --cpus=2 --pids-limit=256 \\\n  --tmpfs /var/lib/postgresql/data:size=2g\
         \ \\\n  --publish 127.0.0.1::5432 \\\n  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only\
         \ \"$image\")\n[[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\necho \"ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid\"\
@@ -429,7 +434,8 @@ jobs:
         [[ \"$port\" =~ ^127\\.0\\.0\\.1:([0-9]+)$ ]]\nurl=\"postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres\"\
         \necho \"::add-mask::$url\"\necho \"ACTIONS_INVOICE_TEST_POSTGRES=$url\" >>\
         \ \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=$url\" >> \"$GITHUB_ENV\"\
-        \necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=1\" >> \"$GITHUB_ENV\"\n"
+        \necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=1\" >> \"$GITHUB_ENV\"\ntrap -\
+        \ EXIT\n"
     - name: Test (not integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
@@ -440,13 +446,14 @@ jobs:
       if: always() && runner.os == 'Linux'
       shell: bash
       run: "set -euo pipefail\ncid=\"${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}\"\nif\
-        \ [[ -n \"$cid\" ]]; then\n  [[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\n  docker rm\
-        \ --force \"$cid\"\n  for attempt in {1..10}; do\n    remaining=$(docker ps\
-        \ --all --no-trunc --quiet --filter \"id=$cid\")\n    if [[ -z \"$remaining\"\
-        \ ]]; then break; fi\n    sleep 1\n  done\n  [[ -z \"$remaining\" ]]\nfi\n\
-        echo \"ACTIONS_INVOICE_TEST_POSTGRES=\" >> \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=\"\
-        \ >> \"$GITHUB_ENV\"\necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=0\" >> \"$GITHUB_ENV\"\
-        \n"
+        \ [[ -n \"$cid\" ]]; then\n  [[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\n  remaining=$(docker\
+        \ ps --all --no-trunc --quiet --filter \"id=$cid\")\n  if [[ -n \"$remaining\"\
+        \ ]]; then docker rm --force \"$cid\"; fi\n  for attempt in {1..10}; do\n\
+        \    remaining=$(docker ps --all --no-trunc --quiet --filter \"id=$cid\")\n\
+        \    if [[ -z \"$remaining\" ]]; then break; fi\n    sleep 1\n  done\n  [[\
+        \ -z \"$remaining\" ]]\nfi\necho \"ACTIONS_INVOICE_TEST_POSTGRES=\" >> \"\
+        $GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=\" >> \"$GITHUB_ENV\"\necho\
+        \ \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=0\" >> \"$GITHUB_ENV\"\n"
     - name: Test (integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}

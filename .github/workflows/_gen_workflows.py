@@ -679,6 +679,18 @@ class ActionServerTests(BaseTests):
             "shell": "bash",
             "run": r"""set -euo pipefail
 image=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+cid=""
+cleanup_failed_start() {
+  status=$?
+  trap - EXIT
+  if [[ "$status" -ne 0 && "$cid" =~ ^[0-9a-f]{64}$ ]]; then
+    docker rm --force "$cid" >/dev/null
+    remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+    [[ -z "$remaining" ]]
+  fi
+  exit "$status"
+}
+trap cleanup_failed_start EXIT
 docker pull "$image"
 cid=$(docker run --detach --pull=never --rm \
   --name "actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
@@ -701,6 +713,7 @@ echo "::add-mask::$url"
 echo "ACTIONS_INVOICE_TEST_POSTGRES=$url" >> "$GITHUB_ENV"
 echo "ACTIONS_TEST_POSTGRES_URL=$url" >> "$GITHUB_ENV"
 echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" >> "$GITHUB_ENV"
+trap - EXIT
 """,
         }
 
@@ -713,7 +726,8 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" >> "$GITHUB_ENV"
 cid="${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}"
 if [[ -n "$cid" ]]; then
   [[ "$cid" =~ ^[0-9a-f]{64}$ ]]
-  docker rm --force "$cid"
+  remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+  if [[ -n "$remaining" ]]; then docker rm --force "$cid"; fi
   for attempt in {1..10}; do
     remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
     if [[ -z "$remaining" ]]; then break; fi
@@ -734,6 +748,7 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
             "master",
             "community",
             "integration/**",
+            "release/**",
         ]
         parts["on"]["pull_request"]["paths"].append(".gitattributes")
         return parts
