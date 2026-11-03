@@ -1579,3 +1579,10 @@ Deployment, Package, capability and Runtime Plan reference, a registry-verified
 RCC Robot selection, and resolution of the exact activated target under existing
 execute checks. The locked deployment preflight repeats these checks. This does
 not yet implement child admission, host policy refresh or installed execution.
+The standalone internal child-admission component rechecks the live parent
+fence, current Deployment delegation, exact Robot target and grants inside one
+transaction, then stores ordinary detached Run lineage with a stable logical
+key. SQLite tests cover competing admissions and rollback inventories; the
+fixture uses synthetic compilation/preparation and PostgreSQL locking remains
+unverified. This component is not connected to Runtime IPC, child status or
+cancellation, and does not enforce parent-exit lifecycle yet.
