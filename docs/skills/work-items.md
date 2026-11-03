@@ -1589,3 +1589,7 @@ cancellation, and does not enforce parent-exit lifecycle yet.
 Positive model Task fixtures must explicitly publish the selected capability
 before resolving its immutable Deployment snapshot. Keep unpublished cases for
 model-denial coverage; trusted claimed-worker dispatch remains a separate path.
+The private Core child transport frames bounded JSON over an invocation-owned
+local socket and has no caller-supplied parent identity. Socketpair tests prove
+only the local codec: the RCC env-exec forwarding, host binding and installed
+Action-to-Robot path remain unverified, including Windows behavior.
