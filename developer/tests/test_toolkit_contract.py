@@ -172,7 +172,7 @@ def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
     job = workflow["jobs"]["rcc_descriptor"]
     assert "pull_request" in job["if"] and "release/" in job["if"]
     assert job["permissions"] == {"contents": "read"}
-    assert job["runs-on"] == "ubuntu-22.04"
+    assert job["runs-on"] == "ubuntu-24.04"
     checkout, install, probe, receipt = job["steps"]
     assert checkout["with"]["persist-credentials"] is False
     assert (
