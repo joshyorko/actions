@@ -8,7 +8,10 @@ log text or artifact bytes into model context. Model enqueue must not supply a
 review proposal, and model cancellation must not supply retry reconciliation
 evidence. Trusted worker claim and completion remain separate operations.
 The isolated facade's component tests do not establish native startup wiring or
-an installed worker-backed queue flow.
+an installed worker-backed queue flow. Model publication must identify exact
+QueueRefs per operation; queue listing intersects that scope with READ authority
+and returns a cursor for the visible set, not the backend cursor. Host wiring
+must still prove that publication revocation cannot race a mutating admission.
 
 ## Current Boundary
 

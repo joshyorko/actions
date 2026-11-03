@@ -7,13 +7,15 @@ policy is deny-all. Domain grants and publication are checked on every call.
 
 from __future__ import annotations
 
+import base64
+import hashlib
 import json
 from collections.abc import Awaitable, Callable, Iterable
 from itertools import islice
-from typing import Protocol
+from typing import Literal, Protocol
 
 from mcp.types import CallToolResult, TextContent, Tool, ToolAnnotations
-from pydantic import JsonValue, TypeAdapter, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter, ValidationError
 from starlette.concurrency import run_in_threadpool
 
 from actions.server.deployments.ids import WorkspaceId
@@ -29,11 +31,20 @@ from .contracts import (
     ManagedCaller,
     ManagedWorkItemsPort,
     Operation,
+    Permission,
+    QueuePage,
+    QueueRef,
     Queues,
 )
 
 MAX_REQUEST_BYTES = 512 * 1024
 MAX_RESULT_BYTES = 64 * 1024
+MAX_PUBLISHED_WORKSPACES = 100
+MAX_PUBLISHED_QUEUES = 100
+MAX_QUEUE_SCAN_ROWS = 2048
+MAX_QUEUE_SCAN_PAGES = MAX_QUEUE_SCAN_ROWS // 100 + 1
+MAX_QUEUE_CURSOR_BYTES = 512
+MAX_QUEUE_PAGE_SIZE = 100
 
 _TOOL_OPERATIONS = {
     "managed_queues_list": Operation.QUEUES,
@@ -77,6 +88,98 @@ class ModelPublicationPolicy(Protocol):
         self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
     ) -> bool:
         """Return whether the operation is explicitly published to this model."""
+
+    def queues(
+        self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
+    ) -> Iterable[QueueRef]:
+        """Return the bounded exact Queues published for this operation."""
+
+
+class _PublishedQueueCursor(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+    version: Literal[1]
+    workspace_id: str = Field(alias="workspaceId", min_length=36, max_length=36)
+    deployment_id: str | None = Field(
+        alias="deploymentId", default=None, min_length=36, max_length=36
+    )
+    offset: int = Field(ge=0, le=MAX_PUBLISHED_QUEUES)
+    visible_digest: str = Field(
+        alias="visibleDigest", pattern=r"^sha256:[0-9a-f]{64}$"
+    )
+
+
+def _queue_key(queue: QueueRef) -> str:
+    return json.dumps(
+        queue.model_dump(mode="json"), ensure_ascii=False, separators=(",", ":"), sort_keys=True
+    )
+
+
+def _visible_queue_digest(queues: Iterable[QueueRef]) -> str:
+    digest = hashlib.sha256(b"actions.managed-work-items-visible-queues/v1\x00")
+    for queue in sorted(queues, key=_queue_key):
+        digest.update(_queue_key(queue).encode("utf-8"))
+        digest.update(b"\x00")
+    return "sha256:" + digest.hexdigest()
+
+
+def _encode_queue_cursor(
+    workspace_id: WorkspaceId,
+    deployment_id: str | None,
+    offset: int,
+    visible_digest: str,
+) -> str:
+    payload = _PublishedQueueCursor(
+        version=1,
+        workspaceId=str(workspace_id.root),
+        deploymentId=deployment_id,
+        offset=offset,
+        visibleDigest=visible_digest,
+    ).model_dump(mode="json", by_alias=True)
+    raw = json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    encoded = base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+    if len(encoded) > MAX_QUEUE_CURSOR_BYTES:
+        raise ValueError("published Queue cursor exceeds its bound")
+    return encoded
+
+
+def _decode_queue_cursor(
+    value: str,
+    workspace_id: WorkspaceId,
+    deployment_id: str | None,
+) -> _PublishedQueueCursor:
+    if not isinstance(value, str) or not value or len(value) > MAX_QUEUE_CURSOR_BYTES:
+        raise ValueError("invalid published Queue cursor")
+    try:
+        raw = base64.b64decode(
+            value + "=" * (-len(value) % 4), altchars=b"-_", validate=True
+        )
+        cursor = _PublishedQueueCursor.model_validate_json(raw)
+    except (ValueError, TypeError):
+        raise ValueError("invalid published Queue cursor") from None
+    if (
+        cursor.workspace_id != str(workspace_id.root)
+        or cursor.deployment_id != deployment_id
+    ):
+        raise ValueError("published Queue cursor scope changed")
+    return cursor
+
+
+def _normalize_published_queues(
+    values: Iterable[QueueRef], workspace_id: WorkspaceId
+) -> dict[str, QueueRef] | None:
+    """Validate a finite, exact publication set; ``None`` means deny."""
+    try:
+        result: dict[str, QueueRef] = {}
+        for index, value in enumerate(islice(values, MAX_PUBLISHED_QUEUES + 1)):
+            if index == MAX_PUBLISHED_QUEUES or not isinstance(value, QueueRef):
+                return None
+            queue = QueueRef.model_validate(value)
+            if queue.workspace_id != workspace_id:
+                return None
+            result[_queue_key(queue)] = queue
+        return result
+    except Exception:
+        return None
 
 
 Authenticate = Callable[[object], Awaitable[ManagedCaller | None]]
@@ -249,6 +352,30 @@ class ManagedWorkItemsMcp:
         except Exception:
             return set()
 
+    async def _published_queues(
+        self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
+    ) -> dict[str, QueueRef] | None:
+        if self.publication is None:
+            return None
+        try:
+            return await run_in_threadpool(
+                self._load_published_queues, caller, workspace_id, operation
+            )
+        except Exception:
+            return None
+
+    def _load_published_queues(
+        self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
+    ) -> dict[str, QueueRef] | None:
+        """Invoke and fully consume the trusted scope iterator off-loop."""
+        if self.publication is None:
+            return None
+        try:
+            values = self.publication.queues(caller, workspace_id, operation)
+            return _normalize_published_queues(values, workspace_id)
+        except Exception:
+            return None
+
     async def _allowed(
         self, caller: ManagedCaller, workspace_id: WorkspaceId, operation: Operation
     ) -> bool:
@@ -284,7 +411,10 @@ class ManagedWorkItemsMcp:
         for workspace in workspaces:
             workspace_id = WorkspaceId.model_validate(workspace)
             for operation in _TOOL_OPERATIONS.values():
-                if await self._allowed(caller, workspace_id, operation):
+                queues = await self._published_queues(
+                    caller, workspace_id, operation
+                )
+                if queues and await self._allowed(caller, workspace_id, operation):
                     visible.add(operation)
         return [
             Tool(
@@ -340,9 +470,26 @@ class ManagedWorkItemsMcp:
             )
             if str(workspace.root) not in await self._published_workspaces(caller):
                 raise ValueError
+            queues = await self._published_queues(caller, workspace, operation)
+            if queues is None or not queues:
+                raise ValueError
             if not await self._allowed(caller, workspace, operation):
                 raise ValueError
-            result = await run_in_threadpool(self.port.call, caller, command)
+            if operation == Operation.QUEUES:
+                if command.deployment_id is not None and not any(
+                    queue.deployment.deployment_id == command.deployment_id
+                    for queue in queues.values()
+                ):
+                    raise ValueError
+                result, next_cursor = await self._list_visible_queues(
+                    caller, command, queues
+                )
+            else:
+                queue = command.queue
+                if _queue_key(queue) not in queues:
+                    raise ValueError
+                result = await run_in_threadpool(self.port.call, caller, command)
+                next_cursor = None
             if hasattr(result, "__await__") or not isinstance(result, dict):
                 raise ValueError
             result_raw = json.dumps(
@@ -355,6 +502,8 @@ class ManagedWorkItemsMcp:
                 .model_validate_json(result_raw)
                 .model_dump(mode="json")
             )
+            if operation == Operation.QUEUES:
+                result["next_cursor"] = next_cursor
             projected = _project_result(operation, result)
             encoded = json.dumps(projected, ensure_ascii=False, allow_nan=False).encode()
             if len(encoded) > MAX_RESULT_BYTES:
@@ -377,3 +526,117 @@ class ManagedWorkItemsMcp:
                 ],
                 is_error=True,
             )
+
+    async def _list_visible_queues(
+        self,
+        caller: ManagedCaller,
+        command: Queues,
+        published: dict[str, QueueRef],
+    ) -> tuple[dict, str | None]:
+        """Rescan bounded backend pages and paginate only the visible subset.
+
+        Backend cursors stay inside the facade and are never returned. A client
+        cursor binds only the identities the caller can currently see.
+        """
+        if command.cursor is None:
+            offset = 0
+        else:
+            cursor = _decode_queue_cursor(
+                command.cursor, command.workspace_id, (
+                    str(command.deployment_id.root)
+                    if command.deployment_id is not None
+                    else None
+                )
+            )
+            offset = cursor.offset
+        visible: dict[str, dict] = {}
+        backend_cursor: str | None = None
+        seen_cursors: set[str] = set()
+        scanned = 0
+        pages = 0
+        server_time_ms = "0"
+        while True:
+            if pages >= MAX_QUEUE_SCAN_PAGES:
+                raise ValueError("queue scan page bound exceeded")
+            request = command.model_copy(
+                update={"cursor": backend_cursor, "limit": MAX_QUEUE_PAGE_SIZE}
+            )
+            raw_page = await run_in_threadpool(self.port.call, caller, request)
+            if hasattr(raw_page, "__await__") or not isinstance(raw_page, dict):
+                raise ValueError("invalid backend queue page")
+            page_raw = json.dumps(
+                raw_page, ensure_ascii=False, allow_nan=False
+            ).encode()
+            if len(page_raw) > MAX_REQUEST_BYTES:
+                raise ValueError("backend queue page exceeds bound")
+            page = QueuePage.model_validate_json(page_raw)
+            pages += 1
+            scanned += len(page.queues)
+            if scanned > MAX_QUEUE_SCAN_ROWS:
+                raise ValueError("queue scan row bound exceeded")
+            server_time_ms = page.server_time_ms
+            for row in page.queues:
+                key = _queue_key(row.queue)
+                if (
+                    key in published
+                    and Permission.READ in row.permissions
+                    and (
+                        command.deployment_id is None
+                        or row.queue.deployment.deployment_id
+                        == command.deployment_id
+                    )
+                ):
+                    visible[key] = row.model_dump(mode="json")
+            next_backend_cursor = page.next_cursor
+            if next_backend_cursor is None:
+                break
+            if (
+                not isinstance(next_backend_cursor, str)
+                or not next_backend_cursor
+                or len(next_backend_cursor) > 4096
+                or next_backend_cursor in seen_cursors
+                or scanned >= MAX_QUEUE_SCAN_ROWS
+            ):
+                raise ValueError("backend queue pagination is not bounded")
+            seen_cursors.add(next_backend_cursor)
+            backend_cursor = next_backend_cursor
+
+        ordered_keys = sorted(visible)
+        visible_queues = [published[key] for key in ordered_keys]
+        digest = _visible_queue_digest(visible_queues)
+        if command.cursor is not None:
+            cursor = _decode_queue_cursor(
+                command.cursor, command.workspace_id, (
+                    str(command.deployment_id.root)
+                    if command.deployment_id is not None
+                    else None
+                )
+            )
+            if cursor.visible_digest != digest:
+                raise ValueError("visible Queue set changed")
+        if offset > len(ordered_keys):
+            raise ValueError("visible Queue cursor is outside the current set")
+        selected = ordered_keys[offset : offset + command.limit]
+        end = offset + len(selected)
+        next_cursor = (
+            _encode_queue_cursor(
+                command.workspace_id,
+                (
+                    str(command.deployment_id.root)
+                    if command.deployment_id is not None
+                    else None
+                ),
+                end,
+                digest,
+            )
+            if end < len(ordered_keys)
+            else None
+        )
+        return (
+            {
+                "queues": [visible[key] for key in selected],
+                "next_cursor": None,
+                "server_time_ms": server_time_ms,
+            },
+            next_cursor,
+        )

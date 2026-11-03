@@ -1,6 +1,7 @@
 """Isolated model facade tests; host wiring and SQL acceptance live elsewhere."""
 
 import asyncio
+import json
 import threading
 from uuid import uuid4
 
@@ -9,14 +10,33 @@ from actions.server.managed_work_items.contracts import (
     ManagedCaller,
     Operation,
     Permission,
+    QueueRef,
 )
 from actions.server.managed_work_items.mcp import (
     ManagedWorkItemsMcp,
     _item_view,
     _project_result,
+    _queue_key,
     _schema,
 )
 from actions.server.run_outputs.types import Actor
+
+
+def _queue(workspace: str, queue_id: str, deployment: str | None = None) -> QueueRef:
+    deployment_id = deployment or str(uuid4())
+    return QueueRef.model_validate_json(
+        json.dumps(
+            {
+                "workspace_id": workspace,
+                "deployment": {
+                    "workspace_id": workspace,
+                    "deployment_id": deployment_id,
+                    "revision_id": "sha256:" + "a" * 64,
+                },
+                "queue_id": queue_id,
+            }
+        )
+    )
 
 
 def test_missing_publication_or_authentication_denies_catalog_and_calls():
@@ -47,6 +67,7 @@ def test_catalog_and_each_call_require_publication_and_current_grants():
     class Policy:
         enabled = True
         checks = 0
+        queue = _queue(workspace, "published")
 
         def workspaces(self, identity):
             assert identity == caller
@@ -60,6 +81,12 @@ def test_catalog_and_each_call_require_publication_and_current_grants():
                 and str(requested.root) == workspace
                 and operation == Operation.QUEUES
             )
+
+        def queues(self, identity, requested, operation):
+            assert identity == caller
+            if str(requested.root) == workspace and operation == Operation.QUEUES:
+                return [self.queue]
+            return []
 
     class Port:
         enabled = True
@@ -241,6 +268,9 @@ def test_workspace_enumeration_has_a_hard_iteration_bound():
         def allows(self, *_):
             raise AssertionError("oversized enumeration must be rejected first")
 
+        def queues(self, *_):
+            raise AssertionError("oversized enumeration must be rejected first")
+
     async def auth(_):
         return caller
 
@@ -316,6 +346,14 @@ def test_model_facade_hides_review_and_retry_receipt_and_rejects_both_pre_servic
                 Operation.CANCEL,
             }
 
+        def queues(self, _, requested, operation):
+            if str(requested.root) == workspace_id and operation in {
+                Operation.ENQUEUE,
+                Operation.CANCEL,
+            }:
+                return [QueueRef.model_validate_json(json.dumps(queue))]
+            return []
+
     class Port:
         calls = 0
 
@@ -363,5 +401,304 @@ def test_model_facade_hides_review_and_retry_receipt_and_rejects_both_pre_servic
         assert (await facade.call(object(), "managed_items_enqueue", enqueue)).is_error
         assert (await facade.call(object(), "managed_items_cancel", cancel)).is_error
         assert port.calls == 0
+
+    asyncio.run(check())
+
+
+def test_exact_queue_publication_is_rechecked_and_guessed_queue_never_reaches_port():
+    workspace = str(uuid4())
+    published_queue = _queue(workspace, "published")
+    guessed_queue = _queue(workspace, "private")
+    caller = ManagedCaller(actor=Actor(principal_id=str(uuid4())))
+
+    class Policy:
+        enabled = True
+
+        def workspaces(self, _):
+            return [workspace]
+
+        def allows(self, _, requested, operation):
+            return str(requested.root) == workspace and operation == Operation.LIST
+
+        def queues(self, _, requested, operation):
+            if not self.enabled or operation != Operation.LIST:
+                return []
+            return [published_queue]
+
+    class Port:
+        calls = 0
+
+        def capabilities(self, _, requested):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=requested,
+                operations=(Operation.LIST,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, _, command):
+            self.calls += 1
+            assert command.queue == published_queue
+            return {"items": [], "next_cursor": None, "server_time_ms": "1"}
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        policy, port = Policy(), Port()
+        facade = ManagedWorkItemsMcp(port, auth, policy)
+        catalog = await facade.tools(object())
+        assert [tool.name for tool in catalog] == ["managed_items_list"]
+        request = {
+            "operation": "items.list",
+            "queue": published_queue.model_dump(mode="json"),
+        }
+        assert not (await facade.call(object(), "managed_items_list", request)).is_error
+        guessed = {
+            **request,
+            "queue": guessed_queue.model_dump(mode="json"),
+        }
+        assert (await facade.call(object(), "managed_items_list", guessed)).is_error
+        assert port.calls == 1
+
+        # A previously discovered queue ceases to be callable after live
+        # publication is revoked; catalog state is not cached by the facade.
+        policy.enabled = False
+        assert await facade.tools(object()) == []
+        assert (await facade.call(object(), "managed_items_list", request)).is_error
+        assert port.calls == 1
+
+    asyncio.run(check())
+
+
+def test_queue_listing_filters_unpublished_rows_and_hides_backend_cursor():
+    workspace = str(uuid4())
+    visible = _queue(workspace, "visible")
+    hidden = _queue(workspace, "hidden")
+    caller = ManagedCaller(actor=Actor(principal_id=str(uuid4())))
+
+    class Policy:
+        def workspaces(self, _):
+            return [workspace]
+
+        def allows(self, _, requested, operation):
+            return str(requested.root) == workspace and operation == Operation.QUEUES
+
+        def queues(self, _, requested, operation):
+            return [visible] if operation == Operation.QUEUES else []
+
+    class Port:
+        calls = 0
+
+        def capabilities(self, _, requested):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=requested,
+                operations=(Operation.QUEUES,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, _, command):
+            self.calls += 1
+            assert command.limit == 100
+            if command.cursor is not None:
+                assert command.cursor == "backend-hidden-inventory-cursor"
+                return {
+                    "queues": [],
+                    "next_cursor": None,
+                    "server_time_ms": "5",
+                }
+            return {
+                "queues": [
+                    {
+                        "queue": visible.model_dump(mode="json"),
+                        "label": "visible label",
+                        "mode": "producer",
+                        "counts": {"PENDING": 2},
+                        "permissions": [Permission.READ.value],
+                    },
+                    {
+                        "queue": hidden.model_dump(mode="json"),
+                        "label": "hidden secret label",
+                        "mode": "producer",
+                        "counts": {"PENDING": 99},
+                        "permissions": [Permission.READ.value],
+                    },
+                ],
+                "next_cursor": "backend-hidden-inventory-cursor",
+                "server_time_ms": "5",
+            }
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        port = Port()
+        facade = ManagedWorkItemsMcp(port, auth, Policy())
+        result = await facade.call(
+            object(),
+            "managed_queues_list",
+            {"operation": "queues.list", "workspace_id": workspace, "limit": 1},
+        )
+        assert not result.is_error
+        assert result.structured_content == {
+            "queues": [
+                {
+                    "queue": visible.model_dump(mode="json"),
+                    "mode": "producer",
+                    "counts": {"PENDING": 2},
+                }
+            ],
+            "next_cursor": None,
+            "server_time_ms": "5",
+        }
+        serialized = json.dumps(result.structured_content)
+        assert "hidden" not in serialized
+        assert "backend-hidden-inventory-cursor" not in serialized
+        assert port.calls == 2
+
+    asyncio.run(check())
+
+
+def test_queue_publication_iterator_is_bounded_and_fails_closed():
+    workspace = str(uuid4())
+    queue = _queue(workspace, "published")
+    caller = ManagedCaller(actor=Actor(principal_id=str(uuid4())))
+
+    class Policy:
+        consumed = 0
+
+        def workspaces(self, _):
+            return [workspace]
+
+        def allows(self, *_):
+            raise AssertionError("unbounded queue scope must not reach capability checks")
+
+        def queues(self, _, requested, operation):
+            if operation != Operation.QUEUES:
+                return []
+
+            def infinite():
+                while True:
+                    self.consumed += 1
+                    yield queue
+
+            return infinite()
+
+    class Port:
+        calls = 0
+
+        def capabilities(self, *_):
+            self.calls += 1
+            raise AssertionError("unbounded queue scope must fail before port access")
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        policy, port = Policy(), Port()
+        facade = ManagedWorkItemsMcp(port, auth, policy)
+        assert await facade.tools(object()) == []
+        assert policy.consumed == 101
+        assert port.calls == 0
+        denied = await facade.call(
+            object(),
+            "managed_queues_list",
+            {"operation": "queues.list", "workspace_id": workspace},
+        )
+        assert denied.is_error
+        assert policy.consumed == 202
+        assert port.calls == 0
+
+    asyncio.run(check())
+
+
+def test_queue_cursor_paginates_only_recomputed_visible_set():
+    workspace = str(uuid4())
+    first = _queue(workspace, "first")
+    second = _queue(workspace, "second")
+    expected_order = sorted((first, second), key=_queue_key)
+    hidden = _queue(workspace, "hidden")
+    caller = ManagedCaller(actor=Actor(principal_id=str(uuid4())))
+
+    class Policy:
+        def workspaces(self, _):
+            return [workspace]
+
+        def allows(self, _, requested, operation):
+            return str(requested.root) == workspace and operation == Operation.QUEUES
+
+        def queues(self, _, requested, operation):
+            return [first, second] if operation == Operation.QUEUES else []
+
+    class Port:
+        def capabilities(self, _, requested):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=requested,
+                operations=(Operation.QUEUES,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, _, command):
+            assert command.cursor is None and command.limit == 100
+            rows = [
+                {
+                    "queue": queue.model_dump(mode="json"),
+                    "label": queue.queue_id,
+                    "mode": "producer",
+                    "counts": {"PENDING": 1},
+                    "permissions": [Permission.READ.value],
+                }
+                for queue in (hidden, second, first)
+            ]
+            return {
+                "queues": rows,
+                "next_cursor": None,
+                "server_time_ms": "7",
+            }
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        facade = ManagedWorkItemsMcp(Port(), auth, Policy())
+        first_page = await facade.call(
+            object(),
+            "managed_queues_list",
+            {"operation": "queues.list", "workspace_id": workspace, "limit": 1},
+        )
+        assert not first_page.is_error
+        page = first_page.structured_content
+        assert len(page["queues"]) == 1
+        assert page["queues"][0]["queue"] == expected_order[0].model_dump(mode="json")
+        cursor = page["next_cursor"]
+        assert isinstance(cursor, str) and cursor
+        assert "hidden" not in cursor and "backend" not in cursor
+
+        second_page = await facade.call(
+            object(),
+            "managed_queues_list",
+            {
+                "operation": "queues.list",
+                "workspace_id": workspace,
+                "limit": 1,
+                "cursor": cursor,
+            },
+        )
+        assert not second_page.is_error
+        assert [row["queue"]["queue_id"] for row in second_page.structured_content["queues"]] == [
+            expected_order[1].queue_id
+        ]
+        assert second_page.structured_content["next_cursor"] is None
 
     asyncio.run(check())
