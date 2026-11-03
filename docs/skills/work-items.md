@@ -1557,10 +1557,16 @@ trusted model principal, its configured Actor and Workspace, current publication
 policy, and the atomic guard. It does not inherit the worker identity. The MCP
 assembler reserves the managed tool names against Action collisions. Source
 startup tests do not qualify installed Runtime behavior or PostgreSQL parity.
-The experimental internal delegation value binds an exact generated Action
-snapshot to named exact RCC Robot snapshots, with a bounded child count and an
-explicit detach choice. It is separate from model publication and grants no
-execution authority. A real host must re-resolve the registry selections,
-check current delegation and execute permission, and enforce one-level lineage,
-retry identity and detach/cancel behavior before admission. The value is not a
-persisted Deployment policy or an installed Action-to-Robot implementation.
+Deployment specifications can persist an internal Robot delegation selection
+for a deployed parent capability: named bindings pin a target Deployment
+revision, capability and Runtime Plan in the same Workspace, with an explicit
+parent-exit choice and a provisional maximum child count of 16. The parent
+Deployment revision is implicit so its specification does not refer to the
+revision digest that is computed from that same specification. Empty selections
+are omitted from canonical serialization to preserve earlier revision hashes.
+This immutable selection does not prove that a target is a Robot, grant execute
+permission, or implement admission or lifecycle behavior. A host still needs to
+resolve the selected revisions, verify target kind and current grants, and
+enforce one-level lineage, retry identity and the selected exit behavior before
+admission. The count cap and exit values do not yet define complete lifecycle
+semantics or qualify an installed Action-to-Robot implementation.
