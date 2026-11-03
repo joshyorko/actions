@@ -69,3 +69,14 @@ It does not prove a built or installed native Runtime, actual ChatGPT transport,
 or PostgreSQL. All supervisors reported no owned processes left. The failed and
 passing logs are in Library archive `libfile_b1e3d498c26c8191b3f02281a7f5d57f`,
 version 9.
+
+The standalone internal-delegation value at
+`19950123f4aaa5466aeb9e796b9ea498eab4c844` passed 12 source cases and focused
+lint. The first attempt failed collection on an incorrect fixture ID import;
+the second failed on noncanonical fixture digests; the third had 10 passes and
+two positive fixtures with mismatched Workspaces. The corrected run retained
+cross-Workspace and non-RCC-target denial tests. This is policy data only:
+there is no immutable persisted Deployment delegation, host authorization,
+atomic child admission, process transport or installed RCC child proof. The
+failed and passing logs are retained in Library archive
+`libfile_b1e3d498c26c8191b3f02281a7f5d57f`, version 10.
