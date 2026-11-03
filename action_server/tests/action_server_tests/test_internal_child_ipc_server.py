@@ -7,7 +7,7 @@ import json
 import socket
 import struct
 import sys
-from threading import Thread
+from threading import Event, Thread
 
 import pytest
 from action_server_tests.test_generic_work_item_execution import (
@@ -17,9 +17,13 @@ from action_server_tests.test_internal_child_admission import admitted as admitt
 from actions.internal_runtime import ChildRunHandle, ChildRunState, ChildRunUnavailable
 from actions.internal_runtime._fd_transport import InternalChildFDTransport
 
-from actions.server.foundry.internal_child_ipc_server import InternalChildIPCServer
+from actions.server.foundry.internal_child_ipc_server import (
+    InternalChildIPCServer,
+    InternalChildIPCServerHost,
+)
 from actions.server.foundry.internal_child_lifecycle import InternalChildRunLifecycle
 from actions.server.run_outputs.models import RunChildLineage
+from actions.server.run_outputs.service import AccessDenied
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 pytestmark = pytest.mark.skipif(
@@ -39,6 +43,15 @@ def _server(admitted):
     thread = Thread(target=server.serve, daemon=True)
     thread.start()
     return action, server, thread
+
+
+def _host(admitted):
+    return InternalChildIPCServerHost(
+        admitted.fence,
+        admitted.admission,
+        InternalChildRunLifecycle(admitted.detached),
+        timeout_seconds=1,
+    )
 
 
 def test_real_authorities_submit_status_cancel_and_close(admitted):
@@ -185,6 +198,65 @@ def test_peer_closure_stops_invocation_server(admitted):
     sock.close()
     thread.join(timeout=2)
     assert not thread.is_alive()
+
+
+def test_host_wrapper_peer_close_settles_and_stop_joins(admitted):
+    host = _host(admitted)
+    action_socket = host.start(timeout_seconds=2)
+
+    action_socket.close()
+
+    assert host.wait(timeout_seconds=2)
+    assert host.settled
+    assert host.stop(timeout_seconds=2)
+
+
+def test_host_wrapper_stop_closes_action_socket_and_joins(admitted):
+    host = _host(admitted)
+    action_socket = host.start(timeout_seconds=2)
+
+    assert host.stop(timeout_seconds=2)
+
+    assert host.settled
+    assert action_socket.fileno() == -1
+
+
+def test_host_wrapper_reports_nonsettled_until_blocked_authority_returns(
+    admitted, monkeypatch
+):
+    entered = Event()
+    release = Event()
+
+    def block_then_deny(*args):
+        entered.set()
+        assert release.wait(timeout=3)
+        raise AccessDenied("synthetic bounded IPC lifecycle denial")
+
+    monkeypatch.setattr(admitted.admission, "invoke", block_then_deny)
+    host = _host(admitted)
+    transport = InternalChildFDTransport(
+        host.start(timeout_seconds=2), timeout_seconds=2
+    )
+    call_error = []
+
+    def submit():
+        try:
+            transport.submit_child_run("scan", "blocked-lifecycle", "{}")
+        except Exception as exc:
+            call_error.append(exc)
+
+    client = Thread(target=submit, daemon=True)
+    client.start()
+    assert entered.wait(timeout=2)
+
+    assert not host.stop(timeout_seconds=0.01)
+    assert not host.settled
+    release.set()
+    client.join(timeout=2)
+    assert not client.is_alive()
+    assert host.wait(timeout_seconds=2)
+    assert host.settled
+    assert len(call_error) == 1
 
 
 def _recv_exact(sock, size):
