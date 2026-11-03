@@ -130,7 +130,8 @@ def test_unselected_queue_or_operation_is_denied_before_domain_call(generic_worl
     caller = ManagedCaller(actor=g.caller.actor)
     guard = ModelWorkItemPublicationGuard(g.owner.deployments)
     invoked = []
-    domain_call = lambda *args: invoked.append(args)
+    def domain_call(*args):
+        invoked.append(args)
 
     guessed = queue.model_copy(update={"queue_id": "generic-other"})
     with pytest.raises(AccessDenied):

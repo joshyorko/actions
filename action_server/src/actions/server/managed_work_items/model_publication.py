@@ -154,7 +154,7 @@ class ModelWorkItemPublicationGuard:
             if (
                 not isinstance(scanned, tuple)
                 or len(scanned) != 2
-                or type(scanned[0]) is not list
+                or not isinstance(scanned[0], list)
                 or len(scanned[0]) > MAX_MODEL_QUEUE_SCAN_ROWS
             ):
                 raise AccessDenied("bounded managed queue scan required")

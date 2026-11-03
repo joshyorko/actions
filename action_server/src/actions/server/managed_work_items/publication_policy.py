@@ -6,8 +6,6 @@ import inspect
 import json
 from typing import get_args
 
-from pydantic import JsonValue
-
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
     AccessDenied,

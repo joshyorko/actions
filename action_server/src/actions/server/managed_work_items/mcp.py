@@ -16,7 +16,7 @@ from itertools import islice
 from typing import Literal, Protocol, cast
 
 from mcp.types import CallToolResult, TextContent, Tool, ToolAnnotations
-from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter
 from starlette.concurrency import run_in_threadpool
 
 from actions.server.deployments.foundry_values import ModelPublishedWorkItemOperation
