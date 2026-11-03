@@ -1,5 +1,15 @@
 # Work Items
 
+Model publication is separate from managed Work Item grants. A candidate MCP
+facade must require an explicit trusted publication decision and recheck it
+alongside current caller grants for each request. Project typed, bounded status
+and authorized output references rather than forwarding payloads, review data,
+log text or artifact bytes into model context. Model enqueue must not supply a
+review proposal, and model cancellation must not supply retry reconciliation
+evidence. Trusted worker claim and completion remain separate operations.
+The isolated facade's component tests do not establish native startup wiring or
+an installed worker-backed queue flow.
+
 ## Current Boundary
 
 `actions-work-items` exposes `actions.work_items`, `actions.workitems`, and `actions_work_items`. Preserve import identity and the producer-consumer lifecycle: reserve input, create parent-linked output, then release done or failed.
