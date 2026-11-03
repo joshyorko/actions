@@ -428,10 +428,12 @@ def test_rcc_no_build_env_exec_forwards_one_inherited_pipe_fd(tmp_path: Path):
     )
     # 124/125 are supervisor timeout or incomplete-cleanup outcomes, not a
     # valid negative-control result even if RCC also wrote an error receipt.
-    assert negative_status not in (0, 124, 125)
+    assert 0 < negative_status < 124
     assert b"RCC_FD_RESULT:" not in negative_stdout
     assert b"Bad file descriptor" in negative_stdout + negative_stderr
     negative_data = json.loads(negative_receipt.read_text(encoding="utf-8"))
     assert negative_data.get("artifactDigest") == artifact
     assert negative_data.get("verification", {}).get("valid") is True
-    assert negative_data.get("exitCode") != 0
+    exit_code = negative_data.get("exitCode")
+    assert type(exit_code) is int and exit_code != 0  # noqa: E721 - exclude bool
+    print(f"RCC_FD_NEGATIVE_STATUS={negative_status} RCC_CHILD_EXIT={exit_code}")
