@@ -1,0 +1,11 @@
+# CI recovery checkpoint, 2026-11-03
+
+Pushed PR head `143ac24648b70c636c36824f10d78ded2fd38788`: Runtime CI [41709038092](https://github.com/joshyorko/actions/actions/runs/41709038092); toolkit CI [41709038060](https://github.com/joshyorko/actions/actions/runs/41709038060). Both Linux toolkit jobs failed two PostgreSQL fixture-contract tests. Windows Runtime failed two Linux-only shell-double tests, Ruff, and mypy. Preserve these failed receipts. Ubuntu PostgreSQL startup passed; tests and teardown were still pending at checkpoint.
+
+After specific approval, removed only the inactive task-created RCC holotree `6fadf84_5a1fac3_9fcd2534` after verifying its exact resolved path, owner, identity and open-file absence. Free bytes rose from 10735788032 to 11693338624, a measured 957550592-byte recovery. Existing descriptor-probe receipt remains Library `libfile_2c0d1374fd9c8191ba68c0965a7883bd` v0, SHA256 `f6cdb8784e7a11e7ad22799f0656a550b91dad31eb962883d78445369562fa54`. No other cleanup or capacity-floor change.
+
+With the normal RCC v18.19.3 gateway and host capacity supervisor, the two focused CI fixture files passed 7 tests; supervisor reports no owned processes. Local fixture correction committed as `81bf5f27e6d2321b9b0a49fb3349c52800803944` (not pushed at this checkpoint). Log SHA256 `5990051035e0bbde606b2c88695a9e4c021aab9590b07f2e60ae69105e4f04f8`; supervisor receipt SHA256 `90f9f969d0408071bcc5d60c1287ae6d972e0889e45845fc6aaa9660de30c728`.
+
+The uncommitted child lifecycle service and tests (git blob IDs `f259dd319fe6e71f56e317ad86f91baee0b6929b`, `e1e6c135d1bb4c7e7d538e95720ff65f45e6e19f`) passed 6 SQLite tests, with 6 PostgreSQL cases skipped; supervisor reports no owned processes. Log SHA256 `4fd1e6c3ecfa1af63f4cabd43b7a19925923e4ee8beef5fb2e9a28a8d8f1ff6b`; supervisor receipt SHA256 `abaaf16339952e0ee03defdc48318f48671431e4495761c55824bfa0e5fe01ac`. This is service-level proof, not installed RCC child execution or PostgreSQL proof.
+
+PostgreSQL child-admission tests are parameterized for concurrency and authorization. The current child-lineage migration test uses SQLite only, so PostgreSQL migration parity is not established by a passing hosted run. No merge, publication or deployment is authorized without fresh approval.
