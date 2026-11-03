@@ -1574,3 +1574,8 @@ Model-facing Work Item projections omit parent and child IDs: the domain
 ItemView does not carry queue identity for those references, and reviewed
 completion can create children in an unpublished output queue. This projection
 restriction does not change the domain or REST ItemView contracts.
+Deploying an internal Robot delegation requires authorization of each target
+Deployment, Package, capability and Runtime Plan reference, a registry-verified
+RCC Robot selection, and resolution of the exact activated target under existing
+execute checks. The locked deployment preflight repeats these checks. This does
+not yet implement child admission, host policy refresh or installed execution.

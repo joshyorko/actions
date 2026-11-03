@@ -299,6 +299,7 @@ class FoundryDeploymentService:
         _validate_idempotency_key(idempotency_key)
         self._authorize_specification(actor, workspace_id, specification, "deploy")
         self._validate_package_contracts(specification)
+        self._validate_internal_robot_delegations(actor, specification)
 
         def preflight() -> None:
             """Recheck authorization and package contracts under the Workspace lock."""
@@ -314,6 +315,7 @@ class FoundryDeploymentService:
                 self._authorization.require_reference(actor, rollback_of, "deploy")
             self._authorize_specification(actor, workspace_id, specification, "deploy")
             self._validate_package_contracts(specification)
+            self._validate_internal_robot_delegations(actor, specification)
 
         digest = request_digest(
             workspace_id,
@@ -423,12 +425,80 @@ class FoundryDeploymentService:
             )
             if ref is not None
         )
+        for delegation in specification.internal_robot_delegations:
+            for binding in delegation.bindings:
+                refs.extend(
+                    (
+                        binding.target_deployment,
+                        binding.target_capability.package_revision,
+                        binding.target_capability,
+                        binding.target_runtime_plan,
+                    )
+                )
         for ref in refs:
             try:
                 require_workspace_scope(ref, workspace_id)
             except (TypeError, ValueError) as exc:
                 raise AccessDenied("Deployment unavailable or not authorized") from exc
             self._authorization.require_reference(actor, ref, permission)
+
+    def _validate_internal_robot_delegations(
+        self, actor: Actor, specification: DeploymentSpecification
+    ) -> None:
+        """Require each persisted target to be an authorized activated RCC Robot."""
+        if not specification.internal_robot_delegations:
+            return
+
+        # PackageRegistry.selection_for is the provenance boundary: it returns
+        # RegistryRobotSelection only for a verified admitted Robot Package.
+        # A missing seam is denied rather than treating ordinary declarations
+        # as proof of Robot identity.
+        selection_for = getattr(self._packages, "selection_for", None)
+        if not callable(selection_for):
+            raise AccessDenied("Internal Robot registry selection unavailable")
+        from actions.server.foundry.package_registry import RegistryRobotSelection
+
+        for delegation in specification.internal_robot_delegations:
+            for binding in delegation.bindings:
+                try:
+                    selected = selection_for(
+                        binding.target_capability, binding.target_runtime_plan
+                    )
+                    if not isinstance(selected, RegistryRobotSelection):
+                        raise AccessDenied("Internal target is not a registered Robot")
+                    if (
+                        selected.package_revision
+                        != binding.target_capability.package_revision
+                        or selected.capability != binding.target_capability
+                        or selected.runtime_plan != binding.target_runtime_plan
+                    ):
+                        raise AccessDenied("Registered Robot selection differs from target")
+
+                    selected_runtime_kind = selected.robot.robot.plan.runtime_kind
+                    if selected_runtime_kind != "rcc":
+                        raise AccessDenied("Internal target must be an RCC Robot")
+
+                    resolved = self.resolve(
+                        actor,
+                        specification.workspace_id,
+                        binding.target_deployment.deployment_id,
+                        binding.target_capability,
+                        revision=binding.target_deployment,
+                        runtime_plan=binding.target_runtime_plan,
+                    )
+                    if (
+                        resolved.revision.ref != binding.target_deployment
+                        or resolved.snapshot.capability != binding.target_capability
+                        or resolved.snapshot.runtime_plan != binding.target_runtime_plan
+                        or resolved.snapshot.runtime_kind != "rcc"
+                    ):
+                        raise AccessDenied("Activated Robot target differs from selection")
+                except AccessDenied:
+                    raise
+                except (AttributeError, TypeError, ValueError, PackageContractError) as exc:
+                    raise AccessDenied(
+                        "Internal Robot target unavailable or not authorized"
+                    ) from exc
 
     def _validate_package_contracts(
         self, specification: DeploymentSpecification
