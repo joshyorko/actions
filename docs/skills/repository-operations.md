@@ -24,6 +24,14 @@ not only the launcher's successful exit.
 
 ## Recovering installed qualification evidence
 
+For sequential private provider configurations, preview each request and supply
+the exact current catalog pointer to the subsequent configure operation. A
+failed synthetic setup can leave an earlier provider configured; preserve its
+receipt and use a fresh task-owned fixture root for a corrected attempt. For
+logical-bound standalone execution, use the existing standalone admission and
+its guarded output adapter; a bare Run output service does not supply the
+logical publication boundary.
+
 Selected source-path revalidation must compare bounded current file content
 digests with the measured inventory, in addition to metadata and name bindings.
 Same-size writes can leave the observed metadata tuple unchanged. Reopen only
