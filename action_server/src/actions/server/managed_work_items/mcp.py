@@ -36,6 +36,7 @@ from .contracts import (
     Permission,
     QueuePage,
     QueueRef,
+    QueueView,
     Queues,
 )
 from .model_publication import ModelWorkItemPublicationGuard
@@ -46,6 +47,7 @@ MAX_PUBLISHED_WORKSPACES = 100
 MAX_PUBLISHED_QUEUES = 100
 MAX_QUEUE_SCAN_ROWS = 2048
 MAX_QUEUE_SCAN_PAGES = MAX_QUEUE_SCAN_ROWS // 100 + 1
+MAX_QUEUE_SCAN_BYTES = 512 * 1024
 MAX_QUEUE_CURSOR_BYTES = 512
 MAX_QUEUE_PAGE_SIZE = 100
 
@@ -386,7 +388,7 @@ class ManagedWorkItemsMcp:
     ) -> bool:
         if self.port is None or self.publication is None:
             return False
-        if operation != Operation.QUEUES and self.publication_guard is None:
+        if self.publication_guard is None:
             return False
         try:
             published = await run_in_threadpool(
@@ -488,8 +490,8 @@ class ManagedWorkItemsMcp:
                     for queue in queues.values()
                 ):
                     raise ValueError
-                result, next_cursor = await self._list_visible_queues(
-                    caller, command, queues
+                result, next_cursor = await run_in_threadpool(
+                    self._list_visible_queues, caller, command, queues
                 )
             else:
                 if _queue_key(command.queue) not in queues:
@@ -563,17 +565,20 @@ class ManagedWorkItemsMcp:
             domain_call,
         )
 
-    async def _list_visible_queues(
+    def _list_visible_queues(
         self,
         caller: ManagedCaller,
         command: Queues,
         published: dict[str, QueueRef],
     ) -> tuple[dict, str | None]:
-        """Rescan bounded backend pages and paginate only the visible subset.
+        """Scan and filter under the atomic guard, then page the visible set.
 
         Backend cursors stay inside the facade and are never returned. A client
         cursor binds only the identities the caller can currently see.
         """
+        if self.port is None or self.publication_guard is None:
+            raise ValueError("atomic model queue-list guard unavailable")
+
         if command.cursor is None:
             offset = 0
         else:
@@ -585,57 +590,66 @@ class ManagedWorkItemsMcp:
                 )
             )
             offset = cursor.offset
-        visible: dict[str, dict] = {}
-        backend_cursor: str | None = None
-        seen_cursors: set[str] = set()
-        scanned = 0
-        pages = 0
-        server_time_ms = "0"
-        while True:
-            if pages >= MAX_QUEUE_SCAN_PAGES:
-                raise ValueError("queue scan page bound exceeded")
-            request = command.model_copy(
-                update={"cursor": backend_cursor, "limit": MAX_QUEUE_PAGE_SIZE}
-            )
-            raw_page = await run_in_threadpool(self.port.call, caller, request)
-            if hasattr(raw_page, "__await__") or not isinstance(raw_page, dict):
-                raise ValueError("invalid backend queue page")
-            page_raw = json.dumps(
-                raw_page, ensure_ascii=False, allow_nan=False
-            ).encode()
-            if len(page_raw) > MAX_REQUEST_BYTES:
-                raise ValueError("backend queue page exceeds bound")
-            page = QueuePage.model_validate_json(page_raw)
-            pages += 1
-            scanned += len(page.queues)
-            if scanned > MAX_QUEUE_SCAN_ROWS:
-                raise ValueError("queue scan row bound exceeded")
-            server_time_ms = page.server_time_ms
-            for row in page.queues:
-                key = _queue_key(row.queue)
+
+        def scan_pages(identity: ManagedCaller) -> tuple[list[QueueView], str]:
+            rows: list[QueueView] = []
+            backend_cursor: str | None = None
+            seen_cursors: set[str] = set()
+            scanned = 0
+            scan_bytes = 0
+            pages = 0
+            server_time_ms = "0"
+            while True:
+                if pages >= MAX_QUEUE_SCAN_PAGES:
+                    raise ValueError("queue scan page bound exceeded")
+                request = command.model_copy(
+                    update={"cursor": backend_cursor, "limit": MAX_QUEUE_PAGE_SIZE}
+                )
+                raw_page = self.port.call(identity, request)
+                if hasattr(raw_page, "__await__") or not isinstance(raw_page, dict):
+                    raise ValueError("invalid backend queue page")
+                page_raw = json.dumps(
+                    raw_page, ensure_ascii=False, allow_nan=False
+                ).encode()
+                scan_bytes += len(page_raw)
                 if (
-                    key in published
-                    and Permission.READ in row.permissions
-                    and (
-                        command.deployment_id is None
-                        or row.queue.deployment.deployment_id
-                        == command.deployment_id
-                    )
+                    len(page_raw) > MAX_REQUEST_BYTES
+                    or scan_bytes > MAX_QUEUE_SCAN_BYTES
                 ):
-                    visible[key] = row.model_dump(mode="json")
-            next_backend_cursor = page.next_cursor
-            if next_backend_cursor is None:
-                break
-            if (
-                not isinstance(next_backend_cursor, str)
-                or not next_backend_cursor
-                or len(next_backend_cursor) > 4096
-                or next_backend_cursor in seen_cursors
-                or scanned >= MAX_QUEUE_SCAN_ROWS
-            ):
-                raise ValueError("backend queue pagination is not bounded")
-            seen_cursors.add(next_backend_cursor)
-            backend_cursor = next_backend_cursor
+                    raise ValueError("backend queue scan exceeds its bound")
+                page = QueuePage.model_validate_json(page_raw)
+                pages += 1
+                scanned += len(page.queues)
+                if scanned > MAX_QUEUE_SCAN_ROWS:
+                    raise ValueError("queue scan row bound exceeded")
+                rows.extend(page.queues)
+                server_time_ms = page.server_time_ms
+                next_backend_cursor = page.next_cursor
+                if next_backend_cursor is None:
+                    break
+                if (
+                    not isinstance(next_backend_cursor, str)
+                    or not next_backend_cursor
+                    or len(next_backend_cursor) > 4096
+                    or next_backend_cursor in seen_cursors
+                    or scanned >= MAX_QUEUE_SCAN_ROWS
+                ):
+                    raise ValueError("backend queue pagination is not bounded")
+                seen_cursors.add(next_backend_cursor)
+                backend_cursor = next_backend_cursor
+            return rows, server_time_ms
+
+        visible_rows, server_time_ms = self.publication_guard.list_queues(
+            caller,
+            command.workspace_id,
+            scan_pages,
+            deployment_id=command.deployment_id,
+        )
+        visible: dict[str, dict] = {}
+        for row in visible_rows:
+            key = _queue_key(row.queue)
+            if key in published and Permission.READ in row.permissions:
+                visible[key] = row.model_dump(mode="json")
 
         ordered_keys = sorted(visible)
         visible_queues = [published[key] for key in ordered_keys]

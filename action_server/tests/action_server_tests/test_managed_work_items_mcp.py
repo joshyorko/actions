@@ -3,8 +3,11 @@
 import asyncio
 import json
 import threading
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
 from uuid import uuid4
 
+import actions.server.deployments.foundry_repository as repository_module
 import pytest
 from action_server_tests import test_generic_work_item_execution as generic_fixtures
 from actions.server.deployments.foundry_values import DeploymentSpecification
@@ -98,6 +101,9 @@ class _PassingPublicationGuard:
     def call(self, caller, queue, operation, domain_call):
         self.calls.append((caller, queue, operation))
         return domain_call(caller, queue, operation)
+
+    def list_queues(self, caller, workspace_id, domain_scan, *, deployment_id=None):
+        return domain_scan(caller)
 
 def _queue(workspace: str, queue_id: str, deployment: str | None = None) -> QueueRef:
     deployment_id = deployment or str(uuid4())
@@ -252,7 +258,9 @@ def test_catalog_and_each_call_require_publication_and_current_grants():
 
     async def check():
         event_loop_thread = threading.get_ident()
-        facade = ManagedWorkItemsMcp(port, auth, policy)
+        facade = ManagedWorkItemsMcp(
+            port, auth, policy, publication_guard=_PassingPublicationGuard()
+        )
         catalog = await facade.tools(object())
         assert [tool.name for tool in catalog] == ["managed_queues_list"]
         assert catalog[0].annotations.read_only_hint is True
@@ -507,7 +515,9 @@ def test_model_facade_hides_review_and_retry_receipt_and_rejects_both_pre_servic
 
     async def check():
         port = Port()
-        facade = ManagedWorkItemsMcp(port, auth, Policy())
+        facade = ManagedWorkItemsMcp(
+            port, auth, Policy(), publication_guard=_PassingPublicationGuard()
+        )
         assert "review" not in _schema(Operation.ENQUEUE)["properties"]
         assert "reconciliation_receipt" not in _schema(Operation.CANCEL)["properties"]
 
@@ -831,7 +841,9 @@ def test_queue_listing_filters_unpublished_rows_and_hides_backend_cursor():
 
     async def check():
         port = Port()
-        facade = ManagedWorkItemsMcp(port, auth, Policy())
+        facade = ManagedWorkItemsMcp(
+            port, auth, Policy(), publication_guard=_PassingPublicationGuard()
+        )
         result = await facade.call(
             object(),
             "managed_queues_list",
@@ -962,7 +974,9 @@ def test_queue_cursor_paginates_only_recomputed_visible_set():
         return caller
 
     async def check():
-        facade = ManagedWorkItemsMcp(Port(), auth, Policy())
+        facade = ManagedWorkItemsMcp(
+            Port(), auth, Policy(), publication_guard=_PassingPublicationGuard()
+        )
         first_page = await facade.call(
             object(),
             "managed_queues_list",
@@ -993,3 +1007,272 @@ def test_queue_cursor_paginates_only_recomputed_visible_set():
         assert second_page.structured_content["next_cursor"] is None
 
     asyncio.run(check())
+
+
+def test_queue_scan_and_current_publication_filter_share_one_guard_transaction(
+    generic_world,
+):
+    g = generic_world
+    queue = _publish_model_queue(
+        g,
+        [{"queue_id": "generic-input", "operations": ["queues.list"]}],
+        "mcp-atomic-queue-list-publish",
+    )
+    hidden = queue.model_copy(update={"queue_id": "unpublished-secret"})
+    old = queue.model_copy(
+        update={"deployment": g.owner.snapshot.deployment}
+    )
+    caller = ManagedCaller(actor=g.caller.actor)
+
+    class Policy:
+        def workspaces(self, _):
+            return [str(queue.workspace_id.root)]
+
+        def allows(self, _, workspace, operation):
+            return workspace == queue.workspace_id and operation == Operation.QUEUES
+
+        def queues(self, _, workspace, operation):
+            if workspace == queue.workspace_id and operation == Operation.QUEUES:
+                return [queue]
+            return []
+
+    class Port:
+        calls = 0
+        thread_ids = set()
+        connections = set()
+
+        def capabilities(self, _, workspace):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=workspace,
+                operations=(Operation.QUEUES,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, identity, command):
+            self.calls += 1
+            self.thread_ids.add(threading.get_ident())
+            assert identity == caller
+            assert g.db.in_transaction()
+            self.connections.add(id(g.db._tlocal.conn))
+            assert command.limit == 100
+            if command.cursor is None:
+                rows = (queue, hidden)
+                next_cursor = "backend-private-continuation"
+            else:
+                assert command.cursor == "backend-private-continuation"
+                rows = (old,)
+                next_cursor = None
+            return {
+                "queues": [
+                    {
+                        "queue": ref.model_dump(mode="json"),
+                        "label": f"secret-label-{ref.queue_id}",
+                        "mode": "producer",
+                        "counts": {"PENDING": 1, "secret-state": 99},
+                        "permissions": [Permission.READ.value],
+                    }
+                    for ref in rows
+                ],
+                "next_cursor": next_cursor,
+                "server_time_ms": str(self.calls),
+            }
+
+    async def auth(_):
+        return caller
+
+    async def check():
+        port = Port()
+        facade = ManagedWorkItemsMcp(
+            port,
+            auth,
+            Policy(),
+            publication_guard=ModelWorkItemPublicationGuard(g.owner.deployments),
+        )
+        event_loop_thread = threading.get_ident()
+        result = await facade.call(
+            object(),
+            "managed_queues_list",
+            {"operation": "queues.list", "workspace_id": str(queue.workspace_id.root)},
+        )
+        assert not result.is_error
+        assert result.structured_content["queues"] == [
+            {
+                "queue": queue.model_dump(mode="json"),
+                "mode": "producer",
+                "counts": {"PENDING": 1},
+            }
+        ]
+        assert result.structured_content["next_cursor"] is None
+        serialized = json.dumps(result.structured_content)
+        assert "unpublished-secret" not in serialized
+        assert "secret-label" not in serialized
+        assert "secret-state" not in serialized
+        assert "backend-private-continuation" not in serialized
+        assert port.calls == 2
+        assert len(port.thread_ids) == 1 and event_loop_thread not in port.thread_ids
+        assert len(port.connections) == 1
+
+    asyncio.run(check())
+
+
+def test_inflight_guarded_queue_scan_serializes_with_publication_revocation(
+    generic_world, monkeypatch
+):
+    g = generic_world
+    queue = _publish_model_queue(
+        g,
+        [{"queue_id": "generic-input", "operations": ["queues.list"]}],
+        "mcp-queue-list-race-publish",
+    )
+    caller = ManagedCaller(actor=g.caller.actor)
+    scan_started = threading.Event()
+    release_scan = threading.Event()
+    publish_entered_transaction = threading.Event()
+    scan_connections = set()
+    publish_connections = set()
+    current = g.owner.deployments._repository.current(
+        queue.workspace_id, queue.deployment.deployment_id
+    )
+    revoked_values = current.revision.specification.model_dump(
+        mode="json", by_alias=True
+    )
+    revoked_values["model_published_work_item_queues"] = []
+    revoked_specification = DeploymentSpecification.model_validate_json(
+        json.dumps(revoked_values)
+    )
+    repository_transaction = repository_module._transaction
+
+    @contextmanager
+    def observe_publish_transaction(db):
+        publish_connections.add(id(db._tlocal.conn))
+        publish_entered_transaction.set()
+        with repository_transaction(db):
+            yield
+
+    monkeypatch.setattr(
+        repository_module, "_transaction", observe_publish_transaction
+    )
+
+    class Policy:
+        def workspaces(self, _):
+            return [str(queue.workspace_id.root)]
+
+        def allows(self, _, workspace, operation):
+            return workspace == queue.workspace_id and operation == Operation.QUEUES
+
+        def queues(self, _, workspace, operation):
+            # This remains stale after revocation; the SQL list guard is
+            # authoritative at the scan's serialization point.
+            if workspace == queue.workspace_id and operation == Operation.QUEUES:
+                return [queue]
+            return []
+
+    class Port:
+        scan_number = 0
+
+        def capabilities(self, _, workspace):
+            return Capabilities(
+                runtime_version="1.1.0a13",
+                sdk_version="0.5.0a1",
+                workspace_id=workspace,
+                operations=(Operation.QUEUES,),
+                permissions=(Permission.READ,),
+                backend="sqlite",
+                modes=("producer",),
+            )
+
+        def call(self, identity, command):
+            assert identity == caller
+            assert g.db.in_transaction()
+            scan_connections.add(id(g.db._tlocal.conn))
+            assert command.limit == 100
+            if command.cursor is None:
+                self.scan_number += 1
+                if self.scan_number == 1:
+                    scan_started.set()
+                    if not release_scan.wait(timeout=15):
+                        raise TimeoutError("list scan release timed out")
+                    next_cursor = "backend-second-page"
+                else:
+                    next_cursor = None
+            else:
+                assert command.cursor == "backend-second-page"
+                next_cursor = None
+            rows = (
+                [
+                    {
+                        "queue": queue.model_dump(mode="json"),
+                        "label": "published queue",
+                        "mode": "producer",
+                        "counts": {"PENDING": 1},
+                        "permissions": [Permission.READ.value],
+                    }
+                ]
+                if command.cursor is None
+                else []
+            )
+            return {
+                "queues": rows,
+                "next_cursor": next_cursor,
+                "server_time_ms": "9",
+            }
+
+    async def auth(_):
+        return caller
+
+    port = Port()
+    facade = ManagedWorkItemsMcp(
+        port,
+        auth,
+        Policy(),
+        publication_guard=ModelWorkItemPublicationGuard(g.owner.deployments),
+    )
+    request = {
+        "operation": "queues.list",
+        "workspace_id": str(queue.workspace_id.root),
+    }
+
+    def revoke_publication():
+        return g.owner.deployments.publish(
+            g.caller.actor,
+            queue.workspace_id,
+            queue.deployment.deployment_id,
+            queue.deployment,
+            revoked_specification,
+            idempotency_key="mcp-queue-list-race-revoke",
+        )
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first_list = pool.submit(
+            lambda: asyncio.run(
+                facade.call(object(), "managed_queues_list", request)
+            )
+        )
+        try:
+            assert scan_started.wait(timeout=15)
+            revoke = pool.submit(revoke_publication)
+            assert publish_entered_transaction.wait(timeout=15)
+            assert len(scan_connections) == 1
+            assert len(publish_connections) == 1
+            assert scan_connections.isdisjoint(publish_connections)
+            assert not revoke.done()
+        finally:
+            release_scan.set()
+        first_result = first_list.result(timeout=15)
+        revoked_revision = revoke.result(timeout=15)
+
+    assert not first_result.is_error
+    first_queue_ids = [
+        row["queue"]["queue_id"]
+        for row in first_result.structured_content["queues"]
+    ]
+    assert first_queue_ids == ["generic-input"]
+    assert revoked_revision.ref != queue.deployment
+    next_result = asyncio.run(facade.call(object(), "managed_queues_list", request))
+    assert not next_result.is_error
+    assert next_result.structured_content["queues"] == []
+    assert next_result.structured_content["next_cursor"] is None
