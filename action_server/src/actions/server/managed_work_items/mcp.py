@@ -221,8 +221,8 @@ def _queue_ref(value: dict) -> dict:
 
 def _item_view(value: dict) -> dict:
     fields = (
-        "id", "parent_id", "queue_state", "business_state", "delivery_count",
-        "available_after_ms", "created_ms", "run_ids", "child_ids", "review_id",
+        "id", "queue_state", "business_state", "delivery_count",
+        "available_after_ms", "created_ms", "run_ids", "review_id",
     )
     result = {key: value[key] for key in fields if key in value}
     result["queue"] = _queue_ref(value["queue"])

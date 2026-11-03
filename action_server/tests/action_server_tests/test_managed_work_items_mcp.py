@@ -10,11 +10,18 @@ from uuid import uuid4
 import actions.server.deployments.foundry_repository as repository_module
 import pytest
 from action_server_tests import test_generic_work_item_execution as generic_fixtures
+from action_server_tests import test_invoice_review as review_fixtures
+from action_server_tests import (
+    test_managed_work_items_sql_service as sql_service_fixtures,
+)
+from actions.server.data_queries.review_models import FencedWorkItem
 from actions.server.deployments.foundry_values import DeploymentSpecification
+from actions.server.deployments.ids import WorkspaceId
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.sql_authorization import reference_grant_subject
 from actions.server.managed_work_items.contracts import (
     Capabilities,
+    Inspect,
     ManagedCaller,
     Operation,
     Permission,
@@ -31,8 +38,12 @@ from actions.server.managed_work_items.mcp import (
     _schema,
 )
 from actions.server.run_outputs.types import Actor
+from actions.work_items import State
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
+reviewed = review_fixtures.reviewed
+provider = review_fixtures.provider
+postgresql_database = review_fixtures.postgresql_database
 
 
 @pytest.fixture
@@ -314,6 +325,8 @@ def test_explicit_projections_drop_free_text_claims_logs_and_artifact_bytes():
         "payload": {"customer": "private"},
         "claim": {"owner_id": str(uuid4()), "epoch": 4},
         "worker_id": str(uuid4()),
+        "parent_id": str(uuid4()),
+        "child_ids": [str(uuid4())],
         "created_ms": "1",
     }
     projected_item = _item_view(item)
@@ -382,6 +395,88 @@ def test_explicit_projections_drop_free_text_claims_logs_and_artifact_bytes():
         facade = ManagedWorkItemsMcp(object(), auth, object())
         denied = await facade.call(object(), "arbitrary_operation", {"operation": "items.claim"})
         assert denied.is_error
+
+    asyncio.run(check())
+
+
+def test_model_projection_omits_unscoped_item_lineage_from_real_sql_service(reviewed):
+    from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
+
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = QueueRef(
+        workspace_id=WorkspaceId.model_validate(scope.application.workspace_id),
+        deployment=scope.deployment,
+        queue_id=reviews.queue(scope).queue_name,
+    )
+    authz = sql_service_fixtures._Policy(queue.workspace_id.root)
+    authz.grant(actor, Permission.READ)
+    port = SQLManagedWorkItemsService(reviews, authz)
+
+    proposal = reviews.offer(actor, scope, handle)
+    receipt = reviews.decide(actor, scope, proposal, "approve")
+    claim = reviews.queue(scope).reserve_fenced(str(uuid4()), lease_seconds=30)
+    reviews.queue(scope).finish_fenced(
+        claim, State.DONE, outputs=({"confidential": "unpublished output"},)
+    )
+    child_rows = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE workspace_id=? AND parent_id=?",
+        [str(queue.workspace_id.root), receipt.work_item_id],
+    )
+    assert len(child_rows) == 1
+    child = child_rows[0]
+    assert child.queue_name == queue.queue_id + "_output"
+
+    raw = port.call(
+        ManagedCaller(actor=actor),
+        Inspect(operation="items.get", queue=queue, item_id=receipt.work_item_id),
+    )
+    assert raw["item"]["child_ids"] == [child.id]
+
+    class Publication:
+        def workspaces(self, caller):
+            assert caller == ManagedCaller(actor=actor)
+            return (str(queue.workspace_id.root),)
+
+        def allows(self, caller, workspace, operation):
+            return (
+                caller == ManagedCaller(actor=actor)
+                and workspace == queue.workspace_id
+                and operation == Operation.GET
+            )
+
+        def queues(self, caller, workspace, operation):
+            return (
+                (queue,)
+                if self.allows(caller, workspace, operation)
+                else ()
+            )
+
+    async def authenticate(_ctx):
+        return ManagedCaller(actor=actor)
+
+    async def check():
+        facade = ManagedWorkItemsMcp(
+            port,
+            authenticate,
+            Publication(),
+            publication_guard=_PassingPublicationGuard(),
+        )
+        result = await facade.call(
+            object(),
+            "managed_items_get",
+            {
+                "operation": Operation.GET.value,
+                "queue": queue.model_dump(mode="json"),
+                "item_id": receipt.work_item_id,
+            },
+        )
+        assert not result.is_error
+        item = result.structured_content["item"]
+        assert "child_ids" not in item
+        assert "parent_id" not in item
+        assert child.id not in json.dumps(result.structured_content)
+        assert child.queue_name not in json.dumps(result.structured_content)
 
     asyncio.run(check())
 

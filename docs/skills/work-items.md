@@ -1570,3 +1570,7 @@ resolve the selected revisions, verify target kind and current grants, and
 enforce one-level lineage, retry identity and the selected exit behavior before
 admission. The count cap and exit values do not yet define complete lifecycle
 semantics or qualify an installed Action-to-Robot implementation.
+Model-facing Work Item projections omit parent and child IDs: the domain
+ItemView does not carry queue identity for those references, and reviewed
+completion can create children in an unpublished output queue. This projection
+restriction does not change the domain or REST ItemView contracts.
