@@ -426,7 +426,9 @@ def test_rcc_no_build_env_exec_forwards_one_inherited_pipe_fd(tmp_path: Path):
     negative_status, negative_stdout, negative_stderr = _run_reaped(
         negative, env=env, timeout=120
     )
-    assert negative_status != 0
+    # 124/125 are supervisor timeout or incomplete-cleanup outcomes, not a
+    # valid negative-control result even if RCC also wrote an error receipt.
+    assert negative_status not in (0, 124, 125)
     assert b"RCC_FD_RESULT:" not in negative_stdout
     assert b"Bad file descriptor" in negative_stdout + negative_stderr
     negative_data = json.loads(negative_receipt.read_text(encoding="utf-8"))
