@@ -43,13 +43,14 @@ set -u
 printf '%s\\n' "$*" >> "$DOCKER_LOG"
 case "$1" in
   pull) exit 0 ;;
-  run) printf '%s\\n' "$STUB_CID" ;;
+  run) touch "$STUB_STATE"; printf '%s\\n' "$STUB_CID" ;;
   exec) [[ "$STUB_READY" == 1 ]] ;;
   port) printf '%s\\n' '127.0.0.1:55432' ;;
-  rm) [[ "$2" == '--force' && "$3" == "$STUB_CID" ]] ;;
+  rm) [[ "$2" == '--force' && "$3" == "$STUB_CID" ]] || exit 45; rm -f "$STUB_STATE" ;;
   ps)
     if [[ "$STUB_LISTING_FAIL" == 1 ]]; then exit 42; fi
     [[ "$*" == *"id=$STUB_CID"* ]] || exit 43
+    [[ ! -f "$STUB_STATE" ]] || printf '%s\\n' "$STUB_CID"
     exit 0
     ;;
   *) exit 44 ;;
@@ -65,6 +66,7 @@ esac
         "PATH": os.pathsep.join((str(binary_dir), os.defpath)),
         "DOCKER_LOG": str(docker_log),
         "STUB_CID": CID,
+        "STUB_STATE": str(tmp_path / "container-running"),
         "STUB_READY": "1" if ready else "0",
         "STUB_LISTING_FAIL": "1" if listing_fails else "0",
         "GITHUB_RUN_ID": "test-run",

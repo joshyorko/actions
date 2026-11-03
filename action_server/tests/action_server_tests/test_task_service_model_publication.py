@@ -18,7 +18,6 @@ from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.sql_authorization import reference_grant_subject
 from actions.server.managed_work_items.contracts import Permission
 from actions.server._models import Run
-from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import (
     RunAdmission,
     RunAttempt,

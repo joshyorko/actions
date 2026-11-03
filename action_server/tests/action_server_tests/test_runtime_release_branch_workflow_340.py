@@ -1,8 +1,10 @@
 """The release train PR must reach the existing owned PostgreSQL test gate."""
 
 import importlib.util
+import sys
 from pathlib import Path
 
+import pytest
 import yaml
 
 
@@ -33,6 +35,7 @@ def test_release_branch_pr_uses_generated_runtime_workflow_and_owned_postgres():
     assert 'docker rm' in cleanup["run"] and 'docker ps' in cleanup["run"]
 
 
+@pytest.mark.skipif(sys.platform != "linux", reason="PostgreSQL CI shell runs on Linux")
 def test_owned_postgres_cleanup_removes_task_container(tmp_path):
     """Exercise the real generated cleanup shell with a task-local Docker double."""
     import os
@@ -75,6 +78,7 @@ def test_owned_postgres_cleanup_removes_task_container(tmp_path):
     assert "ACTIONS_INVOICE_TEST_POSTGRES=" in (tmp_path / "github_env").read_text()
 
 
+@pytest.mark.skipif(sys.platform != "linux", reason="PostgreSQL CI shell runs on Linux")
 def test_owned_postgres_start_success_and_readiness_failure_cleanup(tmp_path):
     """Exercise generated shell with a local Docker double, never a real daemon."""
     import os
