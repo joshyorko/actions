@@ -1557,3 +1557,10 @@ trusted model principal, its configured Actor and Workspace, current publication
 policy, and the atomic guard. It does not inherit the worker identity. The MCP
 assembler reserves the managed tool names against Action collisions. Source
 startup tests do not qualify installed Runtime behavior or PostgreSQL parity.
+The experimental internal delegation value binds an exact generated Action
+snapshot to named exact RCC Robot snapshots, with a bounded child count and an
+explicit detach choice. It is separate from model publication and grants no
+execution authority. A real host must re-resolve the registry selections,
+check current delegation and execute permission, and enforce one-level lineage,
+retry identity and detach/cancel behavior before admission. The value is not a
+persisted Deployment policy or an installed Action-to-Robot implementation.
