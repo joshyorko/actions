@@ -19,3 +19,12 @@ fixture; the earlier role/password/grant setup was denied before execution.
 Its corrected proposal has unresolved all-path network cleanup and is not
 approval-ready. Protected-home denial remains an environment restriction. No
 package publication, community merge, or deployment follows from this evidence.
+
+The exploratory child-admission prototype was removed from the product tree
+because it assumed a detached parent intent and had no real registry/Run test.
+It is retained only as unqualified Library file
+`libfile_f3d245e9123c81918501a9ec5e1b44c4` version 0, SHA-256
+`de4a3f1055870499b97e0ed81153d4fbf44abaded62b3ec8cf1f6255ae435d4f`.
+It must not be treated as host implementation. A real fixture must cover both
+synchronous and detached parent Runs, fenced cancellation, policy revocation,
+replay conflicts and transaction rollback with a verified RCC Robot registry.
