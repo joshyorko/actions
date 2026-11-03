@@ -272,6 +272,7 @@ class InternalChildRunLifecycle:
             RunStatus.FAILED: ChildRunState.FAILED,
             RunStatus.CANCELLED: ChildRunState.CANCELLED,
         }
+        state: ChildRunState | None
         if run.status == RunStatus.RUNNING:
             state = (
                 ChildRunState.CANCEL_PENDING
