@@ -12,6 +12,14 @@ an installed worker-backed queue flow. Model publication must identify exact
 QueueRefs per operation; queue listing intersects that scope with READ authority
 and returns a cursor for the visible set, not the backend cursor. Host wiring
 must still prove that publication revocation cannot race a mutating admission.
+The immutable `DeploymentSpecification.model_published_work_item_queues`
+selection stores exact queue IDs with a closed operation set, scoped by the
+owning Deployment and Workspace. It is independent of
+`model_published_capabilities` and the per-capability Work Item input/output
+policy; an empty selection is omitted from canonical serialization to preserve
+legacy revision bytes. A host must resolve selected IDs to exact current queue
+references and recheck live domain grants. The selection itself grants no queue
+permission, and its schema does not establish installed host wiring.
 
 The candidate internal child-Run client is a contract only until Runtime
 installs its scoped transport. It exposes bounded submit, status and cancellation

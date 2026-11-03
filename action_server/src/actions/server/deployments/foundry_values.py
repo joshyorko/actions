@@ -104,6 +104,37 @@ class WorkItemDeclaration(_FrozenValue):
 
 
 QueueName = Annotated[str, Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$")]
+ModelPublishedWorkItemOperation = Literal[
+    "queues.list",
+    "items.list",
+    "items.get",
+    "runs.get",
+    "runs.logs",
+    "artifacts.read",
+    "items.enqueue",
+    "items.cancel",
+]
+MAX_MODEL_PUBLISHED_WORK_ITEM_QUEUES = 100
+MAX_MODEL_PUBLISHED_WORK_ITEM_OPERATIONS = 8
+
+
+class ModelPublishedWorkItemQueue(_FrozenValue):
+    """One exact logical queue and its closed model-facing operation set.
+
+    The containing Deployment specification supplies Workspace and Deployment
+    scope. Queue identity alone never grants a managed Work Item permission.
+    """
+
+    queue_id: QueueName
+    operations: tuple[ModelPublishedWorkItemOperation, ...] = Field(
+        min_length=1, max_length=MAX_MODEL_PUBLISHED_WORK_ITEM_OPERATIONS
+    )
+
+    @model_validator(mode="after")
+    def operations_are_unique(self):
+        if len(set(self.operations)) != len(self.operations):
+            raise ValueError("model-published queue operations must be unique")
+        return self
 
 
 class CapabilityWorkItemPolicy(_FrozenValue):
@@ -260,6 +291,11 @@ class DeploymentSpecification(_FrozenValue):
     # Empty means no capability is published to model callers. Canvas visibility
     # and identifiers do not implicitly populate this selection.
     model_published_capabilities: tuple[CapabilityRef, ...] = ()
+    # This queue catalog is independent of capability publication: reviewed
+    # queues need not belong to a model-published capability.
+    model_published_work_item_queues: tuple[ModelPublishedWorkItemQueue, ...] = Field(
+        default=(), max_length=MAX_MODEL_PUBLISHED_WORK_ITEM_QUEUES
+    )
 
     @model_serializer(mode="wrap")
     def preserve_legacy_serialization(self, handler):
@@ -270,6 +306,9 @@ class DeploymentSpecification(_FrozenValue):
             # Preserve the canonical wire bytes and immutable revision hashes
             # of selections created before explicit model publication existed.
             value.pop("model_published_capabilities", None)
+        if not self.model_published_work_item_queues:
+            # Keep pre-selection Deployment revision bytes unchanged.
+            value.pop("model_published_work_item_queues", None)
         return value
 
     @field_validator("canvas_spec", mode="before")
@@ -312,6 +351,7 @@ class DeploymentSpecification(_FrozenValue):
                 or self.canvas_bindings
                 or self.work_item_policies
                 or self.model_published_capabilities
+                or self.model_published_work_item_queues
                 or any(ref is not None for ref in profiles)
             ):
                 raise ValueError(
@@ -344,6 +384,12 @@ class DeploymentSpecification(_FrozenValue):
             require_workspace_scope(capability, workspace_id)
             if capability not in capabilities:
                 raise ValueError("model-published capability is not deployed")
+        published_queue_ids = [
+            publication.queue_id
+            for publication in self.model_published_work_item_queues
+        ]
+        if len(published_queue_ids) != len(set(published_queue_ids)):
+            raise ValueError("model-published Work Item queue IDs must be unique")
         for canvas_binding in self.canvas_bindings:
             if canvas_binding.capability not in capabilities:
                 raise ValueError(

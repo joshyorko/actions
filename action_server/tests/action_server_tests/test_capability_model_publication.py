@@ -112,8 +112,8 @@ def _stable_spec(refs):
 
 def test_absent_publication_preserves_legacy_wire_and_canonical_bytes():
     selection = _stable_spec(_stable_refs())
-    # Recreate the pre-publication serializer's field set independently of the
-    # DeploymentSpecification serializer under test.
+    # Recreate the legacy-compatible field set independently of the serializer,
+    # including optional publication fields that must disappear when empty.
     legacy_fields = (
         "package_revisions",
         "capability_plans",
@@ -125,6 +125,7 @@ def test_absent_publication_preserves_legacy_wire_and_canonical_bytes():
         "canvas_application",
         "canvas_bindings",
         "work_item_policies",
+        "model_published_work_item_queues",
     )
     legacy_wire = TypeAdapter(dict[str, Any]).dump_python(
         {name: getattr(selection, name) for name in legacy_fields},
@@ -133,12 +134,167 @@ def test_absent_publication_preserves_legacy_wire_and_canonical_bytes():
     )
     if not legacy_wire["work_item_policies"]:
         legacy_wire.pop("work_item_policies")
+    if not legacy_wire["model_published_work_item_queues"]:
+        legacy_wire.pop("model_published_work_item_queues")
     expected_legacy_canonical = _canonical_object(legacy_wire)
     assert "model_published_capabilities" not in legacy_wire
+    assert "model_published_work_item_queues" not in selection.model_dump(
+        mode="json", by_alias=True
+    )
 
     parsed = DeploymentSpecification.model_validate_json(json.dumps(legacy_wire))
     assert parsed.model_published_capabilities == ()
     assert canonical_specification(parsed) == expected_legacy_canonical
+
+
+def test_model_queue_publication_is_exact_closed_and_round_trips():
+    refs = _stable_refs()
+    values = _stable_spec(refs).model_dump(mode="json", by_alias=True)
+    values["model_published_work_item_queues"] = [
+        {
+            "queue_id": "review:opaque-id",
+            "operations": ["queues.list", "items.list", "items.get"],
+        },
+        {
+            "queue_id": "generic.input",
+            "operations": ["queues.list", "items.list", "items.enqueue"],
+        },
+    ]
+
+    selected = DeploymentSpecification.model_validate_json(json.dumps(values))
+
+    assert len(selected.model_published_work_item_queues) == 2
+    assert selected.model_published_capabilities == ()
+    assert selected.work_item_policies == ()
+    assert selected.model_published_work_item_queues[0].queue_id == "review:opaque-id"
+    assert selected.model_published_work_item_queues[0].operations == (
+        "queues.list",
+        "items.list",
+        "items.get",
+    )
+    reparsed = DeploymentSpecification.model_validate_json(
+        canonical_specification(selected)
+    )
+    assert {
+        (queue.queue_id, frozenset(queue.operations))
+        for queue in reparsed.model_published_work_item_queues
+    } == {
+        (queue.queue_id, frozenset(queue.operations))
+        for queue in selected.model_published_work_item_queues
+    }
+    assert canonical_specification(reparsed) == canonical_specification(selected)
+    assert canonical_specification(selected) != canonical_specification(
+        _stable_spec(refs)
+    )
+
+    common = (refs.workspace, refs.deployment_id, None)
+    assert request_digest(*common, selected, "create", None) != request_digest(
+        *common, _stable_spec(refs), "create", None
+    )
+
+
+def test_model_queue_publication_rejects_duplicate_or_unbounded_selection():
+    refs = _stable_refs()
+    base = _stable_spec(refs).model_dump(mode="json", by_alias=True)
+    entry = {"queue_id": "queue.one", "operations": ["queues.list"]}
+
+    with pytest.raises(ValueError, match="unique"):
+        DeploymentSpecification.model_validate_json(
+            json.dumps(
+                {
+                    **base,
+                    "model_published_work_item_queues": [entry, entry],
+                }
+            )
+        )
+
+    with pytest.raises(ValueError, match="unique"):
+        DeploymentSpecification.model_validate_json(
+            json.dumps(
+                {
+                    **base,
+                    "model_published_work_item_queues": [
+                        {
+                            "queue_id": "queue.one",
+                            "operations": ["queues.list", "queues.list"],
+                        }
+                    ],
+                }
+            )
+        )
+
+    with pytest.raises(ValueError):
+        DeploymentSpecification.model_validate_json(
+            json.dumps(
+                {
+                    **base,
+                    "model_published_work_item_queues": [
+                        {"queue_id": "*", "operations": ["queues.list"]}
+                    ],
+                }
+            )
+        )
+
+    with pytest.raises(ValueError):
+        DeploymentSpecification.model_validate_json(
+            json.dumps(
+                {
+                    **base,
+                    "model_published_work_item_queues": [
+                        {"queue_id": "queue.one", "operations": ["items.claim"]}
+                    ],
+                }
+            )
+        )
+
+    with pytest.raises(ValueError):
+        DeploymentSpecification.model_validate_json(
+            json.dumps(
+                {
+                    **base,
+                    "model_published_work_item_queues": [
+                        {
+                            "queue_id": f"queue.{index}",
+                            "operations": ["queues.list"],
+                        }
+                        for index in range(101)
+                    ],
+                }
+            )
+        )
+
+
+def test_model_queue_publication_canonicalizes_entry_and_operation_order():
+    refs = _stable_refs()
+    base = _stable_spec(refs).model_dump(mode="json", by_alias=True)
+    first = {
+        "queue_id": "queue.one",
+        "operations": ["items.list", "queues.list"],
+    }
+    second = {
+        "queue_id": "queue.two",
+        "operations": ["items.get", "queues.list"],
+    }
+    left = DeploymentSpecification.model_validate_json(
+        json.dumps(
+            {
+                **base,
+                "model_published_work_item_queues": [first, second],
+            }
+        )
+    )
+    right = DeploymentSpecification.model_validate_json(
+        json.dumps(
+            {
+                **base,
+                "model_published_work_item_queues": [
+                    {**second, "operations": list(reversed(second["operations"]))},
+                    {**first, "operations": list(reversed(first["operations"]))},
+                ],
+            }
+        )
+    )
+    assert canonical_specification(left) == canonical_specification(right)
 
 
 def test_explicit_publication_is_scoped_unique_and_changes_request_identity():

@@ -115,6 +115,12 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
                 capability["capability_id"],
             )
         )
+    if "model_published_work_item_queues" in value:
+        for queue in value["model_published_work_item_queues"]:
+            queue["operations"].sort()
+        value["model_published_work_item_queues"].sort(
+            key=lambda queue: queue["queue_id"]
+        )
     return _canonical_object(value)
 
 
