@@ -52,7 +52,7 @@ class InternalChildIPCServer:
     ) -> None:
         if (
             type(sock) is not socket.socket
-            or sock.family != socket.AF_UNIX
+            or sock.family != getattr(socket, "AF_UNIX", None)
             or sock.type & 0xF != socket.SOCK_STREAM
             or sock.fileno() < 0
         ):
@@ -312,9 +312,10 @@ class InternalChildIPCServerHost:
             or not 0.01 <= timeout_seconds <= MAX_TIMEOUT_SECONDS
         ):
             raise ValueError("bounded IPC timeout required")
-        host_socket, action_socket = socket.socketpair(
-            socket.AF_UNIX, socket.SOCK_STREAM
-        )
+        family = getattr(socket, "AF_UNIX", None)
+        if family is None:
+            raise TypeError("local stream sockets are unavailable")
+        host_socket, action_socket = socket.socketpair(family, socket.SOCK_STREAM)
         try:
             server = InternalChildIPCServer(
                 host_socket,

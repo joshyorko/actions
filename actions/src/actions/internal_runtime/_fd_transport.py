@@ -119,7 +119,7 @@ class InternalChildFDTransport:
     def __init__(self, sock: socket.socket, *, timeout_seconds: float = 10.0):
         if (
             type(sock) is not socket.socket  # noqa: E721 - no socket lookalikes
-            or sock.family != socket.AF_UNIX
+            or sock.family != getattr(socket, "AF_UNIX", None)
             or sock.type & 0xF != socket.SOCK_STREAM
             or sock.fileno() < 0
         ):
