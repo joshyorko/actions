@@ -61,6 +61,8 @@ def confirm_standalone_robot_cancellation(service, caller, ticket, outcome) -> R
             or service.ticket(caller, run) != ticket
         ):
             raise FenceRejected("original cancelled standalone Attempt required")
+        if not isinstance(run.result, str):
+            raise FenceRejected("retained Robot launch required")
         record = json.loads(run.result)
         if record.get("launch") != _launch(outcome.launch):
             raise FenceRejected("stopped Robot launch differs")
