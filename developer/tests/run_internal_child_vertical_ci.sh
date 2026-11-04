@@ -265,6 +265,7 @@ status, stdout, stderr = module._run_reaped(
      "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_child_live_cancellation_probe[sqlite]",
      "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_failed_robot_is_not_automatically_retried_after_host_restart[sqlite]",
      "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_crashed_robot_launch_requires_explicit_reconciliation[sqlite]",
+     "tests/action_server_tests/test_managed_work_items_real_robot_vertical.py::test_model_enqueue_claim_rcc_and_authorized_outputs[sqlite]",
      f"--junitxml={junit_path}"],
     env=test_env,
     timeout=900,
@@ -287,11 +288,12 @@ expected = {
     'test_real_child_live_cancellation_probe[sqlite]',
     'test_real_failed_robot_is_not_automatically_retried_after_host_restart[sqlite]',
     'test_real_crashed_robot_launch_requires_explicit_reconciliation[sqlite]',
+    'test_model_enqueue_claim_rcc_and_authorized_outputs[sqlite]',
 }
 if {case.get('name') for case in cases} != expected or len(cases) != len(expected) or any(
     case.find(tag) is not None for case in cases for tag in ('skipped', 'failure', 'error')
 ):
-    raise SystemExit('all four SQLite vertical cases must execute and pass')
+    raise SystemExit('all five SQLite vertical cases must execute and pass')
 PY
 printf 'VERTICAL_EVIDENCE_DIR=%s\nVERTICAL_JUNIT=%s\n' "$task_root" "$task_root/junit.xml"
 phase=complete
