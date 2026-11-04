@@ -9,8 +9,9 @@ above the existing 10 GiB floor plus 48 MiB guard.
 
 The command used a new temporary HOME/ACTIONS_HOME/TMPDIR and the previously
 used `/workspace/actions-cloud/robocorp` gateway. RCC materialized a new
-`holotree/6fadf84_5a1fac3_9fcd2534` environment (about 914 MiB); it has not
-been deleted. This probe does not establish production `env exec` descriptor
+`holotree/6fadf84_5a1fac3_9fcd2534` environment (about 914 MiB); it had not
+been deleted at the time of this probe. The later approved removal is recorded
+in `ci-recovery-20261103.md`. This probe does not establish production `env exec` descriptor
 forwarding, same-user process isolation, Windows behavior, SDK transport
 installation, or a working Action-to-Robot child Run.
 
