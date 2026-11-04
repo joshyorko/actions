@@ -760,6 +760,39 @@ def test_real_mcp_action_submits_detached_rcc_robot(
                         RunStatus.FAILED,
                     ):
                         break
+            if parent.status == RunStatus.FAILED:
+                # The test owns this deployment and its inputs. Preserve the
+                # bounded RCC failure log before ending a definitively failed run.
+                grant_authority(
+                    c.db,
+                    actor,
+                    workspace,
+                    "application",
+                    str(parent_deployment.ref.deployment_id.root),
+                    ["read_application"],
+                )
+                rows = c.db.all(
+                    RunOutput,
+                    where="run_id=? AND state='final' AND name='rcc-stderr.log'",
+                    values=[parent_id],
+                )
+                stderr = b""
+                if len(rows) == 1:
+                    ref = OutputRef(
+                        workspace_id=str(workspace.root),
+                        run_id=parent_id,
+                        output_id=rows[0].id,
+                    )
+                    with c.outputs.resolve(
+                        actor, str(workspace.root), ref.handle
+                    ) as out:
+                        stderr = out.read()[-16384:]
+                pytest.fail(
+                    f"parent Run failed before completion; lineage_count={len(lineage)}, "
+                    f"host_failed={host.failed}, stderr_rows={len(rows)}, "
+                    f"error={parent.error_message!r}, "
+                    f"rcc_stderr={stderr.decode('utf-8', errors='replace')!r}"
+                )
             time.sleep(0.1)
         else:
             pytest.fail(
