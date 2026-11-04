@@ -7196,8 +7196,9 @@ with the separately prepared RCC homes, exact host wheel hashes, and its retaine
 disk floor. The live cancellation probe waits for a marker written by the Robot
 before requesting cancellation. A source-only synthetic adapter test verifies
 authority and tamper rejection but does not establish real process cleanup.
-The hosted SQLite gate requires both the happy path and the live cancellation
-case in its JUnit inventory; a skipped or absent case fails the gate.
+The hosted SQLite gate requires the happy path, live cancellation, failed-Robot
+restart, and abrupt Robot-process loss cases in its JUnit inventory; a skipped
+or absent case fails the gate.
 The real happy-path fixture also stops its own Task host, starts a fresh host,
 and submits the same completed MCP Task again. It checks the original Task and
 child lineage are reused and no second Robot execution directory appears. This
@@ -7208,3 +7209,13 @@ The live cancellation case separately restarts its test-owned host and checks
 after 0.5 seconds that the cancelled Run retains one Attempt and no second Robot
 execution directory. This is a bounded no-automatic-retry observation, not
 failed-run recovery or a guarantee about all later behavior.
+The failed-Robot case verifies the retained Robot FAIL result, then observes
+for 0.5 seconds after a fresh test-host restart that the failed Run still has
+one Attempt and one Robot execution directory. It does not authorize retry or
+prove recovery from a process crash.
+The abrupt-loss fixture identifies the running Robot using its task-owned
+marker, exact source argument and process ancestry before killing that process.
+After its actual Attempt lease expires, it verifies that an operator recovery
+receipt cannot discard the retained launch or authorize a replacement Attempt.
+This establishes a fail-closed reconciliation boundary, not successful crash
+recovery or a host-process crash.

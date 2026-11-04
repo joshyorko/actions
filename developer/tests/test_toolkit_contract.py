@@ -208,6 +208,14 @@ def test_installed_child_job_uses_step_scoped_runner_context() -> None:
     ).read_text()
     assert "test_real_mcp_action_submits_detached_rcc_robot[sqlite]" in script
     assert "test_real_child_live_cancellation_probe[sqlite]" in script
+    assert (
+        "test_real_failed_robot_is_not_automatically_retried_after_host_restart[sqlite]"
+        in script
+    )
+    assert (
+        "test_real_crashed_robot_launch_requires_explicit_reconciliation[sqlite]"
+        in script
+    )
     assert "{case.get('name') for case in cases} != expected" in script
 
 

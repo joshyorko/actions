@@ -450,6 +450,8 @@ def _real_vertical(
     tmp_path,
     *,
     cancel_child=False,
+    fail_child=False,
+    crash_child=False,
 ):
     (
         action_receipt_path,
@@ -541,6 +543,18 @@ def _real_vertical(
             "*** Tasks ***\nOwned\n"
             "    Create File    %{TMPDIR}/child-started    ready\n"
             "    Sleep    45 seconds\n"
+        )
+    elif fail_child:
+        robot_data["files"][0][
+            "content"
+        ] = "*** Tasks ***\nOwned\n    Fail    actions341-owned-failure\n"
+    elif crash_child:
+        robot_data["files"][0]["content"] = (
+            "*** Settings ***\nLibrary    OperatingSystem\n"
+            "*** Tasks ***\nOwned\n"
+            "    ${pid}=    Evaluate    os.getpid()    modules=os\n"
+            "    Create File    %{TMPDIR}/child-pid    ${pid}\n"
+            "    Sleep    90 seconds\n"
         )
     robot_request = RobotPackageRequest.model_validate_json(json.dumps(robot_data))
     robot_evidence = registry.prepare_trusted_robot(
@@ -770,6 +784,56 @@ def _real_vertical(
                         RunStatus.FAILED,
                     ):
                         break
+            if crash_child and lineage:
+                marker = list((execution_root / "robot").glob("*/tmp/child-pid"))
+                if marker:
+                    import psutil
+
+                    from actions.server.managed_work_items.contracts import (
+                        ManagedCaller,
+                    )
+                    from actions.server.run_outputs.models import RunAttempt, RunPin
+                    from actions.server.run_outputs.service import FenceRejected, _now
+
+                    assert len(marker) == 1 and child.status == RunStatus.RUNNING
+                    pid = int(marker[0].read_text(encoding="utf-8"))
+                    process = psutil.Process(pid)
+                    assert pid != os.getpid()
+                    assert str(marker[0].parent.parent / "source") in process.cmdline()
+                    assert os.getpid() in {parent.pid for parent in process.parents()}
+                    process.kill()
+                    crash_deadline = time.monotonic() + 30
+                    while not host.failed and time.monotonic() < crash_deadline:
+                        time.sleep(0.1)
+                    assert host.failed
+                    assert host.close(30), "crashed Robot cleanup unconfirmed"
+                    with c.db.connect():
+                        child = _one(c.db, Run, child_id)
+                        pin = _one(c.db, RunPin, child_id)
+                        attempt = _one(c.db, RunAttempt, pin.current_attempt_id)
+                        assert child.status == RunStatus.RUNNING
+                        assert isinstance(child.result, str)
+                        assert json.loads(child.result)["launch"] is not None
+                        original_result, original_epoch = child.result, pin.epoch
+                    expiry_deadline = time.monotonic() + 100
+                    while time.monotonic() < expiry_deadline:
+                        with c.db.connect():
+                            if int(attempt.lease_deadline_ms) <= _now(c.db):
+                                break
+                        time.sleep(0.1)
+                    else:
+                        pytest.fail("crashed Robot Attempt did not expire")
+                    control.authorize_recovery(
+                        child_id, original_epoch, receipt="owned-crash-recovery-probe"
+                    )
+                    caller = ManagedCaller(actor=actor, worker_id=str(uuid4()))
+                    with pytest.raises(FenceRejected, match="reconciliation"):
+                        authority.claim(caller, child_id, snapshot.worker)
+                    with c.db.connect():
+                        assert _one(c.db, Run, child_id).result == original_result
+                        assert _one(c.db, RunPin, child_id).epoch == original_epoch
+                    assert len(list((execution_root / "robot").iterdir())) == 1
+                    return
             if cancel_child and lineage:
                 marker = list((execution_root / "robot").glob("*/tmp/child-started"))
                 if marker:
@@ -892,9 +956,47 @@ def _real_vertical(
         assert len(lineage) == 1
         assert lineage[0].binding_name == "scan"
         assert parent.status == RunStatus.PASSED
-        assert child.status == RunStatus.PASSED
         assert parent_id != child_id
         assert not c.db.all(RunTaskReceipt, where="run_id=?", values=[child_id])
+        if fail_child:
+            from actions.server.run_outputs.models import RunAttempt
+
+            assert child.status == RunStatus.FAILED
+            assert isinstance(child.result, str)
+            failure = json.loads(child.result)["result"]
+            assert failure["status"] == "FAIL" and failure["returnCode"] == 1
+            assert failure["actionResult"] == {
+                "suite": "Task",
+                "task": "Owned",
+                "status": "FAIL",
+            }
+            assert host.close(30)
+            restarted = DetachedTaskHost(
+                authority,
+                actor=actor,
+                worker_id=str(uuid4()),
+                profile=snapshot.worker,
+                prepared=action_prepared,
+                rcc=rcc,
+                execution_root=execution_root,
+                policy=host.policy,
+                capability_runner=capability_runner,
+            )
+            try:
+                restarted.start()
+                time.sleep(0.5)
+                assert not restarted.failed
+                with c.db.connect():
+                    assert _one(c.db, Run, child_id).status == RunStatus.FAILED
+                    assert (
+                        len(c.db.all(RunAttempt, where="run_id=?", values=[child_id]))
+                        == 1
+                    )
+                    assert len(list((execution_root / "robot").iterdir())) == 1
+            finally:
+                assert restarted.close(30), "restarted Task host failed to settle"
+            return
+        assert child.status == RunStatus.PASSED
         output_rows = c.db.all(
             RunOutput,
             where="run_id=? AND state='final'",
@@ -1004,4 +1106,28 @@ def test_real_child_live_cancellation_probe(
         foundry_package_store,
         tmp_path,
         cancel_child=True,
+    )
+
+
+def test_real_failed_robot_is_not_automatically_retried_after_host_restart(
+    real_vertical_inputs, admitted, foundry_package_store, tmp_path
+):
+    _real_vertical(
+        real_vertical_inputs,
+        admitted,
+        foundry_package_store,
+        tmp_path,
+        fail_child=True,
+    )
+
+
+def test_real_crashed_robot_launch_requires_explicit_reconciliation(
+    real_vertical_inputs, admitted, foundry_package_store, tmp_path
+):
+    _real_vertical(
+        real_vertical_inputs,
+        admitted,
+        foundry_package_store,
+        tmp_path,
+        crash_child=True,
     )
