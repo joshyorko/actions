@@ -5255,6 +5255,11 @@ child lifecycle control verifies denial before that grant and for a different
 principal afterward; granting a test observer does not establish access for
 other actors.
 
+When the installed Action-to-Robot vertical times out, inspect the parent and
+child Run statuses, lineage count, and Task host failure state before attributing
+the delay to RCC or extending the deadline. A terminal-state timeout alone does
+not identify which of those boundaries stalled.
+
 Runtime action import probes must parse the complete PEP 440 Core version and
 compare its numeric release tuple; splitting dotted components with `int`
 rejects provisional Core versions before action discovery. The existing

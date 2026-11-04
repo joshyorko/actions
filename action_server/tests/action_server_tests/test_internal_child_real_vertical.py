@@ -762,7 +762,12 @@ def test_real_mcp_action_submits_detached_rcc_robot(
                         break
             time.sleep(0.1)
         else:
-            pytest.fail("bounded parent/Robot child execution observation timed out")
+            pytest.fail(
+                "bounded parent/Robot child execution observation timed out: "
+                f"parent_status={parent.status}, lineage_count={len(lineage)}, "
+                f"child_status={child.status if lineage else None}, "
+                f"host_failed={host.failed}"
+            )
         assert len(lineage) == 1
         assert lineage[0].binding_name == "scan"
         assert parent.status == RunStatus.PASSED
