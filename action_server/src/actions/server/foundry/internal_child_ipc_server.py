@@ -136,8 +136,15 @@ class InternalChildIPCServer:
         return bytes(chunks)
 
     def _read_request(self) -> Any:
+        # The invocation owns this connection until process exit. RCC startup
+        # and Action work between requests can exceed a frame's read budget.
+        # Host.stop() shuts down the socket to interrupt this idle wait.
+        self._socket.settimeout(None)
+        first = self._socket.recv(1)
+        if not first:
+            raise EOFError("IPC peer closed")
         deadline = time.monotonic() + self._timeout
-        length = struct.unpack("!I", self._read_exact(4, deadline))[0]
+        length = struct.unpack("!I", first + self._read_exact(3, deadline))[0]
         if not 0 < length <= MAX_FRAME_BYTES:
             raise ValueError("invalid IPC frame length")
         raw = self._read_exact(length, deadline)

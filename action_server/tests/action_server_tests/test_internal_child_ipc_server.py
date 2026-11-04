@@ -7,6 +7,7 @@ import json
 import socket
 import struct
 import sys
+import time
 from threading import Event, Thread
 
 import pytest
@@ -211,6 +212,41 @@ def test_host_wrapper_peer_close_settles_and_stop_joins(admitted):
     assert host.wait(timeout_seconds=2)
     assert host.settled
     assert host.stop(timeout_seconds=2)
+
+
+def test_host_survives_idle_startup_and_between_requests(admitted):
+    host = InternalChildIPCServerHost(
+        admitted.fence,
+        admitted.admission,
+        InternalChildRunLifecycle(admitted.detached),
+        timeout_seconds=0.1,
+    )
+    transport = InternalChildFDTransport(
+        host.start(timeout_seconds=2), timeout_seconds=2
+    )
+    try:
+        time.sleep(0.25)
+        transport.handshake()
+        time.sleep(0.25)
+        transport.handshake()
+    finally:
+        transport.close()
+        assert host.stop(timeout_seconds=2)
+
+
+def test_host_rejects_partial_frame_after_deadline(admitted):
+    host = InternalChildIPCServerHost(
+        admitted.fence,
+        admitted.admission,
+        InternalChildRunLifecycle(admitted.detached),
+        timeout_seconds=0.1,
+    )
+    sock = host.start(timeout_seconds=2)
+    try:
+        sock.sendall(b"\x00")
+        assert host.wait(timeout_seconds=2)
+    finally:
+        assert host.stop(timeout_seconds=2)
 
 
 def test_host_wrapper_stop_closes_action_socket_and_joins(admitted):

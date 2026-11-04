@@ -5260,6 +5260,12 @@ child Run statuses, lineage count, and Task host failure state before attributin
 the delay to RCC or extending the deadline. A terminal-state timeout alone does
 not identify which of those boundaries stalled.
 
+The invocation-owned child IPC server waits for the first byte without an idle
+deadline; RCC startup and Action work can legitimately exceed the frame timeout.
+Once a frame starts, its full header and payload remain subject to the bounded
+read deadline. Closing the invocation host interrupts an idle wait and joins the
+server; test both delayed handshakes and partial-frame expiry when changing it.
+
 Runtime action import probes must parse the complete PEP 440 Core version and
 compare its numeric release tuple; splitting dotted components with `int`
 rejects provisional Core versions before action discovery. The existing
