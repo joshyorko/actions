@@ -2206,6 +2206,14 @@ When refreshing a preserved ADR from a newer branch, identify the exact source r
 
 ## Clean-break package boundaries
 
+The retired-product-path contract ignores only Python bytecode inside
+`__pycache__`, which an old checkout can retain after tracked fixtures disappear.
+It still rejects source files, including files inside a cache directory,
+manifests and symlinks, including broken links. Retained caches must not require
+deletion of local data.
+`test_removed_product_paths_preserve_cache_but_reject_source` preserves such a
+cache while proving that a source file under the retired path still fails.
+
 The source package identities are `actions-core` (`actions` and `actions.mcp`),
 `actions-runtime` (`actions.server`), `actions-http-helper` (`actions_http`),
 and `actions-work-items` (`actions.work_items`). Core owns the sole
@@ -6412,6 +6420,16 @@ I/O trapped after binding, rather than checking only the inner guard.
 
 
 ### Reviewed parallel acceptance boundaries
+
+Generated Knowledge authority-change fixtures allow ten seconds for provider
+preparation within their separate twenty-second total deadline. These tests
+must reach the prepared state before changing cancellation, grants or fences;
+`test_generated_ingestion_cancellation_after_slow_preparation` exercises that
+boundary after a controlled delay. This is fixture scheduling headroom, not a
+production timeout change. Explicit expired-budget tests still check deadline
+rejection. A caught `LogicalReadRejected` exception's context can distinguish a
+sealed-read deadline failure from authorization failure without changing the
+public redacted error.
 
 Wide Canvas table checks must verify readable column layout as well as viewport
 containment: a table can avoid page overflow while wrapping every word one
