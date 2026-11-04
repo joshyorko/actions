@@ -3914,6 +3914,13 @@ the adapter rejected the acquisition; the manifest was restored afterward.
 
 ## Pull Request Triage
 
+For a cancelled hosted job whose log endpoint returns 404, the cancellation
+cause remains unknown without other direct evidence. Compare the job's actual
+workflow timeouts before attributing the result to a timeout. For PR artifacts,
+resolve the receipt's source commit and tree against the synthetic merge's
+parents; the tested merge tree can differ from the PR head. A receipt containing
+wheel hashes and JUnit results is not a downloadable candidate wheel payload.
+
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
 
 For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
@@ -7181,6 +7188,13 @@ clean by a local Docker double and must be reported from actual CI evidence.
 
 ### Standalone Robot cancellation evidence
 
+After Doctor → Bootstrap → ToolkitTest, the installed vertical may reuse the
+RCC binary installed by Bootstrap. `run_internal_child_vertical_ci.sh` accepts
+an existing regular executable only when its SHA-256 matches the pinned asset;
+it does not overwrite that file. Symlinks, directories, non-executable files and
+different bytes fail admission. The executable shell regression is
+`developer/tests/test_internal_child_vertical_ci.py`.
+
 An active standalone Robot cancellation is only terminal after the original
 worker confirms the exact retained launch stopped and its descendants were
 reaped. The confirmation checks the retained Run and Attempt, pinned selection,
@@ -7219,3 +7233,7 @@ After its actual Attempt lease expires, it verifies that an operator recovery
 receipt cannot discard the retained launch or authorize a replacement Attempt.
 This establishes a fail-closed reconciliation boundary, not successful crash
 recovery or a host-process crash.
+`DetachedActions.claim` currently provides recovery only before launch. It has
+no successful reconciliation transition for a retained launch; a recovery
+receipt alone cannot clear that record. Keep this missing capability separate
+from the demonstrated rejection of a replacement Attempt.

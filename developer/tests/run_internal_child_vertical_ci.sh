@@ -44,11 +44,15 @@ chmod 700 "$rcc"
 test "$("$rcc" --version)" = "v18.19.3"
 runtime_rcc="$repo_root/action_server/src/actions/server/bin/rcc-18.19.3"
 if [[ -e "$runtime_rcc" || -L "$runtime_rcc" ]]; then
-  echo "refusing to replace existing Action Server RCC path" >&2
-  exit 1
+  if [[ -L "$runtime_rcc" || ! -f "$runtime_rcc" || ! -x "$runtime_rcc" ]] ||
+    ! printf '%s  %s\n' "$rcc_sha256" "$runtime_rcc" | sha256sum --check --status -; then
+    echo "existing Action Server RCC must be a regular executable with the pinned hash" >&2
+    exit 1
+  fi
+else
+  mkdir -p "$(dirname "$runtime_rcc")"
+  install -m 700 "$rcc" "$runtime_rcc"
 fi
-mkdir -p "$(dirname "$runtime_rcc")"
-install -m 700 "$rcc" "$runtime_rcc"
 printf '%s  %s\n' "$rcc_sha256" "$runtime_rcc" | sha256sum --check --status -
 
 cd "$repo_root/action_server"
