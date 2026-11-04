@@ -810,6 +810,43 @@ def _real_vertical(
                             authority
                         )._project_status(c.db, ChildRunHandle(id=child_id), child, pin)
                     assert projected.state == ChildRunState.CANCELLED
+                    # A fresh test-owned host must not automatically retry a
+                    # confirmed cancelled Robot.
+                    from actions.server.run_outputs.models import RunAttempt
+
+                    assert host.close(30)
+                    restarted = DetachedTaskHost(
+                        authority,
+                        actor=actor,
+                        worker_id=str(uuid4()),
+                        profile=snapshot.worker,
+                        prepared=action_prepared,
+                        rcc=rcc,
+                        execution_root=execution_root,
+                        policy=host.policy,
+                        capability_runner=capability_runner,
+                    )
+                    try:
+                        restarted.start()
+                        time.sleep(0.5)
+                        assert not restarted.failed
+                        with c.db.connect():
+                            assert (
+                                _one(c.db, Run, child_id).status == RunStatus.CANCELLED
+                            )
+                            assert (
+                                len(
+                                    c.db.all(
+                                        RunAttempt, where="run_id=?", values=[child_id]
+                                    )
+                                )
+                                == 1
+                            )
+                            assert len(list((execution_root / "robot").iterdir())) == 1
+                    finally:
+                        assert restarted.close(
+                            30
+                        ), "restarted Task host failed to settle"
                     return
             if parent.status == RunStatus.FAILED:
                 # The test owns this deployment and its inputs. Preserve the

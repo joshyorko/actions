@@ -7204,3 +7204,7 @@ child lineage are reused and no second Robot execution directory appears. This
 is completed-request replay after a test-host restart, not recovery from a
 process crash or a retry of a failed or cancelled Robot. Each MCP app lifespan
 uses a fresh session manager; the manager cannot be started twice.
+The live cancellation case separately restarts its test-owned host and checks
+after 0.5 seconds that the cancelled Run retains one Attempt and no second Robot
+execution directory. This is a bounded no-automatic-retry observation, not
+failed-run recovery or a guarantee about all later behavior.
