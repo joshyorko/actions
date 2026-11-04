@@ -58,29 +58,40 @@ uvx --from poetry==2.1.1 --with poetry-plugin-export==1.9.0 poetry export \
 python3 - "$task_root/poetry-export.txt" "$task_root/locked-host-requirements.txt" "$repo_root" <<'PY'
 import sys
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 source = Path(sys.argv[1]).read_text(encoding="utf-8").splitlines()
 target = Path(sys.argv[2])
 repo = Path(sys.argv[3]).resolve()
-local_names = ("actions-core", "actions-http-helper", "actions-local-devutils", "actions-work-items")
-local_paths = tuple(str((repo / name).resolve()) for name in ("actions", "actions-http-helper", "devutils", "work-items"))
-local_relative = ("../actions", "../actions-http-helper", "../devutils", "../work-items")
+local_paths = {
+    (repo / "actions").resolve(): "actions-core",
+    (repo / "actions-http-helper").resolve(): "actions-http-helper",
+    (repo / "devutils").resolve(): "actions-local-devutils",
+    (repo / "work-items").resolve(): "actions-work-items",
+}
 result = []
+seen = set()
 for line in source:
     stripped = line.strip()
     if not stripped or stripped.startswith("#"):
         continue
     if stripped.startswith("-e ") or "file://" in stripped or stripped.startswith(("../", "./")):
-        if (
-            any(name in stripped.lower() for name in local_names)
-            or any(path in stripped for path in local_paths)
-            or any(path in stripped.replace("\\\\", "/") for path in local_relative)
-        ):
-            continue
-        raise SystemExit("unrecognized local dependency in Poetry export")
+        requirement = stripped.split(";", 1)[0].strip()
+        name, separator, uri = requirement.partition(" @ ")
+        if not separator:
+            name, uri = "", requirement.removeprefix("-e ").strip()
+        parsed = urlsplit(uri)
+        if parsed.scheme != "file" or parsed.netloc not in ("", "localhost"):
+            raise SystemExit("unrecognized local dependency in Poetry export")
+        path = Path(unquote(parsed.path)).resolve()
+        expected = local_paths.get(path)
+        if expected is None or (name and name.lower().replace("_", "-") != expected) or expected in seen:
+            raise SystemExit("unexpected or duplicate local dependency in Poetry export")
+        seen.add(expected)
+        continue
     result.append(line)
-if not result:
-    raise SystemExit("Poetry export yielded no locked registry requirements")
+if not result or seen != set(local_paths.values()):
+    raise SystemExit("Poetry export did not contain the expected locked dependencies")
 target.write_text("\n".join(result) + "\n", encoding="utf-8")
 PY
 uv pip install --python "$host_venv/bin/python" --no-deps --require-hashes \
