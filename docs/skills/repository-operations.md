@@ -2274,6 +2274,12 @@ success mechanics. Missing POSIX names in Windows typing do not establish runtim
 support and do not justify suppressing the matrix typecheck. Shell-stub
 contracts cover setup, bounded readiness failure, cleanup and workflow parity;
 they do not replace hosted execution or real provider qualification.
+The Runtime workflow also runs an injected readiness-failure drill on Linux:
+it executes the generated startup script against a real pinned container with
+only the readiness command forced to fail, then checks that the recorded exact
+container ID is absent. The drill isolates its GitHub environment file and does
+not replace the ordinary provider suite. Check the hosted step result separately
+from the successful-start and portable-test results.
 
 Express explicitly POSIX-only APIs through checked, precisely typed `getattr`
 helpers when Windows typeshed omits them. Require integer security flags and

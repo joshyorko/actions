@@ -415,6 +415,41 @@ jobs:
       with:
         name: action-server-${{ matrix.os }}
         path: action_server/dist/final/
+    - name: Verify owned PostgreSQL readiness failure cleanup
+      if: runner.os == 'Linux'
+      shell: bash
+      run: "set -euo pipefail\nfixture_dir=$(mktemp -d \"$RUNNER_TEMP/actions-postgres-failure.XXXXXXXX\"\
+        )\nmkdir \"$fixture_dir/bin\"\nexport ACTIONS_REAL_DOCKER=\"$(command -v docker)\"\
+        \ncat > \"$fixture_dir/bin/docker\" <<'DOCKER_WRAPPER'\n#!/usr/bin/env bash\n\
+        if [[ \"$1\" == exec ]]; then exit 1; fi\nexec \"$ACTIONS_REAL_DOCKER\" \"\
+        $@\"\nDOCKER_WRAPPER\ncat > \"$fixture_dir/bin/sleep\" <<'SLEEP_WRAPPER'\n\
+        #!/usr/bin/env bash\nexit 0\nSLEEP_WRAPPER\nchmod 700 \"$fixture_dir/bin/docker\"\
+        \ \"$fixture_dir/bin/sleep\"\nexport PATH=\"$fixture_dir/bin:$PATH\"\nexport\
+        \ GITHUB_RUN_ID=\"${GITHUB_RUN_ID}-readiness-failure\"\nexport GITHUB_ENV=\"\
+        $fixture_dir/github-env\"\n: > \"$GITHUB_ENV\"\ncat > \"$fixture_dir/start.sh\"\
+        \ <<'POSTGRES_START'\nset -euo pipefail\nimage=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81\n\
+        cid=\"\"\ncleanup_failed_start() {\n  status=$?\n  trap - EXIT\n  if [[ \"\
+        $status\" -ne 0 && \"$cid\" =~ ^[0-9a-f]{64}$ ]]; then\n    docker rm --force\
+        \ \"$cid\" >/dev/null\n    remaining=$(docker ps --all --no-trunc --quiet\
+        \ --filter \"id=$cid\")\n    [[ -z \"$remaining\" ]]\n  fi\n  exit \"$status\"\
+        \n}\ntrap cleanup_failed_start EXIT\ndocker pull \"$image\"\ncid=$(docker\
+        \ run --detach --pull=never --rm \\\n  --name \"actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
+        \ \\\n  --memory=3g --cpus=2 --pids-limit=256 \\\n  --tmpfs /var/lib/postgresql/data:size=2g\
+        \ \\\n  --publish 127.0.0.1::5432 \\\n  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only\
+        \ \"$image\")\n[[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\necho \"ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid\"\
+        \ >> \"$GITHUB_ENV\"\nready=false\nfor attempt in {1..60}; do\n  if docker\
+        \ exec \"$cid\" pg_isready -U postgres; then ready=true; break; fi\n  sleep\
+        \ 1\ndone\n[[ \"$ready\" == true ]]\nport=$(docker port \"$cid\" 5432/tcp)\n\
+        [[ \"$port\" =~ ^127\\.0\\.0\\.1:([0-9]+)$ ]]\nurl=\"postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres\"\
+        \necho \"::add-mask::$url\"\necho \"ACTIONS_INVOICE_TEST_POSTGRES=$url\" >>\
+        \ \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=$url\" >> \"$GITHUB_ENV\"\
+        \necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=1\" >> \"$GITHUB_ENV\"\ntrap -\
+        \ EXIT\nPOSTGRES_START\nif bash \"$fixture_dir/start.sh\"; then\n  echo \"\
+        Injected readiness failure unexpectedly succeeded\" >&2\n  exit 1\nfi\ncid=$(sed\
+        \ -n 's/^ACTIONS_RUNTIME_TEST_POSTGRES_CID=//p' \"$GITHUB_ENV\")\n[[ \"$cid\"\
+        \ =~ ^[0-9a-f]{64}$ ]]\nremaining=$(docker ps --all --no-trunc --quiet --filter\
+        \ \"id=$cid\")\n[[ -z \"$remaining\" ]]\necho \"Injected readiness failure\
+        \ removed its owned container\"\n"
     - name: Start owned PostgreSQL for portable Runtime tests
       if: runner.os == 'Linux'
       shell: bash

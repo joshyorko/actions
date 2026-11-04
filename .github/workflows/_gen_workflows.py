@@ -717,6 +717,47 @@ trap - EXIT
 """,
         }
 
+    def exercise_postgres_start_failure(self):
+        """Run the real startup trap with a deliberately failing readiness probe."""
+        script = self.start_owned_postgres()["run"]
+        return {
+            "name": "Verify owned PostgreSQL readiness failure cleanup",
+            "if": "runner.os == 'Linux'",
+            "shell": "bash",
+            "run": r"""set -euo pipefail
+fixture_dir=$(mktemp -d "$RUNNER_TEMP/actions-postgres-failure.XXXXXXXX")
+mkdir "$fixture_dir/bin"
+export ACTIONS_REAL_DOCKER="$(command -v docker)"
+cat > "$fixture_dir/bin/docker" <<'DOCKER_WRAPPER'
+#!/usr/bin/env bash
+if [[ "$1" == exec ]]; then exit 1; fi
+exec "$ACTIONS_REAL_DOCKER" "$@"
+DOCKER_WRAPPER
+cat > "$fixture_dir/bin/sleep" <<'SLEEP_WRAPPER'
+#!/usr/bin/env bash
+exit 0
+SLEEP_WRAPPER
+chmod 700 "$fixture_dir/bin/docker" "$fixture_dir/bin/sleep"
+export PATH="$fixture_dir/bin:$PATH"
+export GITHUB_RUN_ID="${GITHUB_RUN_ID}-readiness-failure"
+export GITHUB_ENV="$fixture_dir/github-env"
+: > "$GITHUB_ENV"
+cat > "$fixture_dir/start.sh" <<'POSTGRES_START'
+"""
+            + script
+            + r"""POSTGRES_START
+if bash "$fixture_dir/start.sh"; then
+  echo "Injected readiness failure unexpectedly succeeded" >&2
+  exit 1
+fi
+cid=$(sed -n 's/^ACTIONS_RUNTIME_TEST_POSTGRES_CID=//p' "$GITHUB_ENV")
+[[ "$cid" =~ ^[0-9a-f]{64}$ ]]
+remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+[[ -z "$remaining" ]]
+echo "Injected readiness failure removed its owned container"
+""",
+        }
+
     def stop_owned_postgres(self):
         return {
             "name": "Remove owned portable-test PostgreSQL",
@@ -1146,6 +1187,7 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
             self.upload_artifact(
                 name="action-server-${{ matrix.os }}", path="action_server/dist/final/"
             ),
+            self.exercise_postgres_start_failure(),
             self.start_owned_postgres(),
             {
                 "name": "Test (not integration)",

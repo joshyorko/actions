@@ -87,7 +87,11 @@ def run_shell(script, environment):
 
 def test_owned_postgres_shell_helpers_are_valid_bash():
     workflow = load_generator().ActionServerTests()
-    for step in (workflow.start_owned_postgres(), workflow.stop_owned_postgres()):
+    for step in (
+        workflow.start_owned_postgres(),
+        workflow.stop_owned_postgres(),
+        workflow.exercise_postgres_start_failure(),
+    ):
         check = subprocess.run(
             ["bash", "-n"],
             input=shell_step(step),
@@ -96,6 +100,21 @@ def test_owned_postgres_shell_helpers_are_valid_bash():
             text=True,
         )
         assert check.returncode == 0, check.stderr
+
+
+def test_hosted_postgres_failure_drill_uses_generated_start_and_exact_id():
+    workflow = load_generator().ActionServerTests()
+    step = workflow.exercise_postgres_start_failure()
+    script = shell_step(step)
+    assert workflow.start_owned_postgres()["run"] in script
+    assert '[[ "$cid" =~ ^[0-9a-f]{64}$ ]]' in script
+    assert 'filter "id=$cid"' in script
+    document = yaml.safe_load(
+        (GENERATOR.parent / "actions_runtime_tests.yml").read_text()
+    )
+    steps = document["jobs"]["build"]["steps"]
+    assert step in steps
+    assert steps.index(step) < steps.index(workflow.start_owned_postgres())
 
 
 def test_runtime_and_coverage_workflows_require_same_owned_provider_lifecycle():
