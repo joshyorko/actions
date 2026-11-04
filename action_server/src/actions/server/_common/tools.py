@@ -36,7 +36,7 @@ class BaseTool:
         i.e.:
 
         executable = RccTool.get_default_executable(
-            version="v18.19.3", download=True
+            version="v18.19.7", download=True
         )
 
         Then the `executable` will be a Path to the executable and will be

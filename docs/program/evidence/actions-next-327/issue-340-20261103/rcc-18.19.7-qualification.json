@@ -1,6 +1,6 @@
 {
   "schema": "actions.rcc-upgrade-qualification/v1",
-  "base_source_commit": "9b72b1a22222c426e7fcfa1de53cd45fb6b715d0",
+  "base_source_commit": "05fe71e6aaa6fe686052ecd70b7c85ccb685053b",
   "target_version": "18.19.7",
   "primary_promoted": false,
   "published_assets": [
@@ -50,10 +50,11 @@
   },
   "gates": {
     "published_hashes": "PASS: four platform binaries and index; Linux --version reports 18.19.7",
-    "Doctor": "BLOCKED before toolkit Python: Conda extraction hit workstation Btrfs ENOSPC. Owned setup/debug retry stopped with exit 143.",
-    "Bootstrap": "NOT RUN on 18.19.7",
-    "ToolkitTest": "NOT RUN on 18.19.7",
-    "installed_action_robot_cancellation_recovery": "NOT RUN on 18.19.7"
+    "Doctor": "PASS: published RCC 18.19.7, fresh isolated toolchain, Python 3.12.15, Poetry 2.1.1, Node20.19.3 and Go1.23.6",
+    "Bootstrap": "PASS: existing checkout/package environment locations, locked dependencies",
+    "ToolkitTest": "PASS: 241 passed, 5 opt-in skips after pin and frozen-lane corrections",
+    "installed_action_robot_cancellation_recovery": "NOT RUN on 18.19.7",
+    "runtime_focused": "PASS: 250 passed, 4 explicit opt-in skips, real SQLite/PostgreSQL; configured Runtime lint and typecheck pass (703 files)"
   },
   "storage": {
     "device_bytes": 509944528896,
@@ -61,9 +62,16 @@
     "unallocated_bytes": 1048576,
     "metadata_dup_used_percent": 94.4,
     "observation": "df logical free space did not prevent ENOSPC; SQLite commit and Git index writes also failed. This is not evidence of an RCC 18.19.7 product regression.",
-    "operator_action": "Restore Btrfs allocation health or provide an adequate alternate filesystem. No balance, unrelated cleanup or disk-guard reduction was performed."
+    "operator_action": "RESOLVED: operator restored allocation headroom; agent then removed its 21 GiB scratch tree, owned temporary worktree and owned PostgreSQL fixture. One bounded TMPDIR on /var/tmp now holds qualification; no filesystem balance or unrelated cleanup by this agent.",
+    "remaining_blocker": false
   },
-  "compatibility_lane_proposal": "18.19.3 retained as N-1, primary proposal 18.19.7; generated workflow source regenerated in isolated worktree only.",
+  "compatibility_lane_proposal": "Current candidate primary18.19.7; developer N-1 lane18.19.3. Frozen acceptance jobs retain18.19.3 with their immutable source/native identities.",
   "old_evidence": "All previous RCC 18.19.3 receipts retain original version and binary SHA; no 18.19.7 execution qualification inferred.",
-  "upstream_disposition": "none"
+  "upstream_disposition": "none",
+  "proposal_counterexamples": {
+    "frozen_preseed": "Actual frozen d642a3ac Runtime resolves rcc-18.19.3; broad replacement preseeded rcc-18.19.7. Existing workflow guard failed before restoration; restored frozen lane/summary tests pass55 cases.",
+    "checksum_fixture": "Migration produced an overlong N-1 Windows test digest; production YAML retained the correct published64-hex digest. Existing test failed, fixture corrected, complete ToolkitTest passes.",
+    "manifest_golden": "Only primary adapter range and derived plan/revision digest fields changed. Updated expected compiler golden; compiler module passed40/1skip; current focused suite also passes."
+  },
+  "retained_candidate_artifacts": "Existing installed-vertical CI upload now includes four owned wheel families plus identity/JUnit; no fixture homes, databases or credentials."
 }

@@ -92,9 +92,9 @@ def test_binary_spec_bundles_repository_owned_rcc_asset():
 @pytest.mark.parametrize(
     "data",
     [
-        ("/checkout/src/actions/server/bin/rcc-18.19.3", "actions/server/bin"),
+        ("/checkout/src/actions/server/bin/rcc-18.19.7", "actions/server/bin"),
         (
-            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.7.exe",
             r"actions\server\bin",
         ),
     ],
@@ -110,11 +110,11 @@ def test_rcc_spec_data_filter_accepts_native_path_separators(data):
     [
         (r"C:\checkout\src\actions\server\bin\other.exe", r"actions\server\bin"),
         (
-            r"C:\checkout\src\actions\server\other\rcc-18.19.3.exe",
+            r"C:\checkout\src\actions\server\other\rcc-18.19.7.exe",
             r"actions\server\other",
         ),
         (
-            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.7.exe",
             r"actions\server\bin-extra",
         ),
     ],

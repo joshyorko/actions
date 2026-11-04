@@ -326,7 +326,7 @@ def _load_prepared(
             rf"(?m)^\s*-\s*actions-core={re.escape(core_version)}\s*$", text
         ):
             pytest.fail("prepared RCC package.yaml does not exact-pin candidate Core")
-        # RCC v18.19.3's Python package resolver uses Product.Home()/wheels as
+        # RCC v18.19.7's Python package resolver uses Product.Home()/wheels as
         # --find-links. The preparer stages the wheel there before publish;
         # presence is diagnostic only. Installed-file/RECORD checks prove
         # which bytes the Action artifact actually contains.

@@ -57,7 +57,7 @@ RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION = "v1-draft"
 COMPILER_NORMALIZATION_VERSION = "actions-foundry-normalizer/v1-draft"
 COMPILER_VERSION = "actions-package-compiler/v1"
 CANONICALIZER_VERSION = "actions-canonical-json/v1"
-RCC_ADAPTER_VERSION_RANGE = "==18.19.3"
+RCC_ADAPTER_VERSION_RANGE = "==18.19.7"
 _PACKAGE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,127}$")
 _CAPABILITY_ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9._:-]{0,127}$")
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -163,7 +163,7 @@ class PackageCompilationPolicy:
         if self.compiler_normalization_version != COMPILER_NORMALIZATION_VERSION:
             raise ValueError("unsupported compiler normalization version")
         if self.rcc_adapter_version_range != RCC_ADAPTER_VERSION_RANGE:
-            raise ValueError("this compiler supports only pinned RCC 18.19.3")
+            raise ValueError("this compiler supports only pinned RCC 18.19.7")
 
 
 @dataclass(frozen=True)
@@ -205,7 +205,7 @@ class PreparedRccEnvironment:
         ):
             raise ValueError("prepared RCC manifest identity must be a sha256 digest")
         if self.rcc_version != RCC_VERSION:
-            raise ValueError("prepared RCC cache must use pinned RCC 18.19.3")
+            raise ValueError("prepared RCC cache must use pinned RCC 18.19.7")
 
     def to_receipt_bytes(self) -> bytes:
         """Serialize the local preparation evidence without timestamps."""
@@ -1349,7 +1349,7 @@ class PinnedRccPackageBuildExecutor:
     def __init__(
         self, prepared_environment: PreparedRccEnvironment | None = None
     ) -> None:
-        self._rcc_binary = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
+        self._rcc_binary = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.7"
         self._rcc_home: Path | None = None
         self._prepared_environment = prepared_environment
 

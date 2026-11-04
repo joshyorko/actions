@@ -82,38 +82,38 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
             "primary",
             "ubuntu-22.04",
             "rcc-linux64",
+            "18.19.7",
+        ): "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+        (
+            "primary",
+            "macos-15",
+            "rcc-macosarm64",
+            "18.19.7",
+        ): "324e2ead0e96754eaf0dc2e22bb41928ad2bec90c7e1e7ad069038a100bca595",
+        (
+            "primary",
+            "windows-2022",
+            "rcc-windows64.exe",
+            "18.19.7",
+        ): "d3338be49ef22bbd9f3e42b606e01231cb5c5d86716b18d24fadf85e7630e0be",
+        (
+            "n-1",
+            "ubuntu-22.04",
+            "rcc-linux64",
             "18.19.3",
         ): "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
         (
-            "primary",
+            "n-1",
             "macos-15",
             "rcc-macosarm64",
             "18.19.3",
         ): "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
         (
-            "primary",
+            "n-1",
             "windows-2022",
             "rcc-windows64.exe",
             "18.19.3",
         ): "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
-        (
-            "n-1",
-            "ubuntu-22.04",
-            "rcc-linux64",
-            "18.18.1",
-        ): "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf",
-        (
-            "n-1",
-            "macos-15",
-            "rcc-macosarm64",
-            "18.18.1",
-        ): "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d",
-        (
-            "n-1",
-            "windows-2022",
-            "rcc-windows64.exe",
-            "18.18.1",
-        ): "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b",
     }
 
 
@@ -176,7 +176,7 @@ def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
     checkout, install, probe, receipt = job["steps"]
     assert checkout["with"]["persist-credentials"] is False
     assert (
-        "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+        "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48"
         in install["run"]
     )
     assert probe["env"]["ACTIONS_REAL_RCC_FD_TEST"] == "1"
@@ -224,7 +224,7 @@ def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
 
     for launcher in (shell, batch):
-        assert "v18.19.3" in launcher
+        assert "v18.19.7" in launcher
         assert "joshyorko/rcc/releases/download" in launcher
         assert "developer" in launcher
         assert "toolkit.yaml" in launcher
@@ -235,7 +235,7 @@ def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
 
 def test_dispatcher_resolves_repository_root() -> None:
     assert toolkit.REPOSITORY_ROOT == REPOSITORY_ROOT
-    assert toolkit.RCC_VERSION == "v18.19.3"
+    assert toolkit.RCC_VERSION == "v18.19.7"
     assert toolkit.PACKAGES == (
         "actions",
         "actions-http-helper",
@@ -272,8 +272,8 @@ def test_doctor_accepts_the_explicit_n_minus_one_matrix_version() -> None:
     with patch.dict(
         "os.environ",
         {
-            "RCC_VERSION": "v18.18.1",
-            "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.18.1",
+            "RCC_VERSION": "v18.19.3",
+            "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.19.3",
         },
     ), patch("toolkit.shutil.which", return_value="/usr/bin/tool"), patch(
         "toolkit.run"

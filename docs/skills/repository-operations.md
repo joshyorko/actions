@@ -2657,6 +2657,42 @@ focused and package gates after the ordinary merge.
 
 ### RCC release acceptance pins
 
+A primary RCC upgrade must keep previously admitted immutable Robot records
+readable. Recognize supported prior metadata separately from the exact execution
+binary pin; accepting an old manifest does not authorize an old or arbitrary
+executable. The 18.19.7 proposal preserves 18.19.3 record identity in
+`test_robot_package_admission.py::test_prior_rcc_robot_package_keeps_its_identity`;
+its captured old manifest/archive must not be regenerated with the new pin.
+A compiler golden digest changes with the explicit adapter version and its
+derived plan/revision identities. Compare canonical manifests before updating
+that expectation; all other fields must remain identical.
+
+The installed vertical artifact includes the four tested wheel payloads as well
+as identity/JUnit receipts. Match every payload to its recorded digest and the
+successful exact-source job before release acceptance; receipt-only archives
+cannot supply byte-identical candidate packages. Do not upload fixture homes,
+databases or credentials.
+
+Logical free space alone does not establish Btrfs allocation health. Before
+heavy workstation work, check device unallocated space and metadata usage too.
+Keep task scratch together; on this workstation, RAM-backed `/tmp` is below the
+installed vertical's unchanged disk floor, so use an adequate filesystem through
+`TMPDIR`. RCC's fixed `artifactsDir` also needs relocation: a task-local descriptor
+can reference unchanged canonical environment YAMLs and absolute `toolkit.py`
+commands, with artifacts under that task directory. `--no-build` verifies reuse
+of the already prepared toolkit. Remove disposable homes and temporary
+worktrees after retaining bounded receipts and unapplied changes.
+
+Frozen acceptance workflows retain RCC18.19.3 with their fixed source/native
+artifact identities; they are compatibility evidence, not the current primary.
+For example, frozen Runtime `d642a3ac24f8da85101538bdfdf59b509fd74bfb`
+resolves its bundled executable as `rcc-18.19.3`. A global replacement with a
+new preseed filename breaks that contract. Keep its workflow/summary assertions
+at the historical version while upgrading current tooling and installed tests.
+Generate workflows through `_gen_workflows.py::main` when local ignored
+worktrees exist: the full script also regenerates Dependabot from filesystem
+manifests and can accidentally include those local worktrees.
+
 The repository's primary pinned RCC release is `v18.19.3`,
 published 2026-08-28, with tag target
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a

@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "platform": "Linux x86_64, Python3.12",
   "pins": {
-    "rcc": "18.19.3",
+    "rcc": "18.19.7",
     "python": "3.12.15",
     "actions-runtime": "1.1.0a60",
     "actions-core": "1.1.0a8",

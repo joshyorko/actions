@@ -80,7 +80,7 @@ def test_rcc_download_uses_owned_release(
         path.chmod(0o700)
 
     monkeypatch.setattr(actions_http, "download_with_resume", download)
-    tool = RccTool(str(target), "v18.19.3")
+    tool = RccTool(str(target), "v18.19.7")
     tool.force_sys_platform = platform
     tool.force_machine = machine
     tool.make_run_check = False
@@ -88,7 +88,7 @@ def test_rcc_download_uses_owned_release(
     tool.download()
     assert calls == [
         (
-            f"https://github.com/joshyorko/rcc/releases/download/v18.19.3/{asset}",
+            f"https://github.com/joshyorko/rcc/releases/download/v18.19.7/{asset}",
             target,
             {"make_executable": True},
         )

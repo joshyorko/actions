@@ -306,7 +306,7 @@ def create_runtime_canvas(
         if robot_profile is not None:
             robot_direct, robot_rcc = prepare_robot_runtimes(
                 robot_profile,
-                Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",
+                Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.7",
             )
         task_policy_path = os.environ.get("ACTIONS_FOUNDRY_TASK_POLICY")
         if task_policy_path is not None and profile is None:
@@ -433,7 +433,7 @@ def create_runtime_canvas(
             )
             from actions.server.foundry.generic_view import GenericCanvasView
 
-            rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
+            rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.7"
             execution_root = paths.cache_dir / "execution"
             reviewed_execution = ReviewedCanvasExecution(
                 authoring,

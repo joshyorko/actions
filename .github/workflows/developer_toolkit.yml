@@ -12,35 +12,35 @@ jobs:
       matrix:
         include:
           - lane: primary
+            rcc_version: 18.19.7
+            os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
+          - lane: primary
+            rcc_version: 18.19.7
+            os: macos-15
+            asset: rcc-macosarm64
+            sha256: 324e2ead0e96754eaf0dc2e22bb41928ad2bec90c7e1e7ad069038a100bca595
+          - lane: primary
+            rcc_version: 18.19.7
+            os: windows-2022
+            asset: rcc-windows64.exe
+            sha256: d3338be49ef22bbd9f3e42b606e01231cb5c5d86716b18d24fadf85e7630e0be
+          - lane: n-1
             rcc_version: 18.19.3
             os: ubuntu-22.04
             asset: rcc-linux64
             sha256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
-          - lane: primary
+          - lane: n-1
             rcc_version: 18.19.3
             os: macos-15
             asset: rcc-macosarm64
             sha256: 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266
-          - lane: primary
+          - lane: n-1
             rcc_version: 18.19.3
             os: windows-2022
             asset: rcc-windows64.exe
             sha256: 523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: ubuntu-22.04
-            asset: rcc-linux64
-            sha256: ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: macos-15
-            asset: rcc-macosarm64
-            sha256: 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: windows-2022
-            asset: rcc-windows64.exe
-            sha256: 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b
     runs-on: ${{ matrix.os }}
     env:
       ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
@@ -138,10 +138,10 @@ jobs:
         run: |
           set -Eeuo pipefail
           curl --fail --location --silent --show-error \
-            https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64 \
             --output rcc.download
           printf '%s  %s\n' \
-            7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428 \
+            f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 \
             rcc.download | sha256sum --check --status -
           mv rcc.download rcc
           chmod +x rcc
@@ -254,4 +254,8 @@ jobs:
             ${{ runner.temp }}/actions340-vertical-status.txt
             ${{ runner.temp }}/actions340-real-vertical.*/identity.txt
             ${{ runner.temp }}/actions340-real-vertical.*/junit.xml
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_runtime-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_core-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_work_items-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_http_helper-*.whl
           if-no-files-found: warn

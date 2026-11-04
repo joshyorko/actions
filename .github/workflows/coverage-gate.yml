@@ -13,7 +13,7 @@ jobs:
   coverage:
     runs-on: ubuntu-22.04
     env:
-      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.3
+      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.7
     steps:
       - uses: actions/checkout@v4
 
@@ -27,17 +27,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/robocorp
-          key: rcc-${{ runner.os }}-${{ runner.arch }}-coverage-v18.19.3-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-coverage-v18.19.7-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
 
       - name: Install pinned RCC
         shell: bash
         run: |
           set -Eeuo pipefail
           curl --fail --location --silent --show-error \
-            https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64 \
             --output rcc.download
           printf '%s  %s\n' \
-            7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428 \
+            f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 \
             rcc.download | sha256sum --check --status -
           mv rcc.download rcc
           chmod +x rcc

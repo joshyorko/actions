@@ -274,7 +274,7 @@ class RobotValidator:
             version = self._run(
                 [str(prep.rcc), "--version"], source, environment, check, None
             )
-            if version.exit_code != 0 or version.stdout.strip() != b"v18.19.3":
+            if version.exit_code != 0 or version.stdout.strip() != b"v18.19.7":
                 raise ValueError("unsupported RCC version")
             command = build_exec_command(
                 prep.rcc,

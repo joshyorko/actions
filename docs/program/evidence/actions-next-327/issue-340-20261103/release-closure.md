@@ -4,6 +4,14 @@ Implementation checkpoint: `55b5c0ebe0ba21c7c3ba0e3db98a6d9b9ded2017`,
 [PR #341](https://github.com/joshyorko/actions/pull/341). This is **not a release candidate approval**.
 No merge, publication, tag or deployment is authorized.
 
+RCC18.19.7 candidate update: Doctor/Bootstrap/ToolkitTest now pass; the
+workstation allocation blocker is resolved after operator intervention and
+removal of the agent's21GiB task tree. Affected Runtime source qualification is
+250passed/4explicit opt-in skips on real SQLite/PostgreSQL, with configured
+lint/type checks passing. Installed18.19.7 qualification has not yet run.
+Existing18.19.3 evidence below retains its original identities. The current
+candidate is not release-approved.
+
 The authorities are [#327](https://github.com/joshyorko/actions/issues/327),
 [#328](https://github.com/joshyorko/actions/pull/328),
 [#340](https://github.com/joshyorko/actions/issues/340), and

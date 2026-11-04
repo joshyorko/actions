@@ -76,7 +76,7 @@ def _generated_action_entries(action_source: bytes | None = None) -> list:
 
 
 class _FakeCompilerExecutor:
-    rcc_version = "v18.19.3"
+    rcc_version = "v18.19.7"
 
     def __init__(self, fail_phase: str | None = None) -> None:
         self.fail_phase = fail_phase
@@ -720,7 +720,7 @@ def test_default_work_item_declaration_preserves_manifest_golden():
     assert compiled is not None
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()
-        == "b69feea6cdb57315b9ea490bd7610371ceeeb05ec9096f101e1b50d08b3215bd"
+        == "31ae43e41fc5dacc8491a635b7aeae7011e207d5e7d4982ba303c400e0ebd449"
     )
 
 

@@ -404,7 +404,7 @@ def test_rcc_no_build_env_exec_forwards_one_inherited_pipe_fd(tmp_path: Path):
     )
     assert version_status == 0, version_stderr.decode(errors="replace")[-1000:]
     version = version_stdout.decode(errors="replace").strip()
-    assert version == "v18.19.3"
+    assert version == "v18.19.7"
 
     task_home = tmp_path / "home"
     rcc_home = tmp_path / "robocorp"

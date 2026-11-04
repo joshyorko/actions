@@ -10,6 +10,7 @@ from dataclasses import asdict, dataclass
 from io import BytesIO
 from typing import Literal
 
+from actions.server._rcc_runtime_adapter import RCC_METADATA_VERSIONS
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.ids import PackageRevisionId
 from actions.server.deployments.package_revision_compiler import (
@@ -149,7 +150,7 @@ def decode_robot_admission(raw: bytes, archive_bytes: bytes) -> AdmittedRobotPac
                 or re.fullmatch(r"sha256:[0-9a-f]{64}", plan_value[key]) is None
             ):
                 raise ValueError("measured RCC identity required")
-        if plan_value.get("rcc_version") != "v18.19.3":
+        if plan_value.get("rcc_version") not in RCC_METADATA_VERSIONS:
             raise ValueError("unsupported RCC version")
         plan = RccRobotPlan(
             plan_value["package_yaml_digest"],
