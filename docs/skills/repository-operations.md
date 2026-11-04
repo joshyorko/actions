@@ -7262,3 +7262,15 @@ recovery or a host-process crash.
 no successful reconciliation transition for a retained launch; a recovery
 receipt alone cannot clear that record. Keep this missing capability separate
 from the demonstrated rejection of a replacement Attempt.
+
+The bounded model and SQL replays in
+`.agents/skills/verify-run-lifecycle/` distinguish safety from recovery progress.
+The standalone pre-launch path can replace an expired explicitly authorized
+Attempt. Generic claimed execution cannot currently advance an existing Run
+under a fresh Work Item claim, even before launch and after no-effect recovery
+authorization; its retained claim validation rejects the new epoch. This is a
+missing progression, not proof of successful recovery. Do not remove the
+retained-launch guard to address it: that admits duplicate-execution states.
+Cancellation intent likewise remains distinct from exact stopped/reaped-launch
+confirmation. Follow the skill's source mapping, bounds and mutation checks
+before interpreting a model counterexample as a Runtime defect.
