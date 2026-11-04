@@ -563,6 +563,9 @@ stage, not its root cause. RCC's `Running:` log follows acquisition of the
 Python mutex; it does not establish successful RCC spawn or internal-lock
 progress. Captured stderr is line-oriented, and RCC's interactive forwarding
 does not explicitly flush, so absent captured lines do not establish inactivity.
+When two retained samples identify the same RCC process, compare its CPU and
+I/O counters as observed host activity. Increasing counters do not identify
+which internal operation caused latency or establish descendant cleanup.
 
 The Windows Runtime test workflow now sets an explicit
 `ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
