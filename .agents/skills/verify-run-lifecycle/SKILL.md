@@ -11,7 +11,7 @@ installed RCC execution. Read `source-map.md` before changing the model.
 
 ## Scope and sync
 
-Sync commit: `7ce57c1ffc54debc3bcf59d27f46a253bd49ff05`.
+Sync commit: `55b5c0ebe0ba21c7c3ba0e3db98a6d9b9ded2017`.
 One immutable Run/Work Item, two trusted worker identities, and two Attempt/claim
 epochs. Run and claim epochs are independent. Explore expiry, takeover, durable
 intent, delayed spawn, lost host/result, publication, cancellation and recovery.
@@ -26,14 +26,15 @@ Python/SQL/OS behavior.
    from its current SKILL.md, not a copied launcher. Keep one TLC worker, a 512 MiB
    Java heap and the current task CPU/IO limits.
 2. `safety.cfg` and `claimed-safety.cfg` must preserve all three invariants.
-   `prelaunch-progress.cfg` must preserve standalone recovery progress.
+   `prelaunch-progress.cfg` and `claimed-progress.cfg` must preserve authorized
+   pre-launch recovery progress.
 3. `broken-recovery.cfg`, `broken-publication.cfg` and `broken-cancel.cfg` must
    produce their named safety counterexamples. These scratch configurations
    deliberately disable guards; never change Runtime to make them pass.
-4. `retained-launch-progress.cfg` and `claimed-progress.cfg` currently expose
-   missing progress. Keep those findings; do not weaken the properties or label
-   a safe refusal as successful recovery. The claimed progress config assumes a
-   genuinely fresh live claim which remains live while dispatch is attempted.
+4. `retained-launch-progress.cfg` still exposes missing uncertain-launch
+   settlement. Keep that finding; do not weaken it or label safe refusal as
+   successful recovery. The claimed progress config assumes a genuinely fresh
+   live claim which remains live while dispatch is attempted.
 5. Restore the non-mutant config and rerun it after any model change. Preserve
    TLC output, report, counterexample and chart; a missing chart above the skill's
    graph budget does not invalidate the check.
@@ -50,9 +51,10 @@ poetry run pytest -n 0 ../.agents/skills/verify-run-lifecycle/replay_prelaunch.p
 
 The first replay proves rejection by the correct retained-launch guard and
 admission by a one-guard, in-memory mutant, then restores the method. It never
-starts an external process. The second requests the desired safe pre-launch
-progress and currently fails on SQLite and PostgreSQL. Configure the existing
-owned PostgreSQL fixture and require it with `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1`;
+starts an external process. The second checks safe pre-launch progress; the
+original SQLite/PostgreSQL failures are retained in the evidence receipt. Both
+backends must now advance the same Run under a new fenced Attempt. Configure the
+existing owned PostgreSQL fixture and require it with `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1`;
 missing service skips are not PostgreSQL proof. Never use a live database.
 
 Use the existing installed Action-to-Robot tests for physical execution, cleanup,

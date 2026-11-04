@@ -7275,3 +7275,11 @@ guard admits duplicate-execution states.
 Cancellation intent likewise remains distinct from exact stopped/reaped-launch
 confirmation. Follow the skill's source mapping, bounds and mutation checks
 before interpreting a model counterexample as a Runtime defect.
+
+For a hosted job cancelled without a runner or steps, inspect the check run's
+annotations as well as the job API. The macOS arm64 checks for integration
+checkpoint `9b72b1a22222c426e7fcfa1de53cd45fb6b715d0` explicitly reported
+failure to acquire a hosted runner and capacity constraints. Those checks did
+not execute product code; they remain unqualified until a successful rerun.
+Do not diagnose a source failure or loosen a platform gate from cancellation
+alone.

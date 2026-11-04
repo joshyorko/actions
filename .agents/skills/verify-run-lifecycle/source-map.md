@@ -6,7 +6,7 @@
 - `RecordIntent`: `action_server/src/actions/server/foundry/robot_journal.py::RobotJournal.record_launch_intent`. It rejects outer transactions, owns durable commit and verifies acknowledgement before permission to spawn.
 - `Spawn`: `action_server/src/actions/server/foundry/robot_runtime_runner.py::PinnedRobotRunner.execute` and `foundry/robot_execution.py`. Spawn is separate from SQL. The model conservatively allows a previously issued permit to race later expiry/cancellation; stopped/reaped frames cannot subsequently spawn.
 - `AuthorizeRecovery`, `Recover`: `run_outputs/service.py::RunOutputControlPlane.authorize_recovery` and `run_outputs/detached.py::DetachedActions.claim`. Standalone replacement requires an expired, explicitly authorized epoch and no retained launch. An opaque operator receipt is not launch reconciliation.
-- Claimed recovery gap: `foundry/generic_work_item_execution.py::GenericWorkItemExecution._dispatch/_ticket` returns/validates the original Attempt and claim; it has no fresh-claim recovery transition. `foundry/robot_receipts.py::validate_robot_record` rejects changed claim epochs. The actual replay has no launch and an authorized no-effect receipt, but still cannot advance.
+- Claimed recovery: `foundry/generic_work_item_execution.py::GenericWorkItemExecution._dispatch/_ticket` requires a current epoch-specific no-effect authorization and a closed, unchanged pre-launch journal before rebinding a live claim. `foundry/robot_receipts.py::validate_robot_record` rejects changed claim epochs. The original replay had no launch and an authorized no-effect receipt but could not advance; the repair preserves Run identity, advances the Attempt and fences the old worker.
 - `RequestCancel`, `ConfirmCancel`: `run_outputs/service.py::RunOutputService.cancel`, `run_outputs/cancellation_confirmation.py::confirm_standalone_robot_cancellation/confirm_claimed_robot_cancellation`. Intent fences publication; terminal confirmation requires the exact original launch, authority, stopped execution and descendant reap evidence. It does not require reviving an expired execution lease.
 
 Assume trusted actor/profile and immutable selection, sound SQL transactions and
@@ -24,6 +24,7 @@ Existing Runtime tests establish those empirical boundaries where documented.
 
 The first claimed liveness draft allowed exhaustion of its artificial claim-epoch
 bound. That trace was a model limitation, not a product finding. The corrected
-fresh-live-claim trace still fails, and the matching SQLite/PostgreSQL replay
-confirms the missing progression. Retained-launch non-progression is intentional
-fail-closed behavior; no successful generic uncertain-launch settlement is modeled.
+fresh-live-claim trace originally failed, and the matching SQLite/PostgreSQL
+replay confirmed the missing progression. Recheck the repaired transition with
+the positive claim-progress config and both SQL providers. Retained-launch
+non-progression is intentional fail-closed behavior; no successful generic uncertain-launch settlement is modeled.

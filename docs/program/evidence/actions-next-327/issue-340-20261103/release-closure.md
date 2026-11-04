@@ -1,0 +1,108 @@
+# Release closure: acceptance and remaining decisions
+
+Implementation checkpoint: `55b5c0ebe0ba21c7c3ba0e3db98a6d9b9ded2017`,
+[PR #341](https://github.com/joshyorko/actions/pull/341). This is **not a release candidate approval**.
+No merge, publication, tag or deployment is authorized.
+
+The authorities are [#327](https://github.com/joshyorko/actions/issues/327),
+[#328](https://github.com/joshyorko/actions/pull/328),
+[#340](https://github.com/joshyorko/actions/issues/340), and
+[Canvas #71](https://github.com/joshyorko/actions/issues/71).
+PROVEN below means the stated executable scope; it does not promote earlier
+artifacts to the final candidate or replace the final qualification row.
+MUST FIX includes required missing qualification, not only missing code.
+
+## Executable evidence keys
+
+- **R**: strict local Runtime portable suite at `7ce57c1ffc54debc3bcf59d27f46a253bd49ff05`: 5,651 passed, 66 explicit skips. Real owned PostgreSQL enabled. Local full logs/JUnit are retained under `actions341-evidence/runtime-portable-final.*`. Earlier failed runs remain failed.
+- **F**: canonical owned SQLite/PostgreSQL fenced queue gate: 45 passed, zero skips, fixture cleanup PASS; affected Runtime lifecycle parity: 156 passed, zero skips. Core 479 passed/5 skips; Work Items portable 285 passed/46 skips/3 deselections/10 expected failures; devutils 335 passed; Toolkit 241 passed/5 opt-in skips. These are RCC 18.19.3 evidence.
+- **I**: existing installed-wheel Action→Robot harness: four real SQLite and four real PostgreSQL cases passed. Actual parent/child identity, authorized output bytes, cancellation, failure/replay/restart and uncertain-launch refusal. A separate actual host SIGKILL probe ended with host exit -9, owned descendants reaped, one retained Attempt and no duplicate launch. Safe refusal is not reconciliation.
+- **M**: `test_managed_work_items_real_robot_vertical.py::test_model_enqueue_claim_rcc_and_authorized_outputs`: real installed Runtime/Core/SDK, standard MCP client over HTTP/ASGI, synthetic authenticated actor, model enqueue → real trusted claim → actual RCC Robot consuming the input → terminal Work Item/Run/Attempt and authorized output bytes. SQLite and PostgreSQL each passed. This is not native CLI startup or actual ChatGPT authentication.
+- **L**: [formal receipt](lifecycle-formal.json), [counterexamples](lifecycle-counterexamples.md), and `.agents/skills/verify-run-lifecycle/`: real pre-launch claimed-recovery defect reproduced on both SQL backends, repaired at the checkpoint above. Twelve focused regression cases, 104 nearby cases and six formal replay cases passed. Configured Runtime lint/typecheck passed (703 files); optional Markdown lint unavailable. Retained uncertain launches remain blocked.
+- **C**: [Linux Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169843), [Windows Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169618), [installed five-case vertical](https://github.com/joshyorko/actions/actions/runs/41893331664/job/126796169037) passed at `9b72b1a22222c426e7fcfa1de53cd45fb6b715d0`. Linux included the separate published-Core Canvas/browser gate. All non-macOS RCC primary/N-1 and native builds passed there. This precedes L and is not final-head CI.
+- **D**: [installed a60 CSV/Parquet component receipt](a60-installed-data.md), source `642c6d3f62c2d271d33459553ef560a10f283f1f`; its exact old wheel and RCC 18.19.3 identities remain unchanged. Not current candidate, PostgreSQL restart or ChatGPT proof.
+- **U**: [RCC 18.19.7 proposal and qualification receipt](rcc-18.19.7-qualification.json). Published hashes verified; real retained-record compatibility regression found and fixed in the isolated proposal. Doctor cold setup blocked by Btrfs allocation failure; primary pins have not been promoted.
+
+## Complete release-ledger disposition
+
+This maps the existing 28-row release ledger; the historical matrix below it is not current proof.
+
+| Existing requirement | Classification | Evidence or smallest outstanding requirement |
+| --- | --- | --- |
+| Published 1.0.4 compatibility baseline | MUST FIX | Final accepted artifacts need owned old→new upgrade and coordinated restore/downgrade evidence; source migration tests alone are insufficient. |
+| Existing Runtime capability control plane | PROVEN | R, C: current MCP routing, collisions, aliases and bounded catalog regressions. |
+| Public MCP Apps authoring and CanvasSpec | PROVEN | R, C: authored schema/visibility negatives, public renderer contract and separate Linux browser gate. Actual ChatGPT is a separate row. |
+| Semantic renderer and official bridge | PROVEN | C and retained installed reference-host receipts in this ledger; no second renderer introduced. Final candidate bytes still require the final consumer gate. |
+| Responsive accessible design baseline | MUST FIX | Retain/reconcile packaged UI keyboard/focus/overflow/empty/error/text evidence against final candidate; source UI/harness tests do not alone prove the installed interaction. |
+| First-boot six-tool authoring lifecycle | NEEDS JOSH | Fresh external-model create/revise/rollback/restart acceptance joins actual ChatGPT E1; source lifecycle tests in R pass. |
+| Generated Python / immutable Package and RuntimePlan | PROVEN | R, I, D and retained generated-app installed receipts; RCC 18.19.7 and final artifact qualification remain U/final rows. |
+| Workspace binding/deployment/activation resolver | PROVEN | R, F, I, M: immutable snapshots, revocation, idempotency, cross-principal/workspace denial and current SQL transactions. |
+| Common control SQL / schema migration | PROVEN | R, F: real SQLite/PostgreSQL migration, transactional rollback and fenced-conformance tests. Distribution upgrade/restore remains first row. |
+| Zero-touch plugin boot, launcher and discovery | MUST FIX | Verify the actual final launcher/installed consumer from an immutable plugin root with writable external state, no starter package or public listener. R's startup tests are narrower evidence. |
+| Named open data / result plane | PROVEN | R has 24 real invoice-provider cases; D proves actual CSV AND Parquet execution at its recorded source. Final invoice/candidate evidence remains required below. |
+| Bounded Knowledge collections | PROVEN | R includes bounded collection/ingest/search, authority, provenance, cancellation and preparation-budget cases. Broader knowledge features are not claimed. |
+| Managed Runtime Work Items / installed VSIX | NEEDS JOSH | M proves the installed SDK/Runtime path. The original installed VSIX acceptance needs an owned consumer/session or explicit disposition; do not infer it from MCP tests. |
+| Fenced business Work Items | PROVEN | F, R, M: real SQL owner/epoch/finish/output conformance, denial, replay and terminal lineage. |
+| Pinned Run/Attempt and real RCC worker | PROVEN | I, M, L: actual pinned execution/cancellation and repaired authorized pre-launch recovery; uncertain retained launches never automatically retry. |
+| WorkflowNode / MCPTask / Adapter distinction | PROVEN | R, I: existing Task/Run projections and child lineage. A universal workflow designer is explicitly OPTIONAL and is not a new release requirement. |
+| Exact human approval and authorization negatives | PROVEN | R and installed output isolation: foreign actor/workspace reads denied without Run/Attempt/output growth; M proves model versus trusted-worker authority. Genuine E1 approval remains owner row. |
+| Retry, effects and dead-letter reconciliation | MUST FIX | L closes pre-launch progression. Run the existing real invoice durable-result reconciliation case against final installed artifacts; it was skipped in hosted integration without its prepared RCC fixture. Do not replace this with safe uncertain-launch refusal. |
+| Scoped durable artifacts/results | PROVEN | I, M, R: real immutable output bytes and scoped reads/denials. Final coordinated retention/restore remains first row. |
+| Retention, restore, upgrade/downgrade | MUST FIX | Final SQL + objects + journals + source/runtime artifact restore and old-version fail-closed behavior; use existing gates and retained recipes. |
+| Reusable invoice template/export | MUST FIX | Candidate SDK/Core/Runtime pin drift repaired at `9b72b1a2`; five module regressions pass. Actual cold exported consumer and full query→Canvas→approval→worker→artifact→restart/reopen remain to qualify. |
+| All-route auth and safe sharing | MUST FIX | R covers route/auth negatives; before an isolated remote E1 endpoint, qualify complete live authentication/artifact protection. No public listener/tunnel is authorized by this audit. |
+| Actual authenticated ChatGPT E1 | NEEDS JOSH | Existing isolated endpoint/connection and actual host tool/resource/bridge/action/reconnect test; no available connection supplied. Browser/ASGI evidence is not E1. |
+| Homelab-independent distribution and consumers | MUST FIX | U, final wheels/native/images, deterministic hashes/SBOM/provenance, installed consumers and local build/restore recipe. GitHub metadata receipts do not contain all candidate payloads. |
+| Controlled Codex/Devsy adapter path | NEEDS JOSH | Original ledger retains qualification of an existing controlled adapter. Select an owned existing fixture/session or explicitly decide scope; do not start a new adapter project. |
+| Optional celld experiment | NEEDS JOSH | Existing #326 is NO-GO: no admitted adapter or two-node/storage-failure qualification. Explicitly exclude the experimental integration or authorize its bounded qualification; never advertise it as shipped. |
+| Publisher source/identity qualification | NEEDS JOSH | Existing source tests are not actual publisher token-scope or independent approval acceptance (#332). Owner security/identity disposition before publication. |
+| Final combined acceptance / merge / publication | MUST FIX | Fresh exact-head CI, all mandatory rows closed or explicitly decided, byte-identified accepted inventory. Merge/publication/deployment each still need approval. |
+
+## #340 and Canvas #71 cross-check
+
+#340's eight acceptance items are covered explicitly: flag independence and
+catalog/privacy by R/C; real headless Robot and Task lifecycle by R/I (ordinary
+final native startup is still the installed-consumer gate); managed queue by M;
+typed internal Action→Robot by I; authorization matrix by R/I/M; installed
+release evidence by U and the final qualification row. No synthetic claim rows
+substitute for M. I preserves one logical child, internal-only grants and parent
+cancellation/detach behavior at its original artifact identities.
+
+Canvas #71's thirteen acceptance items map to the same rows: zero-touch plugin
+and fresh prompt are open consumer/E1 gates; native rendered UI and generated
+backend stage/validate/invoke/rollback have component/source/browser evidence;
+restart persistence, atomic revisions, action-name isolation, bounded catalog,
+model-context minimization and text fallback have R/C regression evidence;
+local no-public-listener and shared runtime across plugin/standalone modes are
+in the final launcher gate. Remote authentication must precede remote testing.
+CAMP hosting, public directory submission, air-gapped installation, a universal
+workflow designer, and custom arbitrary HTML/JavaScript are **OPTIONAL/deferred
+or explicit non-goals**, not silently missing mandatory implementation. CAMP's
+optional sidecar does not authorize a second runtime.
+
+## Recovery decision
+
+#340 explicitly accepts unknown launch outcomes remaining blocked/reconcilable,
+never blindly retried. It does not require automatic recovery of unknown external
+effects. #327 still requires bounded recovery in its real invoice acceptance.
+The generic no-launch progression defect is fixed and executable (L). Generic
+retained-launch settlement remains incomplete, and an opaque operator receipt
+cannot override the launch guard. The invoice-specific durable-result path is
+implemented but requires its actual prepared-worker integration proof. A safe
+refusal cannot discharge that invoice gate.
+
+## Finite critical path
+
+1. Restore adequate Btrfs allocation health or supply an adequate alternate filesystem. No unrelated cache deletion, full balance or disk-guard reduction. Git index writes also fail; the verified source checkpoint was pushed using RAM-backed Git metadata while preserving the original checkout.
+2. Qualify U sequentially with verified RCC 18.19.7: Doctor, Bootstrap, ToolkitTest, installed five-case SQLite vertical, affected PostgreSQL execution/cancellation/recovery. Reuse existing harness and owned services. Promote pins/generated workflows only after success; retain 18.19.3 as compatibility evidence/lane.
+3. Run existing invoice/export/reconciliation, final launcher/consumer and coordinated restore gates; repair only executable failures. Produce the final immutable artifact inventory and provenance.
+4. Obtain successful exact-head Linux/Windows/macOS CI. Previous macOS check annotations explicitly report failure to acquire hosted runners and arm64 capacity constraints; no product step ran. Do not weaken gates to bypass capacity.
+5. Resolve the NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval with exact final receipts.
+
+Current decision: **not technically merge-ready or release-candidate-ready**.
+Required qualification and owner decisions remain; no universal uncertain-launch
+recovery or optional celld success is claimed.
+
+Documentation improvement: this replaces stale blanket “missing” statements with
+source-bound proof, explicit unverified consumers, the corrected recovery boundary
+and the real macOS cancellation cause. Upstream disposition: none.

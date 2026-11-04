@@ -1,0 +1,69 @@
+{
+  "schema": "actions.rcc-upgrade-qualification/v1",
+  "base_source_commit": "9b72b1a22222c426e7fcfa1de53cd45fb6b715d0",
+  "target_version": "18.19.7",
+  "primary_promoted": false,
+  "published_assets": [
+    {
+      "name": "index.json",
+      "sha256": "579283aaaa360abd96c5ee42fd9e74bd8dd9fed70acce847c7d4317044eae585",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/index.json"
+    },
+    {
+      "name": "rcc-linux64",
+      "sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64"
+    },
+    {
+      "name": "rcc-macos64",
+      "sha256": "092c8efb615e5d948d16a7330be76c99583c42df2c8a541a6f31f3aaeaeb1a89",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-macos64"
+    },
+    {
+      "name": "rcc-macosarm64",
+      "sha256": "324e2ead0e96754eaf0dc2e22bb41928ad2bec90c7e1e7ad069038a100bca595",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-macosarm64"
+    },
+    {
+      "name": "rcc-windows64.exe",
+      "sha256": "d3338be49ef22bbd9f3e42b606e01231cb5c5d86716b18d24fadf85e7630e0be",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-windows64.exe"
+    }
+  ],
+  "reviewed_compare": "https://github.com/joshyorko/rcc/compare/v18.19.3...v18.19.7",
+  "changes": {
+    "conda/workflows.go::uvLayer": "Legacy uv explicitly selects staged Python and clears inherited UV_PYTHON; legacy uv cache epoch changes.",
+    "conda/uvnative.go::copyPythonPrefix": "Canonicalizes Python prefix symlink aliases.",
+    "environmentlifecycle/lease.go::LocalMaterializer.Release": "Compares exact retained lease snapshot before release.",
+    "environmentlifecycle/materialize.go::Acquirer.acquireLocked": "Refuses rematerialization while a live lease exists.",
+    "environmentlifecycle/gc.go; environmentlifecycle/roots.go": "Bounded GC recovery and root/path validation.",
+    "pathlib/functions.go::makeParentDirectories": "Preserves existing ancestor permissions.",
+    "anywork/worker.go::workerLimit": "Applies parsed configured worker limit.",
+    "cmd/environmentTrust.go; go.mod": "Trust-root decoding compatibility; Go toolchain 1.26.9."
+  },
+  "actual_downstream_defect": {
+    "before": "Primary version replacement rejected an actual retained 18.19.3 Robot package as unsupported RCC version.",
+    "fix_in_isolated_proposal": "Separate recognized metadata versions from the exact executable RCC_VERSION pin; recognize only primary and prior 18.19.3 metadata.",
+    "after": "Real old Robot record load/projection passes without changing database bytes. Actual old Action record load passes. One permanent legacy Robot identity regression passes.",
+    "proposed_test": "test_robot_package_admission.py::test_prior_rcc_robot_package_keeps_its_identity",
+    "upstream_rcc_regression": false
+  },
+  "gates": {
+    "published_hashes": "PASS: four platform binaries and index; Linux --version reports 18.19.7",
+    "Doctor": "BLOCKED before toolkit Python: Conda extraction hit workstation Btrfs ENOSPC. Owned setup/debug retry stopped with exit 143.",
+    "Bootstrap": "NOT RUN on 18.19.7",
+    "ToolkitTest": "NOT RUN on 18.19.7",
+    "installed_action_robot_cancellation_recovery": "NOT RUN on 18.19.7"
+  },
+  "storage": {
+    "device_bytes": 509944528896,
+    "allocated_bytes": 509943480320,
+    "unallocated_bytes": 1048576,
+    "metadata_dup_used_percent": 94.4,
+    "observation": "df logical free space did not prevent ENOSPC; SQLite commit and Git index writes also failed. This is not evidence of an RCC 18.19.7 product regression.",
+    "operator_action": "Restore Btrfs allocation health or provide an adequate alternate filesystem. No balance, unrelated cleanup or disk-guard reduction was performed."
+  },
+  "compatibility_lane_proposal": "18.19.3 retained as N-1, primary proposal 18.19.7; generated workflow source regenerated in isolated worktree only.",
+  "old_evidence": "All previous RCC 18.19.3 receipts retain original version and binary SHA; no 18.19.7 execution qualification inferred.",
+  "upstream_disposition": "none"
+}

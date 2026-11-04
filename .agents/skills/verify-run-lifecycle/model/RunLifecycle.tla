@@ -42,8 +42,9 @@ AuthorizeRecovery == s.status = "running" /\ ~s.runLive
   /\ (~StableClaim \/ (s.claimLive /\ s.claimOwner # s.owner))
   /\ s' = [s EXCEPT !.recovery = s.epoch]
 \* DetachedActions.claim allows verified PRE-LAUNCH replacement only.
-\* Claimed GenericWorkItemExecution._dispatch returns the old ticket instead.
-Recover(w) == ~Claimed /\ s.status = "running" /\ ~s.runLive /\ ~s.cancel
+\* Generic claimed recovery additionally validates/rebinds the fresh live claim.
+Recover(w) == (~Claimed \/ (s.claimLive /\ s.queue = "claimed" /\ s.claimOwner = w))
+  /\ s.status = "running" /\ ~s.runLive /\ ~s.cancel
   /\ s.epoch > 0 /\ s.epoch < MaxEpoch /\ s.recovery = s.epoch
   /\ (s.launch = 0 \/ Fault = "recovery")
   /\ LET e == s.epoch + 1 IN
