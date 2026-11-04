@@ -170,3 +170,80 @@ jobs:
           name: rcc-descriptor-test-receipt
           path: ${{ runner.temp }}/actions-rcc-fd-junit.xml
           if-no-files-found: error
+
+  installed_internal_child_vertical:
+    if: github.event_name == 'pull_request' && startsWith(github.base_ref, 'release/')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    permissions:
+      contents: read
+    env:
+      UV_CACHE_DIR: ${{ runner.temp }}/actions340-uv-cache
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Run installed Action to Robot vertical
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import os, shutil
+          floor = 10_803_773_440
+          reserve = 3_045_752_832
+          if shutil.disk_usage(os.environ['RUNNER_TEMP']).free < floor + reserve:
+              raise SystemExit('insufficient free space for guarded vertical setup')
+          PY
+          guard="$RUNNER_TEMP/actions340-supervisor"
+          uv venv --seed --python 3.12 "$guard"
+          uv pip install --python "$guard/bin/python" pytest==8.3.4 psutil==7.2.2
+          "$guard/bin/python" - <<'PY'
+          import importlib.util, os, sys
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          repo = Path(os.environ['GITHUB_WORKSPACE']).resolve(strict=True)
+          temp = Path(os.environ['RUNNER_TEMP']).resolve(strict=True)
+          home = temp / 'actions340-guard-home'
+          home.mkdir(mode=0o700)
+          source = repo / 'developer/tests/test_rcc_env_exec_fd_real.py'
+          spec = importlib.util.spec_from_file_location('actions340_guard', source)
+          if spec is None or spec.loader is None:
+              raise SystemExit('RCC supervisor unavailable')
+          module = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = module
+          spec.loader.exec_module(module)
+          env = {
+              'PATH': os.environ['PATH'], 'HOME': str(home), 'TMPDIR': str(temp),
+              'RUNNER_TEMP': str(temp), 'GITHUB_WORKSPACE': str(repo),
+              'UV_CACHE_DIR': os.environ['UV_CACHE_DIR'],
+              'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8',
+          }
+          proxies = {'http_proxy', 'https_proxy', 'all_proxy', 'no_proxy'}
+          cas = {'SSL_CERT_FILE', 'SSL_CERT_DIR', 'REQUESTS_CA_BUNDLE', 'CURL_CA_BUNDLE'}
+          for name, value in os.environ.items():
+              if name.lower() in proxies or name in cas:
+                  if name.lower() in proxies - {'no_proxy'}:
+                      parsed = urlsplit(value)
+                      if parsed.username is not None or parsed.password is not None:
+                          raise SystemExit('proxy credentials are not accepted')
+                  env[name] = value
+          status, stdout, stderr = module._run_reaped(
+              ['bash', str(repo / 'developer/tests/run_internal_child_vertical_ci.sh')],
+              env=env, timeout=4500, disk_paths=(temp,), minimum_free_bytes=10_803_773_440,
+          )
+          sys.stdout.buffer.write(stdout)
+          sys.stderr.buffer.write(stderr)
+          raise SystemExit(status)
+          PY
+      - name: Upload installed vertical receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: actions340-installed-child-vertical
+          path: |
+            ${{ runner.temp }}/actions340-vertical-status.txt
+            ${{ runner.temp }}/actions340-real-vertical.*/identity.txt
+            ${{ runner.temp }}/actions340-real-vertical.*/junit.xml
+          if-no-files-found: warn

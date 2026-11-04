@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import signal
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -27,9 +28,11 @@ pytestmark = [
 
 _SUPERVISOR = r"""
 import ctypes
+import json
 import os
 import select
 import signal
+import shutil
 import subprocess
 import sys
 import time
@@ -37,13 +40,21 @@ import time
 import psutil
 
 timeout = float(sys.argv[1])
-assert 0 < timeout <= 900
+assert 0 < timeout <= 4500
 assert hasattr(os, "pidfd_open") and hasattr(signal, "pidfd_send_signal")
+minimum_free_bytes = int(sys.argv[3]) if sys.argv[3] else None
+disk_paths = json.loads(sys.argv[4])
+if minimum_free_bytes is not None and (
+    minimum_free_bytes <= 0 or not disk_paths
+):
+    raise SystemExit(125)
+if minimum_free_bytes is None and disk_paths:
+    raise SystemExit(125)
 libc = ctypes.CDLL(None, use_errno=True)
 if libc.prctl(36, 1, 0, 0, 0) != 0:  # PR_SET_CHILD_SUBREAPER
     raise SystemExit(125)
 pass_fds = tuple(int(fd) for fd in sys.argv[2].split(",") if fd)
-separator = sys.argv.index("--", 3)
+separator = sys.argv.index("--", 5)
 command = sys.argv[separator + 1:]
 if not command:
     raise SystemExit(125)
@@ -93,6 +104,19 @@ def signal_live(sig):
             except ProcessLookupError:
                 pass
 
+def disk_floor_met():
+    if minimum_free_bytes is None:
+        return True
+    try:
+        return all(
+            shutil.disk_usage(path).free >= minimum_free_bytes for path in disk_paths
+        )
+    except (OSError, ValueError):
+        return False
+
+if not disk_floor_met():
+    raise SystemExit(123)
+
 def settle(proc, seconds):
     end = time.monotonic() + seconds
     while time.monotonic() < end:
@@ -106,6 +130,7 @@ def settle(proc, seconds):
 proc = subprocess.Popen(command, close_fds=True, pass_fds=pass_fds)
 deadline = time.monotonic() + timeout
 timed_out = False
+disk_breached = False
 stop_requested = False
 def request_stop(_signum, _frame):
     global stop_requested
@@ -116,11 +141,18 @@ try:
     while proc.poll() is None and time.monotonic() < deadline and not stop_requested:
         collect()
         reap_adopted(proc.pid)
+        if not disk_floor_met():
+            disk_breached = True
+            break
         time.sleep(0.025)
     collect()
     reap_adopted(proc.pid)
-    if proc.poll() is None and (time.monotonic() >= deadline or stop_requested):
-        timed_out = True
+    if not disk_floor_met():
+        disk_breached = True
+    if proc.poll() is None and (
+        time.monotonic() >= deadline or stop_requested or disk_breached
+    ):
+        timed_out = not disk_breached
         signal_live(signal.SIGTERM)
         settle(proc, 2)
         signal_live(signal.SIGKILL)
@@ -143,8 +175,12 @@ try:
         proc.wait(timeout=3)
     except subprocess.TimeoutExpired:
         raise SystemExit(125)
-    if live or timed_out or leaked_descendant:
-        raise SystemExit(125 if live else 124)
+    if live:
+        raise SystemExit(125)
+    if disk_breached:
+        raise SystemExit(123)
+    if timed_out or leaked_descendant:
+        raise SystemExit(124)
     raise SystemExit(proc.returncode)
 finally:
     if proc.poll() is None:
@@ -185,8 +221,43 @@ def _require_supervisor_support():
         pytest.fail("host Python must provide psutil for owned-process discovery")
 
 
-def _run_reaped(command, *, env, timeout, pass_fds=()):
+def _run_reaped(
+    command,
+    *,
+    env,
+    timeout,
+    pass_fds=(),
+    disk_paths: tuple[Path, ...] = (),
+    minimum_free_bytes: int | None = None,
+):
     _require_supervisor_support()
+    if minimum_free_bytes is None:
+        if disk_paths:
+            raise ValueError("disk_paths require minimum_free_bytes")
+        normalized_disk_paths: tuple[Path, ...] = ()
+    else:
+        if (
+            isinstance(minimum_free_bytes, bool)
+            or not isinstance(minimum_free_bytes, int)
+            or minimum_free_bytes <= 0
+            or not disk_paths
+        ):
+            raise ValueError("positive disk floor and one or more disk paths required")
+        normalized: list[Path] = []
+        for path in disk_paths:
+            if not isinstance(path, Path):
+                raise TypeError("disk_paths must contain Path values")
+            resolved = path.resolve(strict=True)
+            if (
+                path.is_symlink()
+                or not resolved.is_dir()
+                or len(os.fsencode(resolved)) > 4096
+            ):
+                raise ValueError("disk monitoring requires existing real directories")
+            normalized.append(resolved)
+        if len(normalized) > 8 or len(set(normalized)) != len(normalized):
+            raise ValueError("disk monitoring paths must be unique and bounded")
+        normalized_disk_paths = tuple(normalized)
     outer_timeout = timeout + 15
     supervisor_command = [
         sys.executable,
@@ -194,6 +265,8 @@ def _run_reaped(command, *, env, timeout, pass_fds=()):
         _SUPERVISOR,
         str(timeout),
         ",".join(str(fd) for fd in pass_fds),
+        str(minimum_free_bytes) if minimum_free_bytes is not None else "",
+        json.dumps([str(path) for path in normalized_disk_paths]),
         "--",
         *command,
     ]
@@ -269,9 +342,55 @@ def test_subreaper_accepts_a_clean_command_without_rcc():
     assert b"CLEAN_OWNED_PROCESS" in stdout
 
 
+def test_supervisor_rejects_pre_spawn_disk_floor_breach(tmp_path: Path):
+    _require_supervisor_support()
+    marker = tmp_path / "must-not-run"
+    free_bytes = shutil.disk_usage(tmp_path).free
+    status, stdout, _stderr = _run_reaped(
+        [
+            sys.executable,
+            "-c",
+            "from pathlib import Path; Path(%r).touch()" % str(marker),
+        ],
+        env={"PATH": os.environ.get("PATH", "")},
+        timeout=5,
+        disk_paths=(tmp_path,),
+        minimum_free_bytes=free_bytes + 1,
+    )
+    assert status == 123
+    assert stdout == b""
+    assert not marker.exists()
+
+
+def test_supervisor_stops_and_reaps_process_when_disk_path_disappears(
+    tmp_path: Path,
+):
+    _require_supervisor_support()
+    monitored = tmp_path / "monitored"
+    monitored.mkdir()
+    pid_file = tmp_path / "command.pid"
+    script = (
+        "import os,time\n"
+        "from pathlib import Path\n"
+        "Path(%r).write_text(str(os.getpid()))\n"
+        "time.sleep(0.3)\n"
+        "os.rmdir(%r)\n"
+        "time.sleep(30)\n"
+    ) % (str(pid_file), str(monitored))
+    status, _stdout, _stderr = _run_reaped(
+        [sys.executable, "-c", script],
+        env={"PATH": os.environ.get("PATH", "")},
+        timeout=5,
+        disk_paths=(monitored,),
+        minimum_free_bytes=1,
+    )
+    assert status == 123
+    child_pid = int(pid_file.read_text())
+    with pytest.raises(ProcessLookupError):
+        os.kill(child_pid, 0)
+
+
 def test_rcc_no_build_env_exec_forwards_one_inherited_pipe_fd(tmp_path: Path):
-    if os.environ.get("ACTIONS_REAL_RCC_FD_TEST") != "1":
-        pytest.skip("set ACTIONS_REAL_RCC_FD_TEST=1 for the opt-in real RCC check")
     rcc_value = os.environ.get("ACTIONS_RUNTIME_RCC_BINARY")
     if not rcc_value:
         pytest.fail("ACTIONS_RUNTIME_RCC_BINARY is required for the real RCC check")
