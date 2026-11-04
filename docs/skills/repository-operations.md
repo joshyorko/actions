@@ -7192,3 +7192,9 @@ before requesting cancellation. A source-only synthetic adapter test verifies
 authority and tamper rejection but does not establish real process cleanup.
 The hosted SQLite gate requires both the happy path and the live cancellation
 case in its JUnit inventory; a skipped or absent case fails the gate.
+The real happy-path fixture also stops its own Task host, starts a fresh host,
+and submits the same completed MCP Task again. It checks the original Task and
+child lineage are reused and no second Robot execution directory appears. This
+is completed-request replay after a test-host restart, not recovery from a
+process crash or a retry of a failed or cancelled Robot. Each MCP app lifespan
+uses a fresh session manager; the manager cannot be started twice.

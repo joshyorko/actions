@@ -696,16 +696,7 @@ def _real_vertical(
                 )
             ]
 
-    helper = McpServerSetupHelper(canvas_foundry=Canvas(), task_service=tasks)
-    app = helper.server.streamable_http_app(
-        streamable_http_path="/mcp",
-        json_response=True,
-        stateless_http=True,
-        transport_security=helper.transport_security,
-    )
     from actions.server.mcp.gateway_metadata import McpRequestMetadataMiddleware
-
-    gateway = McpRequestMetadataMiddleware(app)
 
     try:
         host.start()
@@ -713,6 +704,15 @@ def _real_vertical(
         async def submit_through_mcp():
             import httpx2
 
+            # Each lifespan owns a one-shot MCP session manager.
+            helper = McpServerSetupHelper(canvas_foundry=Canvas(), task_service=tasks)
+            app = helper.server.streamable_http_app(
+                streamable_http_path="/mcp",
+                json_response=True,
+                stateless_http=True,
+                transport_security=helper.transport_security,
+            )
+            gateway = McpRequestMetadataMiddleware(app)
             async with app.router.lifespan_context(app):
                 async with httpx2.AsyncClient(
                     transport=httpx2.ASGITransport(app=gateway),
@@ -917,6 +917,37 @@ def _real_vertical(
             "child_run_id": child_id,
             "core_wheel_sha256": core_hash,
         }
+        # A fresh test-owned host must not execute an idempotent replay again.
+        # This checks completed replay across host restart, not crash recovery.
+        assert host.close(30)
+        restarted = DetachedTaskHost(
+            authority,
+            actor=actor,
+            worker_id=str(uuid4()),
+            profile=snapshot.worker,
+            prepared=action_prepared,
+            rcc=rcc,
+            execution_root=execution_root,
+            policy=host.policy,
+            capability_runner=capability_runner,
+        )
+        try:
+            restarted.start()
+            tasks.readiness = restarted
+            replay = asyncio.run(submit_through_mcp())
+            assert replay["taskId"] == parent_id
+            time.sleep(0.5)
+            assert not restarted.failed
+            with c.db.connect():
+                replay_lineage = c.db.all(
+                    RunChildLineage, where="parent_run_id=?", values=[parent_id]
+                )
+                assert len(replay_lineage) == 1
+                assert replay_lineage[0].child_run_id == child_id
+                assert _one(c.db, Run, child_id).status == RunStatus.PASSED
+                assert len(list((execution_root / "robot").iterdir())) == 1
+        finally:
+            assert restarted.close(30), "restarted Task host failed to settle"
     finally:
         assert host.close(30), "real Task host failed to settle"
 
