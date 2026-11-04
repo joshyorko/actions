@@ -506,6 +506,28 @@ class TaskService:
                     ),
                     None,
                 )
+            if (
+                intent is None
+                and run.status == RunStatus.CANCELLED
+                and pin.current_attempt_id
+            ):
+                from actions.server.run_outputs.cancellation_confirmation import (
+                    validate_standalone_stopped_cancellation,
+                )
+
+                validate_standalone_stopped_cancellation(
+                    self.db, self.outputs.capabilities, snapshot, run, pin
+                )
+                return TaskSnapshot(
+                    run.id,
+                    "cancelled",
+                    int(receipt.created_ms),
+                    int(pin.state_updated_ms),
+                    int(receipt.ttl_ms),
+                    self.policy.poll_interval_ms,
+                    "Cancelled; execution stopped and descendants reaped.",
+                    None,
+                )
             if not pin.current_attempt_id:
                 if run.status == RunStatus.CANCELLED and pin.cancel_requested == 1:
                     status, message = "cancelled", "Cancelled before execution."

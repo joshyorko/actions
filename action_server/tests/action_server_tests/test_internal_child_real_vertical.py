@@ -1,3 +1,4 @@
+# ruff: noqa: F811 - imported fixtures are injected by pytest.
 """Opt-in installed Core/RCC Action-to-Robot vertical through MCP Task admission.
 
 This test consumes exact installed Runtime/Core/Work Items host wheels and two
@@ -442,11 +443,13 @@ def real_vertical_inputs():
     return inputs
 
 
-def test_real_mcp_action_submits_detached_rcc_robot(
+def _real_vertical(
     real_vertical_inputs,
-    admitted,  # noqa: F811
+    admitted,
     foundry_package_store,
     tmp_path,
+    *,
+    cancel_child=False,
 ):
     (
         action_receipt_path,
@@ -532,6 +535,13 @@ def test_real_mcp_action_submits_detached_rcc_robot(
         },
         {"path": "package.yaml", "content": robot_manifest.decode("utf-8")},
     ]
+    if cancel_child:
+        robot_data["files"][0]["content"] = (
+            "*** Settings ***\nLibrary    OperatingSystem\n"
+            "*** Tasks ***\nOwned\n"
+            "    Create File    %{TMPDIR}/child-started    ready\n"
+            "    Sleep    45 seconds\n"
+        )
     robot_request = RobotPackageRequest.model_validate_json(json.dumps(robot_data))
     robot_evidence = registry.prepare_trusted_robot(
         robot_request,
@@ -760,6 +770,47 @@ def test_real_mcp_action_submits_detached_rcc_robot(
                         RunStatus.FAILED,
                     ):
                         break
+            if cancel_child and lineage:
+                marker = list((execution_root / "robot").glob("*/tmp/child-started"))
+                if marker:
+                    assert len(marker) == 1
+                    assert child.status == RunStatus.RUNNING
+                    grant_authority(
+                        c.db,
+                        actor,
+                        workspace,
+                        "application",
+                        str(robot_deployment.ref.deployment_id.root),
+                        ["cancel_execution"],
+                    )
+                    assert authority.cancel(actor, child_id)
+                    cancel_deadline = time.monotonic() + 30
+                    while time.monotonic() < cancel_deadline:
+                        with c.db.connect():
+                            child = _one(c.db, Run, child_id)
+                        if child.status == RunStatus.CANCELLED:
+                            break
+                        if host.failed:
+                            break
+                        time.sleep(0.1)
+                    assert (
+                        child.status == RunStatus.CANCELLED
+                    ), f"child_status={child.status}, host_failed={host.failed}, result={child.result!r}"
+                    assert not host.failed
+                    from actions.internal_runtime import ChildRunHandle, ChildRunState
+
+                    from actions.server.foundry.internal_child_lifecycle import (
+                        InternalChildRunLifecycle,
+                    )
+                    from actions.server.run_outputs.models import RunPin
+
+                    with c.db.connect(), c.db.transaction():
+                        pin = _one(c.db, RunPin, child_id)
+                        projected = InternalChildRunLifecycle(
+                            authority
+                        )._project_status(c.db, ChildRunHandle(id=child_id), child, pin)
+                    assert projected.state == ChildRunState.CANCELLED
+                    return
             if parent.status == RunStatus.FAILED:
                 # The test owns this deployment and its inputs. Preserve the
                 # bounded RCC failure log before ending a definitively failed run.
@@ -868,3 +919,21 @@ def test_real_mcp_action_submits_detached_rcc_robot(
         }
     finally:
         assert host.close(30), "real Task host failed to settle"
+
+
+def test_real_mcp_action_submits_detached_rcc_robot(
+    real_vertical_inputs, admitted, foundry_package_store, tmp_path
+):
+    _real_vertical(real_vertical_inputs, admitted, foundry_package_store, tmp_path)
+
+
+def test_real_child_live_cancellation_probe(
+    real_vertical_inputs, admitted, foundry_package_store, tmp_path
+):
+    _real_vertical(
+        real_vertical_inputs,
+        admitted,
+        foundry_package_store,
+        tmp_path,
+        cancel_child=True,
+    )

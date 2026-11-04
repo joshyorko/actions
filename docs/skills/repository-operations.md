@@ -7172,3 +7172,21 @@ workflow. Its Linux PostgreSQL fixture is disposable CI state, not authority to
 create roles, grants or credentials in a separate environment. Its startup and
 `always()` cleanup handle ordinary step failures; runner loss cannot be proven
 clean by a local Docker double and must be reported from actual CI evidence.
+
+### Standalone Robot cancellation evidence
+
+An active standalone Robot cancellation is only terminal after the original
+worker confirms the exact retained launch stopped and its descendants were
+reaped. The confirmation checks the retained Run and Attempt, pinned selection,
+caller and current cancellation authorization in the same transaction. It does
+not restore the live fence, publish outputs, or authorize a retry. Host shutdown,
+missing cleanup evidence, changed launch or Attempt, and revoked authority must
+not be treated as confirmation. Standalone Task and internal-child status reads
+validate that stopped-launch record before reporting cancellation; a cancellation
+request alone remains pending.
+
+For installed-runtime evidence, run the opt-in real Action-to-Robot vertical
+with the separately prepared RCC homes, exact host wheel hashes, and its retained
+disk floor. The live cancellation probe waits for a marker written by the Robot
+before requesting cancellation. A source-only synthetic adapter test verifies
+authority and tamper rejection but does not establish real process cleanup.

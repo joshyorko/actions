@@ -15,6 +15,7 @@ from actions.server.run_outputs.models import (
 )
 from actions.server.run_outputs.service import (
     AccessDenied,
+    FenceRejected,
     _one,
     _returning,
     _transaction,
@@ -199,9 +200,8 @@ class InternalChildRunLifecycle:
 
         return operation_context()
 
-    @staticmethod
     def _project_status(
-        db, handle: ChildRunHandle, run: Run, pin: RunPin
+        self, db, handle: ChildRunHandle, run: Run, pin: RunPin
     ) -> ChildRunStatus:
         """Project canonical lifecycle only; never expose result or output data."""
         if pin.cancel_requested not in (0, 1):
@@ -236,12 +236,25 @@ class InternalChildRunLifecycle:
                 RunStatus.RUNNING: "running",
                 RunStatus.PASSED: "succeeded",
                 RunStatus.FAILED: "failed",
+                RunStatus.CANCELLED: "cancelled",
             }.get(run.status)
-            # Active cancellation confirmation is specific to Task receipts in
-            # the current Runtime. Never infer a stopped child process from a
-            # cancellation request or an untyped terminal Run state.
             if expected_attempt is None or attempt.state != expected_attempt:
                 raise AccessDenied("Internal child lifecycle unavailable")
+            if run.status == RunStatus.CANCELLED:
+                from actions.server.run_outputs.cancellation_confirmation import (
+                    validate_standalone_stopped_cancellation,
+                )
+
+                try:
+                    validate_standalone_stopped_cancellation(
+                        db,
+                        self.outputs.capabilities,
+                        self.outputs._pinned(pin),
+                        run,
+                        pin,
+                    )
+                except FenceRejected:
+                    raise AccessDenied("Internal child lifecycle unavailable") from None
         elif attempts or pin.epoch != 0:
             raise AccessDenied("Internal child lifecycle unavailable")
 
@@ -268,8 +281,10 @@ class InternalChildRunLifecycle:
             pin.cancel_requested != 0 or run.result is not None
         ):
             raise AccessDenied("Internal child lifecycle unavailable")
-        if state is ChildRunState.CANCELLED and (
-            pin.current_attempt_id or run.result is not None
+        if (
+            state is ChildRunState.CANCELLED
+            and not pin.current_attempt_id
+            and run.result is not None
         ):
             raise AccessDenied("Internal child lifecycle unavailable")
         return ChildRunStatus(handle=handle, state=state)

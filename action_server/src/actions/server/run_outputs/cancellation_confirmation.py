@@ -7,6 +7,7 @@ from actions.server._models import Run, RunStatus
 from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
 from actions.server.foundry.robot_execution import RobotCancellationStopped
 from actions.server.foundry.robot_journal import _launch
+from actions.server.foundry.standalone_execution import StandaloneActionExecution
 from actions.server.managed_work_items.contracts import Permission
 from actions.server.run_outputs.claimed_intent import claimed_intent
 from actions.server.run_outputs.claimed_task_state import validate_claimed_cancellation
@@ -23,8 +24,107 @@ from actions.server.run_outputs.service import (
     _canonical,
     _lock_run,
     _one,
+    _transaction,
     _update,
 )
+
+
+def confirm_standalone_robot_cancellation(service, caller, ticket, outcome) -> Run:
+    """Confirm an authorized cancellation only for the exact stopped launch."""
+    if (
+        type(service) is not StandaloneActionExecution
+        or ticket.claim is not None
+        or type(outcome) is not RobotCancellationStopped
+        or not outcome.cleanup.descendant_reap_complete
+        or outcome.launch.fence != ticket.fence
+        or outcome.launch.selection.snapshot != service.snapshot
+        or caller.worker_id != ticket.fence.owner_id
+    ):
+        raise FenceRejected("exact stopped standalone Robot launch required")
+    fence = ticket.fence
+    with _transaction(service.db):
+        pin = _lock_run(service.db, fence.run_id)
+        run = _one(service.db, Run, fence.run_id)
+        attempt = _one(service.db, RunAttempt, fence.attempt_id)
+        service.current(caller)
+        service.base._authorize(caller.actor, service.snapshot, "cancel")
+        if (
+            run.status != RunStatus.RUNNING
+            or pin.cancel_requested != 1
+            or pin.current_attempt_id != fence.attempt_id
+            or pin.epoch != fence.epoch
+            or pin.admission_principal_id != caller.actor.principal_id
+            or attempt.run_id != run.id
+            or attempt.owner_id != fence.owner_id
+            or attempt.epoch != fence.epoch
+            or attempt.state != "running"
+            or service.ticket(caller, run) != ticket
+        ):
+            raise FenceRejected("original cancelled standalone Attempt required")
+        record = json.loads(run.result)
+        if record.get("launch") != _launch(outcome.launch):
+            raise FenceRejected("stopped Robot launch differs")
+        _advance_lifecycle(service.db, run.id)
+        record["cancellation"] = {
+            "version": "actions.robot-cancellation/v1",
+            "confirmed_ms": _one(service.db, RunPin, run.id).state_updated_ms,
+            "execution_stopped": True,
+            "descendants_reaped": True,
+        }
+        _update(service.db, RunAttempt, fence.attempt_id, {"state": "cancelled"})
+        _update(
+            service.db,
+            Run,
+            run.id,
+            {
+                "status": RunStatus.CANCELLED,
+                "result": _canonical(record, MAX_RESULT_BYTES),
+            },
+        )
+        result = _one(service.db, Run, run.id)
+        validate_standalone_stopped_cancellation(
+            service.db,
+            service.registry,
+            service.snapshot,
+            result,
+            _one(service.db, RunPin, run.id),
+        )
+        return result
+
+
+def validate_standalone_stopped_cancellation(db, registry, snapshot, run, pin):
+    """Validate retained stopped evidence for reads without granting execution."""
+    from actions.server.foundry.robot_receipts import validate_robot_record
+    from actions.server.run_outputs.types import AttemptFence
+
+    if (
+        run.status != RunStatus.CANCELLED
+        or pin.cancel_requested != 1
+        or not pin.current_attempt_id
+    ):
+        raise FenceRejected("stopped standalone Robot cancellation required")
+    attempt = _one(db, RunAttempt, pin.current_attempt_id)
+    fence = AttemptFence(
+        run_id=run.id,
+        attempt_id=attempt.id,
+        owner_id=attempt.owner_id,
+        epoch=attempt.epoch,
+    )
+    try:
+        record = json.loads(run.result)
+    except (TypeError, ValueError):
+        raise FenceRejected("stopped Robot record unavailable") from None
+    validate_robot_record(
+        db,
+        registry,
+        snapshot,
+        run,
+        fence,
+        record,
+        claim=None,
+        terminal=False,
+        _allow_stopped_cancellation=True,
+    )
 
 
 def confirm_claimed_robot_cancellation(service, caller, ticket, outcome) -> Run:
