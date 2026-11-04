@@ -26,6 +26,9 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
+from action_server_tests.test_generic_work_item_execution import (
+    grant as grant_authority,
+)
 from action_server_tests.test_internal_child_admission import (
     _grant_deployment_ref,
     _grant_refs,
@@ -61,7 +64,7 @@ from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 from actions.server.mcp.task_wire import TASK_EXTENSION
 from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import RunChildLineage, RunOutput, RunTaskReceipt
-from actions.server.run_outputs.service import RunOutputControlPlane, _one
+from actions.server.run_outputs.service import AccessDenied, RunOutputControlPlane, _one
 from actions.server.run_outputs.task_host import DetachedTaskHost
 from actions.server.run_outputs.task_service import TaskPolicy, TaskService
 from actions.server.run_outputs.types import OutputRef
@@ -775,6 +778,25 @@ def test_real_mcp_action_submits_detached_rcc_robot(
             "robot-output.xml",
             "robot-stdout.log",
         }
+        denied_ref = OutputRef(
+            workspace_id=str(workspace.root),
+            run_id=child_id,
+            output_id=output_rows[0].id,
+        )
+        with pytest.raises(AccessDenied):
+            with c.outputs.resolve(actor, str(workspace.root), denied_ref.handle):
+                pytest.fail("child output was readable without an application grant")
+        # The observer needs read access to these exact test deployments in
+        # addition to their Run grants.
+        for deployment in (parent_deployment, robot_deployment):
+            grant_authority(
+                c.db,
+                actor,
+                workspace,
+                "application",
+                str(deployment.ref.deployment_id.root),
+                ["read_application"],
+            )
         captured = {}
         for row in output_rows:
             ref = OutputRef(

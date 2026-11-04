@@ -43,6 +43,27 @@ def _child(admitted):
     return outcome.run, ChildRunHandle(outcome.run.id)
 
 
+def test_robot_read_requires_exact_application_grant(admitted):
+    capability = admitted.registry.capability_refs(admitted.robot_ref)[0]
+    snapshot = admitted.deployments.resolve(
+        admitted.actor,
+        admitted.workspace,
+        admitted.robot_revision.ref.deployment_id,
+        capability,
+    ).snapshot
+    with pytest.raises(AccessDenied):
+        admitted.registry.authorize(admitted.actor, snapshot, "read")
+    grant_authority(
+        admitted.db,
+        admitted.actor,
+        admitted.workspace,
+        "application",
+        str(admitted.robot_revision.ref.deployment_id.root),
+        ["read_application"],
+    )
+    admitted.registry.authorize(admitted.actor, snapshot, "read")
+
+
 def test_child_status_and_pending_cancel_use_only_exact_lineage(admitted):
     run, handle = _child(admitted)
     lifecycle = InternalChildRunLifecycle(admitted.detached)
