@@ -602,7 +602,49 @@ class GenericWorkItemExecution:
         if claim and run.status not in (RunStatus.PASSED, RunStatus.FAILED):
             self.queue(self.policy.input_queue)._require(claim)
         if pin.current_attempt_id:
-            return self._ticket(caller, claim, run)
+            if pin.recovery_epoch != pin.epoch or not pin.recovery_receipt:
+                return self._ticket(caller, claim, run)
+            attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+            try:
+                record = json.loads(run.result or "null")
+                prior = (
+                    ClaimValue.model_validate(record["claim"])
+                    if claim is not None
+                    else None
+                )
+                if prior is not None and (
+                    prior.item_id != claim.item_id
+                    or prior.owner_id != attempt.owner_id
+                    or prior.epoch < 1
+                    or prior.epoch > claim.epoch
+                    or (prior.epoch == claim.epoch and prior.owner_id != claim.owner_id)
+                ):
+                    raise ValueError("recovery claim differs")
+                expected = {
+                    "version": versions_for_selection(self.registry, self.snapshot)[0],
+                    "mode": "work-items" if claim else "standalone",
+                    "claim": prior.model_dump() if prior else None,
+                    "fence": AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=pin.epoch,
+                    ).model_dump(),
+                    "launch": None,
+                }
+                if (
+                    run.status != RunStatus.RUNNING
+                    or attempt.run_id != run.id
+                    or attempt.workspace_id != pin.workspace_id
+                    or attempt.state != "running"
+                    or attempt.epoch != pin.epoch
+                    or _canonical(record, 65536) != _canonical(expected, 65536)
+                ):
+                    raise ValueError("recovery journal differs")
+            except (ValueError, TypeError, KeyError):
+                raise FenceRejected(
+                    "recovery requires an unchanged pre-launch journal; retained launch requires reconciliation"
+                ) from None
         fence = self.base.claim(run.id, caller.worker_id, lease_seconds=lease_seconds)
         _update(
             self.db,

@@ -7266,11 +7266,12 @@ from the demonstrated rejection of a replacement Attempt.
 The bounded model and SQL replays in
 `.agents/skills/verify-run-lifecycle/` distinguish safety from recovery progress.
 The standalone pre-launch path can replace an expired explicitly authorized
-Attempt. Generic claimed execution cannot currently advance an existing Run
-under a fresh Work Item claim, even before launch and after no-effect recovery
-authorization; its retained claim validation rejects the new epoch. This is a
-missing progression, not proof of successful recovery. Do not remove the
-retained-launch guard to address it: that admits duplicate-execution states.
+Attempt. Generic claimed execution requires the same current-epoch no-effect
+authorization, a closed unchanged journal with no launch, and a live valid claim
+before replacing an expired Attempt. It preserves the Run and rebinds the claim
+while fencing the old worker. A changed claim identity, journal or fence is not
+recovery proof. Retained launches still require reconciliation; removing that
+guard admits duplicate-execution states.
 Cancellation intent likewise remains distinct from exact stopped/reaped-launch
 confirmation. Follow the skill's source mapping, bounds and mutation checks
 before interpreting a model counterexample as a Runtime defect.
