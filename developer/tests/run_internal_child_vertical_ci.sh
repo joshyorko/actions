@@ -97,10 +97,20 @@ uvx --from poetry==2.1.1 --with poetry-plugin-export==1.9.0 poetry build -f whee
 cd "$repo_root/work-items"
 uvx --from poetry==2.1.1 --with poetry-plugin-export==1.9.0 poetry build -f wheel -o "$wheelhouse"
 
-runtime_wheel="$(find "$wheelhouse" -maxdepth 1 -type f -name 'actions_runtime-*.whl' -print -quit)"
-core_wheel="$(find "$wheelhouse" -maxdepth 1 -type f -name 'actions_core-*.whl' -print -quit)"
-work_items_wheel="$(find "$wheelhouse" -maxdepth 1 -type f -name 'actions_work_items-*.whl' -print -quit)"
-helper_wheel="$(find "$wheelhouse" -maxdepth 1 -type f -name 'actions_http_helper-*.whl' -print -quit)"
+one_wheel() {
+  python3 - "$wheelhouse" "$1" <<'PY'
+import sys
+from pathlib import Path
+matches = sorted(Path(sys.argv[1]).glob(sys.argv[2]))
+if len(matches) != 1 or not matches[0].is_file():
+    raise SystemExit('exactly one wheel is required for ' + sys.argv[2])
+print(matches[0])
+PY
+}
+runtime_wheel="$(one_wheel 'actions_runtime-*.whl')"
+core_wheel="$(one_wheel 'actions_core-*.whl')"
+work_items_wheel="$(one_wheel 'actions_work_items-*.whl')"
+helper_wheel="$(one_wheel 'actions_http_helper-*.whl')"
 for wheel in "$runtime_wheel" "$core_wheel" "$work_items_wheel" "$helper_wheel"; do
   test -n "$wheel" && test -f "$wheel"
 done

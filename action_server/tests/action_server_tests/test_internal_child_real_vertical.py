@@ -26,14 +26,13 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
-
-from action_server_tests.test_internal_child_admission import (  # noqa: F811
-    admitted as admitted,
-)
 from action_server_tests.test_internal_child_admission import (
     _grant_deployment_ref,
     _grant_refs,
     _reference_grants_for_package,
+)
+from action_server_tests.test_internal_child_admission import (  # noqa: F811
+    admitted as admitted,
 )
 from action_server_tests.test_robot_package_admission import request_for
 from contract_tests.test_package_revision_compiler import _entry
@@ -42,6 +41,7 @@ from mcp.client.streamable_http import streamable_http_client
 from mcp.types import CallToolRequestParams, Request, Tool
 from pydantic import TypeAdapter
 
+from actions.server._models import Run, RunStatus
 from actions.server.deployments.foundry_values import (
     CapabilityPlanPolicy,
     DeploymentSpecification,
@@ -65,7 +65,6 @@ from actions.server.run_outputs.service import RunOutputControlPlane, _one
 from actions.server.run_outputs.task_host import DetachedTaskHost
 from actions.server.run_outputs.task_service import TaskPolicy, TaskService
 from actions.server.run_outputs.types import OutputRef
-from actions.server._models import Run, RunStatus
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 pytestmark = pytest.mark.skipif(
@@ -90,15 +89,15 @@ def _required_inputs() -> tuple[Path, Path, Path, str, Path, Path, str, Path, st
     if os.environ.get(_OPT_IN) != "1":
         pytest.skip(f"set {_OPT_IN}=1 to run the real Action-to-Robot vertical")
     values = {
-        _ACTION_RECEIPT: os.environ.get(_ACTION_RECEIPT),
-        _ROBOT_RECEIPT: os.environ.get(_ROBOT_RECEIPT),
-        _CORE_WHEEL: os.environ.get(_CORE_WHEEL),
-        _CORE_SHA256: os.environ.get(_CORE_SHA256),
-        _RUNTIME_WHEEL: os.environ.get(_RUNTIME_WHEEL),
-        _RUNTIME_SHA256: os.environ.get(_RUNTIME_SHA256),
-        _WORK_ITEMS_WHEEL: os.environ.get(_WORK_ITEMS_WHEEL),
-        _WORK_ITEMS_SHA256: os.environ.get(_WORK_ITEMS_SHA256),
-        _RCC: os.environ.get(_RCC),
+        _ACTION_RECEIPT: os.environ.get(_ACTION_RECEIPT, ""),
+        _ROBOT_RECEIPT: os.environ.get(_ROBOT_RECEIPT, ""),
+        _CORE_WHEEL: os.environ.get(_CORE_WHEEL, ""),
+        _CORE_SHA256: os.environ.get(_CORE_SHA256, ""),
+        _RUNTIME_WHEEL: os.environ.get(_RUNTIME_WHEEL, ""),
+        _RUNTIME_SHA256: os.environ.get(_RUNTIME_SHA256, ""),
+        _WORK_ITEMS_WHEEL: os.environ.get(_WORK_ITEMS_WHEEL, ""),
+        _WORK_ITEMS_SHA256: os.environ.get(_WORK_ITEMS_SHA256, ""),
+        _RCC: os.environ.get(_RCC, ""),
     }
     missing = [name for name, value in values.items() if not value]
     if missing:
@@ -192,6 +191,8 @@ def _verify_installed_wheel(
                 str(item).replace("\\", "/"): item for item in (dist.files or [])
             }
             module = importlib.import_module(import_name)
+            if module.__file__ is None:
+                raise AssertionError(f"{import_name} has no module file")
             module_path = Path(module.__file__).resolve()
             relevant = sorted(package_members)
             if not relevant:
@@ -199,10 +200,10 @@ def _verify_installed_wheel(
             for name in relevant:
                 item = installed_files.get(name)
                 if item is None:
-                    pytest.fail(
+                    raise AssertionError(
                         f"installed {distribution_name} omits wheel member {name}"
                     )
-                installed_path = Path(dist.locate_file(item)).resolve()
+                installed_path = Path(str(dist.locate_file(item))).resolve()
                 if (
                     not installed_path.is_file()
                     or installed_path.read_bytes() != archive.read(name)
@@ -211,7 +212,7 @@ def _verify_installed_wheel(
                         f"installed {distribution_name} bytes differ for {name}"
                     )
             module_candidates = [
-                Path(dist.locate_file(installed_files[n])).resolve()
+                Path(str(dist.locate_file(installed_files[n]))).resolve()
                 for n in relevant
                 if n.endswith("/__init__.py") or n.endswith(".py")
             ]
@@ -221,7 +222,7 @@ def _verify_installed_wheel(
                 )
             return wheel_version
     except (OSError, KeyError, zipfile.BadZipFile, UnicodeDecodeError) as exc:
-        pytest.fail(f"{distribution_name} wheel is unreadable: {exc}")
+        raise AssertionError(f"{distribution_name} wheel is unreadable: {exc}") from exc
 
 
 def _verify_host_wheel_origins(inputs) -> None:
@@ -294,7 +295,9 @@ def _wheel_identity(core_wheel: Path) -> tuple[str, dict[str, dict[str, object]]
                 pytest.fail("candidate Core wheel RECORD self-entry is invalid")
             return version, result
     except (OSError, KeyError, zipfile.BadZipFile, UnicodeDecodeError) as exc:
-        pytest.fail(f"candidate Core wheel metadata is unreadable: {exc}")
+        raise AssertionError(
+            f"candidate Core wheel metadata is unreadable: {exc}"
+        ) from exc
 
 
 def _load_prepared(
@@ -314,7 +317,7 @@ def _load_prepared(
     text = manifest.decode("utf-8", errors="strict")
     if core_wheel is not None:
         if expected_hash is None or core_version is None:
-            pytest.fail("complete candidate Core identity required")
+            raise AssertionError("complete candidate Core identity required")
         if not re.search(
             rf"(?m)^\s*-\s*actions-core={re.escape(core_version)}\s*$", text
         ):

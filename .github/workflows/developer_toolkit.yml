@@ -177,8 +177,6 @@ jobs:
     timeout-minutes: 80
     permissions:
       contents: read
-    env:
-      UV_CACHE_DIR: ${{ runner.temp }}/actions340-uv-cache
     steps:
       - uses: actions/checkout@v4
         with:
@@ -187,6 +185,8 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Run installed Action to Robot vertical
         shell: bash
+        env:
+          UV_CACHE_DIR: ${{ runner.temp }}/actions340-uv-cache
         run: |
           set -Eeuo pipefail
           python3 - <<'PY'
@@ -229,12 +229,18 @@ jobs:
                       if parsed.username is not None or parsed.password is not None:
                           raise SystemExit('proxy credentials are not accepted')
                   env[name] = value
+          log = temp / 'actions340-vertical-command.log'
           status, stdout, stderr = module._run_reaped(
-              ['bash', str(repo / 'developer/tests/run_internal_child_vertical_ci.sh')],
+              ['bash', '-c', 'exec bash "$1" >"$2" 2>&1', 'actions340',
+               str(repo / 'developer/tests/run_internal_child_vertical_ci.sh'), str(log)],
               env=env, timeout=4500, disk_paths=(temp,), minimum_free_bytes=10_803_773_440,
           )
           sys.stdout.buffer.write(stdout)
           sys.stderr.buffer.write(stderr)
+          if log.is_file():
+              with log.open('rb') as stream:
+                  stream.seek(max(0, log.stat().st_size - 32768))
+                  sys.stdout.buffer.write(stream.read(32768))
           raise SystemExit(status)
           PY
       - name: Upload installed vertical receipt

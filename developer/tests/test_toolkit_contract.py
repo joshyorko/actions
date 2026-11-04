@@ -186,6 +186,25 @@ def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
     )
 
 
+def test_installed_child_job_uses_step_scoped_runner_context() -> None:
+    workflow = yaml.safe_load(
+        (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
+    )
+    job = workflow["jobs"]["installed_internal_child_vertical"]
+    assert "runner." not in str(job.get("env", {}))
+    assert job["permissions"] == {"contents": "read"}
+    assert job["steps"][0]["with"]["persist-credentials"] is False
+    run = next(
+        step
+        for step in job["steps"]
+        if step.get("name") == "Run installed Action to Robot vertical"
+    )
+    assert "runner.temp" in run["env"]["UV_CACHE_DIR"]
+    assert "minimum_free_bytes=10_803_773_440" in run["run"]
+
+
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     shell = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.sh").read_text()
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
