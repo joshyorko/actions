@@ -529,7 +529,7 @@ def test_real_mcp_action_submits_detached_rcc_robot(
         },
         {"path": "package.yaml", "content": robot_manifest.decode("utf-8")},
     ]
-    robot_request = RobotPackageRequest.model_validate(robot_data)
+    robot_request = RobotPackageRequest.model_validate_json(json.dumps(robot_data))
     robot_evidence = registry.prepare_trusted_robot(
         robot_request,
         logical_package_key="actions340-real-child-robot-" + uuid4().hex,
