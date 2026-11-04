@@ -46,13 +46,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--runtime-wheel", required=True, type=Path)
+    parser.add_argument("--core-wheel", required=True, type=Path)
     parser.add_argument("--sdk-wheel", required=True, type=Path)
     parser.add_argument("--canvas", required=True, type=Path)
     args = parser.parse_args()
     if not args.output.is_absolute() or args.output.exists():
         raise ValueError("fresh absolute task-owned output required")
-    wheel(args.runtime_wheel, "actions-runtime", "1.1.0a5")
-    wheel(args.sdk_wheel, "actions-work-items", "0.5.0a1")
+    pins = json.loads((EXAMPLE / "template.json").read_text())["pins"]
+    candidates = {
+        "actions-runtime": args.runtime_wheel,
+        "actions-core": args.core_wheel,
+        "actions-work-items": args.sdk_wheel,
+    }
+    for name, path in candidates.items():
+        wheel(path, name, pins[name])
     if (
         not args.canvas.is_absolute()
         or args.canvas.is_symlink()
@@ -75,7 +82,7 @@ def main():
         shutil.copyfile(EXAMPLE / relative, target)
     shutil.copyfile(args.canvas, args.output / "canvas.html")
     (args.output / "wheels").mkdir()
-    for value in (args.runtime_wheel, args.sdk_wheel):
+    for value in candidates.values():
         shutil.copyfile(value, args.output / "wheels" / value.name)
     # Reuse Poetry's graph and the existing verified public-floor constants.
     lock_path = REPOSITORY / "action_server/poetry.lock"
@@ -97,8 +104,11 @@ def main():
     floor = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(floor)
     for name, value in floor.EXPECTED_PUBLIC_PACKAGES.items():
+        if name in candidates:
+            continue
         versions[name] = value["version"]
         hashes[value["url"].rsplit("/", 1)[1]] = value["sha256"]
+    versions.update({name: pins[name] for name in candidates})
     (args.output / "dependencies.constraints").write_text(
         "".join(f"{name}=={version}\n" for name, version in sorted(versions.items()))
     )

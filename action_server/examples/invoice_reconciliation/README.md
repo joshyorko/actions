@@ -1,7 +1,7 @@
 # Synthetic invoice reconciliation
 
-Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.0a5**,
-Work Items **0.5.0a1**, Python **3.12.15** and RCC **18.19.3**. These candidate
+Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.0a60**,
+Core **1.1.0a8**, Work Items **0.5.0a2**, Python **3.12.15** and RCC **18.19.3**. These candidate
 packages are not assumed to exist on PyPI. The engine remains in Actions; this
 example composes its existing SQL, Canvas/MCP, review, worker and artifact APIs.
 It contains no credentials or real business records. Apache-2.0 applies.
@@ -90,8 +90,9 @@ the source SHA and every file hash. Run it from a committed Actions checkout:
 ```bash
 python action_server/examples/invoice_reconciliation/export.py \
   --output /absolute/fresh/owned/export \
-  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a5-cp312-cp312-linux_x86_64.whl \
-  --sdk-wheel /absolute/owned/actions_work_items-0.5.0a1-py3-none-any.whl \
+  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl \
+  --core-wheel /absolute/owned/actions_core-1.1.0a8-py3-none-any.whl \
+  --sdk-wheel /absolute/owned/actions_work_items-0.5.0a2-py3-none-any.whl \
   --canvas /absolute/owned/canvas.html
 ```
 
@@ -99,7 +100,7 @@ In an already prepared **noneditable** candidate consumer with locked provider
 dependencies and pinned RCC, launch the exported example with local inputs:
 
 ```bash
-ACTIONS_INVOICE_SDK_WHEEL=/absolute/owned/export/wheels/actions_work_items-0.5.0a1-py3-none-any.whl \
+ACTIONS_INVOICE_SDK_WHEEL=/absolute/owned/export/wheels/actions_work_items-0.5.0a2-py3-none-any.whl \
 ACTIONS_INVOICE_CANVAS_RESOURCE=/absolute/owned/export/canvas.html \
   python /absolute/owned/export/demo.py --state /absolute/fresh/owned/demo --port 8765
 ```

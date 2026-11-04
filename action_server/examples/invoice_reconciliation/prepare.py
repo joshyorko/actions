@@ -59,6 +59,9 @@ def main():
     args = parser.parse_args()
     bundle = Path(__file__).resolve().parent
     manifest = verify_bundle(bundle)
+    pins = json.loads((bundle / "template.json").read_text())["pins"]
+    sdk_name = f"actions_work_items-{pins['actions-work-items']}-py3-none-any.whl"
+    core_name = f"actions_core-{pins['actions-core']}-py3-none-any.whl"
     dependency_lock = json.loads((bundle / "dependency-hashes.json").read_text())
     if dependency_lock["schema"] != "actions.example-wheel-lock/v1":
         raise ValueError("versioned consumer wheel lock required")
@@ -91,9 +94,7 @@ def main():
         ] != str(bundle):
             raise ValueError("consumer bundle identity differs")
         environment.update(
-            ACTIONS_INVOICE_SDK_WHEEL=str(
-                bundle / "wheels/actions_work_items-0.5.0a1-py3-none-any.whl"
-            ),
+            ACTIONS_INVOICE_SDK_WHEEL=str(bundle / "wheels" / sdk_name),
             ACTIONS_INVOICE_CANVAS_RESOURCE=str(bundle / "canvas.html"),
         )
         os.execve(
@@ -115,7 +116,8 @@ def main():
     venv.create(root / "venv", with_pip=True)
     wheels = root / "wheelhouse"
     wheels.mkdir()
-    sdk = bundle / "wheels/actions_work_items-0.5.0a1-py3-none-any.whl"
+    sdk = bundle / "wheels" / sdk_name
+    core = bundle / "wheels" / core_name
     runtime = next((bundle / "wheels").glob("actions_runtime-*.whl"))
     pip = [
         str(python),
@@ -147,6 +149,7 @@ def main():
                 str(wheels),
                 str(runtime) + "[data-duckdb]",
                 str(sdk),
+                str(core),
             ],
             root / "download.log",
             env=environment,
@@ -155,13 +158,13 @@ def main():
     # The exact downloaded closure, including local candidates, is frozen by hash.
     measured = {p.name: digest(p) for p in sorted(wheels.glob("*.whl"))}
     allowed = dict(
-        dependency_lock["files"], **{p.name: digest(p) for p in (runtime, sdk)}
+        dependency_lock["files"], **{p.name: digest(p) for p in (runtime, sdk, core)}
     )
     if any(allowed.get(name) != value for name, value in measured.items()):
         raise ValueError(
             "downloaded artifact differs from the authoritative dependency lock"
         )
-    for candidate in (runtime, sdk):
+    for candidate in (runtime, sdk, core):
         if measured.get(candidate.name) != digest(candidate):
             raise ValueError("candidate wheel absent or altered in closure")
     (wheels / "wheelhouse.json").write_text(
@@ -186,6 +189,7 @@ def main():
             str(root / "install-report.json"),
             str(wheels / runtime.name) + "[data-duckdb]",
             str(wheels / sdk.name),
+            str(wheels / core.name),
         ],
         root / "install.log",
         env=environment,
@@ -204,7 +208,7 @@ for name in ("actions.server.data_queries.canvas_mcp","actions.work_items","duck
  if module.__file__:
   path=Path(module.__file__).resolve(); assert path.is_relative_to(prefix),path
   result["modules"][name]={"path":str(path),"sha256":hashlib.sha256(path.read_bytes()).hexdigest()}
-for name in ("actions-runtime","actions-work-items"):
+for name in ("actions-runtime","actions-core","actions-work-items"):
  dist=importlib.metadata.distribution(name); origin=json.loads(dist.read_text("direct_url.json")); path=Path(origin["url"].removeprefix("file://")); assert hashlib.sha256(path.read_bytes()).hexdigest()==origin["archive_info"]["hashes"]["sha256"]
  result[name]={"version":dist.version,"origin":origin}
 print(json.dumps(result,indent=2))
