@@ -7190,3 +7190,5 @@ with the separately prepared RCC homes, exact host wheel hashes, and its retaine
 disk floor. The live cancellation probe waits for a marker written by the Robot
 before requesting cancellation. A source-only synthetic adapter test verifies
 authority and tamper rejection but does not establish real process cleanup.
+The hosted SQLite gate requires both the happy path and the live cancellation
+case in its JUnit inventory; a skipped or absent case fails the gate.

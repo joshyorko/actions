@@ -203,6 +203,12 @@ def test_installed_child_job_uses_step_scoped_runner_context() -> None:
     )
     assert "runner.temp" in run["env"]["UV_CACHE_DIR"]
     assert "minimum_free_bytes=10_803_773_440" in run["run"]
+    script = (
+        REPOSITORY_ROOT / "developer/tests/run_internal_child_vertical_ci.sh"
+    ).read_text()
+    assert "test_real_mcp_action_submits_detached_rcc_robot[sqlite]" in script
+    assert "test_real_child_live_cancellation_probe[sqlite]" in script
+    assert "{case.get('name') for case in cases} != expected" in script
 
 
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:

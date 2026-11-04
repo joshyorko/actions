@@ -256,7 +256,10 @@ for name, value in os.environ.items():
         test_env[name] = value
 junit_path = task_root / "junit.xml"
 status, stdout, stderr = module._run_reaped(
-    [sys.executable, "-m", "pytest", "-n", "0", "-vv", "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_mcp_action_submits_detached_rcc_robot[sqlite]", f"--junitxml={junit_path}"],
+    [sys.executable, "-m", "pytest", "-n", "0", "-vv",
+     "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_mcp_action_submits_detached_rcc_robot[sqlite]",
+     "tests/action_server_tests/test_internal_child_real_vertical.py::test_real_child_live_cancellation_probe[sqlite]",
+     f"--junitxml={junit_path}"],
     env=test_env,
     timeout=900,
     disk_paths=(runner_temp,),
@@ -273,8 +276,14 @@ import sys
 from xml.etree import ElementTree
 root = ElementTree.parse(sys.argv[1]).getroot()
 cases = root.findall('.//testcase')
-if len(cases) != 1 or any(cases[0].find(tag) is not None for tag in ('skipped', 'failure', 'error')):
-    raise SystemExit('the SQLite vertical did not execute and pass exactly one test')
+expected = {
+    'test_real_mcp_action_submits_detached_rcc_robot[sqlite]',
+    'test_real_child_live_cancellation_probe[sqlite]',
+}
+if {case.get('name') for case in cases} != expected or len(cases) != len(expected) or any(
+    case.find(tag) is not None for case in cases for tag in ('skipped', 'failure', 'error')
+):
+    raise SystemExit('both SQLite vertical cases must execute and pass')
 PY
 printf 'VERTICAL_EVIDENCE_DIR=%s\nVERTICAL_JUNIT=%s\n' "$task_root" "$task_root/junit.xml"
 phase=complete
