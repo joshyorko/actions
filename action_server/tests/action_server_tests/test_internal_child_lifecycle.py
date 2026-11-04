@@ -62,6 +62,8 @@ def test_robot_read_requires_exact_application_grant(admitted):
         ["read_application"],
     )
     admitted.registry.authorize(admitted.actor, snapshot, "read")
+    with pytest.raises(AccessDenied):
+        admitted.registry.authorize(Actor(principal_id=str(uuid4())), snapshot, "read")
 
 
 def test_child_status_and_pending_cancel_use_only_exact_lineage(admitted):

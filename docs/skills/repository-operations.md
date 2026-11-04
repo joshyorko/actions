@@ -5249,6 +5249,12 @@ or authenticated-client acceptance. Inject domain dispatch/status/artifact
 adapters into the semantic renderer; its logical binding labels confer no
 Runtime capability or authorization.
 
+For Package-backed Robot output reads, a Run read grant does not replace the
+observer's application-read grant for the exact deployment. The SQL-backed
+child lifecycle control verifies denial before that grant and for a different
+principal afterward; granting a test observer does not establish access for
+other actors.
+
 Runtime action import probes must parse the complete PEP 440 Core version and
 compare its numeric release tuple; splitting dotted components with `int`
 rejects provisional Core versions before action discovery. The existing
