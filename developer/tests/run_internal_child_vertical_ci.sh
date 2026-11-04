@@ -89,6 +89,8 @@ for line in source:
             raise SystemExit("unexpected or duplicate local dependency in Poetry export")
         seen.add(expected)
         continue
+    if (stripped.startswith("-") and not stripped.startswith("--hash=")) or " @ " in stripped:
+        raise SystemExit("unsupported dependency option or direct URL in Poetry export")
     result.append(line)
 if not result or seen != set(local_paths.values()):
     raise SystemExit("Poetry export did not contain the expected locked dependencies")
