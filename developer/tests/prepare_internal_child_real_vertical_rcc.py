@@ -280,13 +280,17 @@ def _run_supervised(
     timeout: int,
     minimum_free_bytes: int,
 ) -> bytes:
-    status, stdout, _stderr = run_reaped(
+    status, stdout, stderr = run_reaped(
         command,
         env=env,
         timeout=timeout,
         disk_paths=(Path(env["ROBOCORP_HOME"]), Path(env["TMPDIR"])),
         minimum_free_bytes=minimum_free_bytes,
     )
+    log_root = Path(env["ROBOCORP_HOME"]).parent
+    log_name = "rcc-" + phase.replace(" ", "-")
+    _write_new(log_root / (log_name + ".stdout.log"), stdout)
+    _write_new(log_root / (log_name + ".stderr.log"), stderr)
     if status != 0 or len(stdout) > _MAX_RCC_OUTPUT:
         raise RuntimeError(
             f"bounded RCC {phase} failed or did not settle (status {status})"

@@ -7194,6 +7194,13 @@ an existing regular executable only when its SHA-256 matches the pinned asset;
 it does not overwrite that file. Symlinks, directories, non-executable files and
 different bytes fail admission. The executable shell regression is
 `developer/tests/test_internal_child_vertical_ci.py`.
+Preparation retains each supervised RCC phase's complete stdout/stderr in
+`preparation/<role>/rcc-<phase>.stdout.log` and `.stderr.log`, including failure.
+Read those files before retrying a failed publish/acquire. Supervisor status 124
+means timeout or a live descendant after command exit; it does not identify
+which condition occurred by itself. Probe the chosen host interpreter's
+`os.pidfd_open` and `signal.pidfd_send_signal` support before preparation; a
+Python version match alone does not establish those required capabilities.
 
 An active standalone Robot cancellation is only terminal after the original
 worker confirms the exact retained launch stopped and its descendants were

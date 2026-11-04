@@ -1,12 +1,47 @@
 """Exercise installed-vertical RCC admission without downloads or host mutation."""
 
 import hashlib
+import importlib.util
 import os
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+
+
+@pytest.mark.parametrize("status", [0, 124])
+def test_supervised_rcc_retains_diagnostics_before_reporting_result(tmp_path, status):
+    path = Path(__file__).with_name("prepare_internal_child_real_vertical_rcc.py")
+    spec = importlib.util.spec_from_file_location("vertical_preparation", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    home, temporary = tmp_path / "robocorp-home", tmp_path / "tmp"
+    home.mkdir()
+    temporary.mkdir()
+
+    def supervised(*args, **kwargs):
+        return status, b"owned RCC stdout", b"owned RCC stderr"
+
+    def run():
+        return module._run_supervised(
+            supervised,
+            ["rcc", "env", "acquire"],
+            {"ROBOCORP_HOME": str(home), "TMPDIR": str(temporary)},
+            "acquire",
+            120,
+            10803773440,
+        )
+
+    if status:
+        with pytest.raises(RuntimeError, match="status 124"):
+            run()
+    else:
+        assert run() == b"owned RCC stdout"
+    assert (tmp_path / "rcc-acquire.stdout.log").read_bytes() == b"owned RCC stdout"
+    assert (tmp_path / "rcc-acquire.stderr.log").read_bytes() == b"owned RCC stderr"
 
 
 @pytest.mark.skipif(sys.platform != "linux", reason="Linux installed vertical shell")
