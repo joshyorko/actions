@@ -573,7 +573,11 @@ Verify the artifact inventory and report bytes before claiming observations.
 The test-owned observer enables
 only those two native nodes, samples pending initial startup at 80 and 88
 seconds, and delegates unchanged startup and its existing 20-second failure
-cleanup. Reports contain source/executable/config byte identities, an
+cleanup. It wraps only the first synchronized startup with the 90-second
+deadline. At that boundary, `ActionServerProcess.start()` raises `TimeoutError`
+when it has not observed the ready URL on stderr before the deadline; other
+timeout sites in the same test require their own traceback. Reports contain
+source/executable/config byte identities, an
 allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
 cache-file existence and effective-home equality, and registered host-reader
 and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
