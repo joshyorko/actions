@@ -1,18 +1,17 @@
 # Release closure: acceptance and remaining decisions
 
-Runtime implementation checkpoint: `02d7473249733fffff7d9f24e6453fe1d2819021`,
+Runtime implementation checkpoint: `20cddcdd913c838f468f878770e2ba8f31654bb6`,
 [PR #341](https://github.com/joshyorko/actions/pull/341). This is **not a release candidate approval**.
 No merge, publication, tag or deployment is authorized.
 
-RCC18.19.7 now passes Doctor/Bootstrap/ToolkitTest, the hosted five-case installed
-vertical, and five installed SQLite plus five PostgreSQL cases locally. A
-controlled HOME-only counterexample isolated the integration defect; RCC keeps
-a stable cache home while trusted helpers restore private user-code homes.
-The primary-only Runtime wheel also rebuilds byte-identically from its sdist.
-[Exact artifacts, regressions and limits](rcc-18.19.7-bounded-diagnosis.json)
-separate the hosted 9c1a122e wheel from the packaging-corrected 40112c61 wheel.
-Final exact-head CI and remaining contract gates are still required.
-Existing18.19.3 evidence below retains its original identities.
+Primary RCC18.19.8 is published and consumed. Its toolkit lanes pass on
+Linux/Windows/macOS, the installed five-case SQLite vertical passes, and the
+combined invoice gate passes1,032 cases with zero skips on SQLite/PostgreSQL.
+Linux/macOS Runtime and all native builds pass; Windows Runtime is still pending
+at this receipt. The fresh exported installed consumer passes real execution,
+authorization negatives, same-state restart and separate offline package install.
+Earlier [18.19.7 artifacts and regressions](rcc-18.19.7-bounded-diagnosis.json)
+and18.19.3 receipts retain their original binary identities.
 
 The authorities are [#327](https://github.com/joshyorko/actions/issues/327),
 [#328](https://github.com/joshyorko/actions/pull/328),
@@ -32,7 +31,9 @@ MUST FIX includes required missing qualification, not only missing code.
 - **L**: [formal receipt](lifecycle-formal.json), [counterexamples](lifecycle-counterexamples.md), and `.agents/skills/verify-run-lifecycle/`: real pre-launch claimed-recovery defect reproduced on both SQL backends, repaired at the checkpoint above. Twelve focused regression cases, 104 nearby cases and six formal replay cases passed. Configured Runtime lint/typecheck passed (703 files); optional Markdown lint unavailable. Retained uncertain launches remain blocked.
 - **C**: [Linux Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169843), [Windows Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169618), [installed five-case vertical](https://github.com/joshyorko/actions/actions/runs/41893331664/job/126796169037) passed at `9b72b1a22222c426e7fcfa1de53cd45fb6b715d0`. Linux included the separate published-Core Canvas/browser gate. All non-macOS RCC primary/N-1 and native builds passed there. This precedes L and is not final-head CI.
 - **D**: [installed a60 CSV/Parquet component receipt](a60-installed-data.md), source `642c6d3f62c2d271d33459553ef560a10f283f1f`; its exact old wheel and RCC 18.19.3 identities remain unchanged. Not current candidate, PostgreSQL restart or ChatGPT proof.
-- **U**: [RCC18.19.7 qualification](rcc-18.19.7-qualification.json): published hashes verified, prior18.19.3 metadata identity retained, Doctor/Bootstrap/ToolkitTest and I7 pass. Storage allocation is resolved. Primary candidate pins are18.19.7; no release promotion or publication is approved.
+- **U**: [RCC18.19.8 consumption](rcc-18.19.8-consumption.json): published hashes verified, prior18.19.7/18.19.3 metadata identities retained, all primary toolkit lanes and installed SQLite vertical pass. [18.19.7 qualification](rcc-18.19.7-qualification.json) remains historical. RCC publication was approved; Actions merge/publication is not approved.
+- **C8**: [combined invoice receipt](rcc-18.19.8-combined.json), exact20c tree:1,032 passed, zero skips, owned cleanup PASS. All264 measured source inputs match; retained JUnit/log hashes were checked. This includes four SQL/query-provider combinations for real durable-result/controller-crash reconciliation and process-stopped cancellation. Selected CI uploads do not retain the full RCC/worker stores. Host Runtime is source-bound; worker SDK is installed.
+- **E8**: [cold installed consumer receipt](rcc-18.19.8-consumer.json): the hosted307bf82a Runtime wheel plus candidate Core/SDK, fresh65-wheel closure and packaged Canvas run real CSV query→review/approval→trusted RCC worker→authorized artifact. Restart preserves Run/Attempt counts and bytes; seven authorization/activation negatives pass before and after restart. A second empty prefix installs the same closure without an index. All owned processes stop and reap. This is loopback E2, not ChatGPT E1, cold offline RCC or coordinated old→new restore.
 
 ## Complete release-ledger disposition
 
@@ -57,10 +58,10 @@ This maps the existing 28-row release ledger; the historical matrix below it is 
 | Pinned Run/Attempt and real RCC worker | PROVEN | I, M, L: actual pinned execution/cancellation and repaired authorized pre-launch recovery; uncertain retained launches never automatically retry. |
 | WorkflowNode / MCPTask / Adapter distinction | PROVEN | R, I: existing Task/Run projections and child lineage. A universal workflow designer is explicitly OPTIONAL and is not a new release requirement. |
 | Exact human approval and authorization negatives | PROVEN | R and installed output isolation: foreign actor/workspace reads denied without Run/Attempt/output growth; M proves model versus trusted-worker authority. Genuine E1 approval remains owner row. |
-| Retry, effects and dead-letter reconciliation | MUST FIX | L closes pre-launch progression. Run the existing real invoice durable-result reconciliation case against final installed artifacts; it was skipped in hosted integration without its prepared RCC fixture. Do not replace this with safe uncertain-launch refusal. |
+| Retry, effects and dead-letter reconciliation | PROVEN | L closes pre-launch progression. C8 executes the prepared-worker durable-result and actual controller-crash reconciliation cases on both SQL backends/query providers; E8 proves installed completion replay. Generic retained unknown launches remain blocked, never blindly retried. |
 | Scoped durable artifacts/results | PROVEN | I, M, R: real immutable output bytes and scoped reads/denials. Final coordinated retention/restore remains first row. |
 | Retention, restore, upgrade/downgrade | MUST FIX | Final SQL + objects + journals + source/runtime artifact restore and old-version fail-closed behavior; use existing gates and retained recipes. |
-| Reusable invoice template/export | MUST FIX | Candidate SDK/Core/Runtime pin drift repaired at `9b72b1a2`; five module regressions pass. Actual cold exported consumer and full query→Canvas→approval→worker→artifact→restart/reopen remain to qualify. |
+| Reusable invoice template/export | PROVEN | E8: cold exported candidate installation, real CSV query→Canvas→approval→worker→artifact, authorization negatives and restart/reopen pass. Offline package replay is separate from a cold offline RCC installation. Public template destination/publication remains an owner decision. |
 | All-route auth and safe sharing | MUST FIX | R covers route/auth negatives; before an isolated remote E1 endpoint, qualify complete live authentication/artifact protection. No public listener/tunnel is authorized by this audit. |
 | Actual authenticated ChatGPT E1 | NEEDS JOSH | Existing isolated endpoint/connection and actual host tool/resource/bridge/action/reconnect test; no available connection supplied. Browser/ASGI evidence is not E1. |
 | Homelab-independent distribution and consumers | MUST FIX | U, final wheels/native/images, deterministic hashes/SBOM/provenance, installed consumers and local build/restore recipe. GitHub metadata receipts do not contain all candidate payloads. |
@@ -98,21 +99,23 @@ never blindly retried. It does not require automatic recovery of unknown externa
 effects. #327 still requires bounded recovery in its real invoice acceptance.
 The generic no-launch progression defect is fixed and executable (L). Generic
 retained-launch settlement remains incomplete, and an opaque operator receipt
-cannot override the launch guard. The invoice-specific durable-result path is
-implemented but requires its actual prepared-worker integration proof. A safe
-refusal cannot discharge that invoice gate.
+cannot override the launch guard. C8 now proves the invoice-specific durable-result
+path after actual controller death on both SQL backends. E8 proves installed
+completion replay after restart. These successful bounded recovery paths are
+separate from safe refusal of an unknown launch.
 
 ## Finite critical path
 
-1. Finalize the primary-only artifact and current-head CI. RCC18.19.7 installed execution, MCP enqueue/worker, cancellation and replay now pass (I7). The receipt preserves the HOME counterexample, historical failed runs and successful wheel/sdist reproduction. Safe uncertain-launch refusal does not establish successful recovery.
-2. Run existing invoice/export/durable-result reconciliation, final launcher/consumer and coordinated restore gates; retain final payloads/hashes/SBOM/provenance. No safe-refusal-as-recovery claim.
-3. Obtain successful fresh-head Linux/Windows/macOS CI. At02d74732, installed and macOS toolkit pass; macOS Runtime has an executed helper-byte golden failure and Windows toolkit an executed Linux-helper test failure, both corrected in the subsequent checkpoint. Earlier05fe capacity cancellations do not explain these failures. Do not weaken gates.
+1. Finish Windows Runtime CI at20c. Linux/macOS Runtime, all native builds/toolkit lanes, installed SQLite vertical and C8 already pass. RCC18.19.8 restores legacy uv0.1.37 compatibility; earlier7 failures remain labelled7.
+2. Complete ordinary immutable-root launcher, coordinated published1.0.4→candidate upgrade/restore, packaged accessibility and final distribution/provenance cells. E8 closes the cold exported consumer; C8 closes bounded invoice reconciliation. Neither closes the remaining cells by implication.
+3. Keep accepted source, installed wheels and archived evidence bound by hashes; selected hosted logs are not a backup of the cleaned RCC/worker stores. Preserve separate18.19.3/7 evidence.
 4. Resolve NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval. Celld exclusion is pending an explicit decision; no silent downgrade or scope waiver.
 
 Current decision: **not technically merge-ready or release-candidate-ready**.
 Required qualification and owner decisions remain; no universal uncertain-launch
 recovery or optional celld success is claimed.
 
-Documentation improvement: this replaces stale blanket “missing” statements with
-source-bound proof, explicit unverified consumers, the corrected recovery boundary
-and the real macOS cancellation cause. Upstream disposition: none.
+Documentation improvement: replaces stale pending invoice/consumer claims with
+C8/E8 executable proof and preserves the remaining launcher/restore, host and
+publication boundaries. Upstream disposition: RCC261 fixed and published as18.19.8
+with Josh's approval; no new upstream defect in this continuation.

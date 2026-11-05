@@ -59,9 +59,17 @@
       "passed": 244,
       "skipped": 5
     },
-    "full_current_head_CI": "pending push; no7result relabelled8"
+    "full_current_head_CI": {
+      "head": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+      "toolkit_installed_invoice": "PASS https://github.com/joshyorko/actions/actions/runs/42075321728",
+      "native_all_platforms": "PASS https://github.com/joshyorko/actions/actions/runs/42075321791",
+      "runtime_linux_macos": "PASS https://github.com/joshyorko/actions/actions/runs/42075321722",
+      "runtime_windows": "pending",
+      "combined_receipt": "rcc-18.19.8-combined.json",
+      "cold_consumer": "PASS rcc-18.19.8-consumer.json"
+    }
   },
   "compatibility": "8primary/executable;7previous-stable Linux;3legacyall3platforms;frozen3jobsunchanged",
-  "upstream_disposition": "RCC261mergedandv18.19.8publishedwithJoshapproval;Actionsconsumptionrequalificationpending",
+  "upstream_disposition": "RCC261 merged and v18.19.8 published with Josh approval; Actions primary toolkit/native/installed/combined invoice and cold consumer pass; Windows full Runtime pending",
   "remaining_release_limits": "No Actions merge/publication/deployment approval. TrueChatGPTE1,optionalcelld/publisherdecisions and remainingconsumer/restore evidence not waived."
 }

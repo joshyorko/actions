@@ -1,0 +1,73 @@
+{
+  "source": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+  "tested_merge": "7c24542617fada3dbce3882c023a90a1ee65c67c",
+  "tree": "a255373166840afff3403d1029f050f9265b691c",
+  "run": "https://github.com/joshyorko/actions/actions/runs/42075321728",
+  "job": 127413854471,
+  "artifact_id": 13439587081,
+  "receipt_sha256": "91302307eaa5b5295dbc00d7d45125d2c55aa342bbf3386991b751039c8efdea",
+  "status": "PASS",
+  "counts": {
+    "managed": {
+      "tests": 158,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "foundry_storage": {
+      "tests": 299,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "components": {
+      "tests": 168,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "invoice": {
+      "tests": 139,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "worker": {
+      "tests": 134,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "browser": {
+      "tests": 2,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "generated": {
+      "tests": 60,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "effects": {
+      "tests": 72,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "total_tests": 1032,
+  "input_digests_verified": 264,
+  "artifact_digests_verified": 20,
+  "rcc": {
+    "artifact_digest": "sha256:8123e1f6662605336b8af558948b8b9068f5a9b4a133079fbcf049ed884ea0e1",
+    "sdk_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "rcc_sha256": "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
+    "config": "/home/runner/work/_temp/actions327-invoice/3de77656-a0ea-42c9-9316-b7869df20178/worker-runtime.json"
+  },
+  "canvas_html_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+  "cleanup": "PASS",
+  "artifacts_not_archived_count": 37206,
+  "archive_limit": "Hosted upload retains selected logs/JUnit, not full RCC/worker stores; cleanup PASS does not preserve their payloads."
+}

@@ -2677,6 +2677,14 @@ verification. CSV/Parquet sealed-scan component checks run alongside the invoice
 chain; a single Parquet-to-invoice-browser transaction is not claimed. Runtime
 host modules in this gate come from the verified source checkout; the separate
 installed-wheel vertical remains required. Neither gate proves actual ChatGPT E1.
+For distribution acceptance, use the existing invoice `export.py`/`prepare.py`
+and browser capture against a fresh noneditable prefix. Record first execution
+separately from `--resume`: unchanged worker Run, Run/Attempt counts and downloaded
+artifact digest establish completion replay. Run `verify.py` after each phase;
+it restores the owned fixture's revoked grants and activation. A second fresh
+prefix installed from the measured wheelhouse proves offline package installation,
+not a cold offline RCC store. The hosted invoice upload retains selected logs and
+JUnit; its pre-cleanup store hashes do not imply those store bytes were archived.
 The SDK-only fixture on Ubuntu22 resolved an artifact requiring glibc2.36,
 then correctly refused that worker's glibc2.35. Keep the invoice gate on Ubuntu24
 and retain the original Ubuntu22 primary/N-1 toolkit and Runtime gates.

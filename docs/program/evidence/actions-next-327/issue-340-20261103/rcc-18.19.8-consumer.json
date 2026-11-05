@@ -1,0 +1,107 @@
+{
+  "schema": "actions.release-consumer-receipt/v1",
+  "source": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+  "tree": "a255373166840afff3403d1029f050f9265b691c",
+  "profile": "Linux x86_64; fresh noneditable installed Runtime/Core/SDK; official public dependencies constrained to Poetry lock; real loopback browser E2",
+  "runtime_wheel": {
+    "name": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+    "sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+    "artifact_id": 13438381551,
+    "ci_run": "https://github.com/joshyorko/actions/actions/runs/42075321728"
+  },
+  "rcc": {
+    "version": "18.19.8",
+    "sha256": "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
+    "artifact_digest": "sha256:87f886ef4dc94e495858c5972c29be230241f7ae825e9b467525dca06ded1fd5",
+    "exec_exit": 0,
+    "verification_valid": true,
+    "compatibility_status": "compatible"
+  },
+  "export_manifest_sha256": "fb5cf98fa72e374d1be9933ac01b85be00e8205ddfadbddf9a5e7e8173a04512",
+  "canvas_html_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+  "cold_install": {
+    "status": "PASS",
+    "python": "3.12.15",
+    "wheel_count": 65,
+    "preparation": "cold-network-download-no-cache",
+    "wheelhouse_manifest_sha256": "b38a325237e4a2eff0b805808a680d358239dfe9e93947439792fad8e43a72aa"
+  },
+  "fresh_execution": {
+    "status": "PASS",
+    "steps": [
+      "real DuckDB CSV query",
+      "render packaged Canvas via official MCP Apps bridge",
+      "explicit review and approval",
+      "trusted Work Item claim",
+      "real installed RCC SDK-only worker",
+      "authorized persisted result download"
+    ],
+    "state": {
+      "review_state": "approved",
+      "execution_phase": "completed",
+      "worker_run_id": "dba54a3e-9767-4840-b8e3-d4e194d88a19",
+      "run_count": 2,
+      "attempt_count": 2,
+      "runtime_version": "1.1.0a60",
+      "sdk_version": "0.5.0a2"
+    },
+    "artifact_sha256": "a2f05e4792b5f34edf009c6c22c84fc10159799fedb49731dbce74f797804d0a",
+    "external_browser_requests": [],
+    "browser_errors": [],
+    "negative_checks": {
+      "anonymous_denied": true,
+      "foreign_origin_denied": true,
+      "persisted_revocation_denied": true,
+      "inactive_revision_artifact_denied": true,
+      "rollback_restores_same_artifact": true,
+      "foreign_workspace_denied": true,
+      "business_run_audit_unchanged": true
+    }
+  },
+  "restart": {
+    "status": "PASS",
+    "state": {
+      "review_state": "approved",
+      "execution_phase": "completed",
+      "worker_run_id": "dba54a3e-9767-4840-b8e3-d4e194d88a19",
+      "run_count": 2,
+      "attempt_count": 2,
+      "runtime_version": "1.1.0a60",
+      "sdk_version": "0.5.0a2"
+    },
+    "same_run_attempt_counts_and_artifact": true,
+    "negative_checks": {
+      "anonymous_denied": true,
+      "foreign_origin_denied": true,
+      "persisted_revocation_denied": true,
+      "inactive_revision_artifact_denied": true,
+      "rollback_restores_same_artifact": true,
+      "foreign_workspace_denied": true,
+      "business_run_audit_unchanged": true
+    }
+  },
+  "offline_install": {
+    "status": "PASS",
+    "fresh_separate_prefix": true,
+    "same_65_wheel_hashes": true,
+    "no_index": true,
+    "not_cold_RCC_or_airgapped_execution": true
+  },
+  "commands": [
+    "/var/tmp/codex-actions-release-20261104-_kxnuurn/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/bin/python3.12 /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer-export8/prepare.py --root /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8",
+    "/var/tmp/codex-actions-release-20261104-_kxnuurn/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/bin/python3.12 /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer-export8/prepare.py --root /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8 --launch --port 59643",
+    "node action_server/frontend/scripts/capture-invoice-reconciliation.mjs --url http://127.0.0.1:59643 --out /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8-fresh",
+    "/var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8/venv/bin/python -I /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer-export8/verify.py --state /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8/demo --url http://127.0.0.1:59643 --out /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8-fresh/negative.json",
+    "node action_server/frontend/scripts/capture-invoice-reconciliation.mjs --url http://127.0.0.1:51647 --out /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8-resume --resume",
+    "/var/tmp/codex-actions-release-20261104-_kxnuurn/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/bin/python3.12 /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer-export8/prepare.py --root /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8-offline --offline-wheelhouse /var/tmp/codex-actions-release-20261104-_kxnuurn/consumer8/wheelhouse"
+  ],
+  "resource_controls": "One local workload; four-core affinity16-19, nice10, idle I/O, existing pidfd/subreaper, 20GiB disk floor; all three supervisor exits0, no surviving owned descendants",
+  "exclusions": [
+    "Not authenticated ChatGPT E1",
+    "Not installed VSIX or Codex/Devsy acceptance",
+    "Not coordinated Runtime1.0.4 upgrade/restore",
+    "Not cold offline RCC installation",
+    "No universal uncertain-launch recovery or exactly-once external effect claim"
+  ],
+  "upstream_disposition": "none; no new product defect reproduced in this consumer run"
+}
