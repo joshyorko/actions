@@ -32,17 +32,17 @@ host_venv="$task_root/host-venv"
 phase=host_environment
 uv venv --seed --python 3.12 "$host_venv"
 
-rcc_sha256=f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
+rcc_sha256=ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
 phase=pinned_rcc
 rcc="$task_root/rcc"
 curl --fail --location --silent --show-error --retry 2 --connect-timeout 15 --max-time 180 \
-  https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64 \
+  https://github.com/joshyorko/rcc/releases/download/v18.19.8/rcc-linux64 \
   --output "$task_root/rcc.download"
 printf '%s  %s\n' "$rcc_sha256" "$task_root/rcc.download" | sha256sum --check --status -
 mv "$task_root/rcc.download" "$rcc"
 chmod 700 "$rcc"
-test "$("$rcc" --version)" = "v18.19.7"
-runtime_rcc="$repo_root/action_server/src/actions/server/bin/rcc-18.19.7"
+test "$("$rcc" --version)" = "v18.19.8"
+runtime_rcc="$repo_root/action_server/src/actions/server/bin/rcc-18.19.8"
 if [[ -e "$runtime_rcc" || -L "$runtime_rcc" ]]; then
   if [[ -L "$runtime_rcc" || ! -f "$runtime_rcc" || ! -x "$runtime_rcc" ]] ||
     ! printf '%s  %s\n' "$rcc_sha256" "$runtime_rcc" | sha256sum --check --status -; then

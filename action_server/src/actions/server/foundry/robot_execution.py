@@ -509,7 +509,7 @@ class RobotExecution:
                 timeout=min(15, timeout_seconds),
                 check=True,
             )
-            if version.stdout.strip() != b"v18.19.7":
+            if version.stdout.strip() != b"v18.19.8":
                 raise ValueError("unsupported RCC version")
             command = build_exec_command(
                 prep.rcc,

@@ -11,7 +11,7 @@ The repository skill links the specialized RCC/Action Server skills in
 `joshyorko/plugins`; read the relevant skill even when it is not preinstalled.
 
 RCC owns the outer toolchain; Poetry owns package dependencies and lockfiles.
-The setup workflow installs checksum-pinned Josh RCC v18.19.7 and runs
+The setup workflow installs checksum-pinned Josh RCC v18.19.8 and runs
 Doctor → Bootstrap → ToolkitTest. For subsequent work, use
 `rcc run -r developer/toolkit.yaml --dev -t <Task>` from the repository root.
 Do not use upstream RCC `latest`, host pip/Poetry bootstraps, or suppressed

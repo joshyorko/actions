@@ -350,22 +350,22 @@ def test_stored_requirement_tamper_is_not_projected(bound):
         g.registry.get_capability(g.capability)
 
 
-def test_zero_requirement_bytes_match_rcc_18_19_7_golden():
+def test_zero_requirement_bytes_match_rcc_18_19_8_golden():
     import hashlib
 
     compiled = compile_fixture().compiled_package
     # The RCC upgrade changes adapterVersionRange and derived Package identity;
     # it must not change the source archive bytes.
     assert (
-        json.loads(compiled.runtime_plan_payload)["adapterVersionRange"] == "==18.19.7"
+        json.loads(compiled.runtime_plan_payload)["adapterVersionRange"] == "==18.19.8"
     )
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()
-        == "31ae43e41fc5dacc8491a635b7aeae7011e207d5e7d4982ba303c400e0ebd449"
+        == "d22755228b8a06bd11972e77d2580e88a437dda92aa78a97ae25e5dcbc680b48"
     )
     assert (
         hashlib.sha256(compiled.runtime_plan_payload).hexdigest()
-        == "52f30c67bedcd9c3c2e9268d762b0386b7ac231a26ce4d2a9083142af1f939a0"
+        == "b921c45aa48cbb847145e21dd9a81fcf6fce949b4523f6acfa101cbbaa3411de"
     )
     assert (
         hashlib.sha256(compiled.source_archive).hexdigest()

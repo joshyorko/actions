@@ -73,7 +73,7 @@ def configured(tmp_path, request):
         check()
         calls.append(command)
         if command[-1] == "--version":
-            return _ProcessResult(0, b"v18.19.7\n", b"")
+            return _ProcessResult(0, b"v18.19.8\n", b"")
         output_xml.write_bytes(xml())
         if request.param == "rcc":
             (source.parent / "rcc-receipt.json").write_text(

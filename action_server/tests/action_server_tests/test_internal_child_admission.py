@@ -176,7 +176,7 @@ def admitted(database_location, foundry_package_store, tmp_path, request):
                 specification_digest="sha256:" + "c" * 64,
                 artifact_digest="sha256:" + "d" * 64,
             ),
-            rcc_version="v18.19.7",
+            rcc_version="v18.19.8",
         )
         robot_evidence = robot_registry.prepare_trusted_robot(
             robot_request,

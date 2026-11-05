@@ -12,36 +12,41 @@ jobs:
       matrix:
         include:
           - lane: primary
+            rcc_version: 18.19.8
+            os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
+          - lane: invoice
+            rcc_version: 18.19.8
+            os: ubuntu-24.04
+            asset: rcc-linux64
+            sha256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
+          - lane: primary
+            rcc_version: 18.19.8
+            os: macos-15
+            asset: rcc-macosarm64
+            sha256: bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba
+          - lane: primary
+            rcc_version: 18.19.8
+            os: windows-2022
+            asset: rcc-windows64.exe
+            sha256: f5e868af05382731f6675d98ed6ead7c7e95b250466bc5fee054b41817280a89
+          - lane: n-1
             rcc_version: 18.19.7
             os: ubuntu-22.04
             asset: rcc-linux64
             sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
-          - lane: invoice
-            rcc_version: 18.19.7
-            os: ubuntu-24.04
-            asset: rcc-linux64
-            sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
-          - lane: primary
-            rcc_version: 18.19.7
-            os: macos-15
-            asset: rcc-macosarm64
-            sha256: 324e2ead0e96754eaf0dc2e22bb41928ad2bec90c7e1e7ad069038a100bca595
-          - lane: primary
-            rcc_version: 18.19.7
-            os: windows-2022
-            asset: rcc-windows64.exe
-            sha256: d3338be49ef22bbd9f3e42b606e01231cb5c5d86716b18d24fadf85e7630e0be
-          - lane: n-1
+          - lane: legacy
             rcc_version: 18.19.3
             os: ubuntu-22.04
             asset: rcc-linux64
             sha256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
-          - lane: n-1
+          - lane: legacy
             rcc_version: 18.19.3
             os: macos-15
             asset: rcc-macosarm64
             sha256: 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266
-          - lane: n-1
+          - lane: legacy
             rcc_version: 18.19.3
             os: windows-2022
             asset: rcc-windows64.exe
@@ -135,7 +140,7 @@ jobs:
               raise SystemExit('insufficient free space for bounded invoice acceptance')
           PY
           docker pull postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
-          printf '%s  %s\n' f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 action_server/src/actions/server/bin/rcc-18.19.7 | sha256sum --check --status -
+          printf '%s  %s\n' ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 action_server/src/actions/server/bin/rcc-18.19.8 | sha256sum --check --status -
           rcc --workers 2 run -r developer/toolkit.yaml --dev -t InvoiceQueryTest
       - name: Upload combined invoice acceptance receipt
         if: always() && runner.os == 'Linux' && matrix.lane == 'invoice'
@@ -175,10 +180,10 @@ jobs:
         run: |
           set -Eeuo pipefail
           curl --fail --location --silent --show-error \
-            https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64 \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.8/rcc-linux64 \
             --output rcc.download
           printf '%s  %s\n' \
-            f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 \
+            ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 \
             rcc.download | sha256sum --check --status -
           mv rcc.download rcc
           chmod +x rcc

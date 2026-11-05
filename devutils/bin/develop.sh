@@ -5,7 +5,7 @@ script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repo_root=$(cd -- "$script_dir/../.." && pwd)
 rcc_path=""
 downloaded_rcc_path="$script_dir/rcc"
-rcc_version="v18.19.7"
+rcc_version="v18.19.8"
 task=${1:-Bootstrap}
 
 case "$(uname -s):$(uname -m)" in

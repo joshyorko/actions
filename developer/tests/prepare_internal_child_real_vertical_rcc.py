@@ -42,8 +42,8 @@ from uuid import uuid4
 
 
 _OPT_IN = "ACTIONS_INTERNAL_CHILD_PREPARE_RCC"
-_RCC_VERSION = "v18.19.7"
-_RCC_LINUX_SHA256 = "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48"
+_RCC_VERSION = "v18.19.8"
+_RCC_LINUX_SHA256 = "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
 _MAX_MANIFEST_BYTES = 128 * 1024
 _MAX_WHEEL_BYTES = 128 * 1024 * 1024
 _MAX_RCC_OUTPUT = 1024 * 1024
@@ -399,7 +399,7 @@ def _prepared_receipt(role: _RoleHome, details, prepared_types):
 def _parse_args(argv: list[str] | None = None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--rcc", type=Path, required=True, help="pinned RCC v18.19.7 binary"
+        "--rcc", type=Path, required=True, help="pinned RCC v18.19.8 binary"
     )
     parser.add_argument(
         "--core-wheel", type=Path, required=True, help="candidate actions-core wheel"
@@ -495,7 +495,7 @@ def main(argv: list[str] | None = None) -> int:
         args.minimum_free_bytes,
     )
     if version_output.decode("ascii", errors="strict").strip() != _RCC_VERSION:
-        raise RuntimeError("RCC binary version does not match v18.19.7")
+        raise RuntimeError("RCC binary version does not match v18.19.8")
 
     action_details = _publish_and_acquire(
         rcc,

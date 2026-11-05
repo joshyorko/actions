@@ -2,7 +2,7 @@
 
 ## Canonical source build and installation
 
-Use Josh's RCC fork v18.19.7 and the checked-in developer toolkit from the
+Use Josh's RCC fork v18.19.8 and the checked-in developer toolkit from the
 repository root on `community`. See [CONTRIBUTING.md](../CONTRIBUTING.md) for
 installation and the v18.18.1 N−1 compatibility lane. RCC supplies the outer
 Python, Node, Go, Poetry, and Invoke toolchain; Poetry owns package dependencies

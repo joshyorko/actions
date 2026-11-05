@@ -54,7 +54,7 @@ def _rcc_path() -> Path | None:
     if configured:
         return Path(configured)
     candidate = (
-        Path(__file__).resolve().parents[2] / "src/actions/server/bin/rcc-18.19.7"
+        Path(__file__).resolve().parents[2] / "src/actions/server/bin/rcc-18.19.8"
     )
     return candidate if candidate.is_file() else None
 
@@ -238,7 +238,7 @@ def test_explicit_work_items_mode_and_launch_replay_block_before_spawn(
                 rcc = Path("/usr/bin/true")
                 monkeypatch.setattr(
                     "actions.server.foundry.rcc_execution.verify_rcc_version",
-                    lambda _rcc: "v18.19.7",
+                    lambda _rcc: "v18.19.8",
                 )
                 monkeypatch.setattr(
                     "actions.server.foundry.rcc_execution.subprocess.Popen",

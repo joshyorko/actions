@@ -1184,7 +1184,7 @@ def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
 
     result = classify_runtime_tree_delta([], observed, platform_name=platform_name)
     assert result["valid"] is True
-    assert result["rcc_version"] == "18.19.7"
+    assert result["rcc_version"] == "18.19.8"
     assert result["expected_rcc_path"] == executable_path
     assert result["runtime_generated_state"] == observed
 
@@ -1195,7 +1195,7 @@ def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
 def test_native_runtime_requires_pinned_rcc_in_pre_runtime_inventory(
     platform_name: str, suffix: str
 ) -> None:
-    executable = f"_internal/actions/server/bin/rcc-18.19.7{suffix}"
+    executable = f"_internal/actions/server/bin/rcc-18.19.8{suffix}"
     entry: PackageTreeEntry = {
         "path": executable,
         "kind": "file",
@@ -1211,7 +1211,7 @@ def test_native_runtime_requires_pinned_rcc_in_pre_runtime_inventory(
 
 def test_native_runtime_rejects_invalid_pinned_rcc_baseline_entry() -> None:
     entry: PackageTreeEntry = {
-        "path": "_internal/actions/server/bin/rcc-18.19.7.exe",
+        "path": "_internal/actions/server/bin/rcc-18.19.8.exe",
         "kind": "directory",
         "mode": 493,
         "link_target": None,

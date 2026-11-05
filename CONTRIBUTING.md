@@ -43,10 +43,11 @@ RCC is the cross-platform developer gateway. It supplies the isolated toolchain 
 dispatches package commands to Poetry and Invoke; Poetry remains authoritative for each
 package's dependencies and lockfile.
 
-Use [Josh's RCC fork](https://github.com/joshyorko/rcc) **v18.19.7**, the primary
+Use [Josh's RCC fork](https://github.com/joshyorko/rcc) **v18.19.8**, the primary
 pin in `developer/toolkit.py` and `.github/workflows/developer_toolkit.yml`.
-**v18.18.1 is N−1 compatibility only**; its CI lane explicitly sets
-`ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION=v18.18.1`. Do not use upstream `latest`
+**v18.19.7 is previous-stable compatibility only**, and v18.19.3 remains in
+the legacy platform lanes. These lanes explicitly set their expected RCC version.
+Do not use upstream `latest`
 or override the expected version to bypass a mismatch.
 
 Run Doctor → Bootstrap → verification from the repository root:

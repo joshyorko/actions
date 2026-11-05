@@ -77,7 +77,7 @@ def _generated_action_entries(action_source: bytes | None = None) -> list:
 
 
 class _FakeCompilerExecutor:
-    rcc_version = "v18.19.7"
+    rcc_version = "v18.19.8"
 
     def __init__(self, fail_phase: str | None = None) -> None:
         self.fail_phase = fail_phase
@@ -468,7 +468,7 @@ def test_prepared_rcc_keeps_pinned_artifact_when_live_cache_changes(
 
     def run(argv, workspace, *, timeout):
         if argv[-1] == "--version":
-            return b"v18.19.7"
+            return b"v18.19.8"
         publications.append(argv)
         return json.dumps(
             {
@@ -836,7 +836,7 @@ def test_default_work_item_declaration_preserves_manifest_golden():
     assert compiled is not None
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()
-        == "31ae43e41fc5dacc8491a635b7aeae7011e207d5e7d4982ba303c400e0ebd449"
+        == "d22755228b8a06bd11972e77d2580e88a437dda92aa78a97ae25e5dcbc680b48"
     )
 
 

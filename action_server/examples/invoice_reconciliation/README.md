@@ -1,7 +1,7 @@
 # Synthetic invoice reconciliation
 
 Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.0a60**,
-Core **1.1.0a8**, Work Items **0.5.0a2**, Python **3.12.15** and RCC **18.19.7**. These candidate
+Core **1.1.0a8**, Work Items **0.5.0a2**, Python **3.12.15** and RCC **18.19.8**. These candidate
 packages are not assumed to exist on PyPI. The engine remains in Actions; this
 example composes its existing SQL, Canvas/MCP, review, worker and artifact APIs.
 It contains no credentials or real business records. Apache-2.0 applies.
@@ -135,7 +135,7 @@ python /absolute/owned/export/prepare.py --root /absolute/owned/consumer --launc
 The first launch creates a **fresh** RCC home and SDK-only Artifact. It needs
 access to the configured conda-forge and PyPI endpoints, disk headroom and the
 native libraries required by RCC's platform compatibility receipt. The Runtime
-wheel carries RCC18.19.7. No Poetry, Node, source checkout or pre-existing Runtime
+wheel carries RCC18.19.8. No Poetry, Node, source checkout or pre-existing Runtime
 installation is required inside the consumer. Browser automation additionally
 needs the prepared Actions Node20.19.3/Chromium QA environment; ordinary browser
 use does not.

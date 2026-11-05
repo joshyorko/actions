@@ -202,7 +202,7 @@ class GeneratedRccExecution:
         if not isinstance(prepared, PreparedRccEnvironment):
             raise TypeError("exact retained PreparedRccEnvironment required")
         if prepared.rcc_version != RCC_VERSION:
-            raise ValueError("pinned RCC 18.19.7 preparation required")
+            raise ValueError("pinned RCC 18.19.8 preparation required")
         if not isinstance(rcc, Path) or not rcc.is_absolute():
             raise ValueError("absolute trusted pinned RCC executable required")
         rcc = rcc.resolve(strict=True)

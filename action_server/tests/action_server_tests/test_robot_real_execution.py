@@ -147,7 +147,7 @@ def test_legacy_robot_api_real_rcc_retains_outputs_after_database_reopen(
         timeout=30,
         check=True,
     )
-    assert checked.stdout.strip() == "v18.19.7"
+    assert checked.stdout.strip() == "v18.19.8"
 
     from fastapi import BackgroundTasks, Request
 

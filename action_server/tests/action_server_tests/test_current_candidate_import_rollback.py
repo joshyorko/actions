@@ -177,12 +177,12 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     real_rcc_sha = hashlib.sha256(real_rcc.read_bytes()).hexdigest()
     assert (
         real_rcc_sha
-        == "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48"
+        == "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
     )
     rcc_version = subprocess.run(
         [str(real_rcc), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.7"
+    assert rcc_version == "v18.19.8"
 
     trace_path = tmp_path / "rcc-argv.jsonl"
     rcc_wrapper = tmp_path / "rcc-trace"

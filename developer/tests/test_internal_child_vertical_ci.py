@@ -75,7 +75,7 @@ def test_vertical_preserves_and_verifies_existing_rcc(tmp_path, existing):
     source = tmp_path / "pinned-rcc"
     source.write_bytes(b"exact pinned executable fixture")
     source.chmod(0o700)
-    target = tmp_path / "action_server/src/actions/server/bin/rcc-18.19.7"
+    target = tmp_path / "action_server/src/actions/server/bin/rcc-18.19.8"
     target.parent.mkdir(parents=True)
     if existing == "symlink":
         target.symlink_to(source)

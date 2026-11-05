@@ -21,9 +21,9 @@ from urllib.parse import urlsplit
 
 from actions.server._common.process import ProcessTreeCleanupResult
 
-RCC_VERSION = "v18.19.7"
+RCC_VERSION = "v18.19.8"
 # Read compatibility preserves immutable plans; executable checks stay primary-pinned.
-RCC_METADATA_VERSIONS = frozenset((RCC_VERSION, "v18.19.3"))
+RCC_METADATA_VERSIONS = frozenset((RCC_VERSION, "v18.19.7", "v18.19.3"))
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _PROVIDER_PROFILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,62}$")

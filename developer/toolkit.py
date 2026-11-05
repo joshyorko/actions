@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
-RCC_VERSION = "v18.19.7"
+RCC_VERSION = "v18.19.8"
 PACKAGES = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
 PYPROJECTS = (
     "actions",

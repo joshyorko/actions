@@ -1,0 +1,67 @@
+{
+  "version": "v18.19.8",
+  "upstream_pr": "https://github.com/joshyorko/rcc/pull/261",
+  "source_sha": "f7960076843500d15835b476c07e60d7264027c1",
+  "preparation_run": "https://github.com/joshyorko/rcc/actions/runs/42067419811",
+  "publication_run": "https://github.com/joshyorko/rcc/actions/runs/42073285909",
+  "release": "https://github.com/joshyorko/rcc/releases/tag/v18.19.8",
+  "protected_publication": "PASS;policy audit,protected environment,source/history/absent-version,bundle and Homebrew checks retained",
+  "reviewed_asset_manifest_sha256": "0a3a64b2936b8cf007b9672325051fce4920e2ce6c611ce8b285d32ca1355042",
+  "downloaded_preparation_zip_sha256": "sha256:7af1d7e80285ced7b57dc77efc01c1e55f9884abe089da6b5f8138dd96e2c6db",
+  "public_assets": {
+    "index.json": {
+      "sha256": "d8be77eebd5e92192f9701751eda038ae10518d408007019013384f8919689de",
+      "size": 9138
+    },
+    "rcc-linux64": {
+      "sha256": "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
+      "size": 22401186
+    },
+    "rcc-macos64": {
+      "sha256": "275435acd28e43dbd5f6268d109ac1cd5b2ed1fab76d4a1504b423b590ac94d1",
+      "size": 22245328
+    },
+    "rcc-macosarm64": {
+      "sha256": "bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba",
+      "size": 20986322
+    },
+    "rcc-windows64.exe": {
+      "sha256": "f5e868af05382731f6675d98ed6ead7c7e95b250466bc5fee054b41817280a89",
+      "size": 20130816
+    },
+    "rccremote-linux64": {
+      "sha256": "40160c8e20603f58821a0aa5ed4622b217100ba833b5fa7b6435622330ec1214",
+      "size": 9355426
+    },
+    "rccremote-macos64": {
+      "sha256": "2d737b758dcd43baa6929abf0ee2dbf2b3ae215e4f324fdfcd57066b69841b56",
+      "size": 9547136
+    },
+    "rccremote-macosarm64": {
+      "sha256": "4c183d8e1860b6ab4f9835817b29c6852b89d4f879d77cf0ba45111e01319366",
+      "size": 8886578
+    },
+    "rccremote-windows64.exe": {
+      "sha256": "cc9fd5acd09d60dd13c09e296143d6fe71be48e40962f35d451c4e5bb4df954f",
+      "size": 9676288
+    }
+  },
+  "public_verification": "All9server digests/size match reviewedmanifest;fourRCCbinaries+index downloaded and rehashed;Linux --version verified8",
+  "actions_before": "4ea1892e660c5b5efb2edac40f1f69594dc165b3:combined1032PASS0skip,toolkit/nativePASS;fullRuntimeall3legacyuvsetupFAIL",
+  "actions_local_checks": {
+    "metadata_before": "retained7record rejected when7missing from recognizedmetadata set;3record passes",
+    "metadata_after": "3+7frozenmetadata preserve originalimmutableidentity with8primary;old7fixturecapturedfromactualinstalled7Runtime, metadata-only capture",
+    "runtime_focused": {
+      "passed": 74,
+      "skipped": 19
+    },
+    "toolkit": {
+      "passed": 244,
+      "skipped": 5
+    },
+    "full_current_head_CI": "pending push; no7result relabelled8"
+  },
+  "compatibility": "8primary/executable;7previous-stable Linux;3legacyall3platforms;frozen3jobsunchanged",
+  "upstream_disposition": "RCC261mergedandv18.19.8publishedwithJoshapproval;Actionsconsumptionrequalificationpending",
+  "remaining_release_limits": "No Actions merge/publication/deployment approval. TrueChatGPTE1,optionalcelld/publisherdecisions and remainingconsumer/restore evidence not waived."
+}

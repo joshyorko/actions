@@ -144,7 +144,7 @@ def _required_inputs() -> tuple[Path, Path, Path, str, Path, Path, str, Path, st
             for name in archive.namelist()
             if name.startswith("actions/server/bin/rcc")
         ]
-        if bundled_rcc != ["actions/server/bin/rcc-18.19.7"]:
+        if bundled_rcc != ["actions/server/bin/rcc-18.19.8"]:
             pytest.fail("Runtime wheel must contain only the primary RCC executable")
         if archive.read(bundled_rcc[0]) != rcc.read_bytes():
             pytest.fail("Runtime wheel RCC bytes differ from the qualified executable")
@@ -336,7 +336,7 @@ def _load_prepared(
             rf"(?m)^\s*-\s*actions-core={re.escape(core_version)}\s*$", text
         ):
             pytest.fail("prepared RCC package.yaml does not exact-pin candidate Core")
-        # RCC v18.19.7's Python package resolver uses Product.Home()/wheels as
+        # RCC v18.19.8's Python package resolver uses Product.Home()/wheels as
         # --find-links. The preparer stages the wheel there before publish;
         # presence is diagnostic only. Installed-file/RECORD checks prove
         # which bytes the Action artifact actually contains.
