@@ -48,6 +48,10 @@ def test_terminal_task_ack_survives_expiry_but_get_refuses(logical, monkeypatch)
         wrapper.publish(g.actor, g.fence, refs, result)
     expire(g, refs)
     run = _one(g.db, Run, g.fence.run_id)
+    with pytest.raises(ValueError, match="output seal"):
+        owner.ticket(caller, run)
+    history = owner.ticket(caller, run, _allow_expired_terminal=True)
+    assert history.fence == g.fence
     from actions.server.run_outputs.detached import DetachedActions
 
     class ReadOnlyReadiness:

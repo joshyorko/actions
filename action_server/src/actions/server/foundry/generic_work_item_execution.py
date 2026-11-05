@@ -416,7 +416,13 @@ class GenericWorkItemExecution:
             ):
                 raise FenceRejected("retained Work Item terminal state changed")
             claim = retained_claim.as_claim()
-            ticket = self._ticket(caller, claim, run, require_owner=False)
+            ticket = self._ticket(
+                caller,
+                claim,
+                run,
+                require_owner=False,
+                _allow_expired_terminal=terminal,
+            )
             return run, _one(self.db, RunAttempt, ticket.fence.attempt_id), ticket
 
     def _envelope(self, item_id: str, *, _projection=None) -> GenericInput:
@@ -668,7 +674,14 @@ class GenericWorkItemExecution:
         return self._ticket(caller, claim, _one(self.db, Run, run.id))
 
     def _ticket(
-        self, caller, claim, run, *, require_owner=True, _projection=None
+        self,
+        caller,
+        claim,
+        run,
+        *,
+        require_owner=True,
+        _projection=None,
+        _allow_expired_terminal=False,
     ) -> GenericTicket:
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
@@ -719,6 +732,7 @@ class GenericWorkItemExecution:
             terminal=terminal,
             outputs=json.loads(run.result).get("outputs") if terminal else None,
             _projection=_projection,
+            _allow_expired_terminal=_allow_expired_terminal,
         )
         stored_claim = ClaimValue.of(claim) if claim else None
         if (

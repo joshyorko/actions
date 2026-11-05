@@ -69,7 +69,7 @@ class StandaloneActionExecution:
             raise AccessDenied("ordinary no-Work-Item declaration required")
         self.base._authorize(caller.actor, s, "execute")
 
-    def ticket(self, caller, run, *, _projection=None):
+    def ticket(self, caller, run, *, _projection=None, _allow_expired_terminal=False):
         self.current(caller, _projection=_projection)
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
@@ -129,6 +129,7 @@ class StandaloneActionExecution:
             terminal=terminal,
             outputs=outer.get("outputs") if terminal else None,
             _projection=_projection,
+            _allow_expired_terminal=_allow_expired_terminal,
         )
         return GenericTicket(
             claim=None,

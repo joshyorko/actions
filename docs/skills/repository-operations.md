@@ -23,6 +23,16 @@ Work Item selection overrides that form and reopening loses its local state.
 Keep v1 dispatch behavior separate. Model views, previews and unavailable or
 unfinished projections must not display persisted private rows.
 
+Opening an authorized app and reading its retained Run state must survive result
+retention expiry. The resolver classifies expiry only after authorization and
+attachment validation; it still denies the bytes. App history omits the entire
+artifact inventory if any output expired, preserving the completed Run without
+launching replacement work. Do not extend retention, swallow general permission
+or integrity failures, or automatically rerun a completed Action to make reopening
+work. Use terminal metadata acknowledgement only in history readers; worker ticket
+recovery and publication retain strict validation. Catalog tests must assert
+inspection's absence of a UI resource explicitly.
+
 An ordinary native consumer can claim saved query criteria, explicitly launch
 RCC, query its configured logical data provider and render the sealed result.
 That order does not prove approval of an already materialized query result.

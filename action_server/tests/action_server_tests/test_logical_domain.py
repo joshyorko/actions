@@ -464,6 +464,22 @@ def test_generic_queue_publication_and_finish_are_atomic(domain):
     managed = GenericManagedWorkItemsService(owner)
     assert len(managed._artifacts(caller, retained)) == 4
 
+    from actions.server.run_outputs.models import RunOutput
+
+    with _transaction(g.db):
+        for ref in refs:
+            _update(g.db, RunOutput, ref.output_id, {"expires_ms": "1"})
+    expired_history = owner.read_execution(caller, item)
+    assert expired_history[0].status == RunStatus.PASSED
+    assert expired_history[2] == ticket
+    # A metadata read does not make the ticket usable for publication again.
+    with pytest.raises(ValueError, match="output seal"):
+        owner.retained_ticket(caller, claim)
+    with _transaction(g.db):
+        _update(g.db, RunOutput, refs[0].output_id, {"digest": "sha256:" + "f" * 64})
+    with pytest.raises(ValueError, match="output seal"):
+        owner.read_execution(caller, item)
+
 
 def test_new_guard_is_sql_only_and_rechecks_live_grants(domain, monkeypatch):
     from actions.server.foundry.models import FoundryAccessGrant

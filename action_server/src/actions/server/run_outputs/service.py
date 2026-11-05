@@ -61,6 +61,10 @@ class AccessDenied(PermissionError):
     """Object unavailable or current actor not authorized; no provider disclosure."""
 
 
+class OutputExpired(AccessDenied):
+    """An authorized attached output is past retention; bytes remain denied."""
+
+
 class FenceRejected(RuntimeError):
     """Attempt is expired, superseded, cancelled or otherwise not current."""
 
@@ -1064,16 +1068,18 @@ class RunOutputService:
                     if (
                         run.status not in (RunStatus.PASSED, RunStatus.FAILED)
                         or output.state != "final"
-                        or int(output.expires_ms) <= _now(self.db)
                         or not isinstance(attached, dict)
                         or attached.get("version") != 1
                         or ref not in attached.get("outputs", [])
                     ):
                         raise ValueError("not attached final output")
+                    expired = int(output.expires_ms) <= _now(self.db)
                 except (ValueError, TypeError) as exc:
                     raise AccessDenied(
                         "Run/output unavailable or access denied"
                     ) from exc
+                if expired:
+                    raise OutputExpired("Run/output unavailable or access denied")
                 provider = self.providers.get(output.provider_key)
                 if provider is None or output.provider_key != snapshot.provider_key:
                     raise AccessDenied("Run/output unavailable or access denied")
