@@ -2261,6 +2261,17 @@ artifact read reveals it. A successful matrix job also does not establish that
 every step ran: check each platform condition and skipped-step status. The
 candidate-source Canvas browser step is Linux-only.
 
+Compare failing test IDs and assertion values across exact-head matrix jobs
+before diagnosing separate platform failures; retain each platform's independent
+passed/skipped totals. Classify a started test failure by its executed step,
+not unrelated runner-capacity notices or earlier cancelled jobs.
+
+Compiler byte-identity goldens include the pinned RCC adapter version range.
+For an intentional pin upgrade, verify that substituting the previous range and
+recomputing dependent digests reconstructs the previous manifest/plan hashes
+before updating goldens. Keep the unchanged source-archive hash assertion and
+label the new goldens with their toolchain version; old receipts retain theirs.
+
 The Linux Runtime portable suite and measured coverage workflow provision the
 same digest-pinned, bounded owned PostgreSQL container. Both export
 `ACTIONS_INVOICE_TEST_POSTGRES`, `ACTIONS_TEST_POSTGRES_URL` and strict provider

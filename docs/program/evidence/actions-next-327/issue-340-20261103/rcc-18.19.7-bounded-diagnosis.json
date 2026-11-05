@@ -123,5 +123,41 @@
     "not_rcc7_qualification": true
   },
   "next_repair": "Qualify the exact fixed wheel against an execution-ready RCC7 cache while retaining all guards; diagnose any remaining Robot host failure at its recorded launch/cleanup boundary. Do not retry an uncertain existing Robot Run.",
-  "upstream_disposition": "RCC native repair draft only; no external issue or source write"
+  "upstream_disposition": "RCC native repair draft only; no external issue or source write",
+  "ci_upgrade_checkpoint": {
+    "head": "d39e88ecd30629cab6aa9923f7bfe2032c84f4e1",
+    "runtime_run": "https://github.com/joshyorko/actions/actions/runs/41947206711",
+    "shared_failure": "test_logical_binding_checkpoint.py::test_zero_requirement_bytes_match_precheckpoint_compiler",
+    "linux": {
+      "failed": 1,
+      "passed": 5669,
+      "skipped": 66
+    },
+    "windows": {
+      "failed": 1,
+      "passed": 2256,
+      "skipped": 3479
+    },
+    "macos": {
+      "failed": 1,
+      "passed": 2338,
+      "skipped": 3397
+    },
+    "not_runner_allocation_failure": true,
+    "toolkit": "Windows/macOS primary7 and compatibility3 pass; Linux both versions fail the same historical compiler golden.",
+    "installed": "Fresh hosted job126982263460 fails all five SQLite cases; local-cache-only diagnosis is insufficient.",
+    "native_build": "PASS Linux/Windows/macOS"
+  },
+  "compiler_golden_repair": {
+    "defect": "Primary RCC adapterVersionRange intentionally changed from ==18.19.3 to ==18.19.7 but one historical byte-identity test kept old expected manifest/plan hashes.",
+    "discriminator": "Changing only the current plan adapterVersionRange to ==18.19.3 and recomputing plan/revision digests exactly reconstructs BOTH prior expected hashes; source archive is unchanged.",
+    "test": "test_logical_binding_checkpoint.py::test_zero_requirement_bytes_match_rcc_18_19_7_golden",
+    "failing_before": "1 failed in1.24s; same assertion/hashes as all three hosted Runtime jobs.",
+    "passing_after_command": "prepared toolkit: python -m pytest -q tests/action_server_tests/test_logical_binding_checkpoint.py tests/contract_tests/test_package_revision_compiler.py",
+    "passing_after": {
+      "passed": 70,
+      "skipped": 19
+    },
+    "limitations": "No RCC execution in this synthetic compiler check; PostgreSQL fixture absent locally. Source behavior unchanged. Exact-head hosted qualification remains required."
+  }
 }
