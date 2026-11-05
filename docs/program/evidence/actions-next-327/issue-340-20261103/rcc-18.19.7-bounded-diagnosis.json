@@ -84,7 +84,7 @@
     },
     "configured_lint": "PASS",
     "configured_typecheck": "PASS,703 files",
-    "installed_after": "NOT PROVEN: four cases stopped at exact candidate-wheel staging guard, which was retained and then corrected; Robot validation still refused lifecycle state. No passing-after installed vertical is claimed."
+    "installed_after": "Prior b874 run remained blocked by HOME relocation. Subsequent stable-HOME02 implementation passes installed5SQLite+5PostgreSQL under hosted9c1; final40112 packaging checks recorded separately."
   },
   "cold_preparation": {
     "action_first_acquire": 124,
@@ -105,11 +105,13 @@
   },
   "latest_installed_sqlite": {
     "tests": 5,
-    "failures": 5,
+    "failures": 0,
     "errors": 0,
-    "skipped": 0
+    "skipped": 0,
+    "binary_version": "18.19.7",
+    "wheel_sha256": "9c1a122efa6fa5bab2ed5ae5d300a6506d732f988c2fda2dcb6ff35e522cc4a2"
   },
-  "postgres_installed7": "NOT RUN until SQLite installed blocker passes",
+  "postgres_installed7": "PASS:5 installed cases, same hosted9c1 Runtime payload as SQLite",
   "formal": "Existing bounded model/three deliberate mutant counterexamples and real SQLite/PostgreSQL prelaunch regression remain recorded in lifecycle-formal.json. No new formal framework or duplicate checker runs.",
   "ci_checkpoint": {
     "head": "05fe71e6aaa6fe686052ecd70b7c85ccb685053b",
@@ -122,7 +124,7 @@
     "installed_five_sqlite_rcc3": "PASS",
     "not_rcc7_qualification": true
   },
-  "next_repair": "Run installed fixed RCC7 Action-to-Robot and MCP-claimed Robot gates with stable RCC HOME/private user HOME; then PostgreSQL parity and final exact-head CI. No retry of uncertain existing Runs.",
+  "next_repair": "Exact new-head all-platform CI, then real invoice durable-result recovery plus final consumer/launcher and coordinated restore acceptance. RCC7 installed execution and actual host-death duplicate prevention now qualified. No blind uncertain-launch retry.",
   "upstream_disposition": "RCC native repair draft only; no external issue or source write",
   "ci_upgrade_checkpoint": {
     "head": "d39e88ecd30629cab6aa9923f7bfe2032c84f4e1",
@@ -198,6 +200,151 @@
     "regressions_red": "2 failed: sanitized RCC HOME contract and actual generated Action writes into cache HOME instead of private execution HOME.",
     "focused_after": "106 passed,7 skipped; includes actual compiler import/test helper processes and a real Robot task asserting private HOME.",
     "reproducer": "rcc-repair-upstream-draft.md#controlled-home-relocation-counterexample",
-    "limitations": "Native calls do not admit a Run; installed Action-to-Robot and PostgreSQL after-fix qualification pending. The final3 call ran after all7 observations; cache retired afterwards."
+    "limitations": "Native discriminator admits no Run. Installed SQLite/PostgreSQL after-fix now pass; retained uncertain launch test proves refusal, not successful effect reconciliation."
+  },
+  "hosted_stable_home_after": {
+    "head": "02d7473249733fffff7d9f24e6453fe1d2819021",
+    "tested_commit": "858b89863a09b78dffa1c9b77f0d1ca8c23e5168",
+    "tested_tree": "06afaba7b4ca3033aee7afc361d1ae8493fc75a7",
+    "head_tree_equal": true,
+    "job": "https://github.com/joshyorko/actions/actions/runs/42021198999/job/127224113075",
+    "rcc_sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+    "passed": 5,
+    "skipped": 0,
+    "wheels": {
+      "actions_core-1.1.0a8-py3-none-any.whl": "cad139190a73e9c4aa7c3b0e0e998a78315215b3acac4bf1c9cdce0217ff55fa",
+      "actions_http_helper-1.0.3-py3-none-any.whl": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl": "9c1a122efa6fa5bab2ed5ae5d300a6506d732f988c2fda2dcb6ff35e522cc4a2",
+      "actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+    },
+    "all_payload_hashes_match_uploaded_identity": true,
+    "junit_sha256": "b7c9e284dcd2e442c3ad6c765c6770f9e7e9940d77c16e732c77c1995ee68797"
+  },
+  "installed_stable_home_after": {
+    "runtime_wheel": "9c1a122efa6fa5bab2ed5ae5d300a6506d732f988c2fda2dcb6ff35e522cc4a2",
+    "rcc_sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+    "source_product_commit": "02d7473249733fffff7d9f24e6453fe1d2819021",
+    "source_overlay": false,
+    "backends": {
+      "sqlite": {
+        "passed": 5,
+        "skipped": 0,
+        "junit_sha256": "0b1856d4cc592dc774af291bcb382f68d61567f5affafa50538ba9b56cd6e568",
+        "command": "installed host-venv/bin/python run-stable-home.py $VERTICAL_ROOT sqlite-five; existing pidfd/subreaper supervisor, -n0,20GiB disk floor",
+        "cases": [
+          "test_real_mcp_action_submits_detached_rcc_robot[sqlite]",
+          "test_real_child_live_cancellation_probe[sqlite]",
+          "test_real_failed_robot_is_not_automatically_retried_after_host_restart[sqlite]",
+          "test_real_crashed_robot_launch_requires_explicit_reconciliation[sqlite]",
+          "test_model_enqueue_claim_rcc_and_authorized_outputs[sqlite]"
+        ]
+      },
+      "postgres": {
+        "passed": 5,
+        "skipped": 0,
+        "junit_sha256": "8890984226707f86733f2f8a17531cb1de3f108987161533ef6a7d710657a797",
+        "command": "installed host-venv/bin/python run-stable-home.py $VERTICAL_ROOT postgres-five; existing pidfd/subreaper supervisor, -n0,20GiB disk floor",
+        "cases": [
+          "test_real_mcp_action_submits_detached_rcc_robot[postgresql]",
+          "test_real_child_live_cancellation_probe[postgresql]",
+          "test_real_failed_robot_is_not_automatically_retried_after_host_restart[postgresql]",
+          "test_real_crashed_robot_launch_requires_explicit_reconciliation[postgresql]",
+          "test_model_enqueue_claim_rcc_and_authorized_outputs[postgresql]"
+        ]
+      }
+    }
+  },
+  "known_ci_test_repairs": {
+    "head": "02d7473249733fffff7d9f24e6453fe1d2819021",
+    "macos_runtime": "Executed sole archived helper-byte golden failure; historical boundary now exempts/asserts only reviewed JSON serialization and private-HOME line. New helper behavior independently executes in regression.",
+    "windows_toolkit": "Executed sole new preparation helper test failure: os.getuid unavailable. Scope only that new real Linux pidfd/private-UID setup test to Linux.",
+    "portable_HOME_checks": "Compiler/Action regression tests remain enabled across matrix and assert explicit HOME environment contract rather than Windows profile-based Path.home().",
+    "final_exact_head_ci": "pending next checkpoint"
+  },
+  "packaging_counterexample": {
+    "hosted_hash": "9c1a122efa6fa5bab2ed5ae5d300a6506d732f988c2fda2dcb6ff35e522cc4a2",
+    "local_before_hash": "5959054367fbdfa761571ac539203666411e6411462f778e1c7d3e6ae97b6ed0",
+    "hosted_only": [],
+    "local_only": [
+      "actions/server/bin/rcc-18.19.3"
+    ],
+    "changed_common": [
+      "actions_runtime-1.1.0a60.dist-info/RECORD"
+    ],
+    "repair": "Narrow primary Runtime RCC package include; retain old executable for separate compatibility tests. Existing real installed vertical now rejects extra/mismatching bundled RCC bytes.",
+    "after": "PASS: independent repeat build and wheel rebuilt from extracted sdist both SHA40112c61. Only requested primary RCC; OAuth configuration and platform tag preserved.",
+    "rebuilt_primary_only_hash": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04",
+    "hosted_byte_identical": false,
+    "installed_payload_bytes_equal_except_RECORD_row_order": true,
+    "record_rows_equal": true,
+    "rebuilt_rcc_members": [
+      "actions/server/bin/rcc-18.19.7"
+    ],
+    "platform_tag": "cp312-cp312-linux_x86_64",
+    "underlying_cause": "Generated setuptools stage appended stale build/lib data after source selection. Direct download-only build hook avoids build/lib; explicit OAuth/RCC wheel+sdist includes preserve all payloads.",
+    "runtime_wheel_sha256": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04",
+    "sdist_sha256": "4f9e3e644fef431db4c3973035d41206152098800a4d45f41085427ceee16741",
+    "guard": {
+      "old-cache-contaminated": "Runtime wheel must contain only the primary RCC executable",
+      "primary-only": "ACCEPTED",
+      "repeat_build_hash": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04"
+    },
+    "commands": [
+      "prepared Poetry build -f wheel; repeated with stale build/lib still present",
+      "prepared Poetry build -f sdist; extract owned archive with data filter; prepared Poetry build -f wheel from extracted package"
+    ],
+    "limits": "Hosted9c1 and final40112 ZIP bytes differ; all payload files are equal except RECORD row ordering. Final40112 execution checks recorded separately. No claim an old wheel executed as the new one."
+  },
+  "focused_ci_repairs_after": {
+    "runtime_tests": 21,
+    "runtime_failed": 0,
+    "toolkit_tests": 9,
+    "toolkit_failed": 0,
+    "runtime_configured_lint": "PASS623files",
+    "toolkit_ruff": "PASS",
+    "optional_markdown_lint": "UNAVAILABLE",
+    "full_local_runtime": "not repeated; existing exact-head hosted matrix is authoritative"
+  },
+  "final_artifact_host_sigkill7": {
+    "host_exit": -9,
+    "attempts": 1,
+    "epoch": 1,
+    "replacement_rejected": true,
+    "limitation": "fail-closed retained launch; supervisor cleanup is not effect reconciliation",
+    "runtime_wheel_sha256": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04",
+    "rcc_sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+    "supervisor_exit": 0,
+    "command": "installed host-venv/bin/python run-stable-home.py $VERTICAL_ROOT host-crash; existing retained-evidence/probe-host-crash.py and pidfd/subreaper supervisor"
+  },
+  "reproducible_candidate": {
+    "runtime_wheel_sha256": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04",
+    "sdist_sha256": "4f9e3e644fef431db4c3973035d41206152098800a4d45f41085427ceee16741",
+    "wheel_repeat_and_sdist_roundtrip_identical": true,
+    "build_pyproject_sha256": "215103fbef5a3a239ea0f07dfcf957f061c016054765b1569a1fb7693f02537d",
+    "product_code_commit": "02d7473249733fffff7d9f24e6453fe1d2819021",
+    "core_sdk_helper_wheels": "same bytes as hosted_stable_home_after; final primary Runtime ZIP has different ordering, never relabelled as hosted9c1",
+    "build_environment": {
+      "poetry": "2.1.1",
+      "poetry_core_wheel_generator": "2.5.0",
+      "toolkit_python": "3.12.15",
+      "installed_host_python": "3.12.14",
+      "robotframework": "7.4.2"
+    },
+    "limitation": "Byte identity demonstrated in this versioned environment, including a wheel rebuilt from extracted sdist; not a claim that changing build-backend versions preserves bytes."
+  },
+  "final_artifact_postgres7": {
+    "runtime_wheel_sha256": "40112c615e6d74645a227124acc88fad8df7f9d77526e9921191688614f1ed04",
+    "rcc_sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+    "passed": 5,
+    "skipped": 0,
+    "junit_sha256": "aae2fb2d539040aa45a8708f7c0c18a23510818f1d2a5c0e4f45b53ae0a82acb",
+    "cases": [
+      "test_real_mcp_action_submits_detached_rcc_robot[postgresql]",
+      "test_real_child_live_cancellation_probe[postgresql]",
+      "test_real_failed_robot_is_not_automatically_retried_after_host_restart[postgresql]",
+      "test_real_crashed_robot_launch_requires_explicit_reconciliation[postgresql]",
+      "test_model_enqueue_claim_rcc_and_authorized_outputs[postgresql]"
+    ],
+    "command": "installed host-venv/bin/python run-stable-home.py $VERTICAL_ROOT postgres-five; existing supervisor, -n0,20GiB disk floor"
   }
 }

@@ -2679,6 +2679,25 @@ preparation, not an uncertain Run retry. The local preparation helper allows
 300 seconds for cold acquisition after measured 120-second timeouts; production
 Run deadlines, claims and cancellation confirmation remain unchanged.
 
+Wheel payload selection must include only the primary versioned RCC binary,
+including its Windows `.exe` form. A broad `bin/rcc*` include also packages
+ignored compatibility binaries left in a developer checkout: observed local
+and clean-hosted wheels differed solely by the extra 18.19.3 payload. Keep the
+compatibility executable available for its separate lane without bundling it
+into the primary Runtime wheel. Include/exclude rules alone do not remove stale
+files appended by Poetry's generated setuptools `build/lib` stage. The Runtime
+hook only downloads RCC, so run it directly without generating setup.py; the
+build script still gives the wheel its platform tag. Explicitly include generated
+OAuth configuration in both wheel and sdist formats. Compare actual ZIP payloads,
+RECORD rows and repeat-build hashes; the installed vertical rejects extra or
+mismatching RCC members. Do not delete the compatibility source binary.
+
+Portable subprocess tests should assert the explicit `HOME` environment contract;
+Windows `Path.home()` instead uses its Windows profile variables. Keep promised
+compiler/Action tests enabled across the matrix. The installed RCC preparation
+helper itself requires Linux pidfd/private-UID facilities, so tests invoking its
+real role-home setup must carry the same explicit Linux boundary.
+
 ### RCC release acceptance pins
 
 A primary RCC upgrade must keep previously admitted immutable Robot records

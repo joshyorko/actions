@@ -138,6 +138,16 @@ def _required_inputs() -> tuple[Path, Path, Path, str, Path, Path, str, Path, st
     ):
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             pytest.fail(f"host candidate wheel SHA-256 differs: {path.name}")
+    with zipfile.ZipFile(runtime_wheel) as archive:
+        bundled_rcc = [
+            name
+            for name in archive.namelist()
+            if name.startswith("actions/server/bin/rcc")
+        ]
+        if bundled_rcc != ["actions/server/bin/rcc-18.19.7"]:
+            pytest.fail("Runtime wheel must contain only the primary RCC executable")
+        if archive.read(bundled_rcc[0]) != rcc.read_bytes():
+            pytest.fail("Runtime wheel RCC bytes differ from the qualified executable")
     return (
         action_receipt,
         robot_receipt,

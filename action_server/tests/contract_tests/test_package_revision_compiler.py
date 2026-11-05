@@ -413,9 +413,10 @@ def test_compiler_helpers_restore_private_home_before_user_import(
     package.mkdir()
     private_home = workspace / "home"
     prefix = (
+        "import os\n"
         "from pathlib import Path\n"
-        f"assert Path.home() == Path({str(private_home)!r})\n"
-        "(Path.home() / 'user-imported').write_text('private')\n"
+        f"assert Path(os.environ['HOME']) == Path({str(private_home)!r})\n"
+        "(Path(os.environ['HOME']) / 'user-imported').write_text('private')\n"
     ).encode()
     for entry in _generated_action_entries():
         target = package / entry.path

@@ -168,10 +168,12 @@ def test_generated_child_uses_private_home_instead_of_rcc_cache_home(tmp_path):
     cache_home = tmp_path / "rcc-cache"
     cache_home.mkdir()
     (source / "home_action.py").write_text(
+        "import os\n"
         "from pathlib import Path\n"
         "def inspect_home():\n"
-        "    (Path.home() / 'user-created').write_text('private')\n"
-        "    return str(Path.home())\n"
+        "    home = Path(os.environ['HOME'])\n"
+        "    (home / 'user-created').write_text('private')\n"
+        "    return str(home)\n"
     )
     inputs, result = directory / "input.json", directory / "result.json"
     inputs.write_text("{}")

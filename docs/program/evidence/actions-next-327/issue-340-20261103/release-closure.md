@@ -1,16 +1,18 @@
 # Release closure: acceptance and remaining decisions
 
-Implementation checkpoint: `55b5c0ebe0ba21c7c3ba0e3db98a6d9b9ded2017`,
+Runtime implementation checkpoint: `02d7473249733fffff7d9f24e6453fe1d2819021`,
 [PR #341](https://github.com/joshyorko/actions/pull/341). This is **not a release candidate approval**.
 No merge, publication, tag or deployment is authorized.
 
-RCC18.19.7 candidate update: Doctor/Bootstrap/ToolkitTest now pass; the
-workstation allocation blocker is resolved after operator intervention and
-removal of the agent's21GiB task tree. Affected Runtime source qualification is
-250passed/4explicit opt-in skips on real SQLite/PostgreSQL, with configured
-lint/type checks passing. Installed18.19.7 qualification has not yet run.
-Existing18.19.3 evidence below retains its original identities. The current
-candidate is not release-approved.
+RCC18.19.7 now passes Doctor/Bootstrap/ToolkitTest, the hosted five-case installed
+vertical, and five installed SQLite plus five PostgreSQL cases locally. A
+controlled HOME-only counterexample isolated the integration defect; RCC keeps
+a stable cache home while trusted helpers restore private user-code homes.
+The primary-only Runtime wheel also rebuilds byte-identically from its sdist.
+[Exact artifacts, regressions and limits](rcc-18.19.7-bounded-diagnosis.json)
+separate the hosted 9c1a122e wheel from the packaging-corrected 40112c61 wheel.
+Final exact-head CI and remaining contract gates are still required.
+Existing18.19.3 evidence below retains its original identities.
 
 The authorities are [#327](https://github.com/joshyorko/actions/issues/327),
 [#328](https://github.com/joshyorko/actions/pull/328),
@@ -25,11 +27,12 @@ MUST FIX includes required missing qualification, not only missing code.
 - **R**: strict local Runtime portable suite at `7ce57c1ffc54debc3bcf59d27f46a253bd49ff05`: 5,651 passed, 66 explicit skips. Real owned PostgreSQL enabled. Local full logs/JUnit are retained under `actions341-evidence/runtime-portable-final.*`. Earlier failed runs remain failed.
 - **F**: canonical owned SQLite/PostgreSQL fenced queue gate: 45 passed, zero skips, fixture cleanup PASS; affected Runtime lifecycle parity: 156 passed, zero skips. Core 479 passed/5 skips; Work Items portable 285 passed/46 skips/3 deselections/10 expected failures; devutils 335 passed; Toolkit 241 passed/5 opt-in skips. These are RCC 18.19.3 evidence.
 - **I**: existing installed-wheel Action→Robot harness: four real SQLite and four real PostgreSQL cases passed. Actual parent/child identity, authorized output bytes, cancellation, failure/replay/restart and uncertain-launch refusal. A separate actual host SIGKILL probe ended with host exit -9, owned descendants reaped, one retained Attempt and no duplicate launch. Safe refusal is not reconciliation.
+- **I7**: [RCC18.19.7 receipt](rcc-18.19.7-bounded-diagnosis.json): the same five installed cases pass on SQLite/PostgreSQL, including M, under the hosted 9c1a122e wheel. The hosted job tested merge858b8986 whose tree equals integration02d74732. Actual payload hashes and zero-skip JUnit were independently checked. Packaging40112c61 preserves every payload except RECORD row order, passes all five installed PostgreSQL cases, and passes an actual host-SIGKILL/fresh-host duplicate-prevention probe. Its wheel rebuilds byte-identically from extracted sdist. I remains historical18.19.3 proof.
 - **M**: `test_managed_work_items_real_robot_vertical.py::test_model_enqueue_claim_rcc_and_authorized_outputs`: real installed Runtime/Core/SDK, standard MCP client over HTTP/ASGI, synthetic authenticated actor, model enqueue → real trusted claim → actual RCC Robot consuming the input → terminal Work Item/Run/Attempt and authorized output bytes. SQLite and PostgreSQL each passed. This is not native CLI startup or actual ChatGPT authentication.
 - **L**: [formal receipt](lifecycle-formal.json), [counterexamples](lifecycle-counterexamples.md), and `.agents/skills/verify-run-lifecycle/`: real pre-launch claimed-recovery defect reproduced on both SQL backends, repaired at the checkpoint above. Twelve focused regression cases, 104 nearby cases and six formal replay cases passed. Configured Runtime lint/typecheck passed (703 files); optional Markdown lint unavailable. Retained uncertain launches remain blocked.
 - **C**: [Linux Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169843), [Windows Runtime](https://github.com/joshyorko/actions/actions/runs/41893331721/job/126796169618), [installed five-case vertical](https://github.com/joshyorko/actions/actions/runs/41893331664/job/126796169037) passed at `9b72b1a22222c426e7fcfa1de53cd45fb6b715d0`. Linux included the separate published-Core Canvas/browser gate. All non-macOS RCC primary/N-1 and native builds passed there. This precedes L and is not final-head CI.
 - **D**: [installed a60 CSV/Parquet component receipt](a60-installed-data.md), source `642c6d3f62c2d271d33459553ef560a10f283f1f`; its exact old wheel and RCC 18.19.3 identities remain unchanged. Not current candidate, PostgreSQL restart or ChatGPT proof.
-- **U**: [RCC 18.19.7 proposal and qualification receipt](rcc-18.19.7-qualification.json). Published hashes verified; real retained-record compatibility regression found and fixed in the isolated proposal. Doctor cold setup blocked by Btrfs allocation failure; primary pins have not been promoted.
+- **U**: [RCC18.19.7 qualification](rcc-18.19.7-qualification.json): published hashes verified, prior18.19.3 metadata identity retained, Doctor/Bootstrap/ToolkitTest and I7 pass. Storage allocation is resolved. Primary candidate pins are18.19.7; no release promotion or publication is approved.
 
 ## Complete release-ledger disposition
 
@@ -101,9 +104,9 @@ refusal cannot discharge that invoice gate.
 
 ## Finite critical path
 
-1. Close the installed RCC18.19.7 gate with the fixed prepared-identity compiler. [Bounded diagnosis](rcc-18.19.7-bounded-diagnosis.json) preserves the exact failing command, native A/B and all limitations. Unit/source gates pass; installed SQLite/PostgreSQL cancellation/recovery is not yet qualified. The storage blocker is resolved; keep scratch bounded.
+1. Finalize the primary-only artifact and current-head CI. RCC18.19.7 installed execution, MCP enqueue/worker, cancellation and replay now pass (I7). The receipt preserves the HOME counterexample, historical failed runs and successful wheel/sdist reproduction. Safe uncertain-launch refusal does not establish successful recovery.
 2. Run existing invoice/export/durable-result reconciliation, final launcher/consumer and coordinated restore gates; retain final payloads/hashes/SBOM/provenance. No safe-refusal-as-recovery claim.
-3. Obtain successful fresh-head Linux/Windows/macOS CI. At05fe, all native builds and primaryRCC3 toolkit platforms passed; Runtime macOS and N-1 macOS could not acquire runners. Do not weaken gates to bypass capacity.
+3. Obtain successful fresh-head Linux/Windows/macOS CI. At02d74732, installed and macOS toolkit pass; macOS Runtime has an executed helper-byte golden failure and Windows toolkit an executed Linux-helper test failure, both corrected in the subsequent checkpoint. Earlier05fe capacity cancellations do not explain these failures. Do not weaken gates.
 4. Resolve NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval. Celld exclusion is pending an explicit decision; no silent downgrade or scope waiver.
 
 Current decision: **not technically merge-ready or release-candidate-ready**.

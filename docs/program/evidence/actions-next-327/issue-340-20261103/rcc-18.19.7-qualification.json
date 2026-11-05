@@ -53,7 +53,7 @@
     "Doctor": "PASS: published RCC 18.19.7, fresh isolated toolchain, Python 3.12.15, Poetry 2.1.1, Node20.19.3 and Go1.23.6",
     "Bootstrap": "PASS: existing checkout/package environment locations, locked dependencies",
     "ToolkitTest": "Initial241pass5opt-in skips; stable-HOME helper revision242pass5opt-in skips under the same prepared RCC7 toolchain.",
-    "installed_action_robot_cancellation_recovery": "FAILED on d39e88ec hosted SQLite; controlled HOME relocation counterexample now isolates the RCC7 integration defect. Stable-cache-HOME fix installed qualification pending; see rcc-18.19.7-bounded-diagnosis.json.",
+    "installed_action_robot_cancellation_recovery": "PASS: hosted5SQLite plus local5SQLite+5PostgreSQL, source02 implementation/hosted9c1 wheel. Primary-only40112 wheel separately reproduced from sdist; final-artifact checks and exact-head CI remain explicit in bounded diagnosis.",
     "runtime_focused": "PASS: 250 passed, 4 explicit opt-in skips, real SQLite/PostgreSQL; configured Runtime lint and typecheck pass (703 files)",
     "stable_home_focused": "106 passed,7 skipped across compiler, generated Action execution, Robot execution and validation; includes actual Python helpers and real Robot HOME assertion. No installed/SQL qualification inferred."
   },

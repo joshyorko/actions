@@ -10,6 +10,9 @@ from pathlib import Path
 import pytest
 
 
+@pytest.mark.skipif(
+    sys.platform != "linux", reason="installed RCC preparation is Linux-only"
+)
 def test_preparation_uses_stable_private_rcc_home(tmp_path):
     path = Path(__file__).with_name("prepare_internal_child_real_vertical_rcc.py")
     spec = importlib.util.spec_from_file_location("vertical_home_preparation", path)
