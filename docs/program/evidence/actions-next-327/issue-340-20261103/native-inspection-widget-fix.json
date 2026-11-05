@@ -1,0 +1,59 @@
+{
+  "source_base": "d10b0f4499f060fbd19bc594d429e405eb640e1b",
+  "surface": "Actual Codex mode, not ChatGPT-mode E1",
+  "application_id": "3ea3af5d-3d49-4ef9-bb48-cc2dfd3dc68b",
+  "revision": "sha256:571816c6f710655015e2d6f92c4f8a4dcc51878fec4b7e6a72c7a57874207f99",
+  "defect": "canvas_inspect advertised the Canvas resource and returned revision history as actions.canvas. The native completed tool sequence replaced valid v2 metadata with this invalid view.",
+  "repair": "Inspection remains authorized and model-readable but no longer selects a UI resource or returns app-view metadata. V2 renderer validation unchanged.",
+  "evidence": {
+    "before": {
+      "command": "poetry run pytest tests/action_server_tests/mcp/test_foundry_mcp.py::test_stable_model_catalog_and_resource_work_without_a_user_package tests/action_server_tests/test_foundry_authoring_model_contract.py::test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure",
+      "result": "2 failed on original implementation with new contract assertions"
+    },
+    "after": {
+      "focused": "20 passed, 2 skipped",
+      "affected": "62 passed, 92 skipped; external/opt-in cells remain unverified",
+      "frontend": "42 passed",
+      "browser": "1 passed, 0 skipped; built bundled HTML and official MCP Apps bridge with exact native v2 metadata",
+      "lint": "invoke lint: Ruff check/format and Isort PASS; optional Markdown linter unavailable",
+      "types": "invoke typecheck: no issues found in 703 source files"
+    },
+    "installed": {
+      "wheel": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+      "sha256": "a25c91f0b4859cf48d6b94e07a5248c1e836db0ecdb6a6375f7ba80f2576f44b",
+      "prior_counts": {
+        "run": 0,
+        "run_attempt": 0,
+        "run_admission": 0
+      },
+      "original_app": "3ea3af5d-3d49-4ef9-bb48-cc2dfd3dc68b",
+      "original_revision": "sha256:571816c6f710655015e2d6f92c4f8a4dcc51878fec4b7e6a72c7a57874207f99",
+      "datadir_preserved": true,
+      "credential_changed": false
+    },
+    "installed_replay": {
+      "installed_patch": "PASS",
+      "same_v2_revision_preserved": true,
+      "inspection_model_result_retained": true,
+      "inspection_ui_resource_advertised": false,
+      "inspection_canvas_metadata_emitted": false,
+      "credential_changed": false,
+      "actual_host_retry": "pending refreshed native tool catalog"
+    }
+  },
+  "limits": [
+    "Actual original revision reopened through existing native connection; visual result still requires host observation.",
+    "Older native chats may retain the old tool descriptor; refresh the connection/catalog before judging inspection UI behavior.",
+    "This receipt does not qualify the invoice workflow or ChatGPT-mode acceptance."
+  ],
+  "raw_evidence_sha256": {
+    "inspection-before.xml": "cc6c4b3fd7ce1c03795e47d90eff8eac72ba455e2d5d7d62d5233129282dd75c",
+    "inspection-after-final.xml": "df169771b83ded78e0fa32b74e82c2986dbd86634e4006674eea1e3eb7cc3dc5",
+    "python-regression.xml": "9686898d15bc5c778d65c35c94e37393e7f88eaeaa97b95c05cbcc88171ad71f",
+    "browser-exact-metadata.json": "a7d649724c7e07c1033a9450db78888f59be58f38e18fd6215a483ec20374806",
+    "frontend-regression.log": "84a8d8a16f35b4168730b4b405a006aa5ee506fed2205c2698b27e16d1f42f33",
+    "python-lint.log": "149875d3441266e80a34115c2b184b11529499dd83aed8c72d9a31e650fc0218",
+    "python-typecheck.log": "fc4576c25d5337dca71b6e96e8dabb8a3177db13c86e2a78187490323d76f356"
+  },
+  "upstream_disposition": "none; local Actions metadata contract defect"
+}

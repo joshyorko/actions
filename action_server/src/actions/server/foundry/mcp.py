@@ -227,7 +227,7 @@ class CanvasMcp:
                 if name == "capability_discover"
                 else {
                     "ui": {
-                        "resourceUri": URI,
+                        **({"resourceUri": URI} if name != "canvas_inspect" else {}),
                         "visibility": ["model"]
                         if name in CAPABILITY_TOOLS
                         else (["model", "app"] if name in MODEL_TOOLS else ["app"]),

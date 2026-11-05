@@ -8,6 +8,15 @@ mounting or the separately assembled MCP catalog. New native catalog surfaces
 need stable revision identity, and a cached descriptor must not replace live
 authorization of the exact immutable reference.
 
+`canvas_inspect` returns revision diagnostics to the authenticated model; it does
+not select a Canvas resource or emit `actions.canvas` view metadata. Its history
+object is not an app view. A native host trace showed a valid saved v2 app being
+replaced by an inspection widget whose history object failed the renderer's
+closed metadata parser. Diagnose the actual completed tool sequence rather than
+inferring the failing operation from an assistant's summary. Keep v1/v2 app
+validation and inspection authorization strict; do not flatten bound tables
+into text or add unbound rows to bypass data-binding requirements.
+
 The candidate Deployment value supports an explicit, scoped
 `model_published_capabilities` selection. Its empty value is omitted from the
 canonical wire representation so earlier Deployment revision identities stay

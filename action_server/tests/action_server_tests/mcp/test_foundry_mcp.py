@@ -86,6 +86,9 @@ def test_stable_model_catalog_and_resource_work_without_a_user_package():
                             for tool in (await session.list_tools()).tools
                         }
                         assert set(tools) == MODEL_TOOLS
+                        assert "resourceUri" not in tools["canvas_inspect"].meta.get(
+                            "ui", {}
+                        )
                         assert tools["canvas_open"].input_schema == {
                             "type": "object",
                             "properties": {},

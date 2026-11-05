@@ -29,6 +29,15 @@ const semanticFixture: unknown = JSON.parse(
         "utf8",
     ),
 );
+const authoredV2Draft: unknown = JSON.parse(
+    await readFile(
+        new URL(
+            "./src/semantic-renderer/fixtures/authoring-v2-card-draft.fixture.json",
+            import.meta.url,
+        ),
+        "utf8",
+    ),
+);
 
 test("official MCP Apps bridge handles fixture calls and host context lifecycle", async ({
     page,
@@ -277,6 +286,52 @@ test("official bridge keeps unbroken semantic text within a narrow host viewport
         measurements.paragraphClientWidth,
     );
     expect(externalRequests).toEqual([]);
+});
+
+test("official bridge renders the exact authored v2 card draft", async ({
+    page,
+}) => {
+    await page.route("**/index.html", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "text/html; charset=utf-8",
+            headers: {
+                "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${moduleHash}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+            },
+            body: builtCanvasResource,
+        });
+    });
+    await page.goto("/host-harness.html");
+    await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+    const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+    await expect(frame.locator("#query-input")).toHaveValue("alpha");
+    await page.evaluate((metadata) => {
+        const target = document.querySelector("iframe");
+        if (!(target instanceof HTMLIFrameElement) || !target.contentWindow) {
+            throw new Error("Canvas frame missing");
+        }
+        target.contentWindow.postMessage(
+            {
+                jsonrpc: "2.0",
+                method: "ui/notifications/tool-result",
+                params: {
+                    content: [
+                        { type: "text", text: "Canvas revision loaded." },
+                    ],
+                    _meta: { "actions.canvas": metadata },
+                },
+            },
+            window.location.origin,
+        );
+    }, authoredV2Draft);
+    await expect(frame.getByRole("alert")).toHaveCount(0);
+    await expect(
+        frame.getByRole("heading", { name: "Dakota connected" }),
+    ).toBeVisible();
+    await expect(
+        frame.getByRole("heading", { name: "Sample one" }),
+    ).toBeVisible();
+    await expect(frame.getByText("Status: Ready")).toHaveCount(2);
 });
 
 test("official bridge renders a real Runtime Action result", async ({
