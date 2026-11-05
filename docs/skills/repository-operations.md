@@ -17,6 +17,21 @@ inferring the failing operation from an assistant's summary. Keep v1/v2 app
 validation and inspection authorization strict; do not flatten bound tables
 into text or add unbound rows to bypass data-binding requirements.
 
+Semantic v2 tables read the current binding's bounded, persisted result projection,
+as charts and inspectors do. They cannot depend on a form's local dispatch return:
+Work Item selection overrides that form and reopening loses its local state.
+Keep v1 dispatch behavior separate. Model views, previews and unavailable or
+unfinished projections must not display persisted private rows.
+
+An ordinary native consumer can claim saved query criteria, explicitly launch
+RCC, query its configured logical data provider and render the sealed result.
+That order does not prove approval of an already materialized query result.
+The default native bootstrap constructs `InvoiceQueryService` without query
+providers; the separate combined invoice fixture's query-result review path must
+not be claimed as ordinary native-host acceptance. Scope execution grants to the
+fixture's exact Deployment revision; configuring a trusted profile alone must
+not make existing drafts executable.
+
 The candidate Deployment value supports an explicit, scoped
 `model_published_capabilities` selection. Its empty value is omitted from the
 canonical wire representation so earlier Deployment revision identities stay

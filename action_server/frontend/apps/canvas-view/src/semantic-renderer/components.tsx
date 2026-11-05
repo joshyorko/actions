@@ -1006,8 +1006,25 @@ function SemanticCanvasRendererInstance({
 
     const privateSlotsVisible = viewer === "app" && !preview;
 
-    const resolveResult = (bindingId: string): unknown =>
-        ownValue(results, bindingId);
+    const resolveResult = (bindingId: string): unknown => {
+        if (spec.schemaVersion !== "actions.canvas-spec/v2")
+            return ownValue(results, bindingId);
+        if (!privateSlotsVisible) return undefined;
+        try {
+            const projection = adapters.getProjection?.(bindingId);
+            if (
+                projection?.state !== "ready" ||
+                new globalThis.TextEncoder().encode(projection.canonicalJson)
+                    .byteLength >
+                    64 * 1024
+            )
+                return undefined;
+            const data: unknown = JSON.parse(projection.canonicalJson);
+            return isProjectionRecord(data) ? data : undefined;
+        } catch {
+            return undefined;
+        }
+    };
 
     const renderNode = (node: CanvasNode): ReactNode => {
         switch (node.type) {

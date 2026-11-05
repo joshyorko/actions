@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { z } from "zod";
 import {
     Client,
     StreamableHTTPClientTransport,
@@ -435,6 +436,186 @@ test("official bridge renders a real Runtime Action result", async ({
             frame.getByText("Result artifact is ready."),
         ).toBeVisible();
         expect(externalRequests).toEqual([]);
+    } finally {
+        await client.close();
+    }
+});
+
+test("official bridge renders a native invoice consumer's persisted table", async ({
+    page,
+}) => {
+    test.setTimeout(90_000);
+    const configPath = process.env.CANVAS_NATIVE_INVOICE_CONFIG;
+    const keyPath = process.env.CANVAS_NATIVE_KEY_FILE;
+    const runtimeUrl = process.env.CANVAS_RUNTIME_MCP_URL;
+    test.skip(
+        !configPath || !keyPath || !runtimeUrl,
+        "Requires an explicitly prepared native invoice app and private local credentials.",
+    );
+    if (!configPath || !keyPath || !runtimeUrl) return;
+    expect(new URL(runtimeUrl).hostname).toBe("127.0.0.1");
+    const config = z
+        .object({ appId: z.string().uuid(), revisionId: z.string() })
+        .parse(JSON.parse(await readFile(configPath, "utf8")));
+    const key = (await readFile(keyPath, "utf8")).trim();
+    const client = new Client(
+        { name: "native-invoice-acceptance", version: "0.1.0" },
+        { capabilities: {} },
+    );
+    await client.connect(
+        new StreamableHTTPClientTransport(new URL(runtimeUrl), {
+            requestInit: { headers: { Authorization: `Bearer ${key}` } },
+        }),
+    );
+    try {
+        const inspected = await client.callTool({
+            name: "canvas_inspect",
+            arguments: { appId: config.appId },
+        });
+        const descriptors = z
+            .object({
+                invocationDescriptors: z.array(
+                    z.object({
+                        bindingId: z.string(),
+                        snapshot: z.record(z.string(), z.unknown()),
+                    }),
+                ),
+            })
+            .parse(inspected.structuredContent);
+        const selected = descriptors.invocationDescriptors.find(
+            (entry) => entry.bindingId === "reconcile",
+        );
+        if (!selected) throw new Error("Exact invoice binding unavailable");
+        const deployment = z
+            .object({
+                workspace_id: z.string(),
+                deployment_id: z.string(),
+                revision_id: z.string(),
+            })
+            .parse(selected.snapshot.deployment);
+        const queued = await fetch(
+            new URL("/api/managed-work-items/v1/operations", runtimeUrl),
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${key}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    operation: "items.enqueue",
+                    queue: {
+                        workspace_id: deployment.workspace_id,
+                        deployment,
+                        queue_id: "invoice_input",
+                    },
+                    snapshot: selected.snapshot,
+                    payload: { customer: "Synthetic" },
+                    idempotency_key: `native-invoice-browser-${crypto.randomUUID()}`,
+                }),
+            },
+        );
+        expect(queued.ok).toBe(true);
+        const item = z
+            .object({
+                result: z.object({ item: z.object({ id: z.string() }) }),
+            })
+            .parse(await queued.json()).result.item;
+        const opened = await client.callTool({
+            name: "canvas_get",
+            arguments: config,
+        });
+        expect(opened.isError).not.toBe(true);
+        const resource = await client.readResource({
+            uri: "ui://action-canvas/v1/canvas.html",
+        });
+        const html = resource.contents.find((content) => "text" in content);
+        if (!html || !("text" in html) || typeof html.text !== "string")
+            throw new Error("Installed Canvas resource missing");
+        const inline = html.text.match(
+            /<script type="module">([\s\S]*?)<\/script>/u,
+        )?.[1];
+        if (!inline) throw new Error("Installed Canvas module missing");
+        const digest = createHash("sha256").update(inline).digest("base64");
+        await page.route("**/index.html?runtime=1", async (route) =>
+            route.fulfill({
+                contentType: "text/html; charset=utf-8",
+                headers: {
+                    "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${digest}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+                },
+                body: html.text,
+            }),
+        );
+        const calls: string[] = [];
+        await page.route("**/__runtime_tool_call", async (route) => {
+            const request = z
+                .object({
+                    name: z.string(),
+                    arguments: z.record(z.string(), z.unknown()),
+                })
+                .parse(route.request().postDataJSON());
+            calls.push(request.name);
+            const result = await client.callTool(request);
+            await route.fulfill({
+                contentType: "application/json",
+                body: JSON.stringify(result),
+            });
+        });
+        await page.goto("/host-harness.html?runtime=1");
+        await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+        const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+        await expect(frame.locator("#query-input")).toHaveValue("alpha");
+        await page.evaluate((result) => {
+            const target = document.querySelector("iframe");
+            if (!(target instanceof HTMLIFrameElement) || !target.contentWindow)
+                throw new Error("Canvas frame missing");
+            target.contentWindow.postMessage(
+                {
+                    jsonrpc: "2.0",
+                    method: "ui/notifications/tool-result",
+                    params: result,
+                },
+                window.location.origin,
+            );
+        }, opened);
+        await frame
+            .getByRole("button", { name: "Load inputs", exact: true })
+            .click();
+        await frame
+            .getByRole("combobox", { name: "Input item for reconcile" })
+            .selectOption(item.id);
+        await frame
+            .getByRole("button", { name: "Claim selected input", exact: true })
+            .click();
+        await expect(
+            frame.getByRole("button", {
+                name: "Continue execution",
+                exact: true,
+            }),
+        ).toBeVisible();
+        expect(calls).not.toContain("canvas_projection");
+        await frame
+            .getByRole("button", { name: "Continue execution", exact: true })
+            .click();
+        await expect(
+            frame.getByRole("cell", { name: "INV-1004", exact: true }),
+        ).toBeVisible({ timeout: 30_000 });
+        await expect(
+            frame.getByRole("cell", { name: "matched", exact: true }),
+        ).toHaveCount(1);
+        await expect(
+            frame.getByRole("cell", { name: "discrepant", exact: true }),
+        ).toHaveCount(3);
+        await frame
+            .getByRole("button", {
+                name: "Inspect result artifact",
+                exact: true,
+            })
+            .click();
+        await expect(
+            frame.getByRole("region", { name: "Authorized result artifact" }),
+        ).toContainText("INV-1004");
+        expect(calls).toContain("canvas_projection");
+        expect(calls).toContain("canvas_artifact");
     } finally {
         await client.close();
     }
