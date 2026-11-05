@@ -101,11 +101,10 @@ refusal cannot discharge that invoice gate.
 
 ## Finite critical path
 
-1. Restore adequate Btrfs allocation health or supply an adequate alternate filesystem. No unrelated cache deletion, full balance or disk-guard reduction. Git index writes also fail; the verified source checkpoint was pushed using RAM-backed Git metadata while preserving the original checkout.
-2. Qualify U sequentially with verified RCC 18.19.7: Doctor, Bootstrap, ToolkitTest, installed five-case SQLite vertical, affected PostgreSQL execution/cancellation/recovery. Reuse existing harness and owned services. Promote pins/generated workflows only after success; retain 18.19.3 as compatibility evidence/lane.
-3. Run existing invoice/export/reconciliation, final launcher/consumer and coordinated restore gates; repair only executable failures. Produce the final immutable artifact inventory and provenance.
-4. Obtain successful exact-head Linux/Windows/macOS CI. Previous macOS check annotations explicitly report failure to acquire hosted runners and arm64 capacity constraints; no product step ran. Do not weaken gates to bypass capacity.
-5. Resolve the NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval with exact final receipts.
+1. Close the installed RCC18.19.7 gate with the fixed prepared-identity compiler. [Bounded diagnosis](rcc-18.19.7-bounded-diagnosis.json) preserves the exact failing command, native A/B and all limitations. Unit/source gates pass; installed SQLite/PostgreSQL cancellation/recovery is not yet qualified. The storage blocker is resolved; keep scratch bounded.
+2. Run existing invoice/export/durable-result reconciliation, final launcher/consumer and coordinated restore gates; retain final payloads/hashes/SBOM/provenance. No safe-refusal-as-recovery claim.
+3. Obtain successful fresh-head Linux/Windows/macOS CI. At05fe, all native builds and primaryRCC3 toolkit platforms passed; Runtime macOS and N-1 macOS could not acquire runners. Do not weaken gates to bypass capacity.
+4. Resolve NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval. Celld exclusion is pending an explicit decision; no silent downgrade or scope waiver.
 
 Current decision: **not technically merge-ready or release-candidate-ready**.
 Required qualification and owner decisions remain; no universal uncertain-launch

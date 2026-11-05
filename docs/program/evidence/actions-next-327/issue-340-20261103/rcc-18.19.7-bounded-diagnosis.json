@@ -1,0 +1,127 @@
+{
+  "schema": "actions.rcc-upgrade-bounded-diagnosis/v1",
+  "decision": {
+    "release_candidate": "NO-GO",
+    "public_publication": "NO-GO",
+    "no_merge_tag_deployment_publication": true
+  },
+  "integration_fix_commit": "b874f708f2541e6e6106a08f3f225d590c413a94",
+  "rcc7_candidate_commit": "df6083156b882f85da5d9bce073241d027dee638",
+  "binaries": {
+    "18.19.3": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "18.19.7": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48"
+  },
+  "runtime_wheel": "b9e1b5b5329192a24c54588003b75dd30fb55d628cc7233b527c806e59020279",
+  "failing_stage": "prepared parent Package action import; later retained child launch/host failure in one replay",
+  "exact_import_command": [
+    "$VERTICAL_ROOT/rcc",
+    "--no-build",
+    "env",
+    "exec",
+    "--artifact",
+    "sha256:1152141b95d71d6312999f33867bf537d94e7176b38d368136e92fbec77d7203",
+    "--permissive-local",
+    "--provider",
+    "local",
+    "--trust-carrier",
+    "$VERTICAL_ROOT/preparation/action/robocorp-home/artifacts/v1/trust",
+    "--trust-carrier-type",
+    "filesystem",
+    "--json",
+    "--",
+    "python",
+    "-c",
+    "import sys\nfrom io import StringIO\nfrom actions._commands import metadata\nsource, destination = sys.argv[1], sys.argv[2]\noutput = StringIO()\nstatus = metadata(path=source, __stream__=output)\nif status != 0: raise SystemExit(72)\ndata = output.getvalue().encode('utf-8')\nif len(data) > 524288: raise SystemExit(73)\nwith open(destination, 'xb') as stream: stream.write(data)\n",
+    "$VERTICAL_ROOT/test-tmp/actions-package-compiler-0i4c1xer/package",
+    "$VERTICAL_ROOT/test-tmp/actions-package-compiler-0i4c1xer/action-metadata.json"
+  ],
+  "failing_native_error": "reconcile lifecycle state: orphan materialization path exists",
+  "original_cache_replay": 1,
+  "native_direct_ab": {
+    "18.19.3": {
+      "acquire": 0,
+      "exact-import": 0
+    },
+    "18.19.7": {
+      "acquire": 0,
+      "exact-import": 0
+    }
+  },
+  "native_full_sequence_ab": {
+    "18.19.3": {
+      "publish": 0,
+      "acquire": 0,
+      "republish": 0,
+      "import": 0
+    },
+    "18.19.7_matched_fresh": {
+      "publish": 0,
+      "acquire": 0,
+      "republish": 0,
+      "import": 0
+    }
+  },
+  "ab_interpretation": "No ordinary import/version regression reproduced in clean isolated homes. Both published binaries execute the exact import; the full publish/acquire/republish/import sequence passes on both with matched immutable cache inputs. The installed Actions path remains unqualified under the retained cache/preparation conditions.",
+  "confirmed_actions_defect": {
+    "problem": "Republishing a used prepared live environment can return a new artifact digest with the same specification, violating the original immutable prepared binding.",
+    "observed_original_artifact": "sha256:1152141b95d71d6312999f33867bf537d94e7176b38d368136e92fbec77d7203",
+    "observed_resnapshot": "sha256:1de64b45e27a556e8957b7478fcf65e042759ec4a9dc06594a847b68186816f0",
+    "specification": "sha256:721919473b3d0848b213eb55bff2135eab64aa6ae1274bc6c5665a241e63372a",
+    "fix": "Reuse the trusted prepared artifact identity after exact manifest/version/cache checks; retain no-build execution and returned-artifact identity checks. Never adopt the new live snapshot.",
+    "regression": "test_package_revision_compiler.py::test_prepared_rcc_keeps_pinned_artifact_when_live_cache_changes",
+    "negative_guard": "test_package_revision_compiler.py::test_prepared_rcc_exec_rejects_changed_artifact_identity",
+    "before": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "after_module": {
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "configured_lint": "PASS",
+    "configured_typecheck": "PASS,703 files",
+    "installed_after": "NOT PROVEN: four cases stopped at exact candidate-wheel staging guard, which was retained and then corrected; Robot validation still refused lifecycle state. No passing-after installed vertical is claimed."
+  },
+  "cold_preparation": {
+    "action_first_acquire": 124,
+    "robot_first_acquire": 124,
+    "same_artifact_resumes": [
+      0,
+      0
+    ],
+    "policy": "permissive-local; not signed remote artifact qualification",
+    "no_republication_on_targeted_resumes": true,
+    "not_run_recovery": "Environment preparation resumption is not successful uncertain Robot-launch recovery."
+  },
+  "native_repair_limitation": {
+    "action": "exit1, orphan materialization path exists",
+    "robot": "exit1, json: error calling MarshalJSON for type environmentartifact.Digest: cannot encode an empty digest",
+    "classification": "Native RCC repair/reporting limitation observed outside Actions. Release introduced and minimal state-independent reproducer are not established; no claim that ordinary execution is broken on all clean7 homes.",
+    "disposition": "draft prepared, not posted; read-only exact-phrase issue dedup returned no matches"
+  },
+  "latest_installed_sqlite": {
+    "tests": 5,
+    "failures": 5,
+    "errors": 0,
+    "skipped": 0
+  },
+  "postgres_installed7": "NOT RUN until SQLite installed blocker passes",
+  "formal": "Existing bounded model/three deliberate mutant counterexamples and real SQLite/PostgreSQL prelaunch regression remain recorded in lifecycle-formal.json. No new formal framework or duplicate checker runs.",
+  "ci_checkpoint": {
+    "head": "05fe71e6aaa6fe686052ecd70b7c85ccb685053b",
+    "runtime_linux_windows": "PASS",
+    "runtime_macos": "CANCELLED;no runner acquired;arm64 capacity annotation;zero steps",
+    "native_linux_windows_macos": "PASS",
+    "toolkit_primary_rcc3_linux_windows_macos": "PASS",
+    "toolkit_n1_linux_windows": "PASS",
+    "toolkit_n1_macos": "CANCELLED;no runner acquired;arm64 capacity annotation;zero steps",
+    "installed_five_sqlite_rcc3": "PASS",
+    "not_rcc7_qualification": true
+  },
+  "next_repair": "Qualify the exact fixed wheel against an execution-ready RCC7 cache while retaining all guards; diagnose any remaining Robot host failure at its recorded launch/cleanup boundary. Do not retry an uncertain existing Robot Run.",
+  "upstream_disposition": "RCC native repair draft only; no external issue or source write"
+}

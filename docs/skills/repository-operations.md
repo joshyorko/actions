@@ -2674,6 +2674,12 @@ republish a used live cache: runtime-created files can change its snapshot
 digest without changing its dependency specification. Retain manifest/version
 checks, RCC no-build execution and returned-artifact identity validation;
 never adopt a new live snapshot merely because its specification matches.
+The installed vertical should report the path-free compiler failure code and
+stop observing an unexpectedly failed host once no terminal child outcome is
+possible; the deliberate host-crash case remains exempt. Preserve failed native
+cache/lifecycle receipts separately from clean-cache A/B results. Successful
+artifact verification or native smoke execution alone does not qualify the
+complete installed Action-to-Robot path.
 
 The installed vertical artifact includes the four tested wheel payloads as well
 as identity/JUnit receipts. Match every payload to its recorded digest and the
