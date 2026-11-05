@@ -2692,6 +2692,13 @@ denials; it does not prove a real ChatGPT connection or provision execution
 authority. Measure the wheel's `_static_contents` renderer separately from an
 exported Canvas resource: both variants passed real invoice execution, but their
 bytes differ. Do not substitute one hash for the other.
+The installed-wheel vertical must run canonical `inv build-frontend` before
+`poetry build` and compare the wheel's literal `FILE_CONTENTS["canvas.html"]`
+with that fresh build. The tracked generated module can be stale: one hosted
+wheel passed backend execution while its packaged renderer failed the existing
+300px viewport regression (7,214px text in a284px bound); the current built
+renderer passed. Desktop invoice execution alone did not expose this defect.
+Keep the measured wheel/renderer hashes distinct when rebuilding those assets.
 
 For an owned, stopped same-path consumer archive, preserve original permissions
 on extraction (`tar --same-permissions`) and compare before starting Runtime.

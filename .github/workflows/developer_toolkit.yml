@@ -227,6 +227,9 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           version: '0.12.19'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.3'
       - name: Run installed Action to Robot vertical
         shell: bash
         env:

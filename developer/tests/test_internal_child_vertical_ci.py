@@ -5,9 +5,33 @@ import importlib.util
 import os
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 
 import pytest
+
+
+@pytest.mark.parametrize("embedded", [b"current built Canvas", b"stale Canvas"])
+def test_vertical_rejects_stale_embedded_canvas(tmp_path, embedded):
+    script = Path(__file__).with_name("run_internal_child_vertical_ci.sh").read_text()
+    guard = script.split("<<'CANVAS'\n", 1)[1].split("\nCANVAS", 1)[0]
+    canvas = tmp_path / "canvas.html"
+    canvas.write_bytes(b"current built Canvas")
+    wheel = tmp_path / "runtime.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(
+            "actions/server/_static_contents.py",
+            "FILE_CONTENTS = " + repr({"canvas.html": embedded}),
+        )
+    result = subprocess.run(
+        [sys.executable, "-", str(wheel), str(canvas)],
+        input=guard,
+        capture_output=True,
+        text=True,
+    )
+    assert (result.returncode == 0) == (embedded == canvas.read_bytes())
+    if result.returncode:
+        assert "embedded Canvas differs" in result.stderr
 
 
 @pytest.mark.skipif(

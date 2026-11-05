@@ -104,6 +104,9 @@ uv pip install --python "$host_venv/bin/python" --no-deps --require-hashes \
   -r "$task_root/locked-host-requirements.txt"
 "$host_venv/bin/python" scripts/build_oauth2_config.py
 
+phase=build_frontend
+"$host_venv/bin/python" -m invoke build-frontend
+
 cd "$repo_root/actions-http-helper"
 phase=build_wheels
 uvx --from poetry==2.1.1 --with poetry-plugin-export==1.9.0 poetry build -f wheel -o "$wheelhouse"
@@ -128,6 +131,25 @@ runtime_wheel="$(one_wheel 'actions_runtime-*.whl')"
 core_wheel="$(one_wheel 'actions_core-*.whl')"
 work_items_wheel="$(one_wheel 'actions_work_items-*.whl')"
 helper_wheel="$(one_wheel 'actions_http_helper-*.whl')"
+phase=embedded_canvas_admission
+"$host_venv/bin/python" - "$runtime_wheel" "$repo_root/action_server/frontend/dist-canvas/index.html" <<'CANVAS'
+import ast
+import hashlib
+import sys
+import zipfile
+from pathlib import Path
+
+with zipfile.ZipFile(sys.argv[1]) as archive:
+    tree = ast.parse(archive.read("actions/server/_static_contents.py"))
+bindings = [node for node in tree.body if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "FILE_CONTENTS"]
+if len(bindings) != 1:
+    raise SystemExit("literal static contents binding required")
+contents = ast.literal_eval(bindings[0].value)
+canvas = Path(sys.argv[2]).read_bytes()
+if not isinstance(contents, dict) or contents.get("canvas.html") != canvas:
+    raise SystemExit("embedded Canvas differs from the fresh frontend build")
+print("embedded_canvas_sha256=" + hashlib.sha256(canvas).hexdigest())
+CANVAS
 for wheel in "$runtime_wheel" "$core_wheel" "$work_items_wheel" "$helper_wheel"; do
   test -n "$wheel" && test -f "$wheel"
 done
@@ -174,6 +196,7 @@ source_commit="$(git -C "$repo_root" rev-parse HEAD)"
 printf 'vertical_task_root=%s\nsource_commit=%s\nsource_tree=%s\n' "$task_root" "$source_commit" "$source_tree" | tee "$task_root/identity.txt"
 for item in "$runtime_wheel" "$core_wheel" "$work_items_wheel" "$helper_wheel" "$rcc" \
   "$repo_root/action_server/poetry.lock" "$repo_root/action_server/src/actions/server/_oauth2_config.py" \
+  "$repo_root/action_server/frontend/dist-canvas/index.html" "$repo_root/action_server/src/actions/server/_static_contents.py" \
   "$task_root/action-package.yaml" "$task_root/robot-package.yaml"; do
   printf 'file=%s sha256=%s\n' "$(basename "$item")" "$(sha256sum "$item" | awk '{print $1}')" | tee -a "$task_root/identity.txt"
 done
