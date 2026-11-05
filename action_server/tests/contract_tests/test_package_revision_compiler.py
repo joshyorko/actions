@@ -396,6 +396,73 @@ def test_prepared_rcc_child_environment_stays_sanitized(
     assert not any("account" in name.casefold() for name in child_environment)
 
 
+def test_prepared_rcc_keeps_pinned_artifact_when_live_cache_changes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_bytes(_generated_action_entries()[0].content)
+    home = tmp_path / "prepared-home"
+    home.mkdir()
+    (home / "runtime-created-cache").write_bytes(b"benign runtime cache")
+    build = RccBuildIdentity(
+        specification_digest="sha256:" + "a" * 64,
+        artifact_digest="sha256:" + "b" * 64,
+    )
+    prepared = PreparedRccEnvironment(
+        robocorp_home=home,
+        package_yaml_digest="sha256:"
+        + hashlib.sha256(package_yaml.read_bytes()).hexdigest(),
+        build_identity=build,
+    )
+    executor = PinnedRccPackageBuildExecutor(prepared)
+    publications = []
+
+    def run(argv, workspace, *, timeout):
+        if argv[-1] == "--version":
+            return b"v18.19.7"
+        publications.append(argv)
+        return json.dumps(
+            {
+                "specificationDigest": build.specification_digest,
+                "artifactDigest": "sha256:" + "c" * 64,
+            }
+        ).encode()
+
+    monkeypatch.setattr(executor, "_run", run)
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    assert executor.build_environment(package_yaml, workspace) == build
+    assert publications == []
+
+
+def test_prepared_rcc_exec_rejects_changed_artifact_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    build = RccBuildIdentity(
+        specification_digest="sha256:" + "a" * 64,
+        artifact_digest="sha256:" + "b" * 64,
+    )
+    prepared = PreparedRccEnvironment(
+        robocorp_home=tmp_path / "prepared-home",
+        package_yaml_digest="sha256:" + "c" * 64,
+        build_identity=build,
+    )
+    prepared.robocorp_home.mkdir()
+    executor = PinnedRccPackageBuildExecutor(prepared)
+    executor._rcc_home = prepared.robocorp_home
+
+    def run(argv, workspace, *, timeout):
+        assert "--no-build" in argv
+        assert argv[argv.index("--artifact") + 1] == build.artifact_digest
+        return json.dumps(
+            {"exitCode": 0, "artifactDigest": "sha256:" + "d" * 64}
+        ).encode()
+
+    monkeypatch.setattr(executor, "_run", run)
+    with pytest.raises(RuntimeError, match="different artifact identity"):
+        executor._run_exec(build, tmp_path, tmp_path, ["python", "-V"])
+
+
 def test_compiler_outputs_are_idempotent_and_changed_source_changes_identity() -> None:
     first, _first_executor = _compile_with_fake()
     replay, _replay_executor = _compile_with_fake()

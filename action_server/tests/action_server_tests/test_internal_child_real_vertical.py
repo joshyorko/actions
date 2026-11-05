@@ -512,7 +512,10 @@ def _real_vertical(
         application_id=c.parent_revision.ref.deployment_id,
     )
     if not compilation.evidence.ready or compilation.compiled_package is None:
-        pytest.fail("real parent Package did not compile through prepared RCC")
+        pytest.fail(
+            "real parent Package did not compile through prepared RCC: "
+            f"{compilation.evidence.failure_code}"
+        )
     action_package = registry.admit_compiled(
         actor, workspace, compilation.compiled_package
     )
@@ -944,6 +947,10 @@ def _real_vertical(
                     f"host_failed={host.failed}, stderr_rows={len(rows)}, "
                     f"error={parent.error_message!r}, "
                     f"rcc_stderr={stderr.decode('utf-8', errors='replace')!r}"
+                )
+            if host.failed and not crash_child:
+                pytest.fail(
+                    "real Task host failed before the child reached a terminal state"
                 )
             time.sleep(0.1)
         else:

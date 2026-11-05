@@ -2667,6 +2667,14 @@ A compiler golden digest changes with the explicit adapter version and its
 derived plan/revision identities. Compare canonical manifests before updating
 that expectation; all other fields must remain identical.
 
+A trusted `PreparedRccEnvironment` binds exact Package YAML bytes to the
+original specification/artifact digests. Keep that immutable identity when
+compiling another source revision against the prepared environment. Do not
+republish a used live cache: runtime-created files can change its snapshot
+digest without changing its dependency specification. Retain manifest/version
+checks, RCC no-build execution and returned-artifact identity validation;
+never adopt a new live snapshot merely because its specification matches.
+
 The installed vertical artifact includes the four tested wheel payloads as well
 as identity/JUnit receipts. Match every payload to its recorded digest and the
 successful exact-source job before release acceptance; receipt-only archives

@@ -1382,9 +1382,14 @@ class PinnedRccPackageBuildExecutor:
             raise RuntimeError("bundled RCC version output is not ASCII") from exc
         if reported_version != RCC_VERSION:
             raise RuntimeError("bundled RCC version mismatch")
-        publish_command = [str(self._rcc_binary)]
         if prepared is not None:
-            publish_command.append("--no-build")
+            # The trusted receipt binds these exact manifest bytes to an
+            # immutable artifact. Republishing a used live cache can snapshot
+            # runtime-created files and must not replace that pinned identity.
+            # Import/test still execute this artifact through RCC with no-build
+            # and validate the returned artifact identity.
+            return prepared.build_identity
+        publish_command = [str(self._rcc_binary)]
         publish_command.extend(
             [
                 "env",
@@ -1414,8 +1419,6 @@ class PinnedRccPackageBuildExecutor:
             specification_digest=published.specification_digest,
             artifact_digest=published.artifact_digest,
         )
-        if prepared is not None and build != prepared.build_identity:
-            raise RuntimeError("prepared RCC cache identity mismatch")
         return build
 
     def import_action(
