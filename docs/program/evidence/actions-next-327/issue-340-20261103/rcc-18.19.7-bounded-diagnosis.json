@@ -346,5 +346,14 @@
       "test_model_enqueue_claim_rcc_and_authorized_outputs[postgresql]"
     ],
     "command": "installed host-venv/bin/python run-stable-home.py $VERTICAL_ROOT postgres-five; existing supervisor, -n0,20GiB disk floor"
+  },
+  "combined_invoice_ci_first_run": {
+    "head": "1efd72d5ce1b6c845969c719119f348dfcdae02a",
+    "job": "https://github.com/joshyorko/actions/actions/runs/42028606880/job/127248993704",
+    "status": "FAIL before test suites;SDK artifact compatibility rejection",
+    "error": "os.libcMinimum requires2.36,worker has2.35",
+    "cleanup": "PASS exact owned PostgreSQL fixture",
+    "repair": "Run added invoice lane on Ubuntu24 with same primary18.19.7/hash; retain all original Ubuntu22 primary/N-1 toolkit and Runtime gates. No compatibility bypass, no downgrade.",
+    "qualification": "rerun pending; not successful invoice execution"
   }
 }

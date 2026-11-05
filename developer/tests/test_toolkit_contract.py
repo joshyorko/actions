@@ -20,7 +20,9 @@ def test_combined_invoice_ci_requires_all_real_gates():
         for step in workflow["jobs"]["toolkit"]["steps"]
         if step.get("name") == "Invoice combined acceptance (Linux primary)"
     )
-    assert step["if"] == "runner.os == 'Linux' && matrix.lane == 'primary'"
+    assert step["if"] == "runner.os == 'Linux' && matrix.lane == 'invoice'"
+    entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
+    assert any(e["lane"] == "invoice" and e["os"] == "ubuntu-24.04" for e in entries)
     for name in ("BROWSER", "WORKER", "GENERATED", "EFFECTS"):
         assert step["env"]["ACTIONS_INVOICE_" + name] == "1"
     assert "-t InvoiceQueryTest" in step["run"]
@@ -112,6 +114,12 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
         (
             "primary",
             "ubuntu-22.04",
+            "rcc-linux64",
+            "18.19.7",
+        ): "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+        (
+            "invoice",
+            "ubuntu-24.04",
             "rcc-linux64",
             "18.19.7",
         ): "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",

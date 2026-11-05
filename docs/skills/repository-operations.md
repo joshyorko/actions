@@ -2666,7 +2666,7 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
-The primary Linux toolkit CI lane runs `InvoiceQueryTest` with BROWSER, WORKER,
+The Ubuntu24 invoice CI lane uses primary RCC18.19.7 and runs `InvoiceQueryTest` with BROWSER, WORKER,
 GENERATED and EFFECTS enabled. This is the existing strict combined acceptance:
 real DuckDB/owned PostgreSQL queries, renderer and approval, claimed installed
 SDK-only RCC execution, authorized sealed artifacts, fresh-process reopen and
@@ -2677,6 +2677,11 @@ verification. CSV/Parquet sealed-scan component checks run alongside the invoice
 chain; a single Parquet-to-invoice-browser transaction is not claimed. Runtime
 host modules in this gate come from the verified source checkout; the separate
 installed-wheel vertical remains required. Neither gate proves actual ChatGPT E1.
+The SDK-only fixture on Ubuntu22 resolved an artifact requiring glibc2.36,
+then correctly refused that worker's glibc2.35. Keep the invoice gate on Ubuntu24
+and retain the original Ubuntu22 primary/N-1 toolkit and Runtime gates.
+This is a measured fixture compatibility constraint, not permission to bypass
+RCC compatibility checks or claim Ubuntu22 invoice execution.
 
 Keep RCC's process `HOME` stable at the private `ROBOCORP_HOME` used for artifact
 preparation and execution. RCC 18.19.7 derives materialization IDs from

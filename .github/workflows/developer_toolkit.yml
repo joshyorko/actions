@@ -16,6 +16,11 @@ jobs:
             os: ubuntu-22.04
             asset: rcc-linux64
             sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
+          - lane: invoice
+            rcc_version: 18.19.7
+            os: ubuntu-24.04
+            asset: rcc-linux64
+            sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
           - lane: primary
             rcc_version: 18.19.7
             os: macos-15
@@ -111,7 +116,7 @@ jobs:
           done
           rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
       - name: Invoice combined acceptance (Linux primary)
-        if: runner.os == 'Linux' && matrix.lane == 'primary'
+        if: runner.os == 'Linux' && matrix.lane == 'invoice'
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
@@ -133,7 +138,7 @@ jobs:
           printf '%s  %s\n' f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 action_server/src/actions/server/bin/rcc-18.19.7 | sha256sum --check --status -
           rcc --workers 2 run -r developer/toolkit.yaml --dev -t InvoiceQueryTest
       - name: Upload combined invoice acceptance receipt
-        if: always() && runner.os == 'Linux' && matrix.lane == 'primary'
+        if: always() && runner.os == 'Linux' && matrix.lane == 'invoice'
         uses: actions/upload-artifact@v4
         with:
           name: actions327-combined-invoice
@@ -143,13 +148,13 @@ jobs:
             ${{ runner.temp }}/actions327-invoice/*/*.log
           if-no-files-found: warn
       - name: Package task smoke (Linux)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.lane != 'invoice'
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
         run: rcc run -r developer/toolkit.yaml --dev -t Test
       - name: Build and verify community binary (Linux)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.lane != 'invoice'
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
