@@ -7,8 +7,8 @@ No merge, publication, tag or deployment is authorized.
 Primary RCC18.19.8 is published and consumed. Its toolkit lanes pass on
 Linux/Windows/macOS, the installed five-case SQLite vertical passes, and the
 combined invoice gate passes1,032 cases with zero skips on SQLite/PostgreSQL.
-Linux/macOS Runtime and all native builds pass; Windows Runtime is still pending
-at this receipt. The fresh exported installed consumer passes real execution,
+Linux/Windows/macOS Runtime and all native builds pass. Platform-specific skips
+remain explicit. The fresh exported installed consumer passes real execution,
 authorization negatives, same-state restart and separate offline package install.
 Earlier [18.19.7 artifacts and regressions](rcc-18.19.7-bounded-diagnosis.json)
 and18.19.3 receipts retain their original binary identities.
@@ -34,6 +34,7 @@ MUST FIX includes required missing qualification, not only missing code.
 - **U**: [RCC18.19.8 consumption](rcc-18.19.8-consumption.json): published hashes verified, prior18.19.7/18.19.3 metadata identities retained, all primary toolkit lanes and installed SQLite vertical pass. [18.19.7 qualification](rcc-18.19.7-qualification.json) remains historical. RCC publication was approved; Actions merge/publication is not approved.
 - **C8**: [combined invoice receipt](rcc-18.19.8-combined.json), exact20c tree:1,032 passed, zero skips, owned cleanup PASS. All264 measured source inputs match; retained JUnit/log hashes were checked. This includes four SQL/query-provider combinations for real durable-result/controller-crash reconciliation and process-stopped cancellation. Selected CI uploads do not retain the full RCC/worker stores. Host Runtime is source-bound; worker SDK is installed.
 - **E8**: [cold installed consumer receipt](rcc-18.19.8-consumer.json): the hosted307bf82a Runtime wheel plus candidate Core/SDK, fresh65-wheel closure and packaged Canvas run real CSV query→review/approval→trusted RCC worker→authorized artifact. Restart preserves Run/Attempt counts and bytes; seven authorization/activation negatives pass before and after restart. A second empty prefix installs the same closure without an index. All owned processes stop and reap. This is loopback E2, not ChatGPT E1, cold offline RCC or coordinated old→new restore.
+- **S8**: [installed storage/launcher receipt](rcc-18.19.8-storage-launcher.json): all20c Runtime CI jobs pass with recorded skips. Ordinary installed CLI boots/restarts with a read-only filesystem except private external state, seven Canvas tools and the actual wheel renderer. That distinct bundled renderer also passes the real invoice browser/worker/authorized-artifact and seven-negative flow. A complete quiesced consumer archive restores at its original path, compares bytes/modes and replays the same Run/Attempt/artifact. Authentic published1.0.4 SQLite schema15 upgrades to23 retaining legacy rows/artifact; old CLI refuses23 without changing SQL, and restored15 is readable by1.0.4. This is not PostgreSQL backup/restore, active-job recovery or arbitrary relocation. The dependency SBOM and active graph qualify separately; strict declaration-to-active equality still fails with29 explained inactive edges.
 
 ## Complete release-ledger disposition
 
@@ -41,7 +42,7 @@ This maps the existing 28-row release ledger; the historical matrix below it is 
 
 | Existing requirement | Classification | Evidence or smallest outstanding requirement |
 | --- | --- | --- |
-| Published 1.0.4 compatibility baseline | MUST FIX | Final accepted artifacts need owned old→new upgrade and coordinated restore/downgrade evidence; source migration tests alone are insufficient. |
+| Published 1.0.4 compatibility baseline | MUST FIX | S8 proves authentic installed SQLite15→23, retained legacy Run/artifact, old-CLI refusal and original-path restore. Legacy Work Items/attachment consumer and coordinated PostgreSQL restore remain unqualified; do not promote a disabled-Action schema fixture to old Action execution. |
 | Existing Runtime capability control plane | PROVEN | R, C: current MCP routing, collisions, aliases and bounded catalog regressions. |
 | Public MCP Apps authoring and CanvasSpec | PROVEN | R, C: authored schema/visibility negatives, public renderer contract and separate Linux browser gate. Actual ChatGPT is a separate row. |
 | Semantic renderer and official bridge | PROVEN | C and retained installed reference-host receipts in this ledger; no second renderer introduced. Final candidate bytes still require the final consumer gate. |
@@ -50,7 +51,7 @@ This maps the existing 28-row release ledger; the historical matrix below it is 
 | Generated Python / immutable Package and RuntimePlan | PROVEN | R, I, D and retained generated-app installed receipts; RCC 18.19.7 and final artifact qualification remain U/final rows. |
 | Workspace binding/deployment/activation resolver | PROVEN | R, F, I, M: immutable snapshots, revocation, idempotency, cross-principal/workspace denial and current SQL transactions. |
 | Common control SQL / schema migration | PROVEN | R, F: real SQLite/PostgreSQL migration, transactional rollback and fenced-conformance tests. Distribution upgrade/restore remains first row. |
-| Zero-touch plugin boot, launcher and discovery | MUST FIX | Verify the actual final launcher/installed consumer from an immutable plugin root with writable external state, no starter package or public listener. R's startup tests are narrower evidence. |
+| Zero-touch plugin boot, launcher and discovery | PROVEN | S8: actual installed CLI and wheel renderer from a read-only package/filesystem, explicit local synthetic bearer, private external state, no starter, seven model Canvas tools, no public listener/admitted execution, and restart. Actual external host/plugin connection remains the E1/controlled-adapter rows. |
 | Named open data / result plane | PROVEN | R has 24 real invoice-provider cases; D proves actual CSV AND Parquet execution at its recorded source. Final invoice/candidate evidence remains required below. |
 | Bounded Knowledge collections | PROVEN | R includes bounded collection/ingest/search, authority, provenance, cancellation and preparation-budget cases. Broader knowledge features are not claimed. |
 | Managed Runtime Work Items / installed VSIX | NEEDS JOSH | M proves the installed SDK/Runtime path. The original installed VSIX acceptance needs an owned consumer/session or explicit disposition; do not infer it from MCP tests. |
@@ -60,7 +61,7 @@ This maps the existing 28-row release ledger; the historical matrix below it is 
 | Exact human approval and authorization negatives | PROVEN | R and installed output isolation: foreign actor/workspace reads denied without Run/Attempt/output growth; M proves model versus trusted-worker authority. Genuine E1 approval remains owner row. |
 | Retry, effects and dead-letter reconciliation | PROVEN | L closes pre-launch progression. C8 executes the prepared-worker durable-result and actual controller-crash reconciliation cases on both SQL backends/query providers; E8 proves installed completion replay. Generic retained unknown launches remain blocked, never blindly retried. |
 | Scoped durable artifacts/results | PROVEN | I, M, R: real immutable output bytes and scoped reads/denials. Final coordinated retention/restore remains first row. |
-| Retention, restore, upgrade/downgrade | MUST FIX | Final SQL + objects + journals + source/runtime artifact restore and old-version fail-closed behavior; use existing gates and retained recipes. |
+| Retention, restore, upgrade/downgrade | MUST FIX | S8 proves quiesced same-path SQLite consumer SQL+objects+journals+RCC/prefix restore and identical installed replay; also legacy SQLite rollback and old-version refusal. PostgreSQL coordinated SQL/object/journal restore remains required. No live/unknown-launch or arbitrary relocation guarantee. |
 | Reusable invoice template/export | PROVEN | E8: cold exported candidate installation, real CSV query→Canvas→approval→worker→artifact, authorization negatives and restart/reopen pass. Offline package replay is separate from a cold offline RCC installation. Public template destination/publication remains an owner decision. |
 | All-route auth and safe sharing | MUST FIX | R covers route/auth negatives; before an isolated remote E1 endpoint, qualify complete live authentication/artifact protection. No public listener/tunnel is authorized by this audit. |
 | Actual authenticated ChatGPT E1 | NEEDS JOSH | Existing isolated endpoint/connection and actual host tool/resource/bridge/action/reconnect test; no available connection supplied. Browser/ASGI evidence is not E1. |
@@ -106,9 +107,9 @@ separate from safe refusal of an unknown launch.
 
 ## Finite critical path
 
-1. Finish Windows Runtime CI at20c. Linux/macOS Runtime, all native builds/toolkit lanes, installed SQLite vertical and C8 already pass. RCC18.19.8 restores legacy uv0.1.37 compatibility; earlier7 failures remain labelled7.
-2. Complete ordinary immutable-root launcher, coordinated published1.0.4→candidate upgrade/restore, packaged accessibility and final distribution/provenance cells. E8 closes the cold exported consumer; C8 closes bounded invoice reconciliation. Neither closes the remaining cells by implication.
-3. Keep accepted source, installed wheels and archived evidence bound by hashes; selected hosted logs are not a backup of the cleaned RCC/worker stores. Preserve separate18.19.3/7 evidence.
+1. Track the receipt checkpoint's fresh CI. Implementation20c passes all three Runtime platforms, native builds/toolkit lanes, installed SQLite vertical and C8; original skip counts are retained. RCC18.19.8 restores legacy uv0.1.37 compatibility; earlier7 failures remain labelled7.
+2. Complete PostgreSQL coordinated restore/legacy attachment consumer, packaged keyboard/focus/narrow/empty/error acceptance and final distribution inventory/provenance. E8 closes cold exported execution; C8 closes bounded invoice reconciliation; S8 closes ordinary immutable-root boot and scoped installed SQLite upgrade/restore. None silently closes the remaining cells.
+3. Keep accepted source, installed wheels and archived evidence bound by hashes; selected hosted logs are not a backup of cleaned stores. S8 retains the explicit dual-view SBOM scope and failed strict graph equality. Preserve separate18.19.3/7 evidence.
 4. Resolve NEEDS JOSH rows, perform genuine E1, and request separate merge/release approval. Celld exclusion is pending an explicit decision; no silent downgrade or scope waiver.
 
 Current decision: **not technically merge-ready or release-candidate-ready**.
@@ -116,6 +117,6 @@ Required qualification and owner decisions remain; no universal uncertain-launch
 recovery or optional celld success is claimed.
 
 Documentation improvement: replaces stale pending invoice/consumer claims with
-C8/E8 executable proof and preserves the remaining launcher/restore, host and
+C8/E8/S8 executable proof and preserves the remaining storage/distribution, host and
 publication boundaries. Upstream disposition: RCC261 fixed and published as18.19.8
 with Josh's approval; no new upstream defect in this continuation.

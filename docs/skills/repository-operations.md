@@ -2685,6 +2685,21 @@ it restores the owned fixture's revoked grants and activation. A second fresh
 prefix installed from the measured wheelhouse proves offline package installation,
 not a cold offline RCC store. The hosted invoice upload retains selected logs and
 JUnit; its pre-cleanup store hashes do not imply those store bytes were archived.
+Qualify the ordinary installed CLI separately with the package filesystem
+read-only and only a private external state root writable. An explicit local
+synthetic bearer can prove discovery/Canvas resource reads and Host/Origin
+denials; it does not prove a real ChatGPT connection or provision execution
+authority. Measure the wheel's `_static_contents` renderer separately from an
+exported Canvas resource: both variants passed real invoice execution, but their
+bytes differ. Do not substitute one hash for the other.
+
+For an owned, stopped same-path consumer archive, preserve original permissions
+on extraction (`tar --same-permissions`) and compare before starting Runtime.
+Default extraction removed the setgid bit from `rcc-home/pkgs/cache` (2775→775);
+restoring the archived mode made the complete comparison pass before successful
+installed replay. The private attachment-copy helper rejects symlinks/hardlinks
+and does not restore an RCC cache. SQLite legacy-schema rollback, complete local
+consumer restore and external PostgreSQL backup/restore are separate gates.
 The SDK-only fixture on Ubuntu22 resolved an artifact requiring glibc2.36,
 then correctly refused that worker's glibc2.35. Keep the invoice gate on Ubuntu24
 and retain the original Ubuntu22 primary/N-1 toolkit and Runtime gates.

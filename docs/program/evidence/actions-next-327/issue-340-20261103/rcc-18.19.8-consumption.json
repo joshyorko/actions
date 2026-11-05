@@ -64,12 +64,13 @@
       "toolkit_installed_invoice": "PASS https://github.com/joshyorko/actions/actions/runs/42075321728",
       "native_all_platforms": "PASS https://github.com/joshyorko/actions/actions/runs/42075321791",
       "runtime_linux_macos": "PASS https://github.com/joshyorko/actions/actions/runs/42075321722",
-      "runtime_windows": "pending",
+      "runtime_windows": "PASS https://github.com/joshyorko/actions/actions/runs/42075321722",
       "combined_receipt": "rcc-18.19.8-combined.json",
-      "cold_consumer": "PASS rcc-18.19.8-consumer.json"
+      "cold_consumer": "PASS rcc-18.19.8-consumer.json",
+      "installed_storage_launcher_sbom": "PASS within documented scopes: rcc-18.19.8-storage-launcher.json"
     }
   },
   "compatibility": "8primary/executable;7previous-stable Linux;3legacyall3platforms;frozen3jobsunchanged",
-  "upstream_disposition": "RCC261 merged and v18.19.8 published with Josh approval; Actions primary toolkit/native/installed/combined invoice and cold consumer pass; Windows full Runtime pending",
+  "upstream_disposition": "RCC261 merged and v18.19.8 published with Josh approval; Actions20c all-platform Runtime/toolkit/native/installed/combined invoice and scoped installed consumer/storage pass",
   "remaining_release_limits": "No Actions merge/publication/deployment approval. TrueChatGPTE1,optionalcelld/publisherdecisions and remainingconsumer/restore evidence not waived."
 }
