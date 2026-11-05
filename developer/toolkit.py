@@ -213,6 +213,16 @@ def invoice_query_test() -> None:
             "ACTIONS_INVOICE_EVIDENCE_DIR must be an absolute retained directory"
         )
     poetry("action_server", "install", "--extras", "data-duckdb")
+    if (
+        os.environ.get("ACTIONS_INVOICE_BROWSER") == "1"
+        or os.environ.get("ACTIONS_INVOICE_GENERATED") == "1"
+    ):
+        frontend = REPOSITORY_ROOT / "action_server/frontend"
+        if not (frontend / "node_modules/.package-lock.json").exists():
+            run(["npm", "ci", "--no-audit", "--no-fund"], frontend)
+        run(["npm", "run", "build:canvas"], frontend)
+        if os.environ.get("ACTIONS_INVOICE_BROWSER") == "1":
+            run(["npx", "playwright", "install", "chromium"], frontend)
     command = [
         sys.executable,
         "action_server/scripts/verify_invoice_queries.py",

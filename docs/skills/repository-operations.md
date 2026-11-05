@@ -2666,6 +2666,18 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
+The primary Linux toolkit CI lane runs `InvoiceQueryTest` with BROWSER, WORKER,
+GENERATED and EFFECTS enabled. This is the existing strict combined acceptance:
+real DuckDB/owned PostgreSQL queries, renderer and approval, claimed installed
+SDK-only RCC execution, authorized sealed artifacts, fresh-process reopen and
+durable-result/effect reconciliation. Every required suite rejects skipped JUnit
+cases, and the verifier removes only its labelled owned PostgreSQL container.
+The toolkit builds the Canvas resource and installs its pinned Chromium before
+verification. CSV/Parquet sealed-scan component checks run alongside the invoice
+chain; a single Parquet-to-invoice-browser transaction is not claimed. Runtime
+host modules in this gate come from the verified source checkout; the separate
+installed-wheel vertical remains required. Neither gate proves actual ChatGPT E1.
+
 Keep RCC's process `HOME` stable at the private `ROBOCORP_HOME` used for artifact
 preparation and execution. RCC 18.19.7 derives materialization IDs from
 `common.UserHomeIdentity()` as well as the controller/artifact; changing only

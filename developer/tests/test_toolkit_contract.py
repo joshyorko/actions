@@ -11,6 +11,37 @@ sys.path.insert(0, str(TOOLKIT_ROOT))
 import toolkit  # noqa: E402
 
 
+def test_combined_invoice_ci_requires_all_real_gates():
+    workflow = yaml.safe_load(
+        (REPOSITORY_ROOT / ".github/workflows/developer_toolkit.yml").read_text()
+    )
+    step = next(
+        step
+        for step in workflow["jobs"]["toolkit"]["steps"]
+        if step.get("name") == "Invoice combined acceptance (Linux primary)"
+    )
+    assert step["if"] == "runner.os == 'Linux' && matrix.lane == 'primary'"
+    for name in ("BROWSER", "WORKER", "GENERATED", "EFFECTS"):
+        assert step["env"]["ACTIONS_INVOICE_" + name] == "1"
+    assert "-t InvoiceQueryTest" in step["run"]
+    assert "--workers 2" in step["run"]
+
+
+def test_invoice_browser_prepares_renderer_before_verifier(tmp_path, monkeypatch):
+    monkeypatch.setenv("ACTIONS_INVOICE_EVIDENCE_DIR", str(tmp_path))
+    monkeypatch.setenv("ACTIONS_INVOICE_BROWSER", "1")
+    monkeypatch.setenv("ACTIONS_INVOICE_GENERATED", "1")
+    calls = []
+    monkeypatch.setattr(toolkit, "poetry", lambda *args: None)
+    monkeypatch.setattr(
+        toolkit, "run", lambda command, *args, **kwargs: calls.append(command)
+    )
+    toolkit.invoice_query_test()
+    assert ["npm", "run", "build:canvas"] in calls[:-1]
+    assert ["npx", "playwright", "install", "chromium"] in calls[:-1]
+    assert "--browser" in calls[-1] and "--generated" in calls[-1]
+
+
 def test_manifest_defines_cross_platform_developer_tasks() -> None:
     manifest = yaml.safe_load((TOOLKIT_ROOT / "toolkit.yaml").read_text())
 
@@ -269,38 +300,43 @@ def test_coverage_task_passes_its_rcc_python_to_action_server_wheel_tests() -> N
 
 
 def test_doctor_accepts_the_explicit_n_minus_one_matrix_version() -> None:
-    with patch.dict(
-        "os.environ",
-        {
-            "RCC_VERSION": "v18.19.3",
-            "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.19.3",
-        },
-    ), patch("toolkit.shutil.which", return_value="/usr/bin/tool"), patch(
-        "toolkit.run"
+    with (
+        patch.dict(
+            "os.environ",
+            {
+                "RCC_VERSION": "v18.19.3",
+                "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.19.3",
+            },
+        ),
+        patch("toolkit.shutil.which", return_value="/usr/bin/tool"),
+        patch("toolkit.run"),
     ):
         toolkit.doctor()
 
 
 def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
-    with patch.dict(
-        "os.environ",
-        {
-            "VIRTUAL_ENV": "/host/venv",
-            "POETRY_ACTIVE": "1",
-            "CONDA_PREFIX": "/rcc/holotree",
-            "CONDA_DEFAULT_ENV": "rcc",
-            "CONDA_PROMPT_MODIFIER": "(rcc)",
-            "CONDA_SHLVL": "1",
-            "CONDA_EXE": "/rcc/micromamba",
-            "_CE_CONDA": "1",
-            "_CE_M": "1",
-            "PYTHONHOME": "/host/python",
-            "PYTHONPATH": "/host/pythonpath",
-            "PYTHON_EXE": "/rcc/holotree/bin/python3",
-            "ROBOT_ARTIFACTS": "/rcc/artifacts",
-            "ROBOT_ROOT": "/rcc/robot",
-        },
-    ), patch("toolkit.subprocess.run") as run:
+    with (
+        patch.dict(
+            "os.environ",
+            {
+                "VIRTUAL_ENV": "/host/venv",
+                "POETRY_ACTIVE": "1",
+                "CONDA_PREFIX": "/rcc/holotree",
+                "CONDA_DEFAULT_ENV": "rcc",
+                "CONDA_PROMPT_MODIFIER": "(rcc)",
+                "CONDA_SHLVL": "1",
+                "CONDA_EXE": "/rcc/micromamba",
+                "_CE_CONDA": "1",
+                "_CE_M": "1",
+                "PYTHONHOME": "/host/python",
+                "PYTHONPATH": "/host/pythonpath",
+                "PYTHON_EXE": "/rcc/holotree/bin/python3",
+                "ROBOT_ARTIFACTS": "/rcc/artifacts",
+                "ROBOT_ROOT": "/rcc/robot",
+            },
+        ),
+        patch("toolkit.subprocess.run") as run,
+    ):
         toolkit.run(["python", "--version"])
 
     assert "shell" not in run.call_args.kwargs
@@ -331,9 +367,10 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
     (tmp_path / "pyproject.toml").touch()
     scripts = tmp_path / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
 
-    with patch.dict("os.environ", {"PATH": "/rcc/holotree/bin"}), patch(
-        "toolkit.subprocess.run"
-    ) as run:
+    with (
+        patch.dict("os.environ", {"PATH": "/rcc/holotree/bin"}),
+        patch("toolkit.subprocess.run") as run,
+    ):
         toolkit.run(["python", "--version"], cwd=tmp_path)
 
     assert run.call_args.kwargs["env"]["PATH"].split(toolkit.os.pathsep)[0] == str(
@@ -346,11 +383,12 @@ def test_install_community_builds_installs_and_verifies() -> None:
         "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
     )
     target = Path("/custom/bin") / executable
-    with patch.object(toolkit, "poetry") as poetry, patch.object(
-        toolkit, "run"
-    ) as run, patch.object(
-        toolkit, "resolve_install_target", return_value=target
-    ) as resolve, patch.object(toolkit, "install_executable") as install:
+    with (
+        patch.object(toolkit, "poetry") as poetry,
+        patch.object(toolkit, "run") as run,
+        patch.object(toolkit, "resolve_install_target", return_value=target) as resolve,
+        patch.object(toolkit, "install_executable") as install,
+    ):
         toolkit.install_community()
 
     assert [call.args for call in poetry.call_args_list] == [
@@ -393,25 +431,30 @@ def test_resolve_install_target_uses_existing_executable(tmp_path: Path) -> None
 
 def test_resolve_install_target_uses_posix_fallback_on_path(tmp_path: Path) -> None:
     install_directory = tmp_path / ".local" / "bin"
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "linux"
-    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
-        "os.environ",
-        {"PATH": toolkit.os.pathsep.join((str(install_directory), str(tmp_path)))},
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "linux"),
+        patch.object(toolkit.Path, "home", return_value=tmp_path),
+        patch.dict(
+            "os.environ",
+            {"PATH": toolkit.os.pathsep.join((str(install_directory), str(tmp_path)))},
+        ),
     ):
         assert toolkit.resolve_install_target() == install_directory / "action-server"
 
 
 def test_resolve_install_target_uses_windows_fallback_on_path() -> None:
     local_app_data = Path("/local/appdata")
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "win32"
-    ), patch.dict(
-        "os.environ",
-        {
-            "LOCALAPPDATA": str(local_app_data),
-            "PATH": str(local_app_data / "Programs" / "Actions" / "bin"),
-        },
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "win32"),
+        patch.dict(
+            "os.environ",
+            {
+                "LOCALAPPDATA": str(local_app_data),
+                "PATH": str(local_app_data / "Programs" / "Actions" / "bin"),
+            },
+        ),
     ):
         assert toolkit.resolve_install_target() == Path(
             "/local/appdata/Programs/Actions/bin/action-server.exe"
@@ -422,10 +465,11 @@ def test_resolve_install_target_rejects_fallback_directory_not_on_path(
     tmp_path: Path,
 ) -> None:
     install_directory = tmp_path / ".local" / "bin"
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "linux"
-    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
-        "os.environ", {"PATH": str(tmp_path / "elsewhere")}
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "linux"),
+        patch.object(toolkit.Path, "home", return_value=tmp_path),
+        patch.dict("os.environ", {"PATH": str(tmp_path / "elsewhere")}),
     ):
         error = pytest.raises(SystemExit, toolkit.resolve_install_target)
 
@@ -499,9 +543,10 @@ def test_lint_uses_package_configured_gates() -> None:
 
 
 def test_test_uses_package_configured_gates() -> None:
-    with patch.object(toolkit, "toolkit_test"), patch.object(
-        toolkit, "poetry"
-    ) as poetry:
+    with (
+        patch.object(toolkit, "toolkit_test"),
+        patch.object(toolkit, "poetry") as poetry,
+    ):
         toolkit.test()
 
     assert [call.args for call in poetry.call_args_list] == [

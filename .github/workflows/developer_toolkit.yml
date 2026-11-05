@@ -110,6 +110,38 @@ jobs:
             test -x "${package}/.venv/bin/python"
           done
           rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+      - name: Invoice combined acceptance (Linux primary)
+        if: runner.os == 'Linux' && matrix.lane == 'primary'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+          ACTIONS_INVOICE_EVIDENCE_DIR: ${{ runner.temp }}/actions327-invoice
+          ACTIONS_INVOICE_BROWSER: '1'
+          ACTIONS_INVOICE_WORKER: '1'
+          ACTIONS_INVOICE_GENERATED: '1'
+          ACTIONS_INVOICE_EFFECTS: '1'
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/actions327-browser
+          OMP_NUM_THREADS: '1'
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import os, shutil
+          if shutil.disk_usage(os.environ['RUNNER_TEMP']).free < 13_849_526_272:
+              raise SystemExit('insufficient free space for bounded invoice acceptance')
+          PY
+          docker pull postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+          printf '%s  %s\n' f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48 action_server/src/actions/server/bin/rcc-18.19.7 | sha256sum --check --status -
+          rcc --workers 2 run -r developer/toolkit.yaml --dev -t InvoiceQueryTest
+      - name: Upload combined invoice acceptance receipt
+        if: always() && runner.os == 'Linux' && matrix.lane == 'primary'
+        uses: actions/upload-artifact@v4
+        with:
+          name: actions327-combined-invoice
+          path: |
+            ${{ runner.temp }}/actions327-invoice/*/receipt.json
+            ${{ runner.temp }}/actions327-invoice/*/*.xml
+            ${{ runner.temp }}/actions327-invoice/*/*.log
+          if-no-files-found: warn
       - name: Package task smoke (Linux)
         if: runner.os == 'Linux'
         shell: bash
