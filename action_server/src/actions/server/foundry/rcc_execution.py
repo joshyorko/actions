@@ -1299,7 +1299,7 @@ class GeneratedRccExecution:
         for path in (home, actions_home, temporary):
             path.mkdir(mode=0o700)
         return {
-            "HOME": str(home),
+            "HOME": str(self.prepared.robocorp_home),
             "PATH": os.pathsep.join(dict.fromkeys(path_entries)),
             "ROBOCORP_HOME": str(self.prepared.robocorp_home),
             "ACTIONS_HOME": str(actions_home),
@@ -1331,6 +1331,7 @@ class GeneratedRccExecution:
         return (
             "import importlib,json,os,sys\n"
             "source,input_file,result_file=sys.argv[1:4]\n"
+            "os.environ['HOME']=os.path.join(os.path.dirname(input_file),'home')\n"
             "with open(input_file,'rb') as stream: inputs=json.load(stream)\n"
             + ipc
             + "sys.path.insert(0,source)\n"

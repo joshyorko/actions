@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
@@ -388,12 +389,59 @@ def test_prepared_rcc_child_environment_stays_sanitized(
     child_environment = executor._child_environment(tmp_path)
 
     assert child_environment["RCC_NO_BUILD"] == "1"
+    assert child_environment["HOME"] == str(prepared.robocorp_home)
     if sys.platform.startswith("linux"):
         child_path = child_environment["PATH"].split(os.pathsep)
         assert "/usr/sbin" in child_path
         assert "/sbin" in child_path
     assert not any("proxy" in name.casefold() for name in child_environment)
     assert not any("account" in name.casefold() for name in child_environment)
+
+
+@pytest.mark.parametrize("phase", ["import", "test"])
+def test_compiler_helpers_restore_private_home_before_user_import(
+    tmp_path, monkeypatch, phase
+):
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    cache = tmp_path / "cache"
+    cache.mkdir()
+    executor = PinnedRccPackageBuildExecutor()
+    executor._rcc_home = cache
+    executor._create_execution_dirs(workspace)
+    package = workspace / "package"
+    package.mkdir()
+    private_home = workspace / "home"
+    prefix = (
+        "from pathlib import Path\n"
+        f"assert Path.home() == Path({str(private_home)!r})\n"
+        "(Path.home() / 'user-imported').write_text('private')\n"
+    ).encode()
+    for entry in _generated_action_entries():
+        target = package / entry.path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(
+            prefix + entry.content
+            if entry.path == "generated_actions.py"
+            else entry.content
+        )
+
+    def execute(build, package_dir, directory, command):
+        subprocess.run(
+            [sys.executable, *command[1:]],
+            env=executor._child_environment(directory),
+            check=True,
+            timeout=30,
+        )
+
+    monkeypatch.setattr(executor, "_run_exec", execute)
+    build = RccBuildIdentity("sha256:" + "a" * 64, "sha256:" + "b" * 64)
+    if phase == "import":
+        executor.import_action(build, package, workspace)
+    else:
+        executor.run_tests(build, package, workspace)
+    assert (private_home / "user-imported").read_text() == "private"
+    assert not (cache / "user-imported").exists()
 
 
 def test_prepared_rcc_keeps_pinned_artifact_when_live_cache_changes(

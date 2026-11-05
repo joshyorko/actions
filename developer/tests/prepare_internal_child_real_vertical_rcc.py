@@ -220,17 +220,16 @@ def _validate_action_manifest(manifest: bytes, core_version: str) -> None:
 
 
 def _base_environment(role: _RoleHome) -> dict[str, str]:
-    task_home = role.directory / "home"
     actions_home = role.directory / "actions-home"
     task_tmp = role.directory / "tmp"
     xdg_config = role.directory / "config"
     xdg_cache = role.directory / "cache"
-    for path in (task_home, actions_home, task_tmp, xdg_config, xdg_cache):
+    for path in (actions_home, task_tmp, xdg_config, xdg_cache):
         _mkdir_new(path)
     path_value = os.pathsep.join(("/usr/sbin", "/sbin", os.defpath))
     environment = {
         "PATH": path_value,
-        "HOME": str(task_home),
+        "HOME": str(role.robocorp_home),
         "ROBOCORP_HOME": str(role.robocorp_home),
         "ACTIONS_HOME": str(actions_home),
         "TMPDIR": str(task_tmp),
@@ -346,7 +345,9 @@ def _publish_and_acquire(
         ],
         role.environment,
         "acquire",
-        120,
+        # Cold materialization exceeded 120s under a bounded workstation CPU/IO
+        # budget. This preparation deadline does not change any Run/lease limit.
+        300,
         minimum_free_bytes,
     )
     try:

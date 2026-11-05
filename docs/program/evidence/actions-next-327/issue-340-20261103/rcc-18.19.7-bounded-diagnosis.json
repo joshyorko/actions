@@ -61,7 +61,7 @@
       "import": 0
     }
   },
-  "ab_interpretation": "No ordinary import/version regression reproduced in clean isolated homes. Both published binaries execute the exact import; the full publish/acquire/republish/import sequence passes on both with matched immutable cache inputs. The installed Actions path remains unqualified under the retained cache/preparation conditions.",
+  "ab_interpretation": "Earlier clean A/B kept HOME constant and therefore missed the real integration discriminator; home_relocation_counterexample isolates it. No cache-corruption-only or universal RCC7-failure claim.",
   "confirmed_actions_defect": {
     "problem": "Republishing a used prepared live environment can return a new artifact digest with the same specification, violating the original immutable prepared binding.",
     "observed_original_artifact": "sha256:1152141b95d71d6312999f33867bf537d94e7176b38d368136e92fbec77d7203",
@@ -122,7 +122,7 @@
     "installed_five_sqlite_rcc3": "PASS",
     "not_rcc7_qualification": true
   },
-  "next_repair": "Qualify the exact fixed wheel against an execution-ready RCC7 cache while retaining all guards; diagnose any remaining Robot host failure at its recorded launch/cleanup boundary. Do not retry an uncertain existing Robot Run.",
+  "next_repair": "Run installed fixed RCC7 Action-to-Robot and MCP-claimed Robot gates with stable RCC HOME/private user HOME; then PostgreSQL parity and final exact-head CI. No retry of uncertain existing Runs.",
   "upstream_disposition": "RCC native repair draft only; no external issue or source write",
   "ci_upgrade_checkpoint": {
     "head": "d39e88ecd30629cab6aa9923f7bfe2032c84f4e1",
@@ -159,5 +159,45 @@
       "skipped": 19
     },
     "limitations": "No RCC execution in this synthetic compiler check; PostgreSQL fixture absent locally. Source behavior unchanged. Exact-head hosted qualification remains required."
+  },
+  "home_relocation_counterexample": {
+    "source": "ab432b12b0ac88039224ec018c3e16f50b63a1f6",
+    "artifact": "sha256:468071124bde221dca05b869561447c49c159d5e44c0b69a0d22af2001827d7b",
+    "environment": "Actual PinnedRccPackageBuildExecutor._child_environment, including RCC_NO_BUILD=1. Only HOME/binary varied.",
+    "observations": [
+      {
+        "version": "18.19.7",
+        "home": "original preparation",
+        "exit": 0
+      },
+      {
+        "version": "18.19.7",
+        "home": "new private execution",
+        "exit": 1,
+        "error": "reconcile lifecycle state: orphan materialization path exists"
+      },
+      {
+        "version": "18.19.7",
+        "home": "original restored",
+        "exit": 0
+      },
+      {
+        "version": "18.19.3",
+        "home": "new private execution",
+        "exit": 0
+      }
+    ],
+    "source_mechanism": [
+      "common/variables.go::SymbolicUserIdentity",
+      "htfs/library.go::ControllerSpaceName",
+      "environmentlifecycle/materialize.go::materializationID",
+      "environmentlifecycle/gc.go::validateProvisionalRecords"
+    ],
+    "classification": "RCC-version compatibility change under HOME relocation; Actions integration varied HOME across one prepared cache. No proof all clean RCC7 execution is broken.",
+    "integration_fix": "Use private ROBOCORP_HOME as stable RCC-process HOME during preparation/build/execution; trusted Python helpers restore separate private HOME before user imports. All lifecycle, no-build, hash and authorization guards retained.",
+    "regressions_red": "2 failed: sanitized RCC HOME contract and actual generated Action writes into cache HOME instead of private execution HOME.",
+    "focused_after": "106 passed,7 skipped; includes actual compiler import/test helper processes and a real Robot task asserting private HOME.",
+    "reproducer": "rcc-repair-upstream-draft.md#controlled-home-relocation-counterexample",
+    "limitations": "Native calls do not admit a Run; installed Action-to-Robot and PostgreSQL after-fix qualification pending. The final3 call ran after all7 observations; cache retired afterwards."
   }
 }

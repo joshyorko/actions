@@ -1426,10 +1426,11 @@ class PinnedRccPackageBuildExecutor:
     ) -> dict[str, Any]:
         metadata_file = workspace / "action-metadata.json"
         helper = (
-            "import sys\n"
+            "import os, sys\n"
+            "source, destination = sys.argv[1], sys.argv[2]\n"
+            "os.environ['HOME'] = os.path.join(os.path.dirname(destination), 'home')\n"
             "from io import StringIO\n"
             "from actions._commands import metadata\n"
-            "source, destination = sys.argv[1], sys.argv[2]\n"
             "output = StringIO()\n"
             "status = metadata(path=source, __stream__=output)\n"
             "if status != 0: raise SystemExit(72)\n"
@@ -1455,8 +1456,9 @@ class PinnedRccPackageBuildExecutor:
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
     ) -> None:
         helper = (
-            "import io, sys, unittest\n"
+            "import io, os, sys, unittest\n"
             "package_dir, tests_dir = sys.argv[1], sys.argv[2]\n"
+            "os.environ['HOME'] = os.path.join(os.path.dirname(package_dir), 'home')\n"
             "sys.path.insert(0, package_dir)\n"
             "suite = unittest.defaultTestLoader.discover("
             "tests_dir, pattern='test_*.py', top_level_dir=tests_dir)\n"
@@ -1548,7 +1550,9 @@ class PinnedRccPackageBuildExecutor:
             # RCC's Linux worker-capability probe resolves ldconfig through PATH.
             path_entries = ["/usr/sbin", "/sbin", *path_entries]
         environment = {
-            "HOME": str(workspace / "home"),
+            # RCC namespaces materializations by HOME. Keep its cache identity
+            # stable; the Python helpers restore the private generated-code HOME.
+            "HOME": str(self._rcc_home),
             "PATH": os.pathsep.join(dict.fromkeys(path_entries)),
             "ROBOCORP_HOME": str(self._rcc_home),
             "ACTIONS_HOME": str(workspace / "actions-home"),

@@ -2666,6 +2666,19 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
+Keep RCC's process `HOME` stable at the private `ROBOCORP_HOME` used for artifact
+preparation and execution. RCC 18.19.7 derives materialization IDs from
+`common.UserHomeIdentity()` as well as the controller/artifact; changing only
+`HOME` against the same cache reproduces `orphan materialization path exists`.
+Restoring the original home succeeds; 18.19.3 accepts the changed home. Do not
+delete lifecycle records, disable guards or share the generated-code home to
+avoid this check. Compiler, Action and Robot Python helpers set their own private
+execution `HOME` before importing user code; qualify both sides of this boundary.
+Existing prepared caches made with another process home require fresh
+preparation, not an uncertain Run retry. The local preparation helper allows
+300 seconds for cold acquisition after measured 120-second timeouts; production
+Run deadlines, claims and cancellation confirmation remain unchanged.
+
 ### RCC release acceptance pins
 
 A primary RCC upgrade must keep previously admitted immutable Robot records

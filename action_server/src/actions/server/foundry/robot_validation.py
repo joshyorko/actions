@@ -48,8 +48,9 @@ LOG_LIMIT = 256 * 1024
 XML_LIMIT = 1024 * 1024
 
 _CHILD = r"""
-import platform, sys
+import os, platform, sys
 from pathlib import Path
+os.environ['HOME'] = str(Path(sys.argv[5]).parent / 'home')
 import robot
 from robot.api import TestSuiteBuilder
 source, suite_path, suite_name, task_name, inputs, output = sys.argv[1:]
@@ -241,7 +242,9 @@ class RobotValidator:
         GeneratedRccExecution._extract_snapshot(package.source_archive, source)
         (directory / "input.json").write_bytes(b"{}")
         (directory / "tmp").mkdir(mode=0o700)
+        (directory / "home").mkdir(mode=0o700)
         environment = {
+            "HOME": str(directory / "home"),
             "PATH": "/usr/sbin:/sbin:" + os.defpath,
             "LANG": "C.UTF-8",
             "PYTHONIOENCODING": "utf-8",
@@ -269,7 +272,9 @@ class RobotValidator:
             if not isinstance(prep, RccRobotPreparation):
                 raise ValueError("RCC Robot preparation required")
             environment.update(
-                ROBOCORP_HOME=str(prep.environment.robocorp_home), RCC_NO_BUILD="1"
+                HOME=str(prep.environment.robocorp_home),
+                ROBOCORP_HOME=str(prep.environment.robocorp_home),
+                RCC_NO_BUILD="1",
             )
             version = self._run(
                 [str(prep.rcc), "--version"], source, environment, check, None

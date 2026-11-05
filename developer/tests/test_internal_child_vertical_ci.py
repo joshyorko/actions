@@ -10,6 +10,18 @@ from pathlib import Path
 import pytest
 
 
+def test_preparation_uses_stable_private_rcc_home(tmp_path):
+    path = Path(__file__).with_name("prepare_internal_child_real_vertical_rcc.py")
+    spec = importlib.util.spec_from_file_location("vertical_home_preparation", path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    role = module._make_role(tmp_path, "action", b"dependencies: {}\n")
+    assert role.environment["HOME"] == str(role.robocorp_home)
+    assert role.environment["ROBOCORP_HOME"] == str(role.robocorp_home)
+    assert role.robocorp_home.stat().st_mode & 0o777 == 0o700
+
+
 @pytest.mark.parametrize("status", [0, 124])
 def test_supervised_rcc_retains_diagnostics_before_reporting_result(tmp_path, status):
     path = Path(__file__).with_name("prepare_internal_child_real_vertical_rcc.py")
