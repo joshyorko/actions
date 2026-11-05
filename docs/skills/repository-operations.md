@@ -5677,6 +5677,14 @@ historical claims, Run/Attempt lineage and artifact bytes from fresh installed
 consumer processes. Verify original object bytes are unchanged. A SQL dump alone
 does not include filesystem artifacts. Exclude connection contexts and database
 dumps from public evidence; retain digests and bounded readback receipts. This
+comparison must include object owners/ACLs as well as table rows. Keep ownership
+and ACL restoration enabled; after restoring source/objects/journals at their
+original paths, use a fresh installed controller against the restored database,
+check unchanged Run/Attempt and execution counts, and exercise foreign-principal,
+foreign-workspace and persisted-revocation denials before deleting the owned
+fixture. The completed-job PostgreSQL probe passes these checks; it does not
+qualify restoration of a live or unknown launch.
+This
 same-version service-composition test does not establish ordinary CLI PostgreSQL
 configuration, active-effect recovery, cache-loss recovery or schema downgrade.
 
