@@ -75,6 +75,28 @@ Use a real script file: a heredoc supplied to the outer launcher can be consumed
 without executing the intended Python body. Check produced files and receipts,
 not only the launcher's successful exit.
 
+## Actual desktop acceptance
+
+Qualify the real installed desktop separately from a browser harness, direct MCP
+calls and backend execution. Record desktop mode/version, product commit, wheel
+and RCC hashes, UTC action times, real screenshots and retained Run/Attempt/Work
+Item identities. Codex mode in the ChatGPT desktop is not ChatGPT-mode E1.
+
+Use the installed desktop control API or its supported native client under the
+operator's existing session. Do not change trusted-code allowlists, disable the
+sandbox or read browser credentials to obtain control. If standard accessibility
+settings are temporarily enabled, save and restore them. Refresh window and
+accessibility identities after navigation or sidebar remounts. Confirm the actual
+field after an unconfirmed paste before retrying; a successful input-tool return
+alone does not establish a UI change.
+
+Hide unrelated history before review captures. Preserve original image bytes,
+hash them, commit selected images alongside the receipt and embed commit-pinned
+image links in the PR. Describe request-only cancellation and blocked client
+behavior explicitly, without claiming stopped processes or recovery. The
+[real desktop receipt](../program/evidence/actions-next-327/issue-340-20261103/desktop-20261106/README.md)
+shows the distinction between actual Codex-mode interaction and remaining gates.
+
 ## Recovering installed qualification evidence
 
 For sequential private provider configurations, preview each request and supply
