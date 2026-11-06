@@ -378,11 +378,75 @@ def test_template_package_script_is_executable_for_local_packaging():
         assert (REPO / "templates/packaging" / config_name).is_file()
 
 
+def _remaining_product_paths(paths: tuple[Path, ...], repo: Path = REPO) -> list[str]:
+    remaining = []
+    for root in paths:
+        if root.is_symlink():
+            remaining.append(str(root.relative_to(repo)))
+            continue
+        files = (root,) if root.is_file() else root.rglob("*")
+        for path in files:
+            if path.is_symlink() or (
+                path.is_file()
+                and not (
+                    path.suffix == ".pyc"
+                    and "__pycache__" in path.relative_to(repo).parts
+                )
+            ):
+                remaining.append(str(root.relative_to(repo)))
+                break
+    return remaining
+
+
 def test_removed_product_paths_do_not_exist():
-    remaining_paths = [
-        str(path.relative_to(REPO)) for path in REMOVED_PRODUCT_PATHS if path.exists()
-    ]
-    assert not remaining_paths
+    assert not _remaining_product_paths(REMOVED_PRODUCT_PATHS)
+
+
+def test_removed_product_paths_preserve_cache_but_reject_source(tmp_path):
+    retired = tmp_path / "retired"
+    cache = retired / "__pycache__"
+    cache.mkdir(parents=True)
+    bytecode = cache / "legacy.cpython-311.pyc"
+    bytecode.write_bytes(b"owned historical bytecode")
+    assert _remaining_product_paths((retired,), tmp_path) == []
+    assert bytecode.read_bytes() == b"owned historical bytecode"
+    cached_source = cache / "legacy.py"
+    cached_source.write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    cached_source.unlink()
+    manifest = retired / "manifest.json"
+    manifest.write_text("{}")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    manifest.unlink()
+    (retired / "legacy.py").write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    retired_file = tmp_path / "retired.py"
+    retired_file.write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired_file,), tmp_path) == ["retired.py"]
+
+
+@pytest.mark.parametrize("kind", ["root", "nested", "bytecode", "broken"])
+def test_removed_product_paths_reject_symlinks(tmp_path, kind):
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    source = outside / "legacy.py"
+    source.write_text("raise RuntimeError('retired source')\n")
+    retired = tmp_path / "retired"
+    try:
+        if kind in ("root", "broken"):
+            target = outside if kind == "root" else tmp_path / "missing"
+            retired.symlink_to(target, target_is_directory=True)
+        else:
+            retired.mkdir()
+            if kind == "bytecode":
+                cache = retired / "__pycache__"
+                cache.mkdir()
+                (cache / "legacy.pyc").symlink_to(source)
+            else:
+                (retired / "linked").symlink_to(outside, target_is_directory=True)
+    except OSError:
+        pytest.skip("symlink creation unavailable")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
 
 
 def test_runtime_has_no_data_server_or_data_context_compatibility():

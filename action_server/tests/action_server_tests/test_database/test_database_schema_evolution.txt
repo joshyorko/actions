@@ -544,6 +544,44 @@ CREATE UNIQUE INDEX run_task_receipt_run_id_index ON run_task_receipt(run_id);
 
 
 '''
+CREATE TABLE IF NOT EXISTS run_child_lineage(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    parent_run_id TEXT NOT NULL,
+    child_run_id TEXT NOT NULL,
+    binding_name TEXT NOT NULL,
+    logical_key_digest TEXT NOT NULL,
+    identity_digest TEXT NOT NULL
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_child_lineage_id_index ON run_child_lineage(id);
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_child_lineage_child_run_id_index ON run_child_lineage(child_run_id);
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_child_lineage_identity_digest_index ON run_child_lineage(identity_digest);
+''',
+
+
+'''
+CREATE INDEX run_child_lineage_workspace_id_non_unique_index ON run_child_lineage(workspace_id);
+''',
+
+
+'''
+CREATE INDEX run_child_lineage_parent_run_id_non_unique_index ON run_child_lineage(parent_run_id);
+''',
+
+
+'''
 CREATE TABLE IF NOT EXISTS fenced_work_item(
     id TEXT NOT NULL PRIMARY KEY,
     workspace_id TEXT NOT NULL,

@@ -1,0 +1,220 @@
+{
+  "source_base": "b358128e5a6b238a68497dbb877ae4bec9b46597",
+  "surface": "Actual installed native CLI with official MCP Apps bridge in Chromium; manual native Codex visual confirmation and ChatGPT-mode acceptance remain separate",
+  "defect": "v2 table read only local form dispatch state. Native Work Item forms override that dispatch, and reopening has no local response. Successful authorized persisted results therefore rendered an empty table.",
+  "repair": "v2 table reads bounded current persisted projection in app view only; v1 retains local response behavior. Loading, failed and not-run projections remain empty.",
+  "counterexamples": {
+    "component": "v2-projections.test.tsx::renders a v2 table from the persisted projection without a form dispatch: failed before, passed after",
+    "installed_browser": "host-harness.spec.ts::official bridge renders a native invoice consumer's persisted table: real RCC completed but INV-1004 cell absent before; same test passed after the wheel update",
+    "before": {
+      "startTime": "2026-11-05T21:02:53.764Z",
+      "duration": 34962.318,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "after": {
+      "startTime": "2026-11-05T21:06:17.481Z",
+      "duration": 7774.88,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "checks": {
+    "canvas_suite": "208 passed, 1 skipped; before final two privacy tests were added",
+    "focused_final": "40 passed, including preview/model private-row exclusion",
+    "lint": "npm run test:lint PASS",
+    "types": "npm run test:types PASS under prepared Node 20",
+    "build": "canonical invoke build-frontend --no-install and poetry build PASS",
+    "installed_wheel": {
+      "wheel": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+      "sha256": "49367d286aacc6f1aff3b23737b2623bcc8b7942e712bd5636ca965f0425d8f1",
+      "canvas_sha256": "88d3f98b592cc8586d5f32aa5f5e7ba829aa9b6989d5339ee053fc1f52f3f553",
+      "changed_members": [
+        "actions/server/_static_contents.py",
+        "actions_runtime-1.1.0a60.dist-info/RECORD"
+      ],
+      "backend_unchanged_from_inspection_fix": true
+    },
+    "restart_reopen": {
+      "status": "PASS",
+      "authentication": {
+        "missing": 403,
+        "wrong": 403
+      },
+      "authenticated_reopen": true,
+      "same_run": "3399a313-6431-407a-a846-44b4a31ae887",
+      "same_attempt": "a55d0ebc-fe75-4de7-a295-b33431fbf027",
+      "counts_unchanged": {
+        "run": 3,
+        "run_attempt": 3,
+        "run_admission": 1
+      },
+      "four_result_rows_retained": true,
+      "original_v2_draft_preserved": true,
+      "inspection_resource_absent": true
+    }
+  },
+  "native_invoice_consumer": {
+    "status": "PASS_INSTALLED_NATIVE_CONSUMER",
+    "application": {
+      "appId": "a90733e7-384a-4ada-a633-a9358e635f91",
+      "revisionId": "sha256:9cd0eb523474a3874ae4025d8436be974ba4f7281f6f3f33200e308b5fb17015"
+    },
+    "run": {
+      "attemptId": "edb6e22d-bd10-43a0-8a3d-ce8b5088935d",
+      "bindingId": "reconcile",
+      "cancelRequested": false,
+      "outputs": [
+        {
+          "handle": "art_1ow1H_79QWSpY90VYra3IQ"
+        },
+        {
+          "handle": "art_BvkkogBcRDiIpm5brvt96w"
+        },
+        {
+          "handle": "art_of4kkqpUR8C7ArE95mSjAA"
+        },
+        {
+          "handle": "art_weWh8xmTStCGdlLwuu7hcw"
+        }
+      ],
+      "runId": "a58638cb-8f50-4810-b538-75a58791cb0d",
+      "state": "completed",
+      "workItemEpoch": 1,
+      "workItemId": "bca2c722-ba64-4396-9cae-2df24fff3010"
+    },
+    "counts": {
+      "run": 1,
+      "run_attempt": 1,
+      "run_admission": 1
+    },
+    "projection": {
+      "rows": [
+        {
+          "amount_cents": 10000,
+          "customer": "Northstar Synthetic Supply",
+          "discrepancies": "",
+          "invoice_id": "INV-1001",
+          "status": "matched",
+          "variance_cents": 0
+        },
+        {
+          "amount_cents": 11000,
+          "customer": "Beacon Synthetic Parts",
+          "discrepancies": "unit_price, po_total",
+          "invoice_id": "INV-1002",
+          "status": "discrepant",
+          "variance_cents": 1000
+        },
+        {
+          "amount_cents": 5000,
+          "customer": "Cedar Synthetic Tools",
+          "discrepancies": "quantity, po_total, ledger_total",
+          "invoice_id": "INV-1003",
+          "status": "discrepant",
+          "variance_cents": 1000
+        },
+        {
+          "amount_cents": 4600,
+          "customer": "Delta Synthetic Office",
+          "discrepancies": "line_total, po_total, ledger_total",
+          "invoice_id": "INV-1004",
+          "status": "discrepant",
+          "variance_cents": 100
+        }
+      ],
+      "summary": {
+        "discrepant": 3,
+        "invoice_count": 4,
+        "matched": 1,
+        "total_cents": 30600
+      }
+    },
+    "artifacts": [
+      {
+        "handle": "art_1ow1H_79QWSpY90VYra3IQ",
+        "digest": "sha256:627f6f381939d97e74570cf4f946761c672279ab7926928ec083ce7aab12d945",
+        "bytes": 751,
+        "is_report": true
+      },
+      {
+        "handle": "art_BvkkogBcRDiIpm5brvt96w",
+        "digest": "sha256:2a9cc156b6918a030a1210a8537a60bbf3d87154d10455785d522f916e0daadc",
+        "bytes": 34337,
+        "is_report": false
+      },
+      {
+        "handle": "art_of4kkqpUR8C7ArE95mSjAA",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "is_report": false
+      },
+      {
+        "handle": "art_weWh8xmTStCGdlLwuu7hcw",
+        "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "is_report": false
+      }
+    ],
+    "josh_pending_item": "3db4b09b-5cdf-48c4-926f-05b986073dff",
+    "provider": "sealed original invoice/PO/ledger CSV through configured DuckDB logical source",
+    "rcc": "18.19.8",
+    "guarantees": [
+      "No app session denied before Run admission",
+      "Open/enqueue do not execute",
+      "Claim prepared Run without launch",
+      "Explicit execute completed real RCC",
+      "Repeated execute retained same Run/Attempt",
+      "Authorized sealed result reads match actual table data"
+    ],
+    "limits": [
+      "This consumes saved criteria before querying. It does not establish pre-execution query-result approval.",
+      "This is not ChatGPT-mode host acceptance."
+    ],
+    "harness_errors": [
+      "Initial probe used wrong workspace key and then artifacts instead of outputs. Corrected without rerunning completed execution."
+    ]
+  },
+  "model_guidance": "Use supported semantic v2 cards and binding-backed tables. Never replace validation with plain text, hard-coded rows or execution on mount.",
+  "original_invoice_contract_blocker": {
+    "classification": "MUST FIX",
+    "fact": "Native bootstrap InvoiceQueryService receives no configured invoice query providers and exposes no pre-execution query port. The tested consumer claims saved criteria first and queries during RCC execution. This is not the separate combined fixture's query -> immutable-result approval -> claim -> worker order.",
+    "next_task": "Connect the existing invoice query/review path to the native entrypoint under exact app/provider authority; do not treat the consumer proof as that acceptance."
+  },
+  "ci": "Fresh exact-head CI required after this checkpoint; previous SQLite/PostgreSQL receipts retain original head and artifact identities.",
+  "manual_test": [
+    "In a fresh Codex-mode chat select existing Actions-Post2-Dakota and open existing Dakota invoice reconciliation app; do not create another app.",
+    "Load inputs; choose the sole selectable pending item with customer Synthetic. Claim selected input, then choose Continue execution within its 60-second claim lease.",
+    "Expect 4 bound rows: 1 matched and 3 discrepant; inspect result artifact and verify INV-1004.",
+    "Reopen the same app and choose Refresh status to load the persisted table without creating another Run."
+  ],
+  "private_state_preserved": [
+    "credentials",
+    "original user-created v1/v2 draft revisions",
+    "old a44 post2 directory",
+    "scoped provider/profile and exact new invoice Deployment grants"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Inspection is model-only; v2 tables require persisted projections. Native consumer proof does not establish pre-execution invoice-result approval.",
+    "evidence": "Component failure/pass, installed official-bridge failure/pass, private-auth probe, same Run/Attempt reopen after restart.",
+    "removed_ambiguity": "Backend success, UI render success, native Codex and ChatGPT-mode acceptance are separate.",
+    "remaining_uncertainty": "Manual actual-host rendering and original native pre-execution query/review wiring remain open."
+  },
+  "upstream_disposition": "none; both confirmed defects are local Actions contracts",
+  "raw_evidence_sha256": {
+    "table-before.log": "be96f35e0a8b0872d456029d6a01c65825fa12d356b219ee3d74a25d88c5a892",
+    "table-after.log": "3c47238886bacbc78e11fecc4ba8a9d7ad941c3d672da4b0cc526cb10e4406a9",
+    "table-canvas-suite.log": "091b791e3ba735e66fda626f02172ad202bfb24bf602e6cc6b066df58f4d48b0",
+    "table-privacy-final.log": "a96fa2d2a21393531d3113d8c62eae39f37f903edcd05a8e001eb6940847d79d",
+    "table-types-final.log": "11536fe3442bbec2b91b2d2debe8937c594d1f860920efe004432ad8b13aa19b",
+    "table-lint.log": "40779ff11a223d0e955790ce60c9b7508b53c680c9e5fe68c32b2058ee26d098",
+    "native-browser-before.json": "f3ccfac0300ac2f4575126263f91eceb4cac86acbafd5ab3a8954843a380d114",
+    "native-browser-after.json": "b098015f8f7320f3e338e1ee452155378b165af88fdd1ab72b5224b6a95f3ff8",
+    "native-reopen.json": "705fc1c9279917e64e431945a0c68078a3da9fd5340096c04bb852437323eb56"
+  }
+}

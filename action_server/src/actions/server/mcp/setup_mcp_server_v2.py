@@ -41,6 +41,18 @@ CATALOG_REVISION_META_KEY = "actions.catalogRevision"
 CATALOG_TTL_MS = 0
 CATALOG_CACHE_SCOPE = "private"
 OutputSchemaKind = Literal["string", "object", "wrap-in-result-object"]
+MANAGED_WORK_ITEM_TOOL_NAMES = frozenset(
+    {
+        "managed_queues_list",
+        "managed_items_list",
+        "managed_items_get",
+        "managed_runs_get",
+        "managed_runs_logs",
+        "managed_artifacts_read",
+        "managed_items_enqueue",
+        "managed_items_cancel",
+    }
+)
 
 
 @dataclass
@@ -91,6 +103,13 @@ class McpServerSetupHelper:
         self._init_state()
         self._invoice_canvas = invoice_canvas
         self._canvas_foundry = canvas_foundry
+        managed_work_items = getattr(canvas_foundry, "managed_work_items_mcp", None)
+        if managed_work_items is not None and not (
+            callable(getattr(managed_work_items, "tools", None))
+            and callable(getattr(managed_work_items, "call", None))
+        ):
+            raise ValueError("invalid native managed Work Items facade")
+        self._managed_work_items = managed_work_items
         self.transport_security = TransportSecuritySettings(
             enable_dns_rebinding_protection=True,
             allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*"],
@@ -222,6 +241,16 @@ class McpServerSetupHelper:
             tools.extend(await self._invoice_canvas.tools(_ctx))
         if self._task_adapter is not None:
             tools = await self._task_adapter.tools(_ctx, tools)
+        if self._managed_work_items is not None:
+            managed_tools = await self._managed_work_items.tools(_ctx)
+            existing_names = {tool.name for tool in tools}
+            if any(
+                tool.name not in MANAGED_WORK_ITEM_TOOL_NAMES
+                or tool.name in existing_names
+                for tool in managed_tools
+            ):
+                raise MCPError(-32603, "Managed Work Items tools unavailable")
+            tools.extend(managed_tools)
         return ListToolsResult(tools=tools, **self._catalog_result_metadata(catalog))
 
     async def _call_tool(self, ctx: Any, params: Any):
@@ -247,6 +276,13 @@ class McpServerSetupHelper:
                 return await self._invoice_canvas.call(
                     ctx, params.name, params.arguments or {}
                 )
+        if (
+            self._managed_work_items is not None
+            and params.name in MANAGED_WORK_ITEM_TOOL_NAMES
+        ):
+            return await self._managed_work_items.call(
+                ctx, params.name, params.arguments or {}
+            )
         catalog = self._catalog
         try:
             from actions.server._actions_run import IInternalFuncAPI
@@ -609,6 +645,12 @@ class McpServerSetupHelper:
                 )
             ):
                 raise ValueError("foundry Canvas catalog identity collision")
+        if (
+            self._managed_work_items is not None
+            and kind not in ("resource", "prompt")
+            and (tool_name or action.name) in MANAGED_WORK_ITEM_TOOL_NAMES
+        ):
+            raise ValueError("managed Work Items catalog identity collision")
         if kind == "resource":
             uri = options.get("uri")
             if not uri:
@@ -740,6 +782,13 @@ class McpServerSetupHelper:
         self.publish_validated_catalog(replacement)
 
     def _validate_bound_catalog(self, catalog: _McpCatalog) -> None:
+        if (
+            self._managed_work_items is not None
+            and MANAGED_WORK_ITEM_TOOL_NAMES.intersection(
+                catalog.tool_name_to_action_info
+            )
+        ):
+            raise ValueError("managed Work Items catalog identity collision")
         if self._canvas_foundry is not None:
             from actions.server.foundry.mcp import RESERVED_TOOLS
 

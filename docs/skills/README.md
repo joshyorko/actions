@@ -11,4 +11,7 @@ Repository-local operational knowledge lives here. Read root `AGENTS.md` first, 
 
 Update an existing guide before creating another. Add every new canonical guide to this index in the same commit.
 
+For changes to Run/claim fencing, launch journals or cancellation confirmation,
+use the bounded [Run lifecycle verification skill](../../.agents/skills/verify-run-lifecycle/SKILL.md).
+
 Guidance must be supported by code, tests, command output, an observed failure, or an immutable upstream source. Remove stale or contradictory claims when evidence changes. Do not store per-run diaries here.

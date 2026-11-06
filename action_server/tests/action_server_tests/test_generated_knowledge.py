@@ -84,7 +84,7 @@ def generated_knowledge(knowledge, request):
         result=(BindingField(name="result_json", kind="string"),),
         max_rows=100,
         max_bytes=65536,
-        timeout_ms=1000,
+        timeout_ms=10000,
     )
     g.descriptor = g.descriptor.model_copy(
         update={"operations": (operation, search_operation())}
@@ -378,7 +378,7 @@ def search_operation():
         result=(BindingField(name="result_json", kind="string"),),
         max_rows=20,
         max_bytes=65536,
-        timeout_ms=1000,
+        timeout_ms=10000,
     )
 
 
@@ -592,3 +592,20 @@ def test_generated_ingestion_cannot_publish_after_authority_change(
             wrapper.publish(g.actor, g.fence, refs, result)
     assert _one(g.db, Run, g.fence.run_id).status != RunStatus.PASSED
     g.execution.release(prepared)
+
+
+def test_generated_ingestion_cancellation_after_slow_preparation(
+    generated_knowledge, monkeypatch
+):
+    from actions.server.data_queries.knowledge_execution import KnowledgeExecution
+
+    original = KnowledgeExecution.prepare_ingestion
+
+    def delayed(self, *args, **kwargs):
+        time.sleep(1.15)
+        return original(self, *args, **kwargs)
+
+    monkeypatch.setattr(KnowledgeExecution, "prepare_ingestion", delayed)
+    test_generated_ingestion_cannot_publish_after_authority_change(
+        generated_knowledge, "cancel"
+    )

@@ -323,8 +323,9 @@ class RobotCancellationStopped(RobotExecutionError):
 
 
 _CHILD = r"""
-import json, platform, sys
+import json, os, platform, sys
 from pathlib import Path
+os.environ['HOME'] = str(Path(sys.argv[5]).parent / 'home')
 import robot
 from robot.api import TestSuiteBuilder
 source, suite_path, suite_name, task_name, inputs, output = sys.argv[1:]
@@ -459,7 +460,9 @@ class RobotExecution:
         self._read(suite, 1024 * 1024)
         (directory / "input.json").write_bytes(selection.inputs)
         (directory / "tmp").mkdir(mode=0o700)
+        (directory / "home").mkdir(mode=0o700)
         environment = {
+            "HOME": str(directory / "home"),
             "PATH": "/usr/sbin:/sbin:" + os.defpath,
             "LANG": "C.UTF-8",
             "PYTHONIOENCODING": "utf-8",
@@ -495,7 +498,9 @@ class RobotExecution:
             ):
                 raise ValueError("retained RCC preparation differs from plan/source")
             environment.update(
-                ROBOCORP_HOME=str(retained.robocorp_home), RCC_NO_BUILD="1"
+                HOME=str(retained.robocorp_home),
+                ROBOCORP_HOME=str(retained.robocorp_home),
+                RCC_NO_BUILD="1",
             )
             version = subprocess.run(
                 [str(prep.rcc), "--version"],
@@ -504,7 +509,7 @@ class RobotExecution:
                 timeout=min(15, timeout_seconds),
                 check=True,
             )
-            if version.stdout.strip() != b"v18.19.3":
+            if version.stdout.strip() != b"v18.19.8":
                 raise ValueError("unsupported RCC version")
             command = build_exec_command(
                 prep.rcc,

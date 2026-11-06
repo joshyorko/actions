@@ -46,6 +46,7 @@ from actions.server.run_outputs.models import RunAttempt, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    OutputExpired,
     _canonical,
     _key,
     _lock_workspace,
@@ -332,7 +333,12 @@ class GenericCanvasView(CanvasPort):
 
     def _ticket(self, service, managed, run):
         if isinstance(service, StandaloneActionExecution):
-            return service.ticket(managed, run)
+            return service.ticket(
+                managed,
+                run,
+                _allow_expired_terminal=run.status
+                in (RunStatus.PASSED, RunStatus.FAILED),
+            )
         record = json.loads(run.result or "null")
         if run.status in (RunStatus.PASSED, RunStatus.FAILED):
             record = record.get("result") if isinstance(record, dict) else None
@@ -703,9 +709,14 @@ class GenericCanvasView(CanvasPort):
             return
         refs = self._references(caller, run)
         handles = []
-        for ref in refs:
-            with service.base.resolve(caller.actor, caller.workspace_id, ref.handle):
-                handles.append({"handle": ref.handle})
+        try:
+            for ref in refs:
+                with service.base.resolve(
+                    caller.actor, caller.workspace_id, ref.handle
+                ):
+                    handles.append({"handle": ref.handle})
+        except OutputExpired:
+            return
         # Publish the whole validated inventory only after every handle resolves.
         state["outputs"] = handles
 

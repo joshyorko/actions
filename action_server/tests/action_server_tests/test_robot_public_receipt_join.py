@@ -17,6 +17,61 @@ from actions.server.run_outputs.service import FenceRejected, _one
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
 
+def publish_model_snapshot(case):
+    """Publish the selected Robot capability before constructing a model Task."""
+    from uuid import uuid4
+
+    from actions.server.foundry.models import FoundryAccessGrant
+    from actions.server.foundry.sql_authorization import reference_grant_subject
+    from actions.server.foundry.standalone_execution import StandaloneActionExecution
+    from actions.server.run_outputs.service import (
+        RunOutputControlPlane,
+        RunOutputService,
+    )
+
+    current_snapshot = case.service.snapshot
+    deployments = case.service.deployments
+    current = deployments._repository.current(
+        current_snapshot.workspace_id, current_snapshot.deployment.deployment_id
+    )
+    specification = current.revision.specification.model_copy(
+        update={"model_published_capabilities": (current_snapshot.capability,)}
+    )
+    revision = deployments.publish(
+        case.actor,
+        current_snapshot.workspace_id,
+        current_snapshot.deployment.deployment_id,
+        current.revision.ref,
+        specification,
+        idempotency_key="robot-task-model-published",
+    )
+    with case.db.transaction():
+        case.db.insert(
+            FoundryAccessGrant(
+                str(uuid4()),
+                current_snapshot.workspace_id,
+                case.actor.principal_id,
+                "reference",
+                reference_grant_subject(revision.ref),
+                '["deploy","execute"]',
+            )
+        )
+    snapshot = deployments.resolve(
+        case.actor,
+        current_snapshot.workspace_id,
+        current_snapshot.deployment.deployment_id,
+        current_snapshot.capability,
+    ).snapshot
+    control = RunOutputControlPlane(case.db, capabilities=case.registry)
+    control.register(snapshot)
+    control.grant(case.actor, revision.ref, {"read", "execute", "cancel"})
+    outputs = RunOutputService(
+        case.db, {snapshot.provider_key: case.provider}, capabilities=case.registry
+    )
+    case.service = StandaloneActionExecution(deployments, outputs, snapshot)
+    case.control = control
+
+
 def test_public_dispatch_and_terminal_receipt_join(case, monkeypatch):
     c = case
     ticket = c.service.dispatch_standalone(c.caller, {"value": "joined"}, "public-join")
@@ -132,6 +187,7 @@ def test_robot_task_result_uses_sealed_robot_inventory(case, tmp_path):
     )
 
     c = case
+    publish_model_snapshot(c)
 
     class Ready:
         def require_ready(self, actor, snapshot):

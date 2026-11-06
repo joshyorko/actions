@@ -137,6 +137,22 @@ def test_real_direct_returns_xml_and_staged_refs_without_terminalization(case):
         _execute(case)
 
 
+def test_real_robot_observes_private_execution_home(case):
+    runner, selection, _, actor, fence, _ = case
+    archive = _archive(
+        "*** Tasks ***\nSelected\n"
+        "    ${actual}=    Evaluate    str(pathlib.Path.home())    modules=pathlib\n"
+        "    ${expected}=    Evaluate    str(pathlib.Path($INPUT_FILE).parent / 'home')    modules=pathlib\n"
+        "    Should Be Equal    ${actual}    ${expected}\n"
+    )
+    selection = replace(
+        selection, source_digest="sha256:" + hashlib.sha256(archive).hexdigest()
+    )
+    result = _execute((runner, selection, archive, actor, fence, Host(selection)))
+    assert result.status == "PASS" and result.return_code == 0
+    assert result.cleanup.execution_stopped
+
+
 def test_source_tamper_rejected_before_intent(case):
     runner, selection, archive, actor, fence, host = case
     with pytest.raises(ValueError, match="source"):

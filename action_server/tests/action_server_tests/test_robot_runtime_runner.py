@@ -480,3 +480,127 @@ def test_lifecycle_payload_above_provider_chunk_bound(case):
         next(row for row in c.db.all(RunOutput) if row.name == "robot-stdout.log").size
         == 65537
     )
+
+
+def test_standalone_stopped_robot_confirms_authorized_cancellation(case, tmp_path):
+    from action_server_tests.test_generic_work_item_execution import grant
+    from actions.internal_runtime import ChildRunHandle, ChildRunState
+
+    from actions.server.foundry.internal_child_lifecycle import (
+        InternalChildRunLifecycle,
+    )
+    from actions.server.foundry.robot_execution import RobotCancellationStopped
+    from actions.server.run_outputs.task_service import TaskService
+
+    c = case
+    grant(
+        c.db,
+        c.actor,
+        c.refs.workspace,
+        "application",
+        str(c.service.snapshot.deployment.deployment_id.root),
+        ["cancel_execution"],
+    )
+
+    class CancelAdapter:
+        def __init__(self, *args):
+            pass
+
+        def execute(self, actor, fence, *, selection, lifecycle, **kwargs):
+            launch = RobotLaunchIntent(selection, fence, str(uuid4()))
+            lifecycle.record_launch_intent(actor, fence, launch)
+            assert c.service.base.cancel(actor, fence.run_id)
+            raise RobotCancellationStopped(
+                launch, ProcessTreeCleanupResult(True, (), (), ()), directory=tmp_path
+            )
+
+    runner = PinnedRobotRunner(
+        c.runner.preparation, tmp_path, adapter_factory=CancelAdapter
+    )
+    result = runner.execute(c.caller, c.ticket, c.service)
+    assert result.status == RunStatus.CANCELLED
+    assert _one(c.db, RunAttempt, c.ticket.fence.attempt_id).state == "cancelled"
+    assert not c.db.all(RunOutput, where="run_id=?", values=[result.id])
+    owner = SimpleNamespace(outputs=c.service.base)
+    handle = ChildRunHandle(id=result.id)
+    pin = _one(c.db, RunPin, result.id)
+    assert (
+        InternalChildRunLifecycle._project_status(
+            owner, c.db, handle, result, pin
+        ).state
+        == ChildRunState.CANCELLED
+    )
+    task_owner = SimpleNamespace(
+        db=c.db,
+        outputs=c.service.base,
+        detached=SimpleNamespace(claimed=lambda run_id: None),
+        policy=SimpleNamespace(poll_interval_ms=100),
+    )
+    receipt = SimpleNamespace(created_ms="1", ttl_ms="60000")
+    projected = TaskService._project(
+        task_owner, c.actor, (receipt, c.service.snapshot, result, pin)
+    )
+    assert projected.status == "cancelled" and projected.result is None
+    damaged = json.loads(result.result)
+    damaged["cancellation"]["descendants_reaped"] = False
+    with c.db.transaction():
+        c.db.update_by_id(Run, result.id, {"result": json.dumps(damaged)})
+        with pytest.raises(AccessDenied):
+            InternalChildRunLifecycle._project_status(
+                owner, c.db, handle, _one(c.db, Run, result.id), pin
+            )
+
+
+@pytest.mark.parametrize(
+    "damage", ["no_cancel", "cleanup", "launch", "attempt", "revoked"]
+)
+def test_standalone_cancellation_rejects_missing_authority(case, tmp_path, damage):
+    from action_server_tests.test_generic_work_item_execution import grant
+
+    from actions.server.foundry.robot_execution import RobotCancellationStopped
+
+    c = case
+    grant(
+        c.db,
+        c.actor,
+        c.refs.workspace,
+        "application",
+        str(c.service.snapshot.deployment.deployment_id.root),
+        ["cancel_execution"],
+    )
+
+    class CancelAdapter:
+        def __init__(self, *args):
+            pass
+
+        def execute(self, actor, fence, *, selection, lifecycle, **kwargs):
+            launch = RobotLaunchIntent(selection, fence, str(uuid4()))
+            lifecycle.record_launch_intent(actor, fence, launch)
+            if damage != "no_cancel":
+                assert c.service.base.cancel(actor, fence.run_id)
+            if damage == "launch":
+                launch = replace(launch, launch_id=str(uuid4()))
+            if damage == "attempt":
+                with c.db.transaction():
+                    c.db.update_by_id(RunPin, fence.run_id, {"epoch": fence.epoch + 1})
+            if damage == "revoked":
+                with c.db.transaction():
+                    c.db.execute(
+                        "DELETE FROM foundry_access_grant WHERE subject_kind=? AND subject_id=?",
+                        [
+                            "application",
+                            str(c.service.snapshot.deployment.deployment_id.root),
+                        ],
+                    )
+            cleanup = ProcessTreeCleanupResult(
+                True, (), (123,) if damage == "cleanup" else (), ()
+            )
+            raise RobotCancellationStopped(launch, cleanup, directory=tmp_path)
+
+    runner = PinnedRobotRunner(
+        c.runner.preparation, tmp_path, adapter_factory=CancelAdapter
+    )
+    with pytest.raises((FenceRejected, AccessDenied, RegistryDenied)):
+        runner.execute(c.caller, c.ticket, c.service)
+    assert _one(c.db, Run, c.ticket.fence.run_id).status == RunStatus.RUNNING
+    assert _one(c.db, RunAttempt, c.ticket.fence.attempt_id).state == "running"

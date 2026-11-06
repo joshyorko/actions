@@ -10,6 +10,86 @@ from actions.server.data_queries import _invoice_task
 store = run_fixtures.store
 
 
+def test_invoice_example_pins_match_candidate_packages():
+    import json
+    import tomllib
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[3]
+    example = repo / "action_server/examples/invoice_reconciliation"
+    pins = json.loads((example / "template.json").read_text())["pins"]
+    for package, directory in (
+        ("actions-runtime", "action_server"),
+        ("actions-core", "actions"),
+        ("actions-work-items", "work-items"),
+    ):
+        manifest = tomllib.loads((repo / directory / "pyproject.toml").read_text())
+        version = (
+            manifest.get("project", {}).get("version")
+            or manifest["tool"]["poetry"]["version"]
+        )
+        assert pins.get(package) == version
+
+
+def test_invoice_example_accepts_the_current_sdk_wheel(tmp_path, monkeypatch):
+    import hashlib
+    import importlib.util
+    import json
+    import subprocess
+    import tomllib
+    import zipfile
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[3]
+    manifest = tomllib.loads((repo / "work-items/pyproject.toml").read_text())
+    version = manifest["project"]["version"]
+    wheel = tmp_path / f"actions_work_items-{version}-py3-none-any.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(
+            f"actions_work_items-{version}.dist-info/METADATA",
+            f"Metadata-Version: 2.1\nName: actions-work-items\nVersion: {version}\n",
+        )
+    home = tmp_path / "rcc-home"
+    home.mkdir()
+    retained = tmp_path / "retained.json"
+    runtime = {
+        "artifact_digest": "sha256:" + "a" * 64,
+        "environment": str(tmp_path / "package.yaml"),
+        "sdk_wheel_sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+        "rcc": str(tmp_path / "rcc"),
+        "rcc_home": str(home),
+    }
+    retained.write_text(json.dumps(runtime))
+    root = tmp_path / "consumer"
+    root.mkdir()
+    path = repo / "action_server/examples/invoice_reconciliation/runtime.py"
+    spec = importlib.util.spec_from_file_location("invoice_example_runtime", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    calls = []
+
+    def acquire(command, **kwargs):
+        calls.append(command)
+        assert command[1:3] == ["env", "acquire"]
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            stdout=json.dumps(
+                {
+                    "artifactDigest": runtime["artifact_digest"],
+                    "verification": {"valid": True},
+                }
+            ),
+        )
+
+    monkeypatch.setenv("ACTIONS_INVOICE_SDK_WHEEL", str(wheel))
+    monkeypatch.setattr(module, "verify_rcc_version", lambda _path: None)
+    monkeypatch.setattr(module.subprocess, "run", acquire)
+    assert module.prepare_runtime(root, retained) == runtime
+    assert len(calls) == 1
+
+
 def test_real_duckdb_demo_materializes_all_source_ids_and_discrepancies(tmp_path):
     import importlib.util
     import threading

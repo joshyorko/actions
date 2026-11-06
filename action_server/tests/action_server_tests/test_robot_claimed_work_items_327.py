@@ -41,6 +41,7 @@ from actions.server.run_outputs.service import (
     FenceRejected,
     RunOutputControlPlane,
     RunOutputService,
+    _canonical,
     _one,
     _update,
 )
@@ -60,7 +61,7 @@ def claimed(database_location, foundry_package_store, tmp_path):
     with _runtime_database(database_location, refs.workspace, ()) as db:
         _grant(db, refs, actor)
 
-        def setup(mode="consumer", with_claim=True):
+        def setup(mode="consumer", with_claim=True, model_published=False):
             registry = _registry(db, foundry_package_store)
             request = request_for().model_copy(
                 update={"work_items": WorkItemDeclaration(mode=mode)}
@@ -127,6 +128,7 @@ def claimed(database_location, foundry_package_store, tmp_path):
                 policy=refs.policy,
                 output_provider=refs.output_provider,
                 work_item_policies=(policy,),
+                model_published_capabilities=(cap,) if model_published else (),
             )
             revision = deployments.create(
                 actor,
@@ -194,6 +196,70 @@ def claimed(database_location, foundry_package_store, tmp_path):
             )
 
         yield setup
+
+
+def _fresh_recovery_claim(c, *, authorize=True):
+    with c.db.transaction():
+        _update(c.db, RunAttempt, c.ticket.fence.attempt_id, {"lease_deadline_ms": "0"})
+        _update(c.db, FencedWorkItem, c.item, {"claim_deadline_ms": "0"})
+    caller = ManagedCaller(actor=c.caller.actor, worker_id=str(uuid4()))
+    claim = c.owner.queue(c.owner.policy.input_queue).reserve_item_fenced(
+        c.item, caller.worker_id, lease_seconds=60
+    )
+    if authorize:
+        RunOutputControlPlane(c.db).authorize_recovery(
+            c.ticket.fence.run_id,
+            c.ticket.fence.epoch,
+            receipt="owned-verified-prelaunch-no-effects",
+        )
+    return caller, claim
+
+
+def test_authorized_prelaunch_recovery_preserves_run_and_fences_old_worker(claimed):
+    c = claimed()
+    caller, claim = _fresh_recovery_claim(c)
+    recovered = c.owner.dispatch(caller, claim, lease_seconds=60)
+    assert recovered.fence.run_id == c.ticket.fence.run_id
+    assert recovered.fence.epoch == c.ticket.fence.epoch + 1
+    assert recovered.claim.epoch == claim.epoch > c.claim.epoch
+    assert _one(c.db, RunAttempt, c.ticket.fence.attempt_id).state == "lost"
+    assert json.loads(_one(c.db, Run, recovered.fence.run_id).result)["launch"] is None
+    before = _one(c.db, FencedWorkItem, c.item)
+    old = c.owner.outputs(c.caller, c.ticket)
+    with pytest.raises((FenceRejected, ClaimRejected)):
+        old.heartbeat(c.ticket.fence, lease_seconds=60)
+    with pytest.raises((FenceRejected, ClaimRejected)):
+        old.cancel(c.caller.actor, c.ticket.fence.run_id)
+    assert _one(c.db, FencedWorkItem, c.item) == before
+    assert (
+        len(c.db.all(RunAttempt, where="run_id=?", values=[recovered.fence.run_id]))
+        == 2
+    )
+
+
+@pytest.mark.parametrize(
+    "damage", ["authorization", "launch", "extra", "fence", "claim"]
+)
+def test_prelaunch_recovery_rejects_missing_proof_and_changed_journal(claimed, damage):
+    c = claimed()
+    caller, claim = _fresh_recovery_claim(c, authorize=damage != "authorization")
+    run = _one(c.db, Run, c.ticket.fence.run_id)
+    record = json.loads(run.result)
+    if damage == "launch":
+        record["launch"] = {"uncertain": True}
+    elif damage == "extra":
+        record["execution"] = {}
+    elif damage == "fence":
+        record["fence"]["owner_id"] = caller.worker_id
+    elif damage == "claim":
+        record["claim"]["epoch"] = claim.epoch + 1
+    original = _canonical(record, 65536)
+    with c.db.transaction():
+        _update(c.db, Run, run.id, {"result": original})
+    with pytest.raises(FenceRejected):
+        c.owner.dispatch(caller, claim, lease_seconds=60)
+    assert _one(c.db, Run, run.id).result == original
+    assert len(c.db.all(RunAttempt, where="run_id=?", values=[run.id])) == 1
 
 
 @pytest.mark.parametrize(

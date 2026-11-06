@@ -73,7 +73,7 @@ def configured(tmp_path, request):
         check()
         calls.append(command)
         if command[-1] == "--version":
-            return _ProcessResult(0, b"v18.19.3\n", b"")
+            return _ProcessResult(0, b"v18.19.8\n", b"")
         output_xml.write_bytes(xml())
         if request.param == "rcc":
             (source.parent / "rcc-receipt.json").write_text(
@@ -334,4 +334,8 @@ def test_oversize_diagnostic_cannot_be_retained(configured):
     with pytest.raises(ValueError, match="bounded"):
         verify_robot_validation(package, replace(result, stdout=b"x" * (LOG_LIMIT + 1)))
 
-pytestmark = pytest.mark.skipif(sys.platform != "linux" or platform.machine().lower() != "x86_64", reason="Pinned Robot Linux x86_64")
+
+pytestmark = pytest.mark.skipif(
+    sys.platform != "linux" or platform.machine().lower() != "x86_64",
+    reason="Pinned Robot Linux x86_64",
+)

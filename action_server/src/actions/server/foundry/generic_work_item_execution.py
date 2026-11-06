@@ -416,7 +416,13 @@ class GenericWorkItemExecution:
             ):
                 raise FenceRejected("retained Work Item terminal state changed")
             claim = retained_claim.as_claim()
-            ticket = self._ticket(caller, claim, run, require_owner=False)
+            ticket = self._ticket(
+                caller,
+                claim,
+                run,
+                require_owner=False,
+                _allow_expired_terminal=terminal,
+            )
             return run, _one(self.db, RunAttempt, ticket.fence.attempt_id), ticket
 
     def _envelope(self, item_id: str, *, _projection=None) -> GenericInput:
@@ -602,7 +608,49 @@ class GenericWorkItemExecution:
         if claim and run.status not in (RunStatus.PASSED, RunStatus.FAILED):
             self.queue(self.policy.input_queue)._require(claim)
         if pin.current_attempt_id:
-            return self._ticket(caller, claim, run)
+            if pin.recovery_epoch != pin.epoch or not pin.recovery_receipt:
+                return self._ticket(caller, claim, run)
+            attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+            try:
+                record = json.loads(run.result or "null")
+                prior = (
+                    ClaimValue.model_validate(record["claim"])
+                    if claim is not None
+                    else None
+                )
+                if prior is not None and (
+                    prior.item_id != claim.item_id
+                    or prior.owner_id != attempt.owner_id
+                    or prior.epoch < 1
+                    or prior.epoch > claim.epoch
+                    or (prior.epoch == claim.epoch and prior.owner_id != claim.owner_id)
+                ):
+                    raise ValueError("recovery claim differs")
+                expected = {
+                    "version": versions_for_selection(self.registry, self.snapshot)[0],
+                    "mode": "work-items" if claim else "standalone",
+                    "claim": prior.model_dump() if prior else None,
+                    "fence": AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=pin.epoch,
+                    ).model_dump(),
+                    "launch": None,
+                }
+                if (
+                    run.status != RunStatus.RUNNING
+                    or attempt.run_id != run.id
+                    or attempt.workspace_id != pin.workspace_id
+                    or attempt.state != "running"
+                    or attempt.epoch != pin.epoch
+                    or _canonical(record, 65536) != _canonical(expected, 65536)
+                ):
+                    raise ValueError("recovery journal differs")
+            except (ValueError, TypeError, KeyError):
+                raise FenceRejected(
+                    "recovery requires an unchanged pre-launch journal; retained launch requires reconciliation"
+                ) from None
         fence = self.base.claim(run.id, caller.worker_id, lease_seconds=lease_seconds)
         _update(
             self.db,
@@ -626,7 +674,14 @@ class GenericWorkItemExecution:
         return self._ticket(caller, claim, _one(self.db, Run, run.id))
 
     def _ticket(
-        self, caller, claim, run, *, require_owner=True, _projection=None
+        self,
+        caller,
+        claim,
+        run,
+        *,
+        require_owner=True,
+        _projection=None,
+        _allow_expired_terminal=False,
     ) -> GenericTicket:
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
@@ -677,6 +732,7 @@ class GenericWorkItemExecution:
             terminal=terminal,
             outputs=json.loads(run.result).get("outputs") if terminal else None,
             _projection=_projection,
+            _allow_expired_terminal=_allow_expired_terminal,
         )
         stored_claim = ClaimValue.of(claim) if claim else None
         if (

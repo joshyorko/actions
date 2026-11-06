@@ -41,6 +41,22 @@ def disable_feedback():
     yield
 
 
+@pytest.mark.parametrize("producer", ["18_19_3", "18_19_7"])
+def test_prior_rcc_robot_package_keeps_its_identity(producer):
+    import base64
+
+    fixture = json.loads(
+        (
+            Path(__file__).parent / f"resources/rcc_compatibility/robot_{producer}.json"
+        ).read_text()
+    )
+    retained = decode_robot_admission(
+        fixture["manifest"].encode(), base64.b64decode(fixture["source_archive_base64"])
+    )
+    assert retained.robot.plan.rcc_version == fixture["producer_rcc_version"]
+    assert retained.package_revision_id.root == fixture["revision_id"]
+
+
 def request_for(kind="direct"):
     files = [
         {"path": "task.robot", "content": "*** Tasks ***\nOwned\n    No Operation\n"}
@@ -188,7 +204,7 @@ def test_rcc_retains_exact_host_measurements(admitted, tmp_path):
         robocorp_home=tmp_path,
         package_yaml_digest="sha256:" + hashlib.sha256(yaml).hexdigest(),
         build_identity=RccBuildIdentity("sha256:" + "a" * 64, "sha256:" + "b" * 64),
-        rcc_version="v18.19.3",
+        rcc_version="v18.19.8",
     )
     # Synthetic typed host measurements exercise identity propagation only.
     prep = RccRobotPreparation(Path(sys.executable), env)

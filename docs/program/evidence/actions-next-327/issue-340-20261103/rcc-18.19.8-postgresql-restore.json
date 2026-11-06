@@ -1,0 +1,192 @@
+{
+  "status": "PASS",
+  "nodeid": "tests/action_server_tests/test_invoice_worker.py::test_real_controller_crash_then_new_interpreter_finishes_durable_result[postgresql-postgresql]",
+  "runtime": "1.1.0a60",
+  "runtime_module": "/var/tmp/codex-actions-release-20261104-_kxnuurn/requalify/installed/actions340-real-vertical.XhIVmgXi/host-venv/lib/python3.12/site-packages/actions/server/_models.py",
+  "runtime_wheel_sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+  "image": "sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "resources": {
+    "memory_bytes": 805306368,
+    "cpu_cores": 1
+  },
+  "restored_database": "actions_restore_4d806283f381464f81a4a3a40b0a89b6",
+  "tables": {
+    "actions_invoice_test_f26ffeff5af347a38f417f18392df40f.invoices": {
+      "rows": 2,
+      "sha256": "74ec8306a44ac3f5712a9c1bc35d3eecf53ed7272b318375d1ecc144829dcbc6"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.action": {
+      "rows": 2,
+      "sha256": "5c743054c46295a88c7787541f1485f972b1d8a34333315ed42f86f0d2172d09"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.action_package": {
+      "rows": 2,
+      "sha256": "40ce460f99ea028f39602fcfe9d7578b1f43f0da549fb8f621093ea623d743e4"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.counter": {
+      "rows": 1,
+      "sha256": "c116d6ac30b64d84f7767a704507e3470013efe043c64609f9a7d3bdc4c8bcab"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.fenced_work_item": {
+      "rows": 2,
+      "sha256": "7669f66692f93d8dc29820bc3adc3de171615242b802ade440c35d4b72d0d2a8"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_access_grant": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_audit": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_deployment_head": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_deployment_revision": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_package_revision": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_provider_availability": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_provider_revision": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_request": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.foundry_source_revision": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.invoice_review": {
+      "rows": 1,
+      "sha256": "e4aada17e4922c2e9dae70a57a33cadc6d5eeeb5f16b121191d55085f5d6fcf1"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.knowledge_collection_revision": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.mcp_catalog_name": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.mcp_resource_routing": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.migration": {
+      "rows": 1,
+      "sha256": "484474fc9d83de34ee7a7b945d4734d5caa643af9e9d229390200ab51d3fc13a"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.o_auth2_user_data": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run": {
+      "rows": 2,
+      "sha256": "40dbcfc1ea9db7d4710b49a170bb575f111a5280e88ee4c06e2542f073b15ba6"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_access_grant": {
+      "rows": 1,
+      "sha256": "c621ca88aa42618d498a260a8416b7a4f04cd792859cb408e3d42808a01cc525"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_admission": {
+      "rows": 2,
+      "sha256": "a934c927dc08f0990057cccef8030ea54cda3c81ed66dab801e27fd8972d5399"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_attempt": {
+      "rows": 2,
+      "sha256": "de5385209f7348d4de02c1e4c42ebfada7b88b441f4c428b3aa84722df19fc0d"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_child_lineage": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_execution_intent": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_output": {
+      "rows": 2,
+      "sha256": "c604ce0af8145b5faa68e0fe01f2be165c8b1f273c9ee5ddd0aba0e39c51be0e"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_pin": {
+      "rows": 2,
+      "sha256": "6a8d5049bfe8024677618a6cbaae3f1790675a0f7f8f92ece797ea1d258c224d"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.run_task_receipt": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.schedule": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.schedule_execution": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.schedule_group": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.temp_user_session_data": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.trigger": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.trigger_invocation": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.user_session": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "review_test_79285d825b6841ebbd7cc6c3a62d9461.workspace": {
+      "rows": 1,
+      "sha256": "10112e3c3e4c9ce12159a909ac6f8248f185110f347398ba6d1a6e47289250cf"
+    }
+  },
+  "acl_and_owner_match": true,
+  "sql_dump_sha256": "d193b68aaf15a394bb8cb9249235afb007a1b1e38eea8ea642fd379145e2bbb1",
+  "filesystem_archive_sha256": "db97b2f168c2a3d5d262279ede4552002fd03a0342c344e1988d024b4808b03b",
+  "full_filesystem_compare": "PASS",
+  "same_run": "244f35b3-a0e3-4770-8042-e25e7d8d7e40",
+  "same_attempt": "44f8bd69-326d-4f09-b3db-4e300403b6a6",
+  "run_attempt_counts": [
+    2,
+    2
+  ],
+  "rcc_execution_receipts": 1,
+  "authorized_artifact_sha256": "0ae82a97b306e12c8d3a0877ecc123ac557ca71f11dbf1a9f7949f78ddcd57c5",
+  "denials": [
+    "foreign principal",
+    "foreign workspace",
+    "persisted revoked principal"
+  ],
+  "immutable_RCC_reference_archive": "consumer8-quiesced.tar.gz sha256:dc4bd9395f576a9920e9237cf819f78efc2f516e0591cfcfde29eed5be00a705",
+  "scope": "Quiesced real PostgreSQL invoice query/worker state; actual prior controller death; full SQL dump restored to a new owned DB with same schema identities; source/objects/execution journals restored at original path; fresh installed Runtime completion and scoped reads; original writers stopped",
+  "exclusions": [
+    "No running/unknown-launch recovery",
+    "No PostgreSQL cluster/role migration to another server",
+    "No arbitrary filesystem relocation",
+    "No exactly-once external effects"
+  ],
+  "source_commit": "5b02988998f4d89e3a1abe2383e7f1e9667c8c1d",
+  "cleanup": "PASS; exact owned container removed; private connection environment removed",
+  "verification": "1 actual PostgreSQL/PostgreSQL worker case plus post-call restore probe passed in16.87s; supervised exit0",
+  "no_secrets_in_public_evidence": "Only digests/row counts/ACL equality, no connection context or SQL dump"
+}

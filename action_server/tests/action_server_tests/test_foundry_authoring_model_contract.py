@@ -167,6 +167,7 @@ def test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure(
 
         inspected = await canvas.call(model, "canvas_inspect", {"appId": app_id})
         assert not inspected.is_error
+        assert "actions.canvas" not in (inspected.meta or {})
         revisions = inspected.structured_content["revisions"]
         assert [revision["spec"]["title"] for revision in revisions] == [
             "New Canvas",

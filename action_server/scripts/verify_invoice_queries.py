@@ -505,6 +505,8 @@ print(json.dumps(identities))
             ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
+                "tests/action_server_tests/test_sealed_scan.py::test_actual_csv_scan_order_types_and_null_omission",
+                "tests/action_server_tests/test_sealed_scan.py::test_actual_parquet_scan_matches_csv",
                 "tests/action_server_tests/test_invoice_run_outputs.py",
                 "tests/action_server_tests/test_invoice_canvas.py",
                 "tests/action_server_tests/test_invoice_canvas_mcp.py",

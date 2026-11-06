@@ -43,13 +43,14 @@ set -u
 printf '%s\\n' "$*" >> "$DOCKER_LOG"
 case "$1" in
   pull) exit 0 ;;
-  run) printf '%s\\n' "$STUB_CID" ;;
+  run) touch "$STUB_STATE"; printf '%s\\n' "$STUB_CID" ;;
   exec) [[ "$STUB_READY" == 1 ]] ;;
   port) printf '%s\\n' '127.0.0.1:55432' ;;
-  rm) [[ "$2" == '--force' && "$3" == "$STUB_CID" ]] ;;
+  rm) [[ "$2" == '--force' && "$3" == "$STUB_CID" ]] || exit 45; rm -f "$STUB_STATE" ;;
   ps)
     if [[ "$STUB_LISTING_FAIL" == 1 ]]; then exit 42; fi
     [[ "$*" == *"id=$STUB_CID"* ]] || exit 43
+    [[ ! -f "$STUB_STATE" ]] || printf '%s\\n' "$STUB_CID"
     exit 0
     ;;
   *) exit 44 ;;
@@ -65,6 +66,7 @@ esac
         "PATH": os.pathsep.join((str(binary_dir), os.defpath)),
         "DOCKER_LOG": str(docker_log),
         "STUB_CID": CID,
+        "STUB_STATE": str(tmp_path / "container-running"),
         "STUB_READY": "1" if ready else "0",
         "STUB_LISTING_FAIL": "1" if listing_fails else "0",
         "GITHUB_RUN_ID": "test-run",
@@ -85,7 +87,11 @@ def run_shell(script, environment):
 
 def test_owned_postgres_shell_helpers_are_valid_bash():
     workflow = load_generator().ActionServerTests()
-    for step in (workflow.start_owned_postgres(), workflow.stop_owned_postgres()):
+    for step in (
+        workflow.start_owned_postgres(),
+        workflow.stop_owned_postgres(),
+        workflow.exercise_postgres_start_failure(),
+    ):
         check = subprocess.run(
             ["bash", "-n"],
             input=shell_step(step),
@@ -94,6 +100,21 @@ def test_owned_postgres_shell_helpers_are_valid_bash():
             text=True,
         )
         assert check.returncode == 0, check.stderr
+
+
+def test_hosted_postgres_failure_drill_uses_generated_start_and_exact_id():
+    workflow = load_generator().ActionServerTests()
+    step = workflow.exercise_postgres_start_failure()
+    script = shell_step(step)
+    assert workflow.start_owned_postgres()["run"] in script
+    assert '[[ "$cid" =~ ^[0-9a-f]{64}$ ]]' in script
+    assert 'filter "id=$cid"' in script
+    document = yaml.safe_load(
+        (GENERATOR.parent / "actions_runtime_tests.yml").read_text()
+    )
+    steps = document["jobs"]["build"]["steps"]
+    assert step in steps
+    assert steps.index(step) < steps.index(workflow.start_owned_postgres())
 
 
 def test_runtime_and_coverage_workflows_require_same_owned_provider_lifecycle():

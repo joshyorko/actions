@@ -104,6 +104,39 @@ class WorkItemDeclaration(_FrozenValue):
 
 
 QueueName = Annotated[str, Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$")]
+ModelPublishedWorkItemOperation = Literal[
+    "queues.list",
+    "items.list",
+    "items.get",
+    "runs.get",
+    "runs.logs",
+    "artifacts.read",
+    "items.enqueue",
+    "items.cancel",
+]
+MAX_MODEL_PUBLISHED_WORK_ITEM_QUEUES = 100
+MAX_MODEL_PUBLISHED_WORK_ITEM_OPERATIONS = 8
+MAX_INTERNAL_ROBOT_DELEGATIONS = 16
+MAX_INTERNAL_ROBOT_BINDINGS = 16
+
+
+class ModelPublishedWorkItemQueue(_FrozenValue):
+    """One exact logical queue and its closed model-facing operation set.
+
+    The containing Deployment specification supplies Workspace and Deployment
+    scope. Queue identity alone never grants a managed Work Item permission.
+    """
+
+    queue_id: QueueName
+    operations: tuple[ModelPublishedWorkItemOperation, ...] = Field(
+        min_length=1, max_length=MAX_MODEL_PUBLISHED_WORK_ITEM_OPERATIONS
+    )
+
+    @model_validator(mode="after")
+    def operations_are_unique(self):
+        if len(set(self.operations)) != len(self.operations):
+            raise ValueError("model-published queue operations must be unique")
+        return self
 
 
 class CapabilityWorkItemPolicy(_FrozenValue):
@@ -148,6 +181,75 @@ class CapabilityWorkItemPolicy(_FrozenValue):
             raise ValueError("capability does not allow Work Item output creation")
         if declaration.mode == "producer" and self.output_queue is None:
             raise ValueError("producer requires an explicit output queue")
+
+
+InternalRobotBindingName = Annotated[
+    str, Field(pattern=r"^[A-Za-z][A-Za-z0-9._-]{0,63}$")
+]
+
+
+class InternalRobotBinding(_FrozenValue):
+    """An exact target selection for an internal Action-to-Robot binding.
+
+    The reference tuple is immutable selection data only. It does not establish
+    that the target is a Robot, that the caller may execute it, or that a host
+    supports internal child admission.
+    """
+
+    name: InternalRobotBindingName
+    target_deployment: DeploymentRevisionRef
+    target_capability: CapabilityRef
+    target_runtime_plan: RuntimePlanRef
+
+    @model_validator(mode="after")
+    def target_refs_are_coherent(self):
+        if (
+            self.target_deployment.workspace_id
+            != self.target_capability.package_revision.workspace_id
+        ):
+            raise ValueError("internal Robot target references must share a Workspace")
+        if (
+            self.target_capability.package_revision
+            != self.target_runtime_plan.package_revision
+        ):
+            raise ValueError(
+                "internal Robot capability and plan must share a Package Revision"
+            )
+        return self
+
+
+class InternalRobotDelegationPolicy(_FrozenValue):
+    """Immutable bounded declaration for one deployed parent capability.
+
+    The containing Deployment revision is implicit, avoiding a self-reference
+    in the specification whose canonical bytes determine that revision.
+    These fields are policy input for a future host check, not an execution
+    grant or a complete child lifecycle contract.
+    """
+
+    parent_capability: CapabilityRef
+    bindings: tuple[InternalRobotBinding, ...] = Field(
+        min_length=1, max_length=MAX_INTERNAL_ROBOT_BINDINGS
+    )
+    max_children: int = Field(ge=1, le=MAX_INTERNAL_ROBOT_BINDINGS)
+    parent_exit: Literal["cancel-children", "allow-authorized-detach"]
+
+    @model_validator(mode="after")
+    def bindings_are_unique(self):
+        names = [binding.name for binding in self.bindings]
+        if len(names) != len(set(names)):
+            raise ValueError("internal Robot binding names must be unique")
+        targets = [
+            (
+                binding.target_deployment,
+                binding.target_capability,
+                binding.target_runtime_plan,
+            )
+            for binding in self.bindings
+        ]
+        if len(targets) != len(set(targets)):
+            raise ValueError("internal Robot binding targets must be unique")
+        return self
 
 
 class BindingAssignment(_FrozenValue):
@@ -257,12 +359,35 @@ class DeploymentSpecification(_FrozenValue):
     canvas_application: CanvasApplicationRef | None = None
     canvas_bindings: tuple[CanvasCapabilityBinding, ...] = ()
     work_item_policies: tuple[CapabilityWorkItemPolicy, ...] = ()
+    # Empty means no capability is published to model callers. Canvas visibility
+    # and identifiers do not implicitly populate this selection.
+    model_published_capabilities: tuple[CapabilityRef, ...] = ()
+    # This queue catalog is independent of capability publication: reviewed
+    # queues need not belong to a model-published capability.
+    model_published_work_item_queues: tuple[ModelPublishedWorkItemQueue, ...] = Field(
+        default=(), max_length=MAX_MODEL_PUBLISHED_WORK_ITEM_QUEUES
+    )
+    # Internal child selection is scoped by the containing immutable Deployment
+    # revision; it intentionally does not contain that revision's own reference.
+    internal_robot_delegations: tuple[InternalRobotDelegationPolicy, ...] = Field(
+        default=(), max_length=MAX_INTERNAL_ROBOT_DELEGATIONS
+    )
 
     @model_serializer(mode="wrap")
     def preserve_legacy_serialization(self, handler):
         value = handler(self)
         if not self.work_item_policies:
             value.pop("work_item_policies", None)
+        if not self.model_published_capabilities:
+            # Preserve the canonical wire bytes and immutable revision hashes
+            # of selections created before explicit model publication existed.
+            value.pop("model_published_capabilities", None)
+        if not self.model_published_work_item_queues:
+            # Keep pre-selection Deployment revision bytes unchanged.
+            value.pop("model_published_work_item_queues", None)
+        if not self.internal_robot_delegations:
+            # Keep legacy canonical bytes and revision hashes unchanged.
+            value.pop("internal_robot_delegations", None)
         return value
 
     @field_validator("canvas_spec", mode="before")
@@ -304,6 +429,9 @@ class DeploymentSpecification(_FrozenValue):
                 or self.bindings
                 or self.canvas_bindings
                 or self.work_item_policies
+                or self.model_published_capabilities
+                or self.model_published_work_item_queues
+                or self.internal_robot_delegations
                 or any(ref is not None for ref in profiles)
             ):
                 raise ValueError(
@@ -329,6 +457,19 @@ class DeploymentSpecification(_FrozenValue):
         ):
             raise ValueError("Canvas application is outside the Deployment Workspace")
         capabilities = {policy.capability for policy in self.capability_plans}
+        published_capabilities = set(self.model_published_capabilities)
+        if len(published_capabilities) != len(self.model_published_capabilities):
+            raise ValueError("model-published capabilities must be unique")
+        for capability in self.model_published_capabilities:
+            require_workspace_scope(capability, workspace_id)
+            if capability not in capabilities:
+                raise ValueError("model-published capability is not deployed")
+        published_queue_ids = [
+            publication.queue_id
+            for publication in self.model_published_work_item_queues
+        ]
+        if len(published_queue_ids) != len(set(published_queue_ids)):
+            raise ValueError("model-published Work Item queue IDs must be unique")
         for canvas_binding in self.canvas_bindings:
             if canvas_binding.capability not in capabilities:
                 raise ValueError(
@@ -352,14 +493,30 @@ class DeploymentSpecification(_FrozenValue):
                 raise ValueError("Work Item policy capability is duplicated")
             queue_capabilities.add(queue_policy.capability)
 
+        delegation_capabilities: set[CapabilityRef] = set()
+        for delegation in self.internal_robot_delegations:
+            if delegation.parent_capability not in capabilities:
+                raise ValueError(
+                    "internal Robot delegation parent capability is not deployed"
+                )
+            if delegation.parent_capability in delegation_capabilities:
+                raise ValueError("internal Robot delegation parent is duplicated")
+            delegation_capabilities.add(delegation.parent_capability)
+            require_workspace_scope(delegation.parent_capability, workspace_id)
+            for binding in delegation.bindings:
+                if binding.target_deployment.workspace_id != workspace_id:
+                    raise ValueError(
+                        "internal Robot target is outside the Deployment Workspace"
+                    )
+
         binding_ids: set[BindingRequirementRef] = set()
-        for binding in self.bindings:
-            require_workspace_scope(binding.requirement, workspace_id)
-            if binding.requirement.package_revision not in packages:
+        for assignment in self.bindings:
+            require_workspace_scope(assignment.requirement, workspace_id)
+            if assignment.requirement.package_revision not in packages:
                 raise ValueError("binding Package Revision is not deployed")
-            if binding.requirement in binding_ids:
+            if assignment.requirement in binding_ids:
                 raise ValueError("binding requirement is assigned more than once")
-            binding_ids.add(binding.requirement)
+            binding_ids.add(assignment.requirement)
         return self
 
     @property

@@ -92,6 +92,7 @@ def validate_robot_record(
     terminal,
     outputs=None,
     _allow_expired_terminal=False,
+    _allow_stopped_cancellation=False,
 ):
     """Pure SQL retained integrity check; safe inside the caller's transaction.
 
@@ -143,6 +144,11 @@ def validate_robot_record(
             retained = outer
         if not isinstance(record, dict) or not _same(retained, record):
             raise ValueError("Robot record differs from retained carrier")
+        stopped = _allow_stopped_cancellation and run.status == RunStatus.CANCELLED
+        if _allow_stopped_cancellation and (
+            terminal or claim is not None or not stopped
+        ):
+            raise ValueError("standalone stopped cancellation required")
         expected = (
             {"version", "mode", "claim", "fence", "launch"}
             if not terminal
@@ -162,6 +168,8 @@ def validate_robot_record(
                 "actionResult",
             }
         )
+        if stopped:
+            expected = expected | {"cancellation"}
         fence_key = "publicationFence" if terminal else "fence"
         if (
             set(record) != expected
@@ -208,6 +216,25 @@ def validate_robot_record(
                 or (terminal and pin.cancel_requested != 0)
             ):
                 raise ValueError("Robot Run/Attempt lifecycle differs")
+            if stopped:
+                confirmation = record["cancellation"]
+                if (
+                    pin.cancel_requested != 1
+                    or record["launch"] is None
+                    or not isinstance(confirmation, dict)
+                    or set(confirmation)
+                    != {
+                        "version",
+                        "confirmed_ms",
+                        "execution_stopped",
+                        "descendants_reaped",
+                    }
+                    or confirmation["version"] != "actions.robot-cancellation/v1"
+                    or confirmation["confirmed_ms"] != pin.state_updated_ms
+                    or confirmation["execution_stopped"] is not True
+                    or confirmation["descendants_reaped"] is not True
+                ):
+                    raise ValueError("stopped Robot confirmation differs")
             admission = _one(db, RunAdmission, pin.run_admission_id)
             admission_id, admitted = _admission(snapshot)
             if (

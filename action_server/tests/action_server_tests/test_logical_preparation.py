@@ -100,11 +100,16 @@ def test_unbound_helper_archived_bytes():
     helper = GeneratedRccExecution._execution_helper(
         {"module": "generated_actions", "actionName": "echo"}
     )
-    # Preserve the c7d94ca boundary except the reviewed 1eca22ef JSON-mode
-    # model serialization fix. Any other byte change still requires review.
+    # Preserve the c7d94ca boundary except the reviewed JSON-mode serialization
+    # and stable RCC/private execution HOME fixes. Other bytes require review.
     conversion = "if hasattr(value,'model_dump'): value=value.model_dump(mode='json')\n"
     assert helper.count(conversion) == 1
     helper = helper.replace(conversion, "")
+    private_home = (
+        "os.environ['HOME']=os.path.join(os.path.dirname(input_file),'home')\n"
+    )
+    assert helper.count(private_home) == 1
+    helper = helper.replace(private_home, "")
     assert (
         hashlib.sha256(helper.encode()).hexdigest()
         == "c9a99cd5b6dd7320fda2d0a38e4fbeb9a94c0095b119b9da9c66c00ccdd24086"
