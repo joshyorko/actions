@@ -23,6 +23,43 @@ def generator():
     return module
 
 
+@pytest.mark.parametrize("source", ["generator", "native"])
+def test_runner_guard_runs_before_checkout_with_package_defaults(tmp_path, source):
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "frontend-build-unauthenticated.yml").read_text()
+    )
+    step = (
+        generator().macos_arm64_guard()
+        if source == "generator"
+        else workflow["jobs"]["build-external"]["steps"][0]
+    )
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    runner_temp = tmp_path / "runner-temp"
+    runner_temp.mkdir()
+    for name, value in [("uname", "arm64"), ("sw_vers", "26.1")]:
+        path = runner_temp / name
+        path.write_text(f"#!/bin/sh\nprintf '%s\\n' '{value}'\n")
+        path.chmod(0o755)
+    directory = step.get(
+        "working-directory", workflow["defaults"]["run"]["working-directory"]
+    ).replace("${{ runner.temp }}", str(runner_temp))
+    result = subprocess.run(
+        ["bash", "-c", step["run"]],
+        cwd=workspace / directory,
+        env=dict(
+            os.environ,
+            PATH=str(runner_temp) + os.pathsep + os.environ["PATH"],
+            RUNNER_ARCH="ARM64",
+        ),
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "26.1" in result.stdout
+    assert not (workspace / "action_server").exists()
+
+
 @pytest.mark.parametrize(
     "architecture,version,accepted",
     [("arm64", "26.1", True), ("x86_64", "26.1", False), ("arm64", "15.7", False)],

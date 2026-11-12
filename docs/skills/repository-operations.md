@@ -7681,6 +7681,13 @@ digests. Recheck that only the Mac job is unfinished, with no runner or steps,
 before cancellation. A fresh queue request is not proof that capacity is available;
 report the replacement run/job identity and actual assignment separately.
 
+Runner host guards that execute before checkout must explicitly use an existing
+directory such as `${{ runner.temp }}`. A workflow-level package working directory
+does not exist until checkout and can prevent the shell from starting at all;
+that failure proves neither the host architecture nor a build defect. Exercise
+the actual guard with an absent package directory, and keep its architecture and
+OS checks intact when correcting the generator and handwritten workflows.
+
 Candidate-package version tests must compare the imported module and installed
 distribution against declared package metadata, then derive the numeric release
 tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimate

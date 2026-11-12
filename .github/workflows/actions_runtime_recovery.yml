@@ -103,6 +103,7 @@ jobs:
     - name: Verify macOS26 ARM runner
       if: runner.os == 'macOS'
       shell: bash
+      working-directory: ${{ runner.temp }}
       run: 'set -Eeuo pipefail
 
         test "$RUNNER_ARCH" = ARM64
@@ -206,6 +207,7 @@ jobs:
     - name: Verify macOS26 ARM runner
       if: runner.os == 'macOS'
       shell: bash
+      working-directory: ${{ runner.temp }}
       run: 'set -Eeuo pipefail
 
         test "$RUNNER_ARCH" = ARM64
@@ -528,6 +530,7 @@ jobs:
     - name: Verify macOS26 ARM runner
       if: runner.os == 'macOS'
       shell: bash
+      working-directory: ${{ runner.temp }}
       run: 'set -Eeuo pipefail
 
         test "$RUNNER_ARCH" = ARM64
@@ -754,6 +757,7 @@ jobs:
     - name: Verify macOS26 ARM runner
       if: runner.os == 'macOS'
       shell: bash
+      working-directory: ${{ runner.temp }}
       run: 'set -Eeuo pipefail
 
         test "$RUNNER_ARCH" = ARM64

@@ -54,6 +54,7 @@ def macos_arm64_guard():
         "name": "Verify macOS26 ARM runner",
         "if": "runner.os == 'macOS'",
         "shell": "bash",
+        "working-directory": "${{ runner.temp }}",
         "run": """set -Eeuo pipefail
 test "$RUNNER_ARCH" = ARM64
 test "$(uname -m)" = arm64
