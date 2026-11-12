@@ -1159,7 +1159,7 @@ def test_binary_release_matrix_has_no_retired_aws_delivery_permissions():
     assert "matrix.name" not in binary or "name:" in binary
 
 
-@pytest.mark.parametrize("platform", ["macos-15", "windows-2022"])
+@pytest.mark.parametrize("platform", ["macos-26", "windows-2022"])
 @pytest.mark.parametrize("configured", ["absent", "complete", "partial"])
 def test_optional_native_signing_executes_policy(tmp_path, platform, configured):
     generator = load_workflow_generator()
@@ -1175,7 +1175,7 @@ def test_optional_native_signing_executes_policy(tmp_path, platform, configured)
             "APPLETEAMID",
             "APPLEIDPASS",
         ]
-        if platform == "macos-15"
+        if platform == "macos-26"
         else [
             "VAULT_URL",
             "CLIENT_ID",

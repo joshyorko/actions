@@ -1695,6 +1695,7 @@ version rules, and cross-language round trips remain unproved. Do not add a new
 distribution or Canvas dependency to ordinary Core actions on this evidence
 alone.
 
+
 For a runnable protocol showcase proof, start the actual `ActionServerProcess`
 with a temporary action catalog pinned to the candidate's published
 `actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
@@ -7608,3 +7609,28 @@ failure to acquire a hosted runner and capacity constraints. Those checks did
 not execute product code; they remain unqualified until a successful rerun.
 Do not diagnose a source failure or loosen a platform gate from cancellation
 alone.
+
+### macOS ARM build-host migrations
+
+Use explicit `macos-26` for the current ARM runner, not its Intel/large variants.
+The runner guard checks both actual `uname -m` and macOS major version before
+toolchain setup; native manifests retain the requested runner label and actual
+host version alongside measured architecture and binary hashes. A runner label
+alone is not an architecture or deployment-compatibility receipt.
+
+Keep the CPython 3.12/3.13 ARM wheel rows, `macosx_12_0_arm64` verifier tags and
+`MACOSX_DEPLOYMENT_TARGET=12.0` when moving the build host. Keep public native
+`macos-arm64` asset names and pinned RCC hashes. Building or testing on macOS26
+does not establish execution on older macOS; review native Mach-O minimum-OS
+load commands and retain older-OS runtime coverage as a separate gate before
+claiming that compatibility. Signing case labels and producer artifact downloads
+must move with the runner. Fixed historical recovery inputs keep their original
+producer job labels rather than being rewritten as new-run evidence.
+
+Prepare a runner migration on a separate QA branch while an existing release
+source/workflow tree is frozen. The native workflow's manual `macos-arm64`
+scope runs only that host; its default still covers all three platforms. A
+manual QA run cannot replace release qualification, whose event, complete-tree,
+job-count and artifact-source checks still apply. Do not rerun successful frozen
+matrices merely to start independent Mac QA or infer passing results from an
+unallocated runner.

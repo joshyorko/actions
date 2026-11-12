@@ -170,6 +170,10 @@ def write_manifest(
         "workflow_run_attempt": workflow_run_attempt,
         "platform": platform.system(),
         "architecture": platform.machine(),
+        "runner_label": runner_os,
+        "host_os_version": platform.mac_ver()[0]
+        if platform.system() == "Darwin"
+        else platform.release(),
         "python_version": platform.python_version(),
         "go_version": go_version,
         "build_command": build_command,

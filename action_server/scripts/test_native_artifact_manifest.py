@@ -34,7 +34,12 @@ class NativeArtifactManifestTests(unittest.TestCase):
             self.assertEqual(path.read_bytes(), committed, relative)
 
     def test_records_hashes_for_unix_and_windows_suffixes(self):
-        for system, suffix in (("Linux", ""), ("Windows", ".exe")):
+        for system, suffix in (("Linux", ""), ("Windows", ".exe"), ("Darwin", "")):
+            runner_os = {
+                "Windows": "windows-2022",
+                "Linux": "ubuntu-22.04",
+                "Darwin": "macos-26",
+            }[system]
             with self.subTest(
                 system=system
             ), tempfile.TemporaryDirectory() as directory:
@@ -69,15 +74,23 @@ class NativeArtifactManifestTests(unittest.TestCase):
                     mock.patch.object(
                         manifest_writer.platform, "system", return_value=system
                     ),
+                    mock.patch.object(
+                        manifest_writer.platform,
+                        "mac_ver",
+                        return_value=("26.1", (), "arm64"),
+                    ),
+                    mock.patch.object(
+                        manifest_writer.platform,
+                        "machine",
+                        return_value="arm64" if system == "Darwin" else "AMD64",
+                    ),
                 ):
                     result = manifest_writer.write_manifest(
                         package,
                         source_sha="a" * 40,
                         workflow_run_id="123456",
                         workflow_run_attempt="2",
-                        runner_os="windows-2022"
-                        if system == "Windows"
-                        else "ubuntu-22.04",
+                        runner_os=runner_os,
                         build_command="build-executable --go-wrapper",
                         output=output,
                     )
@@ -99,6 +112,10 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 )
                 self.assertEqual(result["source_sha"], "a" * 40)
                 self.assertEqual(result["platform"], system)
+                if system == "Darwin":
+                    self.assertEqual(result["runner_label"], "macos-26")
+                    self.assertEqual(result["host_os_version"], "26.1")
+                    self.assertEqual(result["architecture"], "arm64")
                 self.assertEqual(
                     tree_inventory,
                     manifest_writer.packaged_tree_inventory(
@@ -147,7 +164,7 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     result["artifact_downloads"]["go-wrapper"]["artifact_name"],
-                    f"action-server-unauthenticated-{'windows-2022' if system == 'Windows' else 'ubuntu-22.04'}",
+                    f"action-server-unauthenticated-{runner_os}",
                 )
                 self.assertEqual(
                     result["artifact_downloads"]["go-wrapper"]["archive_path"],

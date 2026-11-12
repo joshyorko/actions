@@ -85,7 +85,7 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
     assert [row["os"] for row in wheel_matrix["include"]] == [
         "ubuntu-22.04",
         "windows-2022",
-        "macos-15",
+        "macos-26",
     ]
     assert "cp312-*macos*arm64" in PYPI_WORKFLOW
     assert "cp313-*macos*arm64" in PYPI_WORKFLOW

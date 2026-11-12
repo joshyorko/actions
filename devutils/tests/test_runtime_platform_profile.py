@@ -91,7 +91,7 @@ def qualification():
             name="build (macos-py3.12-devmode)",
             status="completed",
             conclusion="cancelled",
-            labels=["macos-15"],
+            labels=["macos-26"],
             runner_id=0,
             steps=[],
         )
@@ -149,7 +149,7 @@ def test_profile_does_not_admit_real_failures_or_unknown_jobs(mutation):
     elif mutation == "linux-failure":
         jobs[0]["conclusion"] = "failure"
     elif mutation == "unexpected-mac":
-        jobs[-1]["name"] = "unknown (macos-15)"
+        jobs[-1]["name"] = "unknown (macos-26)"
     elif mutation == "labels":
         jobs[-1]["labels"] = ["ubuntu-22.04"]
     elif mutation == "missing":
@@ -206,7 +206,7 @@ def test_only_unstarted_aggregate_may_be_skipped(mutation):
     run["path"] = ".github/workflows/actions_runtime_pypi_release.yml"
     jobs[0]["name"] = "build-wheels (ubuntu-22.04)"
     jobs[1]["name"] = "build-wheels (windows-2022)"
-    jobs[-1]["name"] = "build-wheels (macos-15)"
+    jobs[-1]["name"] = "build-wheels (macos-26)"
     jobs.append(dict(name="build-sdist (ubuntu-py3.12)", conclusion="success"))
     jobs.append(
         dict(

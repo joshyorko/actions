@@ -7,6 +7,12 @@ on:
       - 'work-items/**'
       - '.github/workflows/frontend-build-unauthenticated.yml'
   workflow_dispatch:
+    inputs:
+      runner_scope:
+        description: Nonpublishing qualification scope (default retains every platform)
+        type: choice
+        default: all
+        options: [all, macos-arm64]
   push:
     branches:
       - community
@@ -26,19 +32,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-22.04
-          - windows-2022
-          - macos-15
-        include:
-          - os: ubuntu-22.04
-            python: '3.12'
-          - os: windows-2022
-            python: '3.12'
-          - os: macos-15
-            python: '3.12'
+        include: ${{ inputs.runner_scope == 'macos-arm64' && fromJSON('[{"os":"macos-26","python":"3.12"}]') || fromJSON('[{"os":"ubuntu-22.04","python":"3.12"},{"os":"windows-2022","python":"3.12"},{"os":"macos-26","python":"3.12"}]') }}
     
     steps:
+      - name: Verify macOS26 ARM runner
+        if: runner.os == 'macOS'
+        shell: bash
+        run: 'set -Eeuo pipefail
+
+          test "$RUNNER_ARCH" = ARM64
+
+          test "$(uname -m)" = arm64
+
+          version=$(sw_vers -productVersion)
+
+          [[ "$version" == 26.* ]]
+
+          printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+          '
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
         env:
@@ -130,6 +142,17 @@ jobs:
           --runner-os "${{ matrix.os }}"
           --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
           --output output/native-artifact-manifest.json
+
+      - name: Record macOS native deployment load commands
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for binary in dist/action-server/action-server dist/final/action-server; do
+            lipo -verify_arch arm64 "$binary"
+            printf '\n%s\n' "$binary"
+            otool -arch arm64 -l "$binary"
+          done > output/native-macos-load-commands.txt
 
       - name: Create complete native provenance archive
         run: >-
@@ -406,7 +429,7 @@ jobs:
           retention-days: 7
 
       - name: Verify packaged Work Items browser acceptance (frozen)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
@@ -421,7 +444,7 @@ jobs:
           --basetemp "${{ runner.temp }}/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
 
       - name: Verify packaged Work Items browser acceptance (Go wrapper)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
@@ -550,6 +573,7 @@ jobs:
             action_server/output/dakota-workitems-ui-*-*.json
             action_server/output/native-artifact-manifest.json
             action_server/output/native-artifact-tree-inventory.json
+            action_server/output/native-macos-load-commands.txt
           if-no-files-found: ignore
           retention-days: 7
 

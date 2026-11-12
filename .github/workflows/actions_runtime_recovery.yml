@@ -100,6 +100,22 @@ jobs:
         \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
         \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
         \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -187,6 +203,22 @@ jobs:
         \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
         \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
         \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -436,7 +468,7 @@ jobs:
         - os: ubuntu-22.04
           name: linux
           python: '3.12'
-        - os: macos-15
+        - os: macos-26
           name: macos
           python: '3.12'
         - os: windows-2022
@@ -493,6 +525,22 @@ jobs:
         \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
         \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
         \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -580,7 +628,7 @@ jobs:
           }}
         SIGNING_EVENT: ${{ github.event_name }}
         SIGNING_OS: ${{ matrix.os }}
-      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-15)\
+      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-26)\
         \ keys=\"MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME\
         \ APPLEID APPLETEAMID APPLEIDPASS\" ;;\n  windows-2022) keys=\"VAULT_URL CLIENT_ID\
         \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04) keys=\"\"\
@@ -703,6 +751,22 @@ jobs:
         \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
         \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
         \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
