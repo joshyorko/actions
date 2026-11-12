@@ -1635,12 +1635,17 @@ make a headless Deployment appear to be an authored Canvas application.
 
 `action_server/scripts/serve_managed_acceptance_fixture.py` starts an explicitly
 opted-in Linux loopback host over the real SQL managed router, MCP facade and
-direct Robot runner. It creates a fresh private state directory and a local
+an explicitly selected direct or genuinely prepared RCC Robot runner. It creates a fresh private state directory and a local
 0600 test bearer; it does not accept an existing unrelated directory or inherited
 execution/Robot/Task profiles. It never transfers a credential, changes networking,
-starts RCC, or adopts a production database. Use the same exact source/dependency
+implicitly prepares RCC, or adopts a production database. Use the same exact source/dependency
 checkout when resuming owned state. Reference-only synthetic profile identities
 are not registered RCC worker qualification or multi-principal isolation proof.
+
+Use a disk-backed canonical state path with no symlink ancestors; `/tmp` may be
+tmpfs. A client that pins `runtime_kind=rcc` requires genuine prepared RCC
+evidence; direct source-host receipts do not qualify that selector. Never relabel
+a direct plan as RCC or relax a client's closed runtime-kind gate for this fixture.
 
 After the pinned RCC Doctor/Bootstrap setup in this Actions checkout, run from
 the repository root using its prepared interpreter:
@@ -1678,3 +1683,23 @@ For a dropped invocation response, retain the original request and uncertainty
 across client reload without automatically invoking again. There is no general
 original-request/nonexecution lookup; neither a 404 nor an absent projection is
 permission to execute again.
+
+For RCC-only managed clients, first use the existing bounded
+`developer/tests/prepare_internal_child_real_vertical_rcc.py` helper with the
+exact candidate Core wheel and Action/Robot manifests. Its parent interpreter
+must expose `os.pidfd_open` and `signal.pidfd_send_signal`; a repository RCC
+Python can lack them. The installed-host setup in
+`developer/tests/run_internal_child_vertical_ci.sh` supplies the existing
+locked-dependency/wheel procedure for a standard Python host. Do not bypass
+supervision, the pinned RCC hash, manifest checks or the retained free-space floor.
+The preparer creates and verifies real local RCC artifacts; it never changes an
+existing RCC home. Keep one heavy preparation job at a time.
+
+Start a fresh fixture with `--runtime-kind rcc`, `--prepared-rcc-receipt` pointing
+to its actual `robot/prepared-rcc.json`, and `--rcc` naming the qualified Linux
+18.19.8 binary. The helper reads the exact adjacent `package.yaml`, verifies its
+prepared digest and binary hash/version, retains the artifact identity, and
+passes a real RccRobotPreparation to both package admission and execution.
+Ready metadata and immutable snapshots retain the genuine selected runtime kind.
+Missing preparation, mismatched manifests/binaries and attempted runtime relabeling
+are rejected. No client credential is copied between machines.

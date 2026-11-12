@@ -1,5 +1,5 @@
-"""Owner-scoped synthetic HTTP host over real Runtime SQL and direct Robot execution.
-Not an installed Runtime CLI/RCC qualification. No production state is adopted.
+"""Owner-scoped synthetic HTTP host over real Runtime SQL and explicit Robot execution.
+Not an installed Runtime CLI qualification. No production state is adopted.
 """
 import argparse
 import fcntl
@@ -48,6 +48,7 @@ from actions.server.deployments.ids import (
 )
 from actions.server.deployments.package_revision_compiler import (
     TrustedDeveloperExecutionAdmission,
+    load_prepared_rcc_environment,
 )
 from actions.server.foundry.bootstrap import (
     _install_model_managed_work_items,
@@ -58,7 +59,10 @@ from actions.server.foundry.generic_view import GenericCanvasView
 from actions.server.foundry.mcp import CanvasMcp
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
-from actions.server.foundry.robot_execution import DirectRobotPreparation
+from actions.server.foundry.robot_execution import (
+    DirectRobotPreparation,
+    RccRobotPreparation,
+)
 from actions.server.foundry.robot_package_builder import RobotPackageRequest
 from actions.server.foundry.robot_runtime_runner import PinnedRobotRunner
 from actions.server.foundry.sql_authorization import (
@@ -83,6 +87,8 @@ from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputS
 from actions.server.run_outputs.types import CanvasApplicationRef
 
 ROOT = Path(__file__).resolve().parents[2]
+
+RCC_LINUX_SHA256 = "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
 
 HTML = '<html><meta name="actions-artifact-content-type" content="text/html;profile=mcp-app"></html>'
 
@@ -144,6 +150,9 @@ def main():
     parser.add_argument("--state", required=True, type=Path)
     parser.add_argument("--port", type=int, default=0)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--runtime-kind", choices=("direct", "rcc"), default="direct")
+    parser.add_argument("--prepared-rcc-receipt", type=Path)
+    parser.add_argument("--rcc", type=Path)
     parser.add_argument("--allow-synthetic-owned-fixture", action="store_true")
     args = parser.parse_args()
     if sys.platform != "linux" or not args.allow_synthetic_owned_fixture:
@@ -159,6 +168,46 @@ def main():
         )
     ):
         parser.error("external execution profiles must be absent for this fixture")
+    manifest = None
+    preparation_identity = {"runtime_kind": args.runtime_kind}
+    if args.runtime_kind == "direct":
+        if args.prepared_rcc_receipt is not None or args.rcc is not None:
+            parser.error("direct mode cannot accept RCC preparation arguments")
+        preparation = DirectRobotPreparation(Path(sys.executable))
+    else:
+        if args.prepared_rcc_receipt is None or args.rcc is None:
+            parser.error(
+                "RCC mode requires a genuine prepared receipt and pinned binary"
+            )
+        if any(
+            not path.is_absolute() or path.resolve() != path
+            for path in (args.prepared_rcc_receipt, args.rcc)
+        ):
+            parser.error("canonical absolute RCC preparation paths required")
+        private_regular(args.prepared_rcc_receipt)
+        if hashlib.sha256(args.rcc.read_bytes()).hexdigest() != RCC_LINUX_SHA256:
+            parser.error("RCC binary differs from the qualified Linux18.19.8 hash")
+        from actions.server._rcc_runtime_adapter import verify_rcc_version
+
+        verify_rcc_version(args.rcc)
+        environment = load_prepared_rcc_environment(args.prepared_rcc_receipt)
+        package_yaml = args.prepared_rcc_receipt.parent / "package.yaml"
+        private_regular(package_yaml)
+        manifest = package_yaml.read_bytes()
+        if (
+            "sha256:" + hashlib.sha256(manifest).hexdigest()
+            != environment.package_yaml_digest
+        ):
+            parser.error("RCC manifest differs from its prepared receipt")
+        preparation = RccRobotPreparation(args.rcc, environment)
+        preparation_identity.update(
+            rcc_sha256=RCC_LINUX_SHA256,
+            prepared_receipt_sha256=hashlib.sha256(
+                args.prepared_rcc_receipt.read_bytes()
+            ).hexdigest(),
+            package_yaml_digest=environment.package_yaml_digest,
+            artifact_digest=environment.build_identity.artifact_digest,
+        )
     os.umask(0o077)
     state = args.state
     if state.is_symlink() or state.resolve() != state:
@@ -173,6 +222,14 @@ def main():
             parser.error("private owned fixture directory required")
         for name in ("fixture.json", "server.db", "bearer"):
             private_regular(state / name)
+        retained = json.loads((state / "fixture.json").read_text())
+        if retained["snapshot"]["runtime_kind"] != args.runtime_kind:
+            parser.error("fixture runtime cannot be relabeled; start fresh owned state")
+        if (
+            args.runtime_kind == "rcc"
+            and retained.get("robot_preparation") != preparation_identity
+        ):
+            parser.error("retained fixture RCC preparation differs")
         if (
             json.loads((state / "fixture.json").read_text()).get("schema_version")
             != "actions.owned-vscode-fixture/v2"
@@ -238,7 +295,7 @@ def main():
                             "required": ["value"],
                             "additionalProperties": False,
                         },
-                        "runtimeKind": "direct",
+                        "runtimeKind": args.runtime_kind,
                         "workItems": {"mode": "consumer"},
                         "files": [
                             {
@@ -249,13 +306,21 @@ def main():
                     }
                 )
             )
+            if manifest is not None:
+                request_data = request.model_dump(mode="json", by_alias=True)
+                request_data["files"].append(
+                    {"path": "package.yaml", "content": manifest.decode("utf-8")}
+                )
+                request = RobotPackageRequest.model_validate_json(
+                    json.dumps(request_data)
+                )
             evidence = registry.prepare_trusted_robot(
                 request,
                 logical_package_key="owned-vscode-acceptance",
                 trusted_actor=actor,
                 workspace_id=workspace,
                 application_id=refs.deployment_id,
-                preparation=DirectRobotPreparation(Path(sys.executable)),
+                preparation=preparation,
             )
             package = registry.admit_robot(actor, workspace, evidence)
             cap = registry.capability_refs(package)[0]
@@ -392,7 +457,8 @@ def main():
                     deployment=revision.ref,
                     queue_id="vscode-input",
                 ).model_dump(mode="json"),
-                "scope": "synthetic single-principal real SQL/direct Robot; source Runtime host, not installed CLI or RCC",
+                "scope": f"synthetic single-principal real SQL/{args.runtime_kind} Robot; source Runtime host, not installed CLI",
+                "robot_preparation": preparation_identity,
                 "versions": {
                     p: importlib.metadata.version(p)
                     for p in ("actions-runtime", "actions-core", "actions-work-items")
@@ -437,9 +503,7 @@ def main():
             outputs,
             SqlQueueAuthorization(db),
             worker_id=worker,
-            runner=PinnedRobotRunner(
-                DirectRobotPreparation(Path(sys.executable)), state / "execution"
-            ),
+            runner=PinnedRobotRunner(preparation, state / "execution"),
         )
         canvas = CanvasMcp(
             GenericCanvasView(execution), native.canvas.authenticate, HTML
@@ -489,7 +553,7 @@ def main():
             config["credential_file"] = str(keyfile)
             config[
                 "profile_scope"
-            ] = "synthetic reference-only profiles, one server-held direct Robot worker; no registered RCC profile claim"
+            ] = "synthetic reference-only profiles, one server-held Robot worker; exact execution preparation recorded separately"
             (state / "ready.json").write_text(json.dumps(config, indent=2) + "\n")
             print(
                 "Owned loopback fixture metadata: " + str(state / "ready.json"),

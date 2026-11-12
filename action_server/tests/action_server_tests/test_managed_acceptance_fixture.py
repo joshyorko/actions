@@ -170,3 +170,33 @@ def test_live_library_discovers_real_binding_without_admitting_work(tmp_path):
             except subprocess.TimeoutExpired:
                 process.kill()
                 process.wait(timeout=5)
+
+
+def test_rcc_mode_refuses_missing_preparation_before_state_creation(tmp_path):
+    state = tmp_path / "state"
+    result = call(
+        tmp_path,
+        "--state",
+        str(state),
+        "--allow-synthetic-owned-fixture",
+        "--runtime-kind",
+        "rcc",
+    )
+    assert result.returncode != 0
+    assert "genuine prepared receipt and pinned binary" in result.stderr
+    assert not state.exists()
+
+
+def test_direct_mode_refuses_rcc_arguments_without_relabeling(tmp_path):
+    state = tmp_path / "state"
+    result = call(
+        tmp_path,
+        "--state",
+        str(state),
+        "--allow-synthetic-owned-fixture",
+        "--prepared-rcc-receipt",
+        str(tmp_path / "unowned.json"),
+    )
+    assert result.returncode != 0
+    assert "direct mode cannot accept RCC preparation" in result.stderr
+    assert not state.exists()
