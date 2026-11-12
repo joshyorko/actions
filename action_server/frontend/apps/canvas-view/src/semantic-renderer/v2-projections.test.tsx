@@ -104,6 +104,81 @@ it("renders all data nodes from a current projection without dispatch or artifac
     }
 });
 
+it("renders a v2 table from the persisted projection without a form dispatch", () => {
+    const adapters = adaptersFor(() => successful());
+    const spec = parseCanvasSpec({
+        ...fixture,
+        root: {
+            type: "table",
+            id: "invoices",
+            bindingId: "data",
+            rowsKey: "rows",
+            columns: [
+                { key: "label", label: "Name" },
+                { key: "value", label: "Amount" },
+            ],
+        },
+    });
+    render(view(adapters, spec));
+    expect(screen.getByRole("cell", { name: "Current row" })).toBeTruthy();
+    expect(screen.getByRole("cell", { name: "12.5" })).toBeTruthy();
+    expect(adapters.dispatch).not.toHaveBeenCalled();
+    expect(adapters.openArtifact).not.toHaveBeenCalled();
+});
+
+it.each(["loading", "error", "not-run"] as const)(
+    "does not render a v2 table from a %s projection",
+    (state) => {
+        const adapters = adaptersFor(() =>
+            state === "not-run"
+                ? { state, bindingId: "data" }
+                : state === "loading"
+                  ? { state, bindingId: "data", requestId: "pending" }
+                  : {
+                        state,
+                        bindingId: "data",
+                        requestId: "failed",
+                        message: "Unavailable",
+                    },
+        );
+        const spec = parseCanvasSpec({
+            ...fixture,
+            root: {
+                type: "table",
+                id: "invoices",
+                bindingId: "data",
+                rowsKey: "rows",
+                columns: [{ key: "label", label: "Name" }],
+            },
+        });
+        render(view(adapters, spec));
+        expect(screen.queryByText("Current row")).toBeNull();
+    },
+);
+
+it.each([
+    { preview: true, viewer: "app" as const },
+    { preview: false, viewer: "model" as const },
+])(
+    "does not read private table rows in $viewer preview=$preview",
+    ({ preview, viewer }) => {
+        const adapters = adaptersFor(() => successful());
+        const spec = parseCanvasSpec({
+            ...fixture,
+            root: {
+                type: "table",
+                id: "invoices",
+                bindingId: "data",
+                rowsKey: "rows",
+                columns: [{ key: "label", label: "Name" }],
+            },
+        });
+        render(view(adapters, spec, preview, viewer));
+        expect(screen.queryByText("Current row")).toBeNull();
+        expect(adapters.getProjection).not.toHaveBeenCalled();
+    },
+);
+
 it.each([
     [
         { state: "not-run", bindingId: "data" } as const,

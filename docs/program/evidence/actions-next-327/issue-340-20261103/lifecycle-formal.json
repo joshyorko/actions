@@ -1,0 +1,152 @@
+{
+  "schema": "actions.release-lifecycle-proof/v1",
+  "source_commit": "55b5c0ebe0ba21c7c3ba0e3db98a6d9b9ded2017",
+  "source_files": {
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "0383b8a661261581a8cacaa5833222b1e2c5c65f6a832afce0b12e5e83da73fe",
+    "action_server/tests/action_server_tests/test_robot_claimed_work_items_327.py": "2277c83cf068ade13d0571c37ff187ecc7f7848c5c0f8e0fbd4d1938bf0a364a"
+  },
+  "model_files": {
+    "RunLifecycle.tla": "b6a6e8d30f1b911a7f48816aab81142462bc86ce53b870634af8d77d4c5b11a7",
+    "broken-cancel.cfg": "322e04330ae37dc8f2d19d091ad181d7936a3f6a5b6a9ad5d32e1535609dc685",
+    "broken-publication.cfg": "95f7886205f96f246c1f36c94d89e7bf40dd897c07cdc98e32f429208a8651dd",
+    "broken-recovery.cfg": "8e23d9f0d83695446e4d5bb5119771525f1d1ebdbd84261da91fb5fd6eea8353",
+    "claimed-progress.cfg": "7f8ba6fc8c926149663cf14faa2fd971d738eeddedef7ff8b3e8a61d85f9f8e9",
+    "claimed-safety.cfg": "f1dabaec23f56da4deeb15a62866d87c48abd757fcfa8a34a5812101eedea7b2",
+    "prelaunch-progress.cfg": "ca0695929afc32e2c3dedce1447effe5d157f023215f571bcbcc926c06efe065",
+    "retained-launch-progress.cfg": "21c6b6a000f8aa7eb3508cd9b1b4bf89990d7126ebdd9bbabf6404b273dfce94",
+    "safety.cfg": "f00bd9cb93674cd79cfe716cdf899c1b701253a1a213db2b2e3a14e40609cc20",
+    "view.mjs": "f4b3cf8d1c85885c9f826fa74d125536a57eac8192471c3cb3b7054c24d26883"
+  },
+  "tool": {
+    "name": "TLC",
+    "version": "1.7.4",
+    "jar_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+    "adapter": "installed PStack statechart",
+    "java": "Temurin 25",
+    "workers": 1,
+    "heap_mb": 512
+  },
+  "bounds": {
+    "runs": 1,
+    "work_items": 1,
+    "trusted_workers": 2,
+    "attempt_epochs": 2,
+    "independent_claim_epochs": 2
+  },
+  "atomicity": "Run/output publication and Work Item finish share SQL transaction; durable launch intent and OS spawn are separate transitions.",
+  "command_example": "taskset -c 16-19 nice -n 10 ionice -c 3 env JAVA_TOOL_OPTIONS=\"-Xmx512m -XX:ActiveProcessorCount=2\" sh /home/kdlocpanda/.codex/skills/statechart/scripts/statechart RunLifecycle.tla --config claimed-progress.cfg --view view.mjs --out claimed-progress",
+  "command_context": "Copy the committed model directory to an owned scratch directory outside the checkout; execute each config through the installed statechart skill. Exit 1 is expected for the three deliberate mutations and the retained-launch progress finding.",
+  "results": {
+    "broken-cancel": {
+      "exit": 1,
+      "report": "# RunLifecycle\n\nTLC reached 858 states, more than the chart budget of 500, so the chart draws only the bug paths: 5 states and 4 arrows.\n\n## CancellationRequiresStop breaks\nThe shortest path has 4 steps:\n0. Queued\n1. Claim Run: Attempt leased\n2. Record Intent: Launch committed or awaiting publication\n3. Request Cancel: Waiting for stopped-launch confirmation\n4. Confirm Cancel: Cancellation reported without stopped proof\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication\n",
+      "report_sha256": "d2ff6ff702ce6adb0ef1837fd1ca380e08a4093392016c9bd2cc471e2ac70f69",
+      "tlc_sha256": "563388b8f1857ff23b4d80b7b4132091f2e747fd6a54ed6dd7c58833047a54cc"
+    },
+    "broken-publication": {
+      "exit": 1,
+      "report": "# RunLifecycle\n\nTLC reached 3,630 states, more than the chart budget of 500, so the chart draws only the bug paths: 5 states and 6 arrows.\n\n## NoStalePublication breaks\nThe shortest path has 7 steps:\n0. Queued\n1. Claim Item: Queued\n2. Claim Run: Attempt leased\n3. Record Intent: Launch committed or awaiting publication\n4. Expire Run: Expired with retained launch\n5. Spawn: Expired with retained launch\n6. Finish Process: Expired with retained launch\n7. Publish: Stale publication committed\n\n## Rules that hold\nNoDuplicateExecution, CancellationRequiresStop\n",
+      "report_sha256": "74e440c1bf091674a411d66a57b18c594c6631e48248308746ae673f6e106c15",
+      "tlc_sha256": "e1860d29100273daf16ca4491f1f9f1d93db70952a2cf34cb6f477097bb20d3b"
+    },
+    "broken-recovery": {
+      "exit": 1,
+      "report": "# RunLifecycle\n\nTLC reached 3,366 states, more than the chart budget of 500, so the chart draws only the bug paths: 8 states and 8 arrows.\n\n## NoDuplicateExecution breaks\nThe shortest path has 8 steps:\n0. Queued\n1. Claim Run: Attempt leased\n2. Record Intent: Launch committed or awaiting publication\n3. Expire Run: Expired with retained launch\n4. Authorize Recovery: Recovery authorized; retained launch blocks progress\n5. Recover: Replacement attempt fenced\n6. Spawn: Owned process running\n7. Record Intent: Owned process running\n8. Spawn: Duplicate external execution\n\n## Rules that hold\nNoStalePublication, CancellationRequiresStop\n",
+      "report_sha256": "b1f8c295e4ccd48167da820dcc31746e0d2fe340c9e3694bacac475e1106b51d",
+      "tlc_sha256": "42eaee5d85f725c30730ed3c00e0f5f0996f6b0020b4b5640758aa01fe2f8f80"
+    },
+    "claimed-progress": {
+      "exit": 0,
+      "report": "# RunLifecycle\n\nTLC reached 625 states, more than the chart budget of 500, so the command wrote no chart.mmd.\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication, CancellationRequiresStop, PrelaunchRecoveryProgress\n",
+      "report_sha256": "0135df3baba17b00c4f52522be64fce7c5ee26664fe55911552feb6f84da2555",
+      "tlc_sha256": "461b0dfc577c0b7c03a7e4bd8657547cbc8f1bbf09b0ec7b73445153ac6e0882"
+    },
+    "claimed-safety": {
+      "exit": 0,
+      "report": "# RunLifecycle\n\nTLC reached 3,054 states, more than the chart budget of 500, so the command wrote no chart.mmd.\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication, CancellationRequiresStop\n",
+      "report_sha256": "310290c661f69a15ba82d683fcb15d6305365780013632bc4df91b27fc2a98e8",
+      "tlc_sha256": "f2f9784d42bda2a595b87f44b80d28079014cdf2a324fae5eef1c04128b2f608"
+    },
+    "prelaunch-progress": {
+      "exit": 0,
+      "report": "# RunLifecycle\n\nTLC reached 285 states and 691 steps. The chart draws 10 states and 13 arrows.\nThe chart does not draw 487 steps that stay in one chart state.\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication, CancellationRequiresStop, PrelaunchRecoveryProgress\n",
+      "report_sha256": "7dfa84bc4ebc40d1b9a22fe0dfa75907765bec0c77c70b7bb0613b2b9cbb9690",
+      "tlc_sha256": "b5a654a1448d69be325bb73bffd57da00363d7d3f12975d90659bd5086311c61"
+    },
+    "retained-launch-progress": {
+      "exit": 1,
+      "report": "# RunLifecycle\n\nTLC reached 285 states and 691 steps. The chart draws 10 states and 14 arrows.\nThe chart does not draw 486 steps that stay in one chart state.\n\n## AuthorizedRecoveryProgress breaks\nTLC's counterexample is in tlc-AuthorizedRecoveryProgress.out. It has 5 steps:\n0. Queued\n1. Claim Run: Attempt leased\n2. Record Intent: Launch committed or awaiting publication\n3. Expire Run: Expired with retained launch\n4. Authorize Recovery: Recovery authorized; retained launch blocks progress\n5. Crash Host: Recovery authorized; retained launch blocks progress\nThe run stops in \"Recovery authorized; retained launch blocks progress\" forever.\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication, CancellationRequiresStop\n",
+      "report_sha256": "5de360ec6184857fc8f213a45443b8265d1aef337c87c99f311f8989c9dfeccc",
+      "tlc_sha256": "567b79de38aa2ecece9d0e5905ef8ec088a669bd17ec009cedac5d8829a89990"
+    },
+    "safety": {
+      "exit": 0,
+      "report": "# RunLifecycle\n\nTLC reached 726 states, more than the chart budget of 500, so the command wrote no chart.mmd.\n\n## Rules that hold\nNoDuplicateExecution, NoStalePublication, CancellationRequiresStop\n",
+      "report_sha256": "32981c81c67cf202049a69c52c2813dd5477d7a3275f51022a5e4960394451b4",
+      "tlc_sha256": "23641c1766b8ae0f4a8bb537fac1e7ebbda65c2bfd094741b4f15c6c12802df7"
+    }
+  },
+  "real_defect": {
+    "before": "GenericWorkItemExecution._dispatch returned the retained ticket and could not progress under a fresh live claim despite explicit no-effect recovery authorization and no recorded launch. SQLite and PostgreSQL both reproduced it.",
+    "after": "Validate closed unchanged pre-launch journal, current epoch authorization and fresh live claim, then replace expired Attempt in the existing transaction, retaining Run identity and fencing the old worker. Retained launches remain rejected.",
+    "regression_symbol": "test_robot_claimed_work_items_327.py::test_authorized_prelaunch_recovery_preserves_run_and_fences_old_worker",
+    "negative_symbol": "test_robot_claimed_work_items_327.py::test_prelaunch_recovery_rejects_missing_proof_and_changed_journal"
+  },
+  "runtime": {
+    "original_replay": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "repaired_same_replays": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "new_recovery_regressions": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "nearby_regressions": {
+      "tests": 104,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "providers": [
+      "real SQLite files",
+      "owned PostgreSQL 15.19 service"
+    ],
+    "commands": [
+      "poetry run pytest -n 0 ../.agents/skills/verify-run-lifecycle/replay_guard_mutation.py ../.agents/skills/verify-run-lifecycle/replay_prelaunch.py",
+      "poetry run pytest -n 0 tests/action_server_tests/test_robot_claimed_work_items_327.py tests/action_server_tests/test_claimed_task_service.py tests/action_server_tests/test_claimed_cancellation_confirmation_327.py",
+      "poetry run invoke lint",
+      "poetry run invoke typecheck"
+    ],
+    "configured_lint": "pass; optional Markdown lint unavailable",
+    "configured_typecheck": "pass, 703 source files",
+    "scratch_source_mutation": "One in-memory DetachedActions.claim retained-launch clause disabled; correct guard rejects, mutant admits replacement, original method restored. No OS process spawned by this mutation replay."
+  },
+  "physical_execution": "Existing installed Action-to-Robot and host SIGKILL receipts remain RCC 18.19.3 evidence; this model/replay does not relabel them or execute a new Robot.",
+  "model_correction": "Initial claimed liveness trace exhausted its artificial claim epoch bound; replaced with a fresh stable live replacement claim assumption. The corrected model still failed before repair and its SQL replay confirmed a product defect.",
+  "limits": [
+    "not an unbounded proof",
+    "not exactly-once business effects",
+    "not ACL/schema/serialization correctness",
+    "not PID/kernel supervision internals",
+    "not database corruption or network partition handling",
+    "no liveness under indefinitely adversarial scheduling",
+    "invoice-specific durable-result reconciliation excluded",
+    "generic uncertain-launch settlement still absent; safe refusal is not recovery"
+  ],
+  "previous_proof_archive": {
+    "sha256": "1f8f3e3f56ed598210fbbbc0dd2b408d98d505a51ba5b635736804234bb5fcc1",
+    "binary_version": "18.19.3",
+    "binary_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "upstream_disposition": "none"
+}

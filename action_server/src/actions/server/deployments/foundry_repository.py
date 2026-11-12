@@ -106,6 +106,32 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
                 policy["capability"]["capability_id"],
             )
         )
+    if "model_published_capabilities" in value:
+        value["model_published_capabilities"].sort(
+            key=lambda capability: (
+                capability["package_revision"]["workspace_id"],
+                capability["package_revision"]["package_id"],
+                capability["package_revision"]["revision_id"],
+                capability["capability_id"],
+            )
+        )
+    if "model_published_work_item_queues" in value:
+        for queue in value["model_published_work_item_queues"]:
+            queue["operations"].sort()
+        value["model_published_work_item_queues"].sort(
+            key=lambda queue: queue["queue_id"]
+        )
+    if "internal_robot_delegations" in value:
+        for delegation in value["internal_robot_delegations"]:
+            delegation["bindings"].sort(key=lambda binding: binding["name"])
+        value["internal_robot_delegations"].sort(
+            key=lambda delegation: (
+                delegation["parent_capability"]["package_revision"]["workspace_id"],
+                delegation["parent_capability"]["package_revision"]["package_id"],
+                delegation["parent_capability"]["package_revision"]["revision_id"],
+                delegation["parent_capability"]["capability_id"],
+            )
+        )
     return _canonical_object(value)
 
 

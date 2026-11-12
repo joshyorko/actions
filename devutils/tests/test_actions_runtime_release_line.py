@@ -58,7 +58,7 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
         ROOT / "action_server/scripts/verify_published_runtime_floor.py"
     ).read_text()
     assert 'EXPECTED_RUNTIME = "1.0.4"' in floor
-    assert 'RCC_VERSION = "18.19.3"' in rcc_download
+    assert 'RCC_VERSION = "18.19.8"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
 
@@ -96,7 +96,7 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
     assert "cibuildwheel==2.23.4" in PYPI_WORKFLOW
     assert "twine==6.2.0" in PYPI_WORKFLOW
     assert (
-        'RCC_VERSION = "18.19.3"' in (ROOT / "action_server" / "build.py").read_text()
+        'RCC_VERSION = "18.19.8"' in (ROOT / "action_server" / "build.py").read_text()
     )
     assert "sema4ai/homebrew-tools" not in BINARY_WORKFLOW.lower()
     assert "cdn.sema4.ai" not in BINARY_WORKFLOW

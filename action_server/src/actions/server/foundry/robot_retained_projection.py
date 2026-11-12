@@ -14,6 +14,7 @@ from uuid import uuid5
 from jsonschema.exceptions import SchemaError
 
 from actions.server._portable_paths import portable_path_collision_key
+from actions.server._rcc_runtime_adapter import RCC_METADATA_VERSIONS
 from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.source_manifest import _validated_parts
 from actions.server.foundry.models import FoundryPackageRevision
@@ -265,7 +266,7 @@ def _project(row, manifest, snapshot):
                 r"sha256:[0-9a-f]{64}", plan_value[key]
             ):
                 raise ValueError("measured RCC digest required")
-        if plan_value.get("rcc_version") != "v18.19.3":
+        if plan_value.get("rcc_version") not in RCC_METADATA_VERSIONS:
             raise ValueError("unsupported RCC version")
         plan = RccRobotPlan(
             plan_value["package_yaml_digest"],

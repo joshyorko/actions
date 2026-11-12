@@ -338,7 +338,11 @@ def test_genuine_mcp_sdk_authors_and_reconnects_to_common_sql(database_location)
         async def first_session(session):
             tools = (await session.list_tools()).tools
             assert {tool.name for tool in tools} == MODEL_TOOLS
-            assert all(tool.meta["ui"]["resourceUri"] == URI for tool in tools)
+            for tool in tools:
+                if tool.name == "canvas_inspect":
+                    assert "resourceUri" not in tool.meta["ui"]
+                else:
+                    assert tool.meta["ui"]["resourceUri"] == URI
             resource = await session.read_resource(URI)
             assert resource.contents[0].mime_type == "text/html;profile=mcp-app"
             empty = await session.call_tool("canvas_open", {})

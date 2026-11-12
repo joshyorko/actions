@@ -1,5 +1,73 @@
 # Repository Operations
 
+## OpenAPI, MCP and publication boundaries
+
+OpenAPI schema inclusion, MCP discovery and authorization are separate
+contracts: `full_openapi_spec` controls route schema visibility, not route
+mounting or the separately assembled MCP catalog. New native catalog surfaces
+need stable revision identity, and a cached descriptor must not replace live
+authorization of the exact immutable reference.
+
+`canvas_inspect` returns revision diagnostics to the authenticated model; it does
+not select a Canvas resource or emit `actions.canvas` view metadata. Its history
+object is not an app view. A native host trace showed a valid saved v2 app being
+replaced by an inspection widget whose history object failed the renderer's
+closed metadata parser. Diagnose the actual completed tool sequence rather than
+inferring the failing operation from an assistant's summary. Keep v1/v2 app
+validation and inspection authorization strict; do not flatten bound tables
+into text or add unbound rows to bypass data-binding requirements.
+
+Semantic v2 tables read the current binding's bounded, persisted result projection,
+as charts and inspectors do. They cannot depend on a form's local dispatch return:
+Work Item selection overrides that form and reopening loses its local state.
+Keep v1 dispatch behavior separate. Model views, previews and unavailable or
+unfinished projections must not display persisted private rows.
+
+Opening an authorized app and reading its retained Run state must survive result
+retention expiry. The resolver classifies expiry only after authorization and
+attachment validation; it still denies the bytes. App history omits the entire
+artifact inventory if any output expired, preserving the completed Run without
+launching replacement work. Do not extend retention, swallow general permission
+or integrity failures, or automatically rerun a completed Action to make reopening
+work. Use terminal metadata acknowledgement only in history readers; worker ticket
+recovery and publication retain strict validation. Catalog tests must assert
+inspection's absence of a UI resource explicitly.
+
+An ordinary native consumer can claim saved query criteria, explicitly launch
+RCC, query its configured logical data provider and render the sealed result.
+That order does not prove approval of an already materialized query result.
+The default native bootstrap constructs `InvoiceQueryService` without query
+providers; the separate combined invoice fixture's query-result review path must
+not be claimed as ordinary native-host acceptance. Scope execution grants to the
+fixture's exact Deployment revision; configuring a trusted profile alone must
+not make existing drafts executable.
+
+The candidate Deployment value supports an explicit, scoped
+`model_published_capabilities` selection. Its empty value is omitted from the
+canonical wire representation so earlier Deployment revision identities stay
+unchanged. Generic synchronous invocation and detached Task admission must
+check the exact current snapshot, live authorization and publication while
+holding the Run-counter and Workspace admission locks. A current model-visible
+Canvas binding also preserves existing Canvas invocation; an app-only binding
+does not publish its capability to a model. Canvas-derived publication covers
+the binding's discovered default Runtime Plan, not every allowed alternate.
+Release the locks before executing
+the worker. Source-level checks alone do not establish installed or released
+support; qualify native discovery, real clients and backend parity separately.
+
+The headless discovery component scans bounded active Deployment heads, checks
+publication and live grants, and binds pagination to the authorized visible
+descriptor set. Hidden-head changes do not alter its cursor; visible-set changes
+invalidate it. Overflow returns no partial page, but the fixed inventory
+threshold and variable scan time can reveal coarse hidden inventory information.
+It strips free-form schema annotations and fails closed for unsupported
+schema resource semantics. Publishing an input contract exposes its property
+names and validation constraints; authors must keep secrets out of those fields.
+The current resolver still requires Workspace-wide execute authority, even
+when a Deployment-specific grant exists. The candidate `capability_discover`
+tool is model-only and does not attach a Canvas resource; its source-level MCP
+tests do not establish ordinary installed startup or real-client proof.
+
 Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
 through the activated cloud toolchain for an arbitrary bounded qualification
 script. `rcc run` selects manifest tasks and is not a generic command gateway.
@@ -7,7 +75,37 @@ Use a real script file: a heredoc supplied to the outer launcher can be consumed
 without executing the intended Python body. Check produced files and receipts,
 not only the launcher's successful exit.
 
+## Actual desktop acceptance
+
+Qualify the real installed desktop separately from a browser harness, direct MCP
+calls and backend execution. Record desktop mode/version, product commit, wheel
+and RCC hashes, UTC action times, real screenshots and retained Run/Attempt/Work
+Item identities. Codex mode in the ChatGPT desktop is not ChatGPT-mode E1.
+
+Use the installed desktop control API or its supported native client under the
+operator's existing session. Do not change trusted-code allowlists, disable the
+sandbox or read browser credentials to obtain control. If standard accessibility
+settings are temporarily enabled, save and restore them. Refresh window and
+accessibility identities after navigation or sidebar remounts. Confirm the actual
+field after an unconfirmed paste before retrying; a successful input-tool return
+alone does not establish a UI change.
+
+Hide unrelated history before review captures. Preserve original image bytes,
+hash them, commit selected images alongside the receipt and embed commit-pinned
+image links in the PR. Describe request-only cancellation and blocked client
+behavior explicitly, without claiming stopped processes or recovery. The
+[real desktop receipt](../program/evidence/actions-next-327/issue-340-20261103/desktop-20261106/README.md)
+shows the distinction between actual Codex-mode interaction and remaining gates.
+
 ## Recovering installed qualification evidence
+
+For sequential private provider configurations, preview each request and supply
+the exact current catalog pointer to the subsequent configure operation. A
+failed synthetic setup can leave an earlier provider configured; preserve its
+receipt and use a fresh task-owned fixture root for a corrected attempt. For
+logical-bound standalone execution, use the existing standalone admission and
+its guarded output adapter; a bare Run output service does not supply the
+logical publication boundary.
 
 Selected source-path revalidation must compare bounded current file content
 digests with the measured inventory, in addition to metadata and name bindings.
@@ -521,6 +619,9 @@ stage, not its root cause. RCC's `Running:` log follows acquisition of the
 Python mutex; it does not establish successful RCC spawn or internal-lock
 progress. Captured stderr is line-oriented, and RCC's interactive forwarding
 does not explicitly flush, so absent captured lines do not establish inactivity.
+When two retained samples identify the same RCC process, compare its CPU and
+I/O counters as observed host activity. Increasing counters do not identify
+which internal operation caused latency or establish descendant cleanup.
 
 The Windows Runtime test workflow now sets an explicit
 `ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
@@ -531,7 +632,11 @@ Verify the artifact inventory and report bytes before claiming observations.
 The test-owned observer enables
 only those two native nodes, samples pending initial startup at 80 and 88
 seconds, and delegates unchanged startup and its existing 20-second failure
-cleanup. Reports contain source/executable/config byte identities, an
+cleanup. It wraps only the first synchronized startup with the 90-second
+deadline. At that boundary, `ActionServerProcess.start()` raises `TimeoutError`
+when it has not observed the ready URL on stderr before the deadline; other
+timeout sites in the same test require their own traceback. Reports contain
+source/executable/config byte identities, an
 allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
 cache-file existence and effective-home equality, and registered host-reader
 and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
@@ -2157,6 +2262,14 @@ When refreshing a preserved ADR from a newer branch, identify the exact source r
 
 ## Clean-break package boundaries
 
+The retired-product-path contract ignores only Python bytecode inside
+`__pycache__`, which an old checkout can retain after tracked fixtures disappear.
+It still rejects source files, including files inside a cache directory,
+manifests and symlinks, including broken links. Retained caches must not require
+deletion of local data.
+`test_removed_product_paths_preserve_cache_but_reject_source` preserves such a
+cache while proving that a source file under the retired path still fails.
+
 The source package identities are `actions-core` (`actions` and `actions.mcp`),
 `actions-runtime` (`actions.server`), `actions-http-helper` (`actions_http`),
 and `actions-work-items` (`actions.work_items`). Core owns the sole
@@ -2204,6 +2317,17 @@ artifact read reveals it. A successful matrix job also does not establish that
 every step ran: check each platform condition and skipped-step status. The
 candidate-source Canvas browser step is Linux-only.
 
+Compare failing test IDs and assertion values across exact-head matrix jobs
+before diagnosing separate platform failures; retain each platform's independent
+passed/skipped totals. Classify a started test failure by its executed step,
+not unrelated runner-capacity notices or earlier cancelled jobs.
+
+Compiler byte-identity goldens include the pinned RCC adapter version range.
+For an intentional pin upgrade, verify that substituting the previous range and
+recomputing dependent digests reconstructs the previous manifest/plan hashes
+before updating goldens. Keep the unchanged source-archive hash assertion and
+label the new goldens with their toolchain version; old receipts retain theirs.
+
 The Linux Runtime portable suite and measured coverage workflow provision the
 same digest-pinned, bounded owned PostgreSQL container. Both export
 `ACTIONS_INVOICE_TEST_POSTGRES`, `ACTIONS_TEST_POSTGRES_URL` and strict provider
@@ -2225,6 +2349,12 @@ success mechanics. Missing POSIX names in Windows typing do not establish runtim
 support and do not justify suppressing the matrix typecheck. Shell-stub
 contracts cover setup, bounded readiness failure, cleanup and workflow parity;
 they do not replace hosted execution or real provider qualification.
+The Runtime workflow also runs an injected readiness-failure drill on Linux:
+it executes the generated startup script against a real pinned container with
+only the readiness command forced to fail, then checks that the recorded exact
+container ID is absent. The drill isolates its GitHub environment file and does
+not replace the ordinary provider suite. Check the hosted step result separately
+from the successful-start and portable-test results.
 
 Express explicitly POSIX-only APIs through checked, precisely typed `getattr`
 helpers when Windows typeshed omits them. Require integer security flags and
@@ -2592,7 +2722,144 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
+The Ubuntu24 invoice CI lane uses primary RCC18.19.8 and runs `InvoiceQueryTest` with BROWSER, WORKER,
+GENERATED and EFFECTS enabled. This is the existing strict combined acceptance:
+real DuckDB/owned PostgreSQL queries, renderer and approval, claimed installed
+SDK-only RCC execution, authorized sealed artifacts, fresh-process reopen and
+durable-result/effect reconciliation. Every required suite rejects skipped JUnit
+cases, and the verifier removes only its labelled owned PostgreSQL container.
+The toolkit builds the Canvas resource and installs its pinned Chromium before
+verification. CSV/Parquet sealed-scan component checks run alongside the invoice
+chain; a single Parquet-to-invoice-browser transaction is not claimed. Runtime
+host modules in this gate come from the verified source checkout; the separate
+installed-wheel vertical remains required. Neither gate proves actual ChatGPT E1.
+For distribution acceptance, use the existing invoice `export.py`/`prepare.py`
+and browser capture against a fresh noneditable prefix. Record first execution
+separately from `--resume`: unchanged worker Run, Run/Attempt counts and downloaded
+artifact digest establish completion replay. Run `verify.py` after each phase;
+it restores the owned fixture's revoked grants and activation. A second fresh
+prefix installed from the measured wheelhouse proves offline package installation,
+not a cold offline RCC store. The hosted invoice upload retains selected logs and
+JUnit; its pre-cleanup store hashes do not imply those store bytes were archived.
+Qualify the ordinary installed CLI separately with the package filesystem
+read-only and only a private external state root writable. An explicit local
+synthetic bearer can prove discovery/Canvas resource reads and Host/Origin
+denials; it does not prove a real ChatGPT connection or provision execution
+authority. Measure the wheel's `_static_contents` renderer separately from an
+exported Canvas resource: both variants passed real invoice execution, but their
+bytes differ. Do not substitute one hash for the other.
+The installed-wheel vertical must run canonical `inv build-frontend` before
+`poetry build` and compare the wheel's literal `FILE_CONTENTS["canvas.html"]`
+with that fresh build. The tracked generated module can be stale: one hosted
+wheel passed backend execution while its packaged renderer failed the existing
+300px viewport regression (7,214px text in a284px bound); the current built
+renderer passed. Desktop invoice execution alone did not expose this defect.
+Keep the measured wheel/renderer hashes distinct when rebuilding those assets.
+
+For an owned, stopped same-path consumer archive, preserve original permissions
+on extraction (`tar --same-permissions`) and compare before starting Runtime.
+Default extraction removed the setgid bit from `rcc-home/pkgs/cache` (2775→775);
+restoring the archived mode made the complete comparison pass before successful
+installed replay. The private attachment-copy helper rejects symlinks/hardlinks
+and does not restore an RCC cache. SQLite legacy-schema rollback, complete local
+consumer restore and external PostgreSQL backup/restore are separate gates.
+The SDK-only fixture on Ubuntu22 resolved an artifact requiring glibc2.36,
+then correctly refused that worker's glibc2.35. Keep the invoice gate on Ubuntu24
+and retain the original Ubuntu22 primary/N-1 toolkit and Runtime gates.
+This is a measured fixture compatibility constraint, not permission to bypass
+RCC compatibility checks or claim Ubuntu22 invoice execution.
+
+Primary RCC18.19.8 includes the legacy uv0.1.37 selector repair from RCC PR261.
+Retain supported18.19.7 and18.19.3 metadata without changing immutable Package
+identity; executable verification remains pinned to18.19.8. The captured7
+Robot metadata fixture is generated by the actual installed7 Runtime with a
+measured7 preparation receipt; capture itself does not execute a Robot. Earlier
+7 execution receipts retain their original binary/version labels. Keep the
+previous-stable7 Linux toolchain lane and all three legacy3 platform lanes.
+
+Keep RCC's process `HOME` stable at the private `ROBOCORP_HOME` used for artifact
+preparation and execution. RCC 18.19.7 derives materialization IDs from
+`common.UserHomeIdentity()` as well as the controller/artifact; changing only
+`HOME` against the same cache reproduces `orphan materialization path exists`.
+Restoring the original home succeeds; 18.19.3 accepts the changed home. Do not
+delete lifecycle records, disable guards or share the generated-code home to
+avoid this check. Compiler, Action and Robot Python helpers set their own private
+execution `HOME` before importing user code; qualify both sides of this boundary.
+Existing prepared caches made with another process home require fresh
+preparation, not an uncertain Run retry. The local preparation helper allows
+300 seconds for cold acquisition after measured 120-second timeouts; production
+Run deadlines, claims and cancellation confirmation remain unchanged.
+
+Wheel payload selection must include only the primary versioned RCC binary,
+including its Windows `.exe` form. A broad `bin/rcc*` include also packages
+ignored compatibility binaries left in a developer checkout: observed local
+and clean-hosted wheels differed solely by the extra 18.19.3 payload. Keep the
+compatibility executable available for its separate lane without bundling it
+into the primary Runtime wheel. Include/exclude rules alone do not remove stale
+files appended by Poetry's generated setuptools `build/lib` stage. The Runtime
+hook only downloads RCC, so run it directly without generating setup.py; the
+build script still gives the wheel its platform tag. Explicitly include generated
+OAuth configuration in both wheel and sdist formats. Compare actual ZIP payloads,
+RECORD rows and repeat-build hashes; the installed vertical rejects extra or
+mismatching RCC members. Do not delete the compatibility source binary.
+
+Portable subprocess tests should assert the explicit `HOME` environment contract;
+Windows `Path.home()` instead uses its Windows profile variables. Keep promised
+compiler/Action tests enabled across the matrix. The installed RCC preparation
+helper itself requires Linux pidfd/private-UID facilities, so tests invoking its
+real role-home setup must carry the same explicit Linux boundary.
+
 ### RCC release acceptance pins
+
+A primary RCC upgrade must keep previously admitted immutable Robot records
+readable. Recognize supported prior metadata separately from the exact execution
+binary pin; accepting an old manifest does not authorize an old or arbitrary
+executable. The 18.19.7 proposal preserves 18.19.3 record identity in
+`test_robot_package_admission.py::test_prior_rcc_robot_package_keeps_its_identity`;
+its captured old manifest/archive must not be regenerated with the new pin.
+A compiler golden digest changes with the explicit adapter version and its
+derived plan/revision identities. Compare canonical manifests before updating
+that expectation; all other fields must remain identical.
+
+A trusted `PreparedRccEnvironment` binds exact Package YAML bytes to the
+original specification/artifact digests. Keep that immutable identity when
+compiling another source revision against the prepared environment. Do not
+republish a used live cache: runtime-created files can change its snapshot
+digest without changing its dependency specification. Retain manifest/version
+checks, RCC no-build execution and returned-artifact identity validation;
+never adopt a new live snapshot merely because its specification matches.
+The installed vertical should report the path-free compiler failure code and
+stop observing an unexpectedly failed host once no terminal child outcome is
+possible; the deliberate host-crash case remains exempt. Preserve failed native
+cache/lifecycle receipts separately from clean-cache A/B results. Successful
+artifact verification or native smoke execution alone does not qualify the
+complete installed Action-to-Robot path.
+
+The installed vertical artifact includes the four tested wheel payloads as well
+as identity/JUnit receipts. Match every payload to its recorded digest and the
+successful exact-source job before release acceptance; receipt-only archives
+cannot supply byte-identical candidate packages. Do not upload fixture homes,
+databases or credentials.
+
+Logical free space alone does not establish Btrfs allocation health. Before
+heavy workstation work, check device unallocated space and metadata usage too.
+Keep task scratch together; on this workstation, RAM-backed `/tmp` is below the
+installed vertical's unchanged disk floor, so use an adequate filesystem through
+`TMPDIR`. RCC's fixed `artifactsDir` also needs relocation: a task-local descriptor
+can reference unchanged canonical environment YAMLs and absolute `toolkit.py`
+commands, with artifacts under that task directory. `--no-build` verifies reuse
+of the already prepared toolkit. Remove disposable homes and temporary
+worktrees after retaining bounded receipts and unapplied changes.
+
+Frozen acceptance workflows retain RCC18.19.3 with their fixed source/native
+artifact identities; they are compatibility evidence, not the current primary.
+For example, frozen Runtime `d642a3ac24f8da85101538bdfdf59b509fd74bfb`
+resolves its bundled executable as `rcc-18.19.3`. A global replacement with a
+new preseed filename breaks that contract. Keep its workflow/summary assertions
+at the historical version while upgrading current tooling and installed tests.
+Generate workflows through `_gen_workflows.py::main` when local ignored
+worktrees exist: the full script also regenerates Dependabot from filesystem
+manifests and can accidentally include those local worktrees.
 
 The repository's primary pinned RCC release is `v18.19.3`,
 published 2026-08-28, with tag target
@@ -3858,6 +4125,13 @@ manifest was tampered with, a fresh consumer received a provider HTTP 500 and
 the adapter rejected the acquisition; the manifest was restored afterward.
 
 ## Pull Request Triage
+
+For a cancelled hosted job whose log endpoint returns 404, the cancellation
+cause remains unknown without other direct evidence. Compare the job's actual
+workflow timeouts before attributing the result to a timeout. For PR artifacts,
+resolve the receipt's source commit and tree against the synthetic merge's
+parents; the tested merge tree can differ from the PR head. A receipt containing
+wheel hashes and JUnit results is not a downloadable candidate wheel payload.
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
 
@@ -5200,6 +5474,23 @@ or authenticated-client acceptance. Inject domain dispatch/status/artifact
 adapters into the semantic renderer; its logical binding labels confer no
 Runtime capability or authorization.
 
+For Package-backed Robot output reads, a Run read grant does not replace the
+observer's application-read grant for the exact deployment. The SQL-backed
+child lifecycle control verifies denial before that grant and for a different
+principal afterward; granting a test observer does not establish access for
+other actors.
+
+When the installed Action-to-Robot vertical times out, inspect the parent and
+child Run statuses, lineage count, and Task host failure state before attributing
+the delay to RCC or extending the deadline. A terminal-state timeout alone does
+not identify which of those boundaries stalled.
+
+The invocation-owned child IPC server waits for the first byte without an idle
+deadline; RCC startup and Action work can legitimately exceed the frame timeout.
+Once a frame starts, its full header and payload remain subject to the bounded
+read deadline. Closing the invocation host interrupts an idle wait and joins the
+server; test both delayed handshakes and partial-frame expiry when changing it.
+
 Runtime action import probes must parse the complete PEP 440 Core version and
 compare its numeric release tuple; splitting dotted components with `int`
 rejects provisional Core versions before action discovery. The existing
@@ -5442,6 +5733,14 @@ historical claims, Run/Attempt lineage and artifact bytes from fresh installed
 consumer processes. Verify original object bytes are unchanged. A SQL dump alone
 does not include filesystem artifacts. Exclude connection contexts and database
 dumps from public evidence; retain digests and bounded readback receipts. This
+comparison must include object owners/ACLs as well as table rows. Keep ownership
+and ACL restoration enabled; after restoring source/objects/journals at their
+original paths, use a fresh installed controller against the restored database,
+check unchanged Run/Attempt and execution counts, and exercise foreign-principal,
+foreign-workspace and persisted-revocation denials before deleting the owned
+fixture. The completed-job PostgreSQL probe passes these checks; it does not
+qualify restoration of a live or unknown launch.
+This
 same-version service-composition test does not establish ordinary CLI PostgreSQL
 configuration, active-effect recovery, cache-loss recovery or schema downgrade.
 
@@ -6334,6 +6633,16 @@ I/O trapped after binding, rather than checking only the inner guard.
 
 ### Reviewed parallel acceptance boundaries
 
+Generated Knowledge authority-change fixtures allow ten seconds for provider
+preparation within their separate twenty-second total deadline. These tests
+must reach the prepared state before changing cancellation, grants or fences;
+`test_generated_ingestion_cancellation_after_slow_preparation` exercises that
+boundary after a controlled delay. This is fixture scheduling headroom, not a
+production timeout change. Explicit expired-budget tests still check deadline
+rejection. A caught `LogicalReadRejected` exception's context can distinguish a
+sealed-read deadline failure from authorization failure without changing the
+public redacted error.
+
 Wide Canvas table checks must verify readable column layout as well as viewport
 containment: a table can avoid page overflow while wrapping every word one
 character per line. Test keyboard focus and horizontal scrolling of the named
@@ -7098,3 +7407,91 @@ process-lifetime proof. Require the supervised child to exit successfully before
 restart or aggregate acceptance. Diagnose residual resources with type/count-only
 instrumentation, preserve timeouts as failures, and close only resources owned by
 the adapter; never force a successful exit to conceal unknown handles.
+
+Historical migration tests must pin the version they assert and separately test
+newer migrations; `CURRENT_VERSION` is not a stable substitute for schema 22.
+Release-branch pull requests must exercise the generated Action Server Tests
+workflow. Its Linux PostgreSQL fixture is disposable CI state, not authority to
+create roles, grants or credentials in a separate environment. Its startup and
+`always()` cleanup handle ordinary step failures; runner loss cannot be proven
+clean by a local Docker double and must be reported from actual CI evidence.
+
+### Standalone Robot cancellation evidence
+
+After Doctor → Bootstrap → ToolkitTest, the installed vertical may reuse the
+RCC binary installed by Bootstrap. `run_internal_child_vertical_ci.sh` accepts
+an existing regular executable only when its SHA-256 matches the pinned asset;
+it does not overwrite that file. Symlinks, directories, non-executable files and
+different bytes fail admission. The executable shell regression is
+`developer/tests/test_internal_child_vertical_ci.py`.
+Preparation retains each supervised RCC phase's complete stdout/stderr in
+`preparation/<role>/rcc-<phase>.stdout.log` and `.stderr.log`, including failure.
+Read those files before retrying a failed publish/acquire. Supervisor status 124
+means timeout or a live descendant after command exit; it does not identify
+which condition occurred by itself. Probe the chosen host interpreter's
+`os.pidfd_open` and `signal.pidfd_send_signal` support before preparation; a
+Python version match alone does not establish those required capabilities.
+
+An active standalone Robot cancellation is only terminal after the original
+worker confirms the exact retained launch stopped and its descendants were
+reaped. The confirmation checks the retained Run and Attempt, pinned selection,
+caller and current cancellation authorization in the same transaction. It does
+not restore the live fence, publish outputs, or authorize a retry. Host shutdown,
+missing cleanup evidence, changed launch or Attempt, and revoked authority must
+not be treated as confirmation. Standalone Task and internal-child status reads
+validate that stopped-launch record before reporting cancellation; a cancellation
+request alone remains pending.
+
+For installed-runtime evidence, run the opt-in real Action-to-Robot vertical
+with the separately prepared RCC homes, exact host wheel hashes, and its retained
+disk floor. The live cancellation probe waits for a marker written by the Robot
+before requesting cancellation. A source-only synthetic adapter test verifies
+authority and tamper rejection but does not establish real process cleanup.
+The hosted SQLite gate requires the happy path, live cancellation, failed-Robot
+restart, and abrupt Robot-process loss cases in its JUnit inventory; a skipped
+or absent case fails the gate.
+The real happy-path fixture also stops its own Task host, starts a fresh host,
+and submits the same completed MCP Task again. It checks the original Task and
+child lineage are reused and no second Robot execution directory appears. This
+is completed-request replay after a test-host restart, not recovery from a
+process crash or a retry of a failed or cancelled Robot. Each MCP app lifespan
+uses a fresh session manager; the manager cannot be started twice.
+The live cancellation case separately restarts its test-owned host and checks
+after 0.5 seconds that the cancelled Run retains one Attempt and no second Robot
+execution directory. This is a bounded no-automatic-retry observation, not
+failed-run recovery or a guarantee about all later behavior.
+The failed-Robot case verifies the retained Robot FAIL result, then observes
+for 0.5 seconds after a fresh test-host restart that the failed Run still has
+one Attempt and one Robot execution directory. It does not authorize retry or
+prove recovery from a process crash.
+The abrupt-loss fixture identifies the running Robot using its task-owned
+marker, exact source argument and process ancestry before killing that process.
+After its actual Attempt lease expires, it verifies that an operator recovery
+receipt cannot discard the retained launch or authorize a replacement Attempt.
+This establishes a fail-closed reconciliation boundary, not successful crash
+recovery or a host-process crash.
+`DetachedActions.claim` currently provides recovery only before launch. It has
+no successful reconciliation transition for a retained launch; a recovery
+receipt alone cannot clear that record. Keep this missing capability separate
+from the demonstrated rejection of a replacement Attempt.
+
+The bounded model and SQL replays in
+`.agents/skills/verify-run-lifecycle/` distinguish safety from recovery progress.
+The standalone pre-launch path can replace an expired explicitly authorized
+Attempt. Generic claimed execution requires the same current-epoch no-effect
+authorization, a closed unchanged journal with no launch, and a live valid claim
+before replacing an expired Attempt. It preserves the Run and rebinds the claim
+while fencing the old worker. A changed claim identity, journal or fence is not
+recovery proof. Retained launches still require reconciliation; removing that
+guard admits duplicate-execution states.
+Cancellation intent likewise remains distinct from exact stopped/reaped-launch
+confirmation. Follow the skill's source mapping, bounds and mutation checks
+before interpreting a model counterexample as a Runtime defect.
+
+For a hosted job cancelled without a runner or steps, inspect the check run's
+annotations as well as the job API. The macOS arm64 checks for integration
+checkpoint `9b72b1a22222c426e7fcfa1de53cd45fb6b715d0` explicitly reported
+failure to acquire a hosted runner and capacity constraints. Those checks did
+not execute product code; they remain unqualified until a successful rerun.
+Do not diagnose a source failure or loosen a platform gate from cancellation
+alone.

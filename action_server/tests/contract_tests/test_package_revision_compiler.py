@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
@@ -76,7 +77,7 @@ def _generated_action_entries(action_source: bytes | None = None) -> list:
 
 
 class _FakeCompilerExecutor:
-    rcc_version = "v18.19.3"
+    rcc_version = "v18.19.8"
 
     def __init__(self, fail_phase: str | None = None) -> None:
         self.fail_phase = fail_phase
@@ -388,12 +389,127 @@ def test_prepared_rcc_child_environment_stays_sanitized(
     child_environment = executor._child_environment(tmp_path)
 
     assert child_environment["RCC_NO_BUILD"] == "1"
+    assert child_environment["HOME"] == str(prepared.robocorp_home)
     if sys.platform.startswith("linux"):
         child_path = child_environment["PATH"].split(os.pathsep)
         assert "/usr/sbin" in child_path
         assert "/sbin" in child_path
     assert not any("proxy" in name.casefold() for name in child_environment)
     assert not any("account" in name.casefold() for name in child_environment)
+
+
+@pytest.mark.parametrize("phase", ["import", "test"])
+def test_compiler_helpers_restore_private_home_before_user_import(
+    tmp_path, monkeypatch, phase
+):
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    cache = tmp_path / "cache"
+    cache.mkdir()
+    executor = PinnedRccPackageBuildExecutor()
+    executor._rcc_home = cache
+    executor._create_execution_dirs(workspace)
+    package = workspace / "package"
+    package.mkdir()
+    private_home = workspace / "home"
+    prefix = (
+        "import os\n"
+        "from pathlib import Path\n"
+        f"assert Path(os.environ['HOME']) == Path({str(private_home)!r})\n"
+        "(Path(os.environ['HOME']) / 'user-imported').write_text('private')\n"
+    ).encode()
+    for entry in _generated_action_entries():
+        target = package / entry.path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(
+            prefix + entry.content
+            if entry.path == "generated_actions.py"
+            else entry.content
+        )
+
+    def execute(build, package_dir, directory, command):
+        subprocess.run(
+            [sys.executable, *command[1:]],
+            env=executor._child_environment(directory),
+            check=True,
+            timeout=30,
+        )
+
+    monkeypatch.setattr(executor, "_run_exec", execute)
+    build = RccBuildIdentity("sha256:" + "a" * 64, "sha256:" + "b" * 64)
+    if phase == "import":
+        executor.import_action(build, package, workspace)
+    else:
+        executor.run_tests(build, package, workspace)
+    assert (private_home / "user-imported").read_text() == "private"
+    assert not (cache / "user-imported").exists()
+
+
+def test_prepared_rcc_keeps_pinned_artifact_when_live_cache_changes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_bytes(_generated_action_entries()[0].content)
+    home = tmp_path / "prepared-home"
+    home.mkdir()
+    (home / "runtime-created-cache").write_bytes(b"benign runtime cache")
+    build = RccBuildIdentity(
+        specification_digest="sha256:" + "a" * 64,
+        artifact_digest="sha256:" + "b" * 64,
+    )
+    prepared = PreparedRccEnvironment(
+        robocorp_home=home,
+        package_yaml_digest="sha256:"
+        + hashlib.sha256(package_yaml.read_bytes()).hexdigest(),
+        build_identity=build,
+    )
+    executor = PinnedRccPackageBuildExecutor(prepared)
+    publications = []
+
+    def run(argv, workspace, *, timeout):
+        if argv[-1] == "--version":
+            return b"v18.19.8"
+        publications.append(argv)
+        return json.dumps(
+            {
+                "specificationDigest": build.specification_digest,
+                "artifactDigest": "sha256:" + "c" * 64,
+            }
+        ).encode()
+
+    monkeypatch.setattr(executor, "_run", run)
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    assert executor.build_environment(package_yaml, workspace) == build
+    assert publications == []
+
+
+def test_prepared_rcc_exec_rejects_changed_artifact_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    build = RccBuildIdentity(
+        specification_digest="sha256:" + "a" * 64,
+        artifact_digest="sha256:" + "b" * 64,
+    )
+    prepared = PreparedRccEnvironment(
+        robocorp_home=tmp_path / "prepared-home",
+        package_yaml_digest="sha256:" + "c" * 64,
+        build_identity=build,
+    )
+    prepared.robocorp_home.mkdir()
+    executor = PinnedRccPackageBuildExecutor(prepared)
+    executor._rcc_home = prepared.robocorp_home
+
+    def run(argv, workspace, *, timeout):
+        assert "--no-build" in argv
+        assert argv[argv.index("--artifact") + 1] == build.artifact_digest
+        return json.dumps(
+            {"exitCode": 0, "artifactDigest": "sha256:" + "d" * 64}
+        ).encode()
+
+    monkeypatch.setattr(executor, "_run", run)
+    with pytest.raises(RuntimeError, match="different artifact identity"):
+        executor._run_exec(build, tmp_path, tmp_path, ["python", "-V"])
 
 
 def test_compiler_outputs_are_idempotent_and_changed_source_changes_identity() -> None:
@@ -720,7 +836,7 @@ def test_default_work_item_declaration_preserves_manifest_golden():
     assert compiled is not None
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()
-        == "b69feea6cdb57315b9ea490bd7610371ceeeb05ec9096f101e1b50d08b3215bd"
+        == "d22755228b8a06bd11972e77d2580e88a437dda92aa78a97ae25e5dcbc680b48"
     )
 
 

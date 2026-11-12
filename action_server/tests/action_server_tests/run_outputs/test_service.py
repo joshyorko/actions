@@ -315,6 +315,7 @@ def test_finalize_failure_rolls_back_run_and_output(store, monkeypatch):
 
 def test_expired_output_and_unmapped_provider_fail_closed(store):
     from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.service import OutputExpired
 
     db, control, service, snap, actor, provider, root = store
     run, fence, output = publish(store)
@@ -323,9 +324,14 @@ def test_expired_output_and_unmapped_provider_fail_closed(store):
             pass
     with db.transaction():
         db.update_by_id(RunOutput, output.output_id, {"expires_ms": "0"})
-    with pytest.raises(AccessDenied):
+    with pytest.raises(OutputExpired):
         with service.resolve(actor, snap.workspace_id, output.handle):
             pass
+    control.revoke(actor, snap.deployment)
+    with pytest.raises(AccessDenied) as denied:
+        with service.resolve(actor, snap.workspace_id, output.handle):
+            pass
+    assert not isinstance(denied.value, OutputExpired)
 
 
 def test_legacy_helper_cannot_change_scoped_run_and_keeps_legacy_behavior(

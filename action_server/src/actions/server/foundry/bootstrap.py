@@ -191,6 +191,60 @@ class RuntimeCanvas:
         self.source_provider.close()
 
 
+def _install_model_managed_work_items(
+    canvas: CanvasMcp,
+    managed_port: SQLManagedWorkItemsService | CompositeManagedWorkItemsService,
+    deployments: FoundryDeploymentService,
+    actor: Actor,
+    workspace: WorkspaceId,
+):
+    """Attach the workerless model facade to the already authenticated Canvas.
+
+    The MCP setup helper receives this same Canvas object. The managed facade
+    reuses Canvas authentication and narrows it to the configured model owner;
+    it never inherits a worker identity or app-session scope.
+    """
+    from actions.server.managed_work_items.mcp import ManagedWorkItemsMcp
+    from actions.server.managed_work_items.model_publication import (
+        ModelWorkItemPublicationGuard,
+    )
+    from actions.server.managed_work_items.publication_policy import (
+        DeploymentModelWorkItemPublicationPolicy,
+    )
+
+    trusted_actor = Actor.model_validate(actor)
+    trusted_workspace = WorkspaceId.model_validate(workspace)
+
+    async def authenticate(ctx: object) -> ManagedCaller | None:
+        try:
+            caller = await canvas.principal(ctx)
+            if (
+                caller is None
+                or caller.audience != "model"
+                or caller.scope is not None
+                or caller.workspace_id != str(trusted_workspace.root)
+                or caller.actor != trusted_actor
+            ):
+                return None
+            # Deliberately omit worker_id: this boundary authorizes a model
+            # caller, while domain permissions remain checked by the port.
+            return ManagedCaller(actor=caller.actor)
+        except Exception:
+            return None
+
+    publication = DeploymentModelWorkItemPublicationPolicy(
+        deployments, managed_port, trusted_actor, trusted_workspace
+    )
+    facade = ManagedWorkItemsMcp(
+        managed_port,
+        authenticate,
+        publication,
+        ModelWorkItemPublicationGuard(deployments),
+    )
+    canvas.managed_work_items_mcp = facade
+    return facade
+
+
 def create_runtime_canvas(
     db: Database,
     data_dir: Path,
@@ -252,7 +306,7 @@ def create_runtime_canvas(
         if robot_profile is not None:
             robot_direct, robot_rcc = prepare_robot_runtimes(
                 robot_profile,
-                Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",
+                Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.8",
             )
         task_policy_path = os.environ.get("ACTIONS_FOUNDRY_TASK_POLICY")
         if task_policy_path is not None and profile is None:
@@ -379,7 +433,7 @@ def create_runtime_canvas(
             )
             from actions.server.foundry.generic_view import GenericCanvasView
 
-            rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
+            rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.8"
             execution_root = paths.cache_dir / "execution"
             reviewed_execution = ReviewedCanvasExecution(
                 authoring,
@@ -471,8 +525,12 @@ def create_runtime_canvas(
                 outputs, managed_authenticate
             )
 
+        canvas = CanvasMcp(port, authenticate, html)
+        _install_model_managed_work_items(
+            canvas, managed, deployments, actor, workspace
+        )
         return RuntimeCanvas(
-            CanvasMcp(port, authenticate, html),
+            canvas,
             actor,
             workspace,
             provider,

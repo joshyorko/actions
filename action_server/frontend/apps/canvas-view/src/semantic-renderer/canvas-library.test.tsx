@@ -1,6 +1,7 @@
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
+import authoredV2Draft from "./fixtures/authoring-v2-card-draft.fixture.json";
 
 const host = vi.hoisted(() => ({
     listeners: new Map<string, (event: unknown) => void>(),
@@ -121,6 +122,21 @@ function emitToolResult(
 }
 
 describe("read-only Canvas library tool-result view", () => {
+    it("renders the exact saved v2 card draft from the Dakota host", () => {
+        render(<McpCanvasView />);
+        emitToolResult(authoredV2Draft);
+
+        expect(screen.queryByRole("alert")).toBeNull();
+        expect(
+            screen.getByRole("heading", { name: "Dakota connected" }),
+        ).toBeVisible();
+        expect(
+            screen.getByRole("heading", { name: "Sample one" }),
+        ).toBeVisible();
+        expect(screen.getAllByText("Status: Ready")).toHaveLength(2);
+        expect(host.callServerTool).not.toHaveBeenCalled();
+    });
+
     it.each([0, 200])(
         "renders a bounded authoring list of %i draft apps",
         (count) => {

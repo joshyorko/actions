@@ -26,7 +26,7 @@ def test_live_direct_child_cancel_is_terminal_and_absent(
         return RobotPackageRequest.model_validate_json(json.dumps(raw))
 
     monkeypatch.setattr(fixture, "request_for", sleeping_request)
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     ticket = t.worker.claim(first.task_id)

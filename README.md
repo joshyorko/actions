@@ -257,7 +257,7 @@ This stack is hands down the easiest way to give AI agents more capabilities. It
 
 ## Community Edition
 
-This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.19.3) - a fully open-source version of RCC with several key benefits:
+This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.19.8) - a fully open-source version of RCC with several key benefits:
 
 ### Why the Community RCC Fork?
 
@@ -301,7 +301,7 @@ The Action Server builds from the checked-in public npm manifest and lockfile wi
 - **Node.js**: LTS 20.x (20.9.0 or later)
 - **npm**: 10.x or later (bundled with Node.js)
 - **Python**: 3.11+ (for the Action Server backend)
-- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.19.3+
+- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.19.8+
 
 ### Build the Frontend
 

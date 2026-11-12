@@ -329,7 +329,7 @@ def test_robot_task_environment_is_private_and_removed_on_failure(tmp_path: Path
 @pytest.mark.real_rcc
 @pytest.mark.skipif(
     not os.environ.get("ACTIONS_ROBOT_INPUT_RCC"),
-    reason="set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance",
+    reason="set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.8 for actual task-input acceptance",
 )
 def test_pinned_rcc_executes_selected_task_with_declared_inputs(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
@@ -343,7 +343,7 @@ def test_pinned_rcc_executes_selected_task_with_declared_inputs(
     version = subprocess.run(
         [str(rcc_path), "version"], capture_output=True, text=True, check=True
     )
-    assert version.stdout.strip() == "v18.19.3"
+    assert version.stdout.strip() == "v18.19.8"
     package = _robot(tmp_path, ["INVOICE_INPUT"])
     toolkit_config = Path(__file__).parents[3] / "developer/setup.yaml"
     (package / "conda.yaml").write_bytes(toolkit_config.read_bytes())

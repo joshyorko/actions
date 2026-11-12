@@ -13,7 +13,7 @@ jobs:
   coverage:
     runs-on: ubuntu-22.04
     env:
-      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.3
+      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.8
     steps:
       - uses: actions/checkout@v4
 
@@ -27,17 +27,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/robocorp
-          key: rcc-${{ runner.os }}-${{ runner.arch }}-coverage-v18.19.3-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-coverage-v18.19.8-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
 
       - name: Install pinned RCC
         shell: bash
         run: |
           set -Eeuo pipefail
           curl --fail --location --silent --show-error \
-            https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.8/rcc-linux64 \
             --output rcc.download
           printf '%s  %s\n' \
-            7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428 \
+            ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 \
             rcc.download | sha256sum --check --status -
           mv rcc.download rcc
           chmod +x rcc
@@ -58,6 +58,18 @@ jobs:
         run: |
           set -euo pipefail
           image=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+          cid=""
+          cleanup_failed_start() {
+            status=$?
+            trap - EXIT
+            if [[ "$status" -ne 0 && "$cid" =~ ^[0-9a-f]{64}$ ]]; then
+              docker rm --force "$cid" >/dev/null
+              remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+              [[ -z "$remaining" ]]
+            fi
+            exit "$status"
+          }
+          trap cleanup_failed_start EXIT
           docker pull "$image"
           cid=$(docker run --detach --pull=never --rm \
             --name "actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
@@ -80,6 +92,7 @@ jobs:
           echo "ACTIONS_INVOICE_TEST_POSTGRES=$url" >> "$GITHUB_ENV"
           echo "ACTIONS_TEST_POSTGRES_URL=$url" >> "$GITHUB_ENV"
           echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" >> "$GITHUB_ENV"
+          trap - EXIT
 
       - name: Measure portable package suite coverage
         run: rcc run -r developer/toolkit.yaml --dev -t Coverage
@@ -92,7 +105,8 @@ jobs:
           cid="${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}"
           if [[ -n "$cid" ]]; then
             [[ "$cid" =~ ^[0-9a-f]{64}$ ]]
-            docker rm --force "$cid"
+            remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+            if [[ -n "$remaining" ]]; then docker rm --force "$cid"; fi
             for attempt in {1..10}; do
               remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
               if [[ -z "$remaining" ]]; then break; fi

@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import stat
+import subprocess
 import sys
 import zipfile
 from io import BytesIO
@@ -53,7 +54,7 @@ def _rcc_path() -> Path | None:
     if configured:
         return Path(configured)
     candidate = (
-        Path(__file__).resolve().parents[2] / "src/actions/server/bin/rcc-18.19.3"
+        Path(__file__).resolve().parents[2] / "src/actions/server/bin/rcc-18.19.8"
     )
     return candidate if candidate.is_file() else None
 
@@ -158,6 +159,44 @@ def test_source_snapshot_rejects_traversal(tmp_path):
     assert not (tmp_path / "escaped.py").exists()
 
 
+def test_generated_child_uses_private_home_instead_of_rcc_cache_home(tmp_path):
+    directory = tmp_path / "execution"
+    source = directory / "source"
+    source.mkdir(parents=True)
+    private_home = directory / "home"
+    private_home.mkdir()
+    cache_home = tmp_path / "rcc-cache"
+    cache_home.mkdir()
+    (source / "home_action.py").write_text(
+        "import os\n"
+        "from pathlib import Path\n"
+        "def inspect_home():\n"
+        "    home = Path(os.environ['HOME'])\n"
+        "    (home / 'user-created').write_text('private')\n"
+        "    return str(home)\n"
+    )
+    inputs, result = directory / "input.json", directory / "result.json"
+    inputs.write_text("{}")
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            GeneratedRccExecution._execution_helper(
+                {"module": "home_action", "actionName": "inspect_home"}
+            ),
+            str(source),
+            str(inputs),
+            str(result),
+        ],
+        env={"HOME": str(cache_home), "PATH": os.defpath},
+        check=True,
+        timeout=15,
+    )
+    assert json.loads(result.read_bytes()) == str(private_home)
+    assert (private_home / "user-created").read_text() == "private"
+    assert not (cache_home / "user-created").exists()
+
+
 @pytest.mark.parametrize("journal_kind", ["missing", "already-launched"])
 def test_explicit_work_items_mode_and_launch_replay_block_before_spawn(
     database_location,
@@ -199,7 +238,7 @@ def test_explicit_work_items_mode_and_launch_replay_block_before_spawn(
                 rcc = Path("/usr/bin/true")
                 monkeypatch.setattr(
                     "actions.server.foundry.rcc_execution.verify_rcc_version",
-                    lambda _rcc: "v18.19.3",
+                    lambda _rcc: "v18.19.8",
                 )
                 monkeypatch.setattr(
                     "actions.server.foundry.rcc_execution.subprocess.Popen",

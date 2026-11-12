@@ -54,7 +54,7 @@ def prepared_case(c, tmp_path, *, cancel=True, cleanup=None):
 
 
 def test_confirmed_cancel_is_terminal_replayable_and_has_no_outputs(claimed, tmp_path):
-    c = claimed()
+    c = claimed(model_published=True)
     t, first, ticket, runner, retained = prepared_case(c, tmp_path)
     result = runner.execute(c.caller, ticket, c.owner)
     assert result.status == RunStatus.CANCELLED
@@ -75,7 +75,7 @@ def test_confirmed_cancel_is_terminal_replayable_and_has_no_outputs(claimed, tmp
 
 
 def test_host_stop_without_cancel_intent_does_not_confirm(claimed, tmp_path):
-    c = claimed()
+    c = claimed(model_published=True)
     t, first, ticket, runner, _ = prepared_case(c, tmp_path, cancel=False)
     with pytest.raises(FenceRejected):
         runner.execute(c.caller, ticket, c.owner)
@@ -87,7 +87,7 @@ def test_host_stop_without_cancel_intent_does_not_confirm(claimed, tmp_path):
 def test_changed_confirmation_rejected_without_terminal_mutation(
     claimed, tmp_path, damage
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     t, first, ticket, runner, retained = prepared_case(c, tmp_path)
     runner.execute(c.caller, ticket, c.owner)
     outcome = retained[0]
@@ -125,7 +125,7 @@ def test_cancellation_between_final_check_and_publication(
     from actions.server.foundry.robot_execution import RobotExecutionResult
     from actions.server.foundry.robot_runtime_runner import _RobotOutputs
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     ticket = t.worker.claim(first.task_id)

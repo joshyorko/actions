@@ -67,6 +67,12 @@ class _GenericRequest(BaseModel):
     snapshot: ExecutionSnapshot
 
 
+class _HeadlessDiscoveryRequest(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid", strict=True)
+    limit: int = Field(default=3, ge=1, le=3)
+    cursor: str | None = Field(default=None, min_length=1, max_length=1024)
+
+
 class GenericClaimInvocation(_GenericRequest):
     claim: ClaimRef
 
@@ -162,6 +168,14 @@ class GenericCanvasExecution(CanvasPort):
             runner,
         )
         self.schemas = dict(reviewed.schemas, capability_invoke=_SCHEMA)
+        self.schemas[
+            "capability_discover"
+        ] = _HeadlessDiscoveryRequest.model_json_schema()
+        self.schemas["capability_discover"]["description"] = (
+            "Discover explicitly model-published capabilities with exact immutable "
+            "references and typed inputs. Discovery is not an execution grant or "
+            "a readiness check."
+        )
         boundary = (
             " Authorized immutable execution references and input schemas may appear "
             "for the active binding. References are not grants; availability indicates "
@@ -186,6 +200,28 @@ class GenericCanvasExecution(CanvasPort):
     async def call(
         self, caller: CanvasCaller, name: str, arguments: dict[str, JsonValue]
     ) -> CanvasReply:
+        if name == "capability_discover":
+            if caller.audience != "model" or caller.scope is not None:
+                raise AccessDenied("authenticated model context required")
+            from actions.server.foundry.headless_discovery import (
+                HeadlessCapabilityDiscovery,
+            )
+
+            discovery_request = _HeadlessDiscoveryRequest.model_validate_json(
+                _canonical(arguments, 4096)
+            )
+            page = await asyncio.to_thread(
+                HeadlessCapabilityDiscovery(
+                    self.deployments, self.outputs, self.authorization
+                ).page,
+                caller,
+                limit=discovery_request.limit,
+                cursor=discovery_request.cursor,
+            )
+            return CanvasReply(
+                summary="Authorized capability discovery.",
+                model_result=page.model_dump(mode="json", by_alias=True),
+            )
         if name != "capability_invoke" or "mode" not in arguments:
             reply = await self.reviewed.call(caller, name, arguments)
             if name in {"canvas_get", "canvas_inspect"}:
@@ -262,6 +298,11 @@ class GenericCanvasExecution(CanvasPort):
                     policies[0],
                     self.authorization,
                 )
+            from actions.server.foundry.model_invocation_publication import (
+                ModelInvocationPublicationGuard,
+            )
+
+            publication_guard = ModelInvocationPublicationGuard(self.deployments)
             if isinstance(request, GenericClaimInvocation):
                 if not isinstance(service, GenericWorkItemExecution):
                     raise AccessDenied("ordinary none cannot consume a claim")
@@ -272,14 +313,25 @@ class GenericCanvasExecution(CanvasPort):
                     or claim.owner_id != self.worker_id
                 ):
                     raise AccessDenied("exact trusted-worker input claim required")
-                ticket = service.dispatch(
-                    caller,
-                    WorkItemClaim(claim.item_id, self.worker_id, claim.epoch),
-                    lease_seconds=60,
+                ticket = publication_guard.admit(
+                    actor,
+                    snapshot,
+                    lambda _resolved: service.dispatch(
+                        caller,
+                        WorkItemClaim(claim.item_id, self.worker_id, claim.epoch),
+                        lease_seconds=60,
+                    ),
                 )
             else:
-                ticket = service.dispatch_standalone(
-                    caller, request.inputs, request.idempotency_key, lease_seconds=60
+                ticket = publication_guard.admit(
+                    actor,
+                    snapshot,
+                    lambda _resolved: service.dispatch_standalone(
+                        caller,
+                        request.inputs,
+                        request.idempotency_key,
+                        lease_seconds=60,
+                    ),
                 )
             run = _one(self.outputs.db, Run, ticket.fence.run_id)
             if run.status in (RunStatus.PASSED, RunStatus.FAILED):

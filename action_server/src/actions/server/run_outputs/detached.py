@@ -550,9 +550,14 @@ class DetachedActionWorker:
         if self.cancelled(ticket):
             raise FenceRejected("detached cancellation requested")
         service, _, _ = self.authority._load(self.caller.actor, ticket.fence.run_id)
+        internal_child_ipc_factory = self._internal_child_ipc_factory(service.snapshot)
         if self.capability_runner is not None:
             robot = self.capability_runner.robot_for(service.registry, service.snapshot)
             if robot is not None:
+                if internal_child_ipc_factory is not None:
+                    raise FenceRejected(
+                        "internal child delegation requires a generated Action"
+                    )
                 return robot.execute(
                     self.caller,
                     ticket,
@@ -571,6 +576,11 @@ class DetachedActionWorker:
                 if self.logical_execution is not None
                 else {}
             ),
+            **(
+                {"internal_child_ipc_factory": internal_child_ipc_factory}
+                if internal_child_ipc_factory is not None
+                else {}
+            ),
         ).execute(
             self.caller.actor,
             ticket.fence,
@@ -583,3 +593,48 @@ class DetachedActionWorker:
                 else {}
             ),
         )
+
+    def _internal_child_ipc_factory(self, snapshot):
+        """Enable the local child API only for a verified pinned Action policy."""
+        if snapshot.capability_authority != "package-revision":
+            return None
+        stored = self.authority.deployments._repository.get_revision(
+            snapshot.deployment
+        )
+        if stored is None or stored.revision.ref != snapshot.deployment:
+            raise FenceRejected("pinned parent Deployment revision unavailable")
+        specification = stored.revision.specification
+        policies = [
+            policy
+            for policy in specification.internal_robot_delegations
+            if policy.parent_capability == snapshot.capability
+        ]
+        if not policies:
+            return None
+        if len(policies) != 1:
+            raise FenceRejected("pinned parent delegation is ambiguous")
+
+        from actions.server.foundry.package_registry import RegistryCapabilitySelection
+
+        selection = self.authority.outputs.capabilities.selection_for(
+            snapshot.capability, snapshot.runtime_plan
+        )
+        if type(selection) is not RegistryCapabilitySelection:
+            raise FenceRejected("internal child parent must be a Package Action")
+        self.authority.deployments._validate_internal_robot_delegations(
+            self.caller.actor, specification
+        )
+
+        from actions.server.foundry.internal_child_admission import (
+            InternalChildAdmission,
+        )
+        from actions.server.foundry.internal_child_ipc_server import (
+            InternalChildIPCServerHost,
+        )
+        from actions.server.foundry.internal_child_lifecycle import (
+            InternalChildRunLifecycle,
+        )
+
+        admission = InternalChildAdmission(self.authority)
+        lifecycle = InternalChildRunLifecycle(self.authority)
+        return lambda fence: InternalChildIPCServerHost(fence, admission, lifecycle)

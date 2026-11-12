@@ -119,7 +119,10 @@ _SPEC: dict[str, JsonValue] = TypeAdapter(CanvasSpecDocument).json_schema(
 )
 _SPEC["description"] = (
     "Complete declarative CanvasSpec for the app UI. Use schemaVersion, title, "
-    "visibility, bindingIds, and root. It contains logical binding labels only; "
+    "visibility, bindingIds, and root. Use actions.canvas-spec/v2 card nodes "
+    "with title/children for headings and grouped content. Tables require a "
+    "declared, authorized data binding; literal text does not populate table rows. "
+    "It contains logical binding labels only; "
     "it never contains Package references, results, credentials, or executable code."
 )
 _BINDINGS: dict[str, JsonValue] = {
@@ -248,7 +251,7 @@ SCHEMAS: dict[str, dict[str, JsonValue]] = {
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("appId", "expectedBase", "spec", "bindings", "idempotencyKey"),
-        description="Stage a complete new CanvasSpec revision with explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
+        description="Stage a complete new CanvasSpec revision. Semantic v2 supports titled card groups; tables require an authorized data binding, not pipe-separated text. Use explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
     ),
     "canvas_preview": _schema(
         {
@@ -1421,5 +1424,4 @@ def _inspection_result(
     return CanvasReply(
         summary="Canvas revisions inspected.",
         model_result=model,
-        view_state={"application": model},
     )

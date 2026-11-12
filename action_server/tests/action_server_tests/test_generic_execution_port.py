@@ -118,7 +118,7 @@ def test_closed_request_union_and_preserved_reviewed_schema(generic):
 
 @pytest.mark.parametrize("mode", ["optional", "producer"])
 def test_model_standalone_completion_replays_without_launch(generic, mode):
-    g = generic(mode, outputs=mode == "producer")
+    g = generic(mode, outputs=mode == "producer", model_publication=True)
     port, caller, runner, _ = wrapper(g)
     first = invoke(port, caller, standalone(g))
     execution = first.model_result["execution"]
@@ -131,7 +131,7 @@ def test_model_standalone_completion_replays_without_launch(generic, mode):
 
 
 def test_exact_claim_input_and_trusted_worker(generic):
-    g = generic()
+    g = generic(model_publication=True)
     item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
     claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(
         item, g.caller.worker_id, lease_seconds=60
@@ -164,7 +164,7 @@ def test_exact_claim_input_and_trusted_worker(generic):
 
 
 def test_model_only_and_exact_snapshot(generic):
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     port, caller, runner, _ = wrapper(g)
     request = standalone(g)
     with pytest.raises(AccessDenied):
@@ -180,7 +180,7 @@ def test_model_only_and_exact_snapshot(generic):
 
 
 def test_prior_launch_returns_reconciliation_without_retry(generic):
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     ticket = g.owner.dispatch_standalone(
         g.caller, {"value": "hello"}, "model-call", lease_seconds=60
     )
@@ -200,7 +200,7 @@ def test_replay_reauthorizes_without_disclosing_revoked_artifacts(generic):
     from actions.server.foundry.models import FoundryAccessGrant
     from actions.server.managed_work_items.contracts import Permission
 
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     port, caller, runner, _ = wrapper(g)
     request = standalone(g)
     first = invoke(port, caller, request)
@@ -229,7 +229,7 @@ def test_replay_reauthorizes_without_disclosing_revoked_artifacts(generic):
 
 
 def test_changed_standalone_replay_and_oversized_key_rejected(generic):
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     port, caller, runner, _ = wrapper(g)
     request = standalone(g)
     invoke(port, caller, request)
@@ -251,7 +251,7 @@ def test_optin_actual_rcc_model_wrapper(generic, tmp_path):
 
     if not os.environ.get("ACTIONS_GENERIC_WRAPPER_REAL_RCC"):
         pytest.skip("exclusive prepared RCC home required")
-    g = generic("optional", real=True)
+    g = generic("optional", real=True, model_publication=True)
     runner = PinnedGenericRccRunner(
         load_prepared_rcc_environment(
             Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
@@ -270,7 +270,7 @@ def test_terminal_claim_projection_checks_independent_current_epoch(generic):
     from actions.server.data_queries.review_models import FencedWorkItem
     from actions.server.run_outputs.service import FenceRejected
 
-    g = generic()
+    g = generic(model_publication=True)
     item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
     claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(
         item, g.caller.worker_id, lease_seconds=60
@@ -308,7 +308,7 @@ def test_failed_launch_is_not_retried(generic):
                 _update(service.db, Run, run.id, {"result": _canonical(record, 65536)})
             raise RuntimeError("fixture process outcome uncertain")
 
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     port, caller, runner, _ = wrapper(g, UncertainRunner())
     with pytest.raises(RuntimeError, match="uncertain"):
         invoke(port, caller, standalone(g))
@@ -327,7 +327,7 @@ def test_terminal_projection_rejects_state_corruption(generic, corruption):
     from actions.server.run_outputs.models import RunAttempt, RunPin
     from actions.server.run_outputs.service import FenceRejected
 
-    g = generic()
+    g = generic(model_publication=True)
     item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
     claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(
         item, g.caller.worker_id, lease_seconds=60
@@ -363,7 +363,7 @@ def test_uncertain_running_projection_rejects_state_corruption(generic, corrupti
     from actions.server.run_outputs.models import RunAttempt, RunPin
     from actions.server.run_outputs.service import FenceRejected
 
-    g = generic("optional")
+    g = generic("optional", model_publication=True)
     ticket = g.owner.dispatch_standalone(
         g.caller, {"value": "hello"}, "model-call", lease_seconds=60
     )

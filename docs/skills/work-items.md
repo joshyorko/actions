@@ -1,5 +1,34 @@
 # Work Items
 
+Model publication is separate from managed Work Item grants. A candidate MCP
+facade must require an explicit trusted publication decision and recheck it
+alongside current caller grants for each request. Project typed, bounded status
+and authorized output references rather than forwarding payloads, review data,
+log text or artifact bytes into model context. Model enqueue must not supply a
+review proposal, and model cancellation must not supply retry reconciliation
+evidence. Trusted worker claim and completion remain separate operations.
+The isolated facade's component tests do not establish native startup wiring or
+an installed worker-backed queue flow. Model publication must identify exact
+QueueRefs per operation; queue listing intersects that scope with READ authority
+and returns a cursor for the visible set, not the backend cursor. Host wiring
+must still prove that publication revocation cannot race a mutating admission.
+The immutable `DeploymentSpecification.model_published_work_item_queues`
+selection stores exact queue IDs with a closed operation set, scoped by the
+owning Deployment and Workspace. It is independent of
+`model_published_capabilities` and the per-capability Work Item input/output
+policy; an empty selection is omitted from canonical serialization to preserve
+legacy revision bytes. A host must resolve selected IDs to exact current queue
+references and recheck live domain grants. The selection itself grants no queue
+permission, and its schema does not establish installed host wiring.
+
+The candidate internal child-Run client is a contract only until Runtime
+installs its scoped transport. It exposes bounded submit, status and cancellation
+operations for a delegated binding, with a stable Action-supplied logical key.
+Result references contain metadata, not output bytes, and confer no read
+authority. `cancel_pending` is not terminal cancellation. Internal child Runs
+need host-side delegation and lineage; they must not manufacture MCP Task
+receipts or infer model publication.
+
 ## Current Boundary
 
 `actions-work-items` exposes `actions.work_items`, `actions.workitems`, and `actions_work_items`. Preserve import identity and the producer-consumer lifecycle: reserve input, create parent-linked output, then release done or failed.
@@ -1334,6 +1363,23 @@ separate cleanup ownership.
 
 ### Model invocation discovery
 
+Qualify `managed_items_enqueue` through the model-facing MCP facade separately
+from public HTTP enqueue/claim. Native bootstrap/helper calls with a simulated
+audience establish facade admission and replay, not transport authentication or
+Robot execution. Check a durable PENDING item, same-key replay of its identity,
+app-audience exclusion and denial without admission for a different Actor.
+The installed detached Action-to-Robot vertical does not exercise a managed
+Work Item claim; joined trusted-worker/Robot completion remains a separate gate.
+`test_managed_work_items_real_robot_vertical.py` supplies that joined gate using
+the same installed wheel identities and prepared RCC inputs. A standard MCP
+client discovers and calls model enqueue over HTTP/ASGI, checks replay, then a
+separate trusted worker claims and executes the Robot. The Robot reads the
+actual input carrier; the test checks terminal Work Item/Run state, authorized
+outputs and foreign-principal denial on SQLite and PostgreSQL. Caller identity
+is an owned synthetic fixture; external-host authentication and packaged CLI
+startup remain separate. The existing hosted installed script requires its
+SQLite case alongside the four detached-child cases, with no skipped cases.
+
 `canvas_get` and `canvas_inspect` may expose `invocationDescriptors` to the authenticated model audience for an exact currently active Canvas binding with either an explicit generic Work Items policy or an ordinary mode-none capability without a queue policy. Each descriptor supplies the immutable execution snapshot, binding ID, input mode, exact deployment-scoped input queue, standalone eligibility, and `inputSchema`. Read the schema through the immutable package registry, verifying its selected capability/runtime plan and input-schema digest; never copy a mutable Action record. Bound the original schema to 32 KiB before projection; omit oversized descriptors without poisoning the existing UI read. Strip schema default/example annotations while preserving property names (including a property literally named `default`), aliases, required fields and validation constraints. No result schema is added in this slice. Resolve these from the retained Deployment and its declared default plan; require live execution and queue permissions plus a configured RCC provider. Availability is explicitly `authorized`, with `invocationReadiness: not-checked`: this is an authority-qualified reference, not proof that the prepared runner environment matches the selected profile/plan. Actual invocation still validates execution readiness. Stale revisions, denied authority, unsupported providers or input-linked output routing, app-scoped audiences and bindings missing a required generic policy do not acquire an executable descriptor. The descriptor is a reference, never a grant: invocation must reauthorize all authority. Do not copy app-private metadata, tokens, source, or results into this model projection. Ordinary mode-none capabilities expose inputMode none, inputQueue null and standaloneAllowed true. Their input schema comes from the immutable selected Package capability and plan. They use StandaloneActionExecution on common Run authority without a synthetic Work Item, invented optional policy or queue grants. Only standalone typed inputs and an idempotency key are accepted; ClaimRef is rejected. App and model requests share this service while preserving separate audience routes and app provenance. Bound only the new descriptor payload (128 KiB and the canonical Canvas MAX_BINDING_COUNT of 32), preserving existing Canvas history limits. Unsupported input-linked routing must be filtered before constructing its execution adapter so valid UI inspection remains available.
 
 Discovery must not register Run admission or mint grants. Generic dispatch, like activated reviewed dispatch, registers only its exact already resolved and authorized snapshot inside the same SQL transaction as admission. Registration is rolled back on failed admission/claim and remains idempotent; startup and discovery remain side-effect free. A fresh ordinary qualification must omit fixture pre-registration to exercise this join. Explicit host execution and queue grants remain separate trusted administrative setup.
@@ -1496,3 +1542,71 @@ actual selected runner. Standalone eligibility must continue rejecting Work Item
 consumers. Preserve claim-policy/declaration agreement, no-output restrictions,
 current activation, host identity and preparation checks. Synthetic readiness
 stubs prove sequencing only; include the actual runner in admission regressions.
+
+Internal child Run lineage is identity metadata, not a Task receipt or an
+authorization grant. The additive lineage table records a stable parent,
+binding and logical-key digest without an attempt epoch, and uniquely associates
+one child Run. Its Run IDs have no database foreign keys: the eventual host
+admission must verify both references and their Workspace inside the same
+transaction as the fenced, authorized child admission. The model and SQLite
+migration alone do not provide delegation policy, a Runtime transport, detach
+or cancellation semantics, PostgreSQL qualification, or a working child Run.
+
+For a model queue mutation, check the current exact Deployment revision and its
+explicit queue-operation selection in the same transaction as the bounded domain
+call, acquiring the Run Counter and then Workspace lock. The authenticated model
+caller has no worker identity; the domain service must still check live grants.
+The standalone guard is not native MCP wiring, and component concurrency tests
+on SQLite do not establish PostgreSQL parity or installed host behavior.
+The model facade sends validated queue-targeted calls through the atomic guard
+and existing domain port on one worker thread; without a guard those tools are
+hidden and their calls are denied. Workspace queue listing runs its bounded scan and current publication filtering
+in one transaction; backend cursors remain private. Native startup, PostgreSQL
+parity and installed host behavior still require qualification.
+The model publication policy adapter must resolve bounded current Deployment
+heads and exact selected queue references against the live managed catalog on
+its own worker-thread database connection. It scopes to the trusted actor and
+Workspace and intersects current queue grants; overflow or ambiguity denies the
+catalog. Its preflight result is not authority for a later call: the atomic
+queue guard must recheck publication and the domain port must recheck grants.
+Native Canvas startup attaches the managed model facade using the existing
+trusted model principal, its configured Actor and Workspace, current publication
+policy, and the atomic guard. It does not inherit the worker identity. The MCP
+assembler reserves the managed tool names against Action collisions. Source
+startup tests do not qualify installed Runtime behavior or PostgreSQL parity.
+Deployment specifications can persist an internal Robot delegation selection
+for a deployed parent capability: named bindings pin a target Deployment
+revision, capability and Runtime Plan in the same Workspace, with an explicit
+parent-exit choice and a provisional maximum child count of 16. The parent
+Deployment revision is implicit so its specification does not refer to the
+revision digest that is computed from that same specification. Empty selections
+are omitted from canonical serialization to preserve earlier revision hashes.
+This immutable selection does not prove that a target is a Robot, grant execute
+permission, or implement admission or lifecycle behavior. A host still needs to
+resolve the selected revisions, verify target kind and current grants, and
+enforce one-level lineage, retry identity and the selected exit behavior before
+admission. The count cap and exit values do not yet define complete lifecycle
+semantics or qualify an installed Action-to-Robot implementation.
+Model-facing Work Item projections omit parent and child IDs: the domain
+ItemView does not carry queue identity for those references, and reviewed
+completion can create children in an unpublished output queue. This projection
+restriction does not change the domain or REST ItemView contracts.
+Deploying an internal Robot delegation requires authorization of each target
+Deployment, Package, capability and Runtime Plan reference, a registry-verified
+RCC Robot selection, and resolution of the exact activated target under existing
+execute checks. The locked deployment preflight repeats these checks. This does
+not yet implement child admission, host policy refresh or installed execution.
+The standalone internal child-admission component rechecks the live parent
+fence, current Deployment delegation, exact Robot target and grants inside one
+transaction, then stores ordinary detached Run lineage with a stable logical
+key. SQLite tests cover competing admissions and rollback inventories; the
+fixture uses synthetic compilation/preparation and PostgreSQL locking remains
+unverified. This component is not connected to Runtime IPC, child status or
+cancellation, and does not enforce parent-exit lifecycle yet.
+Positive model Task fixtures must explicitly publish the selected capability
+before resolving its immutable Deployment snapshot. Keep unpublished cases for
+model-denial coverage; trusted claimed-worker dispatch remains a separate path.
+The private Core child transport frames bounded JSON over an invocation-owned
+local socket and has no caller-supplied parent identity. Socketpair tests prove
+only the local codec: the RCC env-exec forwarding, host binding and installed
+Action-to-Robot path remain unverified, including Windows behavior.

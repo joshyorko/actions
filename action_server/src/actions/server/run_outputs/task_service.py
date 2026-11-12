@@ -191,9 +191,17 @@ class TaskService:
             raise TaskUnavailable("Task unavailable")
         # Readiness is host configuration, not a request-provided callback or grant.
         self._require_ready(actor, snapshot)
+        from actions.server.foundry.model_invocation_publication import (
+            ModelInvocationPublicationGuard,
+        )
+
         with _transaction(self.db):
-            outcome = self.detached.admit_outcome(
-                actor, snapshot, inputs, idempotency_key
+            outcome = ModelInvocationPublicationGuard(self.detached.deployments).admit(
+                actor,
+                snapshot,
+                lambda _resolved: self.detached.admit_outcome(
+                    actor, snapshot, inputs, idempotency_key
+                ),
             )
             self._require_ready(actor, snapshot)
             return self._record_admission(actor, workspace_id, outcome)
@@ -226,11 +234,21 @@ class TaskService:
             raise TaskUnavailable("Task unavailable")
         self._require_claimed_ready(actor, snapshot, claim)
         service = self.detached.claimed_service(snapshot)
+        from actions.server.foundry.model_invocation_publication import (
+            ModelInvocationPublicationGuard,
+        )
+
         # Match the existing Generic lock order before any Run row lock.
         with service._transaction():
             self._require_claimed_ready(actor, snapshot, claim, scope_only=True)
-            outcome = self.detached.admit_claimed(
-                ManagedCaller(actor=actor, worker_id=claim.owner_id), snapshot, claim
+            outcome = ModelInvocationPublicationGuard(self.detached.deployments).admit(
+                actor,
+                snapshot,
+                lambda _resolved: self.detached.admit_claimed(
+                    ManagedCaller(actor=actor, worker_id=claim.owner_id),
+                    snapshot,
+                    claim,
+                ),
             )
             self._require_claimed_ready(actor, snapshot, claim, scope_only=True)
             return self._record_admission(actor, workspace_id, outcome)
@@ -486,6 +504,28 @@ class TaskService:
                         if cancellation == "active_cancelled"
                         else "Cancellation requested; outcome not confirmed."
                     ),
+                    None,
+                )
+            if (
+                intent is None
+                and run.status == RunStatus.CANCELLED
+                and pin.current_attempt_id
+            ):
+                from actions.server.run_outputs.cancellation_confirmation import (
+                    validate_standalone_stopped_cancellation,
+                )
+
+                validate_standalone_stopped_cancellation(
+                    self.db, self.outputs.capabilities, snapshot, run, pin
+                )
+                return TaskSnapshot(
+                    run.id,
+                    "cancelled",
+                    int(receipt.created_ms),
+                    int(pin.state_updated_ms),
+                    int(receipt.ttl_ms),
+                    self.policy.poll_interval_ms,
+                    "Cancelled; execution stopped and descendants reaped.",
                     None,
                 )
             if not pin.current_attempt_id:

@@ -92,7 +92,7 @@ def create(c, t):
 
 
 def test_claimed_task_admits_once_without_attempt_then_worker_joins(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     before = len(c.db.all(RunAttempt))
     first = create(c, t)
@@ -125,7 +125,7 @@ def test_claimed_task_admits_once_without_attempt_then_worker_joins(claimed):
 
 
 def test_existing_synchronous_admission_cannot_become_task(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     c.owner.admit_claimed(c.caller, t.claim)
     with pytest.raises((AccessDenied, FenceRejected)):
@@ -134,7 +134,7 @@ def test_existing_synchronous_admission_cannot_become_task(claimed):
 
 
 def test_pending_cancel_is_terminal_and_idempotent(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     t.tasks.cancel(c.caller.actor, t.snapshot.workspace_id, first.task_id)
@@ -153,7 +153,7 @@ def test_pending_cancel_is_terminal_and_idempotent(claimed):
 
 
 def test_active_cancel_remains_observable_and_cannot_relaunch(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     ticket = t.worker.claim(first.task_id)
@@ -169,7 +169,7 @@ def test_active_cancel_remains_observable_and_cannot_relaunch(claimed):
 
 
 def test_old_task_cannot_cancel_new_claim_epoch(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     with c.db.transaction():
@@ -186,7 +186,7 @@ def test_old_task_cannot_cancel_new_claim_epoch(claimed):
 
 
 def test_task_receipt_insert_failure_rolls_back_admission(claimed, monkeypatch):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     before = len(c.db.all(Run))
     from actions.server.run_outputs import task_service as module
@@ -210,7 +210,7 @@ def test_task_receipt_insert_failure_rolls_back_admission(claimed, monkeypatch):
 def test_claimed_task_projects_terminal_robot_receipt_and_replays(claimed, failed):
     from action_server_tests.test_robot_runtime_runner import SyntheticAdapter
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     ticket = t.worker.claim(first.task_id)
@@ -249,7 +249,7 @@ def test_claimed_task_run_permissions_remain_independent(claimed, active):
     from actions.server.run_outputs.service import RunOutputControlPlane
     from actions.server.run_outputs.task_service import TaskUnavailable
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     control = RunOutputControlPlane(c.db)
     control.grant(c.caller.actor, t.snapshot.deployment, {"execute"})
@@ -272,7 +272,7 @@ def test_claimed_task_run_permissions_remain_independent(claimed, active):
 
 
 def test_cancel_postvalidation_failure_rolls_back_both_owners(claimed):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     t.worker.claim(first.task_id)
@@ -292,7 +292,7 @@ def test_queue_read_revocation_does_not_revoke_cancel(claimed, active):
     from actions.server.foundry.models import FoundryAccessGrant
     from actions.server.run_outputs.task_service import TaskUnavailable
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     if active:
@@ -323,7 +323,7 @@ def test_queue_read_revocation_does_not_revoke_cancel(claimed, active):
 def test_queue_cancel_failure_rolls_back_run_intent(claimed, monkeypatch):
     from actions.work_items._adapters._sql_review import SQLReviewQueue
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     t.worker.claim(first.task_id)
@@ -339,7 +339,7 @@ def test_claimed_task_concurrent_creation_is_one_receipt(claimed):
     from concurrent.futures import ThreadPoolExecutor
     from threading import Barrier
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     before = len(c.db.all(RunAttempt))
     barrier = Barrier(2)
@@ -361,7 +361,7 @@ def test_claimed_task_cancel_races_attempt_admission_without_relaunch(claimed):
     from concurrent.futures import ThreadPoolExecutor
     from threading import Barrier
 
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     before = len(c.db.all(RunAttempt))
@@ -395,7 +395,7 @@ def test_claimed_task_cancel_races_attempt_admission_without_relaunch(claimed):
 def test_claimed_task_cancel_does_not_read_provider_or_schema(
     claimed, monkeypatch, active
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     t = setup(c)
     first = create(c, t)
     if active:

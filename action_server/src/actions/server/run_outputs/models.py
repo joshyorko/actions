@@ -1,5 +1,8 @@
 """Normalized common Run extensions and trusted control-plane records."""
 
+import hashlib
+import json
+
 from pydantic.dataclasses import dataclass
 
 from actions.server._models import _db_rules
@@ -121,6 +124,52 @@ class RunTaskReceipt:
     _db_rules.unique_indexes.add("RunTaskReceipt.run_id")
 
 
+def run_child_identity_digest(
+    parent_run_id: str, binding_name: str, logical_key_digest: str
+) -> str:
+    """Return the stable identity key for a delegated child Run.
+
+    Callers hash the Action-supplied logical key before persistence. Attempt
+    identity is intentionally excluded; current-fence checks and the RunPin
+    request fingerprint validate replay authorization and request consistency.
+    """
+    identity = json.dumps(
+        [parent_run_id, binding_name, logical_key_digest],
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(identity).hexdigest()
+
+
+@dataclass(frozen=True)
+class RunChildLineage:
+    """Internal child-to-parent identity; this is not an MCP Task receipt.
+
+    ``logical_key_digest`` and ``identity_digest`` are host-computed digests.
+    The raw Action-supplied logical key is deliberately not persisted here.
+    This record captures identity only; it does not grant execution or read
+    authority and does not by itself make child admission atomic.
+    """
+
+    id: str
+    workspace_id: str
+    parent_run_id: str
+    child_run_id: str
+    binding_name: str
+    logical_key_digest: str
+    identity_digest: str
+    _db_rules.unique_indexes.update(
+        {
+            "RunChildLineage.id",
+            "RunChildLineage.child_run_id",
+            "RunChildLineage.identity_digest",
+        }
+    )
+    _db_rules.indexes.update(
+        {"RunChildLineage.workspace_id", "RunChildLineage.parent_run_id"}
+    )
+
+
 MODEL_CLASSES = [
     Workspace,
     RunAdmission,
@@ -130,4 +179,5 @@ MODEL_CLASSES = [
     RunOutput,
     RunExecutionIntent,
     RunTaskReceipt,
+    RunChildLineage,
 ]

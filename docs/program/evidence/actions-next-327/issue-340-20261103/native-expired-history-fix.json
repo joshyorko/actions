@@ -1,0 +1,241 @@
+{
+  "source_base": "7e594d61fa13e5373e9943c24019d22e490ed485",
+  "reported_surface": "Actual native Codex chat, 2026-11-05T22:28:48Z and 22:28:53Z; not ChatGPT-mode E1",
+  "application_id": "a90733e7-384a-4ada-a633-a9358e635f91",
+  "defect": "Authorized Canvas open attempted to recover history whose sealed outputs had expired. Both bound receipt validation and artifact inventory resolution rejected expiry, causing the entire app read to fail.",
+  "exact_host_sequence": [
+    {
+      "tool": "canvas_open",
+      "result": "PASS library"
+    },
+    {
+      "tool": "canvas_get",
+      "result": "FAIL generic unavailable/invalid/access-denied"
+    },
+    {
+      "tool": "canvas_inspect",
+      "result": "PASS invocation authorized; no widget resource"
+    },
+    {
+      "tool": "canvas_get",
+      "result": "FAIL even with exact revision"
+    }
+  ],
+  "repair": [
+    "Use existing terminal metadata acknowledgement validation only on history read paths. Keep worker ticket recovery/publication strict by default.",
+    "Classify authorized attached output expiry as an AccessDenied subtype. Omit all artifact handles when an inventory contains an expired output. Do not hide general authorization or integrity failures.",
+    "No retention extension, timestamp rewrite, new admission, retry, automatic RCC execution or schema migration."
+  ],
+  "counterexamples": {
+    "unbound_app_before": [
+      {
+        "tests": "4",
+        "failures": "1",
+        "errors": "0",
+        "skipped": "3"
+      }
+    ],
+    "bound_sqlite_and_postgresql_before": [
+      {
+        "tests": "2",
+        "failures": "2",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "first_partial_repair": "Fixed inventory expiry but installed replay still failed in validate_bound_record. Preserved exact internal traceback and proceeded to the bound metadata path.",
+    "installed_before": {
+      "mode": "before",
+      "calls": [
+        {
+          "name": "canvas_inspect",
+          "is_error": false
+        },
+        {
+          "name": "canvas_get",
+          "is_error": true
+        }
+      ],
+      "original_application": "a90733e7-384a-4ada-a633-a9358e635f91",
+      "application_read_authorized": true,
+      "same_counts": {
+        "run": 3,
+        "run_attempt": 3,
+        "run_admission": 1
+      },
+      "run_id": "3399a313-6431-407a-a846-44b4a31ae887"
+    },
+    "installed_final_after": {
+      "mode": "after",
+      "calls": [
+        {
+          "name": "canvas_inspect",
+          "is_error": false
+        },
+        {
+          "name": "canvas_get",
+          "is_error": false
+        },
+        {
+          "name": "canvas_get_state",
+          "is_error": false
+        },
+        {
+          "name": "canvas_execution_status",
+          "is_error": false
+        },
+        {
+          "name": "canvas_artifact",
+          "is_error": true
+        },
+        {
+          "name": "canvas_projection",
+          "is_error": true
+        },
+        {
+          "name": "canvas_dispatch",
+          "is_error": false
+        },
+        {
+          "name": "canvas_get",
+          "is_error": false
+        },
+        {
+          "name": "canvas_get",
+          "is_error": false
+        }
+      ],
+      "original_application": "a90733e7-384a-4ada-a633-a9358e635f91",
+      "application_read_authorized": true,
+      "same_counts": {
+        "run": 3,
+        "run_attempt": 3,
+        "run_admission": 1
+      },
+      "run_id": "3399a313-6431-407a-a846-44b4a31ae887",
+      "josh_pending_input_preserved": true,
+      "app_open": true,
+      "retained_run_completed": true,
+      "expired_artifact_denied": true,
+      "expired_projection_denied": true,
+      "duplicate_launch": false,
+      "original_draft_preserved": true
+    }
+  },
+  "qualification": {
+    "affected_views_and_resolver": {
+      "result": [
+        {
+          "tests": "386",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0"
+        }
+      ],
+      "limit": "386 passed on inventory/resolver repair before the final history-only ticket change."
+    },
+    "final_focused_history_catalog_and_corruption": [
+      {
+        "tests": "34",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "final_logical_publication_and_history": [
+      {
+        "tests": "42",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "negative_cases": [
+      "Expired artifact and projection reads still denied through installed MCP",
+      "Expired read-only history does not allow worker retained_ticket recovery",
+      "Corrupted output seal remains rejected even after expiry",
+      "Pending publication cannot use terminal acknowledgement",
+      "Revocation remains AccessDenied rather than expiry classification",
+      "Repeated execute of an expired completed Run does not launch again"
+    ],
+    "lint": "invoke lint PASS; optional Markdown linter unavailable",
+    "types": "invoke typecheck PASS, 703 source files",
+    "installed_wheel": {
+      "wheel": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+      "sha256": "2b568aa578a8c42acd0402e497fbfebc343d845ae3c390074201b678adf48f41",
+      "changed_members": [
+        "actions/server/foundry/generic_view.py",
+        "actions/server/foundry/generic_work_item_execution.py",
+        "actions/server/foundry/standalone_execution.py",
+        "actions/server/run_outputs/service.py",
+        "actions_runtime-1.1.0a60.dist-info/RECORD"
+      ],
+      "frontend_and_rcc_unchanged": true
+    },
+    "preservation": {
+      "same_key": true,
+      "preserved_counts": {
+        "run": 3,
+        "run_attempt": 3,
+        "run_admission": 1
+      },
+      "wheel": {
+        "wheel": "actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+        "sha256": "2b568aa578a8c42acd0402e497fbfebc343d845ae3c390074201b678adf48f41",
+        "changed_members": [
+          "actions/server/foundry/generic_view.py",
+          "actions/server/foundry/generic_work_item_execution.py",
+          "actions/server/foundry/standalone_execution.py",
+          "actions/server/run_outputs/service.py",
+          "actions_runtime-1.1.0a60.dist-info/RECORD"
+        ],
+        "frontend_and_rcc_unchanged": true
+      }
+    }
+  },
+  "ci_contract_repair": {
+    "head": "7e594d61fa13e5373e9943c24019d22e490ed485",
+    "runtime_run": "https://github.com/joshyorko/actions/actions/runs/42110012563",
+    "toolkit_run": "https://github.com/joshyorko/actions/actions/runs/42110012456",
+    "confirmed_failure": "test_genuine_mcp_sdk_authors_and_reconnects_to_common_sql indexed resourceUri on every tool, including now-model-only canvas_inspect. Same test failed all three Runtime OS lanes and Linux toolkit/invoice lanes.",
+    "change": "Explicitly require no resourceUri for inspection and retain exact Canvas URI assertions for every other tool. The real SDK author/reconnect cases pass SQLite and PostgreSQL. No gate removed."
+  },
+  "limits": [
+    "Actual native invocation now returns a valid active app; Josh must confirm visual interaction.",
+    "Original native query-result-before-approval wiring remains open. No ChatGPT E1, merge readiness or public release claim.",
+    "Current-head hosted CI must rerun after push."
+  ],
+  "cleanup": {
+    "owned_postgresql": "stopped and removed; transient DSN receipt removed",
+    "live_service": "preserved for Josh, with same private credential, existing drafts and pending input",
+    "new_agents": 0
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "learning": "Authorized app availability is independent of output retention. History acknowledgements preserve terminal provenance; artifact access and mutations stay strict.",
+    "evidence": "Real host failure; deterministic SQLite/PostgreSQL counterexamples; installed authenticated public MCP fail-before/pass-after.",
+    "ambiguity_removed": "Successful immediate reopen does not establish reopen after retention expiry.",
+    "remaining_uncertainty": "Manual current host interaction and fresh exact-head CI remain pending."
+  },
+  "upstream_disposition": "none; local Actions history/retention contract defect",
+  "code_sha256": {
+    "action_server/src/actions/server/foundry/generic_view.py": "219b3ee43548b91442c9657a2825e533d8c16c640ee954cb6c2c7ce7d1d5bc96",
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "f88052994be0d81ec12e037c156e6d1ce8d7cde5ce55a9f326bebff3424bb444",
+    "action_server/src/actions/server/foundry/standalone_execution.py": "3d45f79bda55fec62836e945af27ca68422ab8025e561ae65bcfe2eb9db0a435",
+    "action_server/src/actions/server/run_outputs/service.py": "625bd57182194cf5e20934b672bae4b263dc8dce53fc655d2ad69d3a647c50bd"
+  },
+  "raw_sha256": {
+    "native-completed.sanitized.json": "d83f2d1fea910c97f82dc595bea90e747632ace3edb109b01972d952591b264e",
+    "output-retention.json": "9cd2b6991deaf54c2f64a77ea102c4ec69e6604ee215b39abb6d4ed8be7ce830",
+    "before.xml": "aa22eb1047d54d059489c740a8ce4b9c6a1e4a1a28ce94d1da1f5ce7bf80f4f9",
+    "bound-before.xml": "8bd4339d9994432557ad76d1ea63c173cfc1411e744cf69fb41e1e6c9eb2b700",
+    "affected.xml": "680931c96c044fe84fde847a68ac2688129113f158c6969509115ff74fe92797",
+    "bound-after.xml": "067e8074e1829bab738806b54ef855ba93d1c6ae691e05f838b378d73f492858",
+    "logical-regression.xml": "f3a2ce675658f8adc17da4801d6d6faed62e785d9a46ae4dba7fca9b23301ea8",
+    "internal-trace.log": "af1396bcbebf2198fe68eba214ee2741bb34896924adbb10f9db070b6f50335e",
+    "before-installed.json": "7cba58a0de5744f4bf41dcef0b9fac337fe29dcf71d7869f7d59b4a4f86dab88",
+    "after-installed.json": "589b7e76c07b091879bab5bbe06198732564cff898a02776392eaa04b56366df",
+    "ci7e-runtime.log": "2ac97ee2374d0085ea7ec2454eac770674b917149e13974d309b25d6bfc339d2",
+    "ci7e-toolkit.log": "9086a8d1b58c407249595218cd004bda2f3f329d6d91662570b7980eceda966f"
+  }
+}

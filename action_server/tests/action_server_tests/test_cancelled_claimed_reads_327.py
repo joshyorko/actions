@@ -27,7 +27,7 @@ disable_feedback = disable_feedback_fixture
 
 
 def test_confirmed_cancel_retains_readable_run_attempt_and_ticket(claimed, tmp_path):
-    c = claimed()
+    c = claimed(model_published=True)
     _, first, ticket, runner, _ = prepared_case(c, tmp_path)
     result = runner.execute(c.caller, ticket, c.owner)
 
@@ -46,7 +46,7 @@ def test_confirmed_cancel_retains_readable_run_attempt_and_ticket(claimed, tmp_p
 def test_unconfirmed_cancellation_keeps_active_execution_readable(
     claimed, tmp_path, monkeypatch
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     _, first, ticket, runner, _ = prepared_case(c, tmp_path)
 
     class BeforeConfirmation(Exception):
@@ -74,7 +74,7 @@ def test_unconfirmed_cancellation_keeps_active_execution_readable(
 
 
 def test_cancelled_ticket_cannot_heartbeat_or_publish(claimed, tmp_path):
-    c = claimed()
+    c = claimed(model_published=True)
     _, first, ticket, runner, _ = prepared_case(c, tmp_path)
     runner.execute(c.caller, ticket, c.owner)
     guarded = c.owner.outputs(c.caller, ticket)
@@ -92,7 +92,7 @@ def test_cancelled_ticket_cannot_heartbeat_or_publish(claimed, tmp_path):
 def test_cancelled_execution_read_rejects_changed_retained_provenance(
     claimed, tmp_path, damage
 ):
-    c = claimed()
+    c = claimed(model_published=True)
     _, first, ticket, runner, _ = prepared_case(c, tmp_path)
     runner.execute(c.caller, ticket, c.owner)
 
@@ -113,7 +113,7 @@ def test_cancelled_execution_read_rejects_changed_retained_provenance(
 
 
 def test_cancelled_execution_read_rechecks_live_read_authority(claimed, tmp_path):
-    c = claimed()
+    c = claimed(model_published=True)
     _, _, ticket, runner, _ = prepared_case(c, tmp_path)
     runner.execute(c.caller, ticket, c.owner)
     changed = 0

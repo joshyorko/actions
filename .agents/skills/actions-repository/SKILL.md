@@ -64,6 +64,14 @@ The parent task remains incomplete until every child receipt is integrated or re
 
 Run the smallest focused test while iterating, then the affected package's complete suite, configured lint/type checks, and `git diff --check`. For cross-package contracts, run every affected package suite. Report exact commands, results, skipped gates, and remaining uncertainty.
 
+For a critical authorization, lifecycle, or recovery change, state the invariant
+and exercise a concrete counterexample against the real boundary when feasible.
+Show that the regression fails on the broken code and passes on the fixed code;
+record exact source and artifact identities, commands, cleanup, and skipped cells.
+A source fixture, an installed Runtime, hosted CI, and a real client host prove
+different paths; do not substitute one for another. Use formal modeling only
+when it answers an ordering question more effectively than executable tests.
+
 ## Common Failures
 
 - “Documentation is out of scope” → propose the exact canonical delta anyway.

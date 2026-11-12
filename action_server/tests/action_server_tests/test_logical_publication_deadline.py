@@ -109,7 +109,9 @@ def test_detached_passes_only_explicit_local_stop_for_bound_execution(
     worker.caller = SimpleNamespace(actor=object())
     worker.cancelled = lambda ticket: False
     service = SimpleNamespace(
-        registry=object(), snapshot=object(), outputs=lambda *args: object()
+        registry=object(),
+        snapshot=SimpleNamespace(capability_authority="legacy-action"),
+        outputs=lambda *args: object(),
     )
     worker.authority = SimpleNamespace(_load=lambda *args: (service, None, None))
     monkeypatch.setattr(

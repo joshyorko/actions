@@ -528,6 +528,37 @@ def test_reopen_recovers_existing_app_receipt_without_launch(case):
     assert c.runner.calls == 1
 
 
+def test_expired_results_do_not_prevent_opening_the_authorized_app(case):
+    from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.types import output_id_from_handle
+
+    c = case
+    state = submit(c)
+    done = call(c, "canvas_dispatch", request(state, action="execute")).execution
+    handle = done["outputs"][0]["handle"]
+    with c.db.transaction():
+        _update(c.db, RunOutput, output_id_from_handle(handle), {"expires_ms": "1"})
+    before = len(c.db.all(Run))
+    with pytest.raises(AccessDenied):
+        with c.outputs.resolve(c.actor, c.scope.application.workspace_id, handle):
+            pytest.fail("Expired output must remain inaccessible")
+
+    c.port = GenericCanvasView(c.port.execution)
+    reopened = call(c, "canvas_get", {}, c.model)
+    assert reopened.app_scope == c.scope
+    recovered = reopened.generic_interaction["executions"][0]
+    assert recovered["runId"] == done["runId"]
+    assert recovered["state"] == "completed" and not recovered.get("outputs")
+    status = call(c, "canvas_execution_status", request(state)).execution
+    assert status["runId"] == done["runId"] and status["state"] == "completed"
+    assert not status.get("outputs")
+    replay = call(c, "canvas_dispatch", request(state, action="execute")).execution
+    assert replay["runId"] == done["runId"] and replay["state"] == "completed"
+    with pytest.raises(AccessDenied):
+        call(c, "canvas_artifact", request(state, handle=handle))
+    assert len(c.db.all(Run)) == before and c.runner.calls == 1
+
+
 def test_alias_binding_resolving_same_snapshot_cannot_read_app_run(case, monkeypatch):
     c = case
     state = submit(c)

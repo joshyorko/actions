@@ -57,7 +57,7 @@ RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION = "v1-draft"
 COMPILER_NORMALIZATION_VERSION = "actions-foundry-normalizer/v1-draft"
 COMPILER_VERSION = "actions-package-compiler/v1"
 CANONICALIZER_VERSION = "actions-canonical-json/v1"
-RCC_ADAPTER_VERSION_RANGE = "==18.19.3"
+RCC_ADAPTER_VERSION_RANGE = "==18.19.8"
 _PACKAGE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,127}$")
 _CAPABILITY_ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9._:-]{0,127}$")
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -163,7 +163,7 @@ class PackageCompilationPolicy:
         if self.compiler_normalization_version != COMPILER_NORMALIZATION_VERSION:
             raise ValueError("unsupported compiler normalization version")
         if self.rcc_adapter_version_range != RCC_ADAPTER_VERSION_RANGE:
-            raise ValueError("this compiler supports only pinned RCC 18.19.3")
+            raise ValueError("this compiler supports only pinned RCC 18.19.8")
 
 
 @dataclass(frozen=True)
@@ -205,7 +205,7 @@ class PreparedRccEnvironment:
         ):
             raise ValueError("prepared RCC manifest identity must be a sha256 digest")
         if self.rcc_version != RCC_VERSION:
-            raise ValueError("prepared RCC cache must use pinned RCC 18.19.3")
+            raise ValueError("prepared RCC cache must use pinned RCC 18.19.8")
 
     def to_receipt_bytes(self) -> bytes:
         """Serialize the local preparation evidence without timestamps."""
@@ -1349,7 +1349,7 @@ class PinnedRccPackageBuildExecutor:
     def __init__(
         self, prepared_environment: PreparedRccEnvironment | None = None
     ) -> None:
-        self._rcc_binary = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
+        self._rcc_binary = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.8"
         self._rcc_home: Path | None = None
         self._prepared_environment = prepared_environment
 
@@ -1382,9 +1382,14 @@ class PinnedRccPackageBuildExecutor:
             raise RuntimeError("bundled RCC version output is not ASCII") from exc
         if reported_version != RCC_VERSION:
             raise RuntimeError("bundled RCC version mismatch")
-        publish_command = [str(self._rcc_binary)]
         if prepared is not None:
-            publish_command.append("--no-build")
+            # The trusted receipt binds these exact manifest bytes to an
+            # immutable artifact. Republishing a used live cache can snapshot
+            # runtime-created files and must not replace that pinned identity.
+            # Import/test still execute this artifact through RCC with no-build
+            # and validate the returned artifact identity.
+            return prepared.build_identity
+        publish_command = [str(self._rcc_binary)]
         publish_command.extend(
             [
                 "env",
@@ -1414,8 +1419,6 @@ class PinnedRccPackageBuildExecutor:
             specification_digest=published.specification_digest,
             artifact_digest=published.artifact_digest,
         )
-        if prepared is not None and build != prepared.build_identity:
-            raise RuntimeError("prepared RCC cache identity mismatch")
         return build
 
     def import_action(
@@ -1423,10 +1426,11 @@ class PinnedRccPackageBuildExecutor:
     ) -> dict[str, Any]:
         metadata_file = workspace / "action-metadata.json"
         helper = (
-            "import sys\n"
+            "import os, sys\n"
+            "source, destination = sys.argv[1], sys.argv[2]\n"
+            "os.environ['HOME'] = os.path.join(os.path.dirname(destination), 'home')\n"
             "from io import StringIO\n"
             "from actions._commands import metadata\n"
-            "source, destination = sys.argv[1], sys.argv[2]\n"
             "output = StringIO()\n"
             "status = metadata(path=source, __stream__=output)\n"
             "if status != 0: raise SystemExit(72)\n"
@@ -1452,8 +1456,9 @@ class PinnedRccPackageBuildExecutor:
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
     ) -> None:
         helper = (
-            "import io, sys, unittest\n"
+            "import io, os, sys, unittest\n"
             "package_dir, tests_dir = sys.argv[1], sys.argv[2]\n"
+            "os.environ['HOME'] = os.path.join(os.path.dirname(package_dir), 'home')\n"
             "sys.path.insert(0, package_dir)\n"
             "suite = unittest.defaultTestLoader.discover("
             "tests_dir, pattern='test_*.py', top_level_dir=tests_dir)\n"
@@ -1545,7 +1550,9 @@ class PinnedRccPackageBuildExecutor:
             # RCC's Linux worker-capability probe resolves ldconfig through PATH.
             path_entries = ["/usr/sbin", "/sbin", *path_entries]
         environment = {
-            "HOME": str(workspace / "home"),
+            # RCC namespaces materializations by HOME. Keep its cache identity
+            # stable; the Python helpers restore the private generated-code HOME.
+            "HOME": str(self._rcc_home),
             "PATH": os.pathsep.join(dict.fromkeys(path_entries)),
             "ROBOCORP_HOME": str(self._rcc_home),
             "ACTIONS_HOME": str(workspace / "actions-home"),

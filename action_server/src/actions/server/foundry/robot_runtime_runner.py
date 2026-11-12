@@ -446,6 +446,20 @@ class PinnedRobotRunner:
         is_cancelled = (
             cancelled if callable(cancelled) else (cancelled or Event()).is_set
         )
+
+        def confirm_cancellation(outcome):
+            from actions.server.run_outputs.cancellation_confirmation import (
+                confirm_claimed_robot_cancellation,
+                confirm_standalone_robot_cancellation,
+            )
+
+            confirm = (
+                confirm_claimed_robot_cancellation
+                if domain is not None
+                else confirm_standalone_robot_cancellation
+            )
+            return confirm(service, caller, ticket, outcome)
+
         if is_cancelled():
             raise FenceRejected("Robot execution cancelled")
         try:
@@ -461,20 +475,9 @@ class PinnedRobotRunner:
                 timeout_seconds=self.timeout_seconds,
             )
         except RobotCancellationStopped as stopped:
-            from actions.server.run_outputs.cancellation_confirmation import (
-                confirm_claimed_robot_cancellation,
-            )
-
-            return confirm_claimed_robot_cancellation(service, caller, ticket, stopped)
+            return confirm_cancellation(stopped)
         if is_cancelled():
-            from actions.server.run_outputs.cancellation_confirmation import (
-                confirm_claimed_robot_cancellation,
-            )
-
-            return confirm_claimed_robot_cancellation(
-                service,
-                caller,
-                ticket,
+            return confirm_cancellation(
                 RobotCancellationStopped(
                     result.launch, result.cleanup, directory=self.execution_root
                 ),
@@ -488,14 +491,7 @@ class PinnedRobotRunner:
                 or is_cancelled() is not True
             ):
                 raise
-            from actions.server.run_outputs.cancellation_confirmation import (
-                confirm_claimed_robot_cancellation,
-            )
-
-            return confirm_claimed_robot_cancellation(
-                service,
-                caller,
-                ticket,
+            return confirm_cancellation(
                 RobotCancellationStopped(
                     result.launch, result.cleanup, directory=self.execution_root
                 ),

@@ -14,6 +14,8 @@ from actions.server._rcc_runtime_adapter import get_rcc_location, verify_rcc_ver
 
 
 def prepare_runtime(root: Path, retained: Path | None):
+    pins = json.loads(Path(__file__).with_name("template.json").read_text())["pins"]
+    sdk_version = pins["actions-work-items"]
     target = root / "runtime.json"
     if target.exists():
         runtime = json.loads(target.read_text())
@@ -44,7 +46,7 @@ def prepare_runtime(root: Path, retained: Path | None):
         entries = list(wheels.glob("*.whl"))
         if (
             len(entries) != 1
-            or entries[0].name != "actions_work_items-0.5.0a1-py3-none-any.whl"
+            or entries[0].name != f"actions_work_items-{sdk_version}-py3-none-any.whl"
         ):
             raise ValueError("exact source candidate SDK required")
         with zipfile.ZipFile(entries[0]) as archive:
@@ -59,7 +61,7 @@ def prepare_runtime(root: Path, retained: Path | None):
             )
             if (
                 metadata["Name"] != "actions-work-items"
-                or metadata["Version"] != "0.5.0a1"
+                or metadata["Version"] != sdk_version
             ):
                 raise ValueError("SDK input metadata differs from candidate")
         sdk_hash = hashlib.sha256(entries[0].read_bytes()).hexdigest()

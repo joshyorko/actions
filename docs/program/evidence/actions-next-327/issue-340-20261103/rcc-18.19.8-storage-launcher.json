@@ -1,0 +1,209 @@
+{
+  "schema": "actions.release-storage-launcher-receipt/v1",
+  "source": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+  "runtime_wheel_sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+  "runtime_ci": {
+    "url": "https://github.com/joshyorko/actions/actions/runs/42075321722",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build (macos-py3.12-devmode)",
+        "databaseId": 127413853932,
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-py3.12-devmode)",
+        "databaseId": 127413854465,
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-py3.12-devmode)",
+        "databaseId": 127413854534,
+        "conclusion": "success"
+      }
+    ],
+    "pytest_summaries": [
+      "build (macos-py3.12-devmode)\tTest (not integration)\t2026-11-05T17:36:27.1217240Z ========= 2342 passed, 3399 skipped, 19 warnings in 179.81s (0:02:59) ==========",
+      "build (macos-py3.12-devmode)\tTest (integration)\t2026-11-05T17:50:28.6985680Z === 133 passed, 154 skipped, 5744 deselected, 1 warning in 838.20s (0:13:58) ===",
+      "build (windows-py3.12-devmode)\tTest (not integration)\t2026-11-05T17:42:46.0089701Z ========= 2260 passed, 3481 skipped, 17 warnings in 478.81s (0:07:58) =========",
+      "build (windows-py3.12-devmode)\tTest (integration)\t2026-11-05T18:12:25.1941673Z == 132 passed, 155 skipped, 5744 deselected, 1 warning in 1775.16s (0:29:35) ==",
+      "build (ubuntu-py3.12-devmode)\tTest (not integration)\t2026-11-05T17:45:54.1900613Z ========== 5675 passed, 66 skipped, 18 warnings in 779.24s (0:12:59) ===========",
+      "build (ubuntu-py3.12-devmode)\tTest (integration)\t2026-11-05T17:55:26.2896120Z === 133 passed, 154 skipped, 5744 deselected, 1 warning in 569.79s (0:09:29) ==="
+    ],
+    "platform_limit": "Windows/macOS passing jobs retain platform/provider skips; do not claim Linux-only Canvas storage on those platforms"
+  },
+  "immutable_installed_cli": {
+    "status": "PASS",
+    "source": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+    "scope": "Actual installed ordinary CLI; entire filesystem read-only except one external private work directory; no starter, no public listener; synthetic local bearer, not E1",
+    "phases": [
+      {
+        "tools": [
+          "canvas_apply",
+          "canvas_create",
+          "canvas_get",
+          "canvas_inspect",
+          "canvas_open",
+          "canvas_preview",
+          "canvas_release"
+        ],
+        "canvas_html_sha256": "c503f0fb4ec3503ffa7f6b1d42dd54fbda5a6b4a4394abcf12fbfb721a2c6083",
+        "canvas_open": "PASS",
+        "anonymous_foreign_origin_and_foreign_host_denied": true,
+        "phase": "fresh",
+        "row_counts": {
+          "action_package": 0,
+          "run": 0,
+          "run_attempt": 0
+        }
+      },
+      {
+        "tools": [
+          "canvas_apply",
+          "canvas_create",
+          "canvas_get",
+          "canvas_inspect",
+          "canvas_open",
+          "canvas_preview",
+          "canvas_release"
+        ],
+        "canvas_html_sha256": "c503f0fb4ec3503ffa7f6b1d42dd54fbda5a6b4a4394abcf12fbfb721a2c6083",
+        "canvas_open": "PASS",
+        "anonymous_foreign_origin_and_foreign_host_denied": true,
+        "phase": "restart",
+        "row_counts": {
+          "action_package": 0,
+          "run": 0,
+          "run_attempt": 0
+        }
+      }
+    ]
+  },
+  "same_path_full_consumer_restore": {
+    "status": "PASS",
+    "archive": "consumer8-quiesced.tar.gz",
+    "archive_bytes": 814366055,
+    "archive_sha256": "dc4bd9395f576a9920e9237cf819f78efc2f516e0591cfcfde29eed5be00a705",
+    "scope": "Stopped full consumer: installed prefix, SQL, source, generated revisions, objects, SDK execution journals, RCC content/cache and wheelhouse; original absolute path restored",
+    "tree_compare": "PASS before restart; bytes, symlinks and archived permissions",
+    "first_compare": "FAIL: tar default extraction removed setgid bit on one owned package-cache directory",
+    "permission_correction": {
+      "path": "consumer8/demo/rcc-home/pkgs/cache",
+      "original_and_archived_mode": "0o2775",
+      "first_restored_mode": "0o775",
+      "corrected_mode": "0o2775",
+      "cause": "default tar extraction applies umask; reproduction should use --same-permissions",
+      "product_defect": false
+    },
+    "restored_browser_and_seven_negatives": "PASS",
+    "worker_run_id": "dba54a3e-9767-4840-b8e3-d4e194d88a19",
+    "run_count": 2,
+    "attempt_count": 2,
+    "artifact_sha256": "a2f05e4792b5f34edf009c6c22c84fc10159799fedb49731dbce74f797804d0a",
+    "unknown_or_running_launch_recovery": false
+  },
+  "published104_sqlite": {
+    "status": "PASS",
+    "source": "20cddcdd913c838f468f878770e2ba8f31654bb6",
+    "baseline": {
+      "runtime": "1.0.4",
+      "core": "1.0.2",
+      "sdk": "0.4.4",
+      "schema": 15,
+      "root": "/var/tmp/codex-actions-release-20261104-_kxnuurn/published104/state",
+      "run_id": "1b8fa5a9-e582-457a-9592-47f3dde01c25",
+      "package_id": "dc543f32-4127-44de-9c38-b8ee18fd6905",
+      "action_id": "c3ed9d18-ca34-4100-921b-4ab52636c4b4",
+      "artifact_sha256": "c2a4fa13a5720a69efa7826650a4744d5a7a0960d31b9deb94f49d4452fc6e5e",
+      "scope": "Authentic installed published1.0.4 create_db and persisted legacy rows; this fixture does not execute an old Action"
+    },
+    "baseline_wheels": [
+      {
+        "name": "actions-runtime",
+        "version": "1.0.4",
+        "file": "actions_runtime-1.0.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "ab0925ddfbc804d4790b5bd839461310b851c3dedf5f4781e4b4c8472bcf5eba",
+        "url": "https://files.pythonhosted.org/packages/94/d3/4b019821c0333af2b21a0ce8765e5551166e77749c1452604ab6c5653d0e/actions_runtime-1.0.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "metadata_url": "https://pypi.org/pypi/actions-runtime/1.0.4/json"
+      },
+      {
+        "name": "actions-core",
+        "version": "1.0.2",
+        "file": "actions_core-1.0.2-py3-none-any.whl",
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+        "metadata_url": "https://pypi.org/pypi/actions-core/1.0.2/json"
+      },
+      {
+        "name": "actions-work-items",
+        "version": "0.4.4",
+        "file": "actions_work_items-0.4.4-py3-none-any.whl",
+        "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0",
+        "url": "https://files.pythonhosted.org/packages/87/0b/8f417d65e6e1fd85c158847f8858a1015c31042b24905cfb147d0a5d68b0/actions_work_items-0.4.4-py3-none-any.whl",
+        "metadata_url": "https://pypi.org/pypi/actions-work-items/0.4.4/json"
+      }
+    ],
+    "candidate_runtime_wheel_sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+    "old_schema": 15,
+    "new_schema": 23,
+    "legacy_rows_and_artifact_preserved": true,
+    "old_cli_refusal_exit": 1,
+    "upgraded_database_unchanged_after_old_cli": true,
+    "original_database_sha256": "e90ec00cfc07197cdceb5dbed353baf16fdb5e68d39bc7526c3d97c325aa3db5",
+    "backup_manifest_sha256": "10bb9ee404ade0c731db4776940a0ab9339a1ad00d9552e92565ae8f5e96a3d4",
+    "restore_manifest_sha256": "10bb9ee404ade0c731db4776940a0ab9339a1ad00d9552e92565ae8f5e96a3d4",
+    "published104_restored_read": "PASS",
+    "scope": "Real installed published SQLite schema15 -> installed candidate migration; retained disabled Action/Run metadata and actual artifact bytes; old CLI refuses newer schema; same-original-path backup restore read by published104",
+    "exclusions": [
+      "No old Action execution is claimed",
+      "Not a PostgreSQL external-database backup/restore",
+      "No new Canvas Run/Attempt or RCC journals existed in this legacy fixture",
+      "No live writer, unknown launch or active-job recovery was exercised"
+    ]
+  },
+  "actual_wheel_renderer": {
+    "sha256": "c503f0fb4ec3503ffa7f6b1d42dd54fbda5a6b4a4394abcf12fbfb721a2c6083",
+    "source": "Installed actions.server._static_contents.FILE_CONTENTS[canvas.html]; hash equals native MCP resource bytes",
+    "browser_status": "PASS",
+    "worker_run_id": "2ad364cf-a6e7-4cc1-b5b9-ddaf82bdb79b",
+    "run_count": 2,
+    "attempt_count": 2,
+    "artifact_sha256": "a08cad59896a557cf14e06497ca6621f6030bde3a32ba281ef75376786bd9390",
+    "negative_checks": {
+      "anonymous_denied": true,
+      "foreign_origin_denied": true,
+      "persisted_revocation_denied": true,
+      "inactive_revision_artifact_denied": true,
+      "rollback_restores_same_artifact": true,
+      "foreign_workspace_denied": true,
+      "business_run_audit_unchanged": true
+    },
+    "external_requests": [],
+    "browser_errors": [],
+    "staged_export_renderer_is_distinct": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7; both exercised separately"
+  },
+  "sbom": {
+    "result": "pass",
+    "scope": "dependency inventory and provenance evidence only",
+    "sbom_sha256": "e318b3b1f2bdf89e7c685b5c465d0d0b06d546ab1c4018a86b2888a7cb63a951",
+    "strict_active_graph": {
+      "result": "failed",
+      "error": "CycloneDX graph differs from active resolved dependencies"
+    },
+    "explained_inactive_edges": 29,
+    "evidence_sha256": {
+      "resolved-graph.json": "3826e2982b7da7f0eb8827657f9d6dd6fd390f4ab08f70e7be6968c5e1be17b8",
+      "declaration-reconciliation.json": "95ce55244df833d36e2b64395fbd1d59631e3a9175526533d859a497e3eef0ac"
+    },
+    "producer": "Committed optional devutils sbom group: cyclonedx-bom7.5.0; installed with Poetry --with sbom; no consumer metadata mutation"
+  },
+  "remaining_limits": [
+    "No PostgreSQL external database dump/restore in these local storage probes",
+    "No active-job/unknown-launch backup recovery",
+    "No arbitrary relocation of absolute Package/RCC references",
+    "Packaged keyboard/focus/narrow/empty/error acceptance not discharged by desktop invoice proof",
+    "Not ChatGPT E1 or VSIX/Devsy",
+    "No final all-platform distribution inventory or Actions publication authority"
+  ],
+  "upstream_disposition": "No new upstream defect; launcher probe initially expected403 instead of valid421 and corrected its wrapper shutdown; tar extraction needed archived setgid permission; SBOM optional producer group needed installation. Product guards unchanged."
+}

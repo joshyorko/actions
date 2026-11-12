@@ -1,0 +1,61 @@
+{
+  "active": false,
+  "applicationId": "3ea3af5d-3d49-4ef9-bb48-cc2dfd3dc68b",
+  "bindings": [],
+  "revisionId": "sha256:571816c6f710655015e2d6f92c4f8a4dcc51878fec4b7e6a72c7a57874207f99",
+  "spec": {
+    "bindingIds": [],
+    "root": {
+      "children": [
+        {
+          "children": [
+            {
+              "id": "connection-description",
+              "text": "The app draft is saved and readable.",
+              "type": "text"
+            }
+          ],
+          "id": "connection",
+          "title": "Dakota connected",
+          "type": "card"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "id": "sample-one-status",
+                  "text": "Status: Ready",
+                  "type": "text"
+                }
+              ],
+              "id": "sample-one",
+              "title": "Sample one",
+              "type": "card"
+            },
+            {
+              "children": [
+                {
+                  "id": "sample-two-status",
+                  "text": "Status: Ready",
+                  "type": "text"
+                }
+              ],
+              "id": "sample-two",
+              "title": "Sample two",
+              "type": "card"
+            }
+          ],
+          "id": "samples",
+          "title": "Sample data",
+          "type": "card"
+        }
+      ],
+      "id": "main",
+      "type": "stack"
+    },
+    "schemaVersion": "actions.canvas-spec/v2",
+    "title": "Dakota smoke test",
+    "visibility": ["model", "app"]
+  }
+}

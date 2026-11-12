@@ -1,0 +1,111 @@
+{
+  "defect": "Installed vertical packaged stale tracked Canvas instead of building current frontend",
+  "owner": "Actions installed artifact pipeline; not RCC upstream",
+  "old_packaged_canvas_sha256": "c503f0fb4ec3503ffa7f6b1d42dd54fbda5a6b4a4394abcf12fbfb721a2c6083",
+  "old_wheel_sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+  "failing_real_browser": {
+    "command": "node node_modules/@playwright/test/cli.js test --config playwright.canvas-harness.config.ts --workers=1 --grep official-bridge tests, serving exact wheel Canvas bytes",
+    "stats": {
+      "startTime": "2026-11-05T19:09:44.837Z",
+      "duration": 4633.463,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "case": "official bridge keeps unbroken semantic text within a narrow host viewport",
+    "expected_max_text_width": 284,
+    "actual_text_width": 7214
+  },
+  "passing_same_tests": {
+    "canvas_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+    "stats": {
+      "startTime": "2026-11-05T19:11:54.384Z",
+      "duration": 4374.73,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Existing unchanged official MCP Apps bridge and 300px/narrow text tests; same browser and host; changed only measured renderer bytes"
+  },
+  "fixed_wheel": {
+    "wheel": "/var/tmp/codex-actions-release-20261104-_kxnuurn/fresh-canvas-wheel/actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "eb91704d495b665bb9a8814e5bee872959206218930970b54da4d7deccafbf5f",
+    "prior_wheel_sha256": "307bf82ac5e1264bb492eff07e12bc2397d0da925a28e3e53f773e82d6ccf5d7",
+    "changed_members": [
+      "actions/server/_static_contents.py",
+      "actions_runtime-1.1.0a60.dist-info/RECORD"
+    ],
+    "canvas_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+    "all_other_members_equal": true,
+    "source_head": "5b02988998f4d89e3a1abe2383e7f1e9667c8c1d",
+    "source_generated_assets": "canonical inv build-frontend --no-install; public OAuth inputs checked"
+  },
+  "admission_probe": [
+    {
+      "profile": "old_stale",
+      "exit": 1,
+      "result": "embedded Canvas differs from the fresh frontend build"
+    },
+    {
+      "profile": "fresh",
+      "exit": 0,
+      "result": "embedded_canvas_sha256=e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7"
+    }
+  ],
+  "focused_regressions": "11 passed; developer/tests/test_internal_child_vertical_ci.py; includes actual ZIP stale/current renderer admission tests",
+  "fix": "Canonical frontend build before installed vertical wheel; pinned Node20.19.3; compare literal embedded Canvas to fresh dist; record source/asset hashes; regenerate tracked public static asset",
+  "live_dakota_connection": {
+    "missing_bearer_status": 403,
+    "wrong_bearer_status": 403,
+    "authenticated_discovery": "PASS",
+    "canvas_open": "PASS",
+    "canvas_resource_mime": "text/html;profile=mcp-app",
+    "canvas_sha256": "e0598e6ea995adc82195a7b2e8b5c1e335f213781bd94eb6313b5478c49c50a7",
+    "tools": [
+      "canvas_apply",
+      "canvas_create",
+      "canvas_get",
+      "canvas_inspect",
+      "canvas_open",
+      "canvas_preview",
+      "canvas_release"
+    ],
+    "endpoint": "http://127.0.0.1:18794/mcp",
+    "unit": "actions-341-dakota-e1.service",
+    "state": "RUNNING_FOR_JOSH_CHATGPT_TEST",
+    "runtime": "1.1.0a60",
+    "rcc": "18.19.8",
+    "wheel_sha256": "eb91704d495b665bb9a8814e5bee872959206218930970b54da4d7deccafbf5f",
+    "secret_logged": false,
+    "old_post2_data_touched": false,
+    "execution_profile": "not configured; connection/render verification; no execution authority granted",
+    "service_properties": [
+      "ActiveState=active",
+      "SubState=running",
+      "MainPID=164143",
+      "MemoryCurrent=136011776",
+      "CPUQuotaPerSecUSec=2s",
+      "MemoryMax=1073741824"
+    ],
+    "actual_chatgpt": "PENDING_JOSH",
+    "counts": {
+      "run": 0,
+      "run_attempt": 0,
+      "run_admission": 0
+    }
+  },
+  "native_connection_verification": {
+    "native_cli": "mcp get actions-post2-dakota --json; inspected privately",
+    "url_matches": true,
+    "private_authorization_header_matches": true,
+    "credential_emitted": false
+  },
+  "limits": [
+    "Actual ChatGPT rendering remains pending Josh",
+    "Live service is connection/render only: no execution profile or execution authority provisioned",
+    "No Actions merge or public publication performed"
+  ],
+  "upstream_disposition": "none; local Actions CI packaging defect"
+}

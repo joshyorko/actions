@@ -11,13 +11,16 @@ import hashlib
 import json
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
-from typing import Literal, Protocol
+from typing import TYPE_CHECKING, Literal, Protocol
 
 from mcp.types import CallToolResult, Resource, TextContent, Tool, ToolAnnotations
 from pydantic import JsonValue, TypeAdapter
 
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.run_outputs.types import Actor, CanvasResultScope, canonical_uuid
+
+if TYPE_CHECKING:
+    from actions.server.managed_work_items.mcp import ManagedWorkItemsMcp
 
 URI = "ui://action-canvas/v1/canvas.html"
 MODEL_TOOLS = frozenset(
@@ -42,7 +45,7 @@ APP_TOOLS = frozenset(
         "canvas_artifact",
     }
 )
-CAPABILITY_TOOLS = frozenset({"capability_invoke"})
+CAPABILITY_TOOLS = frozenset({"capability_invoke", "capability_discover"})
 RESERVED_TOOLS = (
     MODEL_TOOLS | APP_TOOLS | CAPABILITY_TOOLS | {"canvas_query", "canvas_page"}
 )
@@ -57,6 +60,7 @@ _READ_ONLY = frozenset(
         "canvas_execution_status",
         "canvas_artifact",
         "canvas_projection",
+        "capability_discover",
     }
 )
 _JSON = TypeAdapter(dict[str, JsonValue])
@@ -175,6 +179,7 @@ class CanvasMcp:
         from actions.server.foundry.app_sessions import AppSessions
 
         self._sessions = AppSessions()
+        self.managed_work_items_mcp: ManagedWorkItemsMcp | None = None
         self.port, self.authenticate, self.html = port, authenticate, html
         self.uri = URI
         self.resource = Resource(
@@ -218,9 +223,11 @@ class CanvasMcp:
                     idempotent_hint=name in _READ_ONLY,
                     open_world_hint=False,
                 ),
-                _meta={
+                _meta={}
+                if name == "capability_discover"
+                else {
                     "ui": {
-                        "resourceUri": URI,
+                        **({"resourceUri": URI} if name != "canvas_inspect" else {}),
                         "visibility": ["model"]
                         if name in CAPABILITY_TOOLS
                         else (["model", "app"] if name in MODEL_TOOLS else ["app"]),
