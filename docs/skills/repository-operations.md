@@ -1695,7 +1695,6 @@ version rules, and cross-language round trips remain unproved. Do not add a new
 distribution or Canvas dependency to ordinary Core actions on this evidence
 alone.
 
-
 For a runnable protocol showcase proof, start the actual `ActionServerProcess`
 with a temporary action catalog pinned to the candidate's published
 `actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
@@ -5197,6 +5196,14 @@ only Josh may dispatch or rerun recovery. Select the setup-python interpreter wi
 select a newer Python than the declared compatibility lane. Never move a failed
 release tag or substitute a new package source during recovery. Existing artifact
 inventory, clean-wheel, digest and publication credential gates still apply.
+Install Poetry itself with pipx's explicit `--python` selector as well: selecting
+an environment can report the requested version while the later `poetry run`
+still fails its interpreter assertion. Log the actual executable/version before
+asserting the declared lane. A release-scoped recovery branch can carry this
+controller repair without changing a frozen Runtime workflow tree, but must admit
+only the original tag/source pair and both Josh actor identities. Existing PyPI
+environment restrictions still apply; record the recovery controller SHA separately
+from the immutable package source. This does not qualify a new Runtime source.
 When executing a workflow shell step in a test, supply its effective job-level
 environment as well as GitHub's event variables. In recovery, `RELEASE_TAG` is
 the selected immutable tag while `GITHUB_REF_NAME` is the controller branch;
@@ -7609,6 +7616,18 @@ failure to acquire a hosted runner and capacity constraints. Those checks did
 not execute product code; they remain unqualified until a successful rerun.
 Do not diagnose a source failure or loosen a platform gate from cancellation
 alone.
+
+For large raw release ZIPs, a caching GitHub CLI shim can exceed its RPC message
+limit even when metadata requests succeed. For local inspection, select the
+underlying native CLI only in the child PATH. Preserve exact GitHub archive size
+and digest, safe extraction, the original manifest and every member hash; never
+rerun preparation or weaken an integrity gate to work around transport buffering.
+Seed backup controller scripts from the exact frozen source, not advancing QA.
+
+An observer's registered-active flag is separate from delivery health. Required
+checks may still be running without a new failure/completion event. Compare the
+live exact-head checks with the observer registration before restarting either
+the observer or unchanged CI; silence alone does not establish a stale watcher.
 
 ### macOS ARM build-host migrations
 
