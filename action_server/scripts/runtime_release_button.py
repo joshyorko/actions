@@ -43,7 +43,7 @@ REQUIRED = {
 }
 PLATFORMS = {
     "ubuntu-22.04": ("Linux", "linux64", "action-server"),
-    "macos-15": ("Darwin", "macos-arm64", "action-server"),
+    "macos-26": ("Darwin", "macos-arm64", "action-server"),
     "windows-2022": ("Windows", "windows64.exe", "action-server.exe"),
 }
 
@@ -142,15 +142,15 @@ def excluded_allocation_job(path, job):
     """Admit only a known Mac job that never acquired a runner or ran a step."""
     patterns = {
         "actions_runtime_tests.yml": r"build \(macos-py3\.12-devmode\)",
-        "actions_runtime_pypi_release.yml": r"build-wheels \(macos-15\)",
-        "frontend-build-unauthenticated.yml": r"Build Action Server binary without credentials \(macos-15\)",
-        "developer_toolkit.yml": r"toolkit \((?:primary, 18\.19\.8|legacy, 18\.19\.3), macos-15, rcc-macosarm64, [0-9a-f]+\.\.\.",
+        "actions_runtime_pypi_release.yml": r"build-wheels \(macos-26\)",
+        "frontend-build-unauthenticated.yml": r"Build Action Server binary without credentials \(macos-26\)",
+        "developer_toolkit.yml": r"toolkit \((?:primary, 18\.19\.8|legacy, 18\.19\.3), macos-26, rcc-macosarm64, [0-9a-f]+\.\.\.",
     }
     pattern = patterns.get(path.rsplit("/", 1)[-1])
     return bool(
         pattern
         and re.fullmatch(pattern, job.get("name", ""))
-        and job.get("labels") == ["macos-15"]
+        and job.get("labels") == ["macos-26"]
         and job.get("status") == "completed"
         and job.get("conclusion") == "cancelled"
         and isinstance(job.get("runner_id"), int)
