@@ -55,7 +55,7 @@ def test_owned_old_trace_requires_public_bridge(tmp_path):
     fake_core(tmp_path)
     result = run_preload(tmp_path)
     assert result.returncode != 0
-    assert "upgrade actions-core to 1.1.0a8" in result.stderr
+    assert "upgrade actions-core to 1.1.0" in result.stderr
     assert "Owned Core must not import" not in result.stderr
 
 

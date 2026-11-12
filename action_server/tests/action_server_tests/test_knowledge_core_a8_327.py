@@ -19,8 +19,9 @@ def test_existing_qualified_knowledge_cores_still_compile_and_verify(core):
     verify_compilation_outcome(outcome)
 
 
-def test_core_a8_mapped_knowledge_compiles_with_unchanged_contract():
-    outcome = compile_mapped(core="1.1.0a8")
+@pytest.mark.parametrize("core", ["1.1.0a8", "1.1.0"])
+def test_core_a8_mapped_knowledge_compiles_with_unchanged_contract(core):
+    outcome = compile_mapped(core=core)
     assert outcome.compiled_package is not None, repr(outcome.receipt)
 
     compiled = verify_compilation_outcome(outcome)
@@ -33,7 +34,7 @@ def test_core_a8_mapped_knowledge_compiles_with_unchanged_contract():
     assert {
         "kind": "python-package",
         "name": "actions-core",
-        "constraint": "==1.1.0a8",
+        "constraint": f"=={core}",
     } in manifest["runtimePlans"][0]["environmentRequirements"]
     assert manifest["logicalBindingRequirements"][0]["invocations"] == [
         {

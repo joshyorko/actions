@@ -198,7 +198,7 @@ sdk = distribution('actions-work-items')
 module = importlib.import_module('actions.work_items._adapters._sql_review')
 path = Path(module.__file__).resolve()
 expected = source.parent.parent / 'work-items/src/actions/work_items/_adapters/_sql_review.py'
-if sdk.version != '0.5.0a2' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
+if sdk.version != '0.5.0' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
     raise RuntimeError('installed candidate SDK differs from the selected source')
 identities['actions.work_items._adapters._sql_review'] = {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'version':sdk.version}
 print(json.dumps(identities))
@@ -320,7 +320,7 @@ print(json.dumps(identities))
             entries = list(wheels.iterdir())
             if (
                 len(entries) != 1
-                or entries[0].name != "actions_work_items-0.5.0a2-py3-none-any.whl"
+                or entries[0].name != "actions_work_items-0.5.0-py3-none-any.whl"
                 or entries[0].is_symlink()
             ):
                 raise RuntimeError("one exact candidate SDK wheel required")

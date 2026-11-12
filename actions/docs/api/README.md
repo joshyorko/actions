@@ -11,6 +11,7 @@
 - [`actions.chat`](./actions.chat.md#module-actionschat)
 - [`actions.cli`](./actions.cli.md#module-actionscli)
 - [`actions.data`](./actions.data.md#module-actionsdata): Read declared, eagerly prepared logical data in a trusted Action execution.
+- [`actions.internal_runtime`](./actions.internal_runtime.md#module-actionsinternal_runtime): Internal asynchronous child Run operations explicitly delegated by Runtime.
 - [`actions.knowledge`](./actions.knowledge.md#module-actionsknowledge): Select bounded Knowledge results prepared by the trusted Runtime.
 - [`actions.mcp`](./actions.mcp.md#module-actionsmcp): Sema4.ai MCP (Model Context Protocol) bindings for Python.
 - [`actions.server_integration`](./actions.server_integration.md#module-actionsserver_integration): Versioned Actions Runtime integration contracts.
@@ -77,6 +78,12 @@
 - [`_models.CanvasTable`](./actions.canvas_contract._models.md#class-canvastable)
 - [`_models.CanvasTableColumn`](./actions.canvas_contract._models.md#class-canvastablecolumn)
 - [`_models.CanvasText`](./actions.canvas_contract._models.md#class-canvastext)
+- [`_models.ChildResultReference`](./actions.internal_runtime.md#class-childresultreference): Opaque, metadata-only result reference supplied by an authorized host.
+- [`internal_runtime.ChildRunContractError`](./actions.internal_runtime.md#class-childruncontracterror): The Action supplied an invalid or unbounded child operation.
+- [`_models.ChildRunHandle`](./actions.internal_runtime.md#class-childrunhandle): Opaque child Run reference; possession grants no read or cancel access.
+- [`_models.ChildRunState`](./actions.internal_runtime.md#class-childrunstate)
+- [`_models.ChildRunStatus`](./actions.internal_runtime.md#class-childrunstatus): Bounded lifecycle plus authorized result references, never raw bytes.
+- [`internal_runtime.ChildRunUnavailable`](./actions.internal_runtime.md#class-childrununavailable): No trusted Runtime transport is installed in this Action context.
 - [`_extension_points.EPManagedParameters`](./actions._customization._extension_points.md#class-epmanagedparameters): The protocol for a class that describes the managed parameters when
 - [`_managed_parameters.ManagedParameters`](./actions._managed_parameters.md#class-managedparameters): Default implementation of EPManagedParameters.
 - [`_plugin_manager.PluginManager`](./actions._customization._plugin_manager.md#class-pluginmanager): This is a manager of plugins (which we refer to extension points and implementations).
@@ -109,6 +116,9 @@
 - [`chat.list_files`](./actions.chat.md#function-list_files): Lists all files in the current chat thread.
 - [`cli.main`](./actions.cli.md#function-main): Entry point for running actions from actions-core.
 - [`_context.scan`](./actions.data._context.md#function-scan): Return fresh rows from one declared eager scan in the current execution.
+- [`internal_runtime.cancel_child_run`](./actions.internal_runtime.md#function-cancel_child_run): Request cancellation; `cancel_pending` is not terminal confirmation.
+- [`internal_runtime.child_run_status`](./actions.internal_runtime.md#function-child_run_status): Read lifecycle and host-authorized result references, never raw output.
+- [`internal_runtime.submit_child_run`](./actions.internal_runtime.md#function-submit_child_run): Admit one delegated child asynchronously and return its opaque handle.
 - [`knowledge.ingest`](./actions.knowledge.md#function-ingest): Return a fresh prepared ingestion result, not publication authority.
 - [`knowledge.search`](./actions.knowledge.md#function-search): Return the prepared search result only when every parameter matches.
 - [`mcp.prompt`](./actions.mcp.md#function-prompt): Decorator for functions that generate prompts for the LLM.

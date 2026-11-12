@@ -519,15 +519,13 @@ def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_ove
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
     assert dependencies["actions-core"] == {
-        "version": ">=1.1.0a8,<2.0.0",
-        "allow-prereleases": True,
+        "version": ">=1.1.0,<2.0.0",
     }
     assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
         "actions-core"
     ] == {"path": "../actions/", "develop": False}
     assert dependencies["actions-work-items"] == {
-        "version": ">=0.5.0a2,<0.6.0",
-        "allow-prereleases": True,
+        "version": ">=0.5.0,<0.6.0",
     }
     assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
         "actions-work-items"
@@ -551,7 +549,7 @@ def test_candidate_version_does_not_change_the_published_runtime_floor(tmp_path)
 def test_template_manifests_pin_supported_worker_core():
     expected_core_versions = {
         "advanced": "1.0.2",
-        "basic": "1.1.0a8",
+        "basic": "1.1.0",
         "canvas-query": "1.0.3",
         "canvas-first-boot": "1.0.3",
         "minimal": "1.0.2",
@@ -768,14 +766,14 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
-        "Requires-Dist: actions-core (>=1.1.0a8,<2.0.0)" in runtime_files[metadata_name]
+        "Requires-Dist: actions-core (>=1.1.0,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"
         in runtime_files[metadata_name]
     )
     assert (
-        "Requires-Dist: actions-work-items (>=0.5.0a2,<0.6.0)"
+        "Requires-Dist: actions-work-items (>=0.5.0,<0.6.0)"
         in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))

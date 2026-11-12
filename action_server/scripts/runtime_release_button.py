@@ -35,7 +35,7 @@ REQUIRED = {
     "actions_runtime_tests.yml": 3,
     "actions_runtime_pypi_release.yml": 5,
     "frontend-build-unauthenticated.yml": 3,
-    "developer_toolkit.yml": 6,
+    "developer_toolkit.yml": 10,
     "actions_core_tests.yml": 4,
     "http_helper_tests.yml": 3,
     "coverage-gate.yml": 1,
@@ -178,8 +178,8 @@ def check_source(root, source, qualification, version):
         f"{source}:action_server/scripts/verify_published_runtime_floor.py",
     )
     require(
-        re.search(rf'^EXPECTED_RUNTIME = "{re.escape(version)}"$', floor, re.M),
-        "installed-wheel verifier version mismatch",
+        re.search(rf'^RELEASE_RUNTIME = "{re.escape(version)}"$', floor, re.M),
+        "prepared Runtime verifier version mismatch",
     )
     changelog = git(
         root, "show", f"{source}:action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"

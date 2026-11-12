@@ -2,7 +2,7 @@
 
 [[package]]
 name = "actions-core"
-version = "1.1.0a8"
+version = "1.1.0"
 description = "Actions Core"
 optional = false
 python-versions = "^3.10"
@@ -74,7 +74,7 @@ url = "../devutils"
 
 [[package]]
 name = "actions-work-items"
-version = "0.5.0a2"
+version = "0.5.0"
 description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 optional = false
 python-versions = ">=3.10,<4.0"
@@ -3942,4 +3942,4 @@ data-duckdb = ["duckdb"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "0ec844044d4764f8a9e08bab15d12b9e5432375cb682b2e491278d3a68840380"
+content-hash = "ee8bfac966ef4fd2bd3b56e8038b770fa2b54c90be09d19defff759fc651e9bb"

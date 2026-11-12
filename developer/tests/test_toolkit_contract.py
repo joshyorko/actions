@@ -238,6 +238,8 @@ def test_installed_child_job_uses_step_scoped_runner_context() -> None:
         ).read_text()
     )
     job = workflow["jobs"]["installed_internal_child_vertical"]
+    assert "github.base_ref == 'community'" in job["if"]
+    assert "startsWith(github.base_ref, 'release/')" in job["if"]
     assert "runner." not in str(job.get("env", {}))
     assert job["permissions"] == {"contents": "read"}
     assert job["steps"][0]["with"]["persist-credentials"] is False

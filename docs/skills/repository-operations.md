@@ -5074,6 +5074,19 @@ production storage contract, then exercises the probe using the physical root.
 
 ### Manual Runtime release preparation and publication
 
+Stable promotion must update Runtime and companion distribution/module versions,
+Runtime dependency floors, installed SDK checks, invoice worker receipts and
+worker template pins together. Preserve previously qualified immutable Core pins
+when adding the stable Knowledge compiler pin; do not rewrite retained alpha
+Package identities. Refresh Poetry locks without upgrading unrelated dependencies.
+A stable Runtime must not publish before its required Core and Work Items versions
+are available through their existing tag workflows. The Runtime controller's
+`RELEASE_RUNTIME` check must match the prepared stable source. Keep the separate
+`EXPECTED_RUNTIME`/public Core canary at its authentic published 1.0.4 baseline;
+explicit candidate-wheel mode verifies the prepared version and companion bytes.
+Historical compatibility evidence is not acceptance of the new version.
+
+
 The manual **Prepare Actions Runtime Release** / **Publish Actions Runtime
 Release** workflows follow RCC's two-phase preparation model. Dispatch both
 from `community`; their controller rejects any other branch or stale controller
@@ -5086,6 +5099,10 @@ head, release source and common tree rather than rewriting their provenance.
 
 Preparation requires successful latest exact-head Runtime, Core, HTTP Helper,
 coverage, audit, toolkit and native workflows, including every required job.
+The toolkit currently has eight matrix lanes plus the descriptor and installed
+Action-to-Robot jobs: all ten must pass, including the installed job on a
+community-targeted PR. Update the admission count with workflow expansion; a
+successful run with a stale count is rejected, never partially admitted.
 Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
 and distribution digests separately. All seven distributions must match those
 receipts. Each native binary must match its producer manifest and both successful

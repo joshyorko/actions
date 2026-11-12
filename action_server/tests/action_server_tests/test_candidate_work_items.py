@@ -13,7 +13,7 @@ def test_runtime_uses_installed_fenced_sdk_candidate():
     import actions.work_items
 
     package = distribution("actions-work-items")
-    assert package.version == "0.5.0a2"
+    assert package.version == "0.5.0"
     module = Path(actions.work_items.__file__).resolve()
     assert module.is_relative_to(Path(sys.prefix).resolve())
     assert callable(actions.work_items.SQLiteAdapter.reserve_fenced)
@@ -25,7 +25,7 @@ def test_runtime_prerelease_retains_numeric_release_tuple():
     declared = tomllib.loads(
         (Path(__file__).parents[2] / "pyproject.toml").read_text()
     )["tool"]["poetry"]["version"]
-    assert re.fullmatch(r"1\.1\.0a\d+", declared)
+    assert re.fullmatch(r"1\.1\.0(?:a\d+)?", declared)
     assert __version__ == declared
     assert distribution("actions-runtime").version == declared
     assert version_info == [1, 1, 0]
@@ -36,7 +36,7 @@ def test_runtime_uses_installed_canvas_core_candidate():
     declared = tomllib.loads(
         (Path(__file__).parents[3] / "actions" / "pyproject.toml").read_text()
     )["tool"]["poetry"]["version"]
-    assert re.fullmatch(r"1\.1\.0a\d+", declared)
+    assert re.fullmatch(r"1\.1\.0(?:a\d+)?", declared)
     assert package.version == declared
     import actions.canvas_contract
     from actions.canvas_contract import validate_canvas_spec

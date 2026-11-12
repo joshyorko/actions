@@ -36,7 +36,7 @@ if X_ACTION_TRACE:
         if not legacy_logger:
             raise RuntimeError(
                 "X_ACTION_TRACE requires the public log_html integration bridge; "
-                "upgrade actions-core to 1.1.0a8 or newer. "
+                "upgrade actions-core to 1.1.0 or newer. "
                 "Ordinary execution without X_ACTION_TRACE remains supported."
             )
         from robocorp.log import html  # type: ignore[import-not-found,no-redef]

@@ -166,7 +166,7 @@ jobs:
         run: rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 
   rcc_descriptor:
-    if: github.event_name == 'pull_request' && startsWith(github.base_ref, 'release/')
+    if: github.event_name == 'pull_request' && (github.base_ref == 'community' || startsWith(github.base_ref, 'release/'))
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     permissions:
@@ -214,7 +214,7 @@ jobs:
           if-no-files-found: error
 
   installed_internal_child_vertical:
-    if: github.event_name == 'pull_request' && startsWith(github.base_ref, 'release/')
+    if: github.event_name == 'pull_request' && (github.base_ref == 'community' || startsWith(github.base_ref, 'release/'))
     runs-on: ubuntu-24.04
     timeout-minutes: 80
     permissions:

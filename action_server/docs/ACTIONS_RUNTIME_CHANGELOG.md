@@ -8,12 +8,31 @@ an Actions Runtime release.
 
 ## Unreleased
 
-Runtime 1.0.4 is a source release candidate. Preparing versioned notes and
-qualification artifacts does not establish a tag or published release. Publish
-1.0.3 and complete its owner verification before promoting or publishing 1.0.4.
-Runtime artifact-worker/provider acceptance, full browser issue closure and
-external native distribution handoff remain separately gated (#134, #153 and
-#211).
+## actions-runtime-1.1.0
+
+- Add persistent Canvas authoring with immutable revisions, explicit activation,
+  scoped capability discovery, and generated Action/Robot execution through RCC.
+- Add bounded named data queries and Knowledge operations with DuckDB and
+  PostgreSQL bindings, sealed results, authorized paging and artifact access.
+- Add managed Work Items with fenced Run/Attempt ownership, explicit approvals,
+  durable outputs, and bounded recovery on SQLite and PostgreSQL.
+- Fix Canvas inspection replacing app views, persisted v2 result tables, narrow
+  layouts, and app reopening after output retention expires.
+- Use RCC 18.19.8, Core 1.1.0 and Work Items 0.5.0. Preserve the legacy API/import
+  aliases; upgraded Runtime databases require coordinated backup for rollback.
+
+Qualification and limits:
+
+- Real desktop acceptance covers Codex mode in ChatGPT desktop. Genuine
+  ChatGPT-mode E1 and native query-result-before-approval are not qualified.
+- Cancellation intent is not terminal process-stop proof. Unknown retained
+  launches remain blocked pending explicit reconciliation; automatic exactly-once
+  external effects and universal post-launch recovery are not promised.
+- celld is not implemented or qualified and is not advertised in this release.
+  VS Code extension release and native exact-VSIX acceptance are separate.
+- Native release assets are unsigned when the existing credential-free producer
+  policy applies. Local/source, installed-wheel and native platform receipts
+  retain their individual scope and skips.
 
 ## actions-runtime-1.0.4
 

@@ -1,0 +1,148 @@
+{
+  "artifacts": {
+    "companions/actions/actions_core-1.1.0-py3-none-any.whl": {
+      "sha256": "38bd11c756cc60d0c028094d6e7f5f3859d724114e2abd48e54f0951e2a3dac6",
+      "size": 480343
+    },
+    "companions/actions/actions_core-1.1.0.tar.gz": {
+      "sha256": "135bef2b94a45e25b1adff9358dc2082364afc12617e35efc33e78f32d461554",
+      "size": 444848
+    },
+    "companions/work-items/actions_work_items-0.5.0-py3-none-any.whl": {
+      "sha256": "3f48e4f1f6952ae0994bf465df07d0743e95d72d3aabf34f6d0ec71d6c2b778e",
+      "size": 74165
+    },
+    "companions/work-items/actions_work_items-0.5.0.tar.gz": {
+      "sha256": "bd8d762f29687a7e70d4a0b01e24200ab3e9657c39d7398494f607dadab10d4b",
+      "size": 63564
+    }
+  },
+  "base_source": "d0bb6337814a54994c82250509c75c596cd2bf9a",
+  "checks": {
+    "bootstrap": "PASS",
+    "configured_lint": "PASS after compiler formatting; optional Markdown lint unavailable",
+    "configured_typecheck": "PASS Core172 / helper3 / Work Items1 / Runtime700 source files",
+    "core_artifacts": "wheel/sdist build, strict Twine and canonical clean-wheel verifier PASS",
+    "docs": "PASS; generated child API documentation added",
+    "doctor": "PASS",
+    "metadata": "3 passed / 42 deselected",
+    "publisher_final": "182 passed",
+    "runtime_focused": "37 passed / 39 service or opt-in skips / 28 deselected",
+    "sdk_artifacts": "wheel/sdist build, strict Twine and canonical metadata/alias clean probes PASS; full service gate remains separate",
+    "sdk_version_factory": "6 passed",
+    "toolkit": "246 passed / 5 opt-in skips",
+    "toolkit_changed_condition": "1 passed"
+  },
+  "integration_merge": "4191408b92fccf68e5bc1bcb0991e6ce7233fe12",
+  "limitations": [
+    "No genuine ChatGPT-mode E1",
+    "No native query-result-before-approval proof",
+    "No universal post-launch recovery/nonexecution read API",
+    "No native exact-VSIX managed acceptance",
+    "No celld implementation or qualification",
+    "No signing policy or production infrastructure changes"
+  ],
+  "local_logs": {
+    "bootstrap.log": {
+      "compressed": "bootstrap.log.gz",
+      "sha256": "db1dc2df692331dff668861b2707979cbbad325f50998599ea056420394a3417"
+    },
+    "companions.log": {
+      "compressed": "companions.log.gz",
+      "sha256": "a3ea2fc4dbda845335558dad8a2b2bd177854bafbe3934cda10dfd12920b9be6"
+    },
+    "doctor.log": {
+      "compressed": "doctor.log.gz",
+      "sha256": "c31b58a904897fcebe2b98d3581e5084ae4bf2926eb99d55aa698893381fea70"
+    },
+    "final-local-checks.log": {
+      "compressed": "final-local-checks.log.gz",
+      "sha256": "4119b912754183c9c6236d4efd3d3876f34bd82b79eb9ce901d855837b35d914"
+    },
+    "promotion-metadata.log": {
+      "compressed": "promotion-metadata.log.gz",
+      "sha256": "f10aeabaa66598896d3e29c5d74677d9fc2ce30023b8248074d9219d15140f48"
+    },
+    "promotion-runtime.log": {
+      "compressed": "promotion-runtime.log.gz",
+      "sha256": "731ed067a7b457df76bf2f510548ca1529eb224285bfdfcc9dda12918f34bc89"
+    },
+    "promotion-sdk.log": {
+      "compressed": "promotion-sdk.log.gz",
+      "sha256": "ea1e061c27e6d298c1d2880db333e777f6b97cea348da885a5aca09ce6f354a2"
+    },
+    "publisher-controls.log": {
+      "compressed": "publisher-controls.log.gz",
+      "sha256": "bea6a534398409b6614c2a93e70db36ea9f22c1effc8a65c8523782ab213ebca"
+    },
+    "remaining-checks.log": {
+      "compressed": "remaining-checks.log.gz",
+      "sha256": "09ea2d6b90320c64071ef79190fbc037f5426b22f87f6ab5b4af4881730b5e0f"
+    },
+    "sdk-clean.log": {
+      "compressed": "sdk-clean.log.gz",
+      "sha256": "f8d991f6c726b4f99a9681adfbd6f23be7687064033c70d85e7a61d65ea4139e"
+    },
+    "stable-core-before.log": {
+      "compressed": "stable-core-before.log.gz",
+      "sha256": "42dd0c77f6ec48832b1b5fe1957867c53e957ae74c139fffc9d64cbb19382d12"
+    },
+    "toolkit-count-after.log": {
+      "compressed": "toolkit-count-after.log.gz",
+      "sha256": "e8c2ebdecc6c68bd31c948de0b0c1dd4c57dd47d093194a6c1d241c65727824d"
+    },
+    "toolkit-count-before.log": {
+      "compressed": "toolkit-count-before.log.gz",
+      "sha256": "c2bf41e9b41bd8694e7ceeba7d49ce555ba005e4f24ea9722feb0626ad43b64d"
+    },
+    "toolkit.log": {
+      "compressed": "toolkit.log.gz",
+      "sha256": "10902834db553116ae0aa492f8f47ff7552788e4407e649ccb7d7962c5345468"
+    }
+  },
+  "regressions": {
+    "stable_core": "new 1.1.0 compiler case fails before allowlist promotion, passes after; historical a4/a7/a8 retained",
+    "toolkit_count": "real current ten-job shape rejected with stale six-job requirement; passes with ten; missing/extra/every skipped job rejected"
+  },
+  "retained_failures": [
+    "Formatting failure before canonical Ruff formatting",
+    "Local artifact wrapper attempted nonexistent work-items/scripts/verify_clean_wheel.py after successful builds/Core proof; corrected by executing canonical .devcontainer/bin/verify-work-items clean probes without rerunning builds"
+  ],
+  "schema": "actions.stable-promotion/v1",
+  "scope_pending": "Owner decision on deferring unimplemented/unqualified celld",
+  "source_inputs_sha256": {
+    ".github/workflows/developer_toolkit.yml": "d5983aad3c7a947437257fc0290f47aa27828700a84ed5711234bed2894d1c7b",
+    "action_server/poetry.lock": "b26bf1c8cbb6746143bad81c8dd1ad45d161fca4b03f022c98da31fce0327cf9",
+    "action_server/pyproject.toml": "3af20d3a3dec2c910b5d0a76e6eb7f5cd47e6c59b2d6d1f01a9f04dc52f1582c",
+    "action_server/scripts/runtime_release_button.py": "47f52970919302f7a642ac65c49ab5a9fb28af1d532b87d3a8f8d7b70f426661",
+    "action_server/scripts/verify_invoice_queries.py": "e0d8f46bf32893d55e317b84abfc6c078bbbf4b2da48af9b86a027fc7a367969",
+    "action_server/scripts/verify_published_runtime_floor.py": "5c38b2b4b249a7a0ba9ac989d5b3568f95a1ec0f8ae6868ae9ecb9630c8c73d6",
+    "action_server/src/actions/server/__init__.py": "5fb9da45afbe938dc19103f0b0a5c85f75f47eb87bd16f935323d690ab885f30",
+    "action_server/src/actions/server/_preload_actions/preload_actions.py": "0f278b45f90ad1055beab8a6c46276b601046da266cbb9b81d35d26c3b274e1a",
+    "action_server/src/actions/server/data_queries/_invoice_task.py": "d057eb0b54c5928efbde2cbc541f459a055af6c90832834252b028a8c30abb60",
+    "action_server/src/actions/server/data_queries/invoice_worker.py": "963a8bfd310157704b4f7b4ae3be4a611e30a742aa3ebf6d9ad0d54996728c9d",
+    "action_server/src/actions/server/deployments/package_revision_compiler.py": "4f3a8e6041ef9f477e8bf0150ed299ec5f7ae44f5a08a0f925f8f9ad7e8840a6",
+    "action_server/tests/action_server_tests/test_candidate_work_items.py": "51ae97584668b5ab8df3264c94ef203c8fd2ea49d468701772031a7c0d54de95",
+    "action_server/tests/action_server_tests/test_invoice_worker.py": "7289750cedbbbb24172a01d7c18b82e1401c3f7bf72cdd001dfd3fea13839df5",
+    "action_server/tests/action_server_tests/test_knowledge_core_a8_327.py": "7359a2dd34d43290338335671f4ac20ba480ec6790b3fb6f25125d70fd01a729",
+    "action_server/tests/contract_tests/test_active_contracts.py": "009b011f6ac860c49e70fd7b880c1088d8301eff7c1f5a6e9aa711f596a52d55",
+    "action_server/tests/contract_tests/test_preload_logging_compatibility_327.py": "c9198e5206d2de8c01be79ea07360768081883f783548637817ec5d28be328dc",
+    "actions/pyproject.toml": "e8890def21c1e38a95d4c5d311b862a0fa9858d7517de70d014c52dcd96c7040",
+    "actions/src/actions/__init__.py": "affa3228c922523e88fca0ab2b5e87bb340c94efe96e7c949734dd5783f1e0c3",
+    "developer/tests/test_toolkit_contract.py": "2b734683a4b4644415138febc9c6ed8b5032888e4cd4da6bca94ceb3da368780",
+    "devutils/tests/test_runtime_release_button.py": "cbd1a79133398ee1b66ae6f7cc9240a95e52404e7118ef33953b3d8cab876063",
+    "templates/basic/package.yaml": "576949c056a4e6a7b11e6d060f3c67dc0a180a6c8c270feb95c8575913ffcb3f",
+    "work-items/pyproject.toml": "809fb631887daadd72f41cf53d798f31b075d92d0fd7569543edb1a644e3e349",
+    "work-items/src/actions/work_items/__init__.py": "1370a6438a5c394bd57fac50239b74663e55f757ddacfb2dea2902c772bec090",
+    "work-items/tests/work_items_tests/test_adapter_factory.py": "dd9e5b7a7c36f6afa111ab9395a25722958e0a9315e9f8e5f4435cede91b38b7"
+  },
+  "status": "local promotion checks; final hosted artifacts pending; no publication",
+  "upstream_disposition": "none",
+  "versions": {
+    "actions-core": "1.1.0",
+    "actions-http-helper": "1.0.3",
+    "actions-runtime": "1.1.0",
+    "actions-work-items": "0.5.0",
+    "rcc": "18.19.8"
+  }
+}
