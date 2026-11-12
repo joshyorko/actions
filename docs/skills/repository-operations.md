@@ -1868,9 +1868,10 @@ release asset. Its sorted entries use the exact three binary asset names, so
 each downloaded executable can be checked with `sha256sum -c` without renaming.
 Maintain this behavior in `.github/workflows/_gen_workflows.py` and regenerate
 the workflow; generated YAML is not authoritative. The maintained Homebrew tap
-is `joshyorko/homebrew-tools`; its `action-server` cask mirrors only verified
-Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
-upstream assets exist and their GitHub SHA-256 digests are verified. The tap
+is `joshyorko/homebrew-tools`; its `action-server` cask is Linux x86_64 only.
+Prepare a tap update after the upstream Linux asset exists and its actual
+GitHub SHA-256 digest is verified. The resolver, cask renderer, mirror bundle and
+Linuxbrew install/version gate must agree; do not advertise a missing Mac asset. The tap
 README documents the `action-server-daily` auto-update slot and its manual
 `action=ci` then `action=release` workflow inputs. Do not dispatch the retired
 Sema4AI `publish.yml` workflow.
@@ -7654,13 +7655,15 @@ job-count and artifact-source checks still apply. Do not rerun successful frozen
 matrices merely to start independent Mac QA or infer passing results from an
 unallocated runner.
 
-A platform-limited Runtime release does not automatically qualify the maintained
-Homebrew `action-server` cask. Its existing resolver requires Linux and Mac
-assets at one version, while the publisher retains only one package release.
-Keep the prior supported cask and referenced Mac assets intact when a new Runtime
-release omits Mac. A per-platform tap update needs a reviewed delivery contract
-that preserves those references; do not remove the Mac block, fabricate an asset,
-or dispatch the retired Sema4AI workflow to force a version bump.
+The maintained Homebrew `action-server` package now uses the reviewed Linux-only
+contract. It requires a verified stable Linux asset, not a fabricated Mac
+counterpart. Run its package-specific build/install/version check before updating;
+its native Git CI planner should select only the affected package. The manual
+`release-bundle --package-id=action-server` exporter already runs `ciCheck`
+internally; an extra positional `ci-check` word prevents argument parsing.
+Preserve prior mirror releases through a scoped no-prune publisher when required,
+and integrate only verified generated cask data. Never dispatch the retired
+Sema4AI workflow or overwrite immutable upstream artifacts.
 
 A published reduced-platform preparation cannot be expanded through a retry:
 its owned release body, native/PyPI inventory, checksum and recovery copies are
@@ -7677,3 +7680,10 @@ version, preserve successful sibling ZIPs and source receipts with their GitHub
 digests. Recheck that only the Mac job is unfinished, with no runner or steps,
 before cancellation. A fresh queue request is not proof that capacity is available;
 report the replacement run/job identity and actual assignment separately.
+
+Candidate-package version tests must compare the imported module and installed
+distribution against declared package metadata, then derive the numeric release
+tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimate
+patch delivery before the substantive invoice gate can run. Keep the separate
+exact prepared-release identity gate; do not weaken module/distribution origin
+or required JUnit evidence to work around a stale test literal.

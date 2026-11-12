@@ -7,6 +7,7 @@ from importlib.metadata import distribution
 from pathlib import Path
 
 import pytest
+from packaging.version import Version
 
 
 def test_runtime_uses_installed_fenced_sdk_candidate():
@@ -25,10 +26,11 @@ def test_runtime_prerelease_retains_numeric_release_tuple():
     declared = tomllib.loads(
         (Path(__file__).parents[2] / "pyproject.toml").read_text()
     )["tool"]["poetry"]["version"]
-    assert re.fullmatch(r"1\.1\.0(?:a\d+)?", declared)
+    release = Version(declared).release
+    assert len(release) == 3
     assert __version__ == declared
     assert distribution("actions-runtime").version == declared
-    assert version_info == [1, 1, 0]
+    assert version_info == list(release)
 
 
 def test_runtime_uses_installed_canvas_core_candidate():
