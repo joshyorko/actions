@@ -177,21 +177,40 @@ def test_cookie_cannot_authenticate_mcp_backend(browser_app):
         )
 
 
-def test_session_expires_and_capacity_is_bounded(browser_app):
+def test_session_expires_and_capacity_is_bounded(browser_app, monkeypatch):
+    from types import SimpleNamespace
+
+    from actions.server import _browser_session
+
+    now = [100.0]
+    monkeypatch.setattr(
+        _browser_session, "time", SimpleNamespace(monotonic=lambda: now[0])
+    )
     sessions = browser_app.state.browser_sessions
     sessions.ttl_seconds = 1
     sessions.max_sessions = 2
     with client_for(browser_app) as client:
         for _ in range(4):
             client.cookies.clear()
-            assert signin(client).status_code == 200
+            response = signin(client)
+            assert response.status_code == 200
         assert len(sessions._sessions) <= 2
+        token = response.cookies.get(_browser_session.COOKIE_NAME)
+        cookie = {"Cookie": f"{_browser_session.COOKIE_NAME}={token}"}
+        # Keep presenting the credential: server expiry, not cookie-jar timing,
+        # must close an already authenticated idle connection and deny HTTP.
+        client.cookies.clear()
+        assert client.get("/api/probe", headers=cookie).status_code == 200
         with client.websocket_connect(
-            "ws://127.0.0.1/api/ws", headers={"Origin": "http://127.0.0.1"}
+            "ws://127.0.0.1/api/ws",
+            headers={"Origin": "http://127.0.0.1", **cookie},
         ) as ws:
+            ws.send_text("before-expiry")
+            assert ws.receive_text() == "before-expiry"
+            now[0] += sessions.ttl_seconds + 1
             with pytest.raises(WebSocketDisconnect):
                 ws.receive_text()
-        assert client.get("/api/probe").status_code == 403
+        assert client.get("/api/probe", headers=cookie).status_code == 403
 
 
 def test_cookie_is_not_valid_after_restart_or_for_another_origin(browser_app):

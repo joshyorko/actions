@@ -1105,6 +1105,12 @@ a deliberate CSRF-safe API migration; browser OAuth status remains a separate
 limitation. Existing public OAuth login/callback exceptions are unchanged. Unauthorized protected HTTP is rejected before
 body parsing. Idle cookie WebSockets close within the 250 ms lifetime check on
 expiry/logout, while each inbound/outbound message is also reauthorized.
+Expiry tests must control only the session module's monotonic clock and keep
+presenting the captured cookie explicitly before and after advancing it. A
+one-second test cookie can disappear from the client jar before a Windows
+WebSocket handshake; that tests client retention rather than server expiry.
+Verify a live authenticated exchange first, then advance the server clock and
+require idle WebSocket closure plus HTTP denial without changing production TTLs.
 Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
