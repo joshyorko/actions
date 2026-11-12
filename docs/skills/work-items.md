@@ -1623,6 +1623,16 @@ Action-to-Robot path remain unverified, including Windows behavior.
 
 ## Local synthetic managed-client fixture
 
+The v2 fixture creates an actual active, immutable Canvas application with a
+validated form and a `run` binding to its Robot capability. It uses the ordinary
+GenericCanvasView wrapper and the existing bootstrap read grants. Read-only
+`canvas_open` then `canvas_get` must expose that application and its exact claim
+invocation descriptor while admitting zero Work Items/Runs. A direct imported
+snapshot invocation alone does not qualify native library discovery. The old v1
+headless fixture is not silently migrated: retain its receipts and start a fresh
+v2 state directory. Do not add broader grants or weaken projection checks to
+make a headless Deployment appear to be an authored Canvas application.
+
 `action_server/scripts/serve_managed_acceptance_fixture.py` starts an explicitly
 opted-in Linux loopback host over the real SQL managed router, MCP facade and
 direct Robot runner. It creates a fresh private state directory and a local

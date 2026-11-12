@@ -18,6 +18,7 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 import uvicorn
+from actions.canvas_contract import validate_canvas_spec
 from fastapi import FastAPI
 
 from actions.server._models import create_db, load_db
@@ -26,10 +27,12 @@ from actions.server.data_queries.service import InvoiceQueryService
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
+    CanvasCapabilityBinding,
     CapabilityPlanPolicy,
     CapabilityWorkItemPolicy,
     DeploymentSpecification,
     ModelPublishedWorkItemQueue,
+    canvas_revision_digest,
 )
 from actions.server.deployments.ids import (
     DeploymentId,
@@ -51,6 +54,7 @@ from actions.server.foundry.bootstrap import (
     create_runtime_canvas,
 )
 from actions.server.foundry.generic_execution_port import GenericCanvasExecution
+from actions.server.foundry.generic_view import GenericCanvasView
 from actions.server.foundry.mcp import CanvasMcp
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
@@ -76,6 +80,7 @@ from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsSer
 from actions.server.mcp.gateway_metadata import McpRequestMetadataMiddleware
 from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputService
+from actions.server.run_outputs.types import CanvasApplicationRef
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -170,7 +175,7 @@ def main():
             private_regular(state / name)
         if (
             json.loads((state / "fixture.json").read_text()).get("schema_version")
-            != "actions.owned-vscode-fixture/v1"
+            != "actions.owned-vscode-fixture/v2"
         ):
             parser.error("existing owned fixture marker required")
     else:
@@ -280,7 +285,42 @@ def main():
                 max_output_items=0,
                 max_output_bytes=0,
             )
+            canvas_spec = validate_canvas_spec(
+                {
+                    "schemaVersion": "actions.canvas-spec/v1",
+                    "title": "Owned managed Robot acceptance",
+                    "visibility": ["model", "app"],
+                    "bindingIds": ["run"],
+                    "root": {
+                        "type": "form",
+                        "id": "managed-robot",
+                        "bindingId": "run",
+                        "submitLabel": "Run selected input",
+                        "fields": [
+                            {
+                                "name": "value",
+                                "label": "Synthetic input",
+                                "type": "text",
+                                "required": True,
+                            }
+                        ],
+                    },
+                }
+            )
+            canvas_bindings = (
+                CanvasCapabilityBinding(binding_id="run", capability=cap),
+            )
+            application = CanvasApplicationRef(
+                workspace_id=str(workspace.root),
+                app_id=str(refs.deployment_id.root),
+                revision_id=canvas_revision_digest(
+                    canvas_spec, canvas_bindings, (package,)
+                ),
+            )
             spec = DeploymentSpecification(
+                canvas_spec=canvas_spec,
+                canvas_application=application,
+                canvas_bindings=canvas_bindings,
                 package_revisions=(package,),
                 capability_plans=(
                     CapabilityPlanPolicy(
@@ -342,8 +382,10 @@ def main():
             control.register(snapshot)
             control.grant(actor, revision.ref, {"execute", "read", "cancel"})
             config = {
-                "schema_version": "actions.owned-vscode-fixture/v1",
+                "schema_version": "actions.owned-vscode-fixture/v2",
                 "worker_id": worker,
+                "application_id": str(refs.deployment_id.root),
+                "binding_id": "run",
                 "snapshot": snapshot.model_dump(mode="json"),
                 "queue": QueueRef(
                     workspace_id=workspace,
@@ -399,7 +441,9 @@ def main():
                 DirectRobotPreparation(Path(sys.executable)), state / "execution"
             ),
         )
-        canvas = CanvasMcp(execution, native.canvas.authenticate, HTML)
+        canvas = CanvasMcp(
+            GenericCanvasView(execution), native.canvas.authenticate, HTML
+        )
         _install_model_managed_work_items(
             canvas, managed, deployments, actor, workspace
         )

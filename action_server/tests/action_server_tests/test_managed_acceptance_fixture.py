@@ -68,3 +68,105 @@ def test_symlink_state_is_refused_before_adoption(tmp_path):
     assert result.returncode != 0
     assert "must not be symlinks" in result.stderr
     assert list(target.iterdir()) == []
+
+
+def test_live_library_discovers_real_binding_without_admitting_work(tmp_path):
+    import asyncio
+    import json
+    import sqlite3
+    import time
+    import urllib.error
+    import urllib.request
+
+    import httpx2
+    from mcp import ClientSession
+    from mcp.client.streamable_http import streamable_http_client
+
+    state = tmp_path / "owned"
+    environment = {
+        "PATH": os.environ.get("PATH", ""),
+        "HOME": str(tmp_path),
+        "TMPDIR": str(tmp_path),
+    }
+    with (tmp_path / "host.log").open("w") as log:
+        process = subprocess.Popen(
+            [
+                sys.executable,
+                str(HELPER),
+                "--state",
+                str(state),
+                "--allow-synthetic-owned-fixture",
+            ],
+            env=environment,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+        )
+        try:
+            deadline = time.monotonic() + 20
+            while not (state / "ready.json").exists():
+                assert process.poll() is None, "owned fixture startup failed"
+                assert time.monotonic() < deadline, "owned fixture readiness timeout"
+                time.sleep(0.05)
+            ready = json.loads((state / "ready.json").read_text())
+            assert ready["schema_version"] == "actions.owned-vscode-fixture/v2"
+            assert state.stat().st_mode & 0o077 == 0
+            assert (state / "bearer").stat().st_mode & 0o077 == 0
+            key = (state / "bearer").read_text()
+            request = urllib.request.Request(
+                ready["endpoint"] + "/api/managed-work-items/v1/schema",
+                headers={"authorization": "Bearer " + key},
+            )
+            while True:
+                try:
+                    with urllib.request.urlopen(request, timeout=2) as response:
+                        assert response.status == 200
+                    break
+                except urllib.error.URLError:
+                    assert (
+                        time.monotonic() < deadline
+                    ), "owned fixture HTTP readiness timeout"
+                    time.sleep(0.05)
+
+            async def discover():
+                async with httpx2.AsyncClient(
+                    headers={"authorization": "Bearer " + key}, timeout=10
+                ) as http:
+                    async with streamable_http_client(
+                        ready["endpoint"] + "/mcp", http_client=http
+                    ) as streams:
+                        async with ClientSession(streams[0], streams[1]) as session:
+                            await session.discover()
+                            opened = await session.call_tool("canvas_open", {})
+                            assert not opened.is_error
+                            apps = opened.structured_content["applications"]
+                            assert len(apps) == 1
+                            assert apps[0]["applicationId"] == ready["application_id"]
+                            selected = await session.call_tool(
+                                "canvas_get", {"appId": ready["application_id"]}
+                            )
+                            assert not selected.is_error
+                            descriptors = selected.structured_content[
+                                "invocationDescriptors"
+                            ]
+                            assert len(descriptors) == 1
+                            assert descriptors[0]["bindingId"] == "run"
+                            assert descriptors[0]["snapshot"] == ready["snapshot"]
+                            assert descriptors[0]["inputMode"] == "claim"
+                            assert descriptors[0]["inputQueue"] == ready["queue"]
+
+            asyncio.run(discover())
+            with sqlite3.connect(
+                "file:" + str(state / "server.db") + "?mode=ro", uri=True
+            ) as db:
+                assert db.execute("SELECT COUNT(*) FROM run").fetchone()[0] == 0
+                assert (
+                    db.execute("SELECT COUNT(*) FROM fenced_work_item").fetchone()[0]
+                    == 0
+                )
+        finally:
+            process.terminate()
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=5)
