@@ -150,7 +150,7 @@ jobs:
         run: |
           set -Eeuo pipefail
           for binary in dist/action-server/action-server dist/final/action-server; do
-            lipo -verify_arch arm64 "$binary"
+            lipo "$binary" -verify_arch arm64
             printf '\n%s\n' "$binary"
             otool -arch arm64 -l "$binary"
           done > output/native-macos-load-commands.txt

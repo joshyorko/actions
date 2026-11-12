@@ -4,6 +4,8 @@ import importlib.util
 import json
 import os
 import re
+import shutil
+import struct
 import subprocess
 from pathlib import Path
 
@@ -58,6 +60,62 @@ def test_runner_guard_runs_before_checkout_with_package_defaults(tmp_path, sourc
     assert result.returncode == 0, result.stderr
     assert "26.1" in result.stdout
     assert not (workspace / "action_server").exists()
+
+
+@pytest.mark.parametrize(
+    "frozen_arch,wrapper_arch,accepted",
+    [("arm64", "arm64", True), ("arm64", "x86_64", False), ("x86_64", "arm64", False)],
+)
+def test_native_architecture_receipt_with_real_macho_tools(
+    tmp_path, frozen_arch, wrapper_arch, accepted
+):
+    tools = tmp_path / "tools"
+    tools.mkdir()
+    for name in ["lipo", "otool"]:
+        executable = shutil.which(name) or shutil.which(f"llvm-{name}")
+        if executable is None:
+            pytest.skip(f"native or LLVM {name} unavailable")
+        (tools / name).symlink_to(executable)
+    for relative, architecture in [
+        ("dist/action-server/action-server", frozen_arch),
+        ("dist/final/action-server", wrapper_arch),
+    ]:
+        binary = tmp_path / relative
+        binary.parent.mkdir(parents=True)
+        binary.write_bytes(
+            struct.pack(
+                "<8I",
+                0xFEEDFACF,
+                {"arm64": 0x0100000C, "x86_64": 0x01000007}[architecture],
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+            )
+        )
+    (tmp_path / "output").mkdir()
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "frontend-build-unauthenticated.yml").read_text()
+    )
+    step = next(
+        step
+        for step in workflow["jobs"]["build-external"]["steps"]
+        if step.get("name") == "Record macOS native deployment load commands"
+    )
+    result = subprocess.run(
+        ["bash", "-c", step["run"]],
+        cwd=tmp_path,
+        env=dict(os.environ, PATH=str(tools) + os.pathsep + os.environ["PATH"]),
+        capture_output=True,
+        text=True,
+    )
+    assert (result.returncode == 0) == accepted, result.stderr
+    if accepted:
+        receipt = (tmp_path / "output/native-macos-load-commands.txt").read_text()
+        assert "dist/action-server/action-server" in receipt
+        assert "dist/final/action-server" in receipt
 
 
 @pytest.mark.parametrize(

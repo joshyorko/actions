@@ -7688,6 +7688,12 @@ that failure proves neither the host architecture nor a build defect. Exercise
 the actual guard with an absent package directory, and keep its architecture and
 OS checks intact when correcting the generator and handwritten workflows.
 
+For native Mach-O provenance, pass the input file before `lipo -verify_arch`
+and its trailing architecture list. A filename after `arm64` is parsed as another
+architecture, so the receipt step can fail after a successful binary build.
+Exercise both ARM64 inputs and rejection of a non-ARM64 frozen or wrapper input
+with real Mach-O tools; retain `otool` load commands for both executables.
+
 Candidate-package version tests must compare the imported module and installed
 distribution against declared package metadata, then derive the numeric release
 tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimate
