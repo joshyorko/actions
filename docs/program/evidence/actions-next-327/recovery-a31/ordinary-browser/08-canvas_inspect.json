@@ -1,0 +1,282 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "application": {
+        "activeRevisionId": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+        "applicationId": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+        "revisions": [
+          {
+            "active": false,
+            "buildStatus": "not-required",
+            "compilationStatus": "not-required",
+            "importStatus": "not-required",
+            "revisionId": "sha256:3d71dd2b71536bd0f41ad0ce79be0b37bb28f3e3b25f0691194c70ed2b80863d",
+            "spec": {
+              "bindingIds": [],
+              "root": {
+                "children": [
+                  {
+                    "id": "welcome",
+                    "text": "Installed ordinary generated app is ready to compose.",
+                    "type": "text"
+                  },
+                  {
+                    "id": "guidance",
+                    "text": "Describe the interface you want. Add a backend only when it needs one.",
+                    "type": "text"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Installed ordinary generated app",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "not-required",
+            "validationStatus": "passed"
+          },
+          {
+            "active": true,
+            "buildStatus": "passed",
+            "compilationStatus": "succeeded",
+            "importStatus": "passed",
+            "revisionId": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+            "spec": {
+              "bindingIds": [
+                "echo"
+              ],
+              "root": {
+                "children": [
+                  {
+                    "bindingId": "echo",
+                    "fields": [
+                      {
+                        "label": "NDJSON records",
+                        "name": "value",
+                        "required": true,
+                        "type": "text"
+                      }
+                    ],
+                    "id": "inputs",
+                    "submitLabel": "Inspect NDJSON",
+                    "type": "form"
+                  },
+                  {
+                    "bindingId": "echo",
+                    "id": "status",
+                    "type": "status"
+                  },
+                  {
+                    "bindingId": "echo",
+                    "id": "artifact",
+                    "label": "Inspect result",
+                    "type": "artifact"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "NDJSON record inspector \u2014 consumer",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "passed",
+            "validationStatus": "passed"
+          }
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revisions inspected.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "activeRevisionId": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+    "applicationId": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+    "invocationAvailability": "authorized",
+    "invocationDescriptors": [
+      {
+        "bindingId": "echo",
+        "inputMode": "claim",
+        "inputQueue": {
+          "deployment": {
+            "deployment_id": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+            "revision_id": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          },
+          "queue_id": "input",
+          "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+        },
+        "inputSchema": {
+          "properties": {
+            "value": {
+              "description": "",
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "value"
+          ],
+          "type": "object"
+        },
+        "mode": "generic",
+        "snapshot": {
+          "action_id": "a0d555f1-7c7e-500a-916f-4fa5b8be7ab3",
+          "canvas_application": {
+            "app_id": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+            "revision_id": "sha256:f600e532b0a71994e43340cbe5adc1ab750c41d78a1b9f1f763562a31fe58019",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          },
+          "capability": {
+            "capability_id": "action.inspect_records",
+            "package_revision": {
+              "package_id": "6fe4199c-9a55-5956-b6db-2ed0d1acb7a1",
+              "revision_id": "sha256:1dd279d0285a73d875d8d6a02689562d34e6789f600aef95471ded607915e069",
+              "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+            }
+          },
+          "capability_authority": "package-revision",
+          "capability_schema_digest": "sha256:cdc6f7fa3a3a8ce5d800b65dc02d27fffa3e48b8fdb7cae960dff6baadbb6600",
+          "data_binding": null,
+          "deployment": {
+            "deployment_id": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+            "revision_id": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          },
+          "output_provider": {
+            "provider_profile_id": "8c5b7fce-44c5-4d9f-ab87-78c9fc80bffb",
+            "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          },
+          "policy": {
+            "policy_id": "16c83dd4-3351-42a6-91c6-1a4414c9d95b",
+            "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          },
+          "runtime_kind": "rcc",
+          "runtime_plan": {
+            "package_revision": {
+              "package_id": "6fe4199c-9a55-5956-b6db-2ed0d1acb7a1",
+              "revision_id": "sha256:1dd279d0285a73d875d8d6a02689562d34e6789f600aef95471ded607915e069",
+              "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+            },
+            "plan_digest": "sha256:0701e5e13d670cade23d3f79ce1bfd9d50da55a45e2d5743652f509cba15ac8d"
+          },
+          "worker": {
+            "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "worker_profile_id": "2137a6e5-ac33-4dc8-b4c5-5a8b15999071",
+            "workspace_id": "27d60cb3-34e9-4502-bb66-274ada8ffe57"
+          }
+        },
+        "standaloneAllowed": false
+      }
+    ],
+    "invocationReadiness": "not-checked",
+    "revisions": [
+      {
+        "active": false,
+        "buildStatus": "not-required",
+        "compilationStatus": "not-required",
+        "importStatus": "not-required",
+        "revisionId": "sha256:3d71dd2b71536bd0f41ad0ce79be0b37bb28f3e3b25f0691194c70ed2b80863d",
+        "spec": {
+          "bindingIds": [],
+          "root": {
+            "children": [
+              {
+                "id": "welcome",
+                "text": "Installed ordinary generated app is ready to compose.",
+                "type": "text"
+              },
+              {
+                "id": "guidance",
+                "text": "Describe the interface you want. Add a backend only when it needs one.",
+                "type": "text"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Installed ordinary generated app",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "not-required",
+        "validationStatus": "passed"
+      },
+      {
+        "active": true,
+        "buildStatus": "passed",
+        "compilationStatus": "succeeded",
+        "importStatus": "passed",
+        "revisionId": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3",
+        "spec": {
+          "bindingIds": [
+            "echo"
+          ],
+          "root": {
+            "children": [
+              {
+                "bindingId": "echo",
+                "fields": [
+                  {
+                    "label": "NDJSON records",
+                    "name": "value",
+                    "required": true,
+                    "type": "text"
+                  }
+                ],
+                "id": "inputs",
+                "submitLabel": "Inspect NDJSON",
+                "type": "form"
+              },
+              {
+                "bindingId": "echo",
+                "id": "status",
+                "type": "status"
+              },
+              {
+                "bindingId": "echo",
+                "id": "artifact",
+                "label": "Inspect result",
+                "type": "artifact"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "NDJSON record inspector \u2014 consumer",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "passed",
+        "validationStatus": "passed"
+      }
+    ]
+  },
+  "isError": false,
+  "resultType": "complete"
+}

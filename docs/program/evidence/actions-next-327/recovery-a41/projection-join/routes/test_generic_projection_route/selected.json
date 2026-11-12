@@ -1,0 +1,18 @@
+[
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_has_app_only_closed_schema[sqlite-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_has_app_only_closed_schema[sqlite-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_has_app_only_closed_schema[postgresql-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_has_app_only_closed_schema[postgresql-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_denies_model_foreign_binding_and_missing_association[sqlite-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_denies_model_foreign_binding_and_missing_association[sqlite-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_denies_model_foreign_binding_and_missing_association[postgresql-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_denies_model_foreign_binding_and_missing_association[postgresql-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_wire_uses_host_selected_identity_and_live_callback[sqlite-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_wire_uses_host_selected_identity_and_live_callback[sqlite-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_wire_uses_host_selected_identity_and_live_callback[postgresql-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_projection_wire_uses_host_selected_identity_and_live_callback[postgresql-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_route_pins_validated_receipt_before_helper_entry[sqlite-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_route_pins_validated_receipt_before_helper_entry[sqlite-postgresql]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_route_pins_validated_receipt_before_helper_entry[postgresql-duckdb]",
+  "tests/action_server_tests/test_generic_projection_route.py::test_route_pins_validated_receipt_before_helper_entry[postgresql-postgresql]"
+]

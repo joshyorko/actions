@@ -1,0 +1,465 @@
++ poetry run pytest tests/action_server_tests/test_generic_input_output_rcc.py tests/action_server_tests/test_generic_execution_port.py tests/action_server_tests/test_generic_work_item_execution.py tests/action_server_tests/test_generic_none_rcc.py -k real_generic_rcc or optin_actual_rcc_model_wrapper or actual_none_app_submit_execute_replay or actual_input_output_app -q --junitxml=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/log --basetemp=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures (in /workspace/actions/action_server)
+F.F.F.F.............                                                     [100%]
+=================================== FAILURES ===================================
+_____________ test_actual_input_output_app[sqlite-duckdb-consumer] _____________
+
+reviewed = (<actions.server._database.Database object at 0x7f6070ea7650>, <actions.server.run_outputs.service.RunOutputControlPla...-40bf-87e5-7ac695a53e16', revision_id='sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')), ...)
+foundry_package_store = <actions.server.run_outputs.filesystem.FilesystemOutputProvider object at 0x7f6070eefbf0>
+tmp_path = PosixPath('/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures/test_actual_input_output_app_s0')
+mode = 'consumer'
+
+    @pytest.mark.parametrize("mode", ["consumer", "producer"])
+    def test_actual_input_output_app(reviewed, foundry_package_store, tmp_path, mode):
+        if os.environ.get("ACTIONS_GENERIC_INPUT_OUTPUT_REAL_RCC") != "1":
+            pytest.skip("exclusive prepared input/output RCC cache required")
+        prepared = load_prepared_rcc_environment(
+            Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+        )
+        c = configure(
+            app_tests.case.__wrapped__(reviewed, foundry_package_store), mode, prepared
+        )
+        execution_root = tmp_path / "execution"
+        execution_root.mkdir()
+        trusted = PinnedGenericRccRunner(
+            prepared, Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]), execution_root
+        )
+
+        class Runner:
+            calls = 0
+
+            def execute(self, caller, ticket, service):
+                self.calls += 1
+                return trusted.execute(caller, ticket, service)
+
+        runner = Runner()
+        c.port.execution.runner = runner
+        service, caller = c.port._selected(c.app, "run")
+        parent = None
+        submit = dict(
+            mode="generic",
+            action="submit",
+            bindingId="run",
+            inputs={"value": "hello"},
+            idempotencyKey="actual-output",
+        )
+        if mode == "consumer":
+            parent = service.enqueue(caller, {"value": "hello"}, "actual-input")
+            queue = service.queue_ref(service.policy.input_queue).model_dump(mode="json")
+            page = app_tests.call(
+                c,
+                "canvas_get_state",
+                dict(mode="generic", action="inputs", bindingId="run", queue=queue),
+            ).execution
+            assert parent in [item["itemId"] for item in page["items"]]
+            submit = dict(
+                mode="generic",
+                action="submit_input",
+                bindingId="run",
+                queue=queue,
+                itemId=parent,
+                idempotencyKey="actual-selection",
+            )
+        else:
+            assert not c.db.all(FencedWorkItem)
+        before_runs = len(c.db.all(Run))
+        state = app_tests.call(c, "canvas_dispatch", submit).execution
+        assert state["state"] == "ready" and runner.calls == 0
+        assert len(c.db.all(Run)) == before_runs + 1
+        assert (
+            app_tests.call(c, "canvas_dispatch", submit).execution["runId"]
+            == state["runId"]
+        )
+        done = app_tests.call(
+            c, "canvas_dispatch", app_tests.request(state, action="execute")
+        ).execution
+        assert done["state"] == "completed" and runner.calls == 1
+        attempt = _one(c.db, RunAttempt, done["attemptId"])
+        assert attempt.state == "succeeded"
+        children = [
+            row
+            for row in c.db.all(FencedWorkItem)
+            if row.queue_name == service.policy.output_queue
+        ]
+        assert len(children) == 1
+        child = children[0]
+        payload = json.loads(child.payload)
+        assert payload["payload"] == {"value": "hello child"}
+        assert payload["produced_by"]["snapshot"] == service.snapshot.model_dump(
+            mode="json"
+        )
+        assert payload["produced_by"]["fence"]["run_id"] == done["runId"]
+        assert payload["produced_by"]["fence"]["attempt_id"] == done["attemptId"]
+        assert payload["produced_by"]["parent_id"] == parent
+        ticket = c.port._ticket(service, caller, _one(c.db, Run, done["runId"]))
+        assert payload["produced_by"]["fence"] == ticket.fence.model_dump(mode="json")
+        assert payload["produced_by"]["input_digest"] == ticket.input_digest
+        if parent:
+            row = _one(c.db, FencedWorkItem, parent)
+>           assert row.state == "DONE" and not row.claim_owner
+
+E           AssertionError: Failed: assert row.state == 'DONE' and (not row.claim_owner)
+E           Variables:
+E             row.state = 'COMPLETED'
+
+tests/action_server_tests/test_generic_input_output_rcc.py:231: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:36:31,799 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:36:31,954 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:36:32,266 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:36:32,468 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+___________ test_actual_input_output_app[sqlite-postgresql-consumer] ___________
+
+reviewed = (<actions.server._database.Database object at 0x7f6067edba70>, <actions.server.run_outputs.service.RunOutputControlPla...-4920-9785-6ef3d1aae045', revision_id='sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')), ...)
+foundry_package_store = <actions.server.run_outputs.filesystem.FilesystemOutputProvider object at 0x7f6069913560>
+tmp_path = PosixPath('/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures/test_actual_input_output_app_s2')
+mode = 'consumer'
+
+    @pytest.mark.parametrize("mode", ["consumer", "producer"])
+    def test_actual_input_output_app(reviewed, foundry_package_store, tmp_path, mode):
+        if os.environ.get("ACTIONS_GENERIC_INPUT_OUTPUT_REAL_RCC") != "1":
+            pytest.skip("exclusive prepared input/output RCC cache required")
+        prepared = load_prepared_rcc_environment(
+            Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+        )
+        c = configure(
+            app_tests.case.__wrapped__(reviewed, foundry_package_store), mode, prepared
+        )
+        execution_root = tmp_path / "execution"
+        execution_root.mkdir()
+        trusted = PinnedGenericRccRunner(
+            prepared, Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]), execution_root
+        )
+
+        class Runner:
+            calls = 0
+
+            def execute(self, caller, ticket, service):
+                self.calls += 1
+                return trusted.execute(caller, ticket, service)
+
+        runner = Runner()
+        c.port.execution.runner = runner
+        service, caller = c.port._selected(c.app, "run")
+        parent = None
+        submit = dict(
+            mode="generic",
+            action="submit",
+            bindingId="run",
+            inputs={"value": "hello"},
+            idempotencyKey="actual-output",
+        )
+        if mode == "consumer":
+            parent = service.enqueue(caller, {"value": "hello"}, "actual-input")
+            queue = service.queue_ref(service.policy.input_queue).model_dump(mode="json")
+            page = app_tests.call(
+                c,
+                "canvas_get_state",
+                dict(mode="generic", action="inputs", bindingId="run", queue=queue),
+            ).execution
+            assert parent in [item["itemId"] for item in page["items"]]
+            submit = dict(
+                mode="generic",
+                action="submit_input",
+                bindingId="run",
+                queue=queue,
+                itemId=parent,
+                idempotencyKey="actual-selection",
+            )
+        else:
+            assert not c.db.all(FencedWorkItem)
+        before_runs = len(c.db.all(Run))
+        state = app_tests.call(c, "canvas_dispatch", submit).execution
+        assert state["state"] == "ready" and runner.calls == 0
+        assert len(c.db.all(Run)) == before_runs + 1
+        assert (
+            app_tests.call(c, "canvas_dispatch", submit).execution["runId"]
+            == state["runId"]
+        )
+        done = app_tests.call(
+            c, "canvas_dispatch", app_tests.request(state, action="execute")
+        ).execution
+        assert done["state"] == "completed" and runner.calls == 1
+        attempt = _one(c.db, RunAttempt, done["attemptId"])
+        assert attempt.state == "succeeded"
+        children = [
+            row
+            for row in c.db.all(FencedWorkItem)
+            if row.queue_name == service.policy.output_queue
+        ]
+        assert len(children) == 1
+        child = children[0]
+        payload = json.loads(child.payload)
+        assert payload["payload"] == {"value": "hello child"}
+        assert payload["produced_by"]["snapshot"] == service.snapshot.model_dump(
+            mode="json"
+        )
+        assert payload["produced_by"]["fence"]["run_id"] == done["runId"]
+        assert payload["produced_by"]["fence"]["attempt_id"] == done["attemptId"]
+        assert payload["produced_by"]["parent_id"] == parent
+        ticket = c.port._ticket(service, caller, _one(c.db, Run, done["runId"]))
+        assert payload["produced_by"]["fence"] == ticket.fence.model_dump(mode="json")
+        assert payload["produced_by"]["input_digest"] == ticket.input_digest
+        if parent:
+            row = _one(c.db, FencedWorkItem, parent)
+>           assert row.state == "DONE" and not row.claim_owner
+
+E           AssertionError: Failed: assert row.state == 'DONE' and (not row.claim_owner)
+E           Variables:
+E             row.state = 'COMPLETED'
+
+tests/action_server_tests/test_generic_input_output_rcc.py:231: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:37:38,033 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:37:38,198 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:37:38,561 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:37:38,768 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+___________ test_actual_input_output_app[postgresql-duckdb-consumer] ___________
+
+reviewed = (<actions.server._database.Database object at 0x7f6067b97650>, <actions.server.run_outputs.service.RunOutputControlPla...-484a-b9e9-4970f2ebd264', revision_id='sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')), ...)
+foundry_package_store = <actions.server.run_outputs.filesystem.FilesystemOutputProvider object at 0x7f6067b6fcb0>
+tmp_path = PosixPath('/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures/test_actual_input_output_app_p0')
+mode = 'consumer'
+
+    @pytest.mark.parametrize("mode", ["consumer", "producer"])
+    def test_actual_input_output_app(reviewed, foundry_package_store, tmp_path, mode):
+        if os.environ.get("ACTIONS_GENERIC_INPUT_OUTPUT_REAL_RCC") != "1":
+            pytest.skip("exclusive prepared input/output RCC cache required")
+        prepared = load_prepared_rcc_environment(
+            Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+        )
+        c = configure(
+            app_tests.case.__wrapped__(reviewed, foundry_package_store), mode, prepared
+        )
+        execution_root = tmp_path / "execution"
+        execution_root.mkdir()
+        trusted = PinnedGenericRccRunner(
+            prepared, Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]), execution_root
+        )
+
+        class Runner:
+            calls = 0
+
+            def execute(self, caller, ticket, service):
+                self.calls += 1
+                return trusted.execute(caller, ticket, service)
+
+        runner = Runner()
+        c.port.execution.runner = runner
+        service, caller = c.port._selected(c.app, "run")
+        parent = None
+        submit = dict(
+            mode="generic",
+            action="submit",
+            bindingId="run",
+            inputs={"value": "hello"},
+            idempotencyKey="actual-output",
+        )
+        if mode == "consumer":
+            parent = service.enqueue(caller, {"value": "hello"}, "actual-input")
+            queue = service.queue_ref(service.policy.input_queue).model_dump(mode="json")
+            page = app_tests.call(
+                c,
+                "canvas_get_state",
+                dict(mode="generic", action="inputs", bindingId="run", queue=queue),
+            ).execution
+            assert parent in [item["itemId"] for item in page["items"]]
+            submit = dict(
+                mode="generic",
+                action="submit_input",
+                bindingId="run",
+                queue=queue,
+                itemId=parent,
+                idempotencyKey="actual-selection",
+            )
+        else:
+            assert not c.db.all(FencedWorkItem)
+        before_runs = len(c.db.all(Run))
+        state = app_tests.call(c, "canvas_dispatch", submit).execution
+        assert state["state"] == "ready" and runner.calls == 0
+        assert len(c.db.all(Run)) == before_runs + 1
+        assert (
+            app_tests.call(c, "canvas_dispatch", submit).execution["runId"]
+            == state["runId"]
+        )
+        done = app_tests.call(
+            c, "canvas_dispatch", app_tests.request(state, action="execute")
+        ).execution
+        assert done["state"] == "completed" and runner.calls == 1
+        attempt = _one(c.db, RunAttempt, done["attemptId"])
+        assert attempt.state == "succeeded"
+        children = [
+            row
+            for row in c.db.all(FencedWorkItem)
+            if row.queue_name == service.policy.output_queue
+        ]
+        assert len(children) == 1
+        child = children[0]
+        payload = json.loads(child.payload)
+        assert payload["payload"] == {"value": "hello child"}
+        assert payload["produced_by"]["snapshot"] == service.snapshot.model_dump(
+            mode="json"
+        )
+        assert payload["produced_by"]["fence"]["run_id"] == done["runId"]
+        assert payload["produced_by"]["fence"]["attempt_id"] == done["attemptId"]
+        assert payload["produced_by"]["parent_id"] == parent
+        ticket = c.port._ticket(service, caller, _one(c.db, Run, done["runId"]))
+        assert payload["produced_by"]["fence"] == ticket.fence.model_dump(mode="json")
+        assert payload["produced_by"]["input_digest"] == ticket.input_digest
+        if parent:
+            row = _one(c.db, FencedWorkItem, parent)
+>           assert row.state == "DONE" and not row.claim_owner
+
+E           AssertionError: Failed: assert row.state == 'DONE' and (not row.claim_owner)
+E           Variables:
+E             row.state = 'COMPLETED'
+
+tests/action_server_tests/test_generic_input_output_rcc.py:231: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:38:35,476 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:38:35,709 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:38:36,288 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:38:36,613 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_________ test_actual_input_output_app[postgresql-postgresql-consumer] _________
+
+reviewed = (<actions.server._database.Database object at 0x7f6067b722d0>, <actions.server.run_outputs.service.RunOutputControlPla...-42b3-be0b-b6b16ff28e01', revision_id='sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')), ...)
+foundry_package_store = <actions.server.run_outputs.filesystem.FilesystemOutputProvider object at 0x7f6070eef950>
+tmp_path = PosixPath('/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures/test_actual_input_output_app_p2')
+mode = 'consumer'
+
+    @pytest.mark.parametrize("mode", ["consumer", "producer"])
+    def test_actual_input_output_app(reviewed, foundry_package_store, tmp_path, mode):
+        if os.environ.get("ACTIONS_GENERIC_INPUT_OUTPUT_REAL_RCC") != "1":
+            pytest.skip("exclusive prepared input/output RCC cache required")
+        prepared = load_prepared_rcc_environment(
+            Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+        )
+        c = configure(
+            app_tests.case.__wrapped__(reviewed, foundry_package_store), mode, prepared
+        )
+        execution_root = tmp_path / "execution"
+        execution_root.mkdir()
+        trusted = PinnedGenericRccRunner(
+            prepared, Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]), execution_root
+        )
+
+        class Runner:
+            calls = 0
+
+            def execute(self, caller, ticket, service):
+                self.calls += 1
+                return trusted.execute(caller, ticket, service)
+
+        runner = Runner()
+        c.port.execution.runner = runner
+        service, caller = c.port._selected(c.app, "run")
+        parent = None
+        submit = dict(
+            mode="generic",
+            action="submit",
+            bindingId="run",
+            inputs={"value": "hello"},
+            idempotencyKey="actual-output",
+        )
+        if mode == "consumer":
+            parent = service.enqueue(caller, {"value": "hello"}, "actual-input")
+            queue = service.queue_ref(service.policy.input_queue).model_dump(mode="json")
+            page = app_tests.call(
+                c,
+                "canvas_get_state",
+                dict(mode="generic", action="inputs", bindingId="run", queue=queue),
+            ).execution
+            assert parent in [item["itemId"] for item in page["items"]]
+            submit = dict(
+                mode="generic",
+                action="submit_input",
+                bindingId="run",
+                queue=queue,
+                itemId=parent,
+                idempotencyKey="actual-selection",
+            )
+        else:
+            assert not c.db.all(FencedWorkItem)
+        before_runs = len(c.db.all(Run))
+        state = app_tests.call(c, "canvas_dispatch", submit).execution
+        assert state["state"] == "ready" and runner.calls == 0
+        assert len(c.db.all(Run)) == before_runs + 1
+        assert (
+            app_tests.call(c, "canvas_dispatch", submit).execution["runId"]
+            == state["runId"]
+        )
+        done = app_tests.call(
+            c, "canvas_dispatch", app_tests.request(state, action="execute")
+        ).execution
+        assert done["state"] == "completed" and runner.calls == 1
+        attempt = _one(c.db, RunAttempt, done["attemptId"])
+        assert attempt.state == "succeeded"
+        children = [
+            row
+            for row in c.db.all(FencedWorkItem)
+            if row.queue_name == service.policy.output_queue
+        ]
+        assert len(children) == 1
+        child = children[0]
+        payload = json.loads(child.payload)
+        assert payload["payload"] == {"value": "hello child"}
+        assert payload["produced_by"]["snapshot"] == service.snapshot.model_dump(
+            mode="json"
+        )
+        assert payload["produced_by"]["fence"]["run_id"] == done["runId"]
+        assert payload["produced_by"]["fence"]["attempt_id"] == done["attemptId"]
+        assert payload["produced_by"]["parent_id"] == parent
+        ticket = c.port._ticket(service, caller, _one(c.db, Run, done["runId"]))
+        assert payload["produced_by"]["fence"] == ticket.fence.model_dump(mode="json")
+        assert payload["produced_by"]["input_digest"] == ticket.input_digest
+        if parent:
+            row = _one(c.db, FencedWorkItem, parent)
+>           assert row.state == "DONE" and not row.claim_owner
+
+E           AssertionError: Failed: assert row.state == 'DONE' and (not row.claim_owner)
+E           Variables:
+E             row.state = 'COMPLETED'
+
+tests/action_server_tests/test_generic_input_output_rcc.py:231: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:39:37,852 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:39:38,128 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:39:38,657 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:39:39,012 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+- generated xml file: /workspace/actions-recovery-327/evidence/a30-source-actual-rcc/tests.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_generic_input_output_rcc.py::test_actual_input_output_app[sqlite-duckdb-consumer]
+FAILED tests/action_server_tests/test_generic_input_output_rcc.py::test_actual_input_output_app[sqlite-postgresql-consumer]
+FAILED tests/action_server_tests/test_generic_input_output_rcc.py::test_actual_input_output_app[postgresql-duckdb-consumer]
+FAILED tests/action_server_tests/test_generic_input_output_rcc.py::test_actual_input_output_app[postgresql-postgresql-consumer]
+4 failed, 16 passed, 70 deselected in 715.29s (0:11:55)
+Log (html): /workspace/actions-recovery-327/evidence/a30-source-actual-rcc/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_generic_input_output_rcc.py', 'tests/action_server_tests/test_generic_execution_port.py', 'tests/action_server_tests/test_generic_work_item_execution.py', 'tests/action_server_tests/test_generic_none_rcc.py', '-k', 'real_generic_rcc or optin_actual_rcc_model_wrapper or actual_none_app_submit_execute_replay or actual_input_output_app', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/log', '--basetemp=/workspace/actions-recovery-327/evidence/a30-source-actual-rcc/fixtures']' returned non-zero exit status 1.

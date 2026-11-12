@@ -354,7 +354,7 @@ def test_runtime_import_scan_decodes_utf8_source(tmp_path: Path):
     assert _private_core_imports_in_file(source) == []
 
 
-def test_template_package_script_is_executable_for_direct_workflow_invocation():
+def test_template_package_script_is_executable_for_local_packaging():
     script = REPO / "templates/packaging/create-templates-package.sh"
     relative_script = script.relative_to(REPO).as_posix()
     tracked_mode = subprocess.run(
@@ -372,15 +372,81 @@ def test_template_package_script_is_executable_for_direct_workflow_invocation():
         ("deploy-beta-templates.yml", "templates-beta.json"),
         ("deploy-templates.yml", "templates-prod.json"),
     ):
-        workflow = (REPO / ".github/workflows" / workflow_name).read_text()
-        assert f"./create-templates-package.sh {config_name}" in workflow
+        # Publishing workflows were deliberately retired; the local deterministic
+        # packaging entrypoint and both local configurations remain supported.
+        assert not (REPO / ".github/workflows" / workflow_name).exists()
+        assert (REPO / "templates/packaging" / config_name).is_file()
+
+
+def _remaining_product_paths(paths: tuple[Path, ...], repo: Path = REPO) -> list[str]:
+    remaining = []
+    for root in paths:
+        if root.is_symlink():
+            remaining.append(str(root.relative_to(repo)))
+            continue
+        files = (root,) if root.is_file() else root.rglob("*")
+        for path in files:
+            if path.is_symlink() or (
+                path.is_file()
+                and not (
+                    path.suffix == ".pyc"
+                    and "__pycache__" in path.relative_to(repo).parts
+                )
+            ):
+                remaining.append(str(root.relative_to(repo)))
+                break
+    return remaining
 
 
 def test_removed_product_paths_do_not_exist():
-    remaining_paths = [
-        str(path.relative_to(REPO)) for path in REMOVED_PRODUCT_PATHS if path.exists()
-    ]
-    assert not remaining_paths
+    assert not _remaining_product_paths(REMOVED_PRODUCT_PATHS)
+
+
+def test_removed_product_paths_preserve_cache_but_reject_source(tmp_path):
+    retired = tmp_path / "retired"
+    cache = retired / "__pycache__"
+    cache.mkdir(parents=True)
+    bytecode = cache / "legacy.cpython-311.pyc"
+    bytecode.write_bytes(b"owned historical bytecode")
+    assert _remaining_product_paths((retired,), tmp_path) == []
+    assert bytecode.read_bytes() == b"owned historical bytecode"
+    cached_source = cache / "legacy.py"
+    cached_source.write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    cached_source.unlink()
+    manifest = retired / "manifest.json"
+    manifest.write_text("{}")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    manifest.unlink()
+    (retired / "legacy.py").write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
+    retired_file = tmp_path / "retired.py"
+    retired_file.write_text("raise RuntimeError('retired source')\n")
+    assert _remaining_product_paths((retired_file,), tmp_path) == ["retired.py"]
+
+
+@pytest.mark.parametrize("kind", ["root", "nested", "bytecode", "broken"])
+def test_removed_product_paths_reject_symlinks(tmp_path, kind):
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    source = outside / "legacy.py"
+    source.write_text("raise RuntimeError('retired source')\n")
+    retired = tmp_path / "retired"
+    try:
+        if kind in ("root", "broken"):
+            target = outside if kind == "root" else tmp_path / "missing"
+            retired.symlink_to(target, target_is_directory=True)
+        else:
+            retired.mkdir()
+            if kind == "bytecode":
+                cache = retired / "__pycache__"
+                cache.mkdir()
+                (cache / "legacy.pyc").symlink_to(source)
+            else:
+                (retired / "linked").symlink_to(outside, target_is_directory=True)
+    except OSError:
+        pytest.skip("symlink creation unavailable")
+    assert _remaining_product_paths((retired,), tmp_path) == ["retired"]
 
 
 def test_runtime_has_no_data_server_or_data_context_compatibility():
@@ -449,17 +515,43 @@ def test_active_guidance_and_ci_have_no_private_product_lane():
     assert not sorted_violations
 
 
-def test_runtime_metadata_uses_published_active_dependencies():
+def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_overlay():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
-    assert dependencies["actions-work-items"] == "^0.4.4"
+    assert dependencies["actions-core"] == {
+        "version": ">=1.1.0,<2.0.0",
+    }
+    assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
+        "actions-core"
+    ] == {"path": "../actions/", "develop": False}
+    assert dependencies["actions-work-items"] == {
+        "version": ">=0.5.0,<0.6.0",
+    }
+    assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
+        "actions-work-items"
+    ] == {"path": "../work-items/", "develop": False}
+
+
+def test_candidate_version_does_not_change_the_published_runtime_floor(tmp_path):
+    candidate = tmp_path / "candidate.whl"
+    with zipfile.ZipFile(candidate, "w") as archive:
+        archive.writestr(
+            "actions_runtime-1.1.0a1.dist-info/METADATA",
+            "Metadata-Version: 2.1\nName: actions-runtime\nVersion: 1.1.0a1\n",
+        )
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        _WHEEL_VERIFIER.validate_runtime_metadata(candidate)
+    _WHEEL_VERIFIER.validate_runtime_metadata(candidate, expected_runtime="1.1.0a1")
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        _WHEEL_VERIFIER.validate_runtime_metadata(candidate, expected_runtime="1.1.0a2")
 
 
 def test_template_manifests_pin_supported_worker_core():
     expected_core_versions = {
         "advanced": "1.0.2",
-        "basic": "1.0.2",
+        "basic": "1.1.0",
         "canvas-query": "1.0.3",
+        "canvas-first-boot": "1.0.3",
         "minimal": "1.0.2",
         "mcp-v2-showcase": "1.0.2",
         "workflow-producer-consumer": "1.0.2",
@@ -469,6 +561,12 @@ def test_template_manifests_pin_supported_worker_core():
         for manifest in sorted((REPO / "templates").glob("*/package.yaml"))
     }
     assert set(manifests) == set(expected_core_versions)
+    # This lane supplies an isolated fixture, not an admitted shipped starter.
+    for metadata in ("templates-prod.json", "templates-beta.json"):
+        catalog = json.loads((REPO / "templates/packaging" / metadata).read_text())
+        assert "canvas-first-boot" not in {
+            entry["id"] for entry in catalog["templates"]
+        }
 
     for template_name, manifest in manifests.items():
         dependencies = {
@@ -514,8 +612,18 @@ def test_template_sources_use_actions_core_without_module_name_collision():
 
 
 def _build_wheels(output: Path, python: Path) -> list[Path]:
+    # Only committed source belongs to this isolated build; public generation must
+    # never overwrite an existing operator/local OAuth module in the checkout.
+    source = output.parent / "wheel-build-source"
+    source.mkdir()
+    import io
+    import tarfile
+
+    archive = subprocess.check_output(["git", "archive", "HEAD"], cwd=REPO)
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
+        tree.extractall(source, filter="data")
     for name in ("actions", "actions-http-helper", "work-items", "action_server"):
-        package = REPO / name
+        package = source / name
         command = [
             "poetry",
             "build",
@@ -619,10 +727,19 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
     runtime_wheel = next(
         path for path in wheels if path.name.startswith("actions_runtime-")
     )
-    _WHEEL_VERIFIER.verify_oauth_input_binding(runtime_wheel, ROOT)
+    _WHEEL_VERIFIER.verify_oauth_input_binding(
+        runtime_wheel, wheelhouse.parent / "wheel-build-source" / "action_server"
+    )
     with tempfile.TemporaryDirectory(prefix="runtime-wheel-probe-") as directory:
         _WHEEL_VERIFIER.verify_installed_runtime_wheel(
-            python, runtime_wheel, Path(directory), REPO, core_wheel=core_wheel
+            python,
+            runtime_wheel,
+            Path(directory),
+            REPO,
+            core_wheel=core_wheel,
+            expected_runtime=tomllib.loads((ROOT / "pyproject.toml").read_text())[
+                "tool"
+            ]["poetry"]["version"],
         )
 
 
@@ -649,10 +766,14 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
-        "Requires-Dist: actions-core (>=1.0.2,<2.0.0)" in runtime_files[metadata_name]
+        "Requires-Dist: actions-core (>=1.1.0,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"
+        in runtime_files[metadata_name]
+    )
+    assert (
+        "Requires-Dist: actions-work-items (>=0.5.0,<0.6.0)"
         in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))

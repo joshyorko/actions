@@ -6,7 +6,10 @@ import pytest
 from devutils.docs import normalize_generic_alias_docs
 
 
-def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkeypatch):
+@pytest.mark.parametrize("overview_module", ["builtins", "alias_fixture"])
+def test_generic_alias_docs_match_python_310_and_312_renderings(
+    tmp_path, monkeypatch, overview_module
+):
     module = ModuleType("alias_fixture")
     module.__all__ = ["Row"]
     module.Row = list[str]
@@ -27,7 +30,7 @@ def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkey
         module_file.write_text(rendering)
         overview_file.write_text(
             overview
-            + "- [`builtins.list`](./builtins.md#class-list): Built-in mutable sequence.\n"
+            + f"- [`{overview_module}.list`](./{overview_module}.md#class-list): Built-in mutable sequence.\n"
         )
         normalize_generic_alias_docs(tmp_path, "alias_fixture")
         assert module_file.read_text() == canonical
@@ -52,3 +55,17 @@ def test_alias_normalization_preserves_following_top_level_sections(
     (tmp_path / "README.md").write_text("# API\n")
     normalize_generic_alias_docs(tmp_path, "alias_fixture")
     assert (tmp_path / "alias_fixture.md").read_text() == before + after
+
+
+def test_reexported_class_overview_links_to_generated_public_page():
+    from devutils.owned_docs.generation import MarkdownGenerator
+
+    class Exported:
+        """Publicly reexported class."""
+
+    module = ModuleType("public_fixture")
+    module.__all__ = ["Exported"]
+    module.Exported = Exported
+    generator = MarkdownGenerator()
+    generator.module2md(module)
+    assert "./public_fixture.md#class-exported" in generator.overview2md()

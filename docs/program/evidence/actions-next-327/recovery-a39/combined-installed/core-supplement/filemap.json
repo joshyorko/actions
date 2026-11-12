@@ -1,0 +1,9 @@
+{
+  "target": "core-suite/tests.xml.b64",
+  "source": "/workspace/actions-327-a39/core-suite/tests.xml",
+  "source_sha256": "66d5d4b8ca7ba040eb1aaf7ed48917ce99c9ecdc117b936733f794be22d65df5",
+  "payload_sha256": "66d5d4b8ca7ba040eb1aaf7ed48917ce99c9ecdc117b936733f794be22d65df5",
+  "staged_sha256": "e9718ac029bb6338c6912f417a67ec9f5490f369483bfa54e0836427755c19d4",
+  "redacted": false,
+  "cause": "Top-level receipt glob accepted .json/.log but omitted .xml; nested batch allowlist included XML. Packaging omission only; source XML exists with 411 tests zero failures/errors/skips."
+}

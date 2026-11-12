@@ -408,7 +408,8 @@ class TestSQLiteAdapter:
         monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
         monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "test_queue")
 
-        adapter = SQLiteAdapter()
+        adapter = SQLiteAdapter(files_dir=str(files_dir))
+        assert adapter._files_dir == files_dir
         yield adapter
 
         # Cleanup - close connections if they exist

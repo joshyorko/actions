@@ -1,0 +1,36 @@
+{
+  "module": "test_local_authorization",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a38/local-authorization/selected-pytest.py",
+    "tests/action_server_tests/test_local_authorization.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a38/local-authorization/test_local_authorization/tests.xml",
+    "--basetemp=/workspace/actions-327-a38/local-authorization/test_local_authorization/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 16583499776,
+  "stop_reason": null,
+  "source_sha256": "3d84887dcb8f12b86dfca83890ed85678640f6d8ee74b3c894fb1ecd5f7eb653",
+  "counts": {
+    "tests": 29,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

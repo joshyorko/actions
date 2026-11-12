@@ -1,0 +1,58 @@
+{
+  "phases": [
+    {
+      "phase": "static",
+      "exit_code": 0
+    },
+    {
+      "phase": "build",
+      "exit_code": 0
+    }
+  ],
+  "reaped_children": [
+    {
+      "pid": 64767,
+      "status": 0
+    },
+    {
+      "pid": 64757,
+      "status": 0
+    },
+    {
+      "pid": 64883,
+      "status": 0
+    },
+    {
+      "pid": 64877,
+      "status": 0
+    }
+  ],
+  "scope": "static checks and build only; no server/auth/browser",
+  "status": "PASS",
+  "node": "20.19.3",
+  "source_commit": "82221c0c8ce7661efa6771c9d461511b1650495f",
+  "adapter_patch_sha256": "387d98526b1355770e27fe5e6c5bf534a712a883c3ec275ed99a6e607c69d183",
+  "changed_files": {
+    "serve.ts": {
+      "stock_sha256": "f011ddcd56a33022e2c6c5a173fb03eb59ebbb81310f0cc4a6fd57cbd6ff2629",
+      "adapted_sha256": "5d48a4f9cb3126407459a25eeff991c5950acace3699f3bae909268a829407f9"
+    },
+    "src/index.tsx": {
+      "stock_sha256": "e5bf6da102c86cc927c80a1ea209a2340ac7d20abff21b4fbf1e332f80861330",
+      "adapted_sha256": "60e57aeb3dbb6b0fcceb9ea995dd59865fe00079abd0a5beae46cd8fdd11c330"
+    },
+    "src/implementation.ts": {
+      "stock_sha256": "02cf4551885418515181bee74062ff79c8fd8ea47e99d177a9d23bb0dd6f6a72",
+      "adapted_sha256": "3269eebaf11c4c086d15c84077f90337242394806e0f8e44e5894965aeed7821"
+    },
+    "src/connection-config.ts": {
+      "stock_sha256": null,
+      "adapted_sha256": "0b6a8d0c31ed1d7383f3f2fef1a42edc50aee23f5ff1d902c353a5662f9f8d86"
+    }
+  },
+  "dist_sha256": {
+    "dist/index.html": "81597bebfc9508b0587b0c75a1e9943eca30a7495f32bb7ef3a15e69be5741b8",
+    "dist/sandbox.html": "00be407b7865bf95291d07cc287b8930775fa00731a762f43f11be07362d1e35"
+  },
+  "node_modules_symlink": "/workspace/recovery327/a44-host-capacity/basic-host/node_modules"
+}

@@ -1,0 +1,11 @@
+# Public logging bridge delivery
+
+Implemented only six isolated Core/Runtime source and test files; see receipt.json and bridge.patch. No versions, manifests, lockfiles, templates or active checkout edits.
+
+Core exports exact aliases `get_log_viewer_html` and `log_html` through public `actions.server_integration`; both Runtime viewer callers use the bridge. Selected-child preload resolves HTML only for nonempty X_ACTION_TRACE. Older owned Core6/7 ordinary execution is unchanged; requested optional trace without public bridge fails with an explicit Corea8 upgrade requirement. Legacy fallback requires the selected installed Core distribution to explicitly declare robocorp-log in Requires-Dist, matching historical pre-owned Core contract (checkpoint072db7f1 Corea5 declares it, Corea6 removes it). Available public bridge import or call errors propagate, with no broad import fallback. No private namespace probing/imports or checker relaxation remains.
+
+Validation: scoped bridge/redaction/preload14PASS; unchanged private import scan/detection20PASS20deselected; scoped mypy2filesPASS; isort/configured Ruff formatting/E/F checksPASS. Retained initial static failures document unavailable black, wrong initial Ruff configuration path and Optional callable typing; corrected final logs are authoritative. Actual installed wheels/compiler qualification remains root-owned.
+
+Canonical delta for docs/skills/provenance-observability.md: “Runtime consumes Core logging through actions.server_integration; viewer assets require the matching public bridge version. Selected older child Core may still execute ordinary actions, but optional X_ACTION_TRACE HTML annotations require log_html. Legacy fallback is available only when that installed Core explicitly declares robocorp-log. Missing capability reports an upgrade requirement; available bridge failures propagate. Do not bypass the public boundary through private imports.”
+
+Documentation improvement receipt: exact proposed delta above, grounded in bridge identity/viewer-byte tests, current owned redaction tests, selected-child compatibility tests and unchanged static private-import contract. Root owns shared documentation integration. Upstream disposition: local package-boundary defect; no upstream report or external mutation authorized/performed.

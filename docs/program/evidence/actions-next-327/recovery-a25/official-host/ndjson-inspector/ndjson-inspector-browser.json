@@ -1,0 +1,10 @@
+{
+  "application": "ndjson-inspector",
+  "status": "PASS",
+  "screenshots": [
+    "ndjson-inspector-mounted.png",
+    "ndjson-inspector-review.png",
+    "ndjson-inspector-executed.png"
+  ],
+  "result_text": "\"{\\\"columns\\\": [\\\"amount_cents\\\", \\\"customer\\\", \\\"days_overdue\\\", \\\"invoice_id\\\"], \\\"record_count\\\": 2}\""
+}

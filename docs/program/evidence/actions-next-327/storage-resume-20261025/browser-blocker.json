@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED",
+  "action": "launch sandboxed Chromium for official MCP Apps host",
+  "target": "/usr/bin/chromium",
+  "reason": "SUID sandbox helper /usr/lib/chromium/chrome-sandbox is not configured root-owned mode4755",
+  "sandbox_override_used": false,
+  "auto_review_denial": false,
+  "process_exit": "SIGABRT before page launch"
+}

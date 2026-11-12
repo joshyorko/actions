@@ -1,0 +1,52 @@
+{
+  "result": "pass",
+  "scope": "installed Python consumer only",
+  "producer_version": "7.5.0",
+  "consumer_prefix": "/workspace/lane-d/clean-sbom-consumer",
+  "producer_prefix": "/workspace/lane-d/repo/devutils/.venv",
+  "consumer_trust": "trusted interpreter and site/.pth execution required",
+  "wheel_sha256": "34f5b7c1db29d4def4ba84214d225f6b82d037fa39e3b819eab6fe1ff15898ce",
+  "runtime_version": "1.1.0a38",
+  "runtime-lock.toml_sha256": "ed0a02f97b916e1cc9606763adb2d94a10b40138cb9c15a505fddb36775d11eb",
+  "producer-lock.toml_sha256": "1f7120c436fce2c82ab144aa494796c4ad0b10280bef59965a42decc4671228a",
+  "inspect_sha256": "712342d404b3996738da80090228175125ab85eabbc39a3aa25aab24ce9557bb",
+  "selected_extras": {
+    "actions-runtime": [
+      "data-duckdb"
+    ],
+    "psycopg": [
+      "binary"
+    ],
+    "pyjwt": [
+      "crypto"
+    ]
+  },
+  "producer_command": [
+    "/workspace/lane-d/repo/devutils/.venv/bin/python",
+    "-m",
+    "cyclonedx_py",
+    "environment",
+    "/workspace/lane-d/clean-sbom-consumer/bin/python",
+    "--spec-version",
+    "1.6",
+    "--output-format",
+    "JSON",
+    "--output-reproducible",
+    "--validate",
+    "--output-file",
+    "-"
+  ],
+  "sbom_sha256": "183898f562696bbab4437de84c853dda67cc799ff2431d3038400ee30275aba1",
+  "sbom_dependencies": "DECLARED",
+  "qualification_scope": "dependency inventory and provenance evidence only",
+  "active_graph_evidence": "resolved-graph.json",
+  "strict_active_graph": {
+    "result": "failed",
+    "error": "CycloneDX graph differs from active resolved dependencies"
+  },
+  "explained_inactive_edges": 29,
+  "evidence_sha256": {
+    "resolved-graph.json": "b68571a9ece83b9e82808e8c71b3403d515f42ff5bbbc5744a95a74e7f905178",
+    "declaration-reconciliation.json": "a5df021fef5f85370471c1bc3c29588409075bc77777594581ef092f43bf9eb1"
+  }
+}

@@ -1,0 +1,125 @@
+[
+  {
+    "source": "/workspace/327-probes/hosted-ci-luna/current-a90d6cdb.json",
+    "copy": "coverage-514.json",
+    "bytes": 9353,
+    "sha256": "415ee6b00b981b452128974f456a41c6476cde63b45a7aa3d316ff1e00fe1290"
+  },
+  {
+    "source": "/workspace/327-probes/hosted-ci-luna/current-a90d6cdb.md",
+    "copy": "coverage-514.md",
+    "bytes": 10078,
+    "sha256": "f033bb84b7e77ea52ae8d0fe574d706d65c359c85d199fb3b6c5c2e773150a00"
+  },
+  {
+    "source": "/workspace/327-probes/ci-final-review-luna.md",
+    "copy": "ci-review.md",
+    "bytes": 3869,
+    "sha256": "442be0524da24404c5aaa044cf652cb41baf1f0de08194f1442bc6b0e55a2b4d"
+  },
+  {
+    "source": "/workspace/327-probes/windows-final-review-luna.md",
+    "copy": "windows-review.md",
+    "bytes": 3920,
+    "sha256": "aabd75e015cd475ef90c104b41a358caf3bb81f20484c971799e20f50f67924a"
+  },
+  {
+    "source": "/workspace/327-probes/windows-task-wire-checkout-proof.json",
+    "copy": "task-wire-checkout.json",
+    "bytes": 278,
+    "sha256": "1958ccfb723f7f6084c8ef4f33b698b3a23f194df38f9b2d2a4fcd1d268056fe"
+  },
+  {
+    "source": "/workspace/327-probes/windows-logical-fixtures-327.md",
+    "copy": "logical-fixtures.md",
+    "bytes": 4460,
+    "sha256": "67521a7f4846decfb6095c22908fd5cb2ad1e903de02418f0df468c6afa7cb5c"
+  },
+  {
+    "source": "/workspace/327-probes/windows-process-fixtures-327.md",
+    "copy": "process-fixtures.md",
+    "bytes": 6023,
+    "sha256": "d548f2f32f7598c37cf18915e9c391bdfbf4cf733dbe2c22b9d09ab6c432b50d"
+  },
+  {
+    "source": "/workspace/327-probes/publication-python-327.md",
+    "copy": "publication-python.md",
+    "bytes": 4189,
+    "sha256": "8fa19a38e04f65903621997efd61c596e6ebc1a0790d822965f3d5e071621c16"
+  },
+  {
+    "source": "/workspace/327-probes/posix-fixture-last-case-327.md",
+    "copy": "restore-fixture.md",
+    "bytes": 3022,
+    "sha256": "613b8566000ece188ac37f52e54a8e59d5d7b7af93fb4fe9797c184f2c9ebc0f"
+  },
+  {
+    "source": "/workspace/327-probes/published-browser392-diagnosis.md",
+    "copy": "published-browser392.md",
+    "bytes": 4541,
+    "sha256": "2d8af01ffa0c305fe6ac247828e6fedab3199fb096fa9355eaf1a94469c400ef"
+  },
+  {
+    "source": "/workspace/327-probes/codex-client-next-proof.md",
+    "copy": "codex-client-next-proof.md",
+    "bytes": 8480,
+    "sha256": "ca798eac7546be3ca0ef6d56af8179a87c7f1b25d29b83025f4caba9c8816bc0",
+    "copied_bytes": 8478,
+    "copied_sha256": "4e56b4c41536afb9f2a2313e47e123a84dda9127473f4e039f084b7839f83fd4",
+    "copy_transform": "trailing Markdown whitespace removed; source bytes/hash preserved in source fields"
+  },
+  {
+    "source": "/tmp/327-ci-final-toolkit-supervisor.json",
+    "copy": "ci-final-toolkit-supervisor.json",
+    "bytes": 191,
+    "sha256": "a19c53768bc12d28bbaeba3f77a8a7bb945d1c5863de073f3535a101ab610cc7"
+  },
+  {
+    "source": "/tmp/327-ci-final-lint-supervisor.json",
+    "copy": "ci-final-lint-supervisor.json",
+    "bytes": 192,
+    "sha256": "045f85e0b7cd62edf719a88e5dd0c30e3b3e29b1ffd484a2dcd6b8c96f88bbff"
+  },
+  {
+    "source": "/tmp/327-ci-final-types-supervisor.json",
+    "copy": "ci-final-types-supervisor.json",
+    "bytes": 192,
+    "sha256": "9ffe8fa301aea76635a4f15011705265776f552b63f2d595904435898c732b19"
+  },
+  {
+    "source": "/tmp/327-process-fixtures-rcc-supervisor.json",
+    "copy": "process-fixtures-rcc-supervisor.json",
+    "bytes": 192,
+    "sha256": "f595353efb6dbf9e78f6becfc4c3b8d3d0b992d46547596b20a997ce4275a43c"
+  },
+  {
+    "source": "/tmp/327-receipt-prefix-green-supervisor.json",
+    "copy": "receipt-prefix-green-supervisor.json",
+    "bytes": 191,
+    "sha256": "9b607d7c335718a4a3637703460d14af0e07f457bf93c204249643a9e4f058b6"
+  },
+  {
+    "source": "/tmp/327-published-diag-green-supervisor.json",
+    "copy": "published-diag-green-supervisor.json",
+    "bytes": 191,
+    "sha256": "8505a9c22e9e9f180489ef02e89523ad89f126b0780a71983f9db93637e65acb"
+  },
+  {
+    "source": "/tmp/327-ci-final-lint.log",
+    "bytes": 4151,
+    "sha256": "68f980e059986e929f6ec14a09d538fe1f4ea39450c9e7367e923daf98e8d304",
+    "retention": "consumer-local original; no raw output copied"
+  },
+  {
+    "source": "/tmp/327-ci-final-toolkit.log",
+    "bytes": 4051,
+    "sha256": "7885f8753a5a2f06eced8a34970d2a15c620ede5ca2362c623ee2eb75b30e454",
+    "retention": "consumer-local original; no raw output copied"
+  },
+  {
+    "source": "/tmp/327-ci-final-types.log",
+    "bytes": 5758,
+    "sha256": "881e1c722804967de25173ddfdfb26ed6a198f40f49f861a02d501194fd0913b",
+    "retention": "consumer-local original; no raw output copied"
+  }
+]

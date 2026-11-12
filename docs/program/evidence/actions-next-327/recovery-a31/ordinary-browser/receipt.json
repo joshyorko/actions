@@ -1,0 +1,91 @@
+{
+  "status": "PASS_ORDINARY_INSTALLED_OFFICIAL_HOST",
+  "runtime_version": "1.1.0a31",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a31/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "5db9f92366e6ce9a268e9d6c98ad041614ead060",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 110378,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 110434,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 111270,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 112167,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS consumer and producer NDJSON app through official bridge",
+  "workspace": "27d60cb3-34e9-4502-bb66-274ada8ffe57",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "managed_calls": [
+    "items.enqueue"
+  ],
+  "applications": {
+    "consumer": {
+      "app": "043f9d7d-aaed-49a7-86cc-14be9c16ae84",
+      "revision": "sha256:04f52f760f4d2ce66377570646578f6842170fd3882f16d2876e418ce4a3a6e3"
+    },
+    "producer": {
+      "app": "77f9d8d6-e35d-4b79-a326-b873a5df7dd2",
+      "revision": "sha256:4572712eff2f34e9900c4cf01ccce14b6dac55cbdb5097fb0f42a5fe8b1500bc"
+    }
+  },
+  "ordinary_cli": true,
+  "fixture_SQL_mutations": false,
+  "host_source": "ext-apps v2.0.3 82221c0c8ce7661efa6771c9d461511b1650495f",
+  "E1": false
+}

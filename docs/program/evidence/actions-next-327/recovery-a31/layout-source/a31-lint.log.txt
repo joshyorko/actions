@@ -1,0 +1,3 @@
+
+> actions-runtime-frontend@0.0.1 test:lint
+> eslint --max-warnings 0 apps/runtime/src apps/canvas-view/src src/app

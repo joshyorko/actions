@@ -1,0 +1,24 @@
+{
+  "status": "PASS_BOUNDED_POSTGRES_RESTORE",
+  "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "runtime": "1.1.0a27",
+  "engine": "noneditable installed wheel",
+  "composition": "synthetic authorized common services, not ordinary CLI",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "cleanup": "PASS",
+  "actual_RCC": "one real generated consumer Run",
+  "restored_fresh_processes": 2,
+  "dump_sha256": "9cb2fea28b3524960479673324b8e05f95d5ff07a4d2660052b0efb2da70eeeb",
+  "dump_bytes": 72906,
+  "source_objects_unchanged": true,
+  "object_members": 6,
+  "scope": "quiesced owned common PostgreSQL schema and immutable filesystem objects; same installed Runtime; pinned snapshot/claim/Run/Attempt and4artifact byte/digest readbacks",
+  "limits": [
+    "no ordinary CLI PostgreSQL configuration claim",
+    "external production storage/credentials not used",
+    "no active job or external effect recovery",
+    "RCC cache remains independently available",
+    "no cross-version schema downgrade"
+  ],
+  "source_overlay_modules": []
+}

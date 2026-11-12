@@ -1,0 +1,177 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": true,
+      "applicationId": "11e8f52a-791e-4e95-b4ed-00f0d6ec65dc",
+      "bindings": [
+        {
+          "bindingId": "normalize",
+          "capabilityId": "action.normalize_words",
+          "packageRevision": {
+            "package_id": "d2afb8a2-b100-5d7a-8605-3ed6c4cb63a6",
+            "revision_id": "sha256:94e8ea43ba87a238a8b78677a63b0aa18eb250893b8fe7f217702441b574ed43",
+            "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f"
+          }
+        },
+        {
+          "bindingId": "add",
+          "capabilityId": "action.add_counts",
+          "packageRevision": {
+            "package_id": "d2afb8a2-b100-5d7a-8605-3ed6c4cb63a6",
+            "revision_id": "sha256:94e8ea43ba87a238a8b78677a63b0aa18eb250893b8fe7f217702441b574ed43",
+            "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f"
+          }
+        }
+      ],
+      "revisionId": "sha256:53105da890668b0a6326242b32ff83f6a605ab8d4b5e9d8b84a479daa426d188",
+      "spec": {
+        "bindingIds": [
+          "normalize",
+          "add"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "normalize",
+              "fields": [
+                {
+                  "label": "Text",
+                  "name": "text",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "normalize-form",
+              "submitLabel": "Normalize",
+              "type": "form"
+            },
+            {
+              "bindingId": "normalize",
+              "id": "normalize-status",
+              "type": "status"
+            },
+            {
+              "bindingId": "add",
+              "fields": [
+                {
+                  "label": "Left",
+                  "name": "left",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "label": "Right",
+                  "name": "right",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "id": "add-form",
+              "submitLabel": "Add",
+              "type": "form"
+            },
+            {
+              "bindingId": "add",
+              "id": "add-status",
+              "type": "status"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Two independently generated Actions",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": true,
+    "applicationId": "11e8f52a-791e-4e95-b4ed-00f0d6ec65dc",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:53105da890668b0a6326242b32ff83f6a605ab8d4b5e9d8b84a479daa426d188",
+    "spec": {
+      "bindingIds": [
+        "normalize",
+        "add"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "normalize",
+            "fields": [
+              {
+                "label": "Text",
+                "name": "text",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "normalize-form",
+            "submitLabel": "Normalize",
+            "type": "form"
+          },
+          {
+            "bindingId": "normalize",
+            "id": "normalize-status",
+            "type": "status"
+          },
+          {
+            "bindingId": "add",
+            "fields": [
+              {
+                "label": "Left",
+                "name": "left",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "label": "Right",
+                "name": "right",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "id": "add-form",
+            "submitLabel": "Add",
+            "type": "form"
+          },
+          {
+            "bindingId": "add",
+            "id": "add-status",
+            "type": "status"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Two independently generated Actions",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

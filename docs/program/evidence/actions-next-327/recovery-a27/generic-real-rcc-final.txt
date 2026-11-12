@@ -1,0 +1,80 @@
+F..                                                                      [100%]
+=================================== FAILURES ===================================
+____________________ test_real_generic_rcc[sqlite-consumer] ____________________
+
+generic = <function generic.<locals>.setup at 0x7f0f4ba78b80>, mode = 'consumer'
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-16/test_real_generic_rcc_sqlite_c0')
+
+    @pytest.mark.parametrize("mode", ["consumer", "producer", "optional"])
+    def test_real_generic_rcc(generic, mode, tmp_path):
+        import os
+        from pathlib import Path
+        from actions.server.deployments.package_revision_compiler import (
+            load_prepared_rcc_environment,
+        )
+        from actions.server.foundry.rcc_execution import GeneratedRccExecution
+    
+        if not os.environ.get("ACTIONS_GENERIC_REAL_RCC"):
+            pytest.skip("explicit owned prepared RCC gate required")
+        g = generic(mode, outputs=mode != "optional", real=True)
+        if mode == "consumer":
+            ticket, claim = dispatch(g)
+        else:
+            ticket = g.owner.dispatch_standalone(
+                g.caller, {"value": "hello"}, "real-rcc", lease_seconds=60
+            )
+            assert not g.db.all(FencedWorkItem)
+        runner = GeneratedRccExecution(
+            g.owner.registry,
+            g.owner.outputs(g.caller, ticket),
+            load_prepared_rcc_environment(
+                Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+            ),
+            Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]),
+            tmp_path / "execution",
+        )
+>       run = runner.execute(g.caller.actor, ticket.fence, cancelled=lambda: False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+action_server/tests/action_server_tests/test_generic_work_item_execution.py:494: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+action_server/src/actions/server/foundry/rcc_execution.py:142: in execute
+    compiled, action, input_schema, output_schema = self._verified_selection(
+action_server/src/actions/server/foundry/rcc_execution.py:412: in _verified_selection
+    generic_outputs.require_rcc_selection(snapshot, capability)
+action_server/src/actions/server/foundry/generic_work_item_execution.py:439: in require_rcc_selection
+    self._check(self.ticket.fence)
+action_server/src/actions/server/foundry/generic_work_item_execution.py:432: in _check
+    queue._require(claim)
+../../actions/action_server/.venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py:148: in _require
+    rows = self.store.execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <actions.server.data_queries.review._SQLStore object at 0x7f0f4a246d80>
+sql = "SELECT id FROM fenced_work_item WHERE id=? AND workspace_id=? AND queue_name=? AND state=? AND claim_owner=? AND clai...l_requested=0 AND format=? AND CAST(claim_deadline_ms AS BIGINT)>CAST((julianday('now')-2440587.5)*86400000 AS BIGINT)"
+values = ['72bf4e9f-a917-4b8b-95d1-e5b71f43544b', '5ea881f4-0831-40ac-aa3d-8cef1f3170d9', 'generic-input', 'IN_PROGRESS', 'b88a453b-07a6-4cd0-901a-b842b9ec1312', 1, ...]
+
+    def execute(self, sql: str, values: list[Any]) -> list[tuple[Any, ...]]:
+        if not self.db.in_transaction():
+>           raise RuntimeError("review queue requires the owning SQL transaction")
+E           RuntimeError: review queue requires the owning SQL transaction
+
+action_server/src/actions/server/data_queries/review.py:91: RuntimeError
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:33:27,398 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:33:27,398 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:33:27,400 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-16/test_real_generic_rcc_sqlite_c0/runtime.db
+TEST PROCESS: 2026-10-25 01:33:27,400 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-16/test_real_generic_rcc_sqlite_c0/runtime.db-pre-migration-18-1792892007.4007263.bak
+TEST PROCESS: 2026-10-25 01:33:27,403 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:33:27,416 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-16/test_real_generic_rcc_sqlite_c0/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-16/test_real_generic_rcc_sqlite_c0/runtime.db-pre-migration-18-1792892007.4007263.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+=========================== short test summary info ============================
+FAILED action_server/tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[sqlite-consumer]
+1 failed, 2 passed, 30 deselected in 84.22s (0:01:24)
+Log (html): /workspace/actions-recovery-327/generic-contract-draft/output/log.html

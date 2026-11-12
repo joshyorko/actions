@@ -1,0 +1,193 @@
+{
+  "dry": {
+    "deployment": {
+      "deployment_id": "54fff041-1e91-4354-8715-2faea8de4de5",
+      "revision_id": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+      "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+    },
+    "dryRun": true,
+    "expected_grants_digest": "sha256:4ac1ceb626551a55f03328b6d05201d8e1bbd8e16faa96576a89bd111cd8e9f6",
+    "foundryRows": 8,
+    "foundryScope": "explicit selected native references plus necessary Workspace gates",
+    "operation": "authorize-exact-deployment",
+    "owner": "2b6ffc73-2a23-4e29-b7b9-0c9c9ba9b876",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "53d70255-9e57-482a-8d82-173a67d06ff1",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "policy_id": "15262c33-9b19-41f1-8a66-d5d7bc12410d",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "provider_profile_id": "4caa6bee-b1ca-49e1-8ef3-13f06218343e",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      }
+    ],
+    "queuePermissions": [
+      "work_items.read",
+      "work_items.enqueue",
+      "work_items.claim",
+      "work_items.complete",
+      "work_items.cancel",
+      "work_items.artifact.read"
+    ],
+    "queueScope": "all queues of exact Deployment revision plus Workspace permission gate",
+    "runPermissions": [
+      "execute",
+      "read",
+      "cancel"
+    ],
+    "runScope": "application ID, including retained/future revisions subject to other live checks",
+    "target": "deployment",
+    "workspace": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+  },
+  "actual": {
+    "deployment": {
+      "deployment_id": "54fff041-1e91-4354-8715-2faea8de4de5",
+      "revision_id": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+      "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+    },
+    "dryRun": false,
+    "expected_grants_digest": "sha256:4ac1ceb626551a55f03328b6d05201d8e1bbd8e16faa96576a89bd111cd8e9f6",
+    "foundryRows": 8,
+    "foundryScope": "explicit selected native references plus necessary Workspace gates",
+    "operation": "authorize-exact-deployment",
+    "owner": "2b6ffc73-2a23-4e29-b7b9-0c9c9ba9b876",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "53d70255-9e57-482a-8d82-173a67d06ff1",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "policy_id": "15262c33-9b19-41f1-8a66-d5d7bc12410d",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "provider_profile_id": "4caa6bee-b1ca-49e1-8ef3-13f06218343e",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      }
+    ],
+    "queuePermissions": [
+      "work_items.read",
+      "work_items.enqueue",
+      "work_items.claim",
+      "work_items.complete",
+      "work_items.cancel",
+      "work_items.artifact.read"
+    ],
+    "queueScope": "all queues of exact Deployment revision plus Workspace permission gate",
+    "replay": false,
+    "runPermissions": [
+      "execute",
+      "read",
+      "cancel"
+    ],
+    "runScope": "application ID, including retained/future revisions subject to other live checks",
+    "target": "deployment",
+    "workspace": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+  },
+  "replay": {
+    "deployment": {
+      "deployment_id": "54fff041-1e91-4354-8715-2faea8de4de5",
+      "revision_id": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+      "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+    },
+    "dryRun": false,
+    "expected_grants_digest": "sha256:53be972bb9019e90bbf004eb46d7985e1fac940e7251f32e35619e6e8566d441",
+    "foundryRows": 8,
+    "foundryScope": "explicit selected native references plus necessary Workspace gates",
+    "historicalReceipt": {
+      "deployment": {
+        "deployment_id": "54fff041-1e91-4354-8715-2faea8de4de5",
+        "revision_id": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      "dryRun": false,
+      "expected_grants_digest": "sha256:4ac1ceb626551a55f03328b6d05201d8e1bbd8e16faa96576a89bd111cd8e9f6",
+      "foundryRows": 8,
+      "foundryScope": "explicit selected native references plus necessary Workspace gates",
+      "operation": "authorize-exact-deployment",
+      "owner": "2b6ffc73-2a23-4e29-b7b9-0c9c9ba9b876",
+      "profileReferences": [
+        {
+          "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "worker_profile_id": "53d70255-9e57-482a-8d82-173a67d06ff1",
+          "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+        },
+        {
+          "policy_id": "15262c33-9b19-41f1-8a66-d5d7bc12410d",
+          "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+        },
+        {
+          "provider_profile_id": "4caa6bee-b1ca-49e1-8ef3-13f06218343e",
+          "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+        }
+      ],
+      "queuePermissions": [
+        "work_items.read",
+        "work_items.enqueue",
+        "work_items.claim",
+        "work_items.complete",
+        "work_items.cancel",
+        "work_items.artifact.read"
+      ],
+      "queueScope": "all queues of exact Deployment revision plus Workspace permission gate",
+      "replay": false,
+      "runPermissions": [
+        "execute",
+        "read",
+        "cancel"
+      ],
+      "runScope": "application ID, including retained/future revisions subject to other live checks",
+      "target": "deployment",
+      "workspace": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+    },
+    "operation": "authorize-exact-deployment",
+    "owner": "2b6ffc73-2a23-4e29-b7b9-0c9c9ba9b876",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "53d70255-9e57-482a-8d82-173a67d06ff1",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "policy_id": "15262c33-9b19-41f1-8a66-d5d7bc12410d",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      },
+      {
+        "provider_profile_id": "4caa6bee-b1ca-49e1-8ef3-13f06218343e",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+      }
+    ],
+    "queuePermissions": [
+      "work_items.read",
+      "work_items.enqueue",
+      "work_items.claim",
+      "work_items.complete",
+      "work_items.cancel",
+      "work_items.artifact.read"
+    ],
+    "queueScope": "all queues of exact Deployment revision plus Workspace permission gate",
+    "replay": true,
+    "runPermissions": [
+      "execute",
+      "read",
+      "cancel"
+    ],
+    "runScope": "application ID, including retained/future revisions subject to other live checks",
+    "target": "deployment",
+    "workspace": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+  }
+}

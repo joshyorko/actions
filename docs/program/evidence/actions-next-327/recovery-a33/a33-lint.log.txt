@@ -1,0 +1,15 @@
++ poetry run invoke lint (in /workspace/actions/action_server)
+[1;37mpoetry run ruff check src tests[0m
+[1;37mpoetry run ruff format --check --config /workspace/actions/devutils/ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests[0m
+Would reformat: src/actions/server/mcp/task_wire.py
+1 file would be reformatted, 481 files already formatted
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'invoke', 'lint']' returned non-zero exit status 1.

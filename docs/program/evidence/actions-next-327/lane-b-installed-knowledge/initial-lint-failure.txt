@@ -1,0 +1,10 @@
+Command: poetry run ruff check scripts/qualify_lane_b_installed_knowledge.py tests/contract_tests/test_lane_b_installed_knowledge.py
+Exit: 1
+scripts/qualify_lane_b_installed_knowledge.py:33:21: E721 Do not compare types, use isinstance()
+scripts/qualify_lane_b_installed_knowledge.py:43:12: E721 Do not compare types, use isinstance()
+scripts/qualify_lane_b_installed_knowledge.py:47:16: E721 Do not compare types, use isinstance()
+scripts/qualify_lane_b_installed_knowledge.py:56:12: E721 Do not compare types, use isinstance()
+scripts/qualify_lane_b_installed_knowledge.py:63:16: E721 Do not compare types, use isinstance()
+scripts/qualify_lane_b_installed_knowledge.py:63:46: E721 Do not compare types, use isinstance()
+Found 6 errors.
+This is a transcription of the tool output, not an original-byte log.

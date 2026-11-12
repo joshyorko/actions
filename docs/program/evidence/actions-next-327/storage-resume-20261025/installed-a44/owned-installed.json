@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "exact_wheel_members": {
+    "actions_runtime-1.1.0a44-cp312-cp312-linux_x86_64.whl": 334,
+    "actions_core-1.1.0a6-py3-none-any.whl": 87,
+    "actions_work_items-0.5.0a2-py3-none-any.whl": 26
+  },
+  "truststore_version": "0.10.4",
+  "truststore_namespace_providers": [
+    "truststore"
+  ],
+  "truststore_record_python_members": 6,
+  "retired_distributions_absent": true,
+  "isolated": true
+}

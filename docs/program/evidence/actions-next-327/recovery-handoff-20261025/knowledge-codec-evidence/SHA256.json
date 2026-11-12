@@ -1,0 +1,7 @@
+{
+  "action_server/src/actions/server/data_queries/knowledge_normalization.py": "8955a82e882b5f08c7250e376fb745ab7afebdcb72e01d27f7bb7be71bfdc47c",
+  "action_server/src/actions/server/data_queries/knowledge_versions.py": "6bca02a16ecec6c9fd2b6df25f4c3ea84217cceaecf825d18b10c22be1abff4f",
+  "action_server/tests/action_server_tests/test_knowledge_versions.py": "eceab5f05de592146594ab0ab5fa57875f0574984ea07c8c45716684577012e3",
+  "knowledge-codec-versions.patch": "73d9e2b71e001ee849f19d317982ba5d0b10eee6f813bae62094120067b67878",
+  "documentation.patch": "803d46ac10439af5f253e0fb5a47da609524982a89f344b0b96d32a5ee99d7ce"
+}

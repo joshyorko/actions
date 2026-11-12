@@ -1,0 +1,17 @@
+--- a/.agents/skills/actions-repository/SKILL.md
++++ b/.agents/skills/actions-repository/SKILL.md
+@@ -70,3 +70,14 @@
+ - “No docs changed because this was read-only” → return a proposal with evidence.
+ - “The change is only mechanical” → record the reproducible command or invariant learned.
+ - “The parent did not request documentation” → this repository contract already did.
++
++### Installed MCP transport denial preflight
++
++For a frozen installed Runtime handoff, record actual HTTP status and sanitized
++response shape for correct bearer initialize, missing/wrong bearer, and
++authenticated foreign Host/Origin requests. Do not assume every authentication
++denial is HTTP401: the a39 installed gate returned403 for missing and wrong
++bearers,421 for foreign Host, and403 for foreign Origin. Run on a fresh owned
++loopback datadir without disabling transport guards; verify installed wheel
++identity and stop the server gracefully. Keep harness expectation failures and
++run only missing cases. These checks do not establish actual ChatGPT support.

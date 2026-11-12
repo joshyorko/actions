@@ -1,0 +1,45 @@
+{
+  "source": "7e0fa8d09be0f152d2aa82bea24fe0bb3209e2dd",
+  "tree": "753a5cad39e46cb50d06347efe94c31e94db1e3b",
+  "container": "42ac84637fde215a9498848cf22f510d7b0f3ffcd110606e76523c0908a38abb",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_foundry_canvas_v2",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a40/runtime-v2/selected-pytest.py",
+        "tests/action_server_tests/test_foundry_canvas_v2.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a40/runtime-v2/test_foundry_canvas_v2/tests.xml",
+        "--basetemp=/workspace/actions-327-a40/runtime-v2/test_foundry_canvas_v2/fixtures"
+      ],
+      "exit_code": 10,
+      "minimum_free_bytes": 7711166464,
+      "stop_reason": null,
+      "source_sha256": "adb817170f3ce37e5084833388614de6919a7211b5f5cbf16dcb07b682e5c050",
+      "counts": {
+        "tests": 1,
+        "failure": 0,
+        "error": 1,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

@@ -1,0 +1,5 @@
++ poetry run pytest tests/contract_tests/test_active_contracts.py -q --junitxml=/workspace/actions-recovery-327/evidence/a30-frozen-contracts.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-frozen-contracts-log (in /workspace/actions-recovery-327/frozen-a30/source/action_server)
+........................................                                 [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a30-frozen-contracts.xml -
+40 passed in 33.29s
+Log (html): /workspace/actions-recovery-327/evidence/a30-frozen-contracts-log/log.html

@@ -1,0 +1,36 @@
+{
+  "run": {
+    "id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "status": 2
+  },
+  "pin": {
+    "run_id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f",
+    "run_admission_id": "6f186df1070ba90cd6a4084e3e8aabece4da251a7234c314c694a6b3a14750f6",
+    "current_attempt_id": "9058e8e6-bc8d-4020-a92d-d98ed33b233f",
+    "epoch": 1,
+    "cancel_requested": 0,
+    "state_updated_ms": "1792930050611"
+  },
+  "attempt": {
+    "id": "9058e8e6-bc8d-4020-a92d-d98ed33b233f",
+    "run_id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f",
+    "epoch": 1,
+    "state": "succeeded"
+  },
+  "intent": {
+    "id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f"
+  },
+  "task_receipt": {
+    "id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "run_id": "ff271adb-5214-423c-b4e3-e6f1f8cfdfd3",
+    "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f",
+    "receipt_version": "actions.run-task-receipt/v1",
+    "result_contract_version": "actions.detached-invocation-result/v1",
+    "created_ms": "1792930032260",
+    "ttl_ms": "600000"
+  },
+  "snapshot_sha256": "fd7bfe2a4cc6cc7cbff691609bb3a4fda98bd1d56b728fd7786e25f1f6d2fd01"
+}

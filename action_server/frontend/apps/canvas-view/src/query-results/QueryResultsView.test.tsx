@@ -43,6 +43,43 @@ function deferred<T>() {
 }
 
 describe("QueryResultsView fixture renderer", () => {
+    it("renders a host result without execution and pages only its pinned handle", async () => {
+        const user = userEvent.setup();
+        const initial: QueryActionResult = {
+            ...success,
+            pagination: { offset: 0, nextOffset: 1 },
+        };
+        const pageResult = vi.fn().mockResolvedValue({
+            ...success,
+            rows: [
+                {
+                    id: "invoice-two",
+                    title: "Second invoice",
+                    category: "400 cents",
+                },
+            ],
+            pagination: { offset: 1, nextOffset: null },
+        });
+        const app = adapter({ pageResult });
+        render(
+            <QueryResultsView
+                adapter={app}
+                hostResult={{ revision: 1, result: initial }}
+                readOnly
+            />,
+        );
+        expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+        expect(app.submitQuery).not.toHaveBeenCalled();
+        await user.click(screen.getByRole("button", { name: "Next page" }));
+        expect(pageResult).toHaveBeenCalledWith(success.artifact?.handle, 1);
+        expect(
+            await screen.findByRole("rowheader", { name: "Second invoice" }),
+        ).toBeVisible();
+        expect(
+            screen.queryByRole("button", { name: "Next page" }),
+        ).not.toBeInTheDocument();
+    });
+
     it("renders a labelled idle form without accessibility violations", async () => {
         render(<QueryResultsView adapter={adapter()} />);
 

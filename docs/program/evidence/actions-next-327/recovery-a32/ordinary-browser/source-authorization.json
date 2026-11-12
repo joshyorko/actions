@@ -1,0 +1,133 @@
+{
+  "dry": {
+    "deployment": null,
+    "dryRun": true,
+    "expected_grants_digest": "sha256:ea97c66d04c554f8aca3d454c816aed4965fa887f59c380fe524a557a19152d2",
+    "foundryRows": 4,
+    "foundryScope": "Workspace generated-source execution and exact profile deploy/execute references",
+    "operation": "authorize-generated-source",
+    "owner": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "c343ec53-4b3b-4f0d-a9a1-7ab39a385f60",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "policy_id": "7c7461b4-7f39-42ce-8921-b0b4d1b6cce1",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "provider_profile_id": "cb9f20bc-92d0-47d7-bcfb-7f2ca9081fbf",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      }
+    ],
+    "queuePermissions": [],
+    "queueScope": null,
+    "runPermissions": [],
+    "runScope": null,
+    "target": "generated-source",
+    "workspace": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+  },
+  "actual": {
+    "deployment": null,
+    "dryRun": false,
+    "expected_grants_digest": "sha256:ea97c66d04c554f8aca3d454c816aed4965fa887f59c380fe524a557a19152d2",
+    "foundryRows": 4,
+    "foundryScope": "Workspace generated-source execution and exact profile deploy/execute references",
+    "operation": "authorize-generated-source",
+    "owner": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "c343ec53-4b3b-4f0d-a9a1-7ab39a385f60",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "policy_id": "7c7461b4-7f39-42ce-8921-b0b4d1b6cce1",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "provider_profile_id": "cb9f20bc-92d0-47d7-bcfb-7f2ca9081fbf",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      }
+    ],
+    "queuePermissions": [],
+    "queueScope": null,
+    "replay": false,
+    "runPermissions": [],
+    "runScope": null,
+    "target": "generated-source",
+    "workspace": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+  },
+  "replay": {
+    "deployment": null,
+    "dryRun": false,
+    "expected_grants_digest": "sha256:88b93e14b9947f68415bc73ef76655911db8a65b40049179cf7999dcfa2285db",
+    "foundryRows": 4,
+    "foundryScope": "Workspace generated-source execution and exact profile deploy/execute references",
+    "historicalReceipt": {
+      "deployment": null,
+      "dryRun": false,
+      "expected_grants_digest": "sha256:ea97c66d04c554f8aca3d454c816aed4965fa887f59c380fe524a557a19152d2",
+      "foundryRows": 4,
+      "foundryScope": "Workspace generated-source execution and exact profile deploy/execute references",
+      "operation": "authorize-generated-source",
+      "owner": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+      "profileReferences": [
+        {
+          "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "worker_profile_id": "c343ec53-4b3b-4f0d-a9a1-7ab39a385f60",
+          "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+        },
+        {
+          "policy_id": "7c7461b4-7f39-42ce-8921-b0b4d1b6cce1",
+          "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+        },
+        {
+          "provider_profile_id": "cb9f20bc-92d0-47d7-bcfb-7f2ca9081fbf",
+          "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+        }
+      ],
+      "queuePermissions": [],
+      "queueScope": null,
+      "replay": false,
+      "runPermissions": [],
+      "runScope": null,
+      "target": "generated-source",
+      "workspace": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+    },
+    "operation": "authorize-generated-source",
+    "owner": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+    "profileReferences": [
+      {
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "worker_profile_id": "c343ec53-4b3b-4f0d-a9a1-7ab39a385f60",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "policy_id": "7c7461b4-7f39-42ce-8921-b0b4d1b6cce1",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      {
+        "provider_profile_id": "cb9f20bc-92d0-47d7-bcfb-7f2ca9081fbf",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      }
+    ],
+    "queuePermissions": [],
+    "queueScope": null,
+    "replay": true,
+    "runPermissions": [],
+    "runScope": null,
+    "target": "generated-source",
+    "workspace": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+  }
+}

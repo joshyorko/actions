@@ -1,0 +1,14 @@
+{
+  "status": "ISOLATED_GREEN",
+  "production_changes": false,
+  "root_cause": "stale object.__new__ fixture missing capability_runner constructor attribute",
+  "red_original_cause": "AttributeError capability_runner",
+  "tests_passed": 5,
+  "pytest_seconds": 3.21,
+  "before_sha256": "8f21c2a25513880a86cbe6cb85418ddff5a5976cb3331218e7241772a4b98df7",
+  "after_sha256": "8f16e2962180f94bf2a41347da11e0e63ae22b01f0e3271ce94424967f04ad15",
+  "patch_sha256": "484bb56389adbc7c9e6ca2b06cf305ebcf3d61d16334c528daa371af841c8e66",
+  "reviewer": "cleanup_review",
+  "review": "cleared fixture correction and duckdb boundary assertion",
+  "services_started": 0
+}

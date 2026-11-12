@@ -1,0 +1,28 @@
+[
+  {
+    "response_status": 401,
+    "type": "SdkHttpError",
+    "code": "CLIENT_HTTP_NOT_IMPLEMENTED",
+    "data": {
+      "status": 401,
+      "statusText": "Unauthorized",
+      "text": "{\"detail\":\"Not authenticated\"}"
+    },
+    "status": 401,
+    "legacy_match": false,
+    "message": "Error POSTing to endpoint: {\"detail\":\"Not authenticated\"}"
+  },
+  {
+    "response_status": 403,
+    "type": "SdkHttpError",
+    "code": "CLIENT_HTTP_NOT_IMPLEMENTED",
+    "data": {
+      "status": 403,
+      "statusText": "Forbidden",
+      "text": "{\"detail\":\"Not authenticated\"}"
+    },
+    "status": 403,
+    "legacy_match": false,
+    "message": "Error POSTing to endpoint: {\"detail\":\"Not authenticated\"}"
+  }
+]

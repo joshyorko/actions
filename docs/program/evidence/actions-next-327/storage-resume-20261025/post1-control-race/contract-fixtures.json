@@ -1,0 +1,22 @@
+{
+  "fixtures/query-results-v0.1.fixture.json": {
+    "source": "/workspace/actions/docs/contracts/canvas/fixtures/query-results-v0.1.fixture.json",
+    "destination": "/workspace/recovery327/post1-form-feedback/docs/contracts/canvas/fixtures/query-results-v0.1.fixture.json",
+    "sha256": "3d5a43d715dc6d79f6f232c99bc651360e5a835436a7131812ed059b61690e19"
+  },
+  "fixtures/query-results-v0.1.schema.json": {
+    "source": "/workspace/actions/docs/contracts/canvas/fixtures/query-results-v0.1.schema.json",
+    "destination": "/workspace/recovery327/post1-form-feedback/docs/contracts/canvas/fixtures/query-results-v0.1.schema.json",
+    "sha256": "fc5bdff0e1b7166aaff9075f46fd56a0729d793739f7855ed816ab3785f2a321"
+  },
+  "fixtures/semantic-v2.fixture.json": {
+    "source": "/workspace/actions/docs/contracts/canvas/fixtures/semantic-v2.fixture.json",
+    "destination": "/workspace/recovery327/post1-form-feedback/docs/contracts/canvas/fixtures/semantic-v2.fixture.json",
+    "sha256": "2c77654c3a291afac597b1d446244c578aceb838e98e7e48d2cb0a42263f2074"
+  },
+  "semantic-v1/canvas-spec-v1.fixture.json": {
+    "source": "/workspace/actions/docs/contracts/canvas/semantic-v1/canvas-spec-v1.fixture.json",
+    "destination": "/workspace/recovery327/post1-form-feedback/docs/contracts/canvas/semantic-v1/canvas-spec-v1.fixture.json",
+    "sha256": "21f5f4810434f7719f310d82abb0fe2ad56c51316079bbf6a029a1dbbdb98752"
+  }
+}

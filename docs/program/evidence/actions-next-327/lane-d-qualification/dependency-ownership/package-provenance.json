@@ -1,0 +1,71 @@
+{
+  "vendor_metadata": {
+    "name": "sema4ai-common",
+    "version": "0.1.0",
+    "project_urls": {
+      "Homepage": "https://github.com/Sema4AI/actions/",
+      "Repository": "https://github.com/Sema4AI/actions/"
+    },
+    "license": "Apache-2.0",
+    "requires_dist": [
+      "psutil<7.0,>=5.0",
+      "sema4ai-http-helper<3.0.0,>=2.0.0",
+      "pyyaml<7.0,>=6.0",
+      "msgspec>=0.18"
+    ]
+  },
+  "wheel_sha256": "46c8e07d1420bf507300a51624e27e0dad1ecc3036604f57513d91d29926a917",
+  "wheel_files": [
+    "sema4ai/common/__init__.py",
+    "sema4ai/common/action_package_handling/__init__.py",
+    "sema4ai/common/action_package_handling/cli_errors.py",
+    "sema4ai/common/app_mutex.py",
+    "sema4ai/common/autoexit.py",
+    "sema4ai/common/callback.py",
+    "sema4ai/common/gallery.py",
+    "sema4ai/common/gen_certificate.py",
+    "sema4ai/common/locations.py",
+    "sema4ai/common/ls_protocols.py",
+    "sema4ai/common/monitor.py",
+    "sema4ai/common/null.py",
+    "sema4ai/common/oauth2_settings.py",
+    "sema4ai/common/package_deps/__init__.py",
+    "sema4ai/common/package_deps/_conda_deps.py",
+    "sema4ai/common/package_deps/_deps_protocols.py",
+    "sema4ai/common/package_deps/_package_deps.py",
+    "sema4ai/common/package_deps/_pip_deps.py",
+    "sema4ai/common/package_deps/analyzer.py",
+    "sema4ai/common/package_deps/conda_cloud.py",
+    "sema4ai/common/package_deps/conda_impl/__init__.py",
+    "sema4ai/common/package_deps/conda_impl/conda_channel.py",
+    "sema4ai/common/package_deps/conda_impl/conda_match_spec.py",
+    "sema4ai/common/package_deps/conda_impl/conda_path.py",
+    "sema4ai/common/package_deps/conda_impl/conda_url.py",
+    "sema4ai/common/package_deps/conda_impl/conda_version.py",
+    "sema4ai/common/package_deps/pip_impl/__init__.py",
+    "sema4ai/common/package_deps/pip_impl/pip_distlib_util.py",
+    "sema4ai/common/package_deps/pip_impl/pip_packaging_structure.py",
+    "sema4ai/common/package_deps/pip_impl/pip_packaging_version.py",
+    "sema4ai/common/package_deps/pypi_cloud.py",
+    "sema4ai/common/process.py",
+    "sema4ai/common/protocols.py",
+    "sema4ai/common/py.typed",
+    "sema4ai/common/run_in_thread.py",
+    "sema4ai/common/system_mutex.py",
+    "sema4ai/common/termcolors/__init__.py",
+    "sema4ai/common/text.py",
+    "sema4ai/common/tools.py",
+    "sema4ai/common/uris.py",
+    "sema4ai/common/url_callback_server.py",
+    "sema4ai/common/wait_for.py",
+    "sema4ai/common/yaml_with_location.py",
+    "sema4ai_common-0.1.0.dist-info/METADATA",
+    "sema4ai_common-0.1.0.dist-info/WHEEL",
+    "sema4ai_common-0.1.0.dist-info/RECORD"
+  ],
+  "run_in_thread_byte_identical": true,
+  "owned_helper_artifacts": {
+    "actions_http_helper-1.0.3-py3-none-any.whl": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+    "actions_http_helper-1.0.3.tar.gz": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945"
+  }
+}

@@ -438,7 +438,11 @@ Python executable being used:
                     str_output = result[key]
                     break
     try:
-        return tuple(int(x) for x in str_output.strip().split("."))
+        from actions.server._common.package_deps.pip_impl.pip_packaging_version import (
+            Version,
+        )
+
+        return Version(str_output.strip()).release
     except Exception:
         raise RuntimeError(msg)
 

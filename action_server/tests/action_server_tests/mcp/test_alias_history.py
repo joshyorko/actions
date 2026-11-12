@@ -408,27 +408,21 @@ def test_invalid_catalog_does_not_reserve_candidate_names(catalog):
 
 
 def test_v12_migration_creates_empty_history_matching_fresh_schema(tmp_path):
-    from actions.server._models import create_db, load_db
+    from action_server_tests.foundry_historical import create_historical_schema
+
+    from actions.server._database import Database
+    from actions.server._models import create_db, get_all_model_classes, load_db
     from actions.server.migrations import CURRENT_VERSION, migrate_db
 
     path = tmp_path / "old.db"
-    with create_db(path) as db:
+    with create_db(tmp_path / "fresh.db") as db:
         expected_columns = db.list_table_and_columns()
         expected_indexes = db.list_indexes()
+    db = Database(path)
+    with db.connect():
+        db.initialize(get_all_model_classes())
         with db.transaction():
-            # Restore the real pre-13 schema, including absence of migration 15.
-            for table in (
-                "run_output",
-                "run_attempt",
-                "run_pin",
-                "run_access_grant",
-                "run_admission",
-                "workspace",
-            ):
-                db.execute("DROP TABLE " + table)
-            db.execute("DROP TABLE mcp_catalog_name")
-            db.execute("DROP TABLE mcp_resource_routing")
-            db.execute("DELETE FROM migration")
+            create_historical_schema(db, 12)
             db.execute(
                 "INSERT INTO migration(id,name) VALUES(12,'reconcile_run_columns')"
             )
@@ -453,11 +447,60 @@ def generate(action_package, action, display_name, **kwargs):
         return action.id
     return execute, execute, {}
 _actions_run.generate_func_from_action = generate
-with load_db(sys.argv[1]):
-    Path(sys.argv[3]).write_text("ready")
+with load_db(sys.argv[1]) as db:
+    marker = Path(sys.argv[3])
+    with db.cursor() as cursor:
+        db.execute_query(cursor, "PRAGMA busy_timeout")
+        ready = marker.with_suffix(".ready-tmp")
+        ready.write_text(str(cursor.fetchone()[0]))
+        ready.replace(marker)
+    if sys.stdin.buffer.read(3) != b"go\\n":
+        raise RuntimeError("missing parent contention gate")
+    original_execute = db.execute
+    def execute(sql, values=None):
+        if sql == "UPDATE mcp_catalog_name SET id=id WHERE 0":
+            Path(str(marker) + ".claim").write_text("entering")
+        return original_execute(sql, values)
+    db.execute = execute
     helper = _ActionRoutes(sys.argv[2], []).prepare_actions()[1]
     print(json.dumps({name: info.action.action_package_id for name, info in helper._tool_name_to_action_info.items()}))
 """
+
+
+def test_catalog_readiness_is_published_after_its_payload_is_complete(
+    tmp_path, monkeypatch
+):
+    partial_write = """
+import time
+original_write_text = Path.write_text
+def write_text(path, content, *args, **kwargs):
+    if content == "5000":
+        with path.open("w") as stream:
+            time.sleep(0.5)
+            return stream.write(content)
+    return original_write_text(path, content, *args, **kwargs)
+Path.write_text = write_text
+"""
+    monkeypatch.setitem(
+        globals(),
+        "_CHILD",
+        _CHILD.replace(
+            "with load_db(sys.argv[1])", partial_write + "with load_db(sys.argv[1])"
+        ),
+    )
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)
+
+
+def test_catalog_serialization_survives_slow_contender_startup(tmp_path, monkeypatch):
+    # Exceed SQLite's unchanged five-second busy timeout before contender B is
+    # ready. Startup skew must not consume contender A's lock-wait allowance.
+    delayed = _CHILD.replace(
+        "with load_db(sys.argv[1])",
+        "import time\nif sys.argv[2] == 'package2/do_it': time.sleep(6)\n"
+        "with load_db(sys.argv[1])",
+    )
+    monkeypatch.setitem(globals(), "_CHILD", delayed)
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)
 
 
 @pytest.mark.parametrize("same_catalog", [True, False])
@@ -499,6 +542,7 @@ def test_concurrent_processes_serialize_empty_history_allocation(
                             str(marker),
                         ],
                         env=environment,
+                        stdin=subprocess.PIPE,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE,
                         text=True,
@@ -542,6 +586,33 @@ def test_concurrent_processes_serialize_empty_history_allocation(
                         "readiness:\n" + "\n".join(diagnostics)
                     )
                 time.sleep(0.01)
+            for child in children:
+                assert Path(child.args[-1]).read_text() == "5000"
+                child.stdin.buffer.write(b"go\n")
+                child.stdin.buffer.flush()
+            while not all(
+                Path(str(child.args[-1]) + ".claim").exists() for child in children
+            ):
+                if time.monotonic() >= deadline:
+                    pytest.fail("catalog children did not reach the real writer gate")
+                exited = [child for child in children if child.poll() is not None]
+                if exited:
+                    diagnostics = []
+                    for child in exited:
+                        stdout, stderr = child.communicate(timeout=5)
+                        diagnostics.append(
+                            f"returncode={child.returncode} stdout={stdout[-2000:]!r} stderr={stderr[-4000:]!r}"
+                        )
+                    pytest.fail(
+                        "catalog child exited while the writer was held: "
+                        + "\n".join(diagnostics)
+                    )
+                time.sleep(0.01)
+            assert all(child.poll() is None for child in children)
+            assert (
+                blocker.execute("SELECT COUNT(*) FROM mcp_catalog_name").fetchone()[0]
+                == 0
+            )
             blocker.commit()
         results = []
         for child in children:
@@ -565,3 +636,19 @@ def test_concurrent_processes_serialize_empty_history_allocation(
             if child.poll() is None:
                 child.kill()
                 child.communicate(timeout=10)
+
+
+def test_catalog_gate_is_byte_exact_under_windows_text_newline(tmp_path, monkeypatch):
+    import io
+    import subprocess
+
+    real_popen = subprocess.Popen
+
+    def windows_pipe(*args, **kwargs):
+        process = real_popen(*args, **kwargs)
+        if isinstance(process.stdin, io.TextIOWrapper):
+            process.stdin.reconfigure(newline="\r\n")
+        return process
+
+    monkeypatch.setattr(subprocess, "Popen", windows_pipe)
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)

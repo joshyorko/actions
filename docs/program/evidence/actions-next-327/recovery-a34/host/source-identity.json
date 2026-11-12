@@ -1,0 +1,14 @@
+{
+  "base": "ba3aba9e8f623ccd0a17803d29b3cc8b85f65cf2",
+  "clock_patch": "1fb994bb5ed1f9362a0741cf7ae12b5096463407bb2d0bf67db267a5912bb6f4",
+  "task_service_patch": "f93f39aada2e8df1da2a2e7fdc14e1e50cd03432fa02094c4d0e651ba9947e4f",
+  "patch_sha256": "c63253d5b4a35238a7896fbe34d97e60218e9cac80dd767ab7d1b9d52492b2d3",
+  "files": {
+    "action_server/src/actions/server/run_outputs/task_host.py": "3f0c3b8abf9c13cb66bca5f9983e19cbc29ebadd0243f6baf33a155954d7beea",
+    "action_server/src/actions/server/run_outputs/detached.py": "d8c0c2c37b0d73cb5453c2a4421b734c4f49d2e255f2a5a8d322578e3d927a9c",
+    "action_server/src/actions/server/foundry/rcc_execution.py": "6265922694b185331e492e97269ed099acc92b5ee6ba6a1939da6c85dce21327",
+    "action_server/tests/action_server_tests/test_task_host.py": "053e559a0cbffe75a53721d433c972b348c52619c5eb2d488219f21c21359424",
+    "action_server/tests/action_server_tests/test_detached_task_host_rcc.py": "7eda3059b6b303e3a1ac3ed90098c762c8785ec1901507c9d2cc419a3a68428c",
+    "action_server/tests/action_server_tests/foundry_fixtures.py": "757f21f6e9dcae6faab5eda4809539f3f7cc1e78f7b538a6f28164d641654fc5"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "method": "tasks/get",
+  "result": {
+    "resultType": "complete",
+    "taskId": "6b34e570-f6a5-43bf-9607-fcf10e9fa3cd",
+    "status": "completed",
+    "createdAt": "2026-10-25T05:38:25.047Z",
+    "lastUpdatedAt": "2026-10-25T05:38:39.523Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 50,
+    "statusMessage": "Execution completed.",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Execution completed."
+        }
+      ],
+      "structuredContent": {
+        "version": "actions.detached-invocation-result/v1",
+        "runId": "6b34e570-f6a5-43bf-9607-fcf10e9fa3cd",
+        "attemptId": "2b083ad9-14f9-432f-ade0-f58b439b4061",
+        "state": "completed",
+        "outputs": [
+          {
+            "handle": "art_465LtgUzSgyikTyAGqSX5Q"
+          },
+          {
+            "handle": "art_p8QyVeZrQ7e0OQ92MRhxyw"
+          },
+          {
+            "handle": "art_T4v28bYUQIaWIG3K5tWVAw"
+          },
+          {
+            "handle": "art_crI-FcvdQ5She5oFNCGeNg"
+          }
+        ]
+      },
+      "isError": false,
+      "resultType": "complete"
+    },
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  }
+}

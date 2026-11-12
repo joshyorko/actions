@@ -1,0 +1,37 @@
+{
+  "qualification": "Installed synchronous generated claimed Robot capability_invoke generic via Node SDK 2; separate from Task-returning detached mode",
+  "status": "FAILED",
+  "base": "/workspace/327-artifacts/a53",
+  "runtime": "1.1.0a53",
+  "core": "1.1.0a8",
+  "work_items": "0.5.0a2",
+  "node_sdk": "@modelcontextprotocol/client 2.0.0",
+  "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+  "max_outer_seconds": 180,
+  "max_each_node_client_seconds": 90,
+  "source_fixture_read_only": "/workspace/327-probes/a53-claimed/terminal-success-failure",
+  "installed_identity": {
+    "runtime": "1.1.0a53",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a53/consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "wheel_sha256": {
+    "wheels/actions_runtime-1.1.0a53-cp312-cp312-linux_x86_64.whl": "2013b8fc54163d10c3c0edddb3bb1ea8e59cb95b88f9a05a2d810110cdd0d117",
+    "wheels/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f"
+  },
+  "prepared_artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "profile_sha256": {
+    "source": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "copy": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f"
+  },
+  "runtime_ready": true,
+  "node_timeout": "execute",
+  "failure_type": "TimeoutError",
+  "failure": "node_client_over_90_seconds",
+  "runtime_final_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  }
+}

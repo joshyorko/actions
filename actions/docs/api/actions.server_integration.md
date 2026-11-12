@@ -26,6 +26,45 @@ format_lint_results(
 
 ______________________________________________________________________
 
+## `get_log_viewer_html`
+
+Return the owned HTML viewer template matching this log encoder.
+
+Runtime can embed recorded log chunks without importing private asset modules. The template contains the viewer's sample-data placeholder; callers must use their existing log-chunk embedding routine to produce a populated report.
+
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_logging/__init__.py#L1348)
+
+```python
+get_log_viewer_html() → str
+```
+
+______________________________________________________________________
+
+## `html`
+
+Adds html contents to the log.
+
+**Args:**
+
+- <b>`html`</b>: The html content to be embedded in the page.
+- <b>`level`</b>: The level of the message ("INFO", "WARN" or "ERROR")
+
+Example adding an image:
+
+```python
+html(
+     '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAnBAMAAACGbbfxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURR4nOzpCVI+Tnf///+Pk5qqutXN4hVZdbMbJzod39mUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAETSURBVDjLnZIxT8MwFITPqDQdG1rBGjX8AOBS0hG1ghnUhbFSBlZvMFbqH+fZaeMLBJA4KZHzyb7ce374l1we3vm0Ty/Ix7era1YvSjOeVBWCZx3mveBDwlWyH1OUXM5t0yJqS+4V33xdwWFCrvOoOfmA1r30Z+r9jHV7zmeKd7ADQEOvATkFlzGz13JqIGanYbexYLOldcY+IsniqrEyRrUj7xBwccRm/lSuPqysI3YBjzUfQproNOr/0tLEgE3CK8P2YG54K401XIeWHDw2Uo5H5UP1l1ZXr9+7U2ffRfhTC9HwFVMmqOzl7vTDnEwSvhXsNLaoGbIGurvf97ArhzYbj01sm6TKXm3yC3yX8/hdwCdipl9ujxriXgAAAABJRU5ErkJggg=="/>'
+)
+```
+
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_logging/__init__.py#L239)
+
+```python
+html(html: str, level: str = 'INFO')
+```
+
+______________________________________________________________________
+
 # Class `EPManagedParameters`
 
 The protocol for a class that describes the managed parameters when calling an action.

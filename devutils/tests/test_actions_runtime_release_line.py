@@ -40,17 +40,25 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     pyproject = tomllib.loads((ROOT / "action_server" / "pyproject.toml").read_text())[
         "tool"
     ]["poetry"]
-    runtime_init = (
-        ROOT / "action_server" / "src/actions/server/__init__.py"
-    ).read_text()
+    runtime_init = ROOT / "action_server" / "src/actions/server/__init__.py"
+    spec = importlib.util.spec_from_file_location("runtime_identity", runtime_init)
+    assert spec and spec.loader
+    runtime = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runtime)
     rcc_download = (
         ROOT / "action_server" / "src/actions/server/_download_rcc.py"
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.4"
-    assert '__version__ = "1.0.4"' in runtime_init
-    assert 'RCC_VERSION = "18.19.3"' in rcc_download
+    assert pyproject["version"] == "1.1.0"
+    assert runtime.__version__ == pyproject["version"]
+    assert runtime.version_info == [1, 1, 0]
+    # Candidate source advances independently of the exact published floor.
+    floor = (
+        ROOT / "action_server/scripts/verify_published_runtime_floor.py"
+    ).read_text()
+    assert 'EXPECTED_RUNTIME = "1.0.4"' in floor
+    assert 'RCC_VERSION = "18.19.8"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
 
@@ -88,7 +96,7 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
     assert "cibuildwheel==2.23.4" in PYPI_WORKFLOW
     assert "twine==6.2.0" in PYPI_WORKFLOW
     assert (
-        'RCC_VERSION = "18.19.3"' in (ROOT / "action_server" / "build.py").read_text()
+        'RCC_VERSION = "18.19.8"' in (ROOT / "action_server" / "build.py").read_text()
     )
     assert "sema4ai/homebrew-tools" not in BINARY_WORKFLOW.lower()
     assert "cdn.sema4.ai" not in BINARY_WORKFLOW
@@ -204,7 +212,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     changelog = (
         ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
     ).read_text()
-    tag = "actions-runtime-1.0.4"
+    tag = "actions-runtime-1.1.0"
     headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
     release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
     release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")
@@ -223,12 +231,14 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     assert "## 1.0.1 - 2026-09-07" in changelog
     selected_body = changelog.split(f"## {tag}\n", 1)[1].split("\n## ", 1)[0]
     assert selected_body.strip()
-    assert "Canvas" not in selected_body
-    assert not re.search(r"\bpublish(?:ed|ation)?\b", selected_body, re.IGNORECASE)
-    unreleased_body = changelog.split("## Unreleased\n", 1)[1].split(f"## {tag}\n", 1)[
-        0
-    ]
-    assert all(issue in unreleased_body for issue in ("#134", "#153", "#211"))
+    assert "Canvas" in selected_body
+    assert "SQLite and PostgreSQL" in selected_body
+    historical_body = changelog.split("## actions-runtime-1.0.4\n", 1)[1].split(
+        "\n## ", 1
+    )[0]
+    assert historical_body.strip()
+    assert "Canvas" not in historical_body
+    assert not re.search(r"\bpublish(?:ed|ation)?\b", historical_body, re.IGNORECASE)
 
 
 def test_legacy_action_server_changelog_is_not_the_runtime_release_source():

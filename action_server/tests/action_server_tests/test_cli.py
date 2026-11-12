@@ -68,6 +68,14 @@ def fix_eol(text: str) -> str:
     return text.replace("\r\n", "\n").replace("\r", "\n").strip()
 
 
+def normalize_help(text: str) -> str:
+    from actions.server import __version__
+
+    return text.replace(
+        f"Actions Runtime ({__version__})", "Actions Runtime (<version>)"
+    )
+
+
 @pytest.mark.integration_test
 @pytest.mark.parametrize(
     "args",
@@ -79,12 +87,10 @@ def fix_eol(text: str) -> str:
     ],
 )
 def test_help(args, str_regression, datadir):
-    import re
-
     from action_server_tests.fixtures import actions_server_run
 
     result = actions_server_run(args, returncode=0)
-    out = re.sub(r"\(\d+.\d+.\d+\)", "(<version>)", result.stdout)
+    out = normalize_help(result.stdout)
     out = fix_eol(out)
     v2_expected = datadir / f"test_help_{args[0]}_v2.txt"
     if v2_expected.exists():
@@ -245,3 +251,12 @@ def test_oauth2_actions_config(tmpdir) -> None:
 
     # Return code assertion happens inside the call.
     actions_server_run(["oauth2", "actions-config"], returncode=0, cwd=tmpdir)
+
+
+def test_help_snapshot_normalizes_candidate_prerelease_without_changing_other_text():
+    from actions.server import __version__
+
+    assert (
+        normalize_help(f"Actions Runtime ({__version__})\nOther (123)")
+        == "Actions Runtime (<version>)\nOther (123)"
+    )

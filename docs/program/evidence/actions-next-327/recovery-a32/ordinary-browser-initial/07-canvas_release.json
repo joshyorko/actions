@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": true,
+      "applicationId": "486b6142-6045-4dc1-b307-05c02654da46",
+      "bindings": [
+        {
+          "bindingId": "echo",
+          "capabilityId": "action.inspect_records",
+          "packageRevision": {
+            "package_id": "8435e270-d70f-5c57-a3ec-7f0570cd384e",
+            "revision_id": "sha256:33c83355d514990a2b847c378f2bc83fb4b45460a42eb115e713a174d9e6a6bf",
+            "workspace_id": "59c79112-f143-4792-9b2f-1d717c3b1323"
+          }
+        }
+      ],
+      "revisionId": "sha256:8ef758e0d67d7800ccb2fe86aabc38fe1d9992a2ffbc155859aedd37d2a9f9e7",
+      "spec": {
+        "bindingIds": [
+          "echo"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "echo",
+              "fields": [
+                {
+                  "label": "NDJSON records",
+                  "name": "value",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "inputs",
+              "submitLabel": "Inspect NDJSON",
+              "type": "form"
+            },
+            {
+              "bindingId": "echo",
+              "id": "status",
+              "type": "status"
+            },
+            {
+              "bindingId": "echo",
+              "id": "artifact",
+              "label": "Inspect result",
+              "type": "artifact"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "NDJSON record inspector \u2014 producer",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": true,
+    "applicationId": "486b6142-6045-4dc1-b307-05c02654da46",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:8ef758e0d67d7800ccb2fe86aabc38fe1d9992a2ffbc155859aedd37d2a9f9e7",
+    "spec": {
+      "bindingIds": [
+        "echo"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "echo",
+            "fields": [
+              {
+                "label": "NDJSON records",
+                "name": "value",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "inputs",
+            "submitLabel": "Inspect NDJSON",
+            "type": "form"
+          },
+          {
+            "bindingId": "echo",
+            "id": "status",
+            "type": "status"
+          },
+          {
+            "bindingId": "echo",
+            "id": "artifact",
+            "label": "Inspect result",
+            "type": "artifact"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "NDJSON record inspector \u2014 producer",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

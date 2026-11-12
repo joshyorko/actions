@@ -36,6 +36,13 @@ def _fchmod() -> Callable[[int, int], None]:
     return cast(Callable[[int, int], None], value)
 
 
+def _pread() -> Callable[[int, int, int], bytes]:
+    value = getattr(os, "pread", None)
+    if not callable(value):
+        raise RuntimeError("Linux output provider requires pread")
+    return cast(Callable[[int, int, int], bytes], value)
+
+
 def _identity(info: os.stat_result) -> tuple:
     return (
         info.st_dev,
@@ -60,10 +67,22 @@ def _regular(info: os.stat_result, expected_size: int) -> None:
 
 
 class _Reader:
-    def __init__(self, fd: int, identity: tuple, size: int):
+    def __init__(
+        self,
+        fd: int,
+        identity: tuple,
+        size: int,
+        block_digests: tuple[bytes, ...],
+        block_bytes: int,
+        read_at: Callable[[int, int, int], bytes],
+    ):
         self.fd = fd
         self.identity = identity
+        self.size = size
         self.remaining = size
+        self.block_digests = block_digests
+        self.block_bytes = block_bytes
+        self.read_at = read_at
         self.closed = False
 
     def read(self, size: int = -1) -> bytes:
@@ -72,17 +91,36 @@ class _Reader:
         if not isinstance(size, int) or isinstance(size, bool) or size < -1:
             raise ValueError("invalid read size")
         amount = self.remaining if size == -1 else min(size, self.remaining)
+        requested = amount
+        position = self.size - self.remaining
         parts = []
         while amount:
-            chunk = os.read(self.fd, min(amount, CHUNK_BYTES))
-            if not chunk or _identity(os.fstat(self.fd)) != self.identity:
+            index, offset = divmod(position, self.block_bytes)
+            start = index * self.block_bytes
+            length = min(self.block_bytes, self.size - start)
+            block_parts = []
+            measured = 0
+            while measured < length:
+                chunk = self.read_at(self.fd, length - measured, start + measured)
+                if not chunk or len(chunk) > length - measured:
+                    raise ValueError("sealed output changed during read")
+                block_parts.append(chunk)
+                measured += len(chunk)
+            block = b"".join(block_parts)
+            if (
+                hashlib.sha256(block).digest() != self.block_digests[index]
+                or _identity(os.fstat(self.fd)) != self.identity
+            ):
                 raise ValueError("sealed output changed during read")
-            parts.append(chunk)
-            self.remaining -= len(chunk)
-            amount -= len(chunk)
+            count = min(amount, length - offset)
+            parts.append(block[offset : offset + count])
+            position += count
+            amount -= count
         if _identity(os.fstat(self.fd)) != self.identity:
             raise ValueError("sealed output changed during read")
-        return b"".join(parts)
+        result = b"".join(parts)
+        self.remaining -= requested
+        return result
 
 
 @dataclass(frozen=True)
@@ -101,6 +139,7 @@ class FilesystemOutputProvider:
     _proc: int
     _closed: bool
     _chmod: Callable[[int, int], None]
+    _read_at: Callable[[int, int, int], bytes]
     _issuer: object
 
     def __init__(self, verified_root_fd: int):
@@ -108,6 +147,7 @@ class FilesystemOutputProvider:
             raise RuntimeError("filesystem output provider is Linux-only")
         self._issuer = object()
         self._chmod = _fchmod()
+        self._read_at = _pread()
         self._nofollow = _flag("O_NOFOLLOW")
         self._directory = _flag("O_DIRECTORY")
         self._cloexec = _flag("O_CLOEXEC")
@@ -237,12 +277,18 @@ class FilesystemOutputProvider:
                 raise ValueError("output descriptor binding changed")
             measured = hashlib.sha256()
             remaining = size
+            block_digests = []
             while remaining:
-                chunk = os.read(reader_fd, min(remaining, CHUNK_BYTES))
-                if not chunk:
-                    raise ValueError("truncated sealed output")
-                measured.update(chunk)
-                remaining -= len(chunk)
+                length = min(remaining, CHUNK_BYTES)
+                block = bytearray()
+                while len(block) < length:
+                    chunk = os.read(reader_fd, length - len(block))
+                    if not chunk or len(chunk) > length - len(block):
+                        raise ValueError("truncated sealed output")
+                    measured.update(chunk)
+                    block.extend(chunk)
+                    remaining -= len(chunk)
+                block_digests.append(hashlib.sha256(block).digest())
             if (
                 os.read(reader_fd, 1)
                 or "sha256:" + measured.hexdigest() != digest
@@ -254,7 +300,14 @@ class FilesystemOutputProvider:
             ):
                 raise ValueError("sealed output identity/content changed")
             os.lseek(reader_fd, 0, os.SEEK_SET)
-            reader = _Reader(reader_fd, identity, size)
+            reader = _Reader(
+                reader_fd,
+                identity,
+                size,
+                tuple(block_digests),
+                CHUNK_BYTES,
+                self._read_at,
+            )
             yield reader
         finally:
             if reader is not None:

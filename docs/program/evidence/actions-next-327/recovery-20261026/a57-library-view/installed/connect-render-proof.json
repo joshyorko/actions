@@ -1,0 +1,21 @@
+{
+  "candidate": "a57",
+  "source_commit": "bde511d2ba6318d0b100547cc6e777e53b9ebc80",
+  "source_tree": "58e3beed765765e13724928d26acefb729d8aeab",
+  "runtime_wheel_sha256": "07a144f6200ea6bce8d52e14244aef2889e2c15cd52472a758381648fb693efa",
+  "canvas_html_bytes": 490733,
+  "canvas_html_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+  "installed_payload_members_verified": 339,
+  "metadata_identical": true,
+  "pip_check": "PASS",
+  "frontend_runtime_tests": "287 passed",
+  "frontend_canvas_tests": "203 passed, 1 existing interchange skip",
+  "frontend_quality": "PASS",
+  "installed_protocol_and_resource": "PASS: fresh datadir, initially empty, UI-only create/get/open/get, exact resource bytes, Run/Attempt/TaskReceipt0, natural client exit, graceful Runtime shutdown",
+  "actual_chatgpt_render": "PENDING owner retest; old a44 actual host remains FAILED",
+  "fresh_datadir_required_for_this_retest": true,
+  "cross_version_state_migration": "NOT EXERCISED; do not reuse a44 state",
+  "execution_or_compiler_qualification": "NOT IN THIS HANDOFF",
+  "constraints": "constraints-connect-render.txt",
+  "constraints_sha256": "5e7417599af87b28b0e82ea95b3b26189dd57f8741417d109a53ab743aa7b83e"
+}

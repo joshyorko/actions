@@ -18,7 +18,7 @@ from starlette.responses import PlainTextResponse, StreamingResponse
 from starlette.types import Receive, Scope, Send
 
 from .service import AccessDenied, ResolvedOutput, RunOutputService
-from .types import Actor
+from .types import Actor, CanvasResultScope
 
 UNAVAILABLE = "Output unavailable or access denied"
 CHUNK_BYTES = 64 * 1024
@@ -35,22 +35,35 @@ class RunOutputTransport:
 
     service: RunOutputService
     authenticate: Callable[[Request], Awaitable[Actor | None]]
+    canvas_scope: CanvasResultScope | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.service, RunOutputService) or not callable(
             self.authenticate
         ):
             raise TypeError("trusted output service and authenticator required")
+        if self.canvas_scope is not None:
+            object.__setattr__(
+                self,
+                "canvas_scope",
+                CanvasResultScope.model_validate(self.canvas_scope),
+            )
 
 
 class _BoundOutputResponse(StreamingResponse):
     def __init__(
-        self, service: RunOutputService, actor: Actor, workspace: str, handle: str
+        self,
+        service: RunOutputService,
+        actor: Actor,
+        workspace: str,
+        handle: str,
+        canvas_scope: CanvasResultScope | None = None,
     ) -> None:
         self._service = service
         self._actor = actor
         self._workspace = workspace
         self._handle = handle
+        self._canvas_scope = canvas_scope
         self._owned: AbstractContextManager[ResolvedOutput] | None = None
         self._resolved: ResolvedOutput | None = None
         super().__init__(
@@ -66,7 +79,12 @@ class _BoundOutputResponse(StreamingResponse):
         # Database.connect is thread-local. Open/close it in this same worker;
         # resolve has committed/released its grant lock before it yields a reader.
         with self._service.db.connect():
-            owned = self._service.resolve(self._actor, self._workspace, self._handle)
+            owned = self._service.resolve(
+                self._actor,
+                self._workspace,
+                self._handle,
+                canvas_scope=self._canvas_scope,
+            )
             resolved = owned.__enter__()
             self._owned = owned
             self._resolved = resolved
@@ -152,7 +170,9 @@ def install_run_output_transport(
                 status_code=416,
                 headers={"Cache-Control": "no-store"},
             )
-        return _BoundOutputResponse(config.service, actor, workspace_id, handle)
+        return _BoundOutputResponse(
+            config.service, actor, workspace_id, handle, config.canvas_scope
+        )
 
     app.add_api_route(
         "/api/workspaces/{workspace_id}/outputs/{handle}",

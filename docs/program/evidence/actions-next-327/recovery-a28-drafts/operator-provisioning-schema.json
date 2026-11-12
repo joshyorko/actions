@@ -1,0 +1,143 @@
+{
+  "$defs": {
+    "DeploymentId": {
+      "format": "uuid",
+      "title": "DeploymentId",
+      "type": "string"
+    },
+    "DeploymentRevisionId": {
+      "title": "DeploymentRevisionId",
+      "type": "string"
+    },
+    "DeploymentRevisionRef": {
+      "additionalProperties": false,
+      "properties": {
+        "workspace_id": {
+          "$ref": "#/$defs/WorkspaceId"
+        },
+        "deployment_id": {
+          "$ref": "#/$defs/DeploymentId"
+        },
+        "revision_id": {
+          "$ref": "#/$defs/DeploymentRevisionId"
+        }
+      },
+      "required": [
+        "workspace_id",
+        "deployment_id",
+        "revision_id"
+      ],
+      "title": "DeploymentRevisionRef",
+      "type": "object"
+    },
+    "WorkspaceId": {
+      "format": "uuid",
+      "title": "WorkspaceId",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "actions.local-authorization/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "authorize-generated-source",
+        "authorize-exact-deployment",
+        "revoke"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "target": {
+      "enum": [
+        "generated-source",
+        "deployment"
+      ],
+      "title": "Target",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "workspace_id": {
+      "$ref": "#/$defs/WorkspaceId"
+    },
+    "runtime_profile": {
+      "title": "Runtime Profile",
+      "type": "string"
+    },
+    "deployment": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DeploymentRevisionRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "run_permissions": {
+      "default": [],
+      "description": "Explicit application-ID Run operations, including retained and future revisions subject to live checks. Revoke subtracts these named operations.",
+      "items": {
+        "enum": [
+          "read",
+          "execute",
+          "cancel"
+        ],
+        "type": "string"
+      },
+      "title": "Run Permissions",
+      "type": "array"
+    },
+    "queue_permissions": {
+      "default": [],
+      "description": "Exact Deployment-revision permissions cover all its queues and require a Workspace gate. Revoke changes only this command-owned Foundry rows.",
+      "items": {
+        "enum": [
+          "work_items.read",
+          "work_items.enqueue",
+          "work_items.claim",
+          "work_items.complete",
+          "work_items.cancel",
+          "work_items.review",
+          "work_items.artifact.read"
+        ],
+        "type": "string"
+      },
+      "title": "Queue Permissions",
+      "type": "array"
+    },
+    "expected_grants_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Grants Digest"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation",
+    "target",
+    "request_id",
+    "workspace_id",
+    "runtime_profile"
+  ],
+  "title": "LocalAuthorizationRequest",
+  "type": "object"
+}

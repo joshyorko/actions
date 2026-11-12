@@ -1,0 +1,8 @@
+{
+  "patchSha256": "158c6b887f3e26077630df79653a2893bae3f34ac03248065569da607ec8b107",
+  "files": {
+    "action_server/src/actions/server/foundry/generic_view.py": "3d6630c4e242378aa4fa6ddcc18e677ef1ce983e1cfa259fb51b653093b58e89",
+    "action_server/tests/action_server_tests/test_generic_reopen_artifacts.py": "87ffa125811b988c8482b510eab35450123a915de5387e3dd863e74b82d922c1"
+  },
+  "base": "root frozen a28 generic_view.py copied read-only to independent scratch"
+}

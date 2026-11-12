@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="1" errors="0" time="0">
+    <testsuite name="src/semantic-renderer/v2-projections.test.tsx" timestamp="2026-10-25T14:22:46.770Z" hostname="71cd163cf8ad" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="src/semantic-renderer/v2-projections.test.tsx" time="0">
+            <failure message="Failed to resolve import &quot;../../../../../../../docs/contracts/canvas/fixtures/semantic-v2.fixture.json&quot; from &quot;apps/canvas-view/src/semantic-renderer/v2-projections.test.tsx&quot;. Does the file exist?" type="Error">
+Error: Failed to resolve import &quot;../../../../../../../docs/contracts/canvas/fixtures/semantic-v2.fixture.json&quot; from &quot;apps/canvas-view/src/semantic-renderer/v2-projections.test.tsx&quot;. Does the file exist?
+  Plugin: vite:import-analysis
+  File: /workspace/lane-a/action_server/frontend/apps/canvas-view/src/semantic-renderer/v2-projections.test.tsx:10:20
+  3  |  import { SemanticCanvasRenderer } from &quot;./components&quot;;
+  4  |  import { parseCanvasSpec } from &quot;./mcp-bridge&quot;;
+  5  |  import fixture from &quot;../../../../../../../docs/contracts/canvas/fixtures/semantic-v2.fixture.json&quot;;
+     |                       ^
+  6  |  var _jsxFileName = &quot;/workspace/lane-a/action_server/frontend/apps/canvas-view/src/semantic-renderer/v2-projections.te...
+  7  |  import { jsxDEV as _jsxDEV } from &quot;react/jsx-dev-runtime&quot;;
+ ❯ TransformPluginContext._formatLog ../../node_modules/vite/dist/node/chunks/node.js:31066:39
+ ❯ TransformPluginContext.error ../../node_modules/vite/dist/node/chunks/node.js:31063:14
+ ❯ normalizeUrl ../../node_modules/vite/dist/node/chunks/node.js:28008:18
+ ❯ ../../node_modules/vite/dist/node/chunks/node.js:28076:30
+ ❯ TransformPluginContext.transform ../../node_modules/vite/dist/node/chunks/node.js:28044:4
+ ❯ EnvironmentPluginContainer.transform ../../node_modules/vite/dist/node/chunks/node.js:30851:14
+ ❯ loadAndTransform ../../node_modules/vite/dist/node/chunks/node.js:20619:26
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

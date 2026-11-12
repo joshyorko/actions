@@ -1,0 +1,16 @@
+{
+  "source_state": "a44 pending source checkpoint",
+  "receipt_sha256": "5200e3c2e66036f96b3a6b9b8a1951c83d3b4fa50e78db4e8475474a06a5ed8f",
+  "suites": [
+    {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "38",
+      "time": "23.917",
+      "timestamp": "2026-10-25T18:01:28.457536+00:00",
+      "hostname": "2c8e4f4795f6"
+    }
+  ]
+}

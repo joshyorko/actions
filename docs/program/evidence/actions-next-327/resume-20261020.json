@@ -1,0 +1,93 @@
+{
+  "authority": "https://github.com/joshyorko/actions/issues/327",
+  "draft_pr": "https://github.com/joshyorko/actions/pull/328",
+  "resume_base": "7ab2edbf29c550df906c32a10b221ae98e86ec1f",
+  "research_crosswalk_and_startup_fix_commit": "2ea2c8ab72ad6d6f135e0a8076f32c27279a8a4a",
+  "implementation_commit": "65f1f40bec4e861d34259f695a447996ac57faf6",
+  "release_status": "NOT_READY",
+  "research_inputs": [
+    {
+      "name": "actions-runtime-research-2026-10-20.md",
+      "bytes": 32388,
+      "sha256": "3d521ff0e79d29cd69b301b894085de09b66019cd3d0282e3f63042b9be6bd4c",
+      "read_complete": true
+    },
+    {
+      "name": "actions-runtime-evidence-ledger-2026-10-20.json",
+      "bytes": 13158,
+      "sha256": "b5b13d7da759f1cb98c8a10ed42fa241a1c9ee837f81dd7160d9bb279d8e0d82",
+      "read_complete": true
+    }
+  ],
+  "research_classification": "Historical research-only snapshot at community 0e80d41c; no new acceptance in those inputs. Distilled crosswalk only in Git.",
+  "tests": {
+    "isolated_original_lock_case": {
+      "tests": 1,
+      "passed": 1,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junit_sha256": "8d00154849bb94cb9cedd2e6cfa88f5ad135f1cadb0d18c4b9333625ed6ba35d"
+    },
+    "controlled_startup_skew_before_fix": {
+      "exit": 1,
+      "diagnostic": "database is locked at the actual catalog writer statement"
+    },
+    "partial_ready_publication_before_fix": {
+      "exit": 1,
+      "diagnostic": "parent observed empty readiness payload"
+    },
+    "bounded_combined_gate": {
+      "tests": 31,
+      "passed": 31,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junit_sha256": "8d8489461d2d3445269465def61a70158104b743412eb95f7ad08aa1450d95f9"
+    },
+    "strict_canvas_final_gate": {
+      "tests": 8,
+      "passed": 8,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "junit_sha256": "42484cc15c121436d7154b58e5f443ca0fd1077d2621e5c6d1c955ffe54b54b5"
+    },
+    "strict_canvas_cases_repeat_the_eight_in_combined_gate": true,
+    "runtime_lint_exit": 0,
+    "runtime_typecheck_exit": 0
+  },
+  "lock_diagnosis": {
+    "proven": "First contender could spend its unchanged five-second busy timeout waiting for the second process startup while the parent held the writer. Controlled six-second skew reproduced this path.",
+    "correction": "Separate stdin start gate after both ready; both real catalog writer statements reached and table empty before writer release; atomic ready publication; unchanged 5000ms busy timeout and original parent deadline.",
+    "historical_io_cause": "UNPROVEN; do not retroactively relabel the prior failed full run as passed."
+  },
+  "new_e2_scope": "Private immutable Canvas result facade, application/deployment revision pins, existing Actor grants, common resolver and actual assembled Runtime HTTP download. Real DuckDB and sealed NDJSON in the new tests.",
+  "not_proven": [
+    "Connected renderer or MCP Apps bridge",
+    "Generated application staging/activation/restart/rollback",
+    "Actual ChatGPT E1",
+    "Work Item epoch/review/retry/finish and real RCC worker workflow",
+    "Optional celld SQL/storage/two-node conformance",
+    "Current-source complete package/service/native/image/release/restore acceptance"
+  ],
+  "verification_limit": "No complete package gate or rebuild for the new source under high host I/O pressure. Prior f9aa2e7f artifacts and 179/118/29 counts retain their original historical scopes.",
+  "io_pressure_at_handoff": "some avg10=75.94 avg60=75.33 avg300=63.61 total=574036194\nfull avg10=72.95 avg60=72.41 avg300=60.37 total=540326472",
+  "protected_untracked_file": {
+    "path": "action_server/src/actions/server/_oauth2_config.py",
+    "bytes": 1339,
+    "sha256": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b",
+    "unchanged": true,
+    "owner": "not established; do not remove or commit"
+  },
+  "review": {
+    "model": "gpt-6-luna",
+    "scope": "bounded read-only Canvas scope delta",
+    "findings": [],
+    "tests_run_by_helper": false,
+    "canonical_doc_proposal": "integrated in docs/skills/repository-operations.md"
+  },
+  "upstream_disposition": "none",
+  "local_evidence": "/home/kdlocpanda/.cache/actions-release-327/resume-20261020/evidence",
+  "next_action": "When resource-safe, run strict canonical InvoiceQueryTest full gate for the new source; then connect the existing Canvas View and app-only MCP binding to this scoped result service before continuing Work Item review/fencing and real worker acceptance."
+}

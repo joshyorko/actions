@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 - 2026-11-12
+
+- Add fenced SQLite/PostgreSQL claim, heartbeat and completion contracts with
+  independent ownership epochs and explicit reconciliation controls.
+- Preserve FileAdapter and existing aliases; managed Runtime Work Items use a
+  separate authenticated, negotiated service contract.
+
 ## 0.4.4 - 2026-08-13
 
 - Stop shipping `actions/__init__.py`; `actions-core` exclusively owns the root

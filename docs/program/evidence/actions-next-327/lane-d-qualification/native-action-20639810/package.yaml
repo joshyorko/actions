@@ -1,0 +1,10 @@
+spec-version: v2
+name: native-qualified
+version: 0.0.1
+description: Synthetic native qualification only.
+dependencies:
+  conda-forge:
+    - python=3.12
+    - uv=0.9.26
+  pypi:
+    - actions-core=1.0.2

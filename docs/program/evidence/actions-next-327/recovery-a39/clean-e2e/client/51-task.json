@@ -1,0 +1,19 @@
+{
+  "method": "tools/call",
+  "result": {
+    "resultType": "task",
+    "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06",
+    "status": "completed",
+    "createdAt": "2026-10-25T13:55:43.058Z",
+    "lastUpdatedAt": "2026-10-25T13:56:05.146Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 50,
+    "statusMessage": "Execution completed.",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  }
+}

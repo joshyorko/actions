@@ -1,0 +1,470 @@
+{
+  "status": "PASS",
+  "runtime": "1.1.0a47",
+  "core": "1.1.0a7",
+  "artifact_digest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+  "processes": [
+    {
+      "pid": 97731,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16402617000130704,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 97742,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21419297099964751,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 98119,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16406735300006403,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 98640,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21434424900144222,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [
+    {
+      "case": "pass",
+      "surface": "model",
+      "canvas_artifact_expected": "denied",
+      "run_id": "633b2d76-3dbd-4801-af46-6e3eba21afeb",
+      "item_id": "337a0ed5-c895-4345-bdc2-e682cceebc22",
+      "state": "completed",
+      "queue_state": "DONE",
+      "authorized_artifacts": 4,
+      "real_rcc_exit_code": 0
+    },
+    {
+      "case": "fail",
+      "surface": "model",
+      "canvas_artifact_expected": "denied",
+      "run_id": "ef60b253-7ee9-4411-8369-c542a55d0568",
+      "item_id": "186eca56-9400-4e5b-9db9-f2375ec9f8d7",
+      "state": "failed",
+      "queue_state": "FAILED",
+      "authorized_artifacts": 4,
+      "real_rcc_exit_code": 1
+    },
+    {
+      "case": "pass",
+      "surface": "canvas",
+      "canvas_artifact_expected": "allowed",
+      "run_id": "a160c44c-d310-4904-8f69-8e0bf2ec5139",
+      "item_id": "19f462dc-04b1-45ce-955c-197c27827e6d",
+      "state": "completed",
+      "queue_state": "DONE",
+      "authorized_artifacts": 4,
+      "real_rcc_exit_code": 0
+    },
+    {
+      "case": "fail",
+      "surface": "canvas",
+      "canvas_artifact_expected": "allowed",
+      "run_id": "0be2758d-500b-4583-b10f-0cee9ed17073",
+      "item_id": "890287fc-d25e-468b-809e-31e8217b1093",
+      "state": "failed",
+      "queue_state": "FAILED",
+      "authorized_artifacts": 4,
+      "real_rcc_exit_code": 1
+    }
+  ],
+  "workspace": "34fe016b-752a-4d3a-be03-d5dd36b7dde4",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "restart_terminal_claim_and_receipt_unchanged": true,
+  "scope": "Public HTTP queues plus distinct MCP model invocation and app-associated Canvas submit_input/execute; model Canvas artifacts intentionally denied; single persisted Actor and server-held worker; no producer or child outputs; not multi-principal isolation"
+}

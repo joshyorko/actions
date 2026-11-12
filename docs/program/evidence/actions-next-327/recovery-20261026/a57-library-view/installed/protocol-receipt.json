@@ -1,0 +1,143 @@
+{
+  "status": "PASS_PROTOCOL_AND_STATIC_RESOURCE",
+  "scope": "Installed a57 Node SDK modern-auto Canvas create/get/open/resource-read protocol and static renderer identity only",
+  "expected_candidate": {
+    "source_commit": "bde511d2ba6318d0b100547cc6e777e53b9ebc80",
+    "source_tree": "58e3beed765765e13724928d26acefb729d8aeab",
+    "runtime_version": "1.1.0a57",
+    "runtime_wheel_sha256": "07a144f6200ea6bce8d52e14244aef2889e2c15cd52472a758381648fb693efa",
+    "canvas_html_bytes": 490733,
+    "canvas_html_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+    "core_version": "1.1.0a8",
+    "work_items_version": "0.5.0a2",
+    "sdk_version": "2.0.0",
+    "node_version": "v20.19.3"
+  },
+  "runtime_candidate": "/workspace/327-artifacts/a57/consumer",
+  "datadir_policy": "fresh disposable datadir; no cross-version database copy",
+  "operations": [
+    "tools/list",
+    "canvas_create default UI only",
+    "canvas_get",
+    "canvas_open {}",
+    "canvas_get",
+    "resources/read ui://action-canvas/v1/canvas.html"
+  ],
+  "forbidden_operations": [
+    "canvas_apply",
+    "canvas_release",
+    "canvas_dispatch",
+    "capability_invoke",
+    "queue or run operations",
+    "compiler or RCC package execution"
+  ],
+  "source_fixture_reference": "/workspace/327-probes/a53-claimed/terminal-success-failure/evidence/08-canvas_get.json (app identity only; no state copied)",
+  "artifact_receipt_status": "PASS_ARTIFACT_ONLY",
+  "install_receipt_status": "PASS_CLEAN_INSTALL",
+  "runtime_wheel_sha256": "07a144f6200ea6bce8d52e14244aef2889e2c15cd52472a758381648fb693efa",
+  "companion_wheel_sha256": {
+    "actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "installed_identity": {
+    "runtime": "1.1.0a57",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a57/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+    "renderer_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+    "renderer_bytes": 490733,
+    "renderer_has_library_heading": true
+  },
+  "node_version": "v20.19.3",
+  "node_undici_version": "6.21.2",
+  "sdk_entry_sha256": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414",
+  "sdk_types_sha256": "309cc5f76da5abff0be678d958aba0e875e52909f5f6f0544a45a34ac596cc9c",
+  "node_script_sha256": "a85088b6410684dc2eaaa5fa16d8cbfebf6ada073a77a8045eff8202aa0d6948",
+  "renderer_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+  "renderer_bytes": 490733,
+  "free_disk_bytes": 18586152960,
+  "runtime_ready": true,
+  "run_attempt_counts_before": {
+    "run": 0,
+    "run_attempt": 0,
+    "run_task_receipt": 0
+  },
+  "node_exit_code": 0,
+  "node_events": [
+    {
+      "event": "client_config",
+      "stage": "sdk_metadata"
+    },
+    {
+      "event": "protocol_negotiated",
+      "stage": "connect"
+    },
+    {
+      "event": "catalog_ready",
+      "stage": "tools_list"
+    },
+    {
+      "event": "initial_library_verified_empty",
+      "stage": "canvas_open_initial"
+    },
+    {
+      "event": "default_canvas_created",
+      "stage": "canvas_create"
+    },
+    {
+      "event": "canvas_get_metadata",
+      "stage": "canvas_get_before_open"
+    },
+    {
+      "event": "library_metadata",
+      "stage": "canvas_open"
+    },
+    {
+      "event": "canvas_get_after_open_verified",
+      "stage": "canvas_get_after_open"
+    },
+    {
+      "event": "ui_resource_verified",
+      "stage": "resource_read"
+    },
+    {
+      "event": "phase_complete",
+      "stage": "resource_read"
+    },
+    {
+      "event": "client_close_complete",
+      "stage": "resource_read"
+    },
+    {
+      "event": "transport_close_complete",
+      "stage": "resource_read"
+    },
+    {
+      "event": "natural_before_exit",
+      "stage": "resource_read"
+    }
+  ],
+  "run_attempt_counts_after": {
+    "run": 0,
+    "run_attempt": 0,
+    "run_task_receipt": 0
+  },
+  "run_attempt_counts_unchanged": true,
+  "result": {
+    "protocol_version": "2026-07-28",
+    "application_id": "40ae02a7-538e-4e23-a254-f27fd83b2890",
+    "title": "New Canvas",
+    "active_revision_id": null,
+    "revision_id": "sha256:a6e2b679f7738fb62aadec48dc17e09e5970ca2477efa92e152ee4037cbfcbf2",
+    "default_spec_schema": "actions.canvas-spec/v1",
+    "default_binding_count": 0,
+    "library_application_count": 1,
+    "resource_uri": "ui://action-canvas/v1/canvas.html",
+    "resource_byte_length": 490733,
+    "resource_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44"
+  },
+  "runtime_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  }
+}

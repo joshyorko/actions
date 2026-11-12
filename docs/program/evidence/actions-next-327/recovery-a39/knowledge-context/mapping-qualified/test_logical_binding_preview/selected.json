@@ -1,0 +1,6 @@
+[
+  "tests/action_server_tests/test_logical_binding_preview.py::test_preview_rejects_cross_workspace_before_any_provider_or_compiler_access",
+  "tests/action_server_tests/test_logical_binding_preview.py::test_preview_explicitly_does_not_claim_provider_compatibility[True]",
+  "tests/action_server_tests/test_logical_binding_preview.py::test_preview_explicitly_does_not_claim_provider_compatibility[False]",
+  "tests/action_server_tests/test_logical_binding_preview.py::test_legacy_preview_reply_does_not_gain_binding_readiness_claims"
+]

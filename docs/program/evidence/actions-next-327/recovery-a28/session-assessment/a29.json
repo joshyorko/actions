@@ -1,0 +1,55 @@
+{
+  "status": "PASS_NO_REUSABLE_AUTHORITY",
+  "affected_commit": "cadd933390ebc51c86f90f511669e19aaf5eb1bf",
+  "affected_path": "docs/program/evidence/actions-next-327/recovery-a28/ordinary-installed/15-canvas_get.json",
+  "corrected_commit": "087c86c8e81844f8e9013460b3ca6a8bbca748c7",
+  "engine_prefix": "/workspace/actions-recovery-327/installed-a29/consumer",
+  "app_sessions_source_sha256": "744099acb2d49774da457bb2cac70e81b83302c073e1cd66651df81d808f6c68",
+  "scope": {
+    "deployment": {
+      "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4",
+      "deployment_id": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+      "revision_id": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c"
+    },
+    "application": {
+      "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4",
+      "app_id": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+      "revision_id": "sha256:f33c8fe35cd9d56077280460c527788e31f28532767ed9e20831b9ce46962096"
+    }
+  },
+  "principal_id": "2b6ffc73-2a23-4e29-b7b9-0c9c9ba9b876",
+  "ttl_seconds": 900,
+  "storage": "SHA256(token) lookup in per-CanvasMcp in-memory AppSessions dictionary; monotonic deadline; no signing key or disk/database serialization",
+  "authentication": "requires separately authenticated matching principal/workspace, app-only route, exact scope and live SQL domain checks",
+  "issuing_processes": [
+    {
+      "pid": 68228,
+      "recorded_stopped": true,
+      "pid_exists_now": false
+    },
+    {
+      "pid": 68262,
+      "recorded_stopped": true,
+      "pid_exists_now": false
+    },
+    {
+      "pid": 68540,
+      "recorded_stopped": true,
+      "pid_exists_now": false
+    },
+    {
+      "pid": 69038,
+      "recorded_stopped": true,
+      "pid_exists_now": false
+    }
+  ],
+  "checks": [
+    "actual exposed value denied by fresh installed CanvasMcp before domain call",
+    "actual exposed value denied after issuing a new session for the same actor/scope",
+    "fresh test session expires after monotonic deadline",
+    "all issuing harness processes are absent"
+  ],
+  "remaining_authority": "none: original registry instance destroyed; restart constructs empty registry and cannot reconstruct its entry from persisted datadir",
+  "revocation_or_credential_changes": "none required or performed",
+  "token_repeated": false
+}

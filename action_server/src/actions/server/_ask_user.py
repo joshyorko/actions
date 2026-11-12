@@ -89,16 +89,22 @@ def ask_user_for_hostname() -> str:
     """
     from urllib.parse import urlparse
 
+    from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._storage import get_hostname
     from actions.server.vendored_deps.termcolors import bold_red
 
     while True:
-        default_hostname = get_hostname()
+        try:
+            default_hostname = get_hostname()
+        except ActionServerValidationError:
+            default_hostname = ""
 
         try:
-            hostname = input(f"Enter Control Room hostname ({default_hostname}): ")
+            hostname = input(f"Enter cloud hostname ({default_hostname}): ")
             if not hostname:
-                return default_hostname
+                if default_hostname:
+                    return default_hostname
+                log.error(bold_red("An explicit cloud hostname is required."))
             else:
                 url = urlparse(hostname)
                 if url.hostname:

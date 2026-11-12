@@ -1,0 +1,92 @@
+{
+  "source_sha": "1520f348c31b68a8faf5a3f813bea6cf5146897b",
+  "runtime_candidate": "1.1.0a13",
+  "sdk_floor": "0.5.0a1; unchanged SDK source",
+  "public_baseline": {
+    "tag": "actions-runtime-1.0.4",
+    "sha": "d222f94edca26953c1506ab258adc458ded17c56",
+    "classification": "local SQLite /api/work-items CRUD and attachments, not authenticated managed API"
+  },
+  "implemented": "Closed versioned command AND result schemas for14 operations, authenticated capability negotiation, explicit permissions, server-derived worker owner, queue/deployment/review/claim scope validation, bounded finite JSON, safe errors, no local-CRUD fallback; injected router factory only",
+  "not_implemented": "No central managed SQL service or ordinary Runtime mount, no complete managed server or installed VSIX acceptance. General scheduling/fairness/fanout/retry/review policy remains same-release work. Native foundry Package/Run/boot/client gates continue independently.",
+  "results": {
+    "protocol_transport": "14passed; synthetic domain port, not SQL/backend acceptance",
+    "static": "configured lint/typecheck426PASS",
+    "owned_full_status": "PASS",
+    "cleanup": "PASS",
+    "overlap": "focused/components/portable/installed selections overlap, not a summed count",
+    "foundry_storage": {
+      "tests": 73,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "components": {
+      "tests": 161,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "invoice": {
+      "tests": 129,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "portable": {
+      "tests": 2011,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 14
+    }
+  },
+  "receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/managed-contract-frozen-20261023/30431db9-b399-4db5-a800-fc99c412e356/receipt.json",
+      "sha256": "ca1f27d63b8a92622417d8c7a05bc454bd566de801a45f71043aa4c6e4d0e1c1"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/managed-contract-frozen-20261023/30431db9-b399-4db5-a800-fc99c412e356/foundry_storage.xml",
+      "sha256": "433d7f0fe50646fe68f28f416f548bf876e94e36949df77dddd1c571a82222dc"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/managed-contract-frozen-20261023/30431db9-b399-4db5-a800-fc99c412e356/components.xml",
+      "sha256": "9c24bf25975b7a63084f73fb2b5526fc12f7c0f4a7a2a89b5fca2ba41e9bb4eb"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/managed-contract-frozen-20261023/30431db9-b399-4db5-a800-fc99c412e356/invoice.xml",
+      "sha256": "7969cbcda4f4fc7d1adb833c8a35224c1543a93d5eb03f78545d629b9cb282ba"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/managed-contract-frozen-20261023/30431db9-b399-4db5-a800-fc99c412e356/portable.xml",
+      "sha256": "ccb8311bbc69e463129ec089ac0884847855360110ede2aa2b9a62f54f60ceaa"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/managed-handoff-20261023.xml",
+      "sha256": "ee0cfc68c2dffa4a56003385d04526d152578c834ddc2851b39bb6d84360b376"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/managed-handoff-static-20261023.log",
+      "sha256": "d64adc55775cdcefd5de6fae3f05387c1bf486f75be7fe171499b23c5ac854ea"
+    }
+  ],
+  "canonical_handoff": "docs/program/actions-next-managed-work-items-132.md",
+  "schema_export": "docs/contracts/work-items/managed-v1.json",
+  "canonical_documentation_delta": "docs/skills/work-items.md now distinguishes published local CRUD from authenticated managed mode, required injection, actual capability negotiation, and no FileAdapter/registration-only completion claim. Evidence: tag source,14 tests, checked-in schema equality and full gate.",
+  "worker_seam": "Parent may reuse one idle owner for ONLY new reviewed.py and test_managed_work_items_reviewed.py against existing common SQL review/queue/Run/output services and injected QueueAuthorizationPort; no task created by integrator, no schema/auth/bootstrap ownership transfer",
+  "rollback": "Revert this additive unmounted factory/contract commit for code rollback; no migration or production state change in this checkpoint. Prior schema18 requires its coordinated pre-upgrade backup for binary rollback.",
+  "blockers": [
+    {
+      "action": "real managed SQL service/bootstrap and VSIX qualification",
+      "target": "same #132/#327 release",
+      "state": "pending implementation/test, not an owner permission hold"
+    },
+    {
+      "action": "authenticated ChatGPT E1/Dakota",
+      "target": "actual client/identity",
+      "state": "STOP pending cloud readiness then explicit local approval"
+    }
+  ],
+  "upstream_disposition": "Existing RCC report remains draft only; no new upstream action",
+  "authority": "No community/public release/production/other repository/credential changes without separate approval"
+}

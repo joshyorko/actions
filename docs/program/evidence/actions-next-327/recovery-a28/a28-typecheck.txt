@@ -1,0 +1,24 @@
++ poetry run invoke typecheck (in /workspace/actions/action_server)
+poetry run mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests
+src/actions/server/_community_expose.py:657:9: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_robot_run_inputs.py:43:9: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_robot_run_inputs.py:44:9: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+src/actions/server/_actions_run.py:863:25: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+src/actions/server/_actions_run.py:881:21: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+src/actions/server/_triggers.py:36:9: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_generic_invocation_discovery.py:123:15: error: Need type annotation for "schemas"  [var-annotated]
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py:276:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py:277:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py:278:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py:279:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+Found 1 error in 1 file (checked 489 source files)
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'invoke', 'typecheck']' returned non-zero exit status 1.

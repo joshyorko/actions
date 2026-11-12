@@ -1,0 +1,26 @@
+{
+  "canonical/tests.xml.b64": {
+    "decoded_sha256": "a8142c5cdc2173c9824c7f45b7caf149197a785243347eec1883d9f7cd398780"
+  },
+  "canonical-corrected/tests.xml.b64": {
+    "decoded_sha256": "467f16052e94c7956ebe3becc16aa7a0168adfa42880677d705f50f82139091a"
+  },
+  "canonical-final/tests.xml.b64": {
+    "decoded_sha256": "92d66974bf7149bef74cfa990f62bbf5ba2ff8b2f59fb796ef0f3fa135ce0e29"
+  },
+  "canonical-authorized/tests.xml.b64": {
+    "decoded_sha256": "b5aff6cc2e6ef15735f4402d08af89b3d5b1e1472cf57ccf7c58ee0d45d83b43"
+  },
+  "knowledge-qualified/tests.xml.b64": {
+    "decoded_sha256": "840830b262fc08838c7a99468bee1067f5faa1babd632d530bb390224b4bf3de"
+  },
+  "selection-red.xml.b64": {
+    "decoded_sha256": "480b0d4d8d8e081b105e71aa2f4702b90a6e2b37eee120537542df34e372ab63"
+  },
+  "selection-green.xml.b64": {
+    "decoded_sha256": "4f166104ceba77ded748659da2fe0c5dee56d24cdac5ea08a718e39196139a4e"
+  },
+  "knowledge-cancel-red.xml.b64": {
+    "decoded_sha256": "8966b8ac6edf65eb454b2cf0b90793700bb80478c787aac8dde092cf6c7aba08"
+  }
+}

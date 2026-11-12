@@ -1,0 +1,216 @@
+{
+  "supervisor_parent_pid": 10009,
+  "supervisor_sha256": "d02ec0cf0c8ca25cefb46487fa2ed473cfc0394e214044cecbe8f42ed50b740e",
+  "source": "aca51868d14e916c8034c69309e222100d5d50f3",
+  "manifest_sha256": "67dc9452db30ebd1cc060bfd84e6eb5c0b483ddd24f84c049a19a0bff0271097",
+  "harness_sha256": "8d65d66cb613b42345539ef5882489272dc5d7114288fa7d7433506b736a38f3",
+  "live_cancellation": "TERMINAL_CONFIRMED",
+  "status": "FAILED",
+  "runtime": "1.1.0a53",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "processes": [
+    {
+      "pid": 10014,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21405069099955654,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 10038,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2139839619999293,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 10087,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16388940700016974,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "ff91471c-a7ed-4889-bc2a-d907493d1386",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "observed_child": [
+    {
+      "role": "rcc",
+      "pid": 10178,
+      "birth": 1793015909.2,
+      "pgid": 10178,
+      "executable_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "cwd_sha256": "67d1869e7938e9d1d2d28047c791520c81fceb90be4761b55eb916d07310a743",
+      "run_id": "4e9ed09b-42af-47d8-86b4-146cbd3affed",
+      "attempt_id": "6e00de33-02d3-482c-8ba1-a6ec2ce3362b",
+      "launch_id": "a7e1751d-c7bc-43fc-a3bd-56dad63b2440"
+    },
+    {
+      "role": "python",
+      "pid": 10206,
+      "birth": 1793015910.31,
+      "pgid": 10178,
+      "executable_sha256": "bb9a83a3c8f7d2bea8f80afc56924d921ef4b8ce28799c511e118973ef61a275",
+      "cwd_sha256": "668b8ca986697d767ec8c6fa2e60396438986139489e1e34f619936673b42a55",
+      "run_id": "4e9ed09b-42af-47d8-86b4-146cbd3affed",
+      "attempt_id": "6e00de33-02d3-482c-8ba1-a6ec2ce3362b",
+      "launch_id": "a7e1751d-c7bc-43fc-a3bd-56dad63b2440"
+    }
+  ],
+  "cancel_ack": {
+    "resultType": "complete",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  },
+  "latest_task": {
+    "resultType": "complete",
+    "taskId": "4e9ed09b-42af-47d8-86b4-146cbd3affed",
+    "status": "cancelled",
+    "createdAt": "2026-10-26T11:58:25.688Z",
+    "lastUpdatedAt": "2026-10-26T11:58:31.378Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 100,
+    "statusMessage": "Cancelled; execution stopped and descendants reaped.",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  },
+  "child_birth_to_absence_seconds": 1.1556320190429688,
+  "child_absent_before_runtime_stop": true,
+  "failure": {
+    "type": "ExceptionGroup",
+    "frames": [
+      {
+        "file": "qualify-cancel.py",
+        "function": "main",
+        "line": 379
+      },
+      {
+        "file": "qualify-cancel.py",
+        "function": "connect",
+        "line": 133
+      },
+      {
+        "file": "contextlib.py",
+        "function": "__aexit__",
+        "line": 231
+      },
+      {
+        "file": "streamable_http.py",
+        "function": "streamable_http_client",
+        "line": 771
+      },
+      {
+        "file": "_asyncio.py",
+        "function": "__aexit__",
+        "line": 847
+      }
+    ],
+    "nested": [
+      {
+        "type": "ExceptionGroup",
+        "frames": [
+          {
+            "file": "streamable_http.py",
+            "function": "streamable_http_client",
+            "line": 788
+          },
+          {
+            "file": "qualify-cancel.py",
+            "function": "connect",
+            "line": 134
+          },
+          {
+            "file": "session.py",
+            "function": "__aexit__",
+            "line": 514
+          },
+          {
+            "file": "_asyncio.py",
+            "function": "__aexit__",
+            "line": 847
+          }
+        ],
+        "nested": [
+          {
+            "type": "AssertionError",
+            "frames": [
+              {
+                "file": "qualify-cancel.py",
+                "function": "connect",
+                "line": 137
+              },
+              {
+                "file": "qualify-cancel.py",
+                "function": "exercise_task",
+                "line": 319
+              },
+              {
+                "file": "qualify-cancel.py",
+                "function": "managed",
+                "line": 220
+              }
+            ],
+            "nested": [],
+            "safe_message": "('items.get', 409)"
+          }
+        ],
+        "safe_message": null
+      }
+    ],
+    "safe_message": null
+  },
+  "budget": {
+    "fixture_bytes": 883181,
+    "log_bytes_upper_bound": 13687
+  },
+  "scope": "Installed claimed consumer Robot Task live cancellation, child absence before stop, public read/replay/restart; synthetic single owner only"
+}

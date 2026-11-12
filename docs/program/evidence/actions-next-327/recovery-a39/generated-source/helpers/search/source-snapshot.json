@@ -1,0 +1,28 @@
+{
+  "base": "da928b69e0558917c3e88af9297ddfd3bec818e8",
+  "overlay": {
+    "action_server/src/actions/server/data_queries/knowledge_execution.py": "cb55f94e5d79e44e37ef9d172adc75e741df80c19b46c45c9a1e98b7cd4de404",
+    "action_server/src/actions/server/data_queries/knowledge_operations.py": "8976e635543c5a15fd39fae499668d2ca6ea23c41343c4722fa53b59b7fb5f9d",
+    "action_server/src/actions/server/deployments/package_revision_compiler.py": "4754c6c115a4a227f15b46ea0a4e6c6cc5e22a1953f5814c1db73aacef6aa301",
+    "action_server/src/actions/server/foundry/authoring.py": "8f5065cda6164f2827fadef1fa9c28e12a89da822bc2c8b12985926405aa0ccd",
+    "action_server/src/actions/server/foundry/generated_knowledge.py": "066a3125702bf610a791b382d782d1b0a683434287027192f6f67e281b2422a5",
+    "action_server/src/actions/server/foundry/generic_execution_port.py": "8bde40d64b6838f82d6ea33081c21d81298e64e43d0aebf6e1e5d560d0e67331",
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "058ff371dc1f44e75ce3babd4c124cd31e73ce35c381b69bf59da14a0a121b43",
+    "action_server/src/actions/server/foundry/logical_execution.py": "3241798ded615045df412a4452ff80469727e5bb263454aa2757ddcea09b706e",
+    "action_server/src/actions/server/foundry/logical_receipts.py": "130243a6e7b75bde1941322e1c3a790da43a3be1890a215fc5815af79d6dcb5f",
+    "action_server/src/actions/server/foundry/package_registry.py": "6c276d442bc40fd391b95a194f6e81d4b877fa74dbcc901b041629f91bd9c362",
+    "action_server/src/actions/server/foundry/rcc_execution.py": "56d6865e9d26a823f4191cca18d4849f9038a811a59467cddde7a7f694c7e303",
+    "action_server/src/actions/server/foundry/standalone_execution.py": "b6957a07fcd30b358b7dbbf39213964cc619f588ffe07c14b220a1bef6c242bd",
+    "action_server/src/actions/server/managed_work_items/generic_service.py": "800780e7f7b9cd4ae8984fce58b73e23ff64d81b3e1c1f2d0fd993a009b70cf3",
+    "action_server/src/actions/server/run_outputs/detached.py": "cba027b3bcb123f557bede32f0e32e1eab74079214dedb017754dbeed20c5db5",
+    "action_server/src/actions/server/run_outputs/task_service.py": "26e646afa144ec52655c0b85d27ad223da8e1540d297752c7427688391c3cde6",
+    "action_server/tests/action_server_tests/test_generated_knowledge.py": "542526115f041cbb97193dd564996039fd639396488edf0cd0b94c4f276515c1",
+    "action_server/tests/action_server_tests/test_knowledge_operations.py": "3290afb3870470e761ec7c291ef6b83bcefcd1275eac65a4394d5461f42d1f92",
+    "action_server/tests/action_server_tests/test_logical_full_publication.py": "30d16a85eb0aa22c6d4ae94ecba6303d2accb01bbda5f9ae7a500ca8b518a441",
+    "action_server/tests/action_server_tests/test_logical_receipts.py": "d23b0658e84e0007e1a2e4501dea639a66300641a11a1f785786df90d160815f",
+    "action_server/tests/contract_tests/test_knowledge_compiler_contract.py": "b8a0aae36fa0166711e2cb2578c2e23557ba6239bb82c05832d1e7d55a0847f4",
+    "action_server/tests/contract_tests/test_knowledge_input_mapping.py": "dd542dc8cd1d49bcc3044553f0821237198b9f090e6745073a8a7b1916377c72",
+    "action_server/tests/contract_tests/test_package_revision_compiler.py": "3bd0c9c4a2ff6854501febe253e8b3fef9bac51cff6237b08129b931cbc528d5"
+  },
+  "changed_during_copy": []
+}

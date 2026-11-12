@@ -1,0 +1,16 @@
+{
+  "local_commit": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "remote_commit": "f1b11838674494cd6a34d343b97404cbb1537004",
+  "tree": "f094faf5d2eabbef0a159a7fabb4983a59a8e56c",
+  "expected_parent": "aad6b245f68176cb44d4871fc80443d6429671b4",
+  "blob_count": 19,
+  "all_blob_shas_matched": true,
+  "tree_identity_matched": true,
+  "expected_head_lease": true,
+  "force": false,
+  "remote_branch_verified_identical": true,
+  "git_transport": "authentication unavailable; no credentials changed",
+  "publication": "official authenticated GitHub connector Git data APIs",
+  "difference": "commit identity differs because API-generated commit metadata differs; source and evidence tree is byte-identical",
+  "local_reconciliation": "local HEAD remains original commit; do not push divergent local ancestry or rewrite shared history"
+}

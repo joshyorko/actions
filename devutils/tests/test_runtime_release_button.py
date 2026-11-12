@@ -145,6 +145,42 @@ def test_release_collision_cannot_replace_or_retarget(mutation):
         button.reconcile_release(m, digest, r, tag)
 
 
+def test_current_toolkit_jobs_are_all_required_for_release():
+    import yaml
+
+    workflow = yaml.safe_load(
+        (ROOT / ".github/workflows/developer_toolkit.yml").read_text()
+    )
+    jobs = []
+    for name, job in workflow["jobs"].items():
+        matrix = job.get("strategy", {}).get("matrix", {})
+        for _ in matrix.get("include", [{}]):
+            jobs.append({"name": name, "conclusion": "success"})
+    run = {
+        "head_sha": "a" * 40,
+        "path": ".github/workflows/developer_toolkit.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "pull_request",
+        "repository": {"full_name": button.REPOSITORY},
+        "head_repository": {"full_name": button.REPOSITORY},
+    }
+    count = button.REQUIRED["developer_toolkit.yml"]
+    button.validate_run(run, jobs, sha="a" * 40, path=run["path"], count=count)
+    for mutation in (jobs[:-1], jobs + [{"conclusion": "success"}]):
+        with pytest.raises(button.ReleaseError):
+            button.validate_run(
+                run, mutation, sha="a" * 40, path=run["path"], count=count
+            )
+    for index in range(len(jobs)):
+        altered = [dict(value) for value in jobs]
+        altered[index]["conclusion"] = "skipped"
+        with pytest.raises(button.ReleaseError):
+            button.validate_run(
+                run, altered, sha="a" * 40, path=run["path"], count=count
+            )
+
+
 def test_successful_pr_run_requires_canonical_workflow_jobs_and_same_repo():
     run = {
         "id": 1,
@@ -163,7 +199,10 @@ def test_successful_pr_run_requires_canonical_workflow_jobs_and_same_repo():
         ("path", "other"),
         ("conclusion", "failure"),
         ("event", "pull_request_target"),
+        ("repository", {"full_name": "fork/actions"}),
+        ("repository", {"full_name": "joshyorko/actions-lookalike"}),
         ("head_repository", {"full_name": "fork/actions"}),
+        ("head_repository", {"full_name": "joshyorko/actions-lookalike"}),
     ]:
         bad = dict(run, **{key: value})
         with pytest.raises(button.ReleaseError):
@@ -430,7 +469,7 @@ def test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree(
     for name, contents in {
         "action_server/pyproject.toml": '[tool.poetry]\nname="actions-runtime"\nversion="1.0.4"\n',
         "action_server/src/actions/server/__init__.py": '__version__ = "1.0.4"\n',
-        "action_server/scripts/verify_published_runtime_floor.py": 'EXPECTED_RUNTIME = "1.0.4"\n',
+        "action_server/scripts/verify_published_runtime_floor.py": 'EXPECTED_RUNTIME = "1.0.4"\nRELEASE_RUNTIME = "1.0.4"\n',
         "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": "## actions-runtime-1.0.4\n\nSynthetic notes.\n",
         ".github/workflows/button.yml": "name: synthetic\n",
     }.items():
@@ -454,6 +493,15 @@ def test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree(
     )
     with pytest.raises(button.ReleaseError, match="version mismatch"):
         button.check_source(repo, source, qualified, "1.0.5")
+    # A current-community commit with unchanged workflow code is still not the
+    # qualified source. Matching ancestry and version cannot replace tree identity.
+    (repo / "unchecked.py").write_text("UNREVIEWED = True\n")
+    git("add", ".")
+    git("commit", "--quiet", "-m", "unqualified application bytes")
+    unchecked = git("rev-parse", "HEAD")
+    git("push", "--quiet", "origin", "community")
+    with pytest.raises(button.ReleaseError, match="complete trees differ"):
+        button.check_source(repo, unchecked, qualified, "1.0.4")
     (repo / ".github/workflows/button.yml").write_text("name: changed\n")
     git("add", ".")
     git("commit", "--quiet", "-m", "controller workflow changed")

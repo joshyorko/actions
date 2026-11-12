@@ -1,0 +1,28 @@
+{
+  "status": "FOCUSED_PASS",
+  "tests": 2,
+  "skips": 0,
+  "warnings": 1,
+  "seconds": 6.94,
+  "scope": "Two isolated source fixture repairs only; not installed or full-suite qualification",
+  "parent_and_child_import_origin_asserted": true,
+  "formatter": "configured Ruff check/format + isort PASS; file unchanged",
+  "runtime_shutdown": [
+    {
+      "fixture": "test_server_async_api_requests0",
+      "shutdown_complete": true,
+      "shutdown_failed": false,
+      "server_log_contains_source_path": false
+    },
+    {
+      "fixture": "test_server_full_openapi_flag0",
+      "shutdown_complete": true,
+      "shutdown_failed": false,
+      "server_log_contains_source_path": false
+    }
+  ],
+  "prior_failure": "1 failed/1 passed due parent isolateda50 versus childmaina49; preserved",
+  "postgresql": "NOT_STARTED",
+  "production_edits": "NONE",
+  "main_full_suite": "FAILED 4299 passed,197 skipped,3 deselected,5 failed preserved"
+}

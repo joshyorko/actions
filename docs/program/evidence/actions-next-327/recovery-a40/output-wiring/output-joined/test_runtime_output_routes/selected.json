@@ -1,0 +1,5 @@
+[
+  "tests/action_server_tests/test_runtime_output_routes.py::test_assembled_native_output_selection_and_outer_gate[native]",
+  "tests/action_server_tests/test_runtime_output_routes.py::test_assembled_native_output_selection_and_outer_gate[custom]",
+  "tests/action_server_tests/test_runtime_output_routes.py::test_assembled_native_output_selection_and_outer_gate[disabled]"
+]

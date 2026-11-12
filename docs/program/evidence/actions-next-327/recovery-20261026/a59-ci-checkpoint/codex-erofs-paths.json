@@ -1,0 +1,19 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "exit": 1,
+  "initialize_response": false,
+  "requests_sent": [
+    "initialize"
+  ],
+  "initialized_notification_sent": false,
+  "model_list_sent": false,
+  "model_inference": false,
+  "mcp_request": false,
+  "erofs_syscalls": [
+    "69589 chmod(\"/run/codex-environment/codex-home/tmp/arg0\", 0700) = -1 EROFS (Read-only file system)",
+    "69609 openat(4, \"uid_map\", O_RDWR|O_CLOEXEC) = -1 EROFS (Read-only file system)",
+    "69598 open(\"/run/codex-environment/codex-home/installation_id\", O_RDWR|O_CREAT|O_LARGEFILE|O_CLOEXEC, 0644) = -1 EROFS (Read-only file system)"
+  ],
+  "elapsed_seconds": 0.62,
+  "scope": "file-path system-call tracing only; no read/write buffers or credential contents traced; original login/config unchanged"
+}

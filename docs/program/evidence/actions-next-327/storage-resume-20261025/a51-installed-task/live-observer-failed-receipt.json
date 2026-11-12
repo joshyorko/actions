@@ -1,0 +1,174 @@
+{
+  "supervisor_parent_pid": 194352,
+  "supervisor_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b",
+  "source": "ea3448e2b40741c5a21369c24cc20e84b8258809",
+  "manifest_sha256": "99ce43e45bc67bce48d60f1b6377b97d7e93a045c4b7937c7939661ff5dd5341",
+  "harness_sha256": "d9dd4f7199cf80bdfc09632c0abdefce43ecb81a37968543bc2f3d69dae97151",
+  "live_cancellation": "NOT_RUN",
+  "status": "FAILED",
+  "runtime": "1.1.0a51",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:0a0e5fee81bc3d747aa685d634880e94e344643e942a70733b4280af6d89a8a7",
+  "processes": [
+    {
+      "pid": 194354,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11394423699675826,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 194376,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16411616699770093,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 194414,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.36490827499801526,
+      "lifespan_shutdown_complete": false
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "d7656f21-4360-4b5a-8cb5-200bac098e20",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "failure": {
+    "type": "ExceptionGroup",
+    "frames": [
+      {
+        "file": "qualify.py",
+        "function": "main",
+        "line": 489
+      },
+      {
+        "file": "qualify.py",
+        "function": "connect",
+        "line": 139
+      },
+      {
+        "file": "contextlib.py",
+        "function": "__aexit__",
+        "line": 231
+      },
+      {
+        "file": "streamable_http.py",
+        "function": "streamable_http_client",
+        "line": 688
+      },
+      {
+        "file": "_asyncio.py",
+        "function": "__aexit__",
+        "line": 815
+      }
+    ],
+    "children": [
+      {
+        "type": "ExceptionGroup",
+        "frames": [
+          {
+            "file": "streamable_http.py",
+            "function": "streamable_http_client",
+            "line": 705
+          },
+          {
+            "file": "qualify.py",
+            "function": "connect",
+            "line": 140
+          },
+          {
+            "file": "session.py",
+            "function": "__aexit__",
+            "line": 481
+          },
+          {
+            "file": "_asyncio.py",
+            "function": "__aexit__",
+            "line": 815
+          }
+        ],
+        "children": [
+          {
+            "type": "TimeoutError",
+            "frames": [
+              {
+                "file": "qualify.py",
+                "function": "connect",
+                "line": 143
+              },
+              {
+                "file": "qualify.py",
+                "function": "exercise_live",
+                "line": 429
+              },
+              {
+                "file": "qualify.py",
+                "function": "observe_launch",
+                "line": 379
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "budget": {
+    "fixture_bytes": 981766,
+    "log_bytes_upper_bound": 49559
+  },
+  "cleanup_errors": [
+    {
+      "phase": "runtime-stop",
+      "type": "AssertionError",
+      "frames": [
+        {
+          "file": "qualify.py",
+          "function": "main",
+          "line": 505
+        },
+        {
+          "file": "qualify.py",
+          "function": "stop",
+          "line": 135
+        }
+      ]
+    }
+  ]
+}

@@ -95,6 +95,8 @@ def insert_action(db, snap):
 
 @pytest.fixture
 def store(tmp_path):
+    if sys.platform != "linux":
+        pytest.skip("Linux private output-provider proof")
     root = tmp_path / "objects"
     root.mkdir()
     fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY"))
@@ -143,10 +145,48 @@ def test_authorized_handle_round_trip_and_existing_run_authority(store):
     with service.resolve(actor, snap.workspace_id, output.handle) as resolved:
         assert resolved.run_id == run.id
         assert resolved.read() == b"result"
+
     # A fresh service uses only durable rows and the configured provider.
     second = RunOutputService(db, {snap.provider_key: provider})
     with second.resolve(actor, snap.workspace_id, output.handle) as resolved:
         assert resolved.read() == b"result"
+
+
+def test_failed_run_retains_a_fenced_scoped_failure_artifact(store):
+    db, control, service, snap, actor, _, _ = store
+    run = service.admit(actor, snap, {}, "exhausted-retry")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+    output = service.stage(
+        fence,
+        [b'{"disposition":"dead_letter"}'],
+        name="failure.json",
+        media_type="application/json",
+        retention_seconds=3600,
+    )
+    result = {"disposition": "dead_letter"}
+    failed = service.publish(
+        actor, fence, [output], result, terminal_status=RunStatus.FAILED
+    )
+    assert failed.status == RunStatus.FAILED
+    assert (
+        service.publish(
+            actor, fence, [output], result, terminal_status=RunStatus.FAILED
+        )
+        == failed
+    )
+    with pytest.raises(FenceRejected):
+        service.publish(actor, fence, [output], result)
+    with service.resolve(actor, snap.workspace_id, output.handle) as resolved:
+        assert json.loads(resolved.read()) == result
+    with pytest.raises(AccessDenied):
+        with service.resolve(
+            Actor(principal_id=uid()), snap.workspace_id, output.handle
+        ):
+            pass
+    control.revoke(actor, snap.deployment)
+    with pytest.raises(AccessDenied):
+        with service.resolve(actor, snap.workspace_id, output.handle):
+            pass
 
 
 def test_revocation_and_other_workspace_deny_before_provider_access(store, monkeypatch):
@@ -275,6 +315,7 @@ def test_finalize_failure_rolls_back_run_and_output(store, monkeypatch):
 
 def test_expired_output_and_unmapped_provider_fail_closed(store):
     from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.service import OutputExpired
 
     db, control, service, snap, actor, provider, root = store
     run, fence, output = publish(store)
@@ -283,9 +324,14 @@ def test_expired_output_and_unmapped_provider_fail_closed(store):
             pass
     with db.transaction():
         db.update_by_id(RunOutput, output.output_id, {"expires_ms": "0"})
-    with pytest.raises(AccessDenied):
+    with pytest.raises(OutputExpired):
         with service.resolve(actor, snap.workspace_id, output.handle):
             pass
+    control.revoke(actor, snap.deployment)
+    with pytest.raises(AccessDenied) as denied:
+        with service.resolve(actor, snap.workspace_id, output.handle):
+            pass
+    assert not isinstance(denied.value, OutputExpired)
 
 
 def test_legacy_helper_cannot_change_scoped_run_and_keeps_legacy_behavior(

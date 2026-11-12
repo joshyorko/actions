@@ -1,0 +1,11 @@
+[
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_stays_provisional_and_has_closed_context",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_publication_and_retained_source_join",
+  "tests/action_server_tests/test_generated_knowledge.py::test_search_joins_successful_generated_ingestion_and_rechecks_provenance",
+  "tests/action_server_tests/test_generated_knowledge.py::test_multiple_ingestions_have_distinct_canonical_outputs[multiple]",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_cannot_publish_after_authority_change[cancel]",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_cannot_publish_after_authority_change[stale-fence]",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_cannot_publish_after_authority_change[expired-output]",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_cannot_publish_after_authority_change[revoke-manage]",
+  "tests/action_server_tests/test_generated_knowledge.py::test_generated_ingestion_cannot_publish_after_authority_change[disabled]"
+]

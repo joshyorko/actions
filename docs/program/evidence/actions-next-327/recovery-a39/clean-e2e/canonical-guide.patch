@@ -1,0 +1,18 @@
+--- a/docs/program/actions-next-foundry-71.md
++++ b/docs/program/actions-next-foundry-71.md
+@@ -379,3 +379,15 @@
+ Authorized model results include the public authored spec for create/apply/get,
+ inspection and activation/rollback; concrete capability bindings and backend
+ source remain private. Spec data enables revision, never actor authorization.
++
++## Fresh installed Canvas evidence after a failed attempt
++
++A later fresh acceptance run does not turn an earlier failed apply into a pass.
++Retain both. The clean a39 sequence independently proved public creation,
++compilation and activation of two generated applications, real RCC execution,
++and authorized artifacts without diagnostic instrumentation. For restart proof,
++keep the same datadir and compare the retained Run/output identity after opening
++a fresh AppSession; assert unchanged Run/Attempt counts. Capture the authorized
++artifact region itself so the screenshot shows the result rather than only a
++completed status. Official reference-host evidence remains distinct from actual
++ChatGPT acceptance, and a passing rerun alone does not identify the old cause.

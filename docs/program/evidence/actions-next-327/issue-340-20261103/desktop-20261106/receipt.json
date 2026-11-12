@@ -1,0 +1,143 @@
+{
+  "tested_source": "e38b37d614dc5a4e80ba0639f641aa536f5d0710",
+  "pr": "https://github.com/joshyorko/actions/pull/341",
+  "desktop": {
+    "name": "ChatGPT",
+    "version": "26.1029.61003",
+    "mode": "Codex",
+    "executable_sha256": "e2f3574c75bed8496b25191143833cb19fbf67ecc0b0086719801954328628e9",
+    "app_asar_sha256": "a28793c2e1c41331903d7aa035d62e385ae81fd0719548f28dec2995d253a713",
+    "capture": "Installed native Sky CLI, real X11 application window and AT-SPI controls; no substituted UI or image generation.",
+    "accessibility": "Temporarily enabled standard GNOME accessibility; extra renderer accessibility flag used in this successful run. Restoration required at cleanup."
+  },
+  "runtime": {
+    "version": "1.1.0a60",
+    "wheel_sha256": "2b568aa578a8c42acd0402e497fbfebc343d845ae3c390074201b678adf48f41",
+    "rcc_version": "18.19.8",
+    "rcc_linux_sha256": "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
+  },
+  "application_id": "a90733e7-384a-4ada-a633-a9358e635f91",
+  "revision_id": "sha256:9cd0eb523474a3874ae4025d8436be974ba4f7281f6f3f33200e308b5fb17015",
+  "ui_steps": [
+    "Open existing app through the actual desktop chat and MCP connection",
+    "Load inputs",
+    "Select saved Synthetic input",
+    "Claim selected input",
+    "Continue execution",
+    "Inspect result artifact"
+  ],
+  "results": {
+    "open_load_select_created_no_run": {
+      "run": 3,
+      "run_attempt": 3,
+      "run_admission": 1
+    },
+    "claim": {
+      "run_id": "3857cdf3-b9cf-40d8-9b7f-56e6f0fc8cc0",
+      "status": 1,
+      "launch_present": false,
+      "counts": {
+        "run": 4,
+        "run_attempt": 4,
+        "run_admission": 1
+      }
+    },
+    "completed_run_id": "3857cdf3-b9cf-40d8-9b7f-56e6f0fc8cc0",
+    "completed_status": 2,
+    "after_completion_counts": {
+      "run": 4,
+      "run_attempt": 4,
+      "run_admission": 1
+    },
+    "execution_status": "completed",
+    "publication_fence": {
+      "attempt_id": "daa9d605-002d-444f-80ca-b506c5fac6a3",
+      "epoch": 1,
+      "owner_id": "db19b4e8-e355-437e-b141-b04ff3f90f75",
+      "run_id": "3857cdf3-b9cf-40d8-9b7f-56e6f0fc8cc0"
+    },
+    "expected_invoice_ids": [
+      "INV-1001",
+      "INV-1002",
+      "INV-1003",
+      "INV-1004"
+    ],
+    "expected_summary": {
+      "invoice_count": 4,
+      "matched": 1,
+      "discrepant": 3,
+      "total_cents": 30600
+    },
+    "artifact_read": "PASS in actual desktop",
+    "cancellation": {
+      "run_id": "9b88704c-21cd-4748-8b11-c41509a7eaf6",
+      "run_status": 1,
+      "cancel_requested": 1,
+      "attempt_state": "running",
+      "launch": null
+    },
+    "observed_ui_artifact_summary": {
+      "discrepant": 3,
+      "invoice_count": 4,
+      "matched": 1,
+      "total_cents": 30600
+    },
+    "observed_ui_invoice_ids": [
+      "INV-1001",
+      "INV-1002",
+      "INV-1003",
+      "INV-1004"
+    ]
+  },
+  "limits": [
+    "This positive run is Codex mode in the actual ChatGPT desktop, not ChatGPT-mode E1.",
+    "Cancellation proved a request with no launch, not terminal cancellation, process termination or successful recovery.",
+    "The RCC Python Action consumer is not an actual Robot child GUI qualification. Installed Action-to-Robot CI remains separate.",
+    "This consumes saved criteria before querying; original query-result-before-approval wiring is still open.",
+    "ChatGPT-mode attempt later exited with SIGILL before invoking Actions; a single bounded normal-launch retry is in progress.",
+    "The assistant's unchanged read-only message refers to the initial open; subsequent operator UI clicks performed execution."
+  ],
+  "screenshots": [
+    {
+      "file": "01-opened-canvas.jpg",
+      "at_utc": "2026-11-06T00:06:24.659693+00:00",
+      "sha256": "2ecce022eda3c3a395836cd442233d864e648b67624884b66f16e4795611d165",
+      "caption": "Existing v2 app opens in the actual desktop; no new app created.",
+      "unmodified_native_capture": true
+    },
+    {
+      "file": "02-claim-ready.jpg",
+      "at_utc": "2026-11-06T00:08:53.869118+00:00",
+      "sha256": "1a761c9518378ab7867ec604b2b30d94efb63c073f5618f433a3b1a59ac82c50",
+      "caption": "Claim created a Run with no launch; Continue execution remained explicit.",
+      "unmodified_native_capture": true
+    },
+    {
+      "file": "03-completed-table.jpg",
+      "at_utc": "2026-11-06T00:09:38.017330+00:00",
+      "sha256": "93def068fe536483153bc63d76c5dc5009888ea6aa17ecad176eb90549b22ce3",
+      "caption": "Real RCC completion rendered the four invoice rows. This capture is a scrolled viewport.",
+      "unmodified_native_capture": true
+    },
+    {
+      "file": "04-authorized-artifact.jpg",
+      "at_utc": "2026-11-06T00:11:00.991096+00:00",
+      "sha256": "5c930cf90cb240cbb58debe942fd521a8a34ee624637227418c522dde9680a19",
+      "caption": "Authorized artifact inspection displayed the persisted report and 30600-cent total.",
+      "unmodified_native_capture": true
+    },
+    {
+      "file": "05-cancel-request-only.jpg",
+      "at_utc": "2026-11-06T00:18:25.161819+00:00",
+      "sha256": "7191ea4159f448059beacb75236d8d0a6934b6ad084a6141d89f2590908b4b22",
+      "caption": "Cancellation intent is visible; this is not terminal cancellation or stopped-process proof.",
+      "unmodified_native_capture": true
+    }
+  ],
+  "upstream_disposition": "Untriaged desktop/client SIGILL; no confirmed upstream attribution or external report.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "learning": "Real UI evidence requires fresh window/AX identities, visible state confirmation, artifact hashes and independent Runtime lineage. Saving or calling MCP alone is insufficient.",
+    "remaining_uncertainty": "ChatGPT-mode E1 and complete cancellation/recovery UI remain unqualified."
+  }
+}

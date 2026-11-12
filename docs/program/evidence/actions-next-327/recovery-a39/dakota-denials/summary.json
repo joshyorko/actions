@@ -1,0 +1,64 @@
+{
+  "status": "PASS_INSTALLED_HTTP_DENIAL_CASES",
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "wheels": {
+    "actions_work_items-0.5.0a2-py3-none-any.whl": {
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "installed_package_files_byte_verified": 26
+    },
+    "actions_core-1.1.0a4-py3-none-any.whl": {
+      "sha256": "fe8fb01f5924837ebd221bb559cc4c36482a581921f81beba1d4c2a6c8e4b371",
+      "installed_package_files_byte_verified": 55
+    },
+    "actions_runtime-1.1.0a39-cp312-cp312-linux_x86_64.whl": {
+      "sha256": "f023a767234ee5a93fd50281b1ae574b1056893468e13c23bb9d22704a4a6902",
+      "installed_package_files_byte_verified": 319
+    }
+  },
+  "cases": [
+    {
+      "case": "correct_bearer",
+      "status": 200,
+      "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"prompts\":{\"listChanged\":false},\"resources\":{\"listChanged\":false,\"subscribe\":false},\"tools\":{\"listChanged\":false}},\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"Action Server\",\"version\":\"\"}}}"
+    },
+    {
+      "case": "missing_bearer",
+      "status": 403,
+      "body": "{\"detail\":\"Not authenticated\"}"
+    },
+    {
+      "case": "wrong_bearer",
+      "status": 403,
+      "body": "{\"detail\":\"Invalid authentication credentials\"}"
+    },
+    {
+      "case": "authenticated_foreign_host",
+      "status": 421,
+      "body": "Invalid Host header"
+    },
+    {
+      "case": "authenticated_foreign_origin",
+      "status": 403,
+      "body": "Invalid Origin header"
+    }
+  ],
+  "run_history": "Initial script stopped after missing bearer correctly denied HTTP403 because harness expected401. Initial receipt/trace retained. Remaining run selected only the three unexecuted cases; no replay of prior cases. Aggregate PASS records observed required denials, not a retroactive script PASS.",
+  "shutdowns": [
+    {
+      "returncode": -15,
+      "forced": false,
+      "seconds": 0.21405589999994845,
+      "stopped": true,
+      "lifespan_complete": true
+    },
+    {
+      "returncode": -15,
+      "forced": false,
+      "seconds": 0.21414248299879546,
+      "stopped": true,
+      "lifespan_complete": true
+    }
+  ],
+  "scope": "frozen installed a39 loopback transport and bearer only; no ChatGPT Desktop acceptance; no RCC work or host configuration changes",
+  "upstream_disposition": "none"
+}

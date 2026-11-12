@@ -1,0 +1,13 @@
+{
+  "protocol_version": "2026-07-28",
+  "application_id": "40ae02a7-538e-4e23-a254-f27fd83b2890",
+  "title": "New Canvas",
+  "active_revision_id": null,
+  "revision_id": "sha256:a6e2b679f7738fb62aadec48dc17e09e5970ca2477efa92e152ee4037cbfcbf2",
+  "default_spec_schema": "actions.canvas-spec/v1",
+  "default_binding_count": 0,
+  "library_application_count": 1,
+  "resource_uri": "ui://action-canvas/v1/canvas.html",
+  "resource_byte_length": 490733,
+  "resource_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44"
+}

@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a39",
+  "engine_origin": "/workspace/actions-327-a39/installed-combined/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a4"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 56690,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1639064219998545,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 56801,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2140210429988656,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 56999,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21410745100001805,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_execution_status",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "prepared_artifact": "sha256:ff881cb7903461ed387ab79912105aa0726e91354f8a05b01fd4f337620141d2",
+  "prepared_specification": "sha256:9dee42164c32a71de49bc33b47f60fe3cee391f062d2dd5612cf6ae43e8abed2",
+  "workspace": "81d22bd1-8ae8-421e-9409-cff028bcb1c1",
+  "browser_restart_retained_run": "7a1266fd-520b-4062-9ab1-7c18f8d68e42",
+  "browser_restart_artifact_value": 3,
+  "ordinary_cli": true,
+  "official_host": "ext-apps2.0.3@82221c0c8ce7661efa6771c9d461511b1650495f",
+  "app": "334c9745-1382-4d5c-92fa-79c63513193d",
+  "revision": "sha256:f50f889c61cad52afa9622e316bd2f090b1b1f3cb91df9cfacff021b5f512e3f",
+  "E1": false,
+  "scope": "second independent generated app; actual official bridge controls execute RCC and display scoped artifact bytes; wide/narrow screenshots",
+  "budget": {
+    "fixture_bytes": 1516431,
+    "log_bytes_upper_bound": 17947
+  }
+}

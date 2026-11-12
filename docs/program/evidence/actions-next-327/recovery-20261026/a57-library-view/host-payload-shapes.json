@@ -1,0 +1,52 @@
+{
+  "provenance": "Trusted parent actual ChatGPT desktop metadata summary; IDs/digests redacted, not a raw byte receipt",
+  "pinned_source": "46488e59f419d6bb55ab594031a0f227b4e0d817",
+  "resource": "ui://action-canvas/v1/canvas.html",
+  "ordered_calls": [
+    {
+      "tool": "canvas_get",
+      "meta_keys": [
+        "actions.canvas"
+      ],
+      "canvas_keys": [
+        "active",
+        "applicationId",
+        "bindings",
+        "revisionId",
+        "spec"
+      ],
+      "active": true,
+      "bindings": [],
+      "spec_version": "actions.canvas-spec/v1",
+      "spec_title": "Dakota pinned post2 generated word count",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    {
+      "tool": "canvas_open",
+      "meta_keys": [
+        "actions.canvas"
+      ],
+      "canvas": {
+        "applications": [
+          {
+            "activeRevisionId": "<sha256>",
+            "applicationId": "<same UUID>",
+            "title": "Dakota pinned post2 generated word count"
+          }
+        ]
+      },
+      "structured_content_keys": [
+        "applications"
+      ]
+    }
+  ],
+  "absent_both_calls": [
+    "actions.appSession",
+    "actions.reviewedExecution",
+    "actions.genericExecution"
+  ],
+  "action_execution": false
+}

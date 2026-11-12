@@ -1,0 +1,7 @@
+{
+  "action_server/src/actions/server/foundry/rcc_execution.py": "6434e2cd3faff7f8fd8a1704875824c1d5880b52b6af3749adb853f1d09557b6",
+  "action_server/src/actions/server/foundry/logical_receipts.py": "28b70bc85a9c0086bd202964cbcc0bbb431bf9430964d290b7c77817f152b0f9",
+  "action_server/src/actions/server/foundry/standalone_execution.py": "8b76a56ff586df2d60f707e268a4f14783c8ba261689bcb586b71c2415a71f04",
+  "action_server/src/actions/server/foundry/generic_work_item_execution.py": "2c1041e968f337943954087db7cf5dcb2a9ab9081dbc9fa9144bc41195b153be",
+  "action_server/src/actions/server/run_outputs/task_service.py": "fbe29f150f069dd8bb826b12e7edad6a453ab6652841f76ca6ed2ac8ec31fce6"
+}

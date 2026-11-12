@@ -1,0 +1,127 @@
+{
+  "qualification": "Candidate-specific modern SDK auto-negotiated synchronous generic claimed Robot pass/fail, authorized artifacts, restart reads, and natural exit; distinct from legacy compatibility and Task support",
+  "status": "PASS",
+  "base": "/workspace/327-artifacts/a56",
+  "runtime": "1.1.0a56",
+  "core": "1.1.0a8",
+  "work_items": "0.5.0a2",
+  "node_sdk": "@modelcontextprotocol/client 2.0.0",
+  "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+  "max_outer_seconds": 300,
+  "max_each_node_client_seconds": 90,
+  "version_negotiation": {
+    "mode": "auto",
+    "expected_protocol_version": "2026-07-28"
+  },
+  "fetch_profile": "default native fetch (input, init); no custom Request retention",
+  "source_fixture_read_only": "/workspace/327-probes/a53-claimed/terminal-success-failure",
+  "installed_identity": {
+    "runtime": "1.1.0a56",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a56/consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "source_commit": "88846b55e3b455eb44378bd5ba43bb146706661d",
+  "source_tree": "a65449200ec36981b6ad4002147f19cf8da8a265",
+  "node_version": "v20.19.3",
+  "node_undici_version": "6.21.2",
+  "node_source_sha256": "eec68c68b8d2a7cd6dc824771b7fdf77b22f6dc006cb93a80cafa6d8771e511d",
+  "locked_sdk_entry_sha256": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414",
+  "locked_sdk_types_sha256": "309cc5f76da5abff0be678d958aba0e875e52909f5f6f0544a45a34ac596cc9c",
+  "wheel_sha256": {
+    "wheels/actions_runtime-1.1.0a56-cp312-cp312-linux_x86_64.whl": "f06526ab99c8df7a769a03c67efb771f0bdcf4fbeb00caa74afc85b0c035f046",
+    "wheels/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f"
+  },
+  "prepared_artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "profile_sha256": {
+    "source": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "copy": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f"
+  },
+  "prior_canvas_fixture_sha256": {
+    "prior-pass.json": "429e5ecd8758d3f2ce7e7f6663ae54ecab22379c06792653ed9aafeafecd0ff3",
+    "prior-fail.json": "2e423cbec5f438f2b5ecf8f5bf287700c0eabd5a86637e162d9fbb8755263654"
+  },
+  "free_disk_bytes": 19358085120,
+  "runtime_ready": true,
+  "robot_xml_validation": [
+    {
+      "case": "pass",
+      "parser": "xml.etree.ElementTree",
+      "test_name": "Selected",
+      "test_status": "PASS",
+      "failure_reason": null,
+      "artifact_sha256": "ec5c49355caa0d8afe771de8bfdce00e87f2324136ea981d8aa861bd4aa2af8d"
+    },
+    {
+      "case": "fail",
+      "parser": "xml.etree.ElementTree",
+      "test_name": "Selected",
+      "test_status": "FAIL",
+      "failure_reason": "synthetic expected Robot failure",
+      "artifact_sha256": "09da891aaa8209504fe3fd5562fb6815f9c940d941a8267368f26122c6f15cd4"
+    }
+  ],
+  "runtime_first_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  },
+  "runtime_restarted": true,
+  "runtime_restart_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  },
+  "node_phases": [
+    {
+      "phase": "execute",
+      "exit_code": 0,
+      "natural_exit": true,
+      "negotiated_protocol_version": "2026-07-28",
+      "server_info": null,
+      "transport_profile": "native_fetch_sdk_2_auto",
+      "log": "/workspace/327-probes/node-a56-modern-minimal/node-execute.jsonl",
+      "log_sha256": "9e5eef0564e215fe7b7918c68896de155e6a51ebe1be94642d0d9fdd41d4dc0f",
+      "xml_validation": [
+        {
+          "case": "pass",
+          "parser": "xml.etree.ElementTree",
+          "test_name": "Selected",
+          "test_status": "PASS",
+          "failure_reason": null,
+          "artifact_sha256": "ec5c49355caa0d8afe771de8bfdce00e87f2324136ea981d8aa861bd4aa2af8d"
+        },
+        {
+          "case": "fail",
+          "parser": "xml.etree.ElementTree",
+          "test_name": "Selected",
+          "test_status": "FAIL",
+          "failure_reason": "synthetic expected Robot failure",
+          "artifact_sha256": "09da891aaa8209504fe3fd5562fb6815f9c940d941a8267368f26122c6f15cd4"
+        }
+      ]
+    },
+    {
+      "phase": "restart",
+      "exit_code": 0,
+      "natural_exit": true,
+      "negotiated_protocol_version": "2026-07-28",
+      "server_info": null,
+      "transport_profile": "native_fetch_sdk_2_auto",
+      "log": "/workspace/327-probes/node-a56-modern-minimal/node-restart.jsonl",
+      "log_sha256": "b32a0a523df0b03a497b6462aeff5af0f7d50f8173da5fff413ade6f059528be"
+    }
+  ],
+  "cases": {
+    "pass": {
+      "run_id": "2c674eaf-aff4-4fc7-9026-bd78199141b9",
+      "state": "completed",
+      "queue_state": "DONE"
+    },
+    "fail": {
+      "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+      "state": "failed",
+      "queue_state": "FAILED"
+    }
+  },
+  "qualification_scope": "Modern auto-negotiated protocol 2026-07-28 only; does not resolve or qualify legacy default mode or detached Task mode"
+}

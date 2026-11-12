@@ -1,0 +1,167 @@
++ poetry run pytest tests/action_server_tests/test_sealed_scan.py tests/action_server_tests/test_foundry_deployments.py tests/action_server_tests/test_foundry_storage.py tests/action_server_tests/test_foundry_package_less_storage.py -q --junitxml=/workspace/actions-recovery-327/evidence/a33-source-historical/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a33-source-historical/log --basetemp=/workspace/actions-recovery-327/evidence/a33-source-historical/fixtures (in /workspace/actions/action_server)
+........................................................................ [ 65%]
+....................................FF                                   [100%]
+=================================== FAILURES ===================================
+__ test_interrupted_nullable_upgrade_restores_schema_rows_and_marker[sqlite] ___
+
+self = <actions.server._database.Database object at 0x7f8f859014f0>
+cursor = <sqlite3.Cursor object at 0x7f8f859799c0>
+sql = 'SELECT * FROM run_execution_intent', values = None
+
+    def execute_query(self, cursor: Any, sql: str, values: Optional[list] = None):
+        """
+        Executes a query which will NOT change the database (and should return values).
+
+        No write-lock needed.
+        """
+        if self.verbose:
+            self._print_sql(sql, values)
+
+        try:
+            sql = self._adapt_sql(sql, values)
+            if values:
+                cursor.execute(sql, values)
+            else:
+>               cursor.execute(sql)
+E               sqlite3.OperationalError: no such table: run_execution_intent
+
+src/actions/server/_database.py:1094: OperationalError
+
+During handling of the above exception, another exception occurred:
+
+schema17 = PosixPath('/workspace/actions-recovery-327/evidence/a33-source-historical/fixtures/test_interrupted_nullable_upgr0/schema17.db')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8f859838f0>
+
+    def test_interrupted_nullable_upgrade_restores_schema_rows_and_marker(
+        schema17, monkeypatch
+    ):
+        from actions.server.migrations import migration_allow_package_less_canvas
+
+        db = Database(schema17)
+        with db.connect():
+            db.initialize(get_all_model_classes())
+            assert not _nullable(db)
+>           before = db.list_whole_db()
+                     ^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/test_foundry_package_less_storage.py:136:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src/actions/server/_database.py:1012: in list_whole_db
+    self.execute_query(cursor, f"SELECT * FROM {table}")
+src/actions/server/_database.py:1098: in execute_query
+    self._raise_execute_error(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <actions.server._database.Database object at 0x7f8f859014f0>
+msg = "Error running sql query: 'SELECT * FROM run_execution_intent' with values: None"
+
+    def _raise_execute_error(self, msg):
+        if self.verbose:
+            print(msg, file=sys.stderr)
+>       raise DBError(msg)
+E       actions.server._database.DBError: Error running sql query: 'SELECT * FROM run_execution_intent' with values: None
+
+src/actions/server/_database.py:1038: DBError
+_ test_interrupted_nullable_upgrade_restores_schema_rows_and_marker[postgresql] _
+
+self = <actions.server._database.Database object at 0x7f8f8596c8f0>
+cursor = <psycopg.Cursor [closed] [BAD] at 0x7f8f859cc950>
+sql = 'SELECT * FROM run_execution_intent', values = None
+
+    def execute_query(self, cursor: Any, sql: str, values: Optional[list] = None):
+        """
+        Executes a query which will NOT change the database (and should return values).
+
+        No write-lock needed.
+        """
+        if self.verbose:
+            self._print_sql(sql, values)
+
+        try:
+            sql = self._adapt_sql(sql, values)
+            if values:
+                cursor.execute(sql, values)
+            else:
+>               cursor.execute(sql)
+
+src/actions/server/_database.py:1094:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <psycopg.Cursor [closed] [BAD] at 0x7f8f859cc950>
+query = 'SELECT * FROM run_execution_intent', params = None
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           psycopg.errors.UndefinedTable: relation "run_execution_intent" does not exist
+E           LINE 1: SELECT * FROM run_execution_intent
+E                                 ^
+
+.venv/lib/python3.12/site-packages/psycopg/cursor.py:117: UndefinedTable
+
+During handling of the above exception, another exception occurred:
+
+schema17 = 'postgresql://postgres:synthetic-installed-only@127.0.0.1:32812/postgres?options=-csearch_path%3Dfoundry_ui_4acd6f132343467dbf5751f2deacdbcc'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8f85902e40>
+
+    def test_interrupted_nullable_upgrade_restores_schema_rows_and_marker(
+        schema17, monkeypatch
+    ):
+        from actions.server.migrations import migration_allow_package_less_canvas
+
+        db = Database(schema17)
+        with db.connect():
+            db.initialize(get_all_model_classes())
+            assert not _nullable(db)
+>           before = db.list_whole_db()
+                     ^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/test_foundry_package_less_storage.py:136:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src/actions/server/_database.py:1012: in list_whole_db
+    self.execute_query(cursor, f"SELECT * FROM {table}")
+src/actions/server/_database.py:1098: in execute_query
+    self._raise_execute_error(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <actions.server._database.Database object at 0x7f8f8596c8f0>
+msg = "Error running sql query: 'SELECT * FROM run_execution_intent' with values: None"
+
+    def _raise_execute_error(self, msg):
+        if self.verbose:
+            print(msg, file=sys.stderr)
+>       raise DBError(msg)
+E       actions.server._database.DBError: Error running sql query: 'SELECT * FROM run_execution_intent' with values: None
+
+src/actions/server/_database.py:1038: DBError
+- generated xml file: /workspace/actions-recovery-327/evidence/a33-source-historical/tests.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_foundry_package_less_storage.py::test_interrupted_nullable_upgrade_restores_schema_rows_and_marker[sqlite]
+FAILED tests/action_server_tests/test_foundry_package_less_storage.py::test_interrupted_nullable_upgrade_restores_schema_rows_and_marker[postgresql]
+2 failed, 108 passed in 45.35s
+Log (html): /workspace/actions-recovery-327/evidence/a33-source-historical/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_sealed_scan.py', 'tests/action_server_tests/test_foundry_deployments.py', 'tests/action_server_tests/test_foundry_storage.py', 'tests/action_server_tests/test_foundry_package_less_storage.py', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a33-source-historical/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a33-source-historical/log', '--basetemp=/workspace/actions-recovery-327/evidence/a33-source-historical/fixtures']' returned non-zero exit status 1.

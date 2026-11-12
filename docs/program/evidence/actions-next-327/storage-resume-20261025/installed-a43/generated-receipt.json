@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a43",
+  "engine_origin": "/workspace/recovery327/a43/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "ce98de6963bb6d20325db5a3687b14a8e238d7d9",
+  "installed_versions": {
+    "mcp": "2.0.0",
+    "mcp-types": "2.0.0",
+    "actions-core": "1.1.0a6"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 32339,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16391371000008803,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 32616,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21395507200031716,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 33539,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21410288300012326,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 34294,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.163897762000488,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 34312,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16388920999997936,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 34353,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21406905999992887,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_projection",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_execution_status",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "prepared_artifact": "sha256:34b980ada2bccfdb473344feff5253015d742bb505a8352507368184ae9ab5ad",
+  "prepared_specification": "sha256:7a63fc4c970a838ef18411011791b066cb1562d3f534e0cdd9753a1b69de000a",
+  "workspace": "c4e4a02c-c305-47f7-817a-e7acf635f07d",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "protocol_denials": {
+    "missing": 403,
+    "wrong": 403,
+    "host": 421,
+    "origin": 403
+  },
+  "failed_diagnostics_authorized": true,
+  "browser_gate": "BLOCKED: sandboxed Chromium helper configuration; no sandbox override used",
+  "revoked_read_denial": "new AppSession withheld after read revocation",
+  "app": "c2eede41-a635-44b9-b4e7-ff633a48299a",
+  "revision": "sha256:1f638ef5179cea84317de99085c6755bfccc80f90d6713f8cf214475bf402f6c",
+  "retained_projection": {
+    "attemptId": "f5695b4a-4766-4cbc-8dd0-93245743160a",
+    "bindingId": "report",
+    "canonicalJson": "{\"details\":{\"count\":3,\"name\":\"gamma delta epsilon\"},\"logs\":[{\"message\":\"Processed gamma delta epsilon\"}],\"rows\":[{\"label\":\"words\",\"value\":3}]}",
+    "data": {
+      "details": {
+        "count": 3,
+        "name": "gamma delta epsilon"
+      },
+      "logs": [
+        {
+          "message": "Processed gamma delta epsilon"
+        }
+      ],
+      "rows": [
+        {
+          "label": "words",
+          "value": 3
+        }
+      ]
+    },
+    "runId": "3e6c97f2-248b-4202-b981-e512dc5756d0"
+  },
+  "E1": false,
+  "stale_session_denied": true,
+  "revoked_read_denied": true,
+  "scope": "fresh v2 generated app via independent MCP client; browser/reference host not run",
+  "budget": {
+    "fixture_bytes": 1266860,
+    "log_bytes_upper_bound": 20890
+  }
+}

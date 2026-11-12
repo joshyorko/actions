@@ -1,0 +1,11 @@
+# Ordinary installed a30: consumer/producer functional flow PASS, layout defect retained
+
+Source7111786a0a366834cb323fccb5f3a68a0148cea0. Clean Runtime1.1.0a30 wheel SHA38264b4d601e1b9d356767ffb8378ff73f7de9e3f887d9451ac8ce5becfc5bea;267 Runtime,50 Core and25 SDK source/wheel/import files match. Consumer SDK resolves MCP2.3.0; prepared source uses locked2.0.0. pip check passed. Core1.1.0a2/SDK0.5.0a2 unchanged.
+
+Public CLI owner provisioning and genuine MCP authoring created two immutable NDJSON inspector apps. No SQL mutation/seeding or pre-registration: SQLite reads only measure setup/counts. Unmodified official ext-apps2.0.3 reference host82221c0c8ce7661efa6771c9d461511b1650495f and Chromium151 performed exact consumer input selection, explicit claim/execute, producer submission, child browsing and sealed artifact reads. Two actual RCC Runs/Attempts persisted. A true Runtime process restart reopened both completed Runs, produced children and artifacts; count remained2. Consumer processed two saved NDJSON records, producer one valid single-line record; exact field names/counts checked. All owned Runtime/host/browser processes stopped.
+
+Initial browser attempt is retained in ../ordinary-browser-initial. Consumer passed; producer fixture incorrectly filled a single-line text field with multiline NDJSON, which the browser flattened. That attempt failed and its uncertain Run was not relaunched. Corrected qualification uses a fresh datadir/apps and valid standalone single-line input. This does not add a multiline field or qualify running-effect recovery.
+
+Screenshots are real installed-host captures with synthetic data, visually reviewed. They expose a remaining layout defect: consumer's authored form slot says unavailable while its working input control and execution/output panels are appended outside the styled canvas. Functional protocol/execution/restart acceptance passes; polished UI acceptance remains open pending a separate fix. Authenticated ChatGPT/E1/READY FOR DAKOTA are not claimed. Library helper hosted apps tools/list HTTP401 prevented upload; no Library IDs exist and no retry was attempted. These committed images are the accessible handoff.
+
+Upstream disposition: none. Root fixture correction and repository UI composition defect.

@@ -1,0 +1,36 @@
+{
+  "module": "test_logical_receipts",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a39/source-joined/selected-pytest.py",
+    "tests/action_server_tests/test_logical_receipts.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a39/source-joined/test_logical_receipts/tests.xml",
+    "--basetemp=/workspace/actions-327-a39/source-joined/test_logical_receipts/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 10115657728,
+  "stop_reason": null,
+  "source_sha256": "d23b0658e84e0007e1a2e4501dea639a66300641a11a1f785786df90d160815f",
+  "counts": {
+    "tests": 34,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "result": "pass",
+  "container": "dd6789a52361d659b9fb2781b7b948b8f5984a0b155b1d1ca2a7704a48d4e8cf",
+  "listener": "127.0.0.1:32768",
+  "command": [
+    "poetry",
+    "run",
+    "pytest",
+    "-p",
+    "no:robocorp_log_pytest",
+    "tests/action_server_tests/test_task_clock_migration.py",
+    "-q",
+    "-rs",
+    "--junitxml=/workspace/lane-d/receipts/postgres-migration/tests.xml"
+  ],
+  "returncode": 0,
+  "cleanup_returncode": 0
+}

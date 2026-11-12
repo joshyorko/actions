@@ -1,0 +1,353 @@
+{
+  "source": "332e0bd4a9fb8ee06652c63d7f2c11b3b423150b",
+  "tree": "9f107225a76f96f6306e0c2b06c94e337a72b36a",
+  "container": "b55675a558d730ec249238d48b010e2761c0628f5e1fc8ffa5ecffcd9ba0093a",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_logical_domain",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_logical_domain.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_logical_domain/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_logical_domain/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 28719316992,
+      "stop_reason": null,
+      "source_sha256": "97a224afc6bb27757e7e8175b9ac58381c3ba82b730a410402d23a7852ebd156",
+      "counts": {
+        "tests": 38,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "145140da3bc73ee5bbad7d27a9f134f4512e996d4871682493314727a868b7d1",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_logical_domain/run.log"
+    },
+    {
+      "module": "test_logical_runner_join",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_logical_runner_join.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_logical_runner_join/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_logical_runner_join/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 28715233280,
+      "stop_reason": null,
+      "source_sha256": "a1c7ae909ff0e2796252cfffe34c57433a1e3d8ef22d1a2238c8c64475dfe73b",
+      "counts": {
+        "tests": 6,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "68fe5c4d09adb457c9c08c21c1508714873ad628f6b7fec8ebb22e5d3a2b0882",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_logical_runner_join/run.log"
+    },
+    {
+      "module": "test_task_service",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_task_service.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_task_service/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_task_service/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29259436032,
+      "stop_reason": null,
+      "source_sha256": "c4e91481e5a8d80ea2d10322b20c2890417e1851fc701538772dbecaffd4a40c",
+      "counts": {
+        "tests": 100,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "dc780af6332419487c26731db0a211b6e2eb1487a62fb9178c21102a69a2be7d",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_task_service/run.log"
+    },
+    {
+      "module": "test_generic_work_item_execution",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_generic_work_item_execution.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_generic_work_item_execution/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_generic_work_item_execution/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29243543552,
+      "stop_reason": null,
+      "source_sha256": "bd467fcb40e22a31c2dd162cf78c1390256d0d99978127c6876942063891e7bf",
+      "counts": {
+        "tests": 37,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "43db1e7a9a8cee38dd9d52ff58e46985fe3fa6da093c60f2bddb03bd8eb94443",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_generic_work_item_execution/run.log"
+    },
+    {
+      "module": "test_generic_execution_port",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_generic_execution_port.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_generic_execution_port/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_generic_execution_port/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29229379584,
+      "stop_reason": null,
+      "source_sha256": "6de06489bf6a25de5dba7aee3903ce87d197618ab082a7a52163b27bf390a764",
+      "counts": {
+        "tests": 33,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "3b5191339ffd2daaeb2d38eae59732c75b715613a4b4172daedca18fd0c5e9f0",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_generic_execution_port/run.log"
+    },
+    {
+      "module": "test_foundry_authoring",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_foundry_authoring.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_foundry_authoring/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_foundry_authoring/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29229248512,
+      "stop_reason": null,
+      "source_sha256": "1b6ff12d70f9220f61431fc87125f4365e1d5a52989d96de80bf35e1de0f7bff",
+      "counts": {
+        "tests": 6,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "59d6a8fea7450cf1848eb314eec6da4bc0303273ac28ce1f28abd5085e3b119a",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_foundry_authoring/run.log"
+    },
+    {
+      "module": "test_foundry_authoring_model_contract",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_foundry_authoring_model_contract.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_foundry_authoring_model_contract/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_foundry_authoring_model_contract/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29227425792,
+      "stop_reason": null,
+      "source_sha256": "82b2b1f2c34fd95d99ba64fd482d13d5e6f8190525f80719baabb7bc06759a7b",
+      "counts": {
+        "tests": 5,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "da6c69243e150f1e53f5694181c8b706c422b37e4e480d1fdaf46462d99e42fd",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_foundry_authoring_model_contract/run.log"
+    },
+    {
+      "module": "test_foundry_sql_authoring",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_foundry_sql_authoring.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-recovery-evidence/test_foundry_sql_authoring/tests.xml",
+        "--basetemp=/workspace/actions-327-recovery-evidence/test_foundry_sql_authoring/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29215735808,
+      "stop_reason": null,
+      "source_sha256": "293d78d698a5c2fdd545b4f2eda43a3c69df0484560870b15eea671b5c489eb5",
+      "counts": {
+        "tests": 14,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      },
+      "log_sha256": "491534083e4e05621bd33e1d0e7da774d9951e68f98e763a3d47d9f2f9db8881",
+      "log_retained_private": "/workspace/actions-327-recovery-evidence/test_foundry_sql_authoring/run.log"
+    }
+  ],
+  "cleanup_exit": 0,
+  "deselected_nodes": [
+    "tests/action_server_tests/test_generic_execution_port.py::test_optin_actual_rcc_model_wrapper[postgresql]",
+    "tests/action_server_tests/test_generic_execution_port.py::test_optin_actual_rcc_model_wrapper[sqlite]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[postgresql-consumer]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[postgresql-optional]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[postgresql-producer]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[sqlite-consumer]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[sqlite-optional]",
+    "tests/action_server_tests/test_generic_work_item_execution.py::test_real_generic_rcc[sqlite-producer]"
+  ],
+  "totals": {
+    "passed": 239,
+    "skipped": 0,
+    "failed": 0,
+    "errors": 0,
+    "deselected": 8
+  },
+  "toolchain": {
+    "Doctor": 0,
+    "Bootstrap": 0,
+    "ToolkitTest": {
+      "exit_code": 0,
+      "passed": 189
+    }
+  },
+  "scope": "Joined source/service qualification, not actual RCC, installed candidate, browser/client or release acceptance",
+  "toolchain_logs": {
+    "doctor.log": {
+      "sha256": "cfc409cb73315e1bb99f688eb58fb9fb69c3f0059e8e18cd528e53e1676b702f",
+      "private_path": "/workspace/actions-327-recovery-evidence/doctor.log"
+    },
+    "bootstrap.log": {
+      "sha256": "4fbd54d1d4fa2a85447c4ed166e9ece1827b73030bd447676187a535f1a2cc93",
+      "private_path": "/workspace/actions-327-recovery-evidence/bootstrap.log"
+    },
+    "toolkit-test.log": {
+      "sha256": "623812735d17c254eedbe1a0ae6bfc37740505465a9019889f98c3e52ac5e67c",
+      "private_path": "/workspace/actions-327-recovery-evidence/toolkit-test.log"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/installed-a26/consumer/bin/python",
+    "-I",
+    "-B",
+    "/workspace/actions-recovery-327/restore-installed-draft/qualify.py",
+    "--operation",
+    "capture",
+    "--version",
+    "1.1.0a26",
+    "--datadir",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade",
+    "--original",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/legacy"
+  ],
+  "returncode": 0,
+  "stdout": "{\"manifest\": {\"source\": \"/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade\", \"original_datadir\": \"/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/legacy\", \"members\": [{\"path\": \".\", \"identity\": [27, 840078, 16832, 4096, 1792892698187977198, 1792892699118014415, 3], \"sha256\": null}, {\"path\": \"work_item_files\", \"identity\": [27, 840079, 16832, 4096, 1792892696963737840, 1792892699117924152, 3], \"sha256\": null}, {\"path\": \"work_item_files/7b9b57fd-1517-44db-b00e-1e76258ac716\", \"identity\": [27, 840080, 16832, 4096, 1792892696963737840, 1792892699117924152, 2], \"sha256\": null}, {\"path\": \"work_item_files/7b9b57fd-1517-44db-b00e-1e76258ac716/report.txt\", \"identity\": [27, 840081, 33152, 30, 1792892696966393952, 1792892699117924152, 1], \"sha256\": \"2c688f2f9259c89285a658270fcc96e5a53ed7fbc815921185f180e494445358\"}, {\"path\": \"workitems.db\", \"identity\": [27, 840082, 33152, 57344, 1792892698187977198, 1792892699118014415, 1], \"sha256\": \"8963dbc106a9c8a2a54702eb5c210c850d844b86d4202d66cede276a60e6c620\"}]}, \"sha256\": \"106ec6d6ffef8097f0a3c925e7b51c84a6a7a32da555ea852301e46c6801e057\"}\n",
+  "stderr": ""
+}

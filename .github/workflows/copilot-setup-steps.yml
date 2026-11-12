@@ -36,8 +36,8 @@ jobs:
       - name: Install pinned Josh RCC
         shell: bash
         env:
-          RCC_VERSION: 18.19.3
-          RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
+          RCC_VERSION: 18.19.8
+          RCC_SHA256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/actions-rcc"

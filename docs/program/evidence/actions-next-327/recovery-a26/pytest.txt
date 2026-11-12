@@ -1,0 +1,6 @@
++ poetry run pytest tests/action_server_tests/test_datadir_restore.py tests/action_server_tests/test_managed_native_completion.py tests/action_server_tests/test_runtime_managed_bootstrap.py tests/action_server_tests/test_candidate_work_items.py tests/action_server_tests/test_managed_work_items_contract.py tests/action_server_tests/test_managed_work_items_api.py tests/action_server_tests/test_managed_work_items_sql_service.py -q --junitxml=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/log --basetemp=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/fixtures (in /workspace/actions/action_server)
+........................................................................ [ 52%]
+..................................................................       [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a26-source-completion-restore/tests.xml -
+138 passed in 146.66s (0:02:26)
+Log (html): /workspace/actions-recovery-327/evidence/a26-source-completion-restore/log/log.html

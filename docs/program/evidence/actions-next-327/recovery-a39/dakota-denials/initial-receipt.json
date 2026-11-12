@@ -1,0 +1,94 @@
+{
+  "status": "RUNNING",
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "runtime_origin": "/workspace/actions-327-a39/installed-combined/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "python": "/workspace/actions-327-a39/installed-combined/consumer/bin/python",
+  "versions": {
+    "actions-runtime": "1.1.0a39",
+    "actions-core": "1.1.0a4",
+    "actions-work-items": "0.5.0a2",
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0"
+  },
+  "wheels": {
+    "actions_work_items-0.5.0a2-py3-none-any.whl": {
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "installed_package_files_byte_verified": 26
+    },
+    "actions_core-1.1.0a4-py3-none-any.whl": {
+      "sha256": "fe8fb01f5924837ebd221bb559cc4c36482a581921f81beba1d4c2a6c8e4b371",
+      "installed_package_files_byte_verified": 55
+    },
+    "actions_runtime-1.1.0a39-cp312-cp312-linux_x86_64.whl": {
+      "sha256": "f023a767234ee5a93fd50281b1ae574b1056893468e13c23bb9d22704a4a6902",
+      "installed_package_files_byte_verified": 319
+    }
+  },
+  "cases": [
+    {
+      "case": "correct_bearer",
+      "method": "POST",
+      "path": "/mcp",
+      "credential_case": "correct synthetic bearer",
+      "extra_headers": {},
+      "status": 200,
+      "content_type": "application/json",
+      "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"prompts\":{\"listChanged\":false},\"resources\":{\"listChanged\":false,\"subscribe\":false},\"tools\":{\"listChanged\":false}},\"protocolVersion\":\"2025-11-25\",\"serverInfo\":{\"name\":\"Action Server\",\"version\":\"\"}}}",
+      "expected_status": 200,
+      "initialize_result_keys": [
+        "capabilities",
+        "protocolVersion",
+        "serverInfo"
+      ]
+    },
+    {
+      "case": "missing_bearer",
+      "method": "POST",
+      "path": "/mcp",
+      "credential_case": "missing",
+      "extra_headers": {},
+      "status": 403,
+      "content_type": "application/json",
+      "body": "{\"detail\":\"Not authenticated\"}",
+      "expected_status": 401
+    }
+  ],
+  "upstream_disposition": "none",
+  "scope": "installed loopback HTTP transport/auth only; not ChatGPT acceptance",
+  "launch_command": [
+    "/workspace/actions-327-a39/installed-combined/consumer/bin/action-server",
+    "start",
+    "--address",
+    "127.0.0.1",
+    "--port",
+    "36875",
+    "--datadir",
+    "/workspace/a39-denial-gate/datadir",
+    "--actions-sync=false",
+    "--api-key",
+    "<fresh process-memory synthetic bearer>"
+  ],
+  "endpoint": "http://127.0.0.1:36875/mcp",
+  "request_body": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {
+      "protocolVersion": "2025-11-25",
+      "capabilities": {},
+      "clientInfo": {
+        "name": "actions-owned-denial-gate",
+        "version": "1"
+      }
+    }
+  },
+  "shutdown": {
+    "returncode": -15,
+    "forced": false,
+    "seconds": 0.21405589999994845,
+    "stopped": true,
+    "lifespan_complete": true
+  },
+  "fixture_bytes": 517810,
+  "free_bytes_after": 7542349824
+}

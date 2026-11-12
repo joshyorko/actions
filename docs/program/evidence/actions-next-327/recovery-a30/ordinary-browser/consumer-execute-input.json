@@ -1,0 +1,10 @@
+{
+  "mode": "consumer",
+  "phase": "execute",
+  "arguments": {
+    "appId": "787ea531-56ee-4730-a854-7c67e03bdbc2"
+  },
+  "itemId": "9871330f-fe90-49c5-ac22-e3f672eac680",
+  "ndjson": "{\"city\":\"Denver\",\"amount\":12}\n{\"city\":\"Seattle\",\"amount\":7}",
+  "expectedCount": 2
+}

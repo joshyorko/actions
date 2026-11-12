@@ -1,0 +1,93 @@
+{
+  "source_sha": "6f519b5ec5b1546ba666f7dd3a250a68cc09cb21",
+  "runtime_candidate": "1.1.0a14",
+  "core_candidate": "1.1.0a2",
+  "sdk_candidate": "0.5.0a1; unchanged SDK source",
+  "implemented": "Explicit package-revision ExecutionSnapshot marker and injected trusted capability schema/authorization port through the existing common Run authority. No legacy Action fallback for native snapshots; legacy wire bytes preserved.",
+  "not_implemented": "Concrete compiler-to-Package registry, genuine native Package-backed business Run/RCC execution, installed native boot/client acceptance and mounted managed service remain pending. A schema-port fixture is not Package admission proof.",
+  "results": {
+    "reproduced_red": "3failed/2PGskipped before implementation",
+    "focused": "131passed/34skipped; unconfigured PostgreSQL variants and applicability skips remain explicit",
+    "static": "configured lint/typecheck427PASS",
+    "owned_full_status": "PASS",
+    "cleanup": "PASS",
+    "counts": {
+      "foundry_storage": {
+        "tests": 78,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 161,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2016,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "portable_interpretation": "2002passed/14skipped/262deselected; XML tests2016 includes14skipped",
+    "overlap": "Selections overlap and must not be summed. Strict SQL78 includes real PostgreSQL; portable skips do not replace it.",
+    "installed": "No a14 wheel/native/installed client qualification in this checkpoint",
+    "compatibility": "Actual old d282 Run codec imported from a task-owned exact Git blob: legacy bytes equal; explicit native marker rejected. Not an installed old-binary upgrade/downgrade acceptance."
+  },
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/native-run-authority-frozen-20261023",
+    "Focused and configured static commands/logs are preserved under /workspace/actions-327-state/evidence/foundry-integration/native-authority-*"
+  ],
+  "receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/native-run-authority-frozen-20261023/f1d80f23-4852-4e4d-8fe4-cb1246d40b7d/receipt.json",
+      "sha256": "46fa4d4bbc6baa719bbf9145a76059e8ef3e3ad2ba72ef3f37d0f7743c3dd919"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/native-run-authority-frozen-20261023/f1d80f23-4852-4e4d-8fe4-cb1246d40b7d/foundry_storage.xml",
+      "sha256": "feaa0d99e2442675abd53151ad639169de3f8a2b40ccae5f58425a57e1122aba"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/native-run-authority-frozen-20261023/f1d80f23-4852-4e4d-8fe4-cb1246d40b7d/components.xml",
+      "sha256": "c44475772014fdc1e906dc78750519ff3c4bec03690dfb95fe6cbad2f2afb34a"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/native-run-authority-frozen-20261023/f1d80f23-4852-4e4d-8fe4-cb1246d40b7d/invoice.xml",
+      "sha256": "592ab872d1afa613a62a2eab359a7e25a1bffc4ffce94dd0b8abc379d0c71560"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/native-run-authority-frozen-20261023/f1d80f23-4852-4e4d-8fe4-cb1246d40b7d/portable.xml",
+      "sha256": "a2b571c1064970e99beff70428261c1a9a420a886462297d08784ca774297acb"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/native-authority-red-20261023.log",
+      "sha256": "768a24eb6d5427c725bc303aa736926273a9de42fb2952f0d8df8114aa4c7ed2"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/native-authority-focused-20261023.xml",
+      "sha256": "f3b606a7d114e5f40922ae7b18ab5b65c2dbf85f6ba9cba5693a000c3cb56a2a"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/native-authority-static-first-20261023.log",
+      "sha256": "5200f59c7452a3183dcb75d38e0d08d5e517ac4e95f2d01465c7cdacc2cb2b30"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/native-codec-compat-20261023.log",
+      "sha256": "9b5245504f797fb2d1e10e62710ea3d67b61a3b3081b108a396aaa000b6eb73a"
+    }
+  ],
+  "recovery": "Actual filesystem/status/process inspection recovered after exec-server disconnect. No validation process remained; existing receipt completed PASS. No reset, repeat validation or cleanup was used. Only protected OAuth configuration remained untracked and untouched.",
+  "canonical_documentation_delta": "docs/skills/provenance-observability.md documents explicit Package authority selection, live injected source authorization, no legacy fallback, unchanged legacy wire bytes and old-codec fail-closed behavior. Evidence: new real-SQL port regressions and exact old-source codec probe.",
+  "rollback": "No DDL change in this checkpoint. Revert additive port for code rollback; old codecs reject native snapshots. Once native rows are admitted a coordinated state/backup compatibility decision is required; prior schema18 rollback still requires its coordinated pre-upgrade backup.",
+  "remaining": "Concrete Package admission and generated Run lifecycle; installed standard MCP/Codex/basic-host/second-app; managed SQL/bootstrap/VSIX; full security/publisher332, source/restore/distribution and retained release matrix. E1 NEEDS_OPERATOR after cloud readiness. celld NO-GO.",
+  "upstream_disposition": "Existing RCC report remains draft only; no new upstream action",
+  "authority": "No community/public release/production/other repository/credential changes without separate approval"
+}

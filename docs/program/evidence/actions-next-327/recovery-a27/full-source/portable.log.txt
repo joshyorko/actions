@@ -1,0 +1,60 @@
+...........................ssss..ss..................................... [  2%]
+........................................................................ [  5%]
+........................................................................ [  8%]
+........................................................................ [ 10%]
+........................................................................ [ 13%]
+........................s............................................... [ 16%]
+.....s.................................................................. [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 24%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 32%]
+........................................................................ [ 35%]
+........................................................................ [ 37%]
+........................................................................ [ 40%]
+..................................ss.................................... [ 43%]
+.......................................................................s [ 46%]
+sssss................................................................... [ 48%]
+........................................................................ [ 51%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 59%]
+........................................................................ [ 62%]
+...............................................sss...................... [ 65%]
+...........................................................s............ [ 67%]
+........................................................................ [ 70%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+............................s........................................... [ 78%]
+........................................................................ [ 81%]
+........................................................................ [ 84%]
+........................................................................ [ 86%]
+........................................................................ [ 89%]
+........................................................................ [ 92%]
+........................................................................ [ 94%]
+........................................................................ [ 97%]
+...............................................................          [100%]
+=============================== warnings summary ===============================
+tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 8 warnings
+  /workspace/actions/action_server/src/actions/server/_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+    log.warn(
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/action_server_tests/test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py:59: DeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a27-full/ffdf3c9f-b937-4c0f-94ab-9a94626e6277/portable.xml -
+2634 passed, 21 skipped, 290 deselected, 16 warnings in 1088.00s (0:18:08)
+Log (html): /workspace/actions-recovery-327/evidence/a27-full-pytest-log/log.html

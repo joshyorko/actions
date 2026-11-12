@@ -52,15 +52,7 @@ def test_server_async_api_requests_while_waiting_for_action_to_complete(
         headers.get(HEADER_ACTION_ASYNC_COMPLETION) == "1"
     ), f"Failed to get {HEADER_ACTION_ASYNC_COMPLETION}. Headers: {headers}"
 
-    def run_id_from_request_id_available():
-        response = client.get_get_response(
-            "api/runs/run-id-from-request-id/123",
-            data={},
-        )
-        response.raise_for_status()
-
     # Get the run id from the request id
-    # wait_for_non_error_condition(run_id_from_request_id_available)
     response = client.get_get_response(
         "api/runs/run-id-from-request-id/123",
         data={},
@@ -69,11 +61,17 @@ def test_server_async_api_requests_while_waiting_for_action_to_complete(
     run_id = response.json()["run_id"]
     assert run_id
 
-    # Get the status of the action
-    response = client.get_get_response(f"api/runs/{run_id}", data={})
-    response.raise_for_status()
-    status = response.json()
-    assert status["status"] == 1  # 1=running
+    # Async admission can return while the worker process is still starting.
+    # Observe active execution before testing active cancellation.
+    def check_running_status():
+        response = client.get_get_response(f"api/runs/{run_id}", data={})
+        response.raise_for_status()
+        status = response.json()["status"]
+        if status not in (0, 1):
+            pytest.fail(f"Run reached unexpected state before cancellation: {status}")
+        assert status == 1  # 1=running
+
+    wait_for_non_error_condition(check_running_status, timeout=10)
 
     # Cancel the action
     response = client.post_get_response(f"api/runs/{run_id}/cancel", data={})

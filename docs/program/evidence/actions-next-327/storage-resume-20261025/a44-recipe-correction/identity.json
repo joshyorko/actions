@@ -1,0 +1,8 @@
+{
+  "original_bundle_sha256": "37ab0cf8bf66132c0112e5b65c7528a1092f4665ac7f7d32a022ec2ee77d18b0",
+  "original_recipe_sha256": "6444546dfdbd8d271d046f9758c4addeb34e0eef4ae8bafc12d633c6153329c6",
+  "corrected_recipe_sha256": "90d2ae610bd521a70785ef3bfb9238aa0719b12a8887c68d6a2d6aa4c5ae0f86",
+  "source_sha": "d0c87a38a937cc339e8e661ac453c7a62ed41fa6",
+  "scope": "source assertion and candidate labels only; no product wheel changes; not a managed CUA adapter",
+  "status": "PREPARED_FOR_REVIEW_NOT_EXECUTED"
+}

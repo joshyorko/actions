@@ -1,0 +1,6 @@
++ poetry run invoke lint (in /workspace/actions/action_server)
+poetry run ruff check src tests
+poetry run ruff format --check --config /workspace/actions/devutils/ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests
+503 files already formatted
+poetry run isort --check src tests
+Markdown lint wasn't found in PATH, consider installing and adding it in order to be able to lint package's *.md documents.

@@ -1,0 +1,13 @@
+# Stopped synthetic AppSession assessment
+
+Affected commit: `cadd933390ebc51c86f90f511669e19aaf5eb1bf`.
+Affected path: `docs/program/evidence/actions-next-327/recovery-a28/ordinary-installed/15-canvas_get.json`, `_meta.actions.appSession.token`.
+Current content was redacted at `087c86c8e81844f8e9013460b3ca6a8bbca748c7`; shared history has not been rewritten. The value is intentionally absent from this assessment.
+
+The installed a28 and isolated a29 probes read the historical value only into memory and confirm that a fresh CanvasMcp rejects it before any domain call, even with the original authenticated principal/workspace. Issuing a fresh capability for that same principal and exact scope does not restore the old value. A positive fresh-session test then verifies expiration after900 monotonic seconds. Exact scope identifiers and installed source hashes are in the receipts.
+
+AppSessions stores SHA256(token) only in a per-CanvasMcp in-memory dictionary. It uses no signing key, persistent database entry, serialized session file or reload path. Each CanvasMcp constructor creates an empty AppSessions. All issuing harness process IDs were confirmed absent after their recorded stops. The old dictionary no longer exists; restarting any inspected candidate from the same datadir cannot recreate its entry. This conclusion does not rely on assuming15minutes elapsed after issuance: the original monotonic deadline is not retained, and registry loss already invalidates the capability. No reusable signing/session state exists to carry it into a restart.
+
+The token was attenuated to one exact app/deployment scope and original principal/workspace; it additionally required separately authenticated model transport, an app-only route and live SQL domain authorization. The exposure is an evidence-publishing defect, not a production credential exposure. No API key was copied, no credential was changed, and no revocation outside disposable task-owned fixtures was needed. Source inspection plus actual installed refusal proves no remaining authority in the inspected running/restartable candidates; it is not a general secret-scan certification.
+
+Publication now uses `scripts/publish_evidence.sh`, whose strict shell exits on scanner, diff-check or commit failure. The scanner reads staged JSON bytes, rejects duplicate keys and credential-valued fields, and never prints their values. Real shell regression tests stub only commit/push and prove scan failure cannot reach either operation; they also cover stale staged credentials beneath a redacted working copy, invalid/duplicate JSON, commit failure and successful ordering. Screenshots and non-JSON content still require explicit review.

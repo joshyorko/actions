@@ -1,0 +1,11 @@
+{
+  "status": "ABORTED_RESOURCE_FLOOR",
+  "reason": "10GiB free reserve during concurrent build; supervisor exit1; no finalJUnit",
+  "observed_reports": 2385,
+  "observed_failures": 1,
+  "first_failure_zero_based": 633,
+  "note": "progress glyphs are not a terminal pytest summary; incremental reports absent",
+  "original_log_sha256": "c8b589b26c6f77b3aa5da21453cb8a4a7e969e822710d53a98ab105a9266a6cd",
+  "collection_correlated_candidate": "tests/action_server_tests/test_candidate_work_items.py::test_runtime_prerelease_retains_numeric_release_tuple",
+  "correlation_scope": "diagnostic only; rerun to confirm, glyph ordering may include setup reports"
+}

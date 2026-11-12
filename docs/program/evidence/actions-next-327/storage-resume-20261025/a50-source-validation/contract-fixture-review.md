@@ -1,0 +1,15 @@
+# a50 contract fixture review
+
+Source-only review CLEAR for the two requested expectation corrections and associated Core metadata floor assertion. Reviewed `test_active_contracts.py` SHA256 `73cfb69151932f3a7338063401796e5bde850b9184133d584e6aa34fb3e11d44`. No repository edits or tests performed by this review.
+
+The basic template expectation now requires actions-core=1.1.0a8, exactly matching current `templates/basic/package.yaml`. Other template version expectations remain explicit and unchanged; this does not silently move every retained child environment to Core8. The clean-wheel METADATA assertion now requires actions-core >=1.1.0a8,<2.0.0, matching Runtime's actual production dependency and the newly required public logging bridge. The source metadata test also asserts that exact range plus allow-prereleases=True, retains noneditable development Core dependency, and preserves Work Items a2 constraints. These changes strengthen consistency with the actual integration requirement; they do not weaken the import scanner or replace installed-wheel verification with source-only assertions.
+
+The historical published-floor verifier defaults are not modified: the candidate-version test still proves a candidate override is explicit and does not alter the published default. The new clean-wheel assertion applies to the newly built candidate.
+
+Prior failure remains FAILED: `/workspace/recovery327/a50-contracts.log` SHA256 `0091a2b9a8109430eec336623f2197ac0884f878305ec220f8126c7b10d9507b`, 2 failed/45 passed. Its failures explicitly show stale basic-template expectation and a Runtime1.1.0a49 wheel. `_build_wheels` uses `git archive HEAD`, while the active edited fixture/metadata are a50/Core8. During review HEAD was `5b9c70e00e5e019a751aec5385591e5a2bbd615e`. Therefore a rerun before the final clean source checkpoint cannot qualify the new wheel contract. Do not relabel this failed run or count this source review as a pass.
+
+Next exact gate: commit and verify the intended clean a50/Core8 source, run the unchanged clean-wheel install/uninstall-order contract against that HEAD through the prepared gateway, and require actual matching wheel metadata plus both uninstall-order probes to pass. Preserve the original failure alongside that fresh result.
+
+Canonical documentation proposal for `docs/skills/repository-operations.md`: “A clean-wheel test that builds with git archive HEAD qualifies committed source only. After changing package versions, dependency floors or packaged templates, first update exact contract expectations and establish the matching clean checkpoint. Preserve earlier mixed-checkpoint failures; source review or fixture correction alone is not an installed-wheel pass.”
+
+Documentation improvement receipt: exact proposal above, grounded in `_build_wheels` archive selection, current metadata/template assertions and the retained two-failure log. Root owns canonical documentation integration. Upstream disposition: none; local fixture/checkpoint mismatch, no external defect established and no external mutation or issue publication authorized/performed.

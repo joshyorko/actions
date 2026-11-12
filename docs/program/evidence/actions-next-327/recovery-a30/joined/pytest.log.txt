@@ -1,0 +1,10 @@
++ poetry run pytest tests/action_server_tests/test_generic_input_canvas_view.py tests/action_server_tests/test_generic_reopen_artifacts.py tests/action_server_tests/test_generic_invocation_discovery.py tests/action_server_tests/test_generic_canvas_view.py tests/action_server_tests/test_generic_none_model.py tests/action_server_tests/test_local_authorization.py tests/action_server_tests/test_runtime_managed_bootstrap.py tests/action_server_tests/mcp/test_foundry_mcp.py tests/action_server_tests/test_generic_execution_port.py -k not optin_actual_rcc_model_wrapper -q --junitxml=/workspace/actions-recovery-327/evidence/a30-source-joined/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-source-joined/log --basetemp=/workspace/actions-recovery-327/evidence/a30-source-joined/fixtures (in /workspace/actions/action_server)
+........................................................................ [ 19%]
+........................................................................ [ 38%]
+........................................................................ [ 58%]
+........................................................................ [ 77%]
+........................................................................ [ 96%]
+............                                                             [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a30-source-joined/tests.xml -
+372 passed, 2 deselected in 683.23s (0:11:23)
+Log (html): /workspace/actions-recovery-327/evidence/a30-source-joined/log/log.html

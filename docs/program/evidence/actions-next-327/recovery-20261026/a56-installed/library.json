@@ -1,0 +1,21 @@
+{
+  "operation": "create_library_file",
+  "status": "succeeded",
+  "path": "/actions-327-a56-installed-cancellation-bundle.zip",
+  "file_id": "file_00000000fce081f9a09cfd3dd6f10e78",
+  "library_file_id": "libfile_1db7f6fe9a008191a87d702c4a7eb58c",
+  "file_name": "actions-327-a56-installed-cancellation-bundle.zip",
+  "current_version_number": 0,
+  "restored_from_version_number": null,
+  "xattrs": [
+    {
+      "name": "user.library-file-version",
+      "value": "0"
+    }
+  ],
+  "directory_id": "libdir_466a97edb4b08191888e6b5af13c58ab",
+  "mime_type": "application/zip",
+  "library_artifact_type": "other",
+  "file_size_bytes": 15537997,
+  "external_connectors_accessed": false
+}

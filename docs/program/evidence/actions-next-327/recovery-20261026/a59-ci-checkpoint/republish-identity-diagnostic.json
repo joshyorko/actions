@@ -1,0 +1,8 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "specificationDigest": "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d",
+  "artifactDigest": "sha256:da7157d080f86dc1494ec25a0fec13480cc615e3a19f454e8167a0e0d6dab7b1",
+  "retainedArtifact": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "compiler_result": "refused mismatch as designed",
+  "qualification": "does not establish stable republishing after acquisition"
+}

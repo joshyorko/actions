@@ -1,0 +1,40 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a34",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "360bb6b98579f14e80f10106c55a315b81818021",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 154423,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1640373610007373
+    },
+    {
+      "pid": 154423,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 1.8730006559053436e-06
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "failure_type": "AssertionError"
+}

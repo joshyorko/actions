@@ -1,0 +1,13 @@
+{
+  "runtime": "1.1.0a38",
+  "duckdb": "1.4.1",
+  "psycopg": "3.3.4",
+  "psycopg_binary": "3.3.4",
+  "origins": {
+    "duckdb": "/workspace/lane-d/clean-sbom-consumer/lib/python3.12/site-packages/duckdb/__init__.py",
+    "psycopg": "/workspace/lane-d/clean-sbom-consumer/lib/python3.12/site-packages/psycopg/__init__.py",
+    "psycopg_binary": "/workspace/lane-d/clean-sbom-consumer/lib/python3.12/site-packages/psycopg_binary/__init__.py",
+    "actions.server": "/workspace/lane-d/clean-sbom-consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "duckdb_query": "pass"
+}

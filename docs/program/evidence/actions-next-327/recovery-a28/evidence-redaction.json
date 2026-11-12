@@ -1,0 +1,12 @@
+{
+  "status": "CORRECTED",
+  "issue": "Pre-commit field scan raised, but shell continued and committed stopped synthetic local AppSession token fields. Follow-up removes fields. Both Runtime processes had already stopped; session authority was process-local and no longer usable. No production credential or API key was copied.",
+  "redacted": [
+    {
+      "file": "ordinary-installed/15-canvas_get.json",
+      "fields": [
+        "token"
+      ]
+    }
+  ]
+}

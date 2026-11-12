@@ -1,0 +1,17 @@
+[
+  "tests/action_server_tests/test_database.py::test_foreign_keys_validation",
+  "tests/action_server_tests/test_database.py::test_database_schema_evolution",
+  "tests/action_server_tests/test_database.py::test_counters",
+  "tests/action_server_tests/test_database.py::test_migrate",
+  "tests/action_server_tests/test_database.py::test_migrate_v10_schema_without_legacy_columns_or_indexes",
+  "tests/action_server_tests/test_database.py::test_database_create_table",
+  "tests/action_server_tests/test_database.py::test_database_insert",
+  "tests/action_server_tests/test_database.py::test_database_update",
+  "tests/action_server_tests/test_database.py::test_database_insert_or_update",
+  "tests/action_server_tests/test_database.py::test_database_datetime",
+  "tests/action_server_tests/test_database.py::test_database_transactions",
+  "tests/action_server_tests/test_database.py::test_database_limit_offset",
+  "tests/action_server_tests/test_database.py::test_database_transactions_nested",
+  "tests/action_server_tests/test_database.py::test_database_concurrency",
+  "tests/action_server_tests/test_database.py::test_database_temp_session_data_cleanup"
+]

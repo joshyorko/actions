@@ -1,0 +1,21 @@
+{
+  "operation": "create_library_file",
+  "status": "succeeded",
+  "path": "/actions-327-a57-connect-render.zip",
+  "file_id": "file_00000000583081f990f215ea0f2fdb39",
+  "library_file_id": "libfile_b8698ad6b2248191b766830900a27c06",
+  "file_name": "actions-327-a57-connect-render.zip",
+  "current_version_number": 0,
+  "restored_from_version_number": null,
+  "xattrs": [
+    {
+      "name": "user.library-file-version",
+      "value": "0"
+    }
+  ],
+  "directory_id": "libdir_466a97edb4b08191888e6b5af13c58ab",
+  "mime_type": "application/zip",
+  "library_artifact_type": "other",
+  "file_size_bytes": 15525289,
+  "external_connectors_accessed": false
+}

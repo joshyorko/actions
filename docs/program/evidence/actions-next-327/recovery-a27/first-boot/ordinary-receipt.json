@@ -1,0 +1,29 @@
+{
+  "status": "PARTIAL_REAL_CLI_UI_PASS_COMPILATION_EXECUTION_BLOCKED",
+  "installed_origin": "/workspace/actions-recovery-327/installed-a26/consumer/lib/python3.12/site-packages/actions/server",
+  "source": "57d851fd17a881f25bb22c2f4ec830415cc52172",
+  "runtime_version": "1.1.0a26",
+  "module_hashes": {
+    "foundry/bootstrap.py": "928c70f3513faac48376d7904d0d726cbac103514e92c9711659b3ff275c51cc",
+    "foundry/boot.py": "9a6eeb23a084e5286d594423611a055ae7f0077172e479ca885675b6df021c1c",
+    "deployments/package_revision_compiler.py": "5f3d9cec86c0c34fbfcd2518820535acb7ae250813fa2f24a4b4af26d4c349c4"
+  },
+  "wheels": {
+    "/workspace/actions-recovery-327/installed-a26/runtime-wheels/actions_runtime-1.1.0a26-cp312-cp312-linux_x86_64.whl": "46f00179334dd686455e557905db35e414983ff7e3fdabe554502ed310e80665"
+  },
+  "compiler_workload_executed": false,
+  "source_compiler_home": "released to root",
+  "product_changes": false,
+  "gates": {
+    "ordinary_ui_create_activate_revision_restart_reopen_rollback": "PASS",
+    "fresh_profile_generated_package": "BLOCKED compiler_workspace_failed: cache/compile absent",
+    "actual_generated_execution": "NOT_RUN; no genuine reviewed source proposal or ordinary generic invocation in a26"
+  },
+  "proofs": [
+    "ui-lifecycle-evidence/receipt.json",
+    "evidence/missing-compile-parent.json",
+    "evidence/configured-catalog.json",
+    "evidence/precompile-diagnostic.log"
+  ],
+  "upstream_disposition": "none; own repository defect sent to integrator"
+}

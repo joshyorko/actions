@@ -1,0 +1,24 @@
+{
+  "method": "tasks/get",
+  "status": 200,
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 18,
+    "result": {
+      "resultType": "complete",
+      "taskId": "448802d8-c4c0-46d4-b291-327e936e1fd7",
+      "status": "working",
+      "createdAt": "2026-10-25T06:04:28.915Z",
+      "lastUpdatedAt": "2026-10-25T06:04:29.750Z",
+      "ttlMs": 600000,
+      "pollIntervalMs": 50,
+      "statusMessage": "Launch recorded; outcome not confirmed.",
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "Action Server",
+          "version": ""
+        }
+      }
+    }
+  }
+}

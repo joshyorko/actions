@@ -89,7 +89,7 @@ export const useWorkItems = (
     queryKey: ['workItems', queueName, state, limit],
     queryFn: async () => {
       const params = new URLSearchParams();
-      if (queueName && queueName !== 'all') {
+      if (queueName) {
         params.append('queue_name', queueName);
       }
       if (state && state !== 'all') {
@@ -126,7 +126,7 @@ export const useWorkItemStats = (queueName?: string) => {
     queryKey: ['workItemStats', queueName],
     queryFn: async () => {
       const params = new URLSearchParams();
-      if (queueName && queueName !== 'all') {
+      if (queueName) {
         params.append('queue_name', queueName);
       }
 

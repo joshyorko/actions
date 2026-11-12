@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/actions-recovery-327/basic-task-a35-new/qualify.py", line 141, in <module>
+    rpc('tasks/get',{'taskId':TASK},TASK,auth=False,expected=401)
+  File "/workspace/actions-recovery-327/basic-task-a35-new/qualify.py", line 117, in rpc
+    RECEIPT['calls'].append({'method':method,'status':status});assert status==expected,(method,status,expected);return value.get('result')
+                                                                      ^^^^^^^^^^^^^^^^
+AssertionError: ('tasks/get', 403, 401)

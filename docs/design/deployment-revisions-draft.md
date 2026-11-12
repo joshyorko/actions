@@ -892,3 +892,13 @@ This end-to-end slice waits for #83's Run contract and the #130/#135 import/proj
 ```
 
 More precisely, #129 does not wait for a new #143 service or a second adapter. It sets only the package-reference and selected-plan envelope required for a Deployment revision and Run snapshot. #130 owns the authoritative Package/Capability/RuntimePlan manifest schema and projection vocabulary; #129 cannot invent compiler behavior. #135 produces that manifest from trusted source; it does not get to create Deployment bindings. #143 owns runtime descriptors, admission outcomes/modes and adapter lifecycle; #129 stores an allowed plan identity and hands it to #143, but does not implement RCC/uv methods. #83 stores the immutable `ResolvedExecutionSnapshot`; it does not recompute the current Deployment. #90/#138 choose/lease a worker matching the pinned WorkerProfile; they do not change the plan. #136 distributes source artifact by digest; RCC’s artifact/provider/lease plane remains RCC-owned.
+
+## Work Item declaration and policy identity
+
+Capability Work Item declarations are immutable Package metadata. Deployment
+policies bind declarations to logical queue names and bounded input/output limits;
+they confer no queue authorization or execution authority. Empty policies are
+omitted to preserve prior canonical Deployment bytes. Nonempty policies sort by
+capability reference before entering revision identity. The bare RCC executor
+rejects non-none declarations; only the matching trusted generic output adapter
+may admit a qualified mode, with separate live queue and execution grants.

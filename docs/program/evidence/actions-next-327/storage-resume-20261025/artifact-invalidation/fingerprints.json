@@ -1,0 +1,26 @@
+{
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.ts": {
+    "before": "35e3611ec387426c34ed49c75dc16d3f91d9ed76619fb7c11c13b197e3a8ac0d",
+    "after": "71f8d6638501ac5388989f806906838397a079eeb1d339934a6fcec2c0d4dc57"
+  },
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.tsx": {
+    "before": "37f9ca892be37926c825b0d8abb860990147d6083f7a1c7c6df0bf1afc0858b7",
+    "after": "e995122f077394983930e0a9deaf59636feee4c61279f7935fc76b23edd11090"
+  },
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/components.tsx": {
+    "before": "e01244af43682768d9614396da9bc3921117301956e7177a2739cfbe8c69a218",
+    "after": "c2c4f61a16ce93a4fd95757217087c517567fbafaad7843305a88f8d3474bff9"
+  },
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/types.ts": {
+    "before": "dcfd00821185d81677247ae4a86066c2989e35d80b68b9961be00c89fff6133c",
+    "after": "25f894edc7b82fa01a8e6cd39f611375de62db1e75ea4d3957d33705043f389d"
+  },
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-artifact-invalidation.test.ts": {
+    "before": null,
+    "after": "205b9b52c3095ee8615e69166bd598e75c2b55430f0407e254e48fdfd2e66624"
+  },
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx": {
+    "before": "86028932867e8199f787d2a0955770eb8c8ebdca22e0338d8c8ddb83b3b8fd0b",
+    "after": "fd91431eb35a4fa345850d21283424dd8b5cf2ce70c43b3dca36626eb721a821"
+  }
+}

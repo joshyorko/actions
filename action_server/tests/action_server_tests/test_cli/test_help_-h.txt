@@ -1,13 +1,15 @@
 usage: action-server [-h]
-                     {start,expose,import,download-rcc,new,version,migrate,package,env,cloud,oauth2,devenv,datadir}
+                     {start,expose,authorize-local,providers-local,import,download-rcc,new,version,migrate,package,env,cloud,oauth2,devenv,datadir}
                      ...
 
 Actions Runtime (<version>)
 
 positional arguments:
-  {start,expose,import,download-rcc,new,version,migrate,package,env,cloud,oauth2,devenv,datadir}
+  {start,expose,authorize-local,providers-local,import,download-rcc,new,version,migrate,package,env,cloud,oauth2,devenv,datadir}
     start               Starts the Actions Runtime (importing the actions in the current directory by default).
     expose              Inspect and manage an explicitly selected tunnel
+    authorize-local     Explicit offline owner-only SQLite grants; never automatic startup authorization
+    providers-local     Explicit offline saved-owner provider setup for local SQLite
     import              Imports an Action Package and exits
     download-rcc        Downloads RCC (by default to the location required by the Actions Runtime)
     new                 Bootstrap new project from template

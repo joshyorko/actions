@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "actions.canvas-spec/v1",
+  "title": "Search records",
+  "visibility": ["model", "app"],
+  "bindingIds": ["search"],
+  "root": {
+    "type": "form",
+    "id": "query-form",
+    "bindingId": "missing",
+    "submitLabel": "Search",
+    "fields": [
+      {
+        "name": "query",
+        "label": "Search records",
+        "type": "text",
+        "required": true
+      }
+    ]
+  }
+}

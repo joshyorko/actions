@@ -1,0 +1,12 @@
+{
+  "source_sha": "72c8a13e90a4e5bfb6e0ea24e818f7589e75c96b",
+  "source_tree": "8474e3132a0294f7c7815dae7ef80b76e22d834e",
+  "status": "PASS",
+  "tests": 49,
+  "failures": 0,
+  "skips": 0,
+  "seconds": 53.09,
+  "scope": "active contracts, preload compatibility, both server fixture repairs; includes isolated clean-wheel install/uninstall both orders",
+  "prior_failed_contract_receipt": "a50-contracts.xml",
+  "full_runtime": "NOT_SUPERSEDED_FAILED_A49"
+}

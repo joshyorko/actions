@@ -1,0 +1,167 @@
+{
+  "status": "FAILED",
+  "runtime": "1.1.0a43",
+  "core": "1.1.0a6",
+  "artifact_digest": "sha256:39cdf691aec33d3e342151ac9710387f27b3cf50ad0a8bb845b7243a82447166",
+  "processes": [
+    {
+      "pid": 34970,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11396507300014491,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 34999,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21412222600065434,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 35159,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16386006400080078,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": true
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [
+    {
+      "case": "pass",
+      "sync_run": "ecbbb7de-610a-4e98-a61d-d59b6cd7d745",
+      "task_id": "767e7eae-2642-4286-bb9f-8961736f7922",
+      "task_terminal": "completed",
+      "task_is_error": false,
+      "authorized_sync_artifacts": 4
+    },
+    {
+      "case": "fail",
+      "sync_run": "ac1f2aa6-7d89-4aea-8004-c7bfe91e869a",
+      "task_id": "599bb1eb-c6cc-4f5b-9ead-a826ce24cba2",
+      "task_terminal": "completed",
+      "task_is_error": true,
+      "authorized_sync_artifacts": 4
+    }
+  ],
+  "workspace": "11194dfc-aaaf-4a3f-ac35-f2bb2573b1be",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "error": {
+    "type": "ExceptionGroup",
+    "message": "unhandled errors in a TaskGroup (1 sub-exception)"
+  }
+}

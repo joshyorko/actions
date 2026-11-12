@@ -1,0 +1,87 @@
+{
+  "status": "FAILED",
+  "runtime": "1.1.0a46",
+  "core": "1.1.0a7",
+  "artifact_digest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+  "processes": [
+    {
+      "pid": 81618,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21415409600012936,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 81698,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1639840389998426,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 82036,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16389262999837229,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "55d29837-13e1-48b4-a1af-747037d7f7aa",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "error": {
+    "type": "ExceptionGroup"
+  },
+  "scope": "Public HTTP queues plus MCP authoring/invoke; single persisted Actor and server-held worker; no producer or child outputs; not multi-principal isolation"
+}

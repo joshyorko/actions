@@ -1,0 +1,8 @@
+[
+  "tests/action_server_tests/test_knowledge_postgres.py::test_versions_replay_and_fresh_process",
+  "tests/action_server_tests/test_knowledge_postgres.py::test_document_failure_rolls_back_version_and_operation",
+  "tests/action_server_tests/test_knowledge_postgres.py::test_independent_connections_serialize_operation_identity[False]",
+  "tests/action_server_tests/test_knowledge_postgres.py::test_independent_connections_serialize_operation_identity[True]",
+  "tests/action_server_tests/test_knowledge_postgres.py::test_cancel_while_waiting_for_provider_lock",
+  "tests/action_server_tests/test_knowledge_postgres.py::test_corrupted_retained_document_refuses_replay"
+]

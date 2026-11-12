@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from typing import Any, ClassVar, cast
 
 import pytest
-from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
+from actions._logging._log_formatting import pretty_format_logs_from_log_html_contents
 
 from actions.server._protocols import ArgumentsNamespaceStart
 from actions.server._selftest import ActionServerClient, ActionServerProcess

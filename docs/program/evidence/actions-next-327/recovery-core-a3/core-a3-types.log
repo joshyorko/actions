@@ -1,0 +1,3 @@
++ poetry run invoke typecheck (in /workspace/actions/actions)
+[1;37mpoetry run mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests[0m
+Success: no issues found in 129 source files

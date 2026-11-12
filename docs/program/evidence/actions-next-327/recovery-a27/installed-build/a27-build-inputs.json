@@ -1,0 +1,8 @@
+{
+  "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "frontend": "canonical invoke build-frontend, current source and lock; root protected OAuth untouched",
+  "copied": {
+    "action_server/src/actions/server/_static_contents.py": "5b8e7176bf608634456439b5c5105f6dc357d4acc08fde0d51e945c6e9d1829f",
+    "action_server/src/actions/server/bin/rcc-18.19.3": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  }
+}

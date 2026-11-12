@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "actions.canvas-spec/v1",
+  "title": "Search records",
+  "visibility": ["model", "app"],
+  "bindingIds": ["search"],
+  "root": {
+    "type": "stack",
+    "id": "main",
+    "children": [
+      {
+        "type": "text",
+        "id": "intro",
+        "text": "Search the existing records."
+      },
+      {
+        "type": "form",
+        "id": "query-form",
+        "bindingId": "search",
+        "submitLabel": "Search",
+        "fields": [
+          {
+            "name": "query",
+            "label": "Search records",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "limit",
+            "label": "Maximum results",
+            "type": "integer",
+            "required": false
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "id": "results",
+        "bindingId": "search",
+        "rowsKey": "items",
+        "columns": [
+          { "key": "name", "label": "Name" },
+          { "key": "status", "label": "Status" }
+        ]
+      },
+      {
+        "type": "status",
+        "id": "search-status",
+        "bindingId": "search"
+      },
+      {
+        "type": "artifact",
+        "id": "search-export",
+        "bindingId": "search",
+        "label": "Download CSV"
+      }
+    ]
+  }
+}

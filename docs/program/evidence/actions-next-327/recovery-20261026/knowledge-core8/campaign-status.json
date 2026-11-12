@@ -1,0 +1,79 @@
+{
+  "status": "FAILED_PUBLIC_CANVAS_APPLY_BEFORE_GENERATED_RCC_EXECUTION",
+  "source": "47ef271d645667e55cf27ff76df602d030b7e337",
+  "runtime": "1.1.0a54",
+  "runtime_wheel_sha256": "fa95745dcb50f2ea0527d504ee6d965a7261d9aa094a9c4508e18d9e4cc7582a",
+  "core": "1.1.0a8",
+  "core_wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+  "work_items": "0.5.0a2",
+  "work_items_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+  "compiler": {
+    "prepared_receipt": "/workspace/327-probes/a53-claimed/compiler/prepared.json",
+    "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+    "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "package_yaml_sha256": "a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+    "core_proof": "Core a8, Work Items 26 payload members, Robot Framework 7.4.2; compiler source aca51868d14e916c8034c69309e222100d5d50f3 (same immutable profile, not same current source build)"
+  },
+  "postgres": {
+    "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "pull": "authorized exact-digest public dependency pull; completed in under 10 seconds; daemon RepoDigest matched",
+    "image_id": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+    "instances_started_sequentially": 3,
+    "instances_remaining": 0,
+    "tls_contract": "Existing source fixture; loopback ephemeral port; localhost SAN; sslmode=verify-full; explicit CA; writer role NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION; no TLS downgrade"
+  },
+  "attempts": [
+    {
+      "run": 1,
+      "controller_root": "/workspace/327-probes/knowledge-pg-luna/owned-a54-pg-run1",
+      "status": "FAILED_HARNESS_DIAGNOSTIC_ONLY",
+      "failure": "Opaque ExceptionGroup during generated author setup; subsequent fresh-root diagnostic identified missing companion source file at qualifier PLAN/(kind + '.py').",
+      "database_setup": "TLS host configured and provisioned before harness error",
+      "auth_denials": {"missing": 403, "wrong": 403, "host": 421, "origin": 403},
+      "container_cleanup": "exact ID confirmed absent; no cleanup errors"
+    },
+    {
+      "run": 2,
+      "controller_root": "/workspace/327-probes/knowledge-pg-luna/owned-a54-pg-run2",
+      "status": "FAILED_HARNESS_DIAGNOSTIC_ONLY",
+      "failure_type": "FileNotFoundError",
+      "failure_frames": ["author, qualifier line 320; read PLAN/(kind + '.py')."],
+      "database_setup": "TLS host configured and provisioned before harness error",
+      "auth_denials": {"missing": 403, "wrong": 403, "host": 421, "origin": 403},
+      "container_cleanup": "exact ID confirmed absent; no cleanup errors"
+    },
+    {
+      "run": 3,
+      "controller_root": "/workspace/327-probes/knowledge-pg-luna/owned-a54-pg-run3",
+      "status": "FAILED_PUBLIC_CANVAS_APPLY",
+      "failure_type": "ExceptionGroup",
+      "nested_failure": "AssertionError at qualifier call() line 185, from author() line 323 awaiting canvas_apply; context-exit ExceptionGroup frames retained in fixture/evidence/receipt.json.",
+      "mcp_tool": "canvas_apply",
+      "mcp_is_error": true,
+      "mcp_structured_content": null,
+      "mcp_content": "Canvas request unavailable, invalid or access denied.",
+      "database_setup": "configure-host returned publication-authorized; provision-knowledge-host returned provisioned-not-ingested",
+      "auth_denials": {"missing": 403, "wrong": 403, "host": 421, "origin": 403},
+      "container_cleanup": "exact ID confirmed absent; no cleanup errors"
+    }
+  ],
+  "run3_readonly_sql_inspection": {
+    "canvas_create_and_release_records": 2,
+    "canvas_apply_request_record": 0,
+    "foundry_package_revision_rows": 0,
+    "run_rows": 0,
+    "run_attempt_rows": 0
+  },
+  "actual_generated_rcc_execution": "NOT_PROVEN; no generated package/run/attempt or RCC execution receipt; ingestion/search/failure/restart phases not reached",
+  "diagnosis": "The installed public API masks the underlying canvas_apply exception with a generic denial. It is ambiguous whether this is authorization, source validation, or compiler failure. Per parent direction, no further retries; do not weaken TLS or authorization.",
+  "supervision": {
+    "outer_supervisor_python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "outer_supervisor_run3": "FAILED command exit 1; zero remaining owned descendants and zero adoptees",
+    "inner_supervisor_run3": "FAIL command exit 1; zero live descendants and zero cleanup errors",
+    "runtime_shutdowns_run3": "two graceful stops, both application lifespan shutdown complete"
+  },
+  "credential_handling": "Only synthetic fixture password and self-generated TLS key material; no live credentials. These files and provider secret blobs were removed after exact container cleanup; see private-material-cleanup.json.",
+  "live_credentials_or_external_grants_mutated": false,
+  "aggregate_tests_run": false,
+  "upstream_disposition": "none"
+}

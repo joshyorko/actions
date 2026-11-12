@@ -1,0 +1,21 @@
+{
+  "schema_version": "actions.runtime-rcc-profile/v1",
+  "admission": "trusted-developer-execution",
+  "prepared_receipt": "/workspace/actions-recovery-327/installed-a25/compiler/prepared.json",
+  "worker_id": "5635798f-40ba-4fbd-94b0-1626ee48258d",
+  "worker": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "worker_profile_id": "f0d20a86-d8d1-4ba0-b28c-f582dcdb0197",
+    "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "policy": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "policy_id": "535e4fdf-1b4e-4178-b645-ade7eb2c7d8c",
+    "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "output_provider": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "provider_profile_id": "edc02039-89d9-4b9b-a63a-2f37e07abe1a",
+    "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  }
+}

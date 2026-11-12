@@ -1,0 +1,13 @@
+[
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_v1_bytes_and_digest_are_unchanged",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_mcp_union_schema_resolves_recursive_refs[actions.canvas-spec/v1]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_mcp_union_schema_resolves_recursive_refs[actions.canvas-spec/v2]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_public_v2_admission_is_closed[unknown-version]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_public_v2_admission_is_closed[card-duplicate]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_public_v2_admission_is_closed[undeclared-binding]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_public_v2_admission_is_closed[unreferenced-binding]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_public_v2_admission_is_closed[extra-field]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_v2_typed_selection_revalidates_bindings_and_digest",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_sql_v1_create_explicit_v2_apply_read_replay_rollback_restart[sqlite]",
+  "tests/action_server_tests/test_foundry_canvas_v2.py::test_sql_v1_create_explicit_v2_apply_read_replay_rollback_restart[postgresql]"
+]

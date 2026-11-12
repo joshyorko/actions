@@ -1,0 +1,45 @@
+{
+  "source": "ab09e19dab3381a914a4cc78e17870f1a85f1e65",
+  "tree": "ecc4473167c363b3aa0e7f33380af579ac8eb590",
+  "container": "758bd2ba1f182488d6a107e4fb7b9aa2ad9157558b7e4add71a8eda1f2686ef6",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_knowledge_postgres",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_postgres.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-knowledge-lock/test_knowledge_postgres/tests.xml",
+        "--basetemp=/workspace/actions-327-knowledge-lock/test_knowledge_postgres/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29100494848,
+      "stop_reason": null,
+      "source_sha256": "8bf8ca4095dec826b3855527b12b4c5b60cea2f44756af82393eb75e2209f2bd",
+      "counts": {
+        "tests": 6,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

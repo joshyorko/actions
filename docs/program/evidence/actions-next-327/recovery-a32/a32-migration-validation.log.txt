@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_database.py::test_database_schema_evolution tests/action_server_tests/test_detached_migration.py -q (in /workspace/actions/action_server)
+....                                                                     [100%]
+4 passed in 2.04s
+Log (html): /workspace/actions/action_server/output/log.html

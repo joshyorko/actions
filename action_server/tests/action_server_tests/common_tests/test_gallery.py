@@ -59,11 +59,37 @@ example_metadata = {
 }
 
 
-def test_import_gallery_action_packages(data_regression, tmpdir):
+def test_import_gallery_action_packages(data_regression, tmpdir, monkeypatch):
+    # Explicit legacy metadata stays compatible; package bytes are an owned fixture.
+    import io
     import os
+    import zipfile
     from pathlib import Path
+    from types import SimpleNamespace
+
+    import actions_http
 
     from actions.server._common.gallery import GalleryActionPackages
+
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w") as zipped:
+        for name in (
+            ".gitignore",
+            "actions.py",
+            "CHANGELOG.md",
+            "LICENSE",
+            "package.png",
+            "package.yaml",
+            "README.md",
+        ):
+            zipped.writestr(name, "owned test fixture")
+    calls = []
+
+    def get(url):
+        calls.append(url)
+        return SimpleNamespace(status=200, data=archive.getvalue())
+
+    monkeypatch.setattr(actions_http, "get", get)
 
     gallery_actions = GalleryActionPackages(example_metadata)
     found = gallery_actions.list_packages()
@@ -73,6 +99,7 @@ def test_import_gallery_action_packages(data_regression, tmpdir):
     target = Path(tmpdir) / "download"
     result = gallery_actions.extract_package("Google Docs 1.2.0", target)
     assert result.success, f"Expected success. Error message: {result.message}"
+    assert calls == [example_metadata["packages"]["Google Docs"]["versions"][0]["zip"]]
 
     extracted_to = target / "google-docs"
     assert extracted_to.samefile(Path(result.result))
@@ -86,3 +113,42 @@ def test_import_gallery_action_packages(data_regression, tmpdir):
         "package.yaml",
         "README.md",
     }.issubset(set(os.listdir(extracted_to)))
+
+
+def test_gallery_requires_explicit_source_before_network(monkeypatch, tmp_path):
+    import actions_http
+
+    from actions.server._common.gallery import GalleryActionPackages
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Unexpected network request")
+
+    monkeypatch.setattr(actions_http, "get", forbidden)
+    gallery = GalleryActionPackages()
+    result = gallery.list_packages()
+    assert not result.success
+    assert "explicit" in result.message
+    result = gallery.extract_package("missing", tmp_path / "absent")
+    assert not result.success
+    assert not (tmp_path / "absent").exists()
+
+
+def test_explicit_gallery_endpoint_and_cache(monkeypatch):
+    from types import SimpleNamespace
+
+    import actions_http
+
+    from actions.server._common.gallery import GalleryActionPackages
+
+    calls = []
+
+    def get(url):
+        calls.append(url)
+        return SimpleNamespace(status=200, json=lambda: example_metadata)
+
+    monkeypatch.setattr(actions_http, "get", get)
+    url = "https://owned.example/manifest.json"
+    gallery = GalleryActionPackages(metadata_url=url)
+    assert gallery.list_packages().success
+    assert gallery.list_packages().success
+    assert calls == [url]

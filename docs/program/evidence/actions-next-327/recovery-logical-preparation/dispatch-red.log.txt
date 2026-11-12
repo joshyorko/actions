@@ -1,0 +1,91 @@
++ poetry run pytest tests/action_server_tests/test_logical_binding_checkpoint.py -q -k unconfigured --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-logical-gate-red-log (in /workspace/actions/action_server)
+.sF                                                                      [100%]
+=================================== FAILURES ===================================
+___ test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch ____
+
+    def test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch():
+        from actions.server.foundry.rcc_execution import GeneratedRccExecution
+        from actions.server.run_outputs.service import AccessDenied
+
+        compiled = compile_fixture((requirement(),)).compiled_package
+        manifest = json.loads(compiled.manifest_json)
+        runner = object.__new__(GeneratedRccExecution)
+        runner.registry = SimpleNamespace(
+            load=lambda ref: compiled,
+            evidence=lambda ref: SimpleNamespace(ready=True),
+        )
+        snapshot = SimpleNamespace(
+            capability_authority="package-revision",
+            capability=SimpleNamespace(
+                package_revision=object(),
+                capability_id=SimpleNamespace(root=manifest["capabilities"][0]["id"]),
+            ),
+        )
+        with pytest.raises(AccessDenied, match="logical execution runtime"):
+>           runner._verified_selection(snapshot)
+
+tests/action_server_tests/test_logical_binding_checkpoint.py:630:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <actions.server.foundry.rcc_execution.GeneratedRccExecution object at 0x7f7304a19a30>
+snapshot = namespace(capability_authority='package-revision', capability=namespace(package_revision=<object object at 0x7f7308d96e30>, capability_id=namespace(root='action.generated_echo')))
+
+    def _verified_selection(
+        self, snapshot: ExecutionSnapshot
+    ) -> tuple[Any, dict[str, str], dict, dict]:
+        if (
+            getattr(snapshot, "capability_authority", "legacy-action")
+            != "package-revision"
+        ):
+            raise AccessDenied("immutable Package capability required")
+        compiled = self.registry.load(snapshot.capability.package_revision)
+        verify_compiled_package_revision(compiled)
+        evidence = self.registry.evidence(snapshot.capability.package_revision)
+        if not evidence.ready:
+            raise AccessDenied(
+                "successful pinned Package build/import/test evidence required"
+            )
+        manifest = json.loads(compiled.manifest_json)
+        capability = next(
+            (
+                item
+                for item in manifest["capabilities"]
+                if item.get("id") == snapshot.capability.capability_id.root
+            ),
+            None,
+        )
+        if not isinstance(capability, dict) or capability.get("kind") != "action":
+            raise AccessDenied("compiled Action capability is not executable")
+        if (
+            capability.get("mode") != "none"
+            or capability.get("allowOutputs") is not False
+        ):
+            from actions.server.foundry.generic_work_item_execution import (
+                _GenericOutputs,
+            )
+
+            generic_outputs = getattr(self, "outputs", None)
+            if not isinstance(generic_outputs, _GenericOutputs):
+                raise AccessDenied("compiled Action capability is not executable")
+            generic_outputs.require_rcc_selection(snapshot, capability)
+>       if snapshot.runtime_plan.plan_digest.root not in capability.get(
+           ^^^^^^^^^^^^^^^^^^^^^
+            "compatiblePlanDigests", []
+        ):
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'runtime_plan'
+
+src/actions/server/foundry/rcc_execution.py:416: AttributeError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_logical_binding_checkpoint.py::test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch
+1 failed, 1 passed, 1 skipped, 43 deselected in 0.77s
+Log (html): /workspace/actions-recovery-327/evidence/task-logical-gate-red-log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_logical_binding_checkpoint.py', '-q', '-k', 'unconfigured', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/task-logical-gate-red-log']' returned non-zero exit status 1.

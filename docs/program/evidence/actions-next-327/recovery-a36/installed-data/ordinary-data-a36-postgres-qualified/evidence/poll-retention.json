@@ -1,0 +1,10 @@
+{
+  "local_poll_files": 41,
+  "remote_samples": [
+    "04-task.json",
+    "05-task.json",
+    "43-task.json",
+    "44-task.json"
+  ],
+  "scope": "all original sanitized poll receipts retained locally; first acknowledgements and last observations copied"
+}

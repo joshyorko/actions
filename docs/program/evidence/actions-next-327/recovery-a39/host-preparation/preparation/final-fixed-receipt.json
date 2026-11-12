@@ -1,0 +1,26 @@
+{
+  "exit_code": 0,
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/knowledge-review/prepare-run.py",
+    "tests/action_server_tests/test_knowledge_preparation.py",
+    "tests/action_server_tests/test_knowledge_execution.py",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/knowledge-review/prepare-evidence/final-fixed.xml",
+    "--basetemp=/workspace/knowledge-review/prepare-evidence/final-fixed-fixtures"
+  ],
+  "container": "45312aff28e5fa83bf1a8f8b0fb20f0a536b7f8882faad6dc94a69cf9d683b37"
+}

@@ -63,12 +63,12 @@ def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Pa
     rcc_binary = Path(rcc_value).resolve(strict=True)
     rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
     assert (
-        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+        rcc_sha256 == "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
     )
     rcc_version = subprocess.run(
         [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.3"
+    assert rcc_version == "v18.19.8"
 
     package_dir = tmp_path / "minimal-package"
     package_dir.mkdir(mode=0o700)
@@ -202,12 +202,12 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
     assert rcc_binary.is_file()
     rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
     assert (
-        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+        rcc_sha256 == "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
     )
     rcc_version = subprocess.run(
         [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.3"
+    assert rcc_version == "v18.19.8"
 
     # The acceptance process owns both homes. Never inherit or mutate another
     # task's RCC cache, even when this test is run outside the hosted workflow.
@@ -364,7 +364,7 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 }
                 descriptor = load_descriptor(package.env_json)
                 assert descriptor is not None
-                assert descriptor.rcc_version == "v18.19.3"
+                assert descriptor.rcc_version == "v18.19.8"
                 assert descriptor.provider_reference == provider_url
                 settings = Settings(
                     datadir=data_dir, artifacts_dir=tmp_path / "artifacts"

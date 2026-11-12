@@ -1,0 +1,909 @@
+{
+  "source_sha": "9e535ee5bb99100ff0c61a71844cd0d7c6c22df3",
+  "worker_implementation_sha": "9390812046ceab287becf78be3df6b50281b639e",
+  "base_sha": "28fa0c1125f9b0b0a624660b9c0e891d9e030ab4",
+  "branch": "release/327-invoice-vertical-20261020",
+  "issue": 327,
+  "draft_pr": 328,
+  "status": "BOUNDED_PRIVATE_WORKER_QUALIFIED_FULL_RELEASE_NOT_READY",
+  "versions": {
+    "runtime": "1.1.0a2",
+    "sdk": "0.5.0a1",
+    "requirement": ">=0.5.0a1,<0.6.0",
+    "disposition": "provisional built/tested only; no publication; published1.0.4/0.4.4 bytes not reused"
+  },
+  "source_binding": {
+    "path": "/workspace/actions-327-state/evidence/worker/source-binding.json",
+    "sha256": "5c1b2bbfa36522be82194b0e9cfcd9994e1e1c584a2039624a53647ebe85c925"
+  },
+  "input_sha256": {
+    "runtime_full": {
+      "action_server/poetry.lock": "e2c743d43d0608182e6c888cccd308821433b80f2adf4547e950e061723f3f7a",
+      "action_server/pyproject.toml": "b4071cd1e915bf89b3520c9b5e7f3727c119990b3ae8b6040224fe645181f964",
+      "action_server/scripts/verify_invoice_queries.py": "078823a528a2e79f311cdd31d27554038b8957522983d72cc75dcf2504d08867",
+      "action_server/src/actions/server/_api_action_routes.py": "65133ad7eb88a1e4a5c959db7f359ceaff2245878c058a8c77b94d42e8288860",
+      "action_server/src/actions/server/_models.py": "d7eee21eeaa10f8d36b40de57fbc6191fcc1dd33f91be0d267229cff0e3f12af",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+      "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+      "action_server/src/actions/server/_server.py": "085eae5a1a4a3e433288735f895687701513a1004656caf3b89368c6e36e2542",
+      "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+      "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+      "action_server/src/actions/server/data_queries/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+      "action_server/src/actions/server/data_queries/canvas.py": "aac22fa2bb54baeae5c98442dda0cfc47168f3beb1ea43f8e8c303481ed90c50",
+      "action_server/src/actions/server/data_queries/canvas_mcp.py": "d52c117af1ee3b42707dcdb648d30b390ad44659f291f74f33bac6beb941f3b9",
+      "action_server/src/actions/server/data_queries/invoice_worker.py": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450",
+      "action_server/src/actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+      "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+      "action_server/src/actions/server/data_queries/review.py": "f7d62b8265dbe6450754f81236d5feb27270a91f6017084dd77f3d8070fe00b4",
+      "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+      "action_server/src/actions/server/data_queries/service.py": "65d4d3eceafd579534fa3a17060be7c35ea468b5692635b647104f733433feea",
+      "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "195f8dd0c4247eeb39b1be5dae974f33d014f734e6429fae249760395d55b4ee",
+      "action_server/src/actions/server/migrations/__init__.py": "76f9ea7dc0087b7f3802c86e7b2f70e97f560265fcf0e6d084e858704e811cea",
+      "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+      "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+      "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+      "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+      "action_server/src/actions/server/run_outputs/service.py": "c7d5532917305c3453d0dd2f2fbb1b04eacfe9bc01ffed52ae9518905b5ee773",
+      "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+      "action_server/src/actions/server/run_outputs/types.py": "1189364febdfcb5caf16d8429cc01945c297f566d38a109ad6bcef33de497b9d",
+      "action_server/tests/action_server_tests/test_candidate_work_items.py": "a186c4a80ed9d6c20eef7fd94414015358caa7b91e8b482d0b58e7a75e6b1c63",
+      "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+      "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+      "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "a1846411f369de1eb8f105c28108e69b3bc50b81a32608724978e96c83aca417",
+      "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "45deba388f4dc5aff738622d6a161e1e11543d072799e0bd5d8154fd26cbc3fd",
+      "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+      "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+      "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+      "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+      "action_server/tests/action_server_tests/test_invoice_worker.py": "7d56d153c84dbbc3c236fd0d6a7e16dc4a82e75cce80cbe7c89f7befa3155d42",
+      "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+      "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+      "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+      "developer/toolkit.py": "5303e8d9530269589ae83f586d2959ce3bd93b2bbf1b09029d18ab7cbbd4cb32",
+      "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+      "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+      "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae"
+    },
+    "worker": {
+      "action_server/poetry.lock": "e2c743d43d0608182e6c888cccd308821433b80f2adf4547e950e061723f3f7a",
+      "action_server/pyproject.toml": "b4071cd1e915bf89b3520c9b5e7f3727c119990b3ae8b6040224fe645181f964",
+      "action_server/scripts/verify_invoice_queries.py": "b2b6a48fb95fee5b54885ec643dc4c898ac0d18a9676859c7c5a62bab7f0110e",
+      "action_server/src/actions/server/_api_action_routes.py": "65133ad7eb88a1e4a5c959db7f359ceaff2245878c058a8c77b94d42e8288860",
+      "action_server/src/actions/server/_models.py": "d7eee21eeaa10f8d36b40de57fbc6191fcc1dd33f91be0d267229cff0e3f12af",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+      "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+      "action_server/src/actions/server/_server.py": "085eae5a1a4a3e433288735f895687701513a1004656caf3b89368c6e36e2542",
+      "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+      "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+      "action_server/src/actions/server/data_queries/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+      "action_server/src/actions/server/data_queries/canvas.py": "aac22fa2bb54baeae5c98442dda0cfc47168f3beb1ea43f8e8c303481ed90c50",
+      "action_server/src/actions/server/data_queries/canvas_mcp.py": "d52c117af1ee3b42707dcdb648d30b390ad44659f291f74f33bac6beb941f3b9",
+      "action_server/src/actions/server/data_queries/invoice_worker.py": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450",
+      "action_server/src/actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+      "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+      "action_server/src/actions/server/data_queries/review.py": "f7d62b8265dbe6450754f81236d5feb27270a91f6017084dd77f3d8070fe00b4",
+      "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+      "action_server/src/actions/server/data_queries/service.py": "65d4d3eceafd579534fa3a17060be7c35ea468b5692635b647104f733433feea",
+      "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "195f8dd0c4247eeb39b1be5dae974f33d014f734e6429fae249760395d55b4ee",
+      "action_server/src/actions/server/migrations/__init__.py": "76f9ea7dc0087b7f3802c86e7b2f70e97f560265fcf0e6d084e858704e811cea",
+      "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+      "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+      "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+      "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+      "action_server/src/actions/server/run_outputs/service.py": "c7d5532917305c3453d0dd2f2fbb1b04eacfe9bc01ffed52ae9518905b5ee773",
+      "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+      "action_server/src/actions/server/run_outputs/types.py": "1189364febdfcb5caf16d8429cc01945c297f566d38a109ad6bcef33de497b9d",
+      "action_server/tests/action_server_tests/test_candidate_work_items.py": "a186c4a80ed9d6c20eef7fd94414015358caa7b91e8b482d0b58e7a75e6b1c63",
+      "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+      "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+      "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "a1846411f369de1eb8f105c28108e69b3bc50b81a32608724978e96c83aca417",
+      "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "45deba388f4dc5aff738622d6a161e1e11543d072799e0bd5d8154fd26cbc3fd",
+      "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+      "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+      "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+      "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+      "action_server/tests/action_server_tests/test_invoice_worker.py": "7d56d153c84dbbc3c236fd0d6a7e16dc4a82e75cce80cbe7c89f7befa3155d42",
+      "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+      "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+      "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+      "developer/toolkit.py": "5303e8d9530269589ae83f586d2959ce3bd93b2bbf1b09029d18ab7cbbd4cb32",
+      "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+      "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+      "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+      "action_server/frontend/apps/canvas-view/src/host-harness.ts": "403e8aad82e795e007658eebb57d5e69a850bcb58bf505c24c11487ec2d3035f",
+      "action_server/frontend/apps/canvas-view/src/main.tsx": "ce2fbd3700a1bf39a9ba37c687f93751acb8ae732cfcf85bf9a316b05ed726fc",
+      "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx": "1ce93a9725a977fae906c0aee45e5188ce9c9c937e02bcdd09efdaf5d0a510ff",
+      "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.tsx": "8f9d448c60fe5aa87fe53c4b0f74e85117b3221cf0b533f633d642c061fdff92",
+      "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.test.tsx": "fb4eb92e36c89f3b943b27d2e2e58d881cefcd1df05019cd9bb80e7b505d9b0d",
+      "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx": "bea0532129a1dae633fe66f132d606baef61ecab4d60d77a4398d2c38a01b6e8",
+      "action_server/frontend/apps/canvas-view/src/query-results/invoice-bridge.ts": "97be1b91fe623e7b0ca5e4203dbb22f9862382a7d3a24c79ae252276591e917b",
+      "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": "00469d5731b5d9cf634dedb2538f6cb60774d67444d28ce74db67300d6609f50",
+      "action_server/frontend/apps/canvas-view/src/query-results/review-contract.ts": "1415138c7cf0daea5258af20fc2465f72a8766ac342c423124e803bc4ae96ecb",
+      "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.test.tsx": "7673b4cd11978a95adf017a7b58234e8c4113cbe61bee0371d9623d591835d86",
+      "action_server/frontend/apps/canvas-view/invoice-runtime.spec.ts": "7d03b6d9f0cb0aa60c110d77a8a4bd56f215336e81cf46b2d78256fb1de4d6c3",
+      "action_server/frontend/playwright.invoice.config.ts": "bfd2ae1cdf3863bd680151e64db0c25fdc6ec096995a30f33b06340ba8ba2129",
+      "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    "sdk": {
+      "developer/toolkit.py": "5303e8d9530269589ae83f586d2959ce3bd93b2bbf1b09029d18ab7cbbd4cb32",
+      "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+      "work-items/poetry.lock": "11cf9a37d527e0089d124ed2f965dbdc16aed6dff546a342dc4ddd9ac9bd672e",
+      "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+      "work-items/scripts/verify_fenced_queues.py": "13f18a32dae6b67e4395b1697f22d38e50e16ac5b19fa2235cdbbd16d1f08076",
+      "work-items/src/actions/work_items/_adapters/__init__.py": "866e54892d3d947d5adae7d7e4c00187bcc36823cda51d3f8729cad7871fa369",
+      "work-items/src/actions/work_items/_adapters/_base.py": "ef0e65e896d74185cfec0443cc1e997e83bf446d954a2dd3681336e845084d0c",
+      "work-items/src/actions/work_items/_adapters/_docdb.py": "5187557ff67d73e0cdaac34d9c58f62f325477209d4d15672624b2bb57cb65e4",
+      "work-items/src/actions/work_items/_adapters/_file.py": "b53c59b0eff5c4f28e6e1b506420e7b7632b5cd4473d18a34cc62e06cfaea3b6",
+      "work-items/src/actions/work_items/_adapters/_postgres_fenced.py": "13a3c563be1e75860d75831a13e45edd6bc262221b931d6f5ae4684909563c55",
+      "work-items/src/actions/work_items/_adapters/_redis.py": "18c8b388aa3310265404677ecc2f9b7e9363feaeeecaa56af2ef6327264cdeab",
+      "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+      "work-items/src/actions/work_items/_adapters/_sqlite.py": "619f93586529126be766f949d317c12c477cf41ae7133257b2994a6e625b3ec4",
+      "work-items/src/actions/work_items/_adapters/_yorko.py": "b3a4a5eae04f209481843c67a937933d72c91a0ee80553495841405762835dc8",
+      "work-items/src/actions/work_items/_fencing.py": "e9d6f7560c432ac9d82727c787a7da8eaf14797bd691572acd414f9822dbe560",
+      "work-items/tests/work_items_tests/test_fenced_queue_conformance.py": "54cb4345a8891223fae40d6a49cc53f85c8533e9618c4de00d94816e41ec14be",
+      "work-items/tests/work_items_tests/test_postgres_fenced_schema.py": "9364270fee927ab0da6a4e3de69edd174949e496d3049b4dfea17d71aa550051",
+      "work-items/tests/work_items_tests/test_sqlite_fencing.py": "a292fb0dc6e2262c5299472a824a1da99ad1e39161621b5c77f168ae5441b288"
+    }
+  },
+  "source_identity_note": "Worker gate executed9390812. Full recovery launcher observed182a709 while harness fix was already in working tree; it was committed as9e535ee before verification completed. Every measured recovery input matches9e535ee, and every original worker production/test input remains identical except the explicitly measured portable-environment harness correction. No historical green is promoted without byte equivalence.",
+  "behavior": {
+    "entry": "private trusted-host composition, not new public tool/scheduler/adapter or automatic approval",
+    "authority": "existing SQL Review/Work Item/Run/Attempt; no migration or duplicate state store",
+    "dispatch": "explicit current review/read/execute authorization and exact immutable result/input/source/app/deployment binding; deterministic existing RunPin idempotency and separate initial Work Item claim in Run.inputs",
+    "execution": "one durable Run.result launch intent; fixed copied and hashed private-result-only synthetic invoice task; actual RCC18.19.3 artifact execution through existing adapter, installed exact SDK proof",
+    "publication": "current Work Item and Attempt fences; sealed RunOutput plus Run publish and Work Item finish/child output share one SQL transaction; terminal replay returns original receipt",
+    "recovery": "explicit no-admitted-launch or verified completed fixed-private-result journal; preserve executed/publication fences, never rerun completed task; unknown/missing/altered receipts fail closed",
+    "crash": "real controller os._exit23 after RCC completes, then new isolated interpreter publishes; deterministic lease expiry is injected in SQL for takeover tests, not elapsed-time crash proof; no generic mid-external-effect claim",
+    "retention": "sealed worker output currently3600seconds; long-term retention/restore remains a release gate",
+    "cancellation": "review, Work Item and linked Run cancellation atomically fence publication; real owned env-exec process suspended then cancelled/reaped in regression"
+  },
+  "toolchain": {
+    "rcc": "18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "gateway": "Doctor -> Bootstrap -> ToolkitTest179 passed",
+    "homes": "task-owned RCC/ACTIONS/ROBOTS/XDG/Poetry/npm; in-project isolated environments; actual worker artifact has separate retained owned RCC home",
+    "postgres": "official digest-pinned15.19, --pull=never; loopback ephemeral, task label,256MiB/1CPU/PID128/tmpfs128MiB",
+    "transport": "exec server disconnected/pong_timeout, then recovered; inspected process/logs before retry. ToolkitTest had actually completed179; no duplicate test run or workspace reset."
+  },
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared ./devutils/bin/develop.sh Doctor, then Bootstrap, then ToolkitTest",
+    "ACTIONS_INVOICE_EVIDENCE_DIR=<owned>/final ACTIONS_INVOICE_WORKER=1 ACTIONS_INVOICE_FULL=1 ACTIONS_INVOICE_BROWSER=1 bash <prepared> ./devutils/bin/develop.sh InvoiceQueryTest",
+    "ACTIONS_FENCED_EVIDENCE_DIR=<owned>/fenced-final ACTIONS_FENCED_FULL=1 bash <prepared> ./devutils/bin/develop.sh FencedWorkItemsTest",
+    "Runtime: poetry run inv lint; poetry run inv typecheck; poetry check --lock",
+    "SDK: poetry run ruff check src tests; poetry run ruff format --check src tests; poetry run mypy; poetry run mypy _fencing.py and concrete _sqlite/_postgres_fenced/_sql_review modules; poetry check --lock",
+    "Devutils: poetry run pytest -q; ruff check/format and isort checks; poetry run mypy --follow-imports=silent -p devutils",
+    "clean committed archive: generate public OAuth fixture offline, copy exact measured RCC build asset; poetry build Runtime1.1.0a2 using prepared package toolchain",
+    "python action_server/scripts/verify_published_runtime_floor.py <owned a2 wheelhouse> --candidate-sdk-wheelhouse <owned0.5a1 wheelhouse>; fresh isolated pip --no-cache-dir public Core/Helper resolution plus local SDK; pip check, full Runtime Python member matching and SDK RECORD/wheel/origin checks",
+    "prepared RCC Python venv with exact Runtime/SDK wheels and pinned dependency graph: python -I copied committed review/MCP/worker tests, real owned PostgreSQL and actual RCC fixture; no Runtime/SDK source overlays"
+  ],
+  "runtime": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/worker/portable-recovery/c4d53d38-1743-4ffb-a217-58d2e2b77508/receipt.json",
+      "sha256": "a80762ed58df2d3ac0aeae9ed48e5c63aeee96e21c506ea8067576ccfac89036"
+    },
+    "observed_head": "182a70942eabf5f12fe7284d97dea4362d3b4075",
+    "counts": {
+      "components": {
+        "tests": 105,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 128,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 1774,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS",
+    "skips": [
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_normalize_uri",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.test_artifact_binding_lock",
+        "name": "test_windows_binding_does_not_import_fcntl",
+        "reason": "Requires native Windows locking"
+      },
+      {
+        "class": "tests.action_server_tests.test_artifact_storage",
+        "name": "test_storage_handles_mixed_resolved_drive_prefixes",
+        "reason": "native Windows path resolution"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_upload",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_status",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_set_changelog",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_rcc_runtime_adapter",
+        "name": "test_real_rcc_artifact_action_vertical",
+        "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+      },
+      {
+        "class": "tests.action_server_tests.test_robot_artifacts",
+        "name": "test_rejects_socket_entries",
+        "reason": "Filesystem cannot create this Unix socket fixture"
+      },
+      {
+        "class": "tests.action_server_tests.test_robot_run_inputs",
+        "name": "test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+      }
+    ],
+    "worker_receipt": {
+      "path": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/receipt.json",
+      "sha256": "e27d95e5d402566c91e74aac3a422de13530790dea09438ac41e40391b7ac428"
+    },
+    "worker_aggregate_status": "FAIL due to later disk-full portable stage, retained; component105/invoice128/worker130/browser2 each passed0skip",
+    "worker_counts": {
+      "components": {
+        "tests": 105,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 128,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "worker": {
+        "tests": 130,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "browser": {
+        "tests": 2,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "worker_cleanup": "PASS",
+    "worker": "130 passed0skip; four provider/SQL combinations plus42 actual task-input cases and4 carrier contracts",
+    "browser": "2 actual Runtime socket/E2 browser cases passed;2 deprecation warnings; no E1 claim"
+  },
+  "sdk": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/worker/fenced-final/9876038a-f123-4b65-bb64-a67d5f886dc1/receipt.json",
+      "sha256": "38ada6b5e500dfd27b014d74048a5c4b27fd7ebe2568a4220dfecccbea36e196"
+    },
+    "counts": {
+      "conformance": {
+        "tests": 45,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 321,
+        "skipped": 38,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS",
+    "portable": "283passed28skipped10xfailed3deselected; JUnit skipped38 includes xfails",
+    "skips_and_xfails": [
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestAdapterFactory",
+        "name": "test_redis_adapter_requires_dependency",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestAdapterFactory",
+        "name": "test_documentdb_adapter_requires_dependency",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_database_initialization",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_reserve_and_release_workflow",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_file_operations",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_producer_consumer_workflow",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_work_item_with_files",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_error_handling_file_already_exists",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_custom_output_queue_name",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestSQLiteAdapter",
+        "name": "test_default_output_queue_name_backward_compatibility",
+        "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_redis_connection",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_reserve_and_release_workflow",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_payload_persistence",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_file_operations_inline",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_fifo_ordering",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_concurrent_reservation",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_producer_consumer_workflow",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_exception_handling",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_error_handling_file_not_found",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_error_handling_file_already_exists",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_error_handling_invalid_work_item",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_custom_output_queue_name",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestRedisAdapter",
+        "name": "test_default_output_queue_name_backward_compatibility",
+        "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_mongodb_connection",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_reserve_and_release_workflow",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_payload_operations",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_file_operations_gridfs",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_fifo_ordering",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_atomic_reservation",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_producer_consumer_workflow",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_exception_storage",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_error_handling_file_not_found",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_error_handling_file_already_exists",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_error_handling_invalid_work_item",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_missing_document_during_file_access",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_file_size_threshold_inline_vs_gridfs",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_custom_output_queue_name",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      },
+      {
+        "class": "tests.work_items_tests.contract_ports.test_custom_backends.TestDocumentDBAdapter",
+        "name": "test_default_output_queue_name_backward_compatibility",
+        "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017"
+      }
+    ],
+    "static": "Ruff lint, declared mypy1file, concrete mypy4files and lock pass; existing formatting27files and broad optional-backend typecheck68errors remain FAIL"
+  },
+  "installed_pair": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/worker/installed/receipt.json",
+      "sha256": "7feb6ccc0454d760227a05658b68a3ae24033c76a2966087d4b0eff4e1335398"
+    },
+    "identity": {
+      "path": "/workspace/actions-327-state/evidence/worker/installed/identity.json",
+      "sha256": "5bc9dcee9473d7801401b8122ed7cb31881c83adef490c6800dc7ec504f415b9"
+    },
+    "counts": "158passed0skip0fail0error",
+    "runtime_wheel": {
+      "path": "/workspace/actions-327-state/worker-installed/wheels/actions_runtime-1.1.0a2-cp312-cp312-linux_x86_64.whl",
+      "sha256": "2e11831c540dd7b6af432313b7fd94361199a7bf81d065ff3b4a008ed0e5b9b1"
+    },
+    "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+    "build_source": {
+      "path": "/workspace/actions-327-state/worker-installed/build-source.json",
+      "sha256": "9e13bd12c2f04e6505512c57af56302c34fb17a5698499269c02973b433e9526"
+    },
+    "external_rcc_fixture": {
+      "path": "/workspace/actions-327-state/worker-installed/external-rcc-fixture.json",
+      "sha256": "bbc9b0d4cf283fef7bcc8f10302407cbb7e0adc516afc2896a521db670ba52a3"
+    },
+    "scope": "Python wheel contracts only; initial harness used wrong bundled RCC filename, then admitted external exact pinned binary without modifying wheel bytes; no native/packaged-binary acceptance claim",
+    "reporting": "post-test directory-hash failure preserved; successful JUnit and cleanup reconciled without rerun"
+  },
+  "ci_admission": {
+    "source": "9e535ee5bb99100ff0c61a71844cd0d7c6c22df3",
+    "primary_failures": {
+      "path": "/workspace/actions-327-state/evidence/worker/hosted-primary-failures.json",
+      "sha256": "90fec87f17298cda10ced215651a74132a571e3770685461613e62d55d45c84f"
+    },
+    "fixes": [
+      "preserve explicit develop=false across main/dev dependency merge",
+      "Runtime ordinary install/devinstall admit locked data-duckdb extra",
+      "PR-only build/stage exact local SDK before cibuildwheel Runtime dependency resolution",
+      "explicit candidate verifier versions from producer pyprojects, SDK installed RECORD/member/origin proof; public Core/Helper URL/SHA and Runtime1.0.4 defaults unchanged"
+    ],
+    "local_clean_floor": {
+      "path": "/workspace/actions-327-state/evidence/worker/candidate-public-floor-second.log",
+      "sha256": "0117457e97445fd30d3148c2a141d11782f5273ca74fb7b85c1d177f9f57431a"
+    },
+    "devutils": "256passed; source SDK version selection38focused passed; factory regression reproduced then passed; actual inv devinstall and2candidate tests plus Runtime387file typecheck passed",
+    "hosted": "fresh pushed-head standardCI, wheel and platform outcomes pending; local fixes are not hosted acceptance"
+  },
+  "rcc_trust": {
+    "negative": "--provider local --permissive-local selects HTTP carrier for local alias and fails attachment decode before task; pinned source4148c2b71705c9d2baf0e88b48d08a79cb7bda0f cmd/environmentTrustPolicy.go",
+    "repair": "keep provider and permissive-local, add generated owned --trust-carrier <rcc-home>/artifacts/v1/trust --trust-carrier-type filesystem",
+    "policy_digest": "sha256:7252b27a0266abd2c3a688e89326e739aed446c3418a8a2248ef01d1b740b6ae",
+    "security": "same policy digest, no key/signature/root/credential/security/network change",
+    "artifact": {
+      "artifact_digest": "sha256:d791a3890527ad638c3446af42bb431a26c2915c8dde19e5e3dfa951478bd60c",
+      "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "config": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/worker-runtime.json"
+    },
+    "positive": {
+      "path": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/rcc-acquire.json",
+      "sha256": "8657eb4daa8ba18698e29074b7c3f72a01ad345ccd274139a784e0d389d5aeec"
+    },
+    "negative_refs": [
+      {
+        "path": "/workspace/actions-327-state/evidence/worker/minimal-local-rejection.json",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/worker/minimal-local-rejection.log",
+        "sha256": "f6d0f20ac2bbafde23efd89df6a8c7aefd1f9c83d5582cd155e386e0fb7a4ffc"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/worker/acquire-local.json",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/worker/acquire-local.log",
+        "sha256": "f6d0f20ac2bbafde23efd89df6a8c7aefd1f9c83d5582cd155e386e0fb7a4ffc"
+      }
+    ],
+    "draft": "docs/program/evidence/actions-next-327/upstream-rcc-local-carrier-draft.md"
+  },
+  "hosted_ledger": {
+    "original_5e55": "39789703880 all3OS frozen/Go HTTP500 ValueError failures retained; inner cause unestablished",
+    "28fa_native": "39801883824 Ubuntu119904511068 and Windows119904510525 actual consumer and downstream binary/process/browser/storage/history SUCCESS; Ubuntu candidate-sourceCanvas PASS; WindowsCanvas intentionally skipped",
+    "28fa_macos": "119904511030 and targeted attempt2 119918396982 cancelled while queued, no steps/logs; no third retry absent causal evidence, Mac remains unverified",
+    "28fa_wheel": "39801884186/119904513251 failed unpublished SDK resolution; publication skipped",
+    "28fa_standard": "39801883728/119904509204 1failed1583passed134skipped and4missingduckdbimports; downstream published-CoreCanvas/integration skipped",
+    "qualification": "parent supplied native job/step observation; primary wheel/standard logs independently fetched and retained; new source needs fresh acceptance"
+  },
+  "failure_receipts": [
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/portable-env-red.log",
+        "sha256": "9692c585b897cbcc536ed16577cd43616b53cb02e81c6073a249ee460a06f743"
+      },
+      "result": "Portable inherited the dedicated RCC opt-in before isolation helper; regression reproduced then passed."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/final-gate.log",
+        "sha256": "fae5dfbcec96971474c28c10c509887636eec823d65078ffdef5d24157c06f0e"
+      },
+      "result": "Strict component105/invoice128/worker130/browser2 passed; aggregate FAIL from disk-full portable1failed1449passed13skipped311errors189deselected15warnings. Normal pytest cleanup recovered space; proposed cache deletion did not execute."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/dispatch-red.log",
+        "sha256": "a4c69c5ff29ea4a920b1ed2532435617310f72b23164e0610c4077c3f068be35"
+      },
+      "result": "Missing composition module before implementation."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/claim-link-red.log",
+        "sha256": "00df0d5fe99e30a1bb4cd0e55a3fbc8ba9a90444b57a4c549e8a77eb5d6b0e63"
+      },
+      "result": "Same-owner higher Work Item epoch could reuse Attempt before dispatch claim/fence binding."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/execution-red.log",
+        "sha256": "a979251378136c351dbfd225e5c04fb6b0096367f76310a94d3009b608b5ff2e"
+      },
+      "result": "Missing actual execution method before implementation."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/execution-first.log",
+        "sha256": "9535a36faf9fd292d851f07820cda3077ffa85996b161d5e6f87575e8271d58a"
+      },
+      "result": "Initial source edit syntax error caused3failures; corrected before acceptance."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/execution-second.log",
+        "sha256": "1dc1fb492175e848bd36fa900d5c912285a39cdaeedd3c9b0ba1276a7d5704d8"
+      },
+      "result": "Provider-bound local trust carrier rejection before child execution; retained negative."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/execution-carrier.log",
+        "sha256": "be8a552dafaf447ec7fcce755a5a7cea6a833c5c4b3fa1ac7b2c9dd57d887cfb"
+      },
+      "result": "Valid RCC completed receipt was rejected by an incorrect expected status; pinned receipt contract corrected."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/carrier-red.log",
+        "sha256": "861f3fd454ca4ecbd1168b11d74b16b28c10218977c25fd981c42b84bdef4bd4"
+      },
+      "result": "Explicit local carrier command contract absent before adapter extension."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/cancel-link-red.log",
+        "sha256": "2e1ba0412e4735a9e61196334323f32993afcc9d145c0d4e27b5b10c0de12fe3"
+      },
+      "result": "Review cancellation did not fence linked Run before transactional linkage."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/reconcile-red.log",
+        "sha256": "823c661f4520fcf5f0bf09247c14956b1678ae2f988b5177c061195edbc5c32f"
+      },
+      "result": "Explicit reconciliation absent before implementation."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/terminal-fence-red.log",
+        "sha256": "1094b33f3f18f67cf9d182715d1c4f9aa7e2d8ec962b270c9d07903a6e40b59c"
+      },
+      "result": "Forged terminal Attempt ticket was accepted before exact ticket comparison."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/process-recovery-first.log",
+        "sha256": "1270fc5851e1f901302f7f2c9f1119d1e181a33b4ddd11d877b16f4ab2d2a2d6"
+      },
+      "result": "Test setup sys import missing; observational cancellation fixture also suspended RCC version probe. Exact owned stopped probe and parent were inspected; only owned process was stopped. Corrected fixture suspends env exec only."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/source-symlink-red.log",
+        "sha256": "e61e29f0caed1fe2c3033efaa5960b2396a01e31fa348b9e02a924769f97c469"
+      },
+      "result": "Source target was followed while hashing before explicit symlink pre-scan."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/ci-install-red.log",
+        "sha256": "a91c6a82f24c27eabcfeb6eb6cdbb0e388efb0b479083761b0d84b2e898cd0c6"
+      },
+      "result": "Shared devinstall overwrote explicit noneditable SDK; install extras mechanism absent."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/ci-sdk-staging-red.log",
+        "sha256": "e8a87c2f979411f3b8232f7a53becf3d16e6198567564553b5f3ab2674761492"
+      },
+      "result": "PR candidate SDK staging and explicit local SDK clean-install mode absent."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/devutils-full.log",
+        "sha256": "1c1062fd238a90e05c2f7d6bda26595cc7e5bf0cec42e1cc0df04d5cb309a32e"
+      },
+      "result": "1 failed/254 passed stale exact generated-workflow assertion after SDK flag addition."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/candidate-public-floor.log",
+        "sha256": "306028d0e8d0c19299aa0c03e46ac364647c5de41507078d8dac6f598cfef5ef"
+      },
+      "result": "Clean verifier read SDK version from tool.poetry rather than its project table; failed before pip."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/devutils-typecheck-final.log",
+        "sha256": "9e9bf790b38c65daef38650aded9b3cf4b1934af54ecfea7da5593c59ad689c9"
+      },
+      "result": "Unconfigured combined src/tests invocation found duplicate module names; package-only check passed 8 files."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/sdk-typecheck-final.log",
+        "sha256": "eda3daaf1eee68d35153d82bc2c7e3b462e0a1b015ca41ac0174a7521b0467c4"
+      },
+      "result": "Broad generic inv typecheck failed:68 errors/16 files, including unavailable optional backends and unused ignores; SDK source unchanged. Declared call-site and explicit concrete checks passed."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/sdk-lint-final.log",
+        "sha256": "2d127eb836b1cb7265bfcc234e71778ba2b24c9e0244461587e97e715070d0fe"
+      },
+      "result": "Generic shared formatter uses devutils config and failed existing SDK formatting; no SDK files changed."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/sdk-declared-static.log",
+        "sha256": "c8ad43f9742abc13d7c582aefa3dc3f2ce2b25bca008fe2425afabb34e8fb7d6"
+      },
+      "result": "SDK Ruff lint passed; declared formatting check reported27 existing files; declared mypy passed1file. Formatting debt remains open."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/installed-proof.log",
+        "sha256": "ad984f1dd0617c010126fe0b4ce316751c0cfaafbb708c222ca81013b677f21c"
+      },
+      "result": "158 setup errors, zero test bodies: clean-build harness supplied RCC under rcc instead of required rcc-18.19.3. Wheel bytes unchanged; retry admitted explicit external measured RCC fixture."
+    },
+    {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/worker/installed-proof-second.log",
+        "sha256": "802b54da09058a19ace66c96c94c0986a7575ee19796e8e50f3b3c49a302fedc"
+      },
+      "result": "158 tests passed; post-cleanup receipt hashing hit cells directory. Reconciled from JUnit/identity and observed absent fixture, no duplicate execution."
+    }
+  ],
+  "verification_logs": [
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/doctor-final.log",
+      "sha256": "a801bcbe27da333636d30927488cec3f63e3339aef363bf9dd429da5fabd1557"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/bootstrap-final.log",
+      "sha256": "1496116d28335879c170433fe8084f0c5af9b1f3e806676e8f60aa8ed7940968"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/toolkit-final.log",
+      "sha256": "1c6f0add1dcdc3a9530391b27d4a9d5a9d7f770bb0211b93a7b2eb08a23fb90c"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/runtime-lint-final2.log",
+      "sha256": "14f99ca87e001ee7f6c1c4bc150bf268e7d6a7a8d1b9d9b4b9509f5f303374b2"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/runtime-typecheck-final.log",
+      "sha256": "fc62e146d8e95d2e796311c1cf27ea6805e31c0878ae6404221b11de9b8b0736"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/runtime-lock-final.log",
+      "sha256": "da2eb86f12b4dcc841bddc4e00a8fddb70012003765fb417eafb3f6acfe92a7f"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/devutils-full-last.log",
+      "sha256": "d5d5253d1327200d062fdc79782b9d1764d65f0650fcb55a491c255671f81840"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/devutils-lint-last.log",
+      "sha256": "37c44e3c541f952bfef4bd8a6bef640b548ef20e76674da09517c0dfcb0e512e"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/devutils-typecheck-package.log",
+      "sha256": "157a09cfcdfdfb5977479c5a1c08345149263a3e990a2ec976ef28aaeec9cae6"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/sdk-declared-static.log",
+      "sha256": "c8ad43f9742abc13d7c582aefa3dc3f2ce2b25bca008fe2425afabb34e8fb7d6"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/sdk-concrete-typecheck.log",
+      "sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/sdk-lock-final.log",
+      "sha256": "a2428ed4ae02d9dbfff2895449321f5a297182c3fd189cddfe630c6e0fa76747"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/candidate-public-floor-second.log",
+      "sha256": "0117457e97445fd30d3148c2a141d11782f5273ca74fb7b85c1d177f9f57431a"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/clean-runtime-build.log",
+      "sha256": "0e47a2ac05e544e61ea4f17092c72ddeafc1c2632a021c0ab593e778156d07aa"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/hosted-primary-failures.json",
+      "sha256": "90fec87f17298cda10ced215651a74132a571e3770685461613e62d55d45c84f"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/portable-env-red.log",
+      "sha256": "9692c585b897cbcc536ed16577cd43616b53cb02e81c6073a249ee460a06f743"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/portable-env-green.log",
+      "sha256": "4bcefcc9f6c645923b9993ccf73ad92e6b400ca25458ea14e095857fc2131342"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/runtime-devinstall-current.log",
+      "sha256": "76904e29ccc25ab8fd57a9b4679997738aa19dac1d3cf266ce3e0c519f77f125"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/actual-devinstall-candidate.log",
+      "sha256": "0a56de559f83193ae9264ad5c562b817752a0b32a599421f9a25aa48e7036a08"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/worker/runtime-typecheck-after-devinstall.log",
+      "sha256": "fc62e146d8e95d2e796311c1cf27ea6805e31c0878ae6404221b11de9b8b0736"
+    }
+  ],
+  "documentation_sha256": {
+    "docs/skills/work-items.md": "dc2c53b7b9f42f730f3cc6631f32c07457dd7b8a89bb3328243db50327091c3f",
+    "docs/skills/repository-operations.md": "ac558976ad8efb860151fb022900c68a175b7bbb77c7263b581f5eacaa4a5228",
+    "docs/program/actions-next-release-327.md": "61bce04f43399d30067153316942d5d023b11283f14c4a7c13ad155c15f95a5f"
+  },
+  "documentation_improvement": [
+    {
+      "path": "docs/skills/work-items.md",
+      "delta": "private approved worker SQL authorities, exact dual fencing, launch/publication/reconciliation/replay/cancellation, four-combination RCC gate, explicit rollback/unknown-effect limits; clarify historical0.4.4/API-only receipts",
+      "evidence": "130strict worker +158installed contracts; transactional expiry, real post-RCC process exit/restart, cancellation, stale ticket/claim and source-symlink regressions"
+    },
+    {
+      "path": "docs/skills/repository-operations.md",
+      "delta": "pinned local-alias HTTP-carrier defect, unchanged-policy explicit filesystem mitigation/removal criterion; candidate devinstall develop=false/extras and PR-only SDK wheel admission/version-table provenance",
+      "evidence": "pinned RCC source and same-policy negative/positive receipts; factory/staging and portable-env RED/GREEN,256Devutils, actual devinstall and real clean public-floor probe"
+    },
+    {
+      "path": "docs/program/actions-next-release-327.md",
+      "delta": "worker checkpoint and ordered next generated immutable application revision slice; source-specific hosted successes, Mac cancellations and distribution CI failures preserved",
+      "evidence": "this receipt plus existing hosted primary evidence; no full-release closure"
+    }
+  ],
+  "rollback": "No new migration in this iteration. Disable dispatch; reconcile/cancel admitted executions using current code before downgrade. Preserve existing SQL Review/Work Item/Run/Attempt and sealed objects/journals together; older code cannot resume private dispatch Run.result envelope. Prior migration rollback needs pre-upgrade database/attachment backups and restore proof. No production migration/deploy/data deletion occurred.",
+  "remaining_order": [
+    "one existing immutable generated app revision -> stage/validate/activate/invoke/restart/rollback -> current renderer/bridge -> exact reviewed result -> this worker and scoped artifact",
+    "generic retry/dead-letter/effect recovery and explicit ambiguous-outcome operator reconciliation; no exactly-once external effects inferred",
+    "fresh3OS source/wheel/frozen/Go/browser standard CI; Mac runner cause and supported targeted recovery",
+    "homelab-independent wheel/native/image distribution, configurable storage/registry, source identity/SBOM/provenance/checksums",
+    "complete backup/restore, rollback and owner release approval; no publication or community merge",
+    "E1 actual authenticated ChatGPT NEEDS_OPERATOR; celld24fbd91c9ddd34bec54230e1c3b20e3225061079 remains NO-GO until pinned synthetic storage/failure prerequisites"
+  ],
+  "cleanup": "All verifier-owned PostgreSQL services removed after completed gates. RCC artifacts/homes and synthetic sealed evidence intentionally retained. Existing PID1 zombies remain separately classified, no universal child-reaping claim or PID1 mutation.",
+  "upstream_disposition": "Pinned RCC compatibility finding drafted only; no external issue/PR/repository mutation authorized or performed.",
+  "authorization": "Assigned branch commits/nonforce push and issue327/PR328 evidence only; no community merge/tag/publication/deployment/production/backend/credentials/network-security change or other repository mutation.",
+  "source_equivalence_verified": {
+    "runtime_full_inputs": 46,
+    "sdk_inputs": 18,
+    "method": "Each measured file hash equals git show9e535ee5bb99100ff0c61a71844cd0d7c6c22df3:path; worker inputs separately equal git show9390812046ceab287becf78be3df6b50281b639e:path, with only verifier portable-opt-in isolation changed since worker execution."
+  }
+}

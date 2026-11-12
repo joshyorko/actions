@@ -1,0 +1,19 @@
+failed to load config from /workspace/actions/action_server/frontend/vitest.canvas.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 1 error:
+
+[UNRESOLVED_ENTRY] Cannot resolve entry module vitest.canvas.config.ts.
+
+    at aggregateBindingErrorsIntoJsError (file:///workspace/actions/action_server/frontend/node_modules/rolldown/dist/shared/error-CVc7IgvG.mjs:48:18)
+    at unwrapBindingResult (file:///workspace/actions/action_server/frontend/node_modules/rolldown/dist/shared/error-CVc7IgvG.mjs:18:128)
+    at #build (file:///workspace/actions/action_server/frontend/node_modules/rolldown/dist/shared/rolldown-DiYVDns9.mjs:132:34)
+    at async bundleConfigFile (file:///workspace/actions/action_server/frontend/node_modules/vite/dist/node/chunks/node.js:37017:17)
+    at async bundleAndLoadConfigFile (file:///workspace/actions/action_server/frontend/node_modules/vite/dist/node/chunks/node.js:36918:18)
+    at async loadConfigFromFile (file:///workspace/actions/action_server/frontend/node_modules/vite/dist/node/chunks/node.js:36879:42)
+    at async resolveConfig (file:///workspace/actions/action_server/frontend/node_modules/vite/dist/node/chunks/node.js:36488:22)
+    at async _createServer (file:///workspace/actions/action_server/frontend/node_modules/vite/dist/node/chunks/node.js:26319:65)
+    at async createViteServer (file:///workspace/actions/action_server/frontend/node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:8835:17)
+    at async createVitest (file:///workspace/actions/action_server/frontend/node_modules/vitest/dist/chunks/cli-api.BK8pd4xc.js:14221:18) {
+  errors: [Getter/Setter]
+}

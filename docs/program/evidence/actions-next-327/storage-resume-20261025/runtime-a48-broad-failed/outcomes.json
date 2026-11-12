@@ -1,0 +1,872 @@
+{
+  "original_junit_sha256": "18834c00308594df795b3772c8b68c1f0339d0fcf7c2193787591efc92c27a71",
+  "failures": [
+    {
+      "case": "tests.action_server_tests.test_logical_readiness::test_present_dependency_keeps_task_admission_unchanged",
+      "type": "failure",
+      "message": "actions.server.run_outputs.task_service.TaskHostUnavailable: Task host unavailable"
+    },
+    {
+      "case": "tests.action_server_tests.test_logical_runner_join::test_bound_runner_synthetic_completion_and_release[sqlite-none]",
+      "type": "failure",
+      "message": "AttributeError: <module 'actions.server.foundry.rcc_execution' from '/workspace/actions/action_server/src/actions/server/foundry/rcc_execution.py'> has no attribute 'RccProcessHandle'"
+    },
+    {
+      "case": "tests.action_server_tests.test_logical_runner_join::test_bound_runner_synthetic_completion_and_release[sqlite-before-spawn]",
+      "type": "failure",
+      "message": "AttributeError: <module 'actions.server.foundry.rcc_execution' from '/workspace/actions/action_server/src/actions/server/foundry/rcc_execution.py'> has no attribute 'RccProcessHandle'"
+    },
+    {
+      "case": "tests.action_server_tests.test_logical_runner_join::test_bound_runner_synthetic_completion_and_release[sqlite-stage]",
+      "type": "failure",
+      "message": "AttributeError: <module 'actions.server.foundry.rcc_execution' from '/workspace/actions/action_server/src/actions/server/foundry/rcc_execution.py'> has no attribute 'RccProcessHandle'"
+    },
+    {
+      "case": "tests.action_server_tests.test_logical_runner_join::test_bound_runner_synthetic_completion_and_release[postgresql-none]",
+      "type": "failure",
+      "message": "AttributeError: <module 'actions.server.foundry.rcc_execution' from '/workspace/actions/action_server/src/actions/server/foundry/rcc_execution.py'> has no attribute 'RccProcessHandle'"
+    }
+  ],
+  "skips": [
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_normalize_uri",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+      "type": "skipped",
+      "message": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.mcp.test_canvas_query_template::test_canvas_template_candidate_source_runs_through_runtime_and_real_browser",
+      "type": "skipped",
+      "message": "Set ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1 for the candidate-source Runtime/browser gate."
+    },
+    {
+      "case": "tests.action_server_tests.mcp.test_canvas_query_template::test_canvas_template_runs_through_runtime_and_real_browser",
+      "type": "skipped",
+      "message": "Set ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 for the Runtime/browser gate."
+    },
+    {
+      "case": "tests.action_server_tests.mcp.test_mcp_apps_authoring::test_canvas_view_calls_public_action_through_runtime_bridge",
+      "type": "skipped",
+      "message": "Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance."
+    },
+    {
+      "case": "tests.action_server_tests.test_artifact_binding_lock::test_windows_binding_does_not_import_fcntl",
+      "type": "skipped",
+      "message": "Requires native Windows locking"
+    },
+    {
+      "case": "tests.action_server_tests.test_artifact_storage::test_storage_handles_mixed_resolved_drive_prefixes",
+      "type": "skipped",
+      "message": "native Windows path resolution"
+    },
+    {
+      "case": "tests.action_server_tests.test_current_candidate_import_rollback::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+      "type": "skipped",
+      "message": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for current-candidate RCC proof"
+    },
+    {
+      "case": "tests.action_server_tests.test_dakota_rcc_acceptance::test_dakota_local_rcc_action_over_authenticated_http",
+      "type": "skipped",
+      "message": "set ACTIONS_REAL_RCC_ACCEPTANCE=1 for the live local proof"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_bound_json_operators_and_array_rhs_execute",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_preserves_values_and_reruns",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stdout]",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stderr]",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_concurrent_postgresql_startup_archives_legacy_run_outputs_once",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_schema_introspection_uses_effective_search_path",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_two_runtime_processes_claim_one_due_schedule",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_two_database_instances_preserve_concurrent_atomic_updates",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_transaction_boundaries_emit_no_redundant_begin_notice",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_transaction_rolls_back_failed_state_update",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_concurrent_postgresql_startup_applies_migrations_once",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_database_shared::test_postgresql_production_models_are_visible_across_instances",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_deployment_schema_probe::test_postgresql_proposed_deployment_schema_scoped_ddl_in_isolated_schema",
+      "type": "skipped",
+      "message": "ACTIONS_TEST_DATABASE_URL is not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_action_rcc::test_actual_detached_action[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "exclusive prepared detached RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_action_rcc::test_actual_detached_action[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "exclusive prepared detached RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_action_rcc::test_actual_detached_action[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "exclusive prepared detached RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_action_rcc::test_actual_detached_action[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "exclusive prepared detached RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-duckdb-False-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-duckdb-True-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-duckdb-True-False]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-postgresql-False-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-postgresql-True-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[sqlite-postgresql-True-False]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-duckdb-False-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-duckdb-True-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-duckdb-True-False]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-postgresql-False-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-postgresql-True-True]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_detached_task_host_rcc::test_actual_task_host_consumes_and_stops[postgresql-postgresql-True-False]",
+      "type": "skipped",
+      "message": "exclusive prepared Task host RCC fixture required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice::test_generated_mcp_review_actual_rcc_and_activation_rollback_keep_audit[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "dedicated generated-app real RCC gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice::test_generated_mcp_review_actual_rcc_and_activation_rollback_keep_audit[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "dedicated generated-app real RCC gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice::test_generated_mcp_review_actual_rcc_and_activation_rollback_keep_audit[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "dedicated generated-app real RCC gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice::test_generated_mcp_review_actual_rcc_and_activation_rollback_keep_audit[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "dedicated generated-app real RCC gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[sqlite-duckdb-private]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[sqlite-duckdb-owned-idempotent]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[sqlite-postgresql-private]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[sqlite-postgresql-owned-idempotent]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[postgresql-duckdb-private]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[postgresql-duckdb-owned-idempotent]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[postgresql-postgresql-private]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generated_invoice_browser::test_generated_renderer_review_dispatch_download_and_activation_rollback[postgresql-postgresql-owned-idempotent]",
+      "type": "skipped",
+      "message": "dedicated generated browser gate not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_execution_port::test_optin_actual_rcc_model_wrapper[sqlite]",
+      "type": "skipped",
+      "message": "exclusive prepared RCC home required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_execution_port::test_optin_actual_rcc_model_wrapper[postgresql]",
+      "type": "skipped",
+      "message": "exclusive prepared RCC home required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[sqlite-duckdb-consumer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[sqlite-duckdb-producer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[sqlite-postgresql-consumer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[sqlite-postgresql-producer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[postgresql-duckdb-consumer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[postgresql-duckdb-producer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[postgresql-postgresql-consumer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_input_output_rcc::test_actual_input_output_app[postgresql-postgresql-producer]",
+      "type": "skipped",
+      "message": "exclusive prepared input/output RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_none_rcc::test_actual_none_app_submit_execute_replay[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "exclusive prepared ordinary RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_none_rcc::test_actual_none_app_submit_execute_replay[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "exclusive prepared ordinary RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_none_rcc::test_actual_none_app_submit_execute_replay[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "exclusive prepared ordinary RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_none_rcc::test_actual_none_app_submit_execute_replay[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "exclusive prepared ordinary RCC cache required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[sqlite-consumer]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[sqlite-producer]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[sqlite-optional]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[postgresql-consumer]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[postgresql-producer]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_generic_work_item_execution::test_real_generic_rcc[postgresql-optional]",
+      "type": "skipped",
+      "message": "explicit owned prepared RCC gate required"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_canvas_browser::test_real_invoice_canvas_browser[duckdb]",
+      "type": "skipped",
+      "message": "dedicated InvoiceQueryTest --browser not configured; browser gate remains required"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_canvas_browser::test_real_invoice_canvas_browser[postgresql]",
+      "type": "skipped",
+      "message": "dedicated InvoiceQueryTest --browser not configured; browser gate remains required"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_explicit_effect_and_terminal_delivery_reuse_one_durable_target_receipt[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_explicit_effect_and_terminal_delivery_reuse_one_durable_target_receipt[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_explicit_effect_and_terminal_delivery_reuse_one_durable_target_receipt[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_explicit_effect_and_terminal_delivery_reuse_one_durable_target_receipt[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_idempotent_absent_effect_retries_with_same_key_without_rerunning_rcc[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_idempotent_absent_effect_retries_with_same_key_without_rerunning_rcc[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_idempotent_absent_effect_retries_with_same_key_without_rerunning_rcc[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_idempotent_absent_effect_retries_with_same_key_without_rerunning_rcc[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_lost_ack_is_observed_and_published_without_redelivery_even_at_budget[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_lost_ack_is_observed_and_published_without_redelivery_even_at_budget[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_lost_ack_is_observed_and_published_without_redelivery_even_at_budget[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_lost_ack_is_observed_and_published_without_redelivery_even_at_budget[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_or_nonidempotent_absent_effect_stays_blocked_before_exhaustion[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_or_nonidempotent_absent_effect_stays_blocked_before_exhaustion[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_or_nonidempotent_absent_effect_stays_blocked_before_exhaustion[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_or_nonidempotent_absent_effect_stays_blocked_before_exhaustion[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_proven_safe_retry_exhaustion_preserves_failure_artifact_and_effect_audit[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_proven_safe_retry_exhaustion_preserves_failure_artifact_and_effect_audit[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_proven_safe_retry_exhaustion_preserves_failure_artifact_and_effect_audit[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_proven_safe_retry_exhaustion_preserves_failure_artifact_and_effect_audit[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_inflight_old_owner_and_retry_share_one_conditional_effect_key[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_inflight_old_owner_and_retry_share_one_conditional_effect_key[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_inflight_old_owner_and_retry_share_one_conditional_effect_key[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_inflight_old_owner_and_retry_share_one_conditional_effect_key[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-duckdb-revoked]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-duckdb-stale_claim]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-duckdb-cancelled]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-duckdb-policy]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-duckdb-target]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-postgresql-revoked]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-postgresql-stale_claim]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-postgresql-cancelled]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-postgresql-policy]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[sqlite-postgresql-target]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-duckdb-revoked]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-duckdb-stale_claim]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-duckdb-cancelled]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-duckdb-policy]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-duckdb-target]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-postgresql-revoked]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-postgresql-stale_claim]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-postgresql-cancelled]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-postgresql-policy]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_denied_effect_entry_never_reaches_the_owned_target[postgresql-postgresql-target]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_cancellation_during_admitted_effect_retains_outcome_and_prevents_publication[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_cancellation_during_admitted_effect_retains_outcome_and_prevents_publication[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_cancellation_during_admitted_effect_retains_outcome_and_prevents_publication[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_cancellation_during_admitted_effect_retains_outcome_and_prevents_publication[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_real_controller_crash_after_effect_then_fresh_process_reconciles_without_redelivery[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_real_controller_crash_after_effect_then_fresh_process_reconciles_without_redelivery[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_real_controller_crash_after_effect_then_fresh_process_reconciles_without_redelivery[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_real_controller_crash_after_effect_then_fresh_process_reconciles_without_redelivery[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_dead_letter_barrier_prevents_a_late_admitted_delivery_from_committing[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_dead_letter_barrier_prevents_a_late_admitted_delivery_from_committing[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_dead_letter_barrier_prevents_a_late_admitted_delivery_from_committing[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_dead_letter_barrier_prevents_a_late_admitted_delivery_from_committing[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_effect_record_cannot_be_adopted_as_a_completed_effect[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_effect_record_cannot_be_adopted_as_a_completed_effect[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_effect_record_cannot_be_adopted_as_a_completed_effect[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_effects::test_unknown_effect_record_cannot_be_adopted_as_a_completed_effect[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_rcc_executes_exact_reviewed_result_and_replays_without_dispatch[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_rcc_executes_exact_reviewed_result_and_replays_without_dispatch[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_rcc_executes_exact_reviewed_result_and_replays_without_dispatch[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_rcc_executes_exact_reviewed_result_and_replays_without_dispatch[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_completed_private_result_reconciles_after_lease_loss_without_reexecution[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_completed_private_result_reconciles_after_lease_loss_without_reexecution[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_completed_private_result_reconciles_after_lease_loss_without_reexecution[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_completed_private_result_reconciles_after_lease_loss_without_reexecution[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_unknown_or_altered_execution_receipt_never_authorizes_retry[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_unknown_or_altered_execution_receipt_never_authorizes_retry[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_unknown_or_altered_execution_receipt_never_authorizes_retry[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_unknown_or_altered_execution_receipt_never_authorizes_retry[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_work_item_expiry_rolls_back_run_publication_and_outputs[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_work_item_expiry_rolls_back_run_publication_and_outputs[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_work_item_expiry_rolls_back_run_publication_and_outputs[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_work_item_expiry_rolls_back_run_publication_and_outputs[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_controller_crash_then_new_interpreter_finishes_durable_result[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_controller_crash_then_new_interpreter_finishes_durable_result[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_controller_crash_then_new_interpreter_finishes_durable_result[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_real_controller_crash_then_new_interpreter_finishes_durable_result[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_cancel_stops_a_real_owned_rcc_wrapper_and_prevents_publication[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_cancel_stops_a_real_owned_rcc_wrapper_and_prevents_publication[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_cancel_stops_a_real_owned_rcc_wrapper_and_prevents_publication[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_cancel_stops_a_real_owned_rcc_wrapper_and_prevents_publication[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_revoked_authority_cannot_publish_already_executed_task[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_revoked_authority_cannot_publish_already_executed_task[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_revoked_authority_cannot_publish_already_executed_task[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker::test_revoked_authority_cannot_publish_already_executed_task[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker_mcp::test_mcp_approved_work_item_executes_as_a_distinct_fenced_run[sqlite-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker_mcp::test_mcp_approved_work_item_executes_as_a_distinct_fenced_run[sqlite-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker_mcp::test_mcp_approved_work_item_executes_as_a_distinct_fenced_run[postgresql-duckdb]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    },
+    {
+      "case": "tests.action_server_tests.test_invoice_worker_mcp::test_mcp_approved_work_item_executes_as_a_distinct_fenced_run[postgresql-postgresql]",
+      "type": "skipped",
+      "message": "owned RCC invoice runtime not configured"
+    }
+  ]
+}

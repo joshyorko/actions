@@ -1,0 +1,9 @@
+{
+  "artifactDigest": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3",
+  "status": "failed",
+  "reason": "materialization does not match ready record",
+  "exitCode": -1,
+  "materializationId": "36b595a_5a1fac3_2611e37d",
+  "path": "/workspace/recovery327/compiler/robocorp/holotree/36b595a_5a1fac3_2611e37d",
+  "verification_valid": true
+}

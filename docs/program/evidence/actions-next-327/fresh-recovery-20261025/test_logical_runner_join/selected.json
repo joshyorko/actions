@@ -1,0 +1,8 @@
+[
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[sqlite-none]",
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[sqlite-before-spawn]",
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[sqlite-stage]",
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[postgresql-none]",
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[postgresql-before-spawn]",
+  "tests/action_server_tests/test_logical_runner_join.py::test_bound_runner_synthetic_completion_and_release[postgresql-stage]"
+]

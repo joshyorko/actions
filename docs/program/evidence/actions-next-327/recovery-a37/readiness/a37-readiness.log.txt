@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_logical_readiness.py tests/action_server_tests/test_candidate_work_items.py -q -p no:robocorp_log_pytest --junitxml=/workspace/actions-recovery-327/evidence/a37-readiness.xml (in /workspace/actions/action_server)
+.............                                                            [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a37-readiness.xml -
+13 passed in 1.87s

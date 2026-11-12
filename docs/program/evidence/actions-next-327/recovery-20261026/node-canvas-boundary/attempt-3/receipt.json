@@ -1,0 +1,199 @@
+{
+  "status": "PASS",
+  "scope": "single canvas_get call; stop before enqueue or capability invocation",
+  "candidate": "actions-runtime 1.1.0a53; actions-core 1.1.0a8; actions-work-items 0.5.0a2",
+  "node_sdk": "@modelcontextprotocol/client 2.0.0",
+  "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+  "protocol_expected": "2026-07-28",
+  "auth_mode": "existing synthetic loopback bearer; unchanged fixture profile and grants",
+  "instrumentation": {
+    "location": "test-only PYTHONPATH sitecustomize import-loader transformation",
+    "modules": [
+      "actions.server.foundry.mcp",
+      "actions.server.foundry.authoring"
+    ],
+    "records": [
+      "authenticated caller present",
+      "Canvas port entered and returned",
+      "appId parse passed",
+      "read_application authorization returned",
+      "latest revision found",
+      "revision ownership validation returned",
+      "caught exception class only"
+    ],
+    "does_not_record": [
+      "exception messages",
+      "request headers",
+      "credentials",
+      "source paths",
+      "object values"
+    ]
+  },
+  "fixture": {
+    "source_profile_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "task_profile_sha256": "883eccd1c2b234311a9442fbcb53c2341a4255bef1b7cacf7c7458cb6634051f",
+    "source_datadir_sqlite_sha256": "62cde2395224a116ff2e377ebd69918256da96c7747792aaf2444ebf63669534",
+    "task_datadir_sqlite_sha256_before": "62cde2395224a116ff2e377ebd69918256da96c7747792aaf2444ebf63669534",
+    "source_prior_pass_sha256": "429e5ecd8758d3f2ce7e7f6663ae54ecab22379c06792653ed9aafeafecd0ff3",
+    "task_prior_pass_sha256": "429e5ecd8758d3f2ce7e7f6663ae54ecab22379c06792653ed9aafeafecd0ff3",
+    "same_profile_bytes": true,
+    "same_database_bytes_before": true,
+    "app_id_source": "saved pass snapshot; exact value intentionally not copied into receipt",
+    "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0"
+  },
+  "preflight": {
+    "all_required_file_inputs_present": true,
+    "task_local_datadir_and_homes_present": true,
+    "prior_pass_copy_matches_source": true,
+    "app_and_revision_match_saved_canvas_result": true
+  },
+  "source_hashes": {
+    "candidate_mcp_py": "9410f44a24d836e9edc350e625c699b2375194c4a0ef8ca8ed90d2b2e81ae49f",
+    "candidate_authoring_py": "155bcf821e196d63e9a4c7e1a8bf58f17d00c312822aac97d165912952fef790",
+    "node_client_entry": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414",
+    "node_client_types": "309cc5f76da5abff0be678d958aba0e875e52909f5f6f0544a45a34ac596cc9c",
+    "node_probe": "0621029482ef44283586888835226e3f2973cd12398759f1a14f4b687d20271b",
+    "sitecustomize": "71148183fbf13874127762d141942184169d39e3c233deee4506cbb95c2cd5c5",
+    "controller": "169affa4fbec7a36287663252eea9361a1008a704bcc198b359b759677b2dfc6"
+  },
+  "installed_identity": {
+    "runtime": "1.1.0a53",
+    "core": "1.1.0a8",
+    "work_items": "0.5.0a2",
+    "server": "/workspace/327-artifacts/a53/consumer/lib/python3.12/site-packages/actions/server/__init__.py"
+  },
+  "node_version": "v20.19.3",
+  "node_undici_version": "6.21.2",
+  "runtime_ready": true,
+  "client": {
+    "exit_code": 0,
+    "natural_exit": true,
+    "events": [
+      {
+        "event": "sdk_package_loaded",
+        "elapsed_ms": 1
+      },
+      {
+        "event": "sdk_module_loaded",
+        "elapsed_ms": 159
+      },
+      {
+        "event": "prior_fixture_loaded",
+        "elapsed_ms": 160
+      },
+      {
+        "event": "transport_ready",
+        "elapsed_ms": 161
+      },
+      {
+        "event": "http_start",
+        "elapsed_ms": 208,
+        "request_id": 1,
+        "method": "POST",
+        "path": "/mcp"
+      },
+      {
+        "event": "http_response",
+        "elapsed_ms": 235,
+        "request_id": 1,
+        "status": 200
+      },
+      {
+        "event": "protocol_negotiated",
+        "elapsed_ms": 267,
+        "version": "2026-07-28"
+      },
+      {
+        "event": "http_start",
+        "elapsed_ms": 270,
+        "request_id": 2,
+        "method": "POST",
+        "path": "/mcp"
+      },
+      {
+        "event": "http_response",
+        "elapsed_ms": 280,
+        "request_id": 2,
+        "status": 200
+      },
+      {
+        "event": "catalog_checked",
+        "elapsed_ms": 289,
+        "canvas_get_present": true,
+        "capability_invoke_present": true
+      },
+      {
+        "event": "canvas_get_call_start",
+        "elapsed_ms": 289
+      },
+      {
+        "event": "http_start",
+        "elapsed_ms": 292,
+        "request_id": 3,
+        "method": "POST",
+        "path": "/mcp"
+      },
+      {
+        "event": "http_response",
+        "elapsed_ms": 555,
+        "request_id": 3,
+        "status": 200
+      },
+      {
+        "event": "canvas_get_response",
+        "elapsed_ms": 558,
+        "is_error": false,
+        "generic_error_text": false,
+        "has_structured_content": true
+      },
+      {
+        "event": "client_close_complete",
+        "elapsed_ms": 559
+      },
+      {
+        "event": "transport_close_complete",
+        "elapsed_ms": 560
+      },
+      {
+        "event": "client_probe_done",
+        "elapsed_ms": 560
+      }
+    ],
+    "stage": "canvas_get_response"
+  },
+  "authorization_boundary_events": [
+    {
+      "event": "authenticated_caller_present",
+      "value": true
+    },
+    {
+      "event": "canvas_port_entered",
+      "value": true
+    },
+    {
+      "event": "app_id_parsed",
+      "value": true
+    },
+    {
+      "event": "read_application_passed",
+      "value": true
+    },
+    {
+      "event": "latest_revision_found",
+      "value": true
+    },
+    {
+      "event": "revision_owner_passed",
+      "value": true
+    },
+    {
+      "event": "canvas_port_returned",
+      "value": true
+    }
+  ],
+  "runtime_shutdown": {
+    "exit_code": -15,
+    "graceful_lifespan": true
+  },
+  "task_datadir_sqlite_sha256_after": "62cde2395224a116ff2e377ebd69918256da96c7747792aaf2444ebf63669534"
+}

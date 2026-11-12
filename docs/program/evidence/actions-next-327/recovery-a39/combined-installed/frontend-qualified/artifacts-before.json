@@ -1,0 +1,13 @@
+{
+  "source/action_server/frontend/dist/index.html": "60d777a6d135b433d66fa477b59afda34e28a2578ad95958aed9abece62b6f42",
+  "source/action_server/frontend/dist/sbom.json": "f624dc4cff74cceaf2d281edc216b7551d5f3e764c299de216565acf4fad9505",
+  "source/action_server/frontend/dist/artifact-manifest.json": "746c84f1a516e65da366360b151f0a59d62883d5d61c64ef08564062ea228e29",
+  "source/action_server/frontend/dist-canvas/index.html": "8602524b92f0431698c7ada8ca68adad095e6f280946923386c2d6961804a1cf",
+  "source/action_server/frontend/dist-canvas/sbom.json": "f624dc4cff74cceaf2d281edc216b7551d5f3e764c299de216565acf4fad9505",
+  "source/action_server/frontend/dist-canvas/artifact-manifest.json": "0280721406f91ecb7839a3072e60fc1f2f604db9fe1943624cd94672bea53b32",
+  "source/action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+  "source/action_server/src/actions/server/_static_contents.py": "9083eb146e2ac3cb32ef25ca4b37d8226073ba1dcb5d433f364e86a77b9aa5b0",
+  "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+  "wheels/actions/actions_core-1.1.0a4-py3-none-any.whl": "fe8fb01f5924837ebd221bb559cc4c36482a581921f81beba1d4c2a6c8e4b371",
+  "wheels/action_server/actions_runtime-1.1.0a39-cp312-cp312-linux_x86_64.whl": "f023a767234ee5a93fd50281b1ae574b1056893468e13c23bb9d22704a4a6902"
+}

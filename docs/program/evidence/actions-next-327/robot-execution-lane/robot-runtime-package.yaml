@@ -1,0 +1,7 @@
+name: retained-robot-adapter-fixture
+description: Synthetic Robot adapter acceptance
+dependencies:
+  conda-forge:
+    - python=3.12.15
+  pypi:
+    - robotframework=7.4.2

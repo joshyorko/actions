@@ -4,11 +4,10 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Dict, List, Literal, Optional, Tuple, get_type_hints
 
-from robocorp.log import ConsoleMessageKind, console_message
-from robocorp.log.protocols import OptExcInfo
-
 from actions._constants import SUPPORTED_TYPES_IN_SCHEMA
 from actions._customization._plugin_manager import PluginManager
+from actions._logging import ConsoleMessageKind, console_message
+from actions._logging.protocols import OptExcInfo
 from actions._protocols import IAction, IContext, Status
 
 if typing.TYPE_CHECKING:

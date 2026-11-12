@@ -1,0 +1,564 @@
+diff --git a/action_server/src/actions/server/foundry/generic_execution_port.py b/action_server/src/actions/server/foundry/generic_execution_port.py
+--- a/action_server/src/actions/server/foundry/generic_execution_port.py
++++ b/action_server/src/actions/server/foundry/generic_execution_port.py
+@@ -33,7 +33,9 @@
+     GenericWorkItemExecution,
+ )
+ from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
++from actions.server.foundry.package_registry import FoundryPackageRegistry
+ from actions.server.foundry.rcc_execution import GeneratedRccExecution
++from actions.server.foundry.standalone_execution import StandaloneActionExecution
+ from actions.server.managed_work_items.contracts import (
+     ClaimRef,
+     ManagedCaller,
+@@ -47,6 +49,7 @@
+     RunOutputService,
+     _canonical,
+     _one,
++    _transaction,
+ )
+ from actions.server.run_outputs.types import (
+     Actor,
+@@ -103,7 +106,7 @@
+         self,
+         caller: ManagedCaller,
+         ticket: GenericTicket,
+-        service: GenericWorkItemExecution,
++        service: GenericWorkItemExecution | StandaloneActionExecution,
+     ) -> Run:
+         return GeneratedRccExecution(
+             service.registry,
+@@ -224,16 +227,36 @@
+                 for p in resolved.revision.specification.work_item_policies
+                 if p.capability == snapshot.capability
+             ]
+-            if len(policies) != 1:
+-                raise AccessDenied("explicit immutable generic policy required")
+-            service = GenericWorkItemExecution(
+-                self.deployments,
+-                self.outputs,
+-                snapshot,
+-                policies[0],
+-                self.authorization,
+-            )
++            registry = self.outputs.capabilities
++            if not isinstance(registry, FoundryPackageRegistry):
++                raise AccessDenied("immutable Package registry required")
++            declaration = registry.get_capability(snapshot.capability)
++            service: GenericWorkItemExecution | StandaloneActionExecution
++            if declaration is not None and declaration.work_items.mode == "none":
++                if (
++                    policies
++                    or declaration.work_items.allow_outputs
++                    or isinstance(request, GenericClaimInvocation)
++                ):
++                    raise AccessDenied(
++                        "ordinary none requires standalone input and no queue policy"
++                    )
++                service = StandaloneActionExecution(
++                    self.deployments, self.outputs, snapshot
++                )
++            else:
++                if len(policies) != 1:
++                    raise AccessDenied("explicit immutable generic policy required")
++                service = GenericWorkItemExecution(
++                    self.deployments,
++                    self.outputs,
++                    snapshot,
++                    policies[0],
++                    self.authorization,
++                )
+             if isinstance(request, GenericClaimInvocation):
++                if not isinstance(service, GenericWorkItemExecution):
++                    raise AccessDenied("ordinary none cannot consume a claim")
+                 claim = request.claim
+                 if (
+                     service.policy.input_queue is None
+@@ -269,17 +292,25 @@
+                     if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
+                         raise ValueError("runner has not published a terminal Run")
+                     state = "completed" if run.status == RunStatus.PASSED else "failed"
+-            with service._transaction():
+-                service._current(caller)
++            with (
++                service._transaction()
++                if isinstance(service, GenericWorkItemExecution)
++                else _transaction(service.db)
++            ):
++                if isinstance(service, StandaloneActionExecution):
++                    service.current(caller)
++                else:
++                    service._current(caller)
+                 current = _one(self.outputs.db, Run, ticket.fence.run_id)
+                 if (
+-                    service._ticket(
++                    service.ticket(caller, current)
++                    if isinstance(service, StandaloneActionExecution)
++                    else service._ticket(
+                         caller,
+                         ticket.claim.as_claim() if ticket.claim else None,
+                         current,
+                     )
+-                    != ticket
+-                ):
++                ) != ticket:
+                     raise FenceRejected("retained invocation changed")
+                 attempt = _one(self.outputs.db, RunAttempt, ticket.fence.attempt_id)
+                 pin = _one(self.outputs.db, RunPin, ticket.fence.run_id)
+@@ -343,18 +374,28 @@
+             )
+ 
+     def _handles(
+-        self, caller: ManagedCaller, service: GenericWorkItemExecution, run: Run
++        self,
++        caller: ManagedCaller,
++        service: GenericWorkItemExecution | StandaloneActionExecution,
++        run: Run,
+     ) -> list[JsonValue] | None:
+         if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
+             return None
+         try:
+-            with service._transaction():
++            with (
++                service._transaction()
++                if isinstance(service, GenericWorkItemExecution)
++                else _transaction(service.db)
++            ):
+                 service.base._authorize(caller.actor, service.snapshot, "read")
+-                queue = service.policy.input_queue or service.policy.output_queue
+-                if queue is None:
+-                    raise AccessDenied("explicit output-read queue authority required")
+-                for permission in (Permission.READ, Permission.ARTIFACT_READ):
+-                    service._permission(caller, queue, permission)
++                if isinstance(service, GenericWorkItemExecution):
++                    queue = service.policy.input_queue or service.policy.output_queue
++                    if queue is None:
++                        raise AccessDenied(
++                            "explicit output-read queue authority required"
++                        )
++                    for permission in (Permission.READ, Permission.ARTIFACT_READ):
++                        service._permission(caller, queue, permission)
+                 attached = json.loads(run.result or "null")
+                 if (
+                     not isinstance(attached, dict)
+diff --git a/action_server/src/actions/server/foundry/invocation_discovery.py b/action_server/src/actions/server/foundry/invocation_discovery.py
+--- a/action_server/src/actions/server/foundry/invocation_discovery.py
++++ b/action_server/src/actions/server/foundry/invocation_discovery.py
+@@ -18,6 +18,8 @@
+ from actions.server.deployments.ids import DeploymentId, WorkspaceId
+ from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
+ from actions.server.foundry.mcp import CanvasCaller, CanvasReply
++from actions.server.foundry.package_registry import FoundryPackageRegistry
++from actions.server.foundry.standalone_execution import StandaloneActionExecution
+ from actions.server.managed_work_items.contracts import (
+     ManagedCaller,
+     Permission,
+@@ -157,12 +159,12 @@
+                     for binding in selection.canvas_bindings:
+                         policy = policies.get(binding.capability)
+                         plan = plans.get(binding.capability)
+-                        # No invented policy/default. None-mode execution has a
+-                        # separate adapter and is not advertised by this slice.
+-                        if policy is None or plan is None:
++                        # No invented queue policy or execution plan.
++                        if plan is None:
+                             continue
+                         if (
+-                            policy.input_queue is not None
++                            policy is not None
++                            and policy.input_queue is not None
+                             and policy.output_queue
+                             not in (None, policy.input_queue + "_output")
+                         ):
+@@ -181,6 +183,38 @@
+                                 snapshot.runtime_kind != "rcc"
+                                 or snapshot.provider_key not in self.outputs.providers
+                             ):
++                                continue
++                            registry = self.outputs.capabilities
++                            if not isinstance(registry, FoundryPackageRegistry):
++                                continue
++                            capability = registry.get_capability(snapshot.capability)
++                            if (
++                                capability is not None
++                                and capability.work_items.mode == "none"
++                            ):
++                                if (
++                                    policy is not None
++                                    or capability.work_items.allow_outputs
++                                ):
++                                    continue
++                                ordinary = StandaloneActionExecution(
++                                    self.deployments, self.outputs, snapshot
++                                )
++                                ordinary.current(ManagedCaller(actor=caller.actor))
++                                descriptors.append(
++                                    GenericInvocationDescriptor(
++                                        bindingId=binding.binding_id,
++                                        inputSchema=_input_schema(
++                                            ordinary.registry, snapshot
++                                        ),
++                                        snapshot=snapshot,
++                                        inputMode="none",
++                                        inputQueue=None,
++                                        standaloneAllowed=True,
++                                    ).model_dump(mode="json", by_alias=True)
++                                )
++                                continue
++                            if policy is None:
+                                 continue
+                             service = GenericWorkItemExecution(
+                                 self.deployments,
+diff --git a/action_server/tests/action_server_tests/foundry_fixtures.py b/action_server/tests/action_server_tests/foundry_fixtures.py
+--- a/action_server/tests/action_server_tests/foundry_fixtures.py
++++ b/action_server/tests/action_server_tests/foundry_fixtures.py
+@@ -64,6 +64,7 @@
+         "test_package_revision_compiler.py",
+         "test_generic_work_item_execution.py",
+         "test_generic_execution_port.py",
++        "test_generic_none_rcc.py",
+     }
+     yield
+     if not enabled or not selected:
+diff --git a/action_server/tests/action_server_tests/test_generic_none_model.py b/action_server/tests/action_server_tests/test_generic_none_model.py
+new file mode 100644
+--- /dev/null
++++ b/action_server/tests/action_server_tests/test_generic_none_model.py
+@@ -0,0 +1,211 @@
++"""Ordinary none model discovery/invocation joins the same Run authority."""
++import asyncio
++import json
++from uuid import uuid4
++
++import pytest
++from action_server_tests import test_generic_canvas_view as app_tests
++from action_server_tests.test_generic_execution_port import (
++    ReviewedStub,
++    SyntheticRunner,
++)
++
++from actions.server.data_queries.review_models import FencedWorkItem
++from actions.server.foundry.generic_execution_port import GenericCanvasExecution
++from actions.server.foundry.invocation_discovery import GenericInvocationDiscovery
++from actions.server.foundry.mcp import CanvasReply
++from actions.server.managed_work_items.authorization import SqlQueueAuthorization
++from actions.server.run_outputs.models import RunAttempt, RunPin
++from actions.server.run_outputs.service import AccessDenied, FenceRejected, _update
++
++pytest_plugins = ["action_server_tests.foundry_fixtures"]
++provider = app_tests.provider
++postgresql_database = app_tests.postgresql_database
++reviewed = app_tests.reviewed
++case = app_tests.case
++pytestmark = app_tests.pytestmark
++
++
++def wrapper(c):
++    runner = SyntheticRunner()
++    port = GenericCanvasExecution(
++        ReviewedStub(),
++        c.deployments,
++        c.outputs,
++        SqlQueueAuthorization(c.db),
++        worker_id=c.worker,
++        runner=runner,
++    )
++    service, _ = c.port._selected(c.app, "run")
++    request = dict(
++        mode="generic",
++        snapshot=service.snapshot.model_dump(mode="json"),
++        inputs={"value": "hello"},
++        idempotencyKey="ordinary-model",
++    )
++    return port, runner, request
++
++
++def invoke(c, port, request):
++    return asyncio.run(port.call(c.model, "capability_invoke", request))
++
++
++def test_none_descriptor_invokes_without_queue_policy_or_item(case):
++    c = case
++    before = len(c.db.all(FencedWorkItem))
++    from actions.server.foundry.models import FoundryAccessGrant
++    from actions.server.run_outputs.models import RunAccessGrant
++
++    grants = len(c.db.all(FoundryAccessGrant)) + len(c.db.all(RunAccessGrant))
++    port, runner, request = wrapper(c)
++    discovery = GenericInvocationDiscovery(
++        c.deployments, c.outputs, SqlQueueAuthorization(c.db)
++    )
++    reply = CanvasReply(
++        "canonical",
++        model_result={
++            "applicationId": str(c.scope.deployment.deployment_id.root),
++            "revisionId": c.scope.deployment.revision_id.root,
++        },
++    )
++    described = discovery.describe(
++        c.model,
++        "canvas_get",
++        {"appId": str(c.scope.deployment.deployment_id.root)},
++        reply,
++    )
++    descriptor = described.model_result["invocationDescriptors"][0]
++    assert (
++        descriptor["inputMode"] == "none"
++        and descriptor["inputQueue"] is None
++        and descriptor["standaloneAllowed"]
++    )
++    assert descriptor["snapshot"] == request["snapshot"]
++    assert "appSession" not in json.dumps(descriptor)
++    result = invoke(c, port, request)
++    assert result.model_result["execution"]["state"] == "completed"
++    assert result.model_result["execution"]["workItemId"] is None
++    assert result.model_result["execution"]["outputs"]
++    assert invoke(c, port, request).model_result == result.model_result
++    assert runner.calls == 1 and len(c.db.all(FencedWorkItem)) == before
++    assert len(c.db.all(FoundryAccessGrant)) + len(c.db.all(RunAccessGrant)) == grants
++
++
++@pytest.mark.parametrize(
++    "corruption", ["attempt-state", "epoch", "cancel", "journal-version"]
++)
++def test_none_terminal_replay_rejects_corruption(case, corruption):
++    from actions.server._models import Run
++    from actions.server.run_outputs.service import _canonical, _one
++
++    c = case
++    port, runner, request = wrapper(c)
++    result = invoke(c, port, request).model_result["execution"]
++    with c.db.transaction():
++        if corruption == "attempt-state":
++            _update(c.db, RunAttempt, result["attemptId"], {"state": "running"})
++        elif corruption == "epoch":
++            _update(
++                c.db, RunPin, result["runId"], {"epoch": result["attemptEpoch"] + 1}
++            )
++        elif corruption == "cancel":
++            _update(c.db, RunPin, result["runId"], {"cancel_requested": 1})
++        else:
++            row = _one(c.db, Run, result["runId"])
++            value = json.loads(row.result)
++            value["version"] = True
++            _update(c.db, Run, row.id, {"result": _canonical(value, 524288)})
++    with pytest.raises(FenceRejected):
++        invoke(c, port, request)
++    assert runner.calls == 1
++
++
++def test_none_claim_and_app_audience_fail_closed(case):
++    c = case
++    port, runner, request = wrapper(c)
++    with pytest.raises(AccessDenied):
++        asyncio.run(port.call(c.app, "capability_invoke", request))
++    from actions.server.managed_work_items.contracts import ClaimRef, QueueRef
++
++    service, _ = c.port._selected(c.app, "run")
++    request.pop("inputs")
++    request.pop("idempotencyKey")
++    request["claim"] = ClaimRef(
++        queue=QueueRef(
++            workspace_id=c.scope.deployment.workspace_id,
++            deployment=c.scope.deployment,
++            queue_id="invented",
++        ),
++        item_id=str(uuid4()),
++        owner_id=c.worker,
++        epoch=1,
++    ).model_dump(mode="json")
++    with pytest.raises(AccessDenied):
++        invoke(c, port, request)
++    assert runner.calls == 0
++
++
++def test_none_discovery_and_replay_reauthorize_execute(case, monkeypatch):
++    c = case
++    port, runner, request = wrapper(c)
++    invoke(c, port, request)
++    original = c.outputs._authorize
++
++    def authorize(actor, snapshot, permission):
++        if permission == "execute":
++            raise AccessDenied("ordinary execution grant revoked")
++        return original(actor, snapshot, permission)
++
++    monkeypatch.setattr(c.outputs, "_authorize", authorize)
++    reply = CanvasReply(
++        "canonical",
++        model_result={
++            "applicationId": str(c.scope.deployment.deployment_id.root),
++            "revisionId": c.scope.deployment.revision_id.root,
++        },
++    )
++    discovery = GenericInvocationDiscovery(
++        c.deployments, c.outputs, SqlQueueAuthorization(c.db)
++    )
++    assert (
++        discovery.describe(
++            c.model,
++            "canvas_get",
++            {"appId": str(c.scope.deployment.deployment_id.root)},
++            reply,
++        ).model_result["invocationDescriptors"]
++        == []
++    )
++    with pytest.raises(AccessDenied):
++        invoke(c, port, request)
++    assert runner.calls == 1
++
++
++def test_none_retained_uncertain_launch_is_never_retried(case):
++    from actions.server._models import Run
++    from actions.server.run_outputs.service import _canonical, _one
++
++    c = case
++    port, _, request = wrapper(c)
++
++    class Uncertain:
++        calls = 0
++
++        def execute(self, caller, ticket, service):
++            self.calls += 1
++            row = _one(service.db, Run, ticket.fence.run_id)
++            value = json.loads(row.result)
++            value["launch"] = {"id": "retained-fixture"}
++            with service.db.transaction():
++                _update(service.db, Run, row.id, {"result": _canonical(value, 65536)})
++            raise RuntimeError("uncertain ordinary launch")
++
++    runner = Uncertain()
++    port.runner = runner
++    with pytest.raises(RuntimeError, match="uncertain"):
++        invoke(c, port, request)
++    assert (
++        invoke(c, port, request).model_result["execution"]["state"]
++        == "reconciliation_required"
++    )
++    assert runner.calls == 1
+diff --git a/action_server/tests/action_server_tests/test_generic_none_rcc.py b/action_server/tests/action_server_tests/test_generic_none_rcc.py
+new file mode 100644
+--- /dev/null
++++ b/action_server/tests/action_server_tests/test_generic_none_rcc.py
+@@ -0,0 +1,121 @@
++"""Opt-in real ordinary generated package app execution, with common SQL authority."""
++import os
++from pathlib import Path
++
++import pytest
++from action_server_tests import test_generic_canvas_view as app_tests
++from contract_tests.test_package_revision_compiler import _generated_action_entries
++
++from actions.server._models import Run
++from actions.server.data_queries.review_models import FencedWorkItem
++from actions.server.deployments.package_revision_compiler import (
++    load_prepared_rcc_environment,
++)
++from actions.server.foundry.generic_execution_port import PinnedGenericRccRunner
++from actions.server.run_outputs.models import RunAttempt
++from actions.server.run_outputs.service import _one
++
++pytest_plugins = ["action_server_tests.foundry_fixtures"]
++provider = app_tests.provider
++postgresql_database = app_tests.postgresql_database
++reviewed = app_tests.reviewed
++pytestmark = app_tests.pytestmark
++
++
++def test_actual_none_app_submit_execute_replay(
++    reviewed, foundry_package_store, tmp_path, monkeypatch
++):
++    if os.environ.get("ACTIONS_GENERIC_NONE_REAL_RCC") != "1":
++        pytest.skip("exclusive prepared ordinary RCC cache required")
++    original = app_tests.fixtures.setup_activated
++    monkeypatch.setattr(
++        app_tests.fixtures,
++        "setup_activated",
++        lambda r, store: original(
++            r,
++            store,
++            real=True,
++            backend_entries=_generated_action_entries(),
++            logical_key="ordinary-generic-echo",
++        ),
++    )
++    c = app_tests.case.__wrapped__(reviewed, foundry_package_store)
++    root = tmp_path / "ordinary-execution"
++    root.mkdir()
++    trusted = PinnedGenericRccRunner(
++        load_prepared_rcc_environment(
++            Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
++        ),
++        Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]),
++        root,
++    )
++
++    class Runner:
++        calls = 0
++
++        def execute(self, caller, ticket, service):
++            self.calls += 1
++            return trusted.execute(caller, ticket, service)
++
++    runner = Runner()
++    c.port.execution.runner = runner
++    before = len(c.db.all(FencedWorkItem))
++    state = app_tests.submit(c)
++    assert state["state"] == "ready" and runner.calls == 0
++    service, _ = c.port._selected(c.app, "run")
++    declaration = service.registry.get_capability(
++        service.snapshot.capability
++    ).work_items
++    assert declaration.mode == "none" and not declaration.allow_outputs
++    revision = c.repository.get_revision(c.scope.deployment)
++    assert not revision.revision.specification.work_item_policies
++    done = app_tests.call(
++        c, "canvas_dispatch", app_tests.request(state, action="execute")
++    ).execution
++    assert done["state"] == "completed" and len(done["outputs"]) == 4
++    assert _one(c.db, RunAttempt, done["attemptId"]).state == "succeeded"
++    assert len(c.db.all(FencedWorkItem)) == before
++    assert (
++        app_tests.call(
++            c, "canvas_dispatch", app_tests.request(state, action="execute")
++        ).execution
++        == done
++    )
++    assert app_tests.submit(c)["runId"] == done["runId"]
++    assert runner.calls == 1
++    import json
++
++    result = json.loads(_one(c.db, Run, done["runId"]).result)
++    assert result["result"]["actionResult"] == "hello"
++
++    import asyncio
++
++    from action_server_tests.test_generic_execution_port import ReviewedStub
++
++    from actions.server.foundry.generic_execution_port import GenericCanvasExecution
++    from actions.server.managed_work_items.authorization import SqlQueueAuthorization
++
++    model = GenericCanvasExecution(
++        ReviewedStub(),
++        c.deployments,
++        c.outputs,
++        SqlQueueAuthorization(c.db),
++        worker_id=c.worker,
++        runner=runner,
++    )
++    request = dict(
++        mode="generic",
++        snapshot=service.snapshot.model_dump(mode="json"),
++        inputs={"value": "headless"},
++        idempotencyKey="actual-ordinary-model",
++    )
++    headless = asyncio.run(model.call(c.model, "capability_invoke", request))
++    execution = headless.model_result["execution"]
++    assert execution["state"] == "completed" and execution["workItemId"] is None
++    assert len(execution["outputs"]) == 4
++    assert (
++        asyncio.run(model.call(c.model, "capability_invoke", request)).model_result
++        == headless.model_result
++    )
++    assert runner.calls == 2 and len(c.db.all(FencedWorkItem)) == before
++    assert execution["runId"] != done["runId"]

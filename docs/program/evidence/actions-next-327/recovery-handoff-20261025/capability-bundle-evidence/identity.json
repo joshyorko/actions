@@ -1,0 +1,15 @@
+{
+  "base": "4f437a10bebfb41299c18170eaf3014cdca2e3cb",
+  "patch_sha256": "609ec189a7c49bc283f4a9e915f8183ca8a1ff9dfbb9800b6a4a5be446bf012c",
+  "files": {
+    "action_server/src/actions/server/deployments/capability_bundle.py": "bf9726eec809e18dd749e2b3835a7a02a98131f90d43afc3186ff933d5745922",
+    "action_server/src/actions/server/deployments/capability_bundle_compiler.py": "26e7b569792ea1f62b1a98a4da4a9b71d582758a4c1a3a9cfd8d2debf1c60ecb",
+    "action_server/tests/contract_tests/test_capability_bundle.py": "693d929b7cd48e36796b7ed672978d8eceec693ba4fc97bf6c57d52572943d3f"
+  },
+  "legacy_compiler_sha256": "6cf4b8e1c17180a86398f1f490a9470946b88b22fd20991a4a6be714c00da6cd",
+  "test_overlay": "/workspace/actions-recovery-327/capability-bundle-draft/action_server/tests/conftest.py",
+  "proof": "source iteration with prepared Runtime venv; synthetic executor; no native RCC or installed claims",
+  "inspection_base": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "base_note": "Root advanced during lane; three added files apply cleanly at freeze HEAD. Legacy compiler imported throughout remained identical.",
+  "inspection_base_legacy_sha256": "6cf4b8e1c17180a86398f1f490a9470946b88b22fd20991a4a6be714c00da6cd"
+}

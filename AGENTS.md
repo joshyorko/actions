@@ -9,7 +9,7 @@ Read [the canonical guide index](docs/skills/README.md) before changing code. Re
 ## Build, Test, and Development Commands
 
 RCC owns the outer developer toolchain; Poetry owns package dependencies and
-committed lockfiles. Start from the repository root with Josh's RCC v18.19.3:
+committed lockfiles. Start from the repository root with Josh's RCC v18.19.8:
 
 ```bash
 rcc run -r developer/toolkit.yaml --dev -t Doctor

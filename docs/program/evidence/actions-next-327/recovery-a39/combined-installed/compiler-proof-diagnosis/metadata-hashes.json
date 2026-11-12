@@ -1,0 +1,17 @@
+{
+  "prepared_manifest_sha256": "3a9a415bfda37bcb2e10bcc4eb305c21eaaecefc397833812ce3042c3c98b18f",
+  "trust_carrier_files": {
+    "sha256/ff881cb7903461ed387ab79912105aa0726e91354f8a05b01fd4f337620141d2/provenance.json": {
+      "bytes": 736,
+      "sha256": "aeadeccea4c5cc9336accbd8c15206ba4278dd669cabbd3c404586a561def644"
+    },
+    "sha256/ff881cb7903461ed387ab79912105aa0726e91354f8a05b01fd4f337620141d2/revocations.json": {
+      "bytes": 233,
+      "sha256": "5d2d25a30ae8555d9592621a9d8fe456588e8ca5e36a77dd0b0327ac9576d993"
+    },
+    "sha256/ff881cb7903461ed387ab79912105aa0726e91354f8a05b01fd4f337620141d2/sbom.json": {
+      "bytes": 1526540,
+      "sha256": "b127646e565e6280218817d2eb8e941850d5032608b399bf067799ae7216a7e8"
+    }
+  }
+}

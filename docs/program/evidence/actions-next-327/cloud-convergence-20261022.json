@@ -1,0 +1,481 @@
+{
+  "schema": "actions.next.bounded-convergence/v1",
+  "date_utc": "2026-10-22",
+  "authority": "https://github.com/joshyorko/actions/issues/327",
+  "pull_request": 328,
+  "starting_integration_sha": "93666a70460e36a75569a4bcff8fae7abf211ee6",
+  "source_binding": "Precommit component/static qualification binds exact input bytes below. The completion comment records the immutable committed-source full-gate rerun and verified remote SHA. No old full-suite count qualifies this union.",
+  "source_heads": {
+    "canvas": "22d9766079f2278350e924b3d44c7b4e00a608a7",
+    "knowledge": "63d9ab6c12fc0158938e565cfca6edf7c2624d38",
+    "knowledge_implementation": "1b2f676f831010f5c5af64a27debbe52855b16f9",
+    "shared_merge_base": "cd17e31e5c5d829bcdcda76208b9bad895706fda"
+  },
+  "import_method": "Reviewed all three Canvas and all three Knowledge commits against the common base; cherry-picked their five-file union with --no-commit onto the assigned integration branch, then added regression repairs. No sibling branch mutation or unrelated history merge.",
+  "isolated_original_qualification": {
+    "canvas": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/canvas/5c5711e4-de83-40ad-83a0-2c9c89cef7a5",
+      "source": "22d9766079f2278350e924b3d44c7b4e00a608a7",
+      "status": "PASS",
+      "cleanup": "NOT_RUN",
+      "inputs": {
+        "action_server/src/actions/server/canvas_lifecycle.py": "072a245c4d7423c505e9d8c29de5557e7216e8664038b0f6cbdfc4ea826d217c",
+        "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "4b2a0b9c7cb56eb6ef6fc7886205309fe06f812dbb26a12371c29fe0e744d64a",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.canvas_lifecycle": {
+          "path": "/workspace/actions-327-canvas/action_server/src/actions/server/canvas_lifecycle.py",
+          "sha256": "072a245c4d7423c505e9d8c29de5557e7216e8664038b0f6cbdfc4ea826d217c"
+        }
+      },
+      "exit": 0,
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 7
+      },
+      "artifacts": {
+        "focused.log": "e5c71635114b94e54bce5d93cfdbe23efb76c0d49ea520f22bdc54d9bb1208d0",
+        "focused.xml": "8aabea939ba6090216ad2f84fbcefbe0d8501436c484fae07e5dfac255da440e"
+      }
+    },
+    "knowledge": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/knowledge/fc33e98f-993f-4b5d-9a66-a6824ead6fad",
+      "source": "63d9ab6c12fc0158938e565cfca6edf7c2624d38",
+      "status": "PASS",
+      "cleanup": "PASS",
+      "inputs": {
+        "action_server/src/actions/server/data_queries/knowledge.py": "4366b12d3733884a581f7694000ebcfa26d578eb244d705c3aad83df82732a8c",
+        "action_server/tests/action_server_tests/test_knowledge_collections.py": "0a70f5a9b2ed741b9ac4b2cb57a03f19f028e647f3f1e3eb12ade216424d8192",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.data_queries.knowledge": {
+          "path": "/workspace/actions-327-knowledge/action_server/src/actions/server/data_queries/knowledge.py",
+          "sha256": "4366b12d3733884a581f7694000ebcfa26d578eb244d705c3aad83df82732a8c"
+        },
+        "duckdb": {
+          "path": "/workspace/actions-327-knowledge/action_server/.venv/lib/python3.12/site-packages/duckdb/__init__.py",
+          "sha256": "2b20aa68f219791777a195cfec5f87fff610299d26bfbc1e6ef7692476c704a1"
+        },
+        "psycopg": {
+          "path": "/workspace/actions-327-knowledge/action_server/.venv/lib/python3.12/site-packages/psycopg/__init__.py",
+          "sha256": "5f1607a193cb63e60a0c5687209d2bd0e3029760b9559e9968f31d6b5d82c778"
+        }
+      },
+      "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "exit": 0,
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 14
+      },
+      "artifacts": {
+        "focused.log": "a76ce038c51768c813372e49368b82c257762861cb6ffd05b178d19c478e5745",
+        "focused.xml": "4baccb43d1af877d59d0791f2b263d226ca0a45c6f57ad808ae1038cd79cf635"
+      }
+    },
+    "toolkit": "Doctor -> Bootstrap -> ToolkitTest passed in each detached exact-source checkout; 179 tests per source, not additive coverage.",
+    "canvas_static": "Configured Runtime lint and typecheck passed on original exact source.",
+    "knowledge_static": "Original typecheck failed observed _bindings var-annotated; original lint failed formatting of the two new Knowledge files. Both repaired on integration only."
+  },
+  "original_worker_receipts_parent_reported": {
+    "canvas": {
+      "source": "22d9766079f2278350e924b3d44c7b4e00a608a7",
+      "bootstrap": "failed twice on PyPI DNS",
+      "lifecycle": "collection failed missing rfc8785; zero cases executed",
+      "typecheck": "14 errors in 13 files",
+      "core": "296 passed, 19 failed",
+      "runtime": "1131 passed, 26 skipped, 124 failed, 126 errors; incomplete/stale environment"
+    },
+    "knowledge": {
+      "source": "63d9ab6c12fc0158938e565cfca6edf7c2624d38",
+      "bootstrap": "failed coverage/actions-http-helper resolution; no current policy denial or DNS/TLS cause established despite HTTP 200 PyPI metadata probes",
+      "pinned_image": "anonymous preload subsequently succeeded",
+      "migration_tests": "8 passed / 6 PostgreSQL skips at prior migrated source, not service conformance"
+    }
+  },
+  "regression_failures": {
+    "canvas": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/canvas/2cede033-304f-4e30-8915-0df82bfd64a6",
+      "source": "93666a70460e36a75569a4bcff8fae7abf211ee6",
+      "status": "FAIL",
+      "cleanup": "NOT_RUN",
+      "inputs": {
+        "action_server/src/actions/server/canvas_lifecycle.py": "072a245c4d7423c505e9d8c29de5557e7216e8664038b0f6cbdfc4ea826d217c",
+        "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "1115dad58cea3cf0d528a0328e24e63aa99bf5213e6b8355b68f8a80d17054e3",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.canvas_lifecycle": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/canvas_lifecycle.py",
+          "sha256": "072a245c4d7423c505e9d8c29de5557e7216e8664038b0f6cbdfc4ea826d217c"
+        }
+      },
+      "exit": 1,
+      "counts": {
+        "failure": 3,
+        "error": 0,
+        "skipped": 0,
+        "tests": 10
+      },
+      "failure_type": "AssertionError",
+      "artifacts": {
+        "focused.log": "43bd9e0364bdd81027b182d37d04df82a32081c26c962c142e32090e320e76de",
+        "focused.xml": "0441fc99ae25a30f65e77b3e08d9ae2bce2b5426e732fe95534e2671f6ebdd3a"
+      }
+    },
+    "knowledge": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/knowledge/1036358b-2066-4396-a711-4234063644f1",
+      "source": "93666a70460e36a75569a4bcff8fae7abf211ee6",
+      "status": "FAIL",
+      "cleanup": "PASS",
+      "inputs": {
+        "action_server/src/actions/server/data_queries/knowledge.py": "4366b12d3733884a581f7694000ebcfa26d578eb244d705c3aad83df82732a8c",
+        "action_server/tests/action_server_tests/test_knowledge_collections.py": "d0676091a848417db981028321e14ed63bfd75c51894b96c329c3d337d02b857",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.data_queries.knowledge": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/knowledge.py",
+          "sha256": "4366b12d3733884a581f7694000ebcfa26d578eb244d705c3aad83df82732a8c"
+        },
+        "duckdb": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/duckdb/__init__.py",
+          "sha256": "2b20aa68f219791777a195cfec5f87fff610299d26bfbc1e6ef7692476c704a1"
+        },
+        "psycopg": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/psycopg/__init__.py",
+          "sha256": "5f1607a193cb63e60a0c5687209d2bd0e3029760b9559e9968f31d6b5d82c778"
+        }
+      },
+      "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "exit": 1,
+      "counts": {
+        "failure": 5,
+        "error": 0,
+        "skipped": 0,
+        "tests": 19
+      },
+      "failure_type": "AssertionError",
+      "artifacts": {
+        "focused.log": "e10442af04a23c001977b563f0e10b055417b477ad415531a636511518165018",
+        "focused.xml": "b57065af3d98d457eb580199f0cde54676c856fcd30db49b9e4a552c6b16dda7"
+      }
+    },
+    "workspace_paths": {
+      "evidence": "/workspace/actions-327-state/evidence/convergence/workspace-red.log",
+      "failed": 2,
+      "deselected": 10,
+      "failure": "drive-qualified workspace path accepted before guard repair"
+    }
+  },
+  "repairs": [
+    "Canvas rollback authorizes both current and restored exact revision; denial leaves pointer unchanged.",
+    "Canvas resource names and workspace path components reject drive-qualified syntax before filesystem operations.",
+    "Knowledge ingest requires read plus management authority, not read permission alone.",
+    "Knowledge source identity frames name/content lengths under a domain prefix; embedded NUL bytes cannot alias file boundaries.",
+    "Knowledge metadata validation and row reads share a DuckDB snapshot or PostgreSQL REPEATABLE READ READ ONLY transaction; real concurrent reingestion cannot turn the old result falsely empty.",
+    "Explicit typed collection-binding map and configured formatter/import ordering repair original static failures."
+  ],
+  "final_precommit_components": {
+    "canvas": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/canvas/1caf2707-7152-4f16-82f1-942950e87a7e",
+      "source": "93666a70460e36a75569a4bcff8fae7abf211ee6",
+      "status": "PASS",
+      "cleanup": "NOT_RUN",
+      "inputs": {
+        "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+        "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.canvas_lifecycle": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/canvas_lifecycle.py",
+          "sha256": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6"
+        }
+      },
+      "exit": 0,
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 12
+      },
+      "artifacts": {
+        "focused.log": "a73aab92afac7497a0b46d214926c982873a45bfa547a8405931b8e189ac2096",
+        "focused.xml": "e0ba1c4db2644e564b66c4e774b1fe817c07cdbfdfb5ea5a39694ffb0d67cd83"
+      }
+    },
+    "knowledge": {
+      "evidence": "/workspace/actions-327-state/evidence/siblings/knowledge/d0daa55f-4be7-43b2-a836-3da0012bbaad",
+      "source": "93666a70460e36a75569a4bcff8fae7abf211ee6",
+      "status": "PASS",
+      "cleanup": "PASS",
+      "inputs": {
+        "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+        "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+        "action_server/poetry.lock": "113050f95d4a8f72dd62f4fc11c976285c7e611533466f0a14afaa4044b3f6a0"
+      },
+      "modules": {
+        "actions.server.data_queries.knowledge": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/knowledge.py",
+          "sha256": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411"
+        },
+        "duckdb": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/duckdb/__init__.py",
+          "sha256": "2b20aa68f219791777a195cfec5f87fff610299d26bfbc1e6ef7692476c704a1"
+        },
+        "psycopg": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/psycopg/__init__.py",
+          "sha256": "5f1607a193cb63e60a0c5687209d2bd0e3029760b9559e9968f31d6b5d82c778"
+        }
+      },
+      "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "exit": 0,
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 19
+      },
+      "artifacts": {
+        "focused.log": "752f8f0a927f978b7e2c2e7ae5ab84201d856a00f68e20f25624207f04469888",
+        "focused.xml": "de5d79c310d03539e73714a73a4d68429c263a9adbb5bdda7192a050507be512"
+      }
+    },
+    "overlap": "These 12 + 19 component cases are also run by canonical InvoiceQueryTest and its portable suite; do not add repeated counts."
+  },
+  "static_gates": {
+    "cwd": "action_server",
+    "commands": [
+      "poetry run invoke lint",
+      "poetry run invoke typecheck",
+      "poetry check --lock"
+    ],
+    "exit": 0,
+    "other": [
+      "git diff --check",
+      "prepared Python -m ruff check action_server/scripts/verify_invoice_queries.py"
+    ],
+    "markdown_lint": "unavailable, not installed; package lint reports this omission"
+  },
+  "canonical_gate": {
+    "command": "ACTIONS_INVOICE_EVIDENCE_DIR=<absolute-task-owned-directory> ACTIONS_INVOICE_FULL=1 ./devutils/bin/develop.sh InvoiceQueryTest",
+    "changes": "Run zero-skip component suites before the existing provider/output suite; hash both new modules/tests; verify loaded Runtime module paths and hashes against selected checkout before allocating PostgreSQL.",
+    "wrong_checkout_control": {
+      "status": "EXPECTED_FAIL",
+      "exit": 1,
+      "expected_source": "/workspace/actions-327-canvas/action_server/src",
+      "actual_environment": "/workspace/actions-327/action_server/.venv",
+      "failure": "Runtime module belongs to another source checkout"
+    }
+  },
+  "first_full_run": {
+    "receipt": "/workspace/actions-327-state/evidence/convergence/precommit/86171c69-9e14-4040-8414-de638db2ee3e/receipt.json",
+    "status": "FAIL",
+    "cleanup": "PASS",
+    "components": {
+      "passed": 29,
+      "skipped": 0
+    },
+    "invoice": {
+      "passed": 128,
+      "skipped": 0
+    },
+    "portable": {
+      "failed": 17,
+      "passed": 1607,
+      "skipped": 15,
+      "deselected": 157
+    },
+    "cases": [
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_normalize_uri",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.mcp.test_canvas_query_template::test_new_canvas_project_extracts_the_embedded_template",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_artifact_binding_lock::test_windows_binding_does_not_import_fcntl",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_artifact_storage::test_storage_handles_mixed_resolved_drive_prefixes",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_canvas_query_results_fixture::test_python_json_round_trips_through_typescript_and_back",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_cloud::test_cloud_list_organizations_uses_cli_http_contract",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_create_new_project::test_action_server_new_force_flag",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_database_shared::test_cli_database_url_credentials_are_redacted_from_early_and_datadir_logs",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_zip",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_zip_no_actions",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_pack_v2_fields_but_not_v2_marked",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata_external_endpoints",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata_external_endpoints_bad",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata_oauth2_secrets",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata_secrets",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_metadata_api",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_upload",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_status",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_set_changelog",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_rcc_runtime_adapter::test_real_rcc_artifact_action_vertical",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_robot_artifacts::test_rejects_socket_entries",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_robot_run_inputs::test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "status": "skipped"
+      },
+      {
+        "test": "tests.action_server_tests.test_server::test_import_action_server_strategies[no-conda]",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_server::test_import_action_server_strategies[package.yaml]",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_server::test_import_action_server_strategies[package.yaml:uv]",
+        "status": "failed"
+      },
+      {
+        "test": "tests.action_server_tests.test_server::test_import_default_value",
+        "status": "failed"
+      }
+    ],
+    "artifacts_sha256": {
+      "components.log": "c3ec09270e5573086f20f8f116cee857dc3eb02962d754ecf3a05282c26929ab",
+      "components.xml": "5023defaf6e394747fb29cac4af7ff4b0c5b92c9006e075e2a522c076421529b",
+      "invoice.log": "3fb5bd1fef59d26e92a512baec99c7494d3c5afe972576d844fded0e19194e66",
+      "invoice.xml": "77d256e27a827a93177e95e78e804630c7612d9a4205d723fc9d6e1b99c2f662",
+      "portable.log": "c577db090e64cab6ced162c2f70a925fa8f9d73012e4b82f55ee8d95cbe19f36",
+      "portable.xml": "85e25b4d09ab9fa6bdad47ee7db352488b9ebffc22d243c2e7e941224fc2d692",
+      "postgres.log": "a27fe05e0c369c52872b44edc72da1c6c5d5c0e25e5ca8dfad4e69afaf15fdc6"
+    }
+  },
+  "home_setup_recovery": {
+    "cause": "ROBOTS_HOME was unset; Runtime get_robots_home() separately defaults to ~/.robots. Most failed CLI cases directly reported read-only /home/agent/.robots; others failed missing log or golden-output assertions.",
+    "change": "Set only supported ROBOTS_HOME=/workspace/actions-327-state/robots in the task-owned prepared environment; no HOME override, credential or network/security setting change.",
+    "retry_command": "poetry run pytest tests -m \"not integration_test\" --lf -q --junitxml=/workspace/actions-327-state/evidence/convergence/robots-home-retry.xml",
+    "retry_result": "19 passed, zero skips: 17 original failures plus two repaired workspace path regressions. Full exact-commit gate still required.",
+    "receipt": "/workspace/actions-327-state/evidence/convergence/robots-home-retry.xml"
+  },
+  "successful_setup_differences": {
+    "toolchain": "Josh RCC 18.19.3, Python 3.12.15, Poetry 2.1.1; same checked-in lockfiles; each source owns fresh package-local venvs.",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "cache": "This task shared only its RCC/toolchain and Poetry download caches after its initial successful Bootstrap, not another source checkout's editable environments or worker task data. Cache reuse is an observed setup difference, not proof of the other worker's Poetry failure cause.",
+    "postgres": "Exact official digest anonymously preloaded; verifier remains --pull=never with bounded owned loopback/tmpfs container."
+  },
+  "changed_inputs_sha256": {
+    "action_server/scripts/verify_invoice_queries.py": "78b08f5aa21212283b326aa5ec539b4324c55860adfc1fc6d080cca1b3959a4c",
+    "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+    "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+    "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+    "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+    "docs/skills/repository-operations.md": "05d83c55d333d828029a5375e2b52dd94e27f1a1932b32eecd73995a18d35b5d",
+    "docs/program/actions-next-release-327.md": "646f28c73f3e719fb73f098533c24a14786922fed9b8f56e05708298ba702549"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "worker_receipts": "Both worker guide additions retained and corrected against code and executable evidence.",
+    "durable_delta": [
+      "require management authority for ingestion; document unambiguous source-version framing and candidate reingestion implications",
+      "document real-engine read-snapshot concurrency and in-flight versus later revocation scope",
+      "authorize restored Canvas revision and reject drive-qualified resource/workspace paths",
+      "document exact-checkout editable import verification and separate ROBOTS_HOME isolation",
+      "retain private-component versus complete invoice/host/process recovery boundaries and file-ingestion allocation limit"
+    ],
+    "evidence": "Original sibling source/module hashes, ten failed regression parametrizations, focused green tests, current static gates, wrong-checkout rejection, first full failure inventory and successful supported-home retry.",
+    "remaining_uncertainty": "Exact committed full gate recorded in completion comment; complete invoice review/worker, actual host, complete ingest I/O bounds, native platforms, optional celld and distribution/restore remain separate."
+  },
+  "rollback": "No deployed schema or backend was changed. Private APIs and persistence are not registered into Runtime routes. New source framing requires new candidate binding hashes and explicit reingestion; retain old snapshots and bindings for rollback. Do not migrate deployed stores or publish changed bytes as Runtime 1.0.4/SDK 0.4.4.",
+  "next_smallest_slice": "Persist an explicit human-review decision bound to the exact authorized published invoice result/input/application/deployment revisions and current actor. Admit one fenced Work Item idempotently under SQL authority, with denial/revocation/mismatch/duplicate-delivery tests using real DuckDB and PostgreSQL. Distinct Run/Attempt and actual RCC worker/recovery follow.",
+  "unmet_release_gates": [
+    "actual authenticated ChatGPT E1 NEEDS_OPERATOR",
+    "celld 24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO; pinned storage/failure lab required before adapter",
+    "full linked invoice review/Run/Attempt/RCC/artifact/recovery and negative authorization matrix",
+    "homelab-independent builds, package/native/image compatibility, retention/restore and owner publication approval",
+    "initial full suite left three observed orphaned zombie Python helpers under PID 1; no live owned service remained, but container cleanup does not prove process reaping"
+  ],
+  "upstream_disposition": "none",
+  "release_status": "DRAFT_PR; full release NOT READY"
+}

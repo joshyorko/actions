@@ -1,0 +1,22 @@
+{
+  "execution_authorized": true,
+  "source_sha": "45e8c2c1f1e6e9b72c5e48e01d735243185e015b",
+  "runtime_version": "1.1.0a48",
+  "core_version": "1.1.0a7",
+  "installed_base": "/workspace/recovery327/a48",
+  "fixture_root": "/workspace/recovery327/a48-data-public-04",
+  "prepared_receipt": "/workspace/recovery327/robot-compiler-a7/prepared.json",
+  "compiler_artifact_digest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+  "compiler_core_wheel_sha256": "9e8a1e687bbce5e444f2dfdd5890d30176ab84ae68384b5ef6af9c3e86dcea74",
+  "compiler_core_bytes_verified": true,
+  "compiler_core_receipt": "/workspace/recovery327/robot-compiler-a7/core-proof.json",
+  "compiler_core_receipt_sha256": "7d84a496cb0be448fac3cee4096730c431378deac1ab394366936cc7915fc4d7",
+  "wheels": {
+    "wheels/action_server/actions_runtime-1.1.0a48-cp312-cp312-linux_x86_64.whl": "8b1d6daa87f12ccb84fbae81c1af1a6af64c07f771dd599bf17bcd3b37a596d6",
+    "wheels/actions/actions_core-1.1.0a7-py3-none-any.whl": "9e8a1e687bbce5e444f2dfdd5890d30176ab84ae68384b5ef6af9c3e86dcea74",
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "package_yaml": "/workspace/recovery327/robot-compiler-a7/package.yaml",
+  "tls_fixture_sha256": "5c2fe2def1cfa8b1c1d381eec9dcea7fd530380c0a59fc4c4dda2d1d6c65a520",
+  "supervisor_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b"
+}

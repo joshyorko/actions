@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "process_exit": 0,
+  "scope": "actual installed a44 direct protocol/RCC measurement; browser not run",
+  "initial_allocated_bytes": 1934905344,
+  "sampled_peak_allocated_bytes": 2953277440,
+  "retained_allocated_bytes": 2953072640,
+  "minimum_free_bytes": 12343414784,
+  "nominal_sample_seconds": 0.25
+}

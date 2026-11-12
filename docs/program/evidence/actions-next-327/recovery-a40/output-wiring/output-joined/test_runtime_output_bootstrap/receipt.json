@@ -1,0 +1,36 @@
+{
+  "module": "test_runtime_output_bootstrap",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a40/output-joined/selected-pytest.py",
+    "tests/action_server_tests/test_runtime_output_bootstrap.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a40/output-joined/test_runtime_output_bootstrap/tests.xml",
+    "--basetemp=/workspace/actions-327-a40/output-joined/test_runtime_output_bootstrap/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 7905738752,
+  "stop_reason": null,
+  "source_sha256": "6a403e222c3250d8ba9953440e38af1ec674be1944b10cf2a943dce91309982e",
+  "counts": {
+    "tests": 4,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

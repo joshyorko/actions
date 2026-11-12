@@ -1,0 +1,29 @@
+{
+  "base": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "archive_root": "/workspace/actions-recovery-327/generic-contract-draft",
+  "patch": "/workspace/actions-recovery-327/generic-contract.patch",
+  "patch_sha256": "14801840a486aa7bcbad40e1e0eb59dcd0b315ccc51659cef3f318c4f42df7d4",
+  "files": {
+    "docs/design/package-revision-v1.schema.json": "f2efacecb49d85fb59ca2242751f36b9a1c5de379b672751fb6966e97ff7f6f9",
+    "action_server/src/actions/server/deployments/foundry_values.py": "bed5550aa728ca5b1734f09558389279c63e857fe20035166c7eae174625e202",
+    "action_server/src/actions/server/deployments/foundry_repository.py": "494f67dd9b4246d127813d95b2cc4d5817fea081dfa631ca630c2bf726549a16",
+    "action_server/src/actions/server/deployments/foundry_service.py": "6717acc8266a4c1064e0142bbce54846f13bb78afc572e53d43758eeda625486",
+    "action_server/src/actions/server/deployments/package_revision_compiler.py": "69fb8175ef0acd6dd27538b775b4a43a2037cb9357580115b778433b9271fb63",
+    "action_server/src/actions/server/foundry/package_registry.py": "5df3f20c835099332c376d8ab7e80ef499c43182c830dd4465b243c7c5b47c48",
+    "action_server/tests/action_server_tests/test_work_item_policy_values.py": "ccaafbe3f58bc143197e5fc9cb6fdcc616f580af7b8079ddae90bb604f70a333",
+    "action_server/tests/action_server_tests/test_foundry_package_registry.py": "a396e8415afe35b72ffc4dd63131a02c3283aa381a4090c35f89b0c9aea66bb2",
+    "action_server/tests/contract_tests/test_package_revision_compiler.py": "9b7c864688b5857cda697af4cd2df3c558316ef98422d8267f4076e10b33cac1"
+  },
+  "classification": "source iteration only; no installed/runtime producer qualification",
+  "gates": {
+    "focused": "117 passed,33 skipped; subsequent 4 new schema negatives tested separately",
+    "mypy": "5 source files passed",
+    "red": "missing typed declarations ImportError before implementation",
+    "setup_failure": "first green attempt failed missing archive RCC; copied existing verified pinned RCC only to owned archive; retained log"
+  },
+  "upstream_disposition": "none",
+  "review_corrections": [
+    "non-none requires explicit allowOutputs",
+    "independent pristine5d950150 deterministic UUID canonical Deployment golden d9009db12668550f6b1d0c9d84c2e4aee6d47d766e0d5cab13916fec7aaf6c2d"
+  ]
+}

@@ -2014,6 +2014,49 @@ paths:
                 $ref: '#/components/schemas/AnalyticsSummary'
           description: Successful Response
       summary: Get Analytics Summary
+  /api/managed-work-items/v1/capabilities:
+    get:
+      operationId: capabilities_api_managed_work_items_v1_capabilities_get
+      parameters:
+      - in: query
+        name: workspace_id
+        required: true
+        schema:
+          title: Workspace Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Capabilities
+  /api/managed-work-items/v1/operations:
+    post:
+      operationId: operation_api_managed_work_items_v1_operations_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Operation
+  /api/managed-work-items/v1/schema:
+    get:
+      operationId: schema_api_managed_work_items_v1_schema_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Schema
   /api/robots/catalog:
     get:
       description: 'Get catalog of available robot packages.

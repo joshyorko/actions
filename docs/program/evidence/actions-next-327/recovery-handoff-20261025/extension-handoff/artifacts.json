@@ -1,0 +1,24 @@
+{
+  "qualified_local_source": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "remote_source": "f1b11838674494cd6a34d343b97404cbb1537004",
+  "tree": "f094faf5d2eabbef0a159a7fabb4983a59a8e56c",
+  "sdk_note": "inherited frozen wheel; work-items source diff from3037e4fccb66a41835dbea8de7406d1281ad5dda toqualifiedsource is empty",
+  "artifacts": [
+    {
+      "filename": "actions_runtime-1.1.0a37-cp312-cp312-linux_x86_64.whl",
+      "sha256": "096c8804e2ba2b7189820c68095fdbaa7bbe710ff2f828611b82375ecb71fdd0",
+      "local_path": "/workspace/actions-recovery-327/installed-a37/runtime-wheels/actions_runtime-1.1.0a37-cp312-cp312-linux_x86_64.whl"
+    },
+    {
+      "filename": "actions_core-1.1.0a3-py3-none-any.whl",
+      "sha256": "4147cdeb2a593e54194b4d2fcd2c92f0b029fb802d1d298e35c912a1fef03167",
+      "local_path": "/workspace/actions-recovery-327/installed-a37/core-wheels/actions_core-1.1.0a3-py3-none-any.whl"
+    },
+    {
+      "filename": "actions_work_items-0.5.0a2-py3-none-any.whl",
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "local_path": "/workspace/actions-recovery-327/installed-a37/sdk-wheels/actions_work_items-0.5.0a2-py3-none-any.whl"
+    }
+  ],
+  "remote_wheel_transfer": "No verified supported remote wheel location. Library tools/list HTTP401; no upload IDs. Rebuild exact source in tester VM."
+}

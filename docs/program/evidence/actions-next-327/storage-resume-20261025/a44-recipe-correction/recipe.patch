@@ -1,0 +1,26 @@
+--- original-bundle/browser/qualify.py
++++ corrected/browser/qualify.py
+@@ -1,4 +1,4 @@
+-"""Prepared a42 official-host and independent MCP qualification; not yet executed."""
++"""Prepared a44 official-host and independent MCP qualification; not yet executed."""
+ import asyncio
+ import hashlib
+ import importlib.metadata
+@@ -24,7 +24,7 @@
+ CONFIG = json.loads(Path(os.environ['ACTIONS_V2_CANDIDATE']).read_text())
+ assert CONFIG['execution_authorized'] is True, 'candidate not released for execution'
+ assert CONFIG['core_version'] == '1.1.0a6'
+-assert CONFIG['source_sha'] == '730f277ce13bd3a123c854c85c1c9fc2c185096c'
++assert CONFIG['source_sha'] == 'd0c87a38a937cc339e8e661ac453c7a62ed41fa6'
+ assert CONFIG['runtime_version'] == '1.1.0a44'
+ HOST_ROOT = Path(CONFIG['official_host']).resolve()
+ NODE = Path(CONFIG['node_executable']).resolve()
+@@ -411,7 +411,7 @@
+                 RECEIPT['revoked_read_denial']='projection rejected'
+         await connect(denied,expected_tasks=False)
+         assert snapshot('after-denial')==after
+-        RECEIPT.update(status='PASS',app=app,revision=revision,retained_projection=retained[0],actual_generated_execution='PASS',E1=False,stale_session_denied=True,revoked_read_denied=True,scope='fresh a42 v2 app through independent MCP and official reference host; actual ChatGPT not tested')
++        RECEIPT.update(status='PASS',app=app,revision=revision,retained_projection=retained[0],actual_generated_execution='PASS',E1=False,stale_session_denied=True,revoked_read_denied=True,scope='fresh a44 v2 app through independent MCP and official reference host; actual ChatGPT not tested')
+     except BaseException as exc:
+         RECEIPT.update(status='FAIL',failure_type=type(exc).__name__);raise
+     finally:

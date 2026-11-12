@@ -1,0 +1,1 @@
+{"mode": "consumer", "phase": "restart", "arguments": {"appId": "043f9d7d-aaed-49a7-86cc-14be9c16ae84"}, "itemId": null, "ndjson": "{\"city\":\"Denver\",\"amount\":12}\n{\"city\":\"Seattle\",\"amount\":7}", "expectedCount": 2}

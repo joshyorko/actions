@@ -1,0 +1,41 @@
+{
+  "status": "PASS_CLEAN_INSTALL",
+  "candidate": "a58",
+  "source_commit": "943f2736b5616b9034f4a97dac9a11efafdcd065",
+  "source_tree": "cf10a054ffef511f258a5a2ede27857fd1a92d72",
+  "runtime_lock_sha256": "00de76d27a833b63225ce37b5d633b83a761d00bad63f315eaeec77dc9de4c53",
+  "constraints_sha256": "ce77892478fff64afbd8cb71885c3832097e2514858bbe5223fe1d241d423758",
+  "candidate_wheel_sha256": {
+    "actions_runtime-1.1.0a58-cp312-cp312-linux_x86_64.whl": "d4865a0a9d509d853897d7c97f23b4b371f10d6e5c27b0bce91cca406bb3629d",
+    "actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "consumer_python": "/workspace/327-artifacts/a58/consumer/bin/python",
+  "runtime_version": "1.1.0a58",
+  "verified_payload_member_counts_excluding_record": {
+    "actions-runtime": 342,
+    "actions-core": 90,
+    "actions-work-items": 29
+  },
+  "metadata_identical": true,
+  "direct_url_wheel_hashes": {
+    "actions-runtime": {
+      "url": "file:///workspace/327-artifacts/a58/actions_runtime-1.1.0a58-cp312-cp312-linux_x86_64.whl",
+      "sha256": "d4865a0a9d509d853897d7c97f23b4b371f10d6e5c27b0bce91cca406bb3629d"
+    },
+    "actions-core": {
+      "url": "file:///workspace/327-artifacts/a57/wheels/actions_core-1.1.0a8-py3-none-any.whl",
+      "sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f"
+    },
+    "actions-work-items": {
+      "url": "file:///workspace/327-artifacts/a57/wheels/actions_work_items-0.5.0a2-py3-none-any.whl",
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+    }
+  },
+  "consumer_inspect_sha256": "66f333c5cff73a3aa17627407c8640c4c916ed1a45587aabfaa5fda709a35e91",
+  "consumer_inspect_path": "pip-inspect.log",
+  "pip_check": "No broken requirements found.",
+  "canvas_html_byte_count": 490733,
+  "canvas_html_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+  "runtime_services_started": false
+}

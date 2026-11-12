@@ -1,0 +1,3 @@
+[
+  "tests/action_server_tests/test_knowledge_host_postgres.py::test_owned_tls_provision_roundtrip_and_readonly_selection"
+]

@@ -1,0 +1,293 @@
+{
+  "schema": "hosted-ci-watch/v1",
+  "observed_at_utc": "2026-10-26T17:08:41Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "head_sha": "a90d6cdb8af8b07bf534953903f157d003a4d322",
+  "head_tree_sha": "cd8f99d859bdb9626aed38d96d39a3d8c1f967d6",
+  "product_source_baseline_prefix": "123e772e",
+  "event": "pull_request",
+  "read_only": true,
+  "qualification_owner": {
+    "name": "Measured Python coverage gate",
+    "run_number": 514,
+    "run_id": 40358988969,
+    "run_url": "https://github.com/joshyorko/actions/actions/runs/40358988969",
+    "job_id": 121698997642,
+    "status": "completed",
+    "current_step": null,
+    "postgres_start": "success",
+    "postgres_cleanup": "success",
+    "package_counts": {
+      "toolkit_contract_preflight": {
+        "passed": 215,
+        "failed": 0,
+        "duration_seconds": 43.28
+      },
+      "actions": {
+        "passed": 449,
+        "skipped": 5,
+        "warnings": 4,
+        "failed": 0,
+        "duration_seconds": 149.22
+      },
+      "actions_http_helper": {
+        "passed": 12,
+        "failed": 0,
+        "duration_seconds": 0.23
+      },
+      "devutils": {
+        "passed": 335,
+        "failed": 0,
+        "duration_seconds": 43.89
+      },
+      "work_items": {
+        "passed": 285,
+        "skipped": 46,
+        "deselected": 3,
+        "xfailed": 10,
+        "failed": 0,
+        "duration_seconds": 12.86
+      },
+      "action_server": {
+        "passed": 5343,
+        "skipped": 58,
+        "warnings": 18,
+        "failed": 0,
+        "duration_seconds": 2204.79
+      }
+    },
+    "coverage_inventory_result": {
+      "state": "PASS",
+      "baseline_written": false,
+      "failed_gates": [],
+      "covered_statements": 41665,
+      "statement_count": 58748,
+      "statement_percent": 70.9216,
+      "minimum_statement_percent": 53.38,
+      "missing_source_files": {},
+      "suite_exit_codes": {
+        "action_server": 0,
+        "actions": 0,
+        "actions_http_helper": 0,
+        "devutils": 0,
+        "work_items": 0
+      },
+      "subprocess_coverage_claim": "complete subprocess and installed-wheel coverage is not claimed"
+    },
+    "coverage_qualified": true,
+    "run_started_at": "2026-10-26T16:25:32Z",
+    "job_started_at": "2026-10-26T16:25:35Z",
+    "measure_step_started_at": "2026-10-26T16:27:54Z",
+    "elapsed_at_observation_seconds": 2212,
+    "conclusion": "success",
+    "job_completed_at": "2026-10-26T17:08:40Z",
+    "measure_step_completed_at": "2026-10-26T17:08:26Z",
+    "elapsed_job_seconds": 2585,
+    "elapsed_measure_seconds": 2426,
+    "checkout_merge_sha": "060288d5b42a1493c366cdc802378ea85713ac54",
+    "checkout_merge_tree_sha": "cd8f99d859bdb9626aed38d96d39a3d8c1f967d6",
+    "checkout_merge_parents": [
+      "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+      "a90d6cdb8af8b07bf534953903f157d003a4d322"
+    ],
+    "artifact_uploaded": true,
+    "artifact_id": 12670266877,
+    "artifact_downloaded": false
+  },
+  "runs": [
+    {
+      "name": "Actions Runtime Tests",
+      "run_number": 392,
+      "run_id": 40358988878,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40358988878",
+      "status": "in_progress",
+      "jobs": [
+        {
+          "id": 121698997711,
+          "runner": "windows-py3.12-devmode",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_step": "Test (not integration)",
+          "counts": {
+            "failed": 19,
+            "passed": 2158,
+            "skipped": 3224,
+            "warnings": 17,
+            "duration_seconds": 410.54
+          },
+          "typecheck": "success",
+          "postgres": "skipped: Linux-only service",
+          "failure_clusters_observed": [
+            "missing os.O_NOFOLLOW/getpgid/killpg",
+            "6 WinError 10038 non-socket errors",
+            "2 file-mode assertions",
+            "1 task-wire schema hash mismatch",
+            "1 explicit offline POSIX backup refusal"
+          ]
+        },
+        {
+          "id": 121698997901,
+          "runner": "ubuntu-py3.12-devmode",
+          "status": "completed",
+          "current_step": "Test (not integration)",
+          "postgres_start": "success",
+          "counts": {
+            "failed": 0,
+            "passed": 5345,
+            "skipped": 56,
+            "warnings": 18,
+            "duration_seconds": 1243.73
+          },
+          "conclusion": "failure",
+          "test_step": "success",
+          "postgres_cleanup": "success",
+          "failed_step": "Verify Canvas published-Core Runtime and browser acceptance",
+          "acceptance": {
+            "pytest_exit": 1,
+            "tests": 1,
+            "skipped": 0,
+            "failures": 1,
+            "errors": 0,
+            "receipt_valid": false,
+            "rejected_predicate": "not exposed"
+          }
+        },
+        {
+          "id": 121698997407,
+          "runner": "macos-py3.12-devmode",
+          "status": "completed",
+          "counts": null,
+          "conclusion": "cancelled"
+        }
+      ]
+    },
+    {
+      "name": "Action Server Build (Unauthenticated)",
+      "run_number": 754,
+      "run_id": 40358988946,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40358988946",
+      "status": "in_progress",
+      "checkout_merge_sha": "060288d5b42a1493c366cdc802378ea85713ac54",
+      "checkout_merge_tree_sha": "cd8f99d859bdb9626aed38d96d39a3d8c1f967d6",
+      "jobs": [
+        {
+          "id": 121699001867,
+          "runner": "ubuntu-22.04",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_step": "Verify Canvas candidate-source Runtime and browser acceptance",
+          "pytest": {
+            "exit": 0,
+            "tests": 1,
+            "passed": 1,
+            "skipped": 0,
+            "failures": 0,
+            "errors": 0
+          },
+          "safe_failure_location": {
+            "availability": "NOT_NEEDED",
+            "locations": []
+          },
+          "receipt_valid": false,
+          "failure_classification": "receipt admission failure; rejected predicate not exposed",
+          "artifact_downloaded": false
+        },
+        {
+          "id": 121699001795,
+          "runner": "windows-2022",
+          "status": "completed",
+          "current_step": null,
+          "candidate_source_acceptance": "skipped by Ubuntu-only condition",
+          "conclusion": "success",
+          "packaged_work_items_browser_acceptance": "success"
+        },
+        {
+          "id": 121699002436,
+          "runner": "macos-15",
+          "status": "completed",
+          "conclusion": "cancelled"
+        }
+      ]
+    },
+    {
+      "name": "RCC developer toolkit",
+      "run_number": 815,
+      "run_id": 40358988985,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40358988985",
+      "status": "in_progress",
+      "jobs": [
+        {
+          "id": 121699087059,
+          "runner": "n-1 Windows 2022",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_step": "Run toolkit contract tests",
+          "counts": {
+            "failed": 7,
+            "passed": 195,
+            "skipped": 13
+          },
+          "observed_error": "scripts/publish_evidence.sh line 10: python3: command not found",
+          "dependent_symptoms": [
+            "exit status 127",
+            "expected start call list empty"
+          ]
+        },
+        {
+          "id": 121699086386,
+          "runner": "n-1 macOS 15",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121699086799,
+          "runner": "primary macOS 15",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 121699086844,
+          "runner": "primary Ubuntu 22.04",
+          "status": "completed",
+          "current_step": null,
+          "conclusion": "success",
+          "linux_package_task_smoke": "success"
+        },
+        {
+          "id": 121699086963,
+          "runner": "primary Windows 2022",
+          "status": "completed",
+          "conclusion": "failure",
+          "counts": {
+            "failed": 7,
+            "passed": 195,
+            "skipped": 13,
+            "duration_seconds": 100.89
+          },
+          "observed_error": "scripts/publish_evidence.sh line 10: python3: command not found",
+          "dependent_symptoms": [
+            "exit status 127",
+            "expected start call list empty"
+          ]
+        },
+        {
+          "id": 121699087145,
+          "runner": "n-1 Ubuntu 22.04",
+          "status": "completed",
+          "current_step": null,
+          "conclusion": "success",
+          "linux_package_task_smoke": "success"
+        }
+      ]
+    }
+  ],
+  "canonical_guidance": {
+    "path": "docs/skills/repository-operations.md",
+    "proposal": "Clarify candidate-source receipt failures separately from pytest failures; when pytest passes but receipt admission fails, report only fixed predicate reason codes or UNAVAILABLE, never receipt values.",
+    "evidence": "Run #754 has pytest=0 and a single passing case but receipt_valid=false; safe location diagnostic is NOT_NEEDED and no rejected predicate is reported."
+  },
+  "upstream_disposition": "none",
+  "mutations": "none"
+}

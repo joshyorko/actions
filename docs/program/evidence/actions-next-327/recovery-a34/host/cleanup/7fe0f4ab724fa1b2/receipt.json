@@ -1,0 +1,16 @@
+{
+  "nodeid": "tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-duckdb-False-True]",
+  "home": "/workspace/actions-recovery-327/installed-a25/compiler/robocorp",
+  "spaces": [
+    "3001d05_5a1fac3_aa7a2268",
+    "bb55d44_5a1fac3_9fcd2534",
+    "bb55d44_5a1fac3_aa7a2268"
+  ],
+  "active_processes": [],
+  "before_free_bytes": 2180222976,
+  "retained": "immutable artifacts/catalog/source/build receipts/package caches",
+  "dryrun_returncode": 0,
+  "returncode": 0,
+  "after_free_bytes": 2789691392,
+  "remaining_selected_spaces": []
+}

@@ -1,0 +1,13 @@
+[
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[corpus-expiry]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[source-run]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[source-attempt]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[source-read]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[collection-read]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[cancel]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_final_authority_changes_reject[deadline]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_full_publish_sql_only_with_independent_corpus_lifetime[never]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_full_publish_sql_only_with_independent_corpus_lifetime[before-prepare]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_search_full_publish_sql_only_with_independent_corpus_lifetime[after-prepare]",
+  "tests/action_server_tests/test_generated_knowledge_search_boundaries.py::test_expired_source_logs_still_require_sealed_metadata"
+]

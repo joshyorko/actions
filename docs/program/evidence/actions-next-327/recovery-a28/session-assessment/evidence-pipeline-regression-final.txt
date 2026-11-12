@@ -1,0 +1,11 @@
+test_duplicate_json_fields_cannot_hide_a_value (test_evidence_publication.EvidencePublicationTests.test_duplicate_json_fields_cannot_hide_a_value) ... ok
+test_failed_commit_stops_shell_before_push (test_evidence_publication.EvidencePublicationTests.test_failed_commit_stops_shell_before_push) ... ok
+test_failed_scan_stops_shell_before_commit_and_push (test_evidence_publication.EvidencePublicationTests.test_failed_scan_stops_shell_before_commit_and_push) ... ok
+test_invalid_json_stops_shell_before_commit_and_push (test_evidence_publication.EvidencePublicationTests.test_invalid_json_stops_shell_before_commit_and_push) ... ok
+test_scan_reads_index_even_if_working_copy_was_redacted (test_evidence_publication.EvidencePublicationTests.test_scan_reads_index_even_if_working_copy_was_redacted) ... ok
+test_successful_scan_and_commit_allow_push_in_order (test_evidence_publication.EvidencePublicationTests.test_successful_scan_and_commit_allow_push_in_order) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.852s
+
+OK

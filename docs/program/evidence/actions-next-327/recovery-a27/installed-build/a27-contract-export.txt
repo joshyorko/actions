@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_managed_work_items_contract.py -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-contract-export (in /workspace/actions/action_server)
+............                                                             [100%]
+12 passed in 0.43s
+Log (html): /workspace/actions-recovery-327/evidence/a27-contract-export/log.html

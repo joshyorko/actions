@@ -1,0 +1,7 @@
+{
+  "base": "087c86c8e81844f8e9013460b3ca6a8bbca748c7",
+  "patch_sha256": "158c6b887f3e26077630df79653a2893bae3f34ac03248065569da607ec8b107",
+  "patch": "/workspace/actions-recovery-327/reopen-artifact-evidence/reopen-artifacts.patch",
+  "version_bump": "1.1.0a28 to1.1.0a29 in three version files",
+  "status": "isolated candidate, root source unchanged during full a28 suite"
+}

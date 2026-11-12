@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "source": "d0c87a38a937cc339e8e661ac453c7a62ed41fa6",
+  "runtime_version": "1.1.0a44",
+  "actual_generated_execution": "PASS",
+  "stale_session_denied": true,
+  "revoked_read_denied": true,
+  "processes": [
+    {
+      "pid": 73537,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2143697079991398,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 73565,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16417194199857477,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 73746,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16389153599993733,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 73879,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16394625600150903,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 73889,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16391011899941077,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 73901,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.214073395000014,
+      "lifespan_shutdown_complete": true
+    }
+  ]
+}

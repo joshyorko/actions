@@ -21,7 +21,9 @@ from urllib.parse import urlsplit
 
 from actions.server._common.process import ProcessTreeCleanupResult
 
-RCC_VERSION = "v18.19.3"
+RCC_VERSION = "v18.19.8"
+# Read compatibility preserves immutable plans; executable checks stay primary-pinned.
+RCC_METADATA_VERSIONS = frozenset((RCC_VERSION, "v18.19.7", "v18.19.3"))
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _PROVIDER_PROFILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,62}$")
@@ -218,7 +220,7 @@ def parse_published_artifact_details(payload: object) -> RccPublishedArtifactDet
     ):
         raise RccRuntimeError("publish", "missing or malformed artifact digest")
 
-    # RCC v18.19.3 emits these camel-case fields. If older artifact aliases are
+    # RCC v18.19.7 emits these camel-case fields. If older artifact aliases are
     # also present, require them to identify the same artifact.
     artifact_values: list[object] = []
     for key in ("artifact_digest", "digest"):
@@ -579,6 +581,7 @@ def build_exec_command(
     *,
     receipt_file: Path | None,
     json_output: bool = True,
+    local_trust_carrier: Path | None = None,
 ) -> list[str]:
     if not descriptor.provider_context_bound:
         raise RccRuntimeError(
@@ -594,6 +597,19 @@ def build_exec_command(
     ]
     if descriptor.provider_reference:
         args.extend(["--provider", descriptor.provider_reference])
+    if local_trust_carrier is not None:
+        if descriptor.provider_reference != "local":
+            raise RccRuntimeError(
+                "exec", "filesystem carrier requires explicit local provider"
+            )
+        args.extend(
+            [
+                "--trust-carrier",
+                str(local_trust_carrier),
+                "--trust-carrier-type",
+                "filesystem",
+            ]
+        )
     if receipt_file is None and json_output:
         args.append("--json")
     elif receipt_file is not None:

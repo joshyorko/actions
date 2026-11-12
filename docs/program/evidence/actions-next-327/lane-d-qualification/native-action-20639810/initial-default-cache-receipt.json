@@ -1,0 +1,77 @@
+{
+  "scope": "native legacy authenticated Action API; not generated Canvas deployment",
+  "result": "pass",
+  "stages": [
+    {
+      "label": "execute",
+      "pid": 23403,
+      "command": [
+        "/workspace/lane-d/native-20639810/action_server/dist/action-server/action-server",
+        "start",
+        "--address=127.0.0.1",
+        "--port=51109",
+        "--api-key=lane-d-synthetic-only",
+        "--datadir=/workspace/lane-d/native-action-20639810/data",
+        "--actions-sync=true",
+        "--dir=/workspace/lane-d/native-action-20639810/package"
+      ]
+    },
+    {
+      "label": "restart",
+      "pid": 24055,
+      "command": [
+        "/workspace/lane-d/native-20639810/action_server/dist/action-server/action-server",
+        "start",
+        "--address=127.0.0.1",
+        "--port=44271",
+        "--api-key=lane-d-synthetic-only",
+        "--datadir=/workspace/lane-d/native-action-20639810/data",
+        "--actions-sync=false",
+        "--dir=/workspace/lane-d/native-action-20639810/package"
+      ]
+    }
+  ],
+  "run_id": "run-000-0e5a1d14-4394-4619-b806-d2491ef80ad7",
+  "result_payload": "{\"core_origin\": \"/home/agent/.actions/holotree/c2fd1aa_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py\", \"core_version\": \"1.0.2\", \"doubled\": 42, \"python\": \"3.12.15 (main, Oct 13 2026, 16:52:04) [GCC 15.3.0]\"}",
+  "before_restart": {
+    "id": "run-000-0e5a1d14-4394-4619-b806-d2491ef80ad7",
+    "status": 2,
+    "action_id": "act-000-7ac971b8-54b7-4b25-ac21-4cfe3f5e98eb",
+    "start_time": "2026-10-25T15:00:41.879396+00:00",
+    "run_time": 0.37180115499995736,
+    "inputs": "{\"value\": 21}",
+    "result": "\"{\\\"core_origin\\\": \\\"/home/agent/.actions/holotree/c2fd1aa_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py\\\", \\\"core_version\\\": \\\"1.0.2\\\", \\\"doubled\\\": 42, \\\"python\\\": \\\"3.12.15 (main, Oct 13 2026, 16:52:04) [GCC 15.3.0]\\\"}\"",
+    "error_message": null,
+    "relative_artifacts_dir": "run-000-0e5a1d14-4394-4619-b806-d2491ef80ad7",
+    "numbered_id": 1,
+    "request_id": "",
+    "run_type": "action",
+    "action_name": null,
+    "robot_package_path": null,
+    "robot_task_name": null,
+    "robot_env_hash": null,
+    "stdout": null,
+    "stderr": null
+  },
+  "unauthorized_status": 403,
+  "after_restart": {
+    "id": "run-000-0e5a1d14-4394-4619-b806-d2491ef80ad7",
+    "status": 2,
+    "action_id": "act-000-7ac971b8-54b7-4b25-ac21-4cfe3f5e98eb",
+    "start_time": "2026-10-25T15:00:41.879396+00:00",
+    "run_time": 0.37180115499995736,
+    "inputs": "{\"value\": 21}",
+    "result": "\"{\\\"core_origin\\\": \\\"/home/agent/.actions/holotree/c2fd1aa_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py\\\", \\\"core_version\\\": \\\"1.0.2\\\", \\\"doubled\\\": 42, \\\"python\\\": \\\"3.12.15 (main, Oct 13 2026, 16:52:04) [GCC 15.3.0]\\\"}\"",
+    "error_message": null,
+    "relative_artifacts_dir": "run-000-0e5a1d14-4394-4619-b806-d2491ef80ad7",
+    "numbered_id": 1,
+    "request_id": "",
+    "run_type": "action",
+    "action_name": null,
+    "robot_package_path": null,
+    "robot_task_name": null,
+    "robot_env_hash": null,
+    "stdout": null,
+    "stderr": null
+  }
+}

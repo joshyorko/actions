@@ -1,0 +1,114 @@
+[
+  {
+    "path": "robot-task-joined.xml",
+    "sha256": "1e18620300f23ae232b62ee6986d795d3f7d8aeac9a9550f2bb2a0ae68b64b65",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "421",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "741.613"
+      }
+    ]
+  },
+  {
+    "path": "robot-public-complete.xml",
+    "sha256": "251961f0ad5ef5520fdd6eee64479337b125900b8c972c3d4cd9324f83c2930b",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "9",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "5.621"
+      }
+    ]
+  },
+  {
+    "path": "owned-template-inventory-final.xml",
+    "sha256": "90121ca25fe289ddd0359cb03220f660ed3cf7d4960476eb21fb8c90c7767898",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "24",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "0.856"
+      }
+    ]
+  },
+  {
+    "path": "devutils-owned-final.xml",
+    "sha256": "dba08d8e1946deb0e6049ad0dad15ce788afdd8688051fba2ef06f0bfc8c65c1",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "333",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "27.254"
+      }
+    ]
+  },
+  {
+    "path": "runtime-applicable-full.xml",
+    "sha256": "00e5df9e5d509bea66db3b45c51b0b4bee53adb6c264c7dd50bb3f09d8f04280",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "302",
+        "failures": "3",
+        "errors": "0",
+        "skipped": "9",
+        "time": "177.710"
+      }
+    ]
+  },
+  {
+    "path": "logging-independence/core-full-corrected.xml",
+    "sha256": "fe8e64d21b8619bd2f0198e0af17d494c5bbbf1f7d63c97315b83ca39d15d4ba",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "448",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "102.574"
+      }
+    ]
+  },
+  {
+    "path": "logging-independence/robot-validation-cleanup.xml",
+    "sha256": "fd804639053600f114963d36b6cd4a6ce4668ee4a1b0a9718e666bd4aab4d542",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "2.248"
+      }
+    ]
+  },
+  {
+    "path": "logging-independence/preload-showcase-current.xml",
+    "sha256": "91c78bebd8feced77bc04668ba19a83599a41babdd9ba877e35b596d2ab20139",
+    "suites": [
+      {
+        "name": "pytest",
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "19.048"
+      }
+    ]
+  }
+]

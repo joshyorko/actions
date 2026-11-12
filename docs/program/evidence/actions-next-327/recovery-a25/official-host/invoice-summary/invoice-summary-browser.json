@@ -1,0 +1,10 @@
+{
+  "application": "invoice-summary",
+  "status": "PASS",
+  "screenshots": [
+    "invoice-summary-mounted.png",
+    "invoice-summary-review.png",
+    "invoice-summary-executed.png"
+  ],
+  "result_text": "\"{\\\"invoice_count\\\": 2, \\\"total_cents\\\": 12900}\""
+}

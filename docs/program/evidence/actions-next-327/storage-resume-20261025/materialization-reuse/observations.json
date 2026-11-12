@@ -1,0 +1,66 @@
+{
+  "receipts": [
+    {
+      "receipt": "a48-data-public-03/datadir/cache/execution/3397a443-43ea-4978-9ead-8ffc413989c6/7da2279c-36f4-403f-a827-9d668325e5bc/f6de6215-244c-4396-be1b-ca1645b741cc/rcc-receipt.json",
+      "receipt_sha256": "13131644eb15069a651c963b8990c56f35d2a09f04f567c96b1c175a075af87b",
+      "artifactDigest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+      "materializationId": "151d251_5a1fac3_bb67b4c8",
+      "path": "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/151d251_5a1fac3_bb67b4c8",
+      "cacheHit": "provider",
+      "leaseId": "7ffe330876d7e3ac5c1cd038b7f39dff",
+      "exitCode": 0
+    },
+    {
+      "receipt": "a48-data-public-03/datadir/cache/execution/6c20eb78-6643-48c7-9aa4-cf646c353eda/90f7c0d7-cc49-46aa-ae9e-ddcb945bf1ca/a63059c3-d17d-4348-9693-c867fd97d003/rcc-receipt.json",
+      "receipt_sha256": "3b24b77d3c38b0724737ea1caa4c62c8b228b2fe4d047a2d2abdd7f6f4d6e031",
+      "artifactDigest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+      "materializationId": "74a2e10_5a1fac3_bb67b4c8",
+      "path": "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/74a2e10_5a1fac3_bb67b4c8",
+      "cacheHit": "provider",
+      "leaseId": "23a13fa45a80fbde7021a360a2d6b1f8",
+      "exitCode": 0
+    },
+    {
+      "receipt": "a48-data-public-04/datadir/cache/execution/237ea224-a14e-40e3-8c01-b4bf8a970f51/14881a5f-db35-4446-b7f3-53b0cfd4f285/29a4b54c-0e37-4af7-a7a6-8519da4481d7/rcc-receipt.json",
+      "receipt_sha256": "4b6b95bf869431fbf915b4cf08aaef1da9fe083205c18696b2ad832817d83746",
+      "artifactDigest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+      "materializationId": "f4fce1e_5a1fac3_bb67b4c8",
+      "path": "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/f4fce1e_5a1fac3_bb67b4c8",
+      "cacheHit": "provider",
+      "leaseId": "dd5e024cea7656e1dee3cb45faa4bc46",
+      "exitCode": 0
+    },
+    {
+      "receipt": "a48-data-public-04/datadir/cache/execution/e9fefc1a-ccdd-4725-a8c8-aaee24980402/b706e009-b90e-4bbb-ada5-9672f4766404/7b6706dd-2fd8-4e78-be8a-74cce45bd2ed/rcc-receipt.json",
+      "receipt_sha256": "ee4f529fb484aa2f92439104fa30eed8338e9510fd34f04dd3472839e25dbc4c",
+      "artifactDigest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+      "materializationId": "a9911c0_5a1fac3_bb67b4c8",
+      "path": "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/a9911c0_5a1fac3_bb67b4c8",
+      "cacheHit": "provider",
+      "leaseId": "bf32a7f72198d0dc5e8c917a836c0878",
+      "exitCode": 0
+    }
+  ],
+  "completed_view_cleanup": {
+    "scope": "Completed Data04 and Robot compiler materialized views only; immutable artifacts/trust/source retained",
+    "entries": [
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/e552514_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/he552514_493f813dad24d3t",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/ec18344_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/42cd3b2_5a1fac3_9fcd2534",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/74a2e10_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/ec18344_5a1fac3_9fcd2534",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/f4fce1e_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/a9911c0_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/badcafe_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/e552514_5a1fac3_9fcd2534",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/151d251_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/h42cd3b2_493f813dad24d3t",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/42cd3b2_5a1fac3_bb67b4c8",
+      "/workspace/recovery327/robot-compiler-a7/robocorp/holotree/hec18344_493f813dad24d3t"
+    ],
+    "process_references": [],
+    "free_before": 13121875968,
+    "free_after": 15408615424
+  }
+}

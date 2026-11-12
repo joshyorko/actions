@@ -1,0 +1,29 @@
+{
+  "status": "HOLD",
+  "candidate": "1.1.0a44.post1",
+  "source": "cd0ed1ce4f425322efd29f0fe09ad430b157bea5",
+  "evidence_index": {
+    "library_file_id": "libfile_1ecc8b748e7481918b9cc754c1bed840",
+    "version": 0,
+    "bytes": 7152,
+    "sha256": "05d1810accaadd0426015aad3de58c7e5fd3aa2c44adbb6ad37589327be92c46"
+  },
+  "observed_stale_artifact_fix": "PASS in two-success/inspect/failure sequence",
+  "control_feedback": "completed result with retained red form error after exposed Continue click",
+  "executions": 3,
+  "qualifier": "FAIL/CancelledError; no operator PASS",
+  "not_run": [
+    "restart",
+    "rollback",
+    "revocation"
+  ],
+  "cleanup": "key absent; owned PIDs gone; ports free; clipboard cleared; owned tab closed",
+  "other_limits": [
+    "CDP console acquisition timed out",
+    "owned host tab later browser error9 cause unestablished"
+  ],
+  "screenshots_private_library": {
+    "contradictory_feedback": "libfile_36e178b743208191b754f19ff0ecd03d",
+    "failed_cleared": "libfile_1001ed66eaec8191b1c578c3572651b6"
+  }
+}

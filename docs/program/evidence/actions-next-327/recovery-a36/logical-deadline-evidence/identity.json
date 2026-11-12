@@ -1,0 +1,23 @@
+{
+  "patch_sha256": "c628ffb8abeb75ab516d176a8b1998f976773868c2b3e86b99d4d5048ce30444",
+  "base_head": "9f38050b83a655c08b468b624f926cf4adbd9b15",
+  "base_kind": "exact current uncommitted root modules; overlay.json records broader source",
+  "files": {
+    "action_server/src/actions/server/foundry/rcc_execution.py": {
+      "before_sha256": "1e50a1a1657b335151301e02e8ba7d6587a230b6d5f6dfb7e2a5b9d2f141fe5a",
+      "after_sha256": "921847ca53af1d70f1e1fad13c91715fd7b2d6a9ad6321fc88480ba4b23997be"
+    },
+    "action_server/src/actions/server/run_outputs/detached.py": {
+      "before_sha256": "d1347368de4fc7afb06341bcc76bd591326e33d90feaec37e37ae5dfdb11f0e7",
+      "after_sha256": "cb82c88eb7db2817afb4b09db18f42633e4bfd25c16cb7873b3e6dc641be9206"
+    },
+    "action_server/tests/action_server_tests/test_logical_runner.py": {
+      "before_sha256": "0ad1fa9827142406a6e19aaa42b3cfc48a5e0a84de573e8dd71d8405ef61cdcd",
+      "after_sha256": "c8b67f5219400f6e736ccf3a68f5123e137476b47b6a0fe0db844105199641e8"
+    },
+    "action_server/tests/action_server_tests/test_logical_publication_deadline.py": {
+      "before_sha256": null,
+      "after_sha256": "60a5195ab73486283237abab01bf916424c672d35c1e2d60f86e7da78ad7ca50"
+    }
+  }
+}

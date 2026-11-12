@@ -1,0 +1,53 @@
+{
+  "status": "UNINTEGRATED_DRAFTS",
+  "files": [
+    {
+      "source": "provider-setup-evidence/codec-catalog-config.patch",
+      "file": "provider-setup-evidence__codec-catalog-config.patch.gz",
+      "source_sha256": "6009eb6798c77649bd9cb2ea299b3c73a64d19785d139130df8177d1a093654b",
+      "saved_sha256": "743b8b5c55a7f5a0fd15085bf213848696098d81564a4b36f84feb392c91fe30"
+    },
+    {
+      "source": "provider-setup-evidence/catalog-atomic-ca.patch",
+      "file": "provider-setup-evidence__catalog-atomic-ca.patch.gz",
+      "source_sha256": "c8c8a9cada082c18ff87b68a0e3e85fe9fb17f4b6675d0fa79ae193ba2a5da8c",
+      "saved_sha256": "8e0d0b2b0fa1ae9bc29d8078d9f025538cc61d40386bd44591659786380eadb1"
+    },
+    {
+      "source": "provider-setup-evidence/operator-bootstrap.patch",
+      "file": "provider-setup-evidence__operator-bootstrap.patch.gz",
+      "source_sha256": "a277edccadf2305fba391cb149d4c014fc14c5cacf0cc1e5b858c91266fafdb6",
+      "saved_sha256": "e88d91b84350f3eac87a6a3684e1fe87f1252ec23bf7d4bd1f0020147b758c8e"
+    },
+    {
+      "source": "provider-setup-evidence/operator-bootstrap.md",
+      "file": "provider-setup-evidence__operator-bootstrap.md",
+      "source_sha256": "824388aeaff64064d8bc81b469a0be5afde0b89e1974358f133c7581d02c4c73",
+      "saved_sha256": "824388aeaff64064d8bc81b469a0be5afde0b89e1974358f133c7581d02c4c73"
+    },
+    {
+      "source": "provider-setup-evidence/codec-catalog-config.md",
+      "file": "provider-setup-evidence__codec-catalog-config.md",
+      "source_sha256": "e10875972e03a69e1c86518377d49d66e63c5266af69769dcdc04d3211c751ec",
+      "saved_sha256": "e10875972e03a69e1c86518377d49d66e63c5266af69769dcdc04d3211c751ec"
+    },
+    {
+      "source": "detached-action-evidence/detached-action.patch",
+      "file": "detached-action-evidence__detached-action.patch.gz",
+      "source_sha256": "d27ded6dec220854b49a1104f801496a4aa4b45d2b411e55c67ee82a4982d2d2",
+      "saved_sha256": "435d684c6cf92001e734f081f3ad5f06e85f9c18f11a8454a694fbef92af4177"
+    },
+    {
+      "source": "detached-review-evidence/detached-review-delta.patch",
+      "file": "detached-review-evidence__detached-review-delta.patch.gz",
+      "source_sha256": "8671a98af8253b3f22b50136f84f450405140b94b4342f0104b531235cfede6d",
+      "saved_sha256": "b38d8df255af53f12db82735939d655268d3e9609ff1a9aecba9ecaf0a04ee68"
+    },
+    {
+      "source": "task-wire-design/design.md",
+      "file": "task-wire-design__design.md",
+      "source_sha256": "7161814a582490680bc9705b7c39a560d2820b15c2285b8206f683bc50d4b8c3",
+      "saved_sha256": "7161814a582490680bc9705b7c39a560d2820b15c2285b8206f683bc50d4b8c3"
+    }
+  ]
+}

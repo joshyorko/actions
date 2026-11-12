@@ -1,0 +1,18 @@
++ poetry run pytest tests/action_server_tests/test_generic_invocation_discovery.py tests/action_server_tests/test_generic_canvas_view.py tests/action_server_tests/test_generic_none_model.py tests/action_server_tests/test_local_authorization.py tests/action_server_tests/test_runtime_managed_bootstrap.py tests/action_server_tests/test_foundry_mcp.py tests/action_server_tests/test_generic_execution_port.py -k not optin_actual_rcc_model_wrapper -q --junitxml=/workspace/actions-recovery-327/evidence/a28-source-joined/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a28-source-joined/log --basetemp=/workspace/actions-recovery-327/evidence/a28-source-joined/fixtures (in /workspace/actions/action_server)
+Robocorp Log Warning: task - .config and collect pop just by type. Actual request: task - .run finished (print results)
+ERROR: file or directory not found: tests/action_server_tests/test_foundry_mcp.py
+
+
+- generated xml file: /workspace/actions-recovery-327/evidence/a28-source-joined/tests.xml -
+no tests ran in 0.00s
+Log (html): /workspace/actions-recovery-327/evidence/a28-source-joined/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_generic_invocation_discovery.py', 'tests/action_server_tests/test_generic_canvas_view.py', 'tests/action_server_tests/test_generic_none_model.py', 'tests/action_server_tests/test_local_authorization.py', 'tests/action_server_tests/test_runtime_managed_bootstrap.py', 'tests/action_server_tests/test_foundry_mcp.py', 'tests/action_server_tests/test_generic_execution_port.py', '-k', 'not optin_actual_rcc_model_wrapper', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a28-source-joined/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a28-source-joined/log', '--basetemp=/workspace/actions-recovery-327/evidence/a28-source-joined/fixtures']' returned non-zero exit status 4.

@@ -1,0 +1,59 @@
+{
+  "status": "PASS_UI_LIFECYCLE_ONLY",
+  "runtime_version": "1.1.0a26",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a26/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "57d851fd17a881f25bb22c2f4ec830415cc52172",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 30167,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 30175,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": true
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": true
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "BLOCKED_no_scoped_source_result_ordinary_a26",
+  "application": "3c1678b4-38df-4577-a249-f3337a20f59f",
+  "initial_revision": "sha256:94af78cd5a226b00e7643b8231d488bf590c764e64ca79c47151d4460424840e",
+  "ui_revision": "sha256:f87e58c4ecad5a5a39c39102fac98e67d74437dd1af658ec2a2f0aae6108e37b",
+  "generated_package": "BLOCKED_compiler_workspace_failed",
+  "rollback_active_assertion": "PASS: final official MCP canvas_inspect activeRevisionId equals initial immutable revision"
+}

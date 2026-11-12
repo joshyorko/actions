@@ -1,0 +1,45 @@
+{
+  "source": "ab09e19dab3381a914a4cc78e17870f1a85f1e65",
+  "tree": "ecc4473167c363b3aa0e7f33380af579ac8eb590",
+  "container": "3fae45f5e84e870a383f12c9272ceed151881da62d8201d6888ea33ae9041626",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_knowledge_foundation",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_foundation.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-knowledge-final/test_knowledge_foundation/tests.xml",
+        "--basetemp=/workspace/actions-327-knowledge-final/test_knowledge_foundation/fixtures"
+      ],
+      "exit_code": 10,
+      "minimum_free_bytes": 29129891840,
+      "stop_reason": null,
+      "source_sha256": "39fb819b089a6252655a02c1c91acea9080fe9ba9c9974aca89a6f85fe6107dd",
+      "counts": {
+        "tests": 50,
+        "failure": 2,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

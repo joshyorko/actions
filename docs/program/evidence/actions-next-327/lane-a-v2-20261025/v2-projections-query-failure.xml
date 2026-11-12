@@ -1,0 +1,1500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="34" failures="5" errors="0" time="0.637288678">
+    <testsuite name="src/semantic-renderer/v2-projections.test.tsx" timestamp="2026-10-25T14:26:23.493Z" hostname="71cd163cf8ad" tests="34" failures="5" errors="0" skipped="0" time="0.637288678">
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="renders all data nodes from a current projection without dispatch or artifact effects" time="0.12047804">
+            <failure message="Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mRevision [0m
+  [0mcurrent[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mApp audience[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mCurrent record[0m
+[36m&lt;/dd&gt;[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;main[39m
+      [33maria-labelledby[39m=[32m&quot;_r_0_&quot;[39m
+      [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;p[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+        [36m&gt;[39m
+          [0mCanvas view[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;h1[39m
+          [33mid[39m=[32m&quot;_r_0_&quot;[39m
+        [36m&gt;[39m
+          [0mBounded views[0m
+        [36m&lt;/h1&gt;[39m
+        [36m&lt;dl[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mRevision[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mRevision [0m
+              [0mcurrent[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mAudience[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mApp audience[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/dl&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;div[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33maria-labelledby[39m=[32m&quot;_r_1_&quot;[39m
+          [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h2[39m
+            [33mid[39m=[32m&quot;_r_1_&quot;[39m
+          [36m&gt;[39m
+            [0mSummary[0m
+          [36m&lt;/h2&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_2_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-chart&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_2_&quot;[39m
+              [36m&gt;[39m
+                [0mValues[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;svg[39m
+                [33maria-describedby[39m=[32m&quot;_r_3_&quot;[39m
+                [33maria-labelledby[39m=[32m&quot;_r_2_&quot;[39m
+                [33mrole[39m=[32m&quot;img&quot;[39m
+                [33mviewBox[39m=[32m&quot;0 0 640 240&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;desc[39m
+                  [33mid[39m=[32m&quot;_r_3_&quot;[39m
+                [36m&gt;[39m
+                  [0mBar[0m
+                  [0m chart. All values and labels are available in the table below.[0m
+                [36m&lt;/desc&gt;[39m
+                [36m&lt;line[39m
+                  [33mclass[39m=[32m&quot;semantic-chart__axis&quot;[39m
+                  [33mx1[39m=[32m&quot;40&quot;[39m
+                  [33mx2[39m=[32m&quot;600&quot;[39m
+                  [33my1[39m=[32m&quot;200&quot;[39m
+                  [33my2[39m=[32m&quot;200&quot;[39m
+                [36m/&gt;[39m
+                [36m&lt;rect[39m
+                  [33mheight[39m=[32m&quot;160&quot;[39m
+                  [33mwidth[39m=[32m&quot;556&quot;[39m
+                  [33mx[39m=[32m&quot;42&quot;[39m
+                  [33my[39m=[32m&quot;40&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/svg&gt;[39m
+              [36m&lt;div[39m
+                [33maria-label[39m=[32m&quot;Values data&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-table__scroll&quot;[39m
+                [33mrole[39m=[32m&quot;region&quot;[39m
+                [33mtabindex[39m=[32m&quot;0&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;table[39m
+                  [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+                [36m&gt;[39m
+                  [36m&lt;caption&gt;[39m
+                    [0mValues data[0m
+                  [36m&lt;/caption&gt;[39m
+                  [36m&lt;thead&gt;[39m
+                    [36m&lt;tr&gt;[39m
+                      [36m&lt;th[39m
+                        [33mscope[39m=[32m&quot;col&quot;[39m
+                      [36m&gt;[39m
+                        [0mLabel[0m
+                      [36m&lt;/th&gt;[39m
+                      [36m&lt;th[39m
+                        [33mscope[39m=[32m&quot;col&quot;[39m
+                      [36m&gt;[39m
+                        [0mValue[0m
+                      [36m&lt;/th&gt;[39m
+                    [36m&lt;/tr&gt;[39m
+                  [36m&lt;/thead&gt;[39m
+                  [36m&lt;tbody&gt;[39m
+                    [36m&lt;tr&gt;[39m
+                      [36m&lt;td&gt;[39m
+                        [0mCurrent row[0m
+                      [36m&lt;/td&gt;[39m
+                      [36m&lt;td&gt;[39m
+                        [0m12.5[0m
+                      [36m&lt;/td&gt;[39m
+                    [36m&lt;/tr&gt;[39m
+                  [36m&lt;/tbody&gt;[39m
+                [36m&lt;/table&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_4_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-log&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_4_&quot;[39m
+              [36m&gt;[39m
+                [0mMessages[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;div[39m
+                [33maria-label[39m=[32m&quot;Messages entries&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-log__scroll&quot;[39m
+                [33mrole[39m=[32m&quot;region&quot;[39m
+                [33mtabindex[39m=[32m&quot;0&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;ol&gt;[39m
+                  [36m&lt;li&gt;[39m
+                    [0mStarted[0m
+                  [36m&lt;/li&gt;[39m
+                [36m&lt;/ol&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_5_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-inspector&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_5_&quot;[39m
+              [36m&gt;[39m
+                [0mDetails[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;dl&gt;[39m
+                [36m&lt;div&gt;[39m
+                  [36m&lt;dt&gt;[39m
+                    [0mName[0m
+                  [36m&lt;/dt&gt;[39m
+                  [36m&lt;dd&gt;[39m
+                    [0mCurrent record[0m
+                  [36m&lt;/dd&gt;[39m
+                [36m&lt;/div&gt;[39m
+              [36m&lt;/dl&gt;[39m
+            [36m&lt;/section&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/div&gt;[39m
+    [36m&lt;/main&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Revision
+  current
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  App audience
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Current record
+&lt;/dd&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;main
+      aria-labelledby=&quot;_r_0_&quot;
+      class=&quot;semantic-canvas&quot;
+    &gt;
+      &lt;header
+        class=&quot;semantic-canvas__header&quot;
+      &gt;
+        &lt;p
+          class=&quot;semantic-canvas__eyebrow&quot;
+        &gt;
+          Canvas view
+        &lt;/p&gt;
+        &lt;h1
+          id=&quot;_r_0_&quot;
+        &gt;
+          Bounded views
+        &lt;/h1&gt;
+        &lt;dl
+          class=&quot;semantic-canvas__metadata&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Revision
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              Revision
+              current
+            &lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Audience
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              App audience
+            &lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/header&gt;
+      &lt;div
+        class=&quot;semantic-canvas__content&quot;
+      &gt;
+        &lt;section
+          aria-labelledby=&quot;_r_1_&quot;
+          class=&quot;semantic-panel semantic-card&quot;
+        &gt;
+          &lt;h2
+            id=&quot;_r_1_&quot;
+          &gt;
+            Summary
+          &lt;/h2&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;section
+              aria-labelledby=&quot;_r_2_&quot;
+              class=&quot;semantic-panel semantic-chart&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_2_&quot;
+              &gt;
+                Values
+              &lt;/h2&gt;
+              &lt;svg
+                aria-describedby=&quot;_r_3_&quot;
+                aria-labelledby=&quot;_r_2_&quot;
+                role=&quot;img&quot;
+                viewBox=&quot;0 0 640 240&quot;
+              &gt;
+                &lt;desc
+                  id=&quot;_r_3_&quot;
+                &gt;
+                  Bar
+                   chart. All values and labels are available in the table below.
+                &lt;/desc&gt;
+                &lt;line
+                  class=&quot;semantic-chart__axis&quot;
+                  x1=&quot;40&quot;
+                  x2=&quot;600&quot;
+                  y1=&quot;200&quot;
+                  y2=&quot;200&quot;
+                /&gt;
+                &lt;rect
+                  height=&quot;160&quot;
+                  width=&quot;556&quot;
+                  x=&quot;42&quot;
+                  y=&quot;40&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;div
+                aria-label=&quot;Values data&quot;
+                class=&quot;semantic-table__scroll&quot;
+                role=&quot;region&quot;
+                tabindex=&quot;0&quot;
+              &gt;
+                &lt;table
+                  class=&quot;semantic-table&quot;
+                &gt;
+                  &lt;caption&gt;
+                    Values data
+                  &lt;/caption&gt;
+                  &lt;thead&gt;
+                    &lt;tr&gt;
+                      &lt;th
+                        scope=&quot;col&quot;
+                      &gt;
+                        Label
+                      &lt;/th&gt;
+                      &lt;th
+                        scope=&quot;col&quot;
+                      &gt;
+                        Value
+                      &lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody&gt;
+                    &lt;tr&gt;
+                      &lt;td&gt;
+                        Current row
+                      &lt;/td&gt;
+                      &lt;td&gt;
+                        12.5
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+            &lt;section
+              aria-labelledby=&quot;_r_4_&quot;
+              class=&quot;semantic-panel semantic-log&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_4_&quot;
+              &gt;
+                Messages
+              &lt;/h2&gt;
+              &lt;div
+                aria-label=&quot;Messages entries&quot;
+                class=&quot;semantic-log__scroll&quot;
+                role=&quot;region&quot;
+                tabindex=&quot;0&quot;
+              &gt;
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    Started
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+            &lt;section
+              aria-labelledby=&quot;_r_5_&quot;
+              class=&quot;semantic-panel semantic-inspector&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_5_&quot;
+              &gt;
+                Details
+              &lt;/h2&gt;
+              &lt;dl&gt;
+                &lt;div&gt;
+                  &lt;dt&gt;
+                    Name
+                  &lt;/dt&gt;
+                  &lt;dd&gt;
+                    Current record
+                  &lt;/dd&gt;
+                &lt;/div&gt;
+              &lt;/dl&gt;
+            &lt;/section&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/v2-projections.test.tsx:88:19
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;not-run&apos; } snapshot from successful output" time="0.01131278">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;loading&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.006200985">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;error&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.00626128">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows admitted empty output distinctly from missing or loading output" time="0.007119127">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the preview view" time="0.006633493">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the model view" time="0.005522869">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="drops prior rendered data when the host replaces its current request snapshot" time="0.027455986">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="fails closed when the local projection getter refuses access" time="0.005629218">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows unavailable results when the host has no projection getter" time="0.005122145">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="reads bounded canonical output rather than a divergent parsed-data property" time="0.013488092">
+            <failure message="Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mRevision [0m
+  [0mcurrent[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mApp audience[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mCurrent record[0m
+[36m&lt;/dd&gt;[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;main[39m
+      [33maria-labelledby[39m=[32m&quot;_r_1n_&quot;[39m
+      [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;p[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+        [36m&gt;[39m
+          [0mCanvas view[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;h1[39m
+          [33mid[39m=[32m&quot;_r_1n_&quot;[39m
+        [36m&gt;[39m
+          [0mBounded views[0m
+        [36m&lt;/h1&gt;[39m
+        [36m&lt;dl[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mRevision[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mRevision [0m
+              [0mcurrent[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mAudience[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mApp audience[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/dl&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;div[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33maria-labelledby[39m=[32m&quot;_r_1o_&quot;[39m
+          [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h2[39m
+            [33mid[39m=[32m&quot;_r_1o_&quot;[39m
+          [36m&gt;[39m
+            [0mSummary[0m
+          [36m&lt;/h2&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_1p_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-chart&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_1p_&quot;[39m
+              [36m&gt;[39m
+                [0mValues[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;svg[39m
+                [33maria-describedby[39m=[32m&quot;_r_1q_&quot;[39m
+                [33maria-labelledby[39m=[32m&quot;_r_1p_&quot;[39m
+                [33mrole[39m=[32m&quot;img&quot;[39m
+                [33mviewBox[39m=[32m&quot;0 0 640 240&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;desc[39m
+                  [33mid[39m=[32m&quot;_r_1q_&quot;[39m
+                [36m&gt;[39m
+                  [0mBar[0m
+                  [0m chart. All values and labels are available in the table below.[0m
+                [36m&lt;/desc&gt;[39m
+                [36m&lt;line[39m
+                  [33mclass[39m=[32m&quot;semantic-chart__axis&quot;[39m
+                  [33mx1[39m=[32m&quot;40&quot;[39m
+                  [33mx2[39m=[32m&quot;600&quot;[39m
+                  [33my1[39m=[32m&quot;200&quot;[39m
+                  [33my2[39m=[32m&quot;200&quot;[39m
+                [36m/&gt;[39m
+                [36m&lt;rect[39m
+                  [33mheight[39m=[32m&quot;160&quot;[39m
+                  [33mwidth[39m=[32m&quot;556&quot;[39m
+                  [33mx[39m=[32m&quot;42&quot;[39m
+                  [33my[39m=[32m&quot;40&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/svg&gt;[39m
+              [36m&lt;div[39m
+                [33maria-label[39m=[32m&quot;Values data&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-table__scroll&quot;[39m
+                [33mrole[39m=[32m&quot;region&quot;[39m
+                [33mtabindex[39m=[32m&quot;0&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;table[39m
+                  [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+                [36m&gt;[39m
+                  [36m&lt;caption&gt;[39m
+                    [0mValues data[0m
+                  [36m&lt;/caption&gt;[39m
+                  [36m&lt;thead&gt;[39m
+                    [36m&lt;tr&gt;[39m
+                      [36m&lt;th[39m
+                        [33mscope[39m=[32m&quot;col&quot;[39m
+                      [36m&gt;[39m
+                        [0mLabel[0m
+                      [36m&lt;/th&gt;[39m
+                      [36m&lt;th[39m
+                        [33mscope[39m=[32m&quot;col&quot;[39m
+                      [36m&gt;[39m
+                        [0mValue[0m
+                      [36m&lt;/th&gt;[39m
+                    [36m&lt;/tr&gt;[39m
+                  [36m&lt;/thead&gt;[39m
+                  [36m&lt;tbody&gt;[39m
+                    [36m&lt;tr&gt;[39m
+                      [36m&lt;td&gt;[39m
+                        [0mCurrent row[0m
+                      [36m&lt;/td&gt;[39m
+                      [36m&lt;td&gt;[39m
+                        [0m12.5[0m
+                      [36m&lt;/td&gt;[39m
+                    [36m&lt;/tr&gt;[39m
+                  [36m&lt;/tbody&gt;[39m
+                [36m&lt;/table&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_1r_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-log&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_1r_&quot;[39m
+              [36m&gt;[39m
+                [0mMessages[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;div[39m
+                [33maria-label[39m=[32m&quot;Messages entries&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-log__scroll&quot;[39m
+                [33mrole[39m=[32m&quot;region&quot;[39m
+                [33mtabindex[39m=[32m&quot;0&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;ol&gt;[39m
+                  [36m&lt;li&gt;[39m
+                    [0mStarted[0m
+                  [36m&lt;/li&gt;[39m
+                [36m&lt;/ol&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_1s_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-inspector&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_1s_&quot;[39m
+              [36m&gt;[39m
+                [0mDetails[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;dl&gt;[39m
+                [36m&lt;div&gt;[39m
+                  [36m&lt;dt&gt;[39m
+                    [0mName[0m
+                  [36m&lt;/dt&gt;[39m
+                  [36m&lt;dd&gt;[39m
+                    [0mCurrent record[0m
+                  [36m&lt;/dd&gt;[39m
+                [36m&lt;/div&gt;[39m
+              [36m&lt;/dl&gt;[39m
+            [36m&lt;/section&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/div&gt;[39m
+    [36m&lt;/main&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Revision
+  current
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  App audience
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Current record
+&lt;/dd&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;main
+      aria-labelledby=&quot;_r_1n_&quot;
+      class=&quot;semantic-canvas&quot;
+    &gt;
+      &lt;header
+        class=&quot;semantic-canvas__header&quot;
+      &gt;
+        &lt;p
+          class=&quot;semantic-canvas__eyebrow&quot;
+        &gt;
+          Canvas view
+        &lt;/p&gt;
+        &lt;h1
+          id=&quot;_r_1n_&quot;
+        &gt;
+          Bounded views
+        &lt;/h1&gt;
+        &lt;dl
+          class=&quot;semantic-canvas__metadata&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Revision
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              Revision
+              current
+            &lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Audience
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              App audience
+            &lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/header&gt;
+      &lt;div
+        class=&quot;semantic-canvas__content&quot;
+      &gt;
+        &lt;section
+          aria-labelledby=&quot;_r_1o_&quot;
+          class=&quot;semantic-panel semantic-card&quot;
+        &gt;
+          &lt;h2
+            id=&quot;_r_1o_&quot;
+          &gt;
+            Summary
+          &lt;/h2&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;section
+              aria-labelledby=&quot;_r_1p_&quot;
+              class=&quot;semantic-panel semantic-chart&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_1p_&quot;
+              &gt;
+                Values
+              &lt;/h2&gt;
+              &lt;svg
+                aria-describedby=&quot;_r_1q_&quot;
+                aria-labelledby=&quot;_r_1p_&quot;
+                role=&quot;img&quot;
+                viewBox=&quot;0 0 640 240&quot;
+              &gt;
+                &lt;desc
+                  id=&quot;_r_1q_&quot;
+                &gt;
+                  Bar
+                   chart. All values and labels are available in the table below.
+                &lt;/desc&gt;
+                &lt;line
+                  class=&quot;semantic-chart__axis&quot;
+                  x1=&quot;40&quot;
+                  x2=&quot;600&quot;
+                  y1=&quot;200&quot;
+                  y2=&quot;200&quot;
+                /&gt;
+                &lt;rect
+                  height=&quot;160&quot;
+                  width=&quot;556&quot;
+                  x=&quot;42&quot;
+                  y=&quot;40&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;div
+                aria-label=&quot;Values data&quot;
+                class=&quot;semantic-table__scroll&quot;
+                role=&quot;region&quot;
+                tabindex=&quot;0&quot;
+              &gt;
+                &lt;table
+                  class=&quot;semantic-table&quot;
+                &gt;
+                  &lt;caption&gt;
+                    Values data
+                  &lt;/caption&gt;
+                  &lt;thead&gt;
+                    &lt;tr&gt;
+                      &lt;th
+                        scope=&quot;col&quot;
+                      &gt;
+                        Label
+                      &lt;/th&gt;
+                      &lt;th
+                        scope=&quot;col&quot;
+                      &gt;
+                        Value
+                      &lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody&gt;
+                    &lt;tr&gt;
+                      &lt;td&gt;
+                        Current row
+                      &lt;/td&gt;
+                      &lt;td&gt;
+                        12.5
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+            &lt;section
+              aria-labelledby=&quot;_r_1r_&quot;
+              class=&quot;semantic-panel semantic-log&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_1r_&quot;
+              &gt;
+                Messages
+              &lt;/h2&gt;
+              &lt;div
+                aria-label=&quot;Messages entries&quot;
+                class=&quot;semantic-log__scroll&quot;
+                role=&quot;region&quot;
+                tabindex=&quot;0&quot;
+              &gt;
+                &lt;ol&gt;
+                  &lt;li&gt;
+                    Started
+                  &lt;/li&gt;
+                &lt;/ol&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+            &lt;section
+              aria-labelledby=&quot;_r_1s_&quot;
+              class=&quot;semantic-panel semantic-inspector&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_1s_&quot;
+              &gt;
+                Details
+              &lt;/h2&gt;
+              &lt;dl&gt;
+                &lt;div&gt;
+                  &lt;dt&gt;
+                    Name
+                  &lt;/dt&gt;
+                  &lt;dd&gt;
+                    Current record
+                  &lt;/dd&gt;
+                &lt;/div&gt;
+              &lt;/dl&gt;
+            &lt;/section&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/v2-projections.test.tsx:192:19
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:9007199254740992}]}" time="0.007519675">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:1e309}]}" time="0.005088537">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:-0}]}" time="0.005457921">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;e\u0301&quot;,&quot;value&quot;:1}]}" time="0.005251429">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;\ud800&quot;,&quot;value&quot;:1}]}" time="0.00649379">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;value&quot;:1}]}" time="0.005395639">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:null}]}" time="0.005002808">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:{}}" time="0.005168215">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {invalid-json" time="0.00518236">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 200-row chart boundary without truncation" time="0.137429836">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 201-row chart boundary without truncation" time="0.004552778">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 256" time="0.006967297">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 257" time="0.005047545">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 500-entry log boundary" time="0.157970534">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 501-entry log boundary" time="0.004457253">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1024-code-point log message boundary" time="0.004710419">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1025-code-point log message boundary" time="0.004648211">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4096 code points" time="0.010037204">
+            <failure message="Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mRevision [0m
+  [0mcurrent[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mApp audience[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0m😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀...
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;main[39m
+      [33maria-labelledby[39m=[32m&quot;_r_3i_&quot;[39m
+      [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;p[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+        [36m&gt;[39m
+          [0mCanvas view[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;h1[39m
+          [33mid[39m=[32m&quot;_r_3i_&quot;[39m
+        [36m&gt;[39m
+          [0mBounded views[0m
+        [36m&lt;/h1&gt;[39m
+        [36m&lt;dl[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mRevision[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mRevision [0m
+              [0mcurrent[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mAudience[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mApp audience[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/dl&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;div[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33maria-labelledby[39m=[32m&quot;_r_3j_&quot;[39m
+          [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h2[39m
+            [33mid[39m=[32m&quot;_r_3j_&quot;[39m
+          [36m&gt;[39m
+            [0mSummary[0m
+          [36m&lt;/h2&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_3k_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-inspector&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_3k_&quot;[39m
+              [36m&gt;[39m
+                [0mDetails[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;dl&gt;[39m
+                [36m&lt;div&gt;[39m
+                  [36m&lt;dt&gt;[39m
+                    [0mName[0m
+                  [36m&lt;/dt&gt;[39m
+                  [36m&lt;dd&gt;[39m
+                    [0m😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀..." type="TestingLibraryElementError">
+TestingLibraryElementError: Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Revision
+  current
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  App audience
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀...
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;main
+      aria-labelledby=&quot;_r_3i_&quot;
+      class=&quot;semantic-canvas&quot;
+    &gt;
+      &lt;header
+        class=&quot;semantic-canvas__header&quot;
+      &gt;
+        &lt;p
+          class=&quot;semantic-canvas__eyebrow&quot;
+        &gt;
+          Canvas view
+        &lt;/p&gt;
+        &lt;h1
+          id=&quot;_r_3i_&quot;
+        &gt;
+          Bounded views
+        &lt;/h1&gt;
+        &lt;dl
+          class=&quot;semantic-canvas__metadata&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Revision
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              Revision
+              current
+            &lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Audience
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              App audience
+            &lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/header&gt;
+      &lt;div
+        class=&quot;semantic-canvas__content&quot;
+      &gt;
+        &lt;section
+          aria-labelledby=&quot;_r_3j_&quot;
+          class=&quot;semantic-panel semantic-card&quot;
+        &gt;
+          &lt;h2
+            id=&quot;_r_3j_&quot;
+          &gt;
+            Summary
+          &lt;/h2&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;section
+              aria-labelledby=&quot;_r_3k_&quot;
+              class=&quot;semantic-panel semantic-inspector&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_3k_&quot;
+              &gt;
+                Details
+              &lt;/h2&gt;
+              &lt;dl&gt;
+                &lt;div&gt;
+                  &lt;dt&gt;
+                    Name
+                  &lt;/dt&gt;
+                  &lt;dd&gt;
+                    😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀...
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/v2-projections.test.tsx:327:27
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4097 code points" time="0.004477886">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{}}" time="0.007247647">
+            <failure message="Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mRevision [0m
+  [0mcurrent[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mApp audience[0m
+[36m&lt;/dd&gt;[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;main[39m
+      [33maria-labelledby[39m=[32m&quot;_r_3o_&quot;[39m
+      [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;p[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+        [36m&gt;[39m
+          [0mCanvas view[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;h1[39m
+          [33mid[39m=[32m&quot;_r_3o_&quot;[39m
+        [36m&gt;[39m
+          [0mBounded views[0m
+        [36m&lt;/h1&gt;[39m
+        [36m&lt;dl[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mRevision[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mRevision [0m
+              [0mcurrent[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mAudience[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mApp audience[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/dl&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;div[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33maria-labelledby[39m=[32m&quot;_r_3p_&quot;[39m
+          [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h2[39m
+            [33mid[39m=[32m&quot;_r_3p_&quot;[39m
+          [36m&gt;[39m
+            [0mSummary[0m
+          [36m&lt;/h2&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_3q_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_3q_&quot;[39m
+              [36m&gt;[39m
+                [0mDetails[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;div[39m
+                [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;p[39m
+                  [33mclass[39m=[32m&quot;semantic-status semantic-status--error&quot;[39m
+                  [33mrole[39m=[32m&quot;alert&quot;[39m
+                [36m&gt;[39m
+                  [0mThis result cannot be displayed.[0m
+                [36m&lt;/p&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/div&gt;[39m
+    [36m&lt;/main&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Revision
+  current
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  App audience
+&lt;/dd&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;main
+      aria-labelledby=&quot;_r_3o_&quot;
+      class=&quot;semantic-canvas&quot;
+    &gt;
+      &lt;header
+        class=&quot;semantic-canvas__header&quot;
+      &gt;
+        &lt;p
+          class=&quot;semantic-canvas__eyebrow&quot;
+        &gt;
+          Canvas view
+        &lt;/p&gt;
+        &lt;h1
+          id=&quot;_r_3o_&quot;
+        &gt;
+          Bounded views
+        &lt;/h1&gt;
+        &lt;dl
+          class=&quot;semantic-canvas__metadata&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Revision
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              Revision
+              current
+            &lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Audience
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              App audience
+            &lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/header&gt;
+      &lt;div
+        class=&quot;semantic-canvas__content&quot;
+      &gt;
+        &lt;section
+          aria-labelledby=&quot;_r_3p_&quot;
+          class=&quot;semantic-panel semantic-card&quot;
+        &gt;
+          &lt;h2
+            id=&quot;_r_3p_&quot;
+          &gt;
+            Summary
+          &lt;/h2&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;section
+              aria-labelledby=&quot;_r_3q_&quot;
+              class=&quot;semantic-panel semantic-card&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_3q_&quot;
+              &gt;
+                Details
+              &lt;/h2&gt;
+              &lt;div
+                class=&quot;semantic-stack&quot;
+              &gt;
+                &lt;p
+                  class=&quot;semantic-status semantic-status--error&quot;
+                  role=&quot;alert&quot;
+                &gt;
+                  This result cannot be displayed.
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/v2-projections.test.tsx:343:23
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{&quot;name&quot;:{&quot;nested&quot;:&quot;unsupported&quot;}}}" time="0.00649542">
+            <failure message="Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mRevision [0m
+  [0mcurrent[0m
+[36m&lt;/dd&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;dd&gt;[39m
+  [0mApp audience[0m
+[36m&lt;/dd&gt;[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;main[39m
+      [33maria-labelledby[39m=[32m&quot;_r_3r_&quot;[39m
+      [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;p[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+        [36m&gt;[39m
+          [0mCanvas view[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;h1[39m
+          [33mid[39m=[32m&quot;_r_3r_&quot;[39m
+        [36m&gt;[39m
+          [0mBounded views[0m
+        [36m&lt;/h1&gt;[39m
+        [36m&lt;dl[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mRevision[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mRevision [0m
+              [0mcurrent[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div&gt;[39m
+            [36m&lt;dt&gt;[39m
+              [0mAudience[0m
+            [36m&lt;/dt&gt;[39m
+            [36m&lt;dd&gt;[39m
+              [0mApp audience[0m
+            [36m&lt;/dd&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/dl&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;div[39m
+        [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33maria-labelledby[39m=[32m&quot;_r_3s_&quot;[39m
+          [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h2[39m
+            [33mid[39m=[32m&quot;_r_3s_&quot;[39m
+          [36m&gt;[39m
+            [0mSummary[0m
+          [36m&lt;/h2&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;section[39m
+              [33maria-labelledby[39m=[32m&quot;_r_3t_&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-panel semantic-card&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;h2[39m
+                [33mid[39m=[32m&quot;_r_3t_&quot;[39m
+              [36m&gt;[39m
+                [0mDetails[0m
+              [36m&lt;/h2&gt;[39m
+              [36m&lt;div[39m
+                [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;p[39m
+                  [33mclass[39m=[32m&quot;semantic-status semantic-status--error&quot;[39m
+                  [33mrole[39m=[32m&quot;alert&quot;[39m
+                [36m&gt;[39m
+                  [0mThis result cannot be displayed.[0m
+                [36m&lt;/p&gt;[39m
+              [36m&lt;/div&gt;[39m
+            [36m&lt;/section&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/div&gt;[39m
+    [36m&lt;/main&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Found multiple elements with the role &quot;definition&quot;
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  Revision
+  current
+&lt;/dd&gt;
+
+Ignored nodes: comments, script, style
+&lt;dd&gt;
+  App audience
+&lt;/dd&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;main
+      aria-labelledby=&quot;_r_3r_&quot;
+      class=&quot;semantic-canvas&quot;
+    &gt;
+      &lt;header
+        class=&quot;semantic-canvas__header&quot;
+      &gt;
+        &lt;p
+          class=&quot;semantic-canvas__eyebrow&quot;
+        &gt;
+          Canvas view
+        &lt;/p&gt;
+        &lt;h1
+          id=&quot;_r_3r_&quot;
+        &gt;
+          Bounded views
+        &lt;/h1&gt;
+        &lt;dl
+          class=&quot;semantic-canvas__metadata&quot;
+        &gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Revision
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              Revision
+              current
+            &lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;
+              Audience
+            &lt;/dt&gt;
+            &lt;dd&gt;
+              App audience
+            &lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/header&gt;
+      &lt;div
+        class=&quot;semantic-canvas__content&quot;
+      &gt;
+        &lt;section
+          aria-labelledby=&quot;_r_3s_&quot;
+          class=&quot;semantic-panel semantic-card&quot;
+        &gt;
+          &lt;h2
+            id=&quot;_r_3s_&quot;
+          &gt;
+            Summary
+          &lt;/h2&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;section
+              aria-labelledby=&quot;_r_3t_&quot;
+              class=&quot;semantic-panel semantic-card&quot;
+            &gt;
+              &lt;h2
+                id=&quot;_r_3t_&quot;
+              &gt;
+                Details
+              &lt;/h2&gt;
+              &lt;div
+                class=&quot;semantic-stack&quot;
+              &gt;
+                &lt;p
+                  class=&quot;semantic-status semantic-status--error&quot;
+                  role=&quot;alert&quot;
+                &gt;
+                  This result cannot be displayed.
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/section&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/v2-projections.test.tsx:343:23
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65536 bytes" time="0.007967821">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65537 bytes" time="0.005608532">
+        </testcase>
+    </testsuite>
+</testsuites>

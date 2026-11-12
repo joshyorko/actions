@@ -1,0 +1,12 @@
++ poetry run python -m robot --outputdir /workspace/actions-recovery-327/robot-preparation/evidence --log NONE --report NONE /workspace/actions-recovery-327/robot-preparation/source/tasks.robot (in /workspace/actions/action_server)
+==============================================================================
+Tasks
+==============================================================================
+Inspect record                                                        | PASS |
+------------------------------------------------------------------------------
+Inspect second record                                                 | PASS |
+------------------------------------------------------------------------------
+Tasks                                                                 | PASS |
+2 tasks, 2 passed, 0 failed
+==============================================================================
+Output:  /workspace/actions-recovery-327/robot-preparation/evidence/output.xml

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "mode": "producer",
+  "phase": "execute",
+  "screenshots": [
+    "producer-execute-mounted.png",
+    "producer-execute-completed.png"
+  ],
+  "producedText": "Produced Work Items\n\nRead-only output items from this Run. Queue: output\n\nLoad produced items\n\nf6f0eed1-0ae3-4d03-92d6-98ce55b98835 \u2014 PENDING\n\n{\"fieldNames\": [\"amount\", \"city\"], \"recordCount\": 1}",
+  "artifactText": "{\"result\":{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":1},\"workItems\":[{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":1}]}"
+}

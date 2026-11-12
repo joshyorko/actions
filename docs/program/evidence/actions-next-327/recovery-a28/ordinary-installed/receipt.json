@@ -1,0 +1,214 @@
+{
+  "status": "PASS_BOUNDED_ORDINARY_INSTALLED_ROUTES",
+  "runtime_version": "1.1.0a28",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a28/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "dfe2b06bebea553680d194b89297e594aead030b",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 68228,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 68262,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 68540,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 69038,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS actual RCC through CLI/MCP optional+required input",
+  "workspace": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "managed_calls": [
+    "items.enqueue",
+    "items.claim",
+    "items.complete",
+    "items.complete",
+    "runs.get",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "runs.logs"
+  ],
+  "optional_execution": {
+    "attemptEpoch": 1,
+    "attemptId": "a458bb36-93ad-45ca-a2f4-52c2f2fb430e",
+    "attemptState": "succeeded",
+    "outputs": [
+      {
+        "handle": "art_EWah1Qp_RjSzv9YfBzilEg",
+        "mediaType": "application/json",
+        "name": "generated-action-result.json",
+        "size": 30
+      },
+      {
+        "handle": "art_yGBwft_cQyKeDFLqiI6uUg",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55326
+      },
+      {
+        "handle": "art_ndkcmAcTSJC52NqjfOWE2g",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stdout.log",
+        "size": 0
+      },
+      {
+        "handle": "art_BQrQ52RcQnaxLJguhGm7bw",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stderr.log",
+        "size": 103
+      }
+    ],
+    "runId": "0b8514ef-0cdf-4bdf-b564-3c326388c07d",
+    "runStatus": 2,
+    "state": "completed",
+    "workItemEpoch": null,
+    "workItemId": null,
+    "workItemState": null
+  },
+  "required_execution": {
+    "attemptEpoch": 1,
+    "attemptId": "0f06da1e-4241-429f-91c0-0f32f87d900b",
+    "attemptState": "succeeded",
+    "outputs": [
+      {
+        "handle": "art_6KtVhr-4RkWrn6ijPpVwXQ",
+        "mediaType": "application/json",
+        "name": "generated-action-result.json",
+        "size": 30
+      },
+      {
+        "handle": "art_zaZQKxYWSTKHnjTXqzcUwQ",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55326
+      },
+      {
+        "handle": "art_ZHe1_1u9QkeVb8JvYGMCNw",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stdout.log",
+        "size": 0
+      },
+      {
+        "handle": "art_EYvV1BlATIW7cmRsbwLugQ",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stderr.log",
+        "size": 103
+      }
+    ],
+    "runId": "79c94c77-d16e-4d8b-856e-46c112b574ad",
+    "runStatus": 2,
+    "state": "completed",
+    "workItemEpoch": 1,
+    "workItemId": "5eac663b-acbf-45c0-8069-3c727773fe4e",
+    "workItemState": "COMPLETED"
+  },
+  "autonomous_model_discovery": "PASS public canvas_inspect descriptors",
+  "public_operator_provisioning": "PASS explicit offline CLI dry-run/CAS/replay; no SQL mutations"
+}

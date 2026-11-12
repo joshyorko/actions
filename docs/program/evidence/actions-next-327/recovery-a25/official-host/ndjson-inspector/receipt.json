@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "application": "ndjson-inspector",
+  "engine": "installed a25",
+  "host_source": "ext-apps v2.0.3 82221c0c8ce7661efa6771c9d461511b1650495f",
+  "synthetic_authenticated_composition": true,
+  "ordinary_cli": false,
+  "E1": false,
+  "run_id": "0044a93e-2748-4ba4-8e24-844d5cea0cdb",
+  "new_runs": 1,
+  "new_attempts": 1,
+  "cleanup": "PASS"
+}

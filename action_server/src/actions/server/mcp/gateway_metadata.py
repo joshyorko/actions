@@ -38,6 +38,7 @@ _REDACTED_IDENTIFIER = "<redacted>"
 _RESOURCE_METHODS = frozenset(
     {"resources/read", "resources/subscribe", "resources/unsubscribe"}
 )
+_TASK_METHODS = frozenset({"tasks/get", "tasks/cancel", "tasks/update"})
 _NAMED_METHODS = frozenset({"tools/call", "prompts/get"})
 _KNOWN_METHODS = frozenset(
     {
@@ -69,6 +70,7 @@ _KNOWN_METHODS = frozenset(
         "tasks/cancel",
         "tasks/get",
         "tasks/list",
+        "tasks/update",
         "tools/call",
         "tools/list",
     }
@@ -217,6 +219,8 @@ def _request_name(entry: dict[str, Any]) -> Any:
         key = "name"
     elif method in _RESOURCE_METHODS:
         key = "uri"
+    elif method in _TASK_METHODS:
+        key = "taskId"
     elif "name" in params:
         key = "name"
     elif "uri" in params:

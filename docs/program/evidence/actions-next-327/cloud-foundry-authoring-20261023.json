@@ -1,0 +1,115 @@
+{
+  "source_sha": "5c63ea271230de6f47ed442ab64fcede37577926",
+  "implementation_sha": "ea8f98d1fd62ebae4defc31a3ee3c43c58e54cbd",
+  "candidate_versions": {
+    "Runtime": "1.1.0a12",
+    "Core": "1.1.0a2",
+    "SDK": "0.5.0a1"
+  },
+  "schema": 18,
+  "imported_sources": {
+    "compiler331": "aa6e37667f0707736475d5159f9a6c33d69a27aa",
+    "authoring334": "07ad74809c1c785f3dc525d8eb6f760e907c9daa",
+    "boot335": "466d6f241fbbb621a6acc0698a9a9574386f45d2",
+    "deployment333": "f5e5916748a76aeec3653c7792c8849881a4ae30",
+    "contract330": "d16ddbbeac090bd03b759fb890864610a6c052d2",
+    "renderer329": "24a618b45c32a5ece427db81911a4791bcdd539e"
+  },
+  "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/foundry-authoring-final-20261023",
+  "results": {
+    "storage_deployment_authoring": "73passed/0skipped on SQLite AND real PostgreSQL",
+    "components": "161passed/0skipped",
+    "invoice_output": "129passed/0skipped",
+    "portable": "1983passed/14skipped/262deselected",
+    "installed_wheel_contracts": "40passed",
+    "configured_static": "lint/typecheck421PASS; Markdown linter unavailable is retained as limitation",
+    "genuine_RCC_compiler": "27passed/0skipped; pinnedRCC18.19.3, fresh trusted-host dependency prep and sanitized generated import/test/no-build replay",
+    "source_equivalence": "Compiler module, compiler test fixture and Runtime pyproject bytes at source_sha equal the genuine execution source ea8f98d1; no dependency/compatibility override",
+    "cleanup": "PASS; exact compiler cache and all evidence retained; no denied cleanup retry"
+  },
+  "overlap": "Focused/components/portable/installed selections overlap; counts are not summed as distinct cases. Default portable compiler proof skips its dedicated real-RCC case; the separate27-case receipt actually executes it. Prior actual invoice worker130 is source9ca45518, not a claim of generated worker execution at this head.",
+  "MCP_scope": "Genuine pinned Python MCP SDK over in-process ASGI with real common SQL: tools/list,call,resource MIME/stableURI, blank create/apply/explicit release/reconnect/replay/rollback and wrong audience/stale/changed-input denial. Synthetic authenticated context and HTML sentinel; not installed transport, official rendered View, fresh Codex session, generated backend invocation or E1. Fresh-interpreter common SQL authoring readback passes both providers.",
+  "implemented": "Common immutable staging without activation; bounded linear edit lineage; exact latest-candidate release and retained-target rollback through sole head CAS; live explicit SQL grants; original selection/base and audited target binding on idempotent replay; no execution of staged snapshots; transactional audit/request/row failure recovery. Backend staging rejects absent common Package evidence adapter.",
+  "retained_failures": [
+    "a9 portable5failed/1307passed; Core prerelease parser fixed atb369",
+    "initial imported fixture/static collection/import-order/type failures retained",
+    "same-supplied-fingerprint altered-stage regression1failed then fixed",
+    "ea8 frozen full1failed1982passed14skipped; installed1failed39passed, both unbundled boot fixture inventory; explicit pin/noncatalog guard fixed at5c63, focused5passed, final full/installed green"
+  ],
+  "receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-authoring-final-20261023/e5790699-52be-4a17-afa1-5a49d3bc7cbf/receipt.json",
+      "sha256": "6b4311857c343e4a4ddc84e463ff1b9b54334b10294e5845c41ca7923da03fd3"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-authoring-final-20261023/e5790699-52be-4a17-afa1-5a49d3bc7cbf/foundry_storage.xml",
+      "sha256": "c7e7e21f082cb8a99dc613bcda344a0919fea898d54c8cfd59a371b1ae4122e8"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-authoring-final-20261023/e5790699-52be-4a17-afa1-5a49d3bc7cbf/components.xml",
+      "sha256": "76fbe81d83e2713c1e116990194cb46264d532128aa21d4b754080b09bddecfb"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-authoring-final-20261023/e5790699-52be-4a17-afa1-5a49d3bc7cbf/invoice.xml",
+      "sha256": "59064a298cf0527f13d20b1b02a7fe882779837fda708f86a737b462ac9294d9"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-authoring-final-20261023/e5790699-52be-4a17-afa1-5a49d3bc7cbf/portable.xml",
+      "sha256": "1c525f5bb9733fc1037e3710d2926451909c9b26aceef2a70b3fb3d3827d084e"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/compiler-genuine-integrated-20261023.xml",
+      "sha256": "2b9c5f01a3ad8fe79c135054f26f8ab9daee5e78ad30c85e4a0ad38cd33d0e34"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/compiler-trusted-preparation-20261023.log",
+      "sha256": "5bf2d175a83d3b792a4143f2076b0efce153666551cc6ec338255538b5a2a3f5"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/authoring-installed-final-20261023.xml",
+      "sha256": "b3fc159a2e682677a76e46b5152924b683283131c70e77d4efa364c60329b088"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/authoring-static-final-20261023.log",
+      "sha256": "02400da19985acb6ffb19831b8284da287b6d47e9eb4fa889c77de71da9442ae"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/authoring-replay-binding-red-20261023.xml",
+      "sha256": "edeb1fe02783183973ee1e7fd9971850d24a6edb65e9eba50e38cebbff133938"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/authoring-installed-20261023.xml",
+      "sha256": "2b0b24bf4789dccff23aea8eda1938d0cdb396d981da1f7fbf55b39b2989f30d"
+    }
+  ],
+  "canonical_documentation": {
+    "docs/skills/repository-operations.md": "Installed Core provenance/frontend declared test union; schema18 UI-only source identity and Package integrity anchor; SQL staging versus activation, exact replay/authorization, unbundled template inventory boundary",
+    "docs/skills/provenance-observability.md": "Trusted exact-manifest RCC cache prep versus sanitized generated code; accurate ldconfig probe, unchanged compatibility check, top-level exec JSON and unmarked unittest discovery; cache/build alone not execution proof",
+    "docs/program/actions-next-release-327.md": "Unified matrix reconciles current lane convergence and keeps latest separate-approval publication/community boundary",
+    "docs/program/actions-next-foundry-71.md": "Exact package-less typed selection ABI and separate source/Deployment digest"
+  },
+  "rollback": "Code changes are reviewable commits; preserve a coordinated schema17 SQL/object/journal backup before schema18 for binary rollback. Do not delete migration markers or erase admitted work/audit. No production change occurred.",
+  "remaining_order": [
+    "Concrete common Package admission/evidence/source payload adapter; first actual generated capability Run/Attempt/RCC/artifact",
+    "Join installed native CLI/boot/authenticator and semantic renderer to official stable resource/bridge",
+    "Installed genuine SDK full lifecycle, fresh Codex CLI and available independent clients, official basic-host browser; second Python app",
+    "Cloud E1 prerequisites then READY FOR DAKOTA CHATGPT TEST and explicit local/identity approval; E1 still NEEDS_OPERATOR, Dakota STOP",
+    "Remaining data/Knowledge/general effect/retry/MCPTask/security/retention/restore/upgrade/downgrade/distribution/publisher332/unified release gates; celld NO-GO"
+  ],
+  "blockers": [
+    {
+      "action": "post design handoff",
+      "target": "issue/PR101",
+      "state": "denied by automatic approval review",
+      "reason": "reviewer classified destination101 as outside comment authorization; no comment created, no retry; authorized327 receipts used independently"
+    },
+    {
+      "action": "authenticated ChatGPT E1/local identity setup",
+      "target": "Dakota/client/tunnel",
+      "state": "pending explicit owner approval after cloud readiness",
+      "reason": "minimum joined cloud prerequisites incomplete; working Executor untouched"
+    }
+  ],
+  "upstream_disposition": "Existing RCC local-carrier report remains draft only; no external target authorized or report created",
+  "authority": "No community/public release/production/other repository/credential changes without separate approval"
+}

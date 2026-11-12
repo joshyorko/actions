@@ -1,0 +1,19 @@
+{
+  "provenance": "parent cloud desktop tester report; not rerun in coding container",
+  "date": "2026-10-25",
+  "extension_version": "2.20.16",
+  "passed": [
+    "fixture-backed review approval",
+    "Run/Attempt reads",
+    "exact artifact Save",
+    "auth denials",
+    "owner-approved claim -> renew -> cancel with actual SQL lease/fence and UI agreement"
+  ],
+  "not_proved": [
+    "ordinary managed Action/Robot RCC execution",
+    "completion/retry",
+    "same-state restart"
+  ],
+  "fixture_limitation": "advertises no completion/retry and recreates state each launch",
+  "dependency": "Provide bounded ordinary-installed synthetic setup through canonical Runtime for existing parent tester; no new test-only authority."
+}

@@ -1,0 +1,166 @@
+{
+  "attempt": "8c1c142a-2ddb-4c28-9dd6-6a850f684a69",
+  "attempts": 1,
+  "audit": {
+    "count": 1,
+    "sha256": "8922a89b4a11ba2ffc5604964239da50ec92d9340c88fdebc091a9539b75547c"
+  },
+  "detached_intents": {
+    "count": 0,
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "inventories_after": {
+    "FoundryAudit": {
+      "count": 3,
+      "sha256": "01c18f180cc862ea301a2dc420f4acdc35bb80898ad5a63a0fc69eb2b4e0a7f1"
+    },
+    "FoundryRequest": {
+      "count": 3,
+      "sha256": "53d18366e8b88887ee121233700204026a14101371c4b56642828a339db1d6b8"
+    },
+    "Run": {
+      "count": 1,
+      "sha256": "a3e679de871187b4473d0d5ac99712db67dc02d1cce020cef2c18d722efb784d"
+    },
+    "RunAttempt": {
+      "count": 1,
+      "sha256": "5a6767aed0c630a18926f7cf29fd4301b32a23edc66e450d8b2332a2252110c0"
+    },
+    "RunExecutionIntent": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "RunOutput": {
+      "count": 4,
+      "sha256": "7b4ea5fd39a90c3a2858c413af2aed7e3ea98143a7af8da417e93e14a62eb973"
+    },
+    "RunPin": {
+      "count": 1,
+      "sha256": "6f3548ac39aa4f8bd4dffe87a87fe7e060ca2a18ff9c87ba9cd3b345bcced466"
+    }
+  },
+  "inventories_before": {
+    "FoundryAudit": {
+      "count": 3,
+      "sha256": "01c18f180cc862ea301a2dc420f4acdc35bb80898ad5a63a0fc69eb2b4e0a7f1"
+    },
+    "FoundryRequest": {
+      "count": 3,
+      "sha256": "53d18366e8b88887ee121233700204026a14101371c4b56642828a339db1d6b8"
+    },
+    "Run": {
+      "count": 1,
+      "sha256": "a3e679de871187b4473d0d5ac99712db67dc02d1cce020cef2c18d722efb784d"
+    },
+    "RunAttempt": {
+      "count": 1,
+      "sha256": "5a6767aed0c630a18926f7cf29fd4301b32a23edc66e450d8b2332a2252110c0"
+    },
+    "RunExecutionIntent": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "RunOutput": {
+      "count": 4,
+      "sha256": "7b4ea5fd39a90c3a2858c413af2aed7e3ea98143a7af8da417e93e14a62eb973"
+    },
+    "RunPin": {
+      "count": 1,
+      "sha256": "6f3548ac39aa4f8bd4dffe87a87fe7e060ca2a18ff9c87ba9cd3b345bcced466"
+    }
+  },
+  "journal": {
+    "sha256": "192f8362239d40bf0f145abab8d78aef3b08dc94f08e7f5ea142d2bf68693fd5",
+    "storage": "Run.result.result.launch"
+  },
+  "outputs": [
+    {
+      "handle": "art_4zpkO_JxRk2lKWY-nuLugA",
+      "sha256": "sha256:5aa762ae383fbb727af3c7a36d4940a5b8c40a989452d2304fc958ff3f354e7a",
+      "size": 7
+    },
+    {
+      "handle": "art_WGVcS-FiRemROxacjEiJ0w",
+      "sha256": "sha256:d8cc42d9aab96d425b3b75fcebe092806d328b124599d1c00d34700b6a0a1714",
+      "size": 55202
+    },
+    {
+      "handle": "art_iZr4PGu3RV6hsODJ0gUuPQ",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "handle": "art_1SKiEoGGTryvap-NrELC5g",
+      "sha256": "sha256:32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "size": 103
+    }
+  ],
+  "prepared_receipt_sha256": "37a4ab3c48a3099989e3fad967875219890eb5752623ceb95fb73d9f30359325",
+  "prepared_robocorp_home": "/workspace/327-probes/a59-cold-rcc/acquire/robocorp",
+  "rcc_artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "rcc_specification_digest": "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d",
+  "requests": {
+    "count": 1,
+    "sha256": "0eea166647ab11b557c44e0f236581456dae8490cafb3fa471f1be7ff60b7a5e"
+  },
+  "run": "ad815994-96d5-445e-aff0-d5affdf39f91",
+  "run_attempt": {
+    "count": 1,
+    "sha256": "5a6767aed0c630a18926f7cf29fd4301b32a23edc66e450d8b2332a2252110c0"
+  },
+  "run_outputs": {
+    "count": 4,
+    "sha256": "7b4ea5fd39a90c3a2858c413af2aed7e3ea98143a7af8da417e93e14a62eb973"
+  },
+  "run_pin": {
+    "count": 1,
+    "sha256": "6f3548ac39aa4f8bd4dffe87a87fe7e060ca2a18ff9c87ba9cd3b345bcced466"
+  },
+  "runs": 1,
+  "snapshot": {
+    "action_id": "9dd85905-7fde-512d-a4cb-c5508ad229d8",
+    "canvas_application": null,
+    "capability": {
+      "capability_id": "action.generated_echo",
+      "package_revision": {
+        "package_id": "4a739ab8-0408-52c4-a3a4-43fd006cbe84",
+        "revision_id": "sha256:75647c6b719bba99aede57e23b8991a53216676a53c426105b8b18d575649f41",
+        "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+      }
+    },
+    "capability_authority": "package-revision",
+    "capability_schema_digest": "sha256:cdc6f7fa3a3a8ce5d800b65dc02d27fffa3e48b8fdb7cae960dff6baadbb6600",
+    "data_binding": null,
+    "deployment": {
+      "deployment_id": "fdaf182a-00e4-4278-93e5-5cfa45bcb0be",
+      "revision_id": "sha256:06d40d6fcf9cd1fb0241f72228592c691e4c4ade7ec41c7519609143cd4afcdb",
+      "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+    },
+    "output_provider": {
+      "provider_profile_id": "d074bdfa-bf12-4ecf-8b8a-ed7251a0ce0f",
+      "revision_id": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+    },
+    "policy": {
+      "policy_id": "f6a42098-56cf-4af1-bda1-1c72bc9fb5a6",
+      "revision_id": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+    },
+    "runtime_kind": "rcc",
+    "runtime_plan": {
+      "package_revision": {
+        "package_id": "4a739ab8-0408-52c4-a3a4-43fd006cbe84",
+        "revision_id": "sha256:75647c6b719bba99aede57e23b8991a53216676a53c426105b8b18d575649f41",
+        "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+      },
+      "plan_digest": "sha256:8630fa9a8effc8559cb827977ce4db5055c852db30b66aeabc91c02135e4cc28"
+    },
+    "worker": {
+      "revision_id": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "worker_profile_id": "22dc5d8b-c228-468e-bf52-53810bb17e90",
+      "workspace_id": "c7eabad1-45f7-45cc-a485-62a5ca0d3dc1"
+    }
+  },
+  "source_artifact_digest": "sha256:509e1dc178fa3ff5d50410be3f6216e390aec28379a89c32f29c999a30085bc9",
+  "status": "PASS"
+}

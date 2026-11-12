@@ -956,6 +956,12 @@ ORDER BY table_name, ordinal_position;
             return found
 
     def list_indexes(self) -> List[List[str]]:
+        """Return index-column metadata, not complete SQL index definitions.
+
+        SQLite index-list sequence numbers depend on creation order. Use the
+        column ordinal instead, retaining repeated columns without aggregation.
+        Expression SQL and partial-index predicates require a separate observer.
+        """
         with self.cursor() as cursor:
             sql = """
 SELECT 
@@ -966,22 +972,14 @@ SELECT
     CASE il.[unique] when 1 then 0 else 1 END as non_unique,
     il.[unique] as is_unique,
     il.partial,
-    il.seq as sequence_in_index,
+    ii.seqno as sequence_in_index,
     ii.seqno as sequence_in_column
 FROM sqlite_master AS m,
     pragma_index_list(m.name) AS il,
     pragma_index_info(il.name) AS ii
 WHERE 
     m.type = 'table'
-    and m.tbl_name = 'YOUR TABLENAME HERE'
-GROUP BY
-    m.tbl_name,
-    il.name,
-    ii.name,
-    il.origin,
-    il.partial,
-    il.seq
-ORDER BY index_name,il.seq,ii.seqno"""
+ORDER BY table_name,index_name,ii.seqno"""
             if self.backend_name == "postgresql":
                 sql = """
 SELECT tbl.relname AS table_name,

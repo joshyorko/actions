@@ -1,0 +1,219 @@
+{
+  "status": "PASS_BOUNDED_ORDINARY_INSTALLED_ROUTES",
+  "runtime_version": "1.1.0a27",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a27/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 33245,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 33260,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 33683,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 33977,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS actual RCC through CLI/MCP optional+required input",
+  "profile_setup": "explicit three exact-reference deploy/execute grants plus workspace execute_generated_source grant in owned stopped datadir; no review or source result seeded",
+  "fixture_provisioning": [
+    {
+      "application": "4dc27f42-910a-423e-ab09-320bcd124fb7",
+      "canonical_snapshot_from_private_SQL": true,
+      "explicit_RunAdmission_and_grants": true,
+      "public_operator_provisioning": "NOT_PROVEN"
+    },
+    {
+      "application": "4db5fc4b-3bf4-4c52-af62-62e0821f3d4e",
+      "canonical_snapshot_from_private_SQL": true,
+      "explicit_RunAdmission_and_grants": true,
+      "public_operator_provisioning": "NOT_PROVEN"
+    }
+  ],
+  "managed_calls": [
+    "items.enqueue",
+    "items.claim",
+    "items.complete",
+    "items.complete",
+    "runs.get",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "runs.logs"
+  ],
+  "optional_execution": {
+    "attemptEpoch": 1,
+    "attemptId": "921a491d-0e48-4c5f-befc-3b5d5c407677",
+    "attemptState": "succeeded",
+    "outputs": [
+      {
+        "handle": "art_mtpD9ZYKRIaVUm50o030sQ",
+        "mediaType": "application/json",
+        "name": "generated-action-result.json",
+        "size": 30
+      },
+      {
+        "handle": "art_tvrH4eAIR2i6JV21hvCXTg",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55326
+      },
+      {
+        "handle": "art_2u8Fy9xySpCYXTNxtggXgw",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stdout.log",
+        "size": 0
+      },
+      {
+        "handle": "art_rhtriSXFRxaJTkBkwS7ASw",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stderr.log",
+        "size": 103
+      }
+    ],
+    "runId": "aa57d2b9-fae9-49c4-b6b7-78140da35348",
+    "runStatus": 2,
+    "state": "completed",
+    "workItemEpoch": null,
+    "workItemId": null,
+    "workItemState": null
+  },
+  "required_execution": {
+    "attemptEpoch": 1,
+    "attemptId": "41110ae5-9291-4791-b1bf-587f31ee4a97",
+    "attemptState": "succeeded",
+    "outputs": [
+      {
+        "handle": "art_GKgX3eQFSQuDQvnibNYXsg",
+        "mediaType": "application/json",
+        "name": "generated-action-result.json",
+        "size": 30
+      },
+      {
+        "handle": "art_l-AMSyOARDu_LmbJxfE38g",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55326
+      },
+      {
+        "handle": "art_L8vnk6flQfSb_ZU7VyQ5IQ",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stdout.log",
+        "size": 0
+      },
+      {
+        "handle": "art_FvabABiHTcGjSrcfyp55ZQ",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stderr.log",
+        "size": 103
+      }
+    ],
+    "runId": "eecadfcb-23cb-4ee7-9d04-f543fd973bc4",
+    "runStatus": 2,
+    "state": "completed",
+    "workItemEpoch": 1,
+    "workItemId": "592ea729-3a7d-44bf-b097-e89a1f6a539e",
+    "workItemState": "COMPLETED"
+  },
+  "autonomous_model_discovery": "NOT_PROVEN_private_fixture_snapshot",
+  "public_operator_provisioning": "MISSING_PUBLIC_SEAM_private_fixture_controlplane_register_grants"
+}

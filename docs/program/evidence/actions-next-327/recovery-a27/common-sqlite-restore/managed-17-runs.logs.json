@@ -1,0 +1,16 @@
+{
+  "schema_version": "actions.managed-work-items/v1",
+  "operation": "runs.logs",
+  "runtime_version": "1.1.0a27",
+  "result": {
+    "run_id": "eecadfcb-23cb-4ee7-9d04-f543fd973bc4",
+    "lines": [
+      {
+        "offset": 0,
+        "text": "Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026."
+      }
+    ],
+    "next_cursor": null,
+    "server_time_ms": "1792894186870"
+  }
+}

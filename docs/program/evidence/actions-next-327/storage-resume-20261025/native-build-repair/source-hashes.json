@@ -1,0 +1,7 @@
+{
+  "action_server/.gitignore": "97e93288ddb877c72eba23228c362daa5447db27b450a3f524065d4563656583",
+  "action_server/action-server.spec": "507188af854f0a81e472dd3604c93709766b8cc74bb499b8109bbdfbdd00032f",
+  "action_server/src/actions/server/_build_common/mcp_bundle.py": "ffe17412a94e93e4665230737f3ffd6b28c9ead22349d3e5b7b7584775d70324",
+  "action_server/src/actions/server/_selftest.py": "5e16dc5700328be6fda679b1e4c631b2d13b2f569636e04868d94ec08c84d748",
+  "action_server/tests/action_server_tests/test_binary.py": "523f9a1e49918b7ca83c2d845cb04854e91f40b0b49cce9974637c32468149a2"
+}

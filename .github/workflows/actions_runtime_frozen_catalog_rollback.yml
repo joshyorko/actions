@@ -52,6 +52,10 @@ jobs:
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      env:
+        GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+        GIT_CONFIG_KEY_0: core.longpaths
+        GIT_CONFIG_VALUE_0: 'true'
       with:
         fetch-depth: 0
     - name: Install the latest version of uv
@@ -214,6 +218,10 @@ jobs:
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      env:
+        GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+        GIT_CONFIG_KEY_0: core.longpaths
+        GIT_CONFIG_VALUE_0: 'true'
       with:
         fetch-depth: 0
     - name: Install the latest version of uv

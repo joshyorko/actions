@@ -1,0 +1,6 @@
+{
+  "action_server/src/actions/server/_local_provider_setup.py": "9ec5e55490486cefa615c98f37a2a915973f059121f3e9f275b6a14dcf84cfd3",
+  "action_server/src/actions/server/foundry/provider_catalog.py": "c081ebcf38f6e2a2a2ef631d2dda342790c463c2e3f17f4b9a85aaaff7efd855",
+  "action_server/tests/action_server_tests/test_local_knowledge_setup.py": "26e102259d47707732207a79eb052d5410ea292e4e3f18268d7b3c7e6d63bcfc",
+  "action_server/tests/action_server_tests/local_provider_request_v1.txt.b64": "0ae7973260a909abb3e03ae44001575e725ddbae1b707d1455d695949e65c292"
+}

@@ -1,0 +1,47 @@
+{
+  "session.json": {
+    "original_sha256": "63ea9244cb036afaccf77ca6e952274b4a97f8bdc103d0a0b71ea0fbd50812e6",
+    "published_sha256": "63ea9244cb036afaccf77ca6e952274b4a97f8bdc103d0a0b71ea0fbd50812e6",
+    "redacted": false
+  },
+  "preflight.json": {
+    "original_sha256": "2195e82655683f770893b835908f90e909c7b3c762d781a75977b7fe1c80ec7c",
+    "published_sha256": "2195e82655683f770893b835908f90e909c7b3c762d781a75977b7fe1c80ec7c",
+    "redacted": false
+  },
+  "test-preflight.json": {
+    "original_sha256": "1f237cfa51b4f5778d863510b684ad92f59f2e47ae74188d6ce55b7d68f08d25",
+    "published_sha256": "1f237cfa51b4f5778d863510b684ad92f59f2e47ae74188d6ce55b7d68f08d25",
+    "redacted": false
+  },
+  "preflight.process.json": {
+    "original_sha256": "9578701a386a237d5b752b4d2de6bd19351b5a0b60be6db23b9bcb98003aa016",
+    "published_sha256": "9578701a386a237d5b752b4d2de6bd19351b5a0b60be6db23b9bcb98003aa016",
+    "redacted": false
+  },
+  "pytest.process.json": {
+    "original_sha256": "289ed4cf1eac33b39e0f24de2306f217163d9342bf971347626e339d29f407fd",
+    "published_sha256": "289ed4cf1eac33b39e0f24de2306f217163d9342bf971347626e339d29f407fd",
+    "redacted": false
+  },
+  "postgres-capacity.jsonl": {
+    "original_sha256": "c181bf3a11f3005eec89904dc284db641b3a89fbe7914b3e1ce4b4b9bb9509c8",
+    "published_sha256": "c181bf3a11f3005eec89904dc284db641b3a89fbe7914b3e1ce4b4b9bb9509c8",
+    "redacted": false
+  },
+  "progress.jsonl": {
+    "original_sha256": "0e48e65063d1a531f40d01a78c61d326f8d33df052d9fdafddfb6da01920565a",
+    "published_sha256": "0e48e65063d1a531f40d01a78c61d326f8d33df052d9fdafddfb6da01920565a",
+    "redacted": false
+  },
+  "pytest.log": {
+    "original_sha256": "c6f0a189438a667bccc8aa9917a98284701abffb3a35c26dd20e05c121163788",
+    "published_sha256": "c6f0a189438a667bccc8aa9917a98284701abffb3a35c26dd20e05c121163788",
+    "redacted": false
+  },
+  "junit.xml": {
+    "original_sha256": "1b8ff7a1050c404577638dc0f3ee0cf29fe4d83155efd1fb5d2ec9525ea1c7bd",
+    "published_sha256": "85893c1353108017fc13bce92e95876dd641ecba30b6062447ea2d3de45b44e5",
+    "redacted": true
+  }
+}

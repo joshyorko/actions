@@ -1,0 +1,184 @@
+{
+  "source": "76fb3afe6e4a3806804d6164f9727efa121551d7",
+  "runtime_version": "1.1.0a17",
+  "status": "SOURCE_INSTALLED_MCP_AND_READ_ONLY_OFFICIAL_HOST_QUALIFIED",
+  "imported_authoring": {
+    "pr": 334,
+    "head": "c9ea84e19b95bc448b6bbc8e9304a4ebd2fe3eda",
+    "import_commit": "97cc2869",
+    "integration_fix": "874187ad: nested JSON Schema references resolve from tool root; expose operation descriptions"
+  },
+  "full_gate": {
+    "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/authoring-model-final-20261023",
+    "receipt": "/workspace/actions-327-state/evidence/authoring-model-final-20261023/834e1fc4-e83f-43ef-ac8c-43e8368156ef/receipt.json",
+    "sha256": "4e0a750ecda0df202afe36a9cd3f37ad4a5604addf6f5651e2a95cf79556f049",
+    "counts": {
+      "foundry_storage": {
+        "tests": 101,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 161,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2039,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS"
+  },
+  "static": "Configured invoke lint/typecheck PASS433; Markdown lint unavailable, not substituted.",
+  "installed": {
+    "root": "/workspace/actions-327-state/evidence/foundry-integration/installed-a17-76fb3afe",
+    "client": "mcp2.0.0 Python SDK, actual streamable HTTP socket",
+    "invocation": "consumer/bin/python -I verify_installed.py (see copied exact script)",
+    "versions": {
+      "runtime": "1.1.0a17",
+      "core": "1.1.0a2",
+      "sdk": "0.5.0a1"
+    },
+    "wheel_members": {
+      "runtime": {
+        "wheel": "/tmp/actions-327-a17-76fb3afe/source/action_server/dist/actions_runtime-1.1.0a17-cp312-cp312-linux_x86_64.whl",
+        "sha256": "4d7e1b03d116a38fa563974ac229b635ca4a32167f797b514b44fb3cf0d13f7e",
+        "source_member_equality_count": 256
+      },
+      "core": {
+        "wheel": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-wheels/core/actions_core-1.1.0a2-py3-none-any.whl",
+        "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+        "source_member_equality_count": 52
+      },
+      "sdk": {
+        "wheel": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-wheels/sdk/actions_work_items-0.5.0a1-py3-none-any.whl",
+        "sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "source_member_equality_count": 24
+      }
+    },
+    "proof": [
+      "Fresh noneditable consumer; imported modules under own sys.prefix; no checkout source imports.",
+      "CLI no user Package, seven model tools, canonical text/html;profile=mcp-app resource.",
+      "Public authored spec and operation descriptions; create/apply/replay/stale edit rejection; app-only dispatch denied.",
+      "Explicit activation; actual process stop/restart/reconnect; reopen and rollback.",
+      "Owned local Runtime processes stopped."
+    ]
+  },
+  "official_host": {
+    "repository": "modelcontextprotocol/ext-apps",
+    "sha": "266a9e3b70dbd4a4f0546dda95da2a2c1a8be4b7",
+    "sdk_version": "2.0.3",
+    "directory": "/workspace/actions-327-state/evidence/foundry-integration/installed-a17-76fb3afe/official-host",
+    "proof": "Real Basic Host AppBridge/PostMessageTransport, double iframe; actual authored Canvas title/revision rendered.",
+    "fixture_adaptations": [
+      "Extracted official source unchanged; standalone build dependencies recorded in package-lock. Missing cors types/cross-env fixture preparation failure retained.",
+      "Task-only http.Server.listen wrapper restricts official server ports8080/8081 to127.0.0.1.",
+      "Playwright injects owned synthetic bearer only for owned Runtime URL; no live identity/tunnel changes.",
+      "Normal Runtime CORS explicitly allows owned localhost8080 fixture origin."
+    ],
+    "screenshot_library_id": "libfile_0e8a40a7845881919e990a4e7c4700a1",
+    "screenshot_sha256": "8eeea50473abc87177d3608006e8c0b15c350063443861d72a72c2d4b1c40fa0",
+    "screenshot_bytes": 99909,
+    "cleanup": "PASS; owned Runtime and host stopped"
+  },
+  "retained_failures": [
+    {
+      "path": "/workspace/actions-327-state/evidence/authoring-model-frozen-20261023/7b409494-1b44-4b7b-9cc0-e431b53c5b4a/receipt.json",
+      "result": "SQL101 pass; components160 pass1 fail stale a16 assertion; invoice/portable not run. Fixed exact candidate assertion; final full rerun passed."
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/authoring-nested-schema-pytest-red-20261023.log",
+      "result": "JSON Schema PointerToNowhere reproduced before scoped ref_template repair."
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/joined-a16-build-f30b6c25.log",
+      "result": "Frontend passed; Poetry wheel failed with archive-local missing .git from inherited Git context. Variables removed only from wheel subprocess; separate retry passed."
+    },
+    {
+      "path": "/tmp/actions-327-official-basic-host-266a9e3/evidence-first-networkidle",
+      "result": "Tools/resource discovery succeeded, browser networkidle wait timed out on persistent MCP stream; cleanup passed."
+    },
+    {
+      "path": "/tmp/actions-327-official-basic-host-266a9e3/evidence-second-label",
+      "result": "Browser Input label selector timed out; changed fixture to unambiguous textarea selector; cleanup passed."
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/official-host-a16-browser-readiness-20261023.log",
+      "result": "Pre-start port probe hit own TIME_WAIT socket; confirmed no listener/process. Reuse-address probe does not reuse a live listener. No Runtime launched by that failed probe."
+    }
+  ],
+  "limits": [
+    "Read-only semantic adapters; app audience, generated business execution/approval/artifact interaction not qualified by this host run.",
+    "RCC-to-Package admission prior proof retained, not a generic business execution claim.",
+    "No Codex auth retry; observed token-refresh401 remains blocker. OpenCode/Claude Code unavailable; ChatGPT E1 NEEDS_OPERATOR and Dakota STOP.",
+    "Real PostgreSQL source gate is separate from installed socket/browser SQLite fixture.",
+    "No offline cold install, full final3OS/native/image/retention/restore/publisher332 proof from these results.",
+    "Managed SQL service integration and general enqueue/retry/logs remain open.",
+    "Celld NO-GO; no community/publication/production/other-repo/live credential change."
+  ],
+  "documentation": {
+    "files": [
+      "docs/program/actions-next-foundry-71.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "delta": "Model-visible public specs and correctly scoped nested schema refs; exact installed normal route/official bridge boundaries, archive frontend Git timestamp scope versus Poetry exclusion context.",
+    "evidence": "Reproduced JSON Schema failure, real SQL full gate, measured wheel source members, isolated CLI/MCP lifecycle, actual official host screenshot and cleanup."
+  },
+  "rollback": "No new DDL; schema18 data/SQL+objects/source/journal coordinated restore remains required for downgrade. UI rollback changes active head without deleting admitted work/audit. Bootstrap receipt must not be deleted to restore revoked grants.",
+  "upstream_disposition": "Existing RCC report remains draft only; standalone host fixture setup failures are not established upstream defects.",
+  "refreshed_gateway": {
+    "source": "9e3c9bd0fc619739df9a112765649b58866b7860",
+    "pin": "RCC18.19.3",
+    "sequence": [
+      {
+        "task": "Doctor",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t Doctor",
+        "result": "PASS",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-doctor.log",
+        "sha256": "a014aa60f9843df3327800306c57b4bcbc3988f2e7dbaf5b296d75b96a803f22"
+      },
+      {
+        "task": "Bootstrap",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+        "result": "PASS",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-bootstrap.log",
+        "sha256": "84f404ca1771e96566b220f3514bae0e300cefbcff72bd1528bca685a30b99de"
+      },
+      {
+        "task": "ToolkitTest",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+        "result": "PASS179",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-toolkit-test.log",
+        "sha256": "9614a8e0b9a14944ebae182fe39d55a8ee7a1acf6ba66253910594a8f8a44b8d"
+      }
+    ]
+  },
+  "private_verification_bundle": {
+    "library_file_id": "libfile_fc92b755fc34819193be1176811a9e5d",
+    "archive": "/tmp/actions-327-a17-private-authoring.zip",
+    "sha256": "7e893df7fb2ce6f701a04ee0fd729825216569a51a754712491f038dcebd472c",
+    "size_bytes": 14840251,
+    "contents": "Exact three measured candidate wheels,66 pinned public dependency requirements, source/wheel hash manifest, portable installed MCP verification script and README; no credentials/state/source checkout.",
+    "qa": "PASS: extract to new owned directory, verify manifest hashes, new consumer venv from pinned Python, install only local candidates plus public requirements, pip check, -I verify.py; normal Runtime socket/create/apply/activate/restart/rollback; both Runtime processes stopped.",
+    "qa_evidence": "/workspace/actions-327-state/evidence/foundry-integration/a17-extracted-private-bundle-qa",
+    "commands": [
+      "python3.12 -m venv consumer",
+      "consumer/bin/python -m pip install -r requirements.txt wheels/*.whl",
+      "consumer/bin/python -m pip check",
+      "consumer/bin/python -I verify.py"
+    ],
+    "network": "Public dependency wheels are not bundled; package-index access or an authorized preloaded cache is required. Offline cold preparation remains unverified.",
+    "limits": "Authoring/read-only semantic evidence only; not a generated execution or final release bundle."
+  }
+}

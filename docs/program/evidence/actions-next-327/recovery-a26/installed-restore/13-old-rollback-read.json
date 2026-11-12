@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/legacy-1.0.4/consumer/bin/python",
+    "-I",
+    "-B",
+    "/workspace/actions-recovery-327/restore-installed-draft/qualify.py",
+    "--operation",
+    "read",
+    "--version",
+    "1.0.4",
+    "--datadir",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/pre-upgrade-rollback",
+    "--item",
+    "7b9b57fd-1517-44db-b00e-1e76258ac716"
+  ],
+  "returncode": 0,
+  "stdout": "{\"version\": \"1.0.4\", \"module\": \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/lib/python3.12/site-packages/actions/server/__init__.py\", \"python\": \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/bin/python\", \"item\": \"7b9b57fd-1517-44db-b00e-1e76258ac716\", \"attachment_sha256\": \"2c688f2f9259c89285a658270fcc96e5a53ed7fbc815921185f180e494445358\"}\n",
+  "stderr": ""
+}

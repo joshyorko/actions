@@ -1,0 +1,111 @@
+{
+  "purpose": "lossless archival of inactive task-created raw traces; human-readable HTML and all other evidence remain unchanged",
+  "before_free": 1392758784,
+  "archives": [
+    {
+      "original": "generic-managed-evidence/final2-log/output_4.robolog",
+      "archive": "generic-managed-evidence/final2-log/output_4.robolog.gz",
+      "original_sha256": "868b4b818125d6f2ee4cee418d6f3667c31db683ab12945f90050966c6a03be1",
+      "archive_sha256": "f043859b4aaaca71f7653268e1fd6240dd4bdad17fdf9f9cd72bb09be0dc4fec",
+      "original_bytes": 50000066,
+      "archive_bytes": 6664812
+    },
+    {
+      "original": "generic-managed-evidence/final2-log/output_3.robolog",
+      "archive": "generic-managed-evidence/final2-log/output_3.robolog.gz",
+      "original_sha256": "a5b4d519c452f07af9112da414ac8738251de17969bc957f558cd1ba882eb837",
+      "archive_sha256": "a56aee31d3053e0dbc46d284d22aa1c7ab4b2c537dd4377c2be97bc4294144de",
+      "original_bytes": 50000009,
+      "archive_bytes": 6672390
+    },
+    {
+      "original": "generic-managed-evidence/final2-log/output.robolog",
+      "archive": "generic-managed-evidence/final2-log/output.robolog.gz",
+      "original_sha256": "01209074a088eb48d75d16ce3506b8529f3950d156012b070f5c173f3d8e2950",
+      "archive_sha256": "e73241e04fd15880f7cf6643f0e20bd66b43a7aa5ee9424159ff48fe9581334d",
+      "original_bytes": 50000010,
+      "archive_bytes": 6818742
+    },
+    {
+      "original": "generic-managed-evidence/final2-log/output_2.robolog",
+      "archive": "generic-managed-evidence/final2-log/output_2.robolog.gz",
+      "original_sha256": "b6a40718f2f54407a3c970eb9adff0e8029b58a5b9948934bbaac69d1cd2d8e1",
+      "archive_sha256": "5c8d6b63066b89349cc0e55cd7a8ee910f60abe76636fb456aa585e4c27b7836",
+      "original_bytes": 50000061,
+      "archive_bytes": 6755647
+    },
+    {
+      "original": "generic-managed-evidence/final2-log/output_5.robolog",
+      "archive": "generic-managed-evidence/final2-log/output_5.robolog.gz",
+      "original_sha256": "3555c2110c98a429e6f6e9b7208e825c0df1b8471773060b8e418487e4833ac5",
+      "archive_sha256": "91ad724cdd147a18d6fb9ff1d5d8ef18ebd0d67b2c64f8b4844d417a5f38dc2b",
+      "original_bytes": 40214353,
+      "archive_bytes": 5269188
+    },
+    {
+      "original": "generic-managed-evidence/final-log/output_4.robolog",
+      "archive": "generic-managed-evidence/final-log/output_4.robolog.gz",
+      "original_sha256": "112303549d9f89a317742abfba413fb247b3390af43fad8624a8884597994ceb",
+      "archive_sha256": "8a8409421499fb42e2a6700ec5fef22624c8f26d37dc93b31ecee093f11b5189",
+      "original_bytes": 50000003,
+      "archive_bytes": 6618567
+    },
+    {
+      "original": "generic-managed-evidence/final-log/output_3.robolog",
+      "archive": "generic-managed-evidence/final-log/output_3.robolog.gz",
+      "original_sha256": "e351f445b7eb374402efb813ffab4e54a2c0eb22504e8897b9eb4ed6ef917b0e",
+      "archive_sha256": "f2f3c7e97cf7b2063286ee45a80dd28646b4d96c12ec52e9e566a73bed62fac1",
+      "original_bytes": 50000045,
+      "archive_bytes": 6652261
+    },
+    {
+      "original": "generic-managed-evidence/final-log/output.robolog",
+      "archive": "generic-managed-evidence/final-log/output.robolog.gz",
+      "original_sha256": "51779fc7378a9f93c0ba4d5ec73080d85c37afa8a530e24b6174816d1ae75cfb",
+      "archive_sha256": "c5e9dc5efb87857df0ef418b4b0b691f98194483107bf693fdd1ba3b33a7484a",
+      "original_bytes": 50003364,
+      "archive_bytes": 6788041
+    },
+    {
+      "original": "generic-managed-evidence/final-log/output_2.robolog",
+      "archive": "generic-managed-evidence/final-log/output_2.robolog.gz",
+      "original_sha256": "0a291a85a08921aab484e93d0a8943fa956723d4df32171b2240868ddc0fe473",
+      "archive_sha256": "394c5315f90ee99849930788e8ad7af11b4733e0f862d0898e40213252d916ea",
+      "original_bytes": 50000063,
+      "archive_bytes": 6735599
+    },
+    {
+      "original": "generic-managed-evidence/final-log/output_5.robolog",
+      "archive": "generic-managed-evidence/final-log/output_5.robolog.gz",
+      "original_sha256": "5457199309a86a334673e6c5c4827664740e4a725d4ebb728f7236e304b167b3",
+      "archive_sha256": "549479869c80d0fc76a838a74a0e39774c511dd4793375d59c70a4e7f58df04c",
+      "original_bytes": 29997801,
+      "archive_bytes": 3954601
+    },
+    {
+      "original": "native-completion-evidence/final2-log/output_3.robolog",
+      "archive": "native-completion-evidence/final2-log/output_3.robolog.gz",
+      "original_sha256": "3d12654e4700d67777072f3853ea5b6902216880556e8debdb5d0d0147405275",
+      "archive_sha256": "da862019bbdea9878071b129d8878d3ac2013c48240e98d59d392e0876cd9a53",
+      "original_bytes": 29326210,
+      "archive_bytes": 3892193
+    },
+    {
+      "original": "native-completion-evidence/final2-log/output.robolog",
+      "archive": "native-completion-evidence/final2-log/output.robolog.gz",
+      "original_sha256": "7bba816bf79d8080e28f0f01cddeba686abcdc6be22f8bb43996b424c5e7a808",
+      "archive_sha256": "13f7a05833733de0d9fae401d59b57a7cd83ac52638dd57b98642b5dc3e1749a",
+      "original_bytes": 50002034,
+      "archive_bytes": 6689933
+    },
+    {
+      "original": "native-completion-evidence/final2-log/output_2.robolog",
+      "archive": "native-completion-evidence/final2-log/output_2.robolog.gz",
+      "original_sha256": "f0865dbe843424c33dd12996bd9d63f0050fadde46f53dfe7ddf75142b919f38",
+      "archive_sha256": "f0e133354f2452385ba99a7a0bd8e5ff87249f10c4b3cbae5aacca2899d180d0",
+      "original_bytes": 50000057,
+      "archive_bytes": 6888216
+    }
+  ],
+  "after_free": 1911906304
+}

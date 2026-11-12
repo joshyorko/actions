@@ -1,0 +1,11 @@
+[
+  "tests/action_server_tests/test_logical_full_publication.py::test_standalone_full_publish_sql_only[sqlite]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_standalone_full_publish_sql_only[postgresql]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_knowledge_full_publish_sql_only",
+  "tests/action_server_tests/test_logical_full_publication.py::test_generic_queue_full_publish_sql_only[sqlite]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_generic_queue_full_publish_sql_only[postgresql]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_bound_publish_rechecks_sql_authority_without_io[sqlite-grant]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_bound_publish_rechecks_sql_authority_without_io[sqlite-package]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_bound_publish_rechecks_sql_authority_without_io[postgresql-grant]",
+  "tests/action_server_tests/test_logical_full_publication.py::test_bound_publish_rechecks_sql_authority_without_io[postgresql-package]"
+]

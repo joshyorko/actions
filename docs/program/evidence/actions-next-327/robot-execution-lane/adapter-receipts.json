@@ -1,0 +1,173 @@
+{
+  "source": {
+    "action_server/src/actions/server/foundry/robot_execution.py": "843d3c2fcf9773c87aa0628990a89256c2f46f6c2690d56972db3a7aef12607e",
+    "action_server/tests/contract_tests/test_robot_execution.py": "b8834f91a81b1fd12b190b04117d7c790e6e5436955851c274cda930170b090e"
+  },
+  "receipts": {
+    "adapter-expanded.log": {
+      "sha256": "b643202932c9b74c65ca140eaf3d21d8ba26dcef4cd3ae35fcf9436a74beaa0d",
+      "bytes": 10718
+    },
+    "adapter-expanded.xml": {
+      "sha256": "00572de9fd855d4a4d4c29fec98c386a8a32031412657de4f23ab10f92ee3e86",
+      "bytes": 8178
+    },
+    "adapter-final.log": {
+      "sha256": "e96e02cd5dbbc0fa33f48ebf059b985ac60e623d01b2107be8c10aa3372303b4",
+      "bytes": 4578
+    },
+    "adapter-final.xml": {
+      "sha256": "6305a5f012fb524517f1334b9dff6311147592425dd1a6a3908ab81fdd0ca466",
+      "bytes": 34107
+    },
+    "adapter-first.log": {
+      "sha256": "0b19bc031c347458f87225b50be58893ad74aa48fc6a2dc9fe3fc2d10b5b6727",
+      "bytes": 4148
+    },
+    "adapter-first.xml": {
+      "sha256": "298b8b9b94080a2d993cc465df295c75b8eb6777ad734d60d4dfbddce44d14de",
+      "bytes": 657
+    },
+    "adapter-format-final.log": {
+      "sha256": "90631e36f0d97ce62f9ba858eb84217e0e46d628b3b3ebe781e3025d8f5ad9fe",
+      "bytes": 3931
+    },
+    "adapter-format-reviewed.log": {
+      "sha256": "df7ac8b610a256b09ba51592a373d8a782b9a4424ec3a22cb2962cd22272ce2e",
+      "bytes": 3931
+    },
+    "adapter-format.log": {
+      "sha256": "058a81c119b396e69bac7f238c76814348f617463cda4925f19645f1165ae2a9",
+      "bytes": 3929
+    },
+    "adapter-full-suite.exit": {
+      "sha256": "ca2ebdf97d7469496b1f4b78958f9dc8447efdcb623953fee7b6996b762f6fff",
+      "bytes": 4
+    },
+    "adapter-full-suite.log": {
+      "sha256": "c0d59bb60859dec7d3ba0edd38ddf5093dee21881d296b8240e35d8beb64ab80",
+      "bytes": 7150
+    },
+    "adapter-isort-final.log": {
+      "sha256": "68e1c0b86e4f050fb63a6a202b02aa401e5b5564498dd8c737a27d525af3250f",
+      "bytes": 4055
+    },
+    "adapter-isort.log": {
+      "sha256": "73559b72e0ced9d455d0cbf8379d9990103f0d47c8ab84470fd9b280b80ddc72",
+      "bytes": 4098
+    },
+    "adapter-lint-final.log": {
+      "sha256": "4bc2a5863aca323e106ecd15dae5e485f6c5315d225760f158f0049ec0c329b0",
+      "bytes": 3910
+    },
+    "adapter-lint.log": {
+      "sha256": "b105f4b4a548cd58f42c7de390ce97e789466e9d4d7972ee778579dfa202c7eb",
+      "bytes": 5589
+    },
+    "adapter-mypy-explicit.log": {
+      "sha256": "029f3b0c76555ef1d9c50be74d86e60c205e2f17f82e0678a9b5a2207aa358ff",
+      "bytes": 6739
+    },
+    "adapter-mypy-final.log": {
+      "sha256": "516957497e972cbe7cad8857363d080ba24921988b9146c8817f3885f50538d5",
+      "bytes": 3919
+    },
+    "adapter-mypy.log": {
+      "sha256": "d95a168141b22f988f9b57816c8e5b90260cf04272cbebce23f1e2d069da410b",
+      "bytes": 5275
+    },
+    "adapter-package-lint-reviewed.log": {
+      "sha256": "e3c387c87d3162efef5b8b95b053c017017b671d4d4e1406501da93b76602b62",
+      "bytes": 5317
+    },
+    "adapter-package-lint.log": {
+      "sha256": "76dd9ece0e6fe286deca60847b65b2c9f6e96ff1d863922af9f7e24e231c8d01",
+      "bytes": 5459
+    },
+    "adapter-package-typecheck.log": {
+      "sha256": "d6f705a8007875fbe8507ef736e2c45e368acab4bb7f9057dbad09346facb187",
+      "bytes": 5785
+    },
+    "adapter-qualified.log": {
+      "sha256": "23c42ac8f69bdffac578083a528892b09c273dd61c4ce2f7297a88c83250d781",
+      "bytes": 4159
+    },
+    "adapter-qualified.xml": {
+      "sha256": "0f7b58eb38aa610c68c9904e72f14ad904d66ec8d5b28708752605c08fae382d",
+      "bytes": 4378
+    },
+    "adapter-rcc-fixed.log": {
+      "sha256": "2d40165fa6e3c598e40a6f12325eb7b4cfe27d15d156c6e7ca3b0da1afd9eeb5",
+      "bytes": 8916
+    },
+    "adapter-rcc-fixed.xml": {
+      "sha256": "8705420db13b835439f97dffda2dad9efb2a6552bf3220f3130b83471695e378",
+      "bytes": 7440
+    },
+    "adapter-rcc.log": {
+      "sha256": "2f845cf9b28322d5374b35b3e197d6e0c7a891edc4c4649f5b68bed19064cbd7",
+      "bytes": 12805
+    },
+    "adapter-rcc.xml": {
+      "sha256": "9317b60f8aca5c5a8499c0c4f222a4467366ab79036a1233f9db9032ff8424a2",
+      "bytes": 11521
+    },
+    "adapter-red.log": {
+      "sha256": "b53831bcf6e97a1c5a952d289532a93945f7a2918b34ef62f2292f356ef17f6b",
+      "bytes": 6426
+    },
+    "adapter-red.xml": {
+      "sha256": "93b313313b333e8a4ba9fc602c3747c452238c12dcfc3b590f3211cb090434f0",
+      "bytes": 1046
+    },
+    "adapter-review.log": {
+      "sha256": "bd30a41e95adb347f7dd8317ce926f6767749f297195811b62eec99a0b047c96",
+      "bytes": 4162
+    },
+    "adapter-review.xml": {
+      "sha256": "de6f253832f2d31b464db9df84180f1654a3c13bc1ea171f97e0eebab4272c8a",
+      "bytes": 4946
+    },
+    "adapter-scoped-isort.log": {
+      "sha256": "e4f284194d061cb0ec16a90fbf1838d5fb7c9baebfd3bc1d026578cbd051371a",
+      "bytes": 3882
+    },
+    "adapter-scoped-lint.log": {
+      "sha256": "d221845239d859f29c64d259fee7364186a4d42268946acdff23f001730d4228",
+      "bytes": 3910
+    },
+    "adapter-source-final.log": {
+      "sha256": "e365677290424f28b188079230087f9cb1a02201dd58a398c20a64ac128fd6bb",
+      "bytes": 4673
+    },
+    "adapter-source-final.xml": {
+      "sha256": "c82d4b60d436fda6222f3c097713f4a4823645916252d6af32a8dc116d47129d",
+      "bytes": 34252
+    },
+    "adapter-source-format.log": {
+      "sha256": "4e3bf39be5d1f5de38df6507175755e5f5ee7a30f29c1aab6f8ef15cd0d4b64c",
+      "bytes": 3931
+    },
+    "adapter-source-isort.log": {
+      "sha256": "b2092a760e050d3f9fcfcc220186ce0099bf41c90504a6edf26ed97d0f05dbc6",
+      "bytes": 3873
+    },
+    "adapter-static-final.log": {
+      "sha256": "5a1f953f711b1223f9072317fde49b7fa1e81dc6024935d969a1c9086c9f3073",
+      "bytes": 4262
+    },
+    "adapter-typecheck-final.log": {
+      "sha256": "ec993fd26c3ba0ba477cd425dbfdb15938c9d22108ce3bb37abbf0b8efdbd48e",
+      "bytes": 5784
+    }
+  },
+  "full_suite_exit": 124,
+  "full_suite_junit": "not emitted before interruption",
+  "upstream_disposition": "none",
+  "last_observed_pr328": "f5a019183da69a5017aa69db4ce2a6f8dc3ae276",
+  "full_suite_process_observation": {
+    "6472": "zombie; parent PID1",
+    "6494": "zombie; parent PID1",
+    "6506": "zombie; parent PID1"
+  }
+}

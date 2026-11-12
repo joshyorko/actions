@@ -1,0 +1,44 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a34",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "360bb6b98579f14e80f10106c55a315b81818021",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 154601,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16397839199998998,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 154613,
+      "returncode": 1,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 3.102500159002375e-05,
+      "lifespan_shutdown_complete": false
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "workspace": "70f2f7a8-c184-4d90-adcf-477873fee62a",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "failure_type": "RuntimeError"
+}

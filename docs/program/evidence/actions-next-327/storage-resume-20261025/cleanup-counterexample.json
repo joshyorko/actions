@@ -1,0 +1,10 @@
+{
+  "captured_count": 0,
+  "descendant_snapshot_complete": true,
+  "empty_snapshot_complete": true,
+  "execution_stopped": true,
+  "helper_source": "/workspace/actions/action_server/src/actions/server/_common/process.py",
+  "late_child_alive": true,
+  "late_child_status": "running",
+  "wrapper_exit": 3
+}

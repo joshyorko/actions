@@ -1,0 +1,11 @@
+{
+  "wheel": "/workspace/actions-recovery-327/installed-a35/runtime-wheels/actions_runtime-1.1.0a35-cp312-cp312-linux_x86_64.whl",
+  "sha256": "d53989296d6b9005cadc6fc1633ca002ae167857006e1205e15ce74b4c7f1eae",
+  "metadata_member": "actions_runtime-1.1.0a35.dist-info/METADATA",
+  "checked_lines": [
+    "Name: actions-runtime",
+    "Version: 1.1.0a35",
+    "Requires-Dist: actions-core (>=1.1.0a3,<2.0.0)"
+  ],
+  "scope": "Read-only retained-wheel metadata; no build/install/uninstall test rerun"
+}

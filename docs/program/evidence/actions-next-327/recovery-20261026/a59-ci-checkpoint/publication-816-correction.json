@@ -1,0 +1,33 @@
+{
+  "source_base": "b1925656ce2283aa1ea78be5366711424e787dc6",
+  "change_scope": "developer publication fixture only; production wrapper/scanner and all product bytes unchanged",
+  "baseline_hosted_failure": {
+    "run": 40370948136,
+    "primary_job": 121741208313,
+    "n_minus_one_job": 121741208605,
+    "counts": "9failed203passed13skipped"
+  },
+  "red_control": {
+    "test": "shell_startup_path_cannot_bypass_git_interception",
+    "failed": 1,
+    "deselected": 12,
+    "symptom": "calls[] instead ofstart/commit/push"
+  },
+  "focused_green": {
+    "passed": 13,
+    "duration_seconds": 4.94
+  },
+  "full_toolkit": {
+    "command": "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+    "passed": 226,
+    "duration_seconds": 61.48,
+    "ruff": "PASS",
+    "supervisor": "PASS; remaining_owned[]"
+  },
+  "review": "read-only explicit Luna; no blocker; nativeWindows pending",
+  "claims_excluded": [
+    "native Windows PASS",
+    "coverage515 at local fixture source",
+    "full campaign PASS"
+  ]
+}

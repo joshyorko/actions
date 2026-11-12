@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 - 2026-11-12
+
+- Add Canvas contracts, scoped invocation context and mapped Data/Knowledge APIs.
+- Own the logging implementation under `actions._logging`; no external
+  `robocorp-log` dependency is required. Retain the native `truststore` dependency.
+
 ## 1.0.3 candidate (unpublished)
 
 - Add validated `meta=` support to public `actions.mcp.tool` and

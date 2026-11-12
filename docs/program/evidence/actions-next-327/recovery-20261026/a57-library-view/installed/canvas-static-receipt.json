@@ -1,0 +1,14 @@
+{
+  "status": "PASS_READ_ONLY_STATIC_DATA",
+  "wheel": "actions_runtime-1.1.0a57-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "07a144f6200ea6bce8d52e14244aef2889e2c15cd52472a758381648fb693efa",
+  "installed_static_module": "/workspace/327-artifacts/a57/consumer/lib/python3.12/site-packages/actions/server/_static_contents.py",
+  "static_module_member": "actions/server/_static_contents.py",
+  "static_module_member_sha256": "e7d6d588d43089c9102ad0cddce844e850fb6ff17ab67c9ff80d586256529db0",
+  "installed_static_module_sha256": "e7d6d588d43089c9102ad0cddce844e850fb6ff17ab67c9ff80d586256529db0",
+  "installed_static_module_matches_wheel_member": true,
+  "file_contents_key": "canvas.html",
+  "canvas_html_bytes": 490733,
+  "canvas_html_sha256": "753e9b50759cb628bf5a402575b33e2a411f4c3a775840146f6d507a05183b44",
+  "runtime_started": false
+}

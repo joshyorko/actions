@@ -1,0 +1,78 @@
+{
+  "base_commit": "109666a5c0add7809dba6c9def2251d4ba7714a3",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Exact Knowledge host schema and canonical identity, explicit provision-vs-configure, grants, provider-local storage/TLS, no-I/O SQL pin checks, partial-DDL retry semantics",
+    "evidence": "68 focused and 15 Data logical-execution cases; owned actual engines; targeted configured quality checks",
+    "remaining_uncertainty": "Installed Run/Task/generated-consumer behavior belongs to parent integration",
+    "stale_guidance_removed": "Raw Knowledge source rejection is Data-only; ordinary host selection is no longer entirely absent"
+  },
+  "documentation_patch_sha256": "3dde338620dff1ec98a38781bf40c33c06d6e1ee804eb9a45fec910b07280bbb",
+  "executor": "RCC 18.19.3 prepared repository toolkit + package-local Poetry 2.1.1/Python 3.12; isolated import origin asserted",
+  "explicit_operator": "provision-knowledge-host with exact committed config; live provider.manage/inspect, source knowledge.read, collection knowledge.read/manage; DDL outside common SQL; idempotent retry after partial DDL, no distributed rollback claim.",
+  "external_mutations": "none; no commit, branch, push, issue, PR, credentials, tunnels or publication",
+  "final_gates": {
+    "evidence_guard": "staged index scan passed; git diff --cached --check passed",
+    "host_and_operator_inventory": {
+      "failed": 0,
+      "log": "final-focused.log",
+      "passed": 68,
+      "skipped": 0
+    },
+    "ordinary_data_execution": {
+      "deselected": 1,
+      "deselection": "test_common_postgresql_authority_with_real_duckdb",
+      "failed": 0,
+      "log": "data-execution-regression.log",
+      "passed": 15,
+      "skipped": 0
+    },
+    "quality": "7 files ruff check/format/isort; 5 production files configured mypy flags; passed"
+  },
+  "host_api": "open_knowledge(actor, provider_reference, manage=False); selection(revision, source_provider, source, blobs, digest-keyed seals, versions, authority). pin_sql/recheck_sql accept manage=False. Closed Knowledge operation contract validation remains root-owned.",
+  "inventory_sha256": "998341f215f87be284164ddcae750d0e9380ec03814c52916f2f8cd9f8db7c4d",
+  "log_sha256": {
+    "check-final.log": "74428c7ddc6f7b8e141332aee1e6704207e0a569b3da5dd77835fa0fffe23c42",
+    "check.log": "d01cd38dd433c475cdd6093c56d85fc99c70536817ec39b0273b6ad10548f88c",
+    "data-execution-regression.log": "43c518f2165fb6fc9dc4142f97674f3401b65f768054ffca70178a28a182548f",
+    "final-focused.log": "75f58fdaf9fc2ebd59bb4490fc483139c02abbe2627c1f818cfc5ddf613d641e",
+    "first.log": "18e4071009f975df4b567599e090b4f24cb92660752b857602115d2790758566",
+    "focused.log": "6116e3c2e9560517200024b4da2c24ed025545c9a7d86f2bcd22350a170bf26d",
+    "format.log": "e01ca4ed97d238208a2c62a8046c9d87b29759e1121a9c5fc75c9899c1501003",
+    "format2.log": "ff5dedf93737d6b0bb8e9e263423948927f44bc4fd19a1c2619501a8d0d83692",
+    "format3.log": "8b5257a8b475d0d2fe0c16e530b1f1f6f52bc0a27b68201c253cefb2b1034b45",
+    "host-second.log": "5ec85e056779ba552fcc80e1e2de09de364e0848f84bb271e3545b8dc321770e",
+    "host-third.log": "30f33b164c59ad2d9138398d4b5ec61b22c171b368d73bfa1d49fcdaefb323c4",
+    "inventory.log": "bc5c3381ce1308fc1120ca1d2ba67a9d88bb27c0b40f9d406c907417f44b8d3f",
+    "postgres.log": "63286d749d0cd4f55c3e749e676105f00c83a7cfaeec8c25d6d7adde951208f6",
+    "red.log": "03a227b32eb6178609631293a7fa15be54389797d9fbe307720a3251e5ad9a41"
+  },
+  "patch_sha256": "7d83d9c2c04a924d50bd2b05ba2b19057b463d314996f395cfe67ad4f0418305",
+  "prior_failures_preserved": {
+    "check.log": "1 mypy tuple annotation failure; corrected",
+    "focused.log": "3 failed, 62 passed; digest-vs-name seal mapping plus two test assertions corrected",
+    "format2.log": "fixture import F811 failures; corrected aliases/assignments",
+    "host-second.log": "1 failed, 9 passed; PostgreSQL explicit pg_catalog first search_path prevented public-schema DDL; fixed to public with implicit pg_catalog builtin lookup",
+    "postgres.log": "1 failed before seal mapping fix",
+    "red.log": "1 expected failing regression before host/catalog wiring"
+  },
+  "proof_boundary": "Actual DuckDB and owned pinned-image verify-full PostgreSQL versions through saved-owner configure/provision; metadata factory reconstructs and rechecks canonical SQL. No installed Runtime/Task/generated-action/publication acceptance claimed.",
+  "remaining_gates": [
+    "Root integration of closed Knowledge operation shapes, Run snapshot derivation and Task/publication joins",
+    "Installed consumer and full campaign matrix qualification",
+    "Full affected package suite remains parent integration gate; this lane was explicitly bounded",
+    "Common PostgreSQL SQLRecordPin path not rerun in this lane; one existing Data common-PG-control case explicitly deselected"
+  ],
+  "schema": "actions.knowledge-host-lane-receipt/v1",
+  "source_files": {
+    "action_server/src/actions/server/_local_provider_setup.py": "41757aba672e25a42ec7165c4fb173b3dc3512d42cff8a01cd4fdc06ab63eabb",
+    "action_server/src/actions/server/foundry/knowledge_host.py": "b5a8c462556adf5f03a185b2fe711df2ee38dcae7ba1fa0d970dcf337e3a785c",
+    "action_server/src/actions/server/foundry/provider_catalog.py": "bb4fe2bc4706891ae95697ab4574160f6cf0442c21d45fb305a5d0f78fee4c2f",
+    "action_server/src/actions/server/foundry/provider_config.py": "524e536e03ee78a896e7716a5866185c7b9958995f01fa5640bd32567529d744",
+    "action_server/src/actions/server/foundry/provider_execution.py": "65d0d28892861d4261970e8c49fea48e67805fb7cafa0b61a13b66e06b776f88",
+    "action_server/tests/action_server_tests/test_knowledge_host.py": "721184235526fb5b3012f15b3810c70638ba3959c62b98904717b0029d22e398",
+    "action_server/tests/action_server_tests/test_knowledge_host_postgres.py": "620bb8eee9199ff4af11446962452dd3ca322ebee0aef18711326e8044b44c4c",
+    "docs/skills/repository-operations.md": "3f0a35b45e0cf5b081632c1a586f5522aabf8d571656a201c4a85a5c602e2e7a"
+  },
+  "upstream_disposition": "none"
+}

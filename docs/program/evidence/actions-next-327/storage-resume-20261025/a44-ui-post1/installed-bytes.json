@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "source_sha": "cd0ed1ce4f425322efd29f0fe09ad430b157bea5",
+  "payload_members": {
+    "actions_runtime-1.1.0a44.post1-cp312-cp312-linux_x86_64.whl": 334,
+    "actions_core-1.1.0a6-py3-none-any.whl": 87,
+    "actions_work_items-0.5.0a2-py3-none-any.whl": 26
+  },
+  "canvas_contains_current_execution_guard": true
+}

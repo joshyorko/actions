@@ -1,8 +1,7 @@
 from contextlib import contextmanager
 from typing import Optional
 
-from robocorp import log
-
+from actions import _logging as log
 from actions._protocols import IAction
 
 

@@ -1,0 +1,6 @@
++ poetry run pytest tests/action_server_tests/test_detached_action.py tests/action_server_tests/test_local_provider_setup.py -q --junitxml=/workspace/actions-recovery-327/evidence/a32-source-review-final/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-source-review-final/log --basetemp=/workspace/actions-recovery-327/evidence/a32-source-review-final/fixtures (in /workspace/actions/action_server)
+........................................................................ [ 69%]
+................................                                         [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a32-source-review-final/tests.xml -
+104 passed in 191.99s (0:03:11)
+Log (html): /workspace/actions-recovery-327/evidence/a32-source-review-final/log/log.html

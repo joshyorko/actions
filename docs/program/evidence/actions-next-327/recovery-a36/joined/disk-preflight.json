@@ -1,0 +1,7 @@
+{
+  "path": "/workspace/actions-recovery-327",
+  "required_free_bytes": 536870912,
+  "available_bytes": 1601011712,
+  "status": "PASS",
+  "scope": "point-in-time preflight; concurrent writers still require monitoring"
+}

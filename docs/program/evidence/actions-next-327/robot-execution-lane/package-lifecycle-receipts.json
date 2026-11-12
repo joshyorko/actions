@@ -1,0 +1,46 @@
+{
+  "tests": "58 passed, 2 skipped",
+  "static": "Ruff/isort/format pass; mypy 581 source files",
+  "receipts": [
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-1.log",
+      "bytes": 4202,
+      "sha256": "be46609e56ab2a9256df8bcc0eed1edc26345da0ddc63ea196de779e2d49d38c"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-1.xml",
+      "bytes": 2823,
+      "sha256": "6a85ee2d0f7926259a70fbc82a941a3d620e380d5b6711c6e295065891a7bc8a"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-2.log",
+      "bytes": 4259,
+      "sha256": "d2f7da322b7604949dfbdfbc861cb1c21c72aa6e1df3ab7a452164ee9ab4d869"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-2.xml",
+      "bytes": 9251,
+      "sha256": "245d495dc2f5894a85f385d3ed6240fee56063fb793cce07f1f80b5376949c9c"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-static-1.log",
+      "bytes": 6248,
+      "sha256": "f9b75258b694d58f671e84c60aef6c898713bce4d6c9ed42c547826c9cf348e7"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-static-2.log",
+      "bytes": 6639,
+      "sha256": "9f2639088284d835888b1b64d54e6769767aeeb6041f73c47798697a7f6edbc4"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-static-3.log",
+      "bytes": 6618,
+      "sha256": "e3402a7689c6832e658af86e35082555aa70dc1664f9052d2c4d20f630a6f6d0"
+    },
+    {
+      "path": "/workspace/lane-c-state/receipts/robot-bridge-static-final.log",
+      "bytes": 5986,
+      "sha256": "4e51e47acced79517fe0f8dc0ef68b368fc7bb2e4cea50392fd9131255163364"
+    }
+  ]
+}

@@ -220,6 +220,25 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "run_pin",
                 "run_attempt",
                 "run_output",
+                "invoice_review",
+                "fenced_work_item",
+                "foundry_package_revision",
+                "foundry_deployment_revision",
+                "foundry_deployment_head",
+                "foundry_request",
+                "foundry_audit",
+                "foundry_access_grant",
+                # Migration 19 adds immutable provider/source metadata.
+                "foundry_source_revision",
+                "foundry_provider_revision",
+                "foundry_provider_availability",
+                # Migrations 20/21 add associations, not another Run authority.
+                "run_execution_intent",
+                "run_task_receipt",
+                # Migration 22 adds immutable Knowledge definition metadata.
+                "knowledge_collection_revision",
+                # Migration 23 adds identity-only child Run lineage.
+                "run_child_lineage",
                 "schedule",
                 "schedule_execution",
                 "schedule_group",
@@ -241,6 +260,25 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
         assert len(actions) > 0
         for action in actions:
             assert action.enabled
+
+
+def test_migration23_adds_child_lineage_after_schema22(database_v0: Path) -> None:
+    from actions.server._database import Database
+    from actions.server.migrations import Migration, migrate_db
+    from actions.server.run_outputs.models import RunChildLineage
+
+    db_path = database_v0
+    assert migrate_db(db_path, to_version=22)
+    db = Database(db_path)
+    with db.connect():
+        assert max(row.id for row in db.all(Migration)) == 22
+        assert "run_child_lineage" not in db.list_table_names()
+
+    assert migrate_db(db_path, to_version=23)
+    with db.connect():
+        assert max(row.id for row in db.all(Migration)) == 23
+        assert "run_child_lineage" in db.list_table_names()
+        assert db.all(RunChildLineage) == []
 
 
 def test_migrate_v10_schema_without_legacy_columns_or_indexes(tmpdir) -> None:

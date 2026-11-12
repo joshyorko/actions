@@ -9,6 +9,8 @@ from actions._collect_actions import DEFAULT_EXCLUSION_PATTERNS
 from actions._customization._extension_points import EPManagedParameters
 from actions._customization._plugin_manager import PluginManager
 from actions._lint_action import format_lint_results
+from actions._logging import get_log_viewer_html
+from actions._logging import html as log_html
 from actions._managed_parameters import ManagedParameters
 
 __all__ = [
@@ -17,4 +19,6 @@ __all__ = [
     "ManagedParameters",
     "PluginManager",
     "format_lint_results",
+    "get_log_viewer_html",
+    "log_html",
 ]

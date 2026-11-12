@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "scope": "installed legacy local queue and attachment subset",
+  "downgrade": "EXACT_SCHEMA_6_REFUSAL_BY_SCHEMA_5_CONSUMER",
+  "refusal_fixture_unchanged": true,
+  "old_consumer_preupgrade_backup_rollback": "PASS",
+  "snapshot_unchanged": true,
+  "full_runtime_restore": "NOT_QUALIFIED",
+  "safe_refusal": "exact Runtime1.0.4/SDK0.4.4 schema6-versus5 ValueError assertion; no general failure waiver"
+}

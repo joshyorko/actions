@@ -1,0 +1,29 @@
+{
+  "execution_authorized": true,
+  "qualification_kind": "installed-claimed-task/v1",
+  "source_sha": "88846b55e3b455eb44378bd5ba43bb146706661d",
+  "preparation_source_sha": "aca51868d14e916c8034c69309e222100d5d50f3",
+  "runtime_version": "1.1.0a56",
+  "core_version": "1.1.0a8",
+  "installed_base": "/workspace/327-artifacts/a56",
+  "fixture_root": "/workspace/327-probes/a56-live-cancellation",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "prepared_receipt": "/workspace/327-probes/a53-claimed/compiler/prepared.json",
+  "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+  "core_proof": "/workspace/327-probes/a53-claimed/compiler/core-proof.json",
+  "core_proof_sha256": "15ce604623a341efaeddbffd649caa4dc5f081634d1020a6f9faa347591e6dcb",
+  "compiler_python": "/workspace/327-probes/a53-claimed/compiler/robocorp/holotree/c2fd1aa_5a1fac3_b00df7dd/bin/python3.12",
+  "compiler_python_sha256": "bb9a83a3c8f7d2bea8f80afc56924d921ef4b8ce28799c511e118973ef61a275",
+  "robocorp_home": "/workspace/327-probes/a53-claimed/compiler/robocorp",
+  "wheels": {
+    "wheels/actions_runtime-1.1.0a56-cp312-cp312-linux_x86_64.whl": "f06526ab99c8df7a769a03c67efb771f0bdcf4fbeb00caa74afc85b0c035f046",
+    "wheels/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions_core-1.1.0a8-py3-none-any.whl": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f"
+  },
+  "supervisor_path": "/workspace/327-probes/supervise_command.py",
+  "supervisor_sha256": "d02ec0cf0c8ca25cefb46487fa2ed473cfc0394e214044cecbe8f42ed50b740e",
+  "harness_sha256": "edb64982bf85ae9af3e8c363c5a0814b8213157d1ae03f8ed2485880ac0ffbe5",
+  "observer_sha256": "428b86e35d0d0d953ecea2fa37a166920872aae7746f9d79306bea3688045b1f",
+  "observer_python_identity_source": "measured artifact exec under exact Runtime environment",
+  "compiler_reused_unchanged_profile": true
+}

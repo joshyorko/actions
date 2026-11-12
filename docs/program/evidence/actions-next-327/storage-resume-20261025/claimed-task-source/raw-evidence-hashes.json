@@ -1,0 +1,58 @@
+{
+  "task-sqlite-first.log": {
+    "sha256": "4a5adc3251cb1e9ac54ffeca4b1c6f4960fa57d923308ce6d58536c1785dbd76",
+    "bytes": 22468
+  },
+  "task-sqlite-second.log": {
+    "sha256": "e0f08c2876ccba05f70534644095a66219b73da71b41a35399035e1e957bb690",
+    "bytes": 4543
+  },
+  "task-sqlite-third.log": {
+    "sha256": "d5df737599e13d3f769cf8f809531da6e9ac798afad97bbb03ee3626d30a1e1b",
+    "bytes": 10324
+  },
+  "task-sqlite-fourth.log": {
+    "sha256": "218c8c00d0c0f612d2fa65f03f0d7ca80cd5ea414ebeef36055487deeeb4444b",
+    "bytes": 19972
+  },
+  "task-sqlite-fifth.log": {
+    "sha256": "7ca2214493a6f156899e4a5d9737c61f6761482d5b48a8055c1045fd27615851",
+    "bytes": 4544
+  },
+  "combined-sqlite.log": {
+    "sha256": "89bcf6a6d2eb03cbaa59c586dc4b12cdf58a3950705d2a7c003e04382af5ceb2",
+    "bytes": 5054
+  },
+  "combined-sqlite.xml": {
+    "sha256": "ec1c21a48a549b3b750794682dc0ae8c4620cd471cfca1c8e09cb816db58733e",
+    "bytes": 15413
+  },
+  "cancel-noio.log": {
+    "sha256": "665bf3076cb9557729db2bc47390c1fe82cbef3139f01dc643478e8f1e41e8b5",
+    "bytes": 4535
+  },
+  "cancel-noio.xml": {
+    "sha256": "a4cccd4c9149568adfce69d0caf1bb977a54d987f4879214a064b5e8c90aad57",
+    "bytes": 583
+  },
+  "static-first.log": {
+    "sha256": "2e560283d73961255bdf3763293f69513543632e8fe42bc154e33dfb2a31bce1",
+    "bytes": 7251
+  },
+  "static-second.log": {
+    "sha256": "71a626d21b36a404768d50d0c2a4295e6bb7abbcd9429d56d1c1b78c1bf65013",
+    "bytes": 7782
+  },
+  "static-third.log": {
+    "sha256": "7aede698521b0a4228b5f8c79dbcba5bdea82436511da99cb102cf1f500be66c",
+    "bytes": 4607
+  },
+  "static-all.log": {
+    "sha256": "fc9666ec8a17500dfca92543a937c21cf3fc7f6ce5965605211a4e9fbb7518f3",
+    "bytes": 5718
+  },
+  "DESIGN.md": {
+    "sha256": "4a87c4ef5d5d386cf0e8e82078498272ed707da7b437e41b57a45a44f12d5195",
+    "bytes": 15439
+  }
+}

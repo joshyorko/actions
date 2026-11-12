@@ -1,0 +1,36 @@
+{
+  "module": "test_logical_binding_preview",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a38/mapping-qualified/selected-pytest.py",
+    "tests/action_server_tests/test_logical_binding_preview.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a38/mapping-qualified/test_logical_binding_preview/tests.xml",
+    "--basetemp=/workspace/actions-327-a38/mapping-qualified/test_logical_binding_preview/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 12572545024,
+  "stop_reason": null,
+  "source_sha256": "ca76920c8f612938dcd28a30e2ff7dca0bd64545c54d83cd2c86c2cc27b2ade1",
+  "counts": {
+    "tests": 4,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

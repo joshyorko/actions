@@ -1,0 +1,17 @@
+{
+  "nodeid": "tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-duckdb-False-True]",
+  "sha256": {
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/rcc-receipt.json": "63f080abc7fb3460b91f799159604a179c6bbf41b269a20cba7ed3d4bb824af7",
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/action-result.json": "5aa762ae383fbb727af3c7a36d4940a5b8c40a989452d2304fc958ff3f354e7a",
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/input.json": "5e99d76e946ff987af1402a9ef575fb4fbf3d2bc668d8be30ad48aac48cc3878",
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/source/package.yaml": "5dcc9dadd6157278933f036532bcf26643b6c1e100d87fa176e6736f4e8e3bf8",
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/source/generated_actions.py": "567829756f5a729da00cca4a3913fb96edfd8c64c17b57ee4585c7077739768b",
+    "execution/a946cd4a-0608-44e3-87e7-f18aa6abbf6c/e04c9ff7-a419-40f4-b05a-e094278616ed/74354ab9-17ab-4669-9e79-25690ceacf5a/source/tests/test_generated_action.py": "159484c561e6cc5dc007a0bd41f2e350d9b1b698570f3eae90c36428b45c272e",
+    "objects/75fdfab9-7d64-45b7-9b1f-9f1ac7fdd65a": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+    "objects/bc903db8-c5c0-4f42-af67-cff0f55b0c9e": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "objects/9658306d-b209-4d67-94da-37aefc7550ec": "63f080abc7fb3460b91f799159604a179c6bbf41b269a20cba7ed3d4bb824af7",
+    "objects/14b06e49-f933-4787-96d1-c9f582b57309": "5aa762ae383fbb727af3c7a36d4940a5b8c40a989452d2304fc958ff3f354e7a",
+    "objects/5977976b-2b56-4246-ac21-0521fc57c3ab": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+    "objects/dbb952ee-e564-4567-ac84-0a396b3ca274": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700"
+  }
+}

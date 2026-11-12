@@ -1,0 +1,31 @@
+
+  ⚡️ Starting Action Server... v1.1.0a34
+
+Using user-specified datadir: /workspace/actions-recovery-327/ordinary-task-a34/datadir
+Logs may be found at: /workspace/actions-recovery-327/ordinary-task-a34/datadir/server_log.txt.
+Database file does not exist. Creating it at: /workspace/actions-recovery-327/ordinary-task-a34/datadir/server.db
+Operating mode: standard
+StreamableHTTP session manager started
+Initializing scheduler engine...
+Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+  ⏰ Scheduler started (check interval: 10.0s)
+
+  ⚡️ Local MCP endpoint: http://127.0.0.1:59351/mcp
+
+  ⚡️ Local Action Server: http://127.0.0.1:59351
+     Public access: use --expose to expose (OpenAPI only)
+API key authentication enabled. Sign in with your configured key.
+2026-10-25 05:28:25: GET /api/managed-work-items/v1/schema 200 OK
+2026-10-25 05:28:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:28:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:28:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:28:26: POST /mcp 200 OK
+MCP request
+Stopping scheduler...
+Scheduler engine stopped
+Stopping action server...
+Killing sub-process when exiting action server: rcc-18.19.3 (pid: 154424)
+StreamableHTTP session manager shutting down

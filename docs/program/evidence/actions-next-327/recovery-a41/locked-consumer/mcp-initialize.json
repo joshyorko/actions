@@ -1,0 +1,36 @@
+{
+  "mcp_version": "2.0.0",
+  "mcp_types_version": "2.0.0",
+  "initialize": {
+    "_meta": null,
+    "protocolVersion": "2025-11-25",
+    "capabilities": {
+      "experimental": {},
+      "logging": null,
+      "prompts": {
+        "listChanged": false
+      },
+      "resources": {
+        "subscribe": false,
+        "listChanged": false
+      },
+      "tools": {
+        "listChanged": false
+      },
+      "completions": null,
+      "extensions": null,
+      "tasks": null
+    },
+    "serverInfo": {
+      "name": "Action Server",
+      "title": null,
+      "version": "",
+      "description": null,
+      "websiteUrl": null,
+      "icons": null
+    },
+    "instructions": null
+  },
+  "empty_tool_catalog": true,
+  "transport": "in-process ASGI; no network listener or job execution"
+}

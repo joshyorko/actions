@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "actions.canvas-spec/v2",
+  "title": "Installed generated v2 report",
+  "visibility": [
+    "app"
+  ],
+  "bindingIds": [
+    "report"
+  ],
+  "root": {
+    "type": "card",
+    "id": "report-card",
+    "title": "Generated report",
+    "children": [
+      {
+        "type": "form",
+        "id": "report-form",
+        "bindingId": "report",
+        "submitLabel": "Generate report",
+        "fields": [
+          {
+            "name": "text",
+            "label": "Report text",
+            "type": "text",
+            "required": true
+          }
+        ]
+      },
+      {
+        "type": "status",
+        "id": "report-status",
+        "bindingId": "report"
+      },
+      {
+        "type": "chart",
+        "id": "chart",
+        "bindingId": "report",
+        "title": "Word counts",
+        "chartType": "bar",
+        "rowsKey": "rows",
+        "labelKey": "label",
+        "valueKey": "value"
+      },
+      {
+        "type": "log",
+        "id": "log",
+        "bindingId": "report",
+        "title": "Processing log",
+        "rowsKey": "logs",
+        "messageKey": "message"
+      },
+      {
+        "type": "inspector",
+        "id": "inspector",
+        "bindingId": "report",
+        "title": "Report details",
+        "valueKey": "details",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Name"
+          },
+          {
+            "key": "count",
+            "label": "Count"
+          }
+        ]
+      },
+      {
+        "type": "artifact",
+        "id": "artifact",
+        "bindingId": "report",
+        "label": "Inspect report artifact"
+      }
+    ]
+  }
+}

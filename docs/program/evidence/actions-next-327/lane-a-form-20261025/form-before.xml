@@ -1,0 +1,38 @@
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="8.037528">
+<testsuite name="browser-harness.spec.ts" timestamp="2026-10-25T13:33:32.972Z" hostname="" tests="1" failures="1" skipped="0" time="5.622" errors="0">
+<testcase name="announces pending work and completion without dispatch on mount" classname="browser-harness.spec.ts" time="5.622">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|form-before/browser-harness-announces--e4798-n-without-dispatch-on-mount/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toHaveText(expected) failed" type="expect.toHaveText">
+<![CDATA[  browser-harness.spec.ts:81:1 › announces pending work and completion without dispatch on mount ───
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByRole('region', { name: 'Search synthetic records', exact: true }).getByRole('status')
+    Expected: ""
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Search synthetic records', exact: true }).getByRole('status')
+
+
+      83 |     const form = page.getByRole("region", { name: "Search synthetic records", exact: true });
+      84 |     await expect(form.getByRole("button")).toHaveText("Search synthetic records");
+    > 85 |     await expect(form.getByRole("status")).toHaveText("");
+         |                                            ^
+      86 |     await form.getByRole("textbox").fill("pending");
+      87 |     await form.getByRole("button").click();
+      88 |     await expect(form.locator("form")).toHaveAttribute("aria-busy", "true");
+        at /workspace/lane-a/action_server/frontend/apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:85:44
+
+    Error Context: ../../../../../../../lane-a-state/receipts/form-before/browser-harness-announces--e4798-n-without-dispatch-on-mount/error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

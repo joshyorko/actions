@@ -1,0 +1,14 @@
+..                                                                       [100%]
+=============================== warnings summary ===============================
+tests/contract_tests/test_recovery_official_host.py::test_installed_official_host[sqlite-duckdb-invoice-summary]
+  /workspace/actions-recovery-327/installed-a25/consumer/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/contract_tests/test_recovery_official_host.py::test_installed_official_host[sqlite-duckdb-invoice-summary]
+  /workspace/actions-recovery-327/installed-a25/consumer/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a25-installed-official-host/tests.xml -
+2 passed, 6 deselected, 2 warnings in 67.60s (0:01:07)
+Log (html): /workspace/actions-recovery-327/evidence/a25-installed-official-host/log/log.html

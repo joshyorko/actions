@@ -1,0 +1,6 @@
+{
+  "schema_version": "actions.managed-work-items/v1",
+  "error": {
+    "code": "stale_claim"
+  }
+}

@@ -11,3 +11,5 @@ src/**/bin/data-server-cli-*
 go-wrapper/action-server-unsigned*
 # This public template contains no provider credentials.
 !oauth2/oauth-config.yaml
+# Generated owned Runtime OAuth catalog; source is oauth2/*.yaml.
+src/actions/server/_oauth2_config.py

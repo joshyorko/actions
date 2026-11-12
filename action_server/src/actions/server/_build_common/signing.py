@@ -243,7 +243,7 @@ def _sign_windows_executable(target_executable: Path) -> None:
         "azuresigntool",
         "sign",
         "--description-url",
-        "https://sema4.ai",
+        "https://github.com/joshyorko/actions",
         "--file-digest",
         "sha256",
         "--azure-key-vault-url",

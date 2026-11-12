@@ -1,0 +1,114 @@
++ poetry run pytest tests -m not integration_test -q --junitxml=/workspace/actions-recovery-327/evidence/a28-source-portable/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a28-source-portable/log --basetemp=/workspace/actions-recovery-327/evidence/a28-source-portable/fixtures (in /workspace/actions/action_server)
+...........................ssss..ss..................................... [  2%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+........................................................................ [ 12%]
+........................s............................................... [ 15%]
+.....s.................................................................. [ 17%]
+........................................................................ [ 20%]
+........................................................................ [ 22%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 30%]
+........................................................................ [ 32%]
+........................................................................ [ 35%]
+........................................................................ [ 37%]
+........................................................................ [ 40%]
+..........................................................ss............ [ 42%]
+........................................................................ [ 45%]
+................................................................ssss.... [ 48%]
+.......................ssssss........................................... [ 50%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+...................................................F.................... [ 58%]
+........................................................................ [ 60%]
+........................................................................ [ 63%]
+........................................................................ [ 65%]
+..........................sss........................................... [ 68%]
+......................................s................................. [ 70%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+..............s......................................................... [ 78%]
+.......s................................................................ [ 80%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+........................................................................ [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 93%]
+........................................................................ [ 96%]
+........................................................................ [ 98%]
+..........................................                               [100%]
+=================================== FAILURES ===================================
+______________ test_cli_validation_does_not_echo_rejected_secret _______________
+
+local = namespace(root=PosixPath('/workspace/actions-recovery-327/evidence/a28-source-portable/fixtures/test_cli_validation_do...kspace/actions-recovery-327/evidence/a28-source-portable/fixtures/test_cli_validation_does_not_e0/owner/request.json'))
+capsys = <_pytest.capture.CaptureFixture object at 0x7f59d61b9bb0>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x7f59d61dfe00>
+
+    def test_cli_validation_does_not_echo_rejected_secret(local, capsys, caplog):
+        from actions.server._cli_impl import _main_retcode
+
+        raw = local.request.model_dump(mode="json")
+        raw["token"] = "synthetic-secret-must-not-print"
+        private_write(local.request_path, json.dumps(raw))
+        assert (
+            _main_retcode(
+                [
+                    "authorize-local",
+                    "--datadir",
+                    str(local.root),
+                    "--request",
+                    str(local.request_path),
+                ]
+            )
+            == 1
+        )
+        capture = capsys.readouterr()
+>       assert raw["token"] not in capture.out + capture.err + caplog.text
+
+E       AssertionError: Failed: assert raw['token'] not in capture.out + capture.err + caplog.text
+E       Variables:
+E         raw['token'] = 'synthetic-secret-must-not-print'
+E         capture.out + capture.err + caplog.text = '--- Logging error ---\nTraceback (most recent call last):\n  File "/workspace/actions/action_server/src/actions/server/_cli_impl.py", line 819, in _main_retcode\n    run_local_authorization(\n  File "/workspace/actions/action_server/src/actions/server/_local_authorization.py", line 608, in run_local_authorization\n    request = LocalAuthorizationRequest.model_validate_json(raw_request)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pydantic/main.py", line 782, in model_validate_json\n    return cls.__pydantic_validator__.validate_json(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic_core._pydantic_core.ValidationError: 1 validation error for LocalAuthorizationRequest\ntoken\n  Extra inputs are not permitted [type=extra_forbidden, input_value=\'synthetic-secret-must-not-print\', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/extra_forbidden\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/logging/__init__.py", line 1163, in emit\n    stream.write(msg + self.terminator)\nValueError: I/O operation on closed file.\nCall stack:\n  File "/workspace/actions/action_server/.venv/bin/pytest", line 8, in <module>\n    sys.exit(console_main())\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 201, in console_main\n    code = main()\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py", line 175, in main\n    ret: ExitCode | int = config.hook.pytest_cmdline_main(config=config)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/main.py", line 336, in pytest_cmdline_main\n    return wrap_session(config, _main)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/main.py", line 289, in wrap_session\n    session.exitstatus = doit(config, session) or 0\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/main.py", line 343, in _main\n    config.hook.pytest_runtestloop(session=session)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/main.py", line 367, in pytest_runtestloop\n    item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 117, in pytest_runtest_protocol\n    runtestprotocol(item, nextitem=nextitem)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 136, in runtestprotocol\n    reports.append(call_and_report(item, "call", log))\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 245, in call_and_report\n    call = CallInfo.from_call(\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 344, in from_call\n    result: TResult | None = func()\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 246, in <lambda>\n    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/runner.py", line 178, in pytest_runtest_call\n    item.runtest()\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/python.py", line 1671, in runtest\n    self.ihook.pytest_pyfunc_call(pyfuncitem=self)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_hooks.py", line 512, in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_manager.py", line 120, in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/pluggy/_callers.py", line 121, in _multicall\n    res = hook_impl.function(*args)\n  File "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/_pytest/python.py", line 157, in pytest_pyfunc_call\n    result = testfunction(**testargs)\n  File "/workspace/actions/action_server/tests/action_server_tests/test_local_authorization.py", line 481, in test_cli_validation_does_not_echo_rejected_secret\n    _main_retcode(\n  File "/workspace/actions/action_server/src/actions/server/_cli_impl.py", line 829, in _main_retcode\n    log.critical("Invalid local authorization request or profile; use --schema")\nMessage: \'Invalid local authorization request or profile; use --schema\'\nArguments: ()\nCRITICAL actions.server._cli_impl:_cli_impl.py:829 Invalid local authorization request or profile; use --schema\n'
+
+tests/action_server_tests/test_local_authorization.py:493: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:14:29,458 - actions.server._cli_impl - CRITICAL - Invalid local authorization request or profile; use --schema
+------------------------------ Captured log call -------------------------------
+CRITICAL actions.server._cli_impl:_cli_impl.py:829 Invalid local authorization request or profile; use --schema
+=============================== warnings summary ===============================
+tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 8 warnings
+  /workspace/actions/action_server/src/actions/server/_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+    log.warn(
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/action_server_tests/test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py:59: DeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a28-source-portable/tests.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_local_authorization.py::test_cli_validation_does_not_echo_rejected_secret
+1 failed, 2823 passed, 26 skipped, 290 deselected, 16 warnings in 1352.69s (0:22:32)
+Log (html): /workspace/actions-recovery-327/evidence/a28-source-portable/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests', '-m', 'not integration_test', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a28-source-portable/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a28-source-portable/log', '--basetemp=/workspace/actions-recovery-327/evidence/a28-source-portable/fixtures']' returned non-zero exit status 1.

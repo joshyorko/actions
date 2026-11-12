@@ -17,7 +17,7 @@ class _BaseInternalOAuth2Secret(OAuth2Secret):
         self._access_token = access_token
         self._metadata = metadata
 
-        from robocorp import log
+        from actions import _logging as log
 
         log.hide_from_output(access_token)
         log.hide_from_output(repr(access_token))
@@ -58,7 +58,7 @@ class _OAuth2SecretInActionContext(_BaseInternalOAuth2Secret):
         self._paths = path.split("/")
 
     def _get_dict_in_action_context(self) -> dict:
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             dct = self._action_context.value
@@ -97,7 +97,7 @@ class _OAuth2SecretInActionContext(_BaseInternalOAuth2Secret):
         """
         Provides the actual access_token wrapped in this class.
         """
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             dct = self._get_dict_in_action_context()
@@ -111,7 +111,7 @@ class _OAuth2SecretInActionContext(_BaseInternalOAuth2Secret):
         """
         Provides the actual provider wrapped in this class.
         """
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             dct = self._get_dict_in_action_context()
@@ -122,7 +122,7 @@ class _OAuth2SecretInActionContext(_BaseInternalOAuth2Secret):
         """
         Provides the actual scopes wrapped in this class.
         """
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             dct = self._get_dict_in_action_context()
@@ -133,7 +133,7 @@ class _OAuth2SecretInActionContext(_BaseInternalOAuth2Secret):
         """
         Provides the actual metadata wrapped in this class.
         """
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             dct = self._get_dict_in_action_context()

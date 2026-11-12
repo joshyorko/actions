@@ -278,3 +278,45 @@ def test_make_release_does_not_tag_commit_outside_community_ancestry(
 
 def test_api_doc_source_links_target_maintained_community_source():
     assert REPOSITORY_URL == "https://github.com/joshyorko/actions/blob/community/"
+
+
+def test_develop_mode_preserves_explicit_noneditable_sdk_candidate(tmp_path):
+    consumer = tmp_path / "action_server"
+    sdk = tmp_path / "work-items"
+    consumer.mkdir()
+    sdk.mkdir()
+    (consumer / "pyproject.toml").write_text(
+        '[tool.poetry]\nname="consumer"\nversion="1.1.0a2"\n[tool.poetry.dependencies]\nactions-work-items=">=0.5.0a1,<0.6.0"\n[tool.poetry.group.dev.dependencies]\nactions-work-items={path="../work-items/",develop=false}\n'
+    )
+    (consumer / "poetry.lock").write_text("owned lock")
+    (sdk / "pyproject.toml").write_text(
+        '[tool.poetry]\nname="actions-work-items"\nversion="0.5.0a1"\n[tool.poetry.dependencies]\npython=">=3.10"\n'
+    )
+    (sdk / "poetry.lock").write_text("owned SDK lock")
+    original = (consumer / "pyproject.toml").read_bytes()
+    tasks = build_common_tasks(consumer, "consumer")
+    with tasks["mark_as_develop_mode"](all_packages=True):
+        actual = tomlkit.loads((consumer / "pyproject.toml").read_text())
+        assert actual["tool"]["poetry"]["dependencies"]["actions-work-items"] == {
+            "path": "../work-items/",
+            "develop": False,
+        }
+    assert (consumer / "pyproject.toml").read_bytes() == original
+    assert (consumer / "poetry.lock").read_text() == "owned lock"
+
+
+def test_declared_install_extras_reach_both_package_install_modes(
+    tmp_path, monkeypatch
+):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "pyproject.toml").write_text(
+        '[tool.poetry]\nname="consumer"\nversion="1.0.0"\n[tool.poetry.dependencies]\npython=">=3.10"\n'
+    )
+    (tmp_path / "poetry.lock").write_text("owned lock")
+    context = Context()
+    context.run = Mock()
+    tasks = build_common_tasks(tmp_path, "consumer", install_extras=("data-duckdb",))
+    tasks["install"](context)
+    tasks["devinstall"](context)
+    commands = [call.args[0] for call in context.run.call_args_list]
+    assert commands.count("poetry install --extras data-duckdb") == 2

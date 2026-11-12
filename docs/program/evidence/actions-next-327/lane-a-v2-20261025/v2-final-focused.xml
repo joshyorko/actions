@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="43" failures="0" errors="0" time="1.539858131">
+    <testsuite name="src/semantic-renderer/v2-presentations.test.tsx" timestamp="2026-10-25T14:30:13.796Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="0" time="0.409313641">
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders a bar chart with equivalent accessible values" time="0.299239726">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders a line chart with equivalent accessible values" time="0.051417572">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="does not silently truncate an oversized chart" time="0.007006606">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders log snapshots in source order as plain text without a live history" time="0.015149588">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="rejects oversized log snapshots instead of showing a partial history" time="0.008422321">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="preserves scalar inspector values without interpreting markup" time="0.014618301">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="refuses oversized inspector projections" time="0.007072598">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/v2-projections.test.tsx" timestamp="2026-10-25T14:30:13.802Z" hostname="71cd163cf8ad" tests="34" failures="0" errors="0" skipped="0" time="0.96330108">
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="renders all data nodes from a current projection without dispatch or artifact effects" time="0.147438089">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;not-run&apos;, bindingId: &apos;data&apos; } snapshot from successful output" time="0.014462804">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;loading&apos;, bindingId: &apos;data&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.01524001">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;error&apos;, bindingId: &apos;data&apos;, message: &apos;Unavailable&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.006531402">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows admitted empty output distinctly from missing or loading output" time="0.017913021">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the preview view" time="0.006681475">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the model view" time="0.006794778">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="drops prior rendered data when the host replaces its current request snapshot" time="0.037412209">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="fails closed when the local projection getter refuses access" time="0.005696067">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows unavailable results when the host has no projection getter" time="0.007490145">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="reads bounded canonical output rather than a divergent parsed-data property" time="0.01961083">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:9007199254740992}]}" time="0.016582652">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:1e309}]}" time="0.006067573">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:-0}]}" time="0.005644918">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;e\u0301&quot;,&quot;value&quot;:1}]}" time="0.01357585">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;\ud800&quot;,&quot;value&quot;:1}]}" time="0.008332714">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;value&quot;:1}]}" time="0.00555506">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:null}]}" time="0.007966802">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:{}}" time="0.006560679">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {invalid-json" time="0.009120818">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 200-row chart boundary without truncation" time="0.33100512">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 201-row chart boundary without truncation" time="0.005183318">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 256" time="0.008461386">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 257" time="0.005057953">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 500-entry log boundary" time="0.188529144">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 501-entry log boundary" time="0.0059846">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1024-code-point log message boundary" time="0.006667312">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1025-code-point log message boundary" time="0.005124743">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4096 code points" time="0.006656601">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4097 code points" time="0.004138348">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{}}" time="0.00535096">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{&quot;name&quot;:{&quot;nested&quot;:&quot;unsupported&quot;}}}" time="0.006425401">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65536 bytes" time="0.010567879">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65537 bytes" time="0.004473482">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/v2-structure.test.tsx" timestamp="2026-10-25T14:30:13.807Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="0" time="0.16724341">
+        <testcase classname="src/semantic-renderer/v2-structure.test.tsx" name="composes a v2 card with existing nodes without invoking adapters" time="0.135123586">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-structure.test.tsx" name="keeps admitted data nodes visible with an explicit unavailable state before the host projection join" time="0.028147445">
+        </testcase>
+    </testsuite>
+</testsuites>

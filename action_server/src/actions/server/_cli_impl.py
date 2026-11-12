@@ -34,6 +34,17 @@ if typing.TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
+def _unfinished_legacy_runs(db):
+    """Preserve admitted Runs for explicit fenced recovery after restart."""
+    from ._models import Run, RunStatus
+
+    return db.all(
+        Run,
+        where="status IN (?, ?) AND NOT EXISTS (SELECT 1 FROM run_pin p WHERE p.run_id=run.id)",
+        values=[RunStatus.NOT_RUN, RunStatus.RUNNING],
+    )
+
+
 def _add_skip_lint(parser, defaults):
     parser.add_argument(
         "--skip-lint",
@@ -510,6 +521,50 @@ def _create_parser():
     # Starts the server
     _add_start_server_command(command_subparser, defaults)
     _add_expose_command(command_subparser)
+    local_auth = command_subparser.add_parser(
+        "authorize-local",
+        help="Explicit offline owner-only SQLite grants; never automatic startup authorization",
+        description="Stop Runtime first. Validated active revision selection gates existing application-wide Run grants and all-queues revision grants. References are not grants. Requires private existing datadir and request file; no RCC or external databases.",
+    )
+    local_auth.add_argument(
+        "--datadir", help="Existing private absolute Runtime datadir (server.db)"
+    )
+    local_auth.add_argument(
+        "--request",
+        help="Private absolute JSON request; use --schema for its exact shape",
+    )
+    local_auth.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Inspect exact scopes and current grant CAS digest without granting",
+    )
+    local_auth.add_argument(
+        "--schema",
+        action="store_true",
+        help="Print strict request JSON schema without opening state",
+    )
+
+    local_provider = command_subparser.add_parser(
+        "providers-local",
+        help="Explicit offline saved-owner provider setup for local SQLite",
+        description="Stop Runtime first. Import sealed sources, register immutable metadata, grant named permissions and configure private host state explicitly. No probes, queries or automatic grants; shared PostgreSQL control planes are refused.",
+    )
+    local_provider.add_argument(
+        "--datadir", help="Existing private absolute Runtime datadir"
+    )
+    local_provider.add_argument(
+        "--request", help="Private absolute JSON request; use --schema"
+    )
+    local_provider.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate and show exact scope/CAS without mutation or probing",
+    )
+    local_provider.add_argument(
+        "--schema",
+        action="store_true",
+        help="Print strict request schema without opening state",
+    )
 
     # Import
     _add_import_command(command_subparser, defaults)
@@ -760,6 +815,77 @@ def _main_retcode(
         parser.print_help()
         return 0
 
+    if command == "providers-local":
+        import json
+
+        from actions.server._local_provider_setup import (
+            LocalProviderRequest,
+            run_local_provider_setup,
+        )
+
+        local_args = typing.cast(argparse.Namespace, base_args)
+        try:
+            if local_args.schema:
+                print(
+                    json.dumps(LocalProviderRequest.model_json_schema(), sort_keys=True)
+                )
+                return 0
+            if not local_args.datadir or not local_args.request:
+                raise ValueError("datadir and request required")
+            result = run_local_provider_setup(
+                local_args.datadir, local_args.request, dry_run=local_args.dry_run
+            )
+        except Exception:
+            # Private source/config validation can include secrets. Leave the
+            # handler before logging, including when a logging stream is broken.
+            refusal = "Local provider setup refused; check private request and stopped local Runtime"
+        else:
+            print(json.dumps(result, sort_keys=True))
+            return 0
+        log.critical("%s", refusal)
+        return 1
+
+    if command == "authorize-local":
+        import json
+
+        from pydantic import ValidationError
+
+        from ._local_authorization import (
+            LocalAuthorizationRequest,
+            run_local_authorization,
+        )
+
+        local_args = typing.cast(argparse.Namespace, base_args)
+        try:
+            if local_args.schema:
+                print(
+                    json.dumps(
+                        LocalAuthorizationRequest.model_json_schema(), sort_keys=True
+                    )
+                )
+                return 0
+            if not local_args.datadir or not local_args.request:
+                raise ValueError("--datadir and --request are required")
+            print(
+                json.dumps(
+                    run_local_authorization(
+                        local_args.datadir,
+                        local_args.request,
+                        dry_run=local_args.dry_run,
+                    ),
+                    sort_keys=True,
+                )
+            )
+            return 0
+        except ValidationError:
+            refusal = "Invalid local authorization request or profile; use --schema"
+        except (ValueError, PermissionError, OSError) as exc:
+            refusal = f"Local authorization refused: {exc}"
+        # A failing logging handler can print the active exception context.
+        # Leave the handler before logging so rejected validation input stays private.
+        log.critical("%s", refusal)
+        return 1
+
     if command == "version":
         print(__version__)
         sys.stdout.flush()
@@ -945,7 +1071,7 @@ def _command_requiring_datadir(
     )
     from actions.server.migrations import MigrationStatus
 
-    from ._models import Run, RunStatus, run_status_to_str
+    from ._models import RunStatus, run_status_to_str
     from ._runs_state_cache import use_runs_state_ctx
 
     settings: "Settings" = setup_info.settings
@@ -1080,15 +1206,10 @@ information from this datadir.
                     if code != 0:
                         return code
 
-                # Ok, we're starting the server. At this point, if there are any
-                # runs in the `not_run` state, or in the `running` state, we should
-                # mark them as cancelled.
-
-                runs_to_cancel = db.all(
-                    Run,
-                    where="status IN (?, ?)",
-                    values=[RunStatus.NOT_RUN, RunStatus.RUNNING],
-                )
+                # Legacy process runs retain their historical restart policy.
+                # Admitted Runs retain their Attempt, launch and effect evidence;
+                # a process restart proves neither cancellation nor no effect.
+                runs_to_cancel = _unfinished_legacy_runs(db)
                 if runs_to_cancel:
                     with db.transaction():
                         for run in runs_to_cancel:

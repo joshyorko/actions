@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "mode": "consumer",
+  "phase": "execute",
+  "screenshots": [
+    "consumer-execute-mounted.png",
+    "consumer-execute-selected.png"
+  ],
+  "failure": "Error: stale selected input after admission"
+}

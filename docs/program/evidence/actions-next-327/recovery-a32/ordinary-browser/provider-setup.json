@@ -1,0 +1,126 @@
+{
+  "status": "PASS_INSTALLED_PUBLIC_SETUP_NOT_ENGINE_EXECUTION",
+  "engine_execution": "NOT_PROVEN",
+  "setup": "public installed providers-local only",
+  "source_digest": "sha256:b7c326b251e7e70433e6e3c4eb4f16dfb38bbf309cd45d05ee3cd2df3c9d3547",
+  "descriptor": {
+    "schema_version": "actions.logical-provider/v1",
+    "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44",
+    "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+    "source_revision": "sha256:b7c326b251e7e70433e6e3c4eb4f16dfb38bbf309cd45d05ee3cd2df3c9d3547",
+    "kind": "data",
+    "operations": [
+      {
+        "name": "records.scan/v1",
+        "effect": "read",
+        "parameters": [],
+        "result": [
+          {
+            "name": "record_id",
+            "kind": "string",
+            "required": true
+          }
+        ],
+        "max_rows": 100,
+        "max_bytes": 65536,
+        "timeout_ms": 1000
+      }
+    ]
+  },
+  "register_grant": {
+    "dry": {
+      "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+      "operation": "grant-owner",
+      "permissions": [
+        "provider.register"
+      ],
+      "provider": null
+    },
+    "result": {
+      "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+      "operation": "grant-owner",
+      "ownedGrant": {
+        "id": "5657389e-9b4f-595f-9c9f-b3a04c988404",
+        "operations_json": "[\"provider.register\"]",
+        "principal_id": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+        "subject_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44",
+        "subject_kind": "workspace",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      "permissions": [
+        "provider.register"
+      ],
+      "provider": null
+    }
+  },
+  "import": {
+    "operation": "import-source",
+    "readiness": "not-probed",
+    "source_revision": "sha256:b7c326b251e7e70433e6e3c4eb4f16dfb38bbf309cd45d05ee3cd2df3c9d3547"
+  },
+  "register": {
+    "operation": "register-revision",
+    "provider": {
+      "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+      "revision_id": "sha256:c317b8b45c23f867068088b3776f6fb1da8ee69da0045e1deb1d673a45cddf91",
+      "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+    },
+    "readiness": "metadata-only"
+  },
+  "manage_grant": {
+    "dry": {
+      "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+      "operation": "grant-owner",
+      "permissions": [
+        "provider.inspect",
+        "provider.manage"
+      ],
+      "provider": {
+        "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+        "revision_id": "sha256:c317b8b45c23f867068088b3776f6fb1da8ee69da0045e1deb1d673a45cddf91",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      }
+    },
+    "result": {
+      "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+      "operation": "grant-owner",
+      "ownedGrant": {
+        "id": "35abc341-72cb-5531-afc6-04610d82067a",
+        "operations_json": "[\"provider.inspect\", \"provider.manage\"]",
+        "principal_id": "c3647655-b94b-4533-b6db-b5c4d0966f1c",
+        "subject_id": "ProviderProfileRevisionRef:sha256:ff82b788bdea908321dcb0889a656d275b35cbd189dd9ae9220ec615d57a6e72",
+        "subject_kind": "reference",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      },
+      "permissions": [
+        "provider.inspect",
+        "provider.manage"
+      ],
+      "provider": {
+        "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+        "revision_id": "sha256:c317b8b45c23f867068088b3776f6fb1da8ee69da0045e1deb1d673a45cddf91",
+        "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+      }
+    }
+  },
+  "configure": {
+    "intent_id": "bdc38dcd-f9ab-5491-8d79-d481da275ca4",
+    "operation": "configure-host",
+    "provider": {
+      "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+      "revision_id": "sha256:c317b8b45c23f867068088b3776f6fb1da8ee69da0045e1deb1d673a45cddf91",
+      "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+    },
+    "readiness": "configured-not-probed"
+  },
+  "replay": {
+    "intent_id": "bdc38dcd-f9ab-5491-8d79-d481da275ca4",
+    "operation": "configure-host",
+    "provider": {
+      "provider_profile_id": "8b523417-e060-4963-8fda-b1d05d2ae263",
+      "revision_id": "sha256:c317b8b45c23f867068088b3776f6fb1da8ee69da0045e1deb1d673a45cddf91",
+      "workspace_id": "2aa31d5f-cd0a-4127-a65e-d6eabe0eea44"
+    },
+    "readiness": "configured-not-probed"
+  }
+}

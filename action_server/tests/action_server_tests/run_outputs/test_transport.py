@@ -220,7 +220,12 @@ def runtime(store, tmp_path, monkeypatch, request):
     monkeypatch.setattr(provider, "open", observe_open)
     config = RunOutputTransport(service, authenticate)
 
-    def build(configured=True, api_key="installation-key", custom_config=None):
+    def build(
+        configured=True,
+        api_key="installation-key",
+        custom_config=None,
+        invoice_canvas=None,
+    ):
         _app.get_app.cache_clear()
         # The existing callback runs only after the real Runtime routers and
         # middleware are assembled; false prevents socket/pool startup.
@@ -232,6 +237,7 @@ def runtime(store, tmp_path, monkeypatch, request):
             api_key=api_key,
             before_start=(lambda app: False,),
             run_output_transport=(custom_config or config) if configured else None,
+            invoice_canvas=invoice_canvas,
         )
         return TestClient(
             _app.get_app(), base_url="http://127.0.0.1", client=("127.0.0.1", 50000)

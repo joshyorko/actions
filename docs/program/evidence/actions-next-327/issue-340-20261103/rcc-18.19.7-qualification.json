@@ -1,0 +1,78 @@
+{
+  "schema": "actions.rcc-upgrade-qualification/v1",
+  "base_source_commit": "05fe71e6aaa6fe686052ecd70b7c85ccb685053b",
+  "target_version": "18.19.7",
+  "primary_promoted": false,
+  "published_assets": [
+    {
+      "name": "index.json",
+      "sha256": "579283aaaa360abd96c5ee42fd9e74bd8dd9fed70acce847c7d4317044eae585",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/index.json"
+    },
+    {
+      "name": "rcc-linux64",
+      "sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-linux64"
+    },
+    {
+      "name": "rcc-macos64",
+      "sha256": "092c8efb615e5d948d16a7330be76c99583c42df2c8a541a6f31f3aaeaeb1a89",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-macos64"
+    },
+    {
+      "name": "rcc-macosarm64",
+      "sha256": "324e2ead0e96754eaf0dc2e22bb41928ad2bec90c7e1e7ad069038a100bca595",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-macosarm64"
+    },
+    {
+      "name": "rcc-windows64.exe",
+      "sha256": "d3338be49ef22bbd9f3e42b606e01231cb5c5d86716b18d24fadf85e7630e0be",
+      "published_url": "https://github.com/joshyorko/rcc/releases/download/v18.19.7/rcc-windows64.exe"
+    }
+  ],
+  "reviewed_compare": "https://github.com/joshyorko/rcc/compare/v18.19.3...v18.19.7",
+  "changes": {
+    "conda/workflows.go::uvLayer": "Legacy uv explicitly selects staged Python and clears inherited UV_PYTHON; legacy uv cache epoch changes.",
+    "conda/uvnative.go::copyPythonPrefix": "Canonicalizes Python prefix symlink aliases.",
+    "environmentlifecycle/lease.go::LocalMaterializer.Release": "Compares exact retained lease snapshot before release.",
+    "environmentlifecycle/materialize.go::Acquirer.acquireLocked": "Refuses rematerialization while a live lease exists.",
+    "environmentlifecycle/gc.go; environmentlifecycle/roots.go": "Bounded GC recovery and root/path validation.",
+    "pathlib/functions.go::makeParentDirectories": "Preserves existing ancestor permissions.",
+    "anywork/worker.go::workerLimit": "Applies parsed configured worker limit.",
+    "cmd/environmentTrust.go; go.mod": "Trust-root decoding compatibility; Go toolchain 1.26.9."
+  },
+  "actual_downstream_defect": {
+    "before": "Primary version replacement rejected an actual retained 18.19.3 Robot package as unsupported RCC version.",
+    "fix_in_isolated_proposal": "Separate recognized metadata versions from the exact executable RCC_VERSION pin; recognize only primary and prior 18.19.3 metadata.",
+    "after": "Real old Robot record load/projection passes without changing database bytes. Actual old Action record load passes. One permanent legacy Robot identity regression passes.",
+    "proposed_test": "test_robot_package_admission.py::test_prior_rcc_robot_package_keeps_its_identity",
+    "upstream_rcc_regression": false
+  },
+  "gates": {
+    "published_hashes": "PASS: four platform binaries and index; Linux --version reports 18.19.7",
+    "Doctor": "PASS: published RCC 18.19.7, fresh isolated toolchain, Python 3.12.15, Poetry 2.1.1, Node20.19.3 and Go1.23.6",
+    "Bootstrap": "PASS: existing checkout/package environment locations, locked dependencies",
+    "ToolkitTest": "Initial241pass5opt-in skips; stable-HOME helper revision242pass5opt-in skips under the same prepared RCC7 toolchain.",
+    "installed_action_robot_cancellation_recovery": "PASS: hosted5SQLite plus local5SQLite+5PostgreSQL, source02 implementation/hosted9c1 wheel. Primary-only40112 wheel separately reproduced from sdist; final-artifact checks and exact-head CI remain explicit in bounded diagnosis.",
+    "runtime_focused": "PASS: 250 passed, 4 explicit opt-in skips, real SQLite/PostgreSQL; configured Runtime lint and typecheck pass (703 files)",
+    "stable_home_focused": "106 passed,7 skipped across compiler, generated Action execution, Robot execution and validation; includes actual Python helpers and real Robot HOME assertion. No installed/SQL qualification inferred."
+  },
+  "storage": {
+    "device_bytes": 509944528896,
+    "allocated_bytes": 509943480320,
+    "unallocated_bytes": 1048576,
+    "metadata_dup_used_percent": 94.4,
+    "observation": "df logical free space did not prevent ENOSPC; SQLite commit and Git index writes also failed. This is not evidence of an RCC 18.19.7 product regression.",
+    "operator_action": "RESOLVED: operator restored allocation headroom; agent then removed its 21 GiB scratch tree, owned temporary worktree and owned PostgreSQL fixture. One bounded TMPDIR on /var/tmp now holds qualification; no filesystem balance or unrelated cleanup by this agent.",
+    "remaining_blocker": false
+  },
+  "compatibility_lane_proposal": "Current candidate primary18.19.7; developer N-1 lane18.19.3. Frozen acceptance jobs retain18.19.3 with their immutable source/native identities.",
+  "old_evidence": "All previous RCC 18.19.3 receipts retain original version and binary SHA; no 18.19.7 execution qualification inferred.",
+  "upstream_disposition": "Native repair and HOME relocation compatibility change documented in draft only; no upstream issue/source mutation authorized.",
+  "proposal_counterexamples": {
+    "frozen_preseed": "Actual frozen d642a3ac Runtime resolves rcc-18.19.3; broad replacement preseeded rcc-18.19.7. Existing workflow guard failed before restoration; restored frozen lane/summary tests pass55 cases.",
+    "checksum_fixture": "Migration produced an overlong N-1 Windows test digest; production YAML retained the correct published64-hex digest. Existing test failed, fixture corrected, complete ToolkitTest passes.",
+    "manifest_golden": "Only primary adapter range and derived plan/revision digest fields changed. Updated expected compiler golden; compiler module passed40/1skip; current focused suite also passes."
+  },
+  "retained_candidate_artifacts": "Existing installed-vertical CI upload now includes four owned wheel families plus identity/JUnit; no fixture homes, databases or credentials."
+}

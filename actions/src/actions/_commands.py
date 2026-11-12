@@ -199,7 +199,7 @@ def _os_exit(retcode: int):
     """
     Kills subprocesses and exits with the given returncode.
     """
-    from robocorp import log
+    from actions import _logging as log
 
     try:
         import psutil
@@ -358,12 +358,6 @@ def run(
     os.environ.pop("ROBOT_ROOT", None)
     import copy
 
-    from robocorp.log import ConsoleMessageKind, console, redirect
-    from robocorp.log.pyproject_config import (
-        read_pyproject_toml,
-        read_robocorp_auto_log_config,
-    )
-
     from actions._action import Context, set_current_action
     from actions._collect_actions import collect_actions
     from actions._config import RunConfig, set_config
@@ -377,6 +371,11 @@ def run(
     from actions._interrupts import interrupt_on_timeout
     from actions._log_auto_setup import setup_cli_auto_logging
     from actions._log_output_setup import setup_log_output, setup_log_output_to_port
+    from actions._logging import ConsoleMessageKind, console, redirect
+    from actions._logging.pyproject_config import (
+        read_pyproject_toml,
+        read_robocorp_auto_log_config,
+    )
     from actions._protocols import Status
 
     if not output_dir:
@@ -391,7 +390,7 @@ def run(
     console.set_mode(console_colors)
 
     # Don't show internal machinery on tracebacks:
-    # setting __tracebackhide__ will make it so that robocorp-log
+    # setting __tracebackhide__ will make it so that the owned logger
     # won't show this frame onwards in the logging.
     __tracebackhide__ = 1
 
@@ -449,7 +448,7 @@ def run(
 
     faulthandler.enable()
 
-    from robocorp import log
+    from actions import _logging as log
 
     action_names: Sequence[str]
     if not action_name:

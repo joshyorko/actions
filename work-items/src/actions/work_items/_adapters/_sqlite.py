@@ -15,13 +15,23 @@ from pathlib import Path
 from typing import Any
 
 from .._exceptions import EmptyQueue
+from .._fencing import (
+    ClaimRejected,
+    ReceiptVerifier,
+    RetryEvidence,
+    WorkItemClaim,
+    retry_record,
+    validate_lease,
+    validate_owner,
+    verify_retry,
+)
 from .._paths import resolve_attachment_path, resolve_item_directory
 from .._types import ExceptionType, JSONType, State
 from ._base import BaseAdapter
 
 log = logging.getLogger(__name__)
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 
 class SQLiteAdapter(BaseAdapter):
@@ -50,14 +60,21 @@ class SQLiteAdapter(BaseAdapter):
             output_queue_name: Name of the output queue (default: {queue_name}_output).
             files_dir: Directory for file attachments.
         """
-        self._db_path = Path(db_path or os.environ.get("RC_WORKITEM_DB_PATH", "./workitems.db"))
+        configured_db_path = (
+            os.environ["RC_WORKITEM_DB_PATH"]
+            if "RC_WORKITEM_DB_PATH" in os.environ
+            else "./workitems.db"
+        )
+        self._db_path = Path(db_path or configured_db_path)
         self._queue_name = queue_name or os.environ.get("RC_WORKITEM_QUEUE_NAME", "default")
         self._output_queue_name = (
             output_queue_name
             or os.environ.get("RC_WORKITEM_OUTPUT_QUEUE_NAME")
             or f"{self._queue_name}_output"
         )
-        self._files_dir = Path(files_dir or os.environ.get("RC_WORKITEM_FILES_DIR", "./work_item_files"))
+        self._files_dir = Path(
+            files_dir or os.environ.get("RC_WORKITEM_FILES_DIR", "./work_item_files")
+        )
         self._orphan_timeout_minutes = int(
             os.environ.get("RC_WORKITEM_ORPHAN_TIMEOUT_MINUTES", "30")
         )
@@ -135,6 +152,9 @@ class SQLiteAdapter(BaseAdapter):
                     updated_at TEXT NOT NULL,
                     reserved_at TEXT,
                     released_at TEXT,
+                    claim_owner TEXT,
+                    claim_epoch INTEGER NOT NULL DEFAULT 0,
+                    claim_deadline_ms INTEGER,
                     FOREIGN KEY (parent_id) REFERENCES work_items(id)
                 )"""
         )
@@ -149,9 +169,7 @@ class SQLiteAdapter(BaseAdapter):
                     FOREIGN KEY (work_item_id) REFERENCES work_items(id)
                 )"""
         )
-        conn.execute(
-            "CREATE INDEX idx_work_items_queue_state ON work_items(queue_name, state)"
-        )
+        conn.execute("CREATE INDEX idx_work_items_queue_state ON work_items(queue_name, state)")
         conn.execute("CREATE INDEX idx_work_items_parent ON work_items(parent_id)")
         conn.execute("CREATE INDEX idx_work_item_files_item ON work_item_files(work_item_id)")
         conn.execute(
@@ -221,12 +239,14 @@ class SQLiteAdapter(BaseAdapter):
         conn.execute(
             f"""INSERT INTO work_items (
                 id, queue_name, parent_id, state, payload, exception_type, error_code,
-                error_message, created_at, updated_at, reserved_at, released_at
+                error_message, created_at, updated_at, reserved_at, released_at,
+                claim_owner, claim_epoch, claim_deadline_ms
             ) SELECT
-                id, queue_name, {column('parent_id')}, {state}, {column('payload')},
-                {column('exception_type')}, {column('error_code', column('exception_code'))},
-                {column('error_message', column('exception_message'))}, {created_at},
-                {updated_at}, {column('reserved_at')}, {column('released_at')}
+                id, queue_name, {column("parent_id")}, {state}, {column("payload")},
+                {column("exception_type")}, {column("error_code", column("exception_code"))},
+                {column("error_message", column("exception_message"))}, {created_at},
+                {updated_at}, {column("reserved_at")}, {column("released_at")},
+                {column("claim_owner")}, {column("claim_epoch", "0")}, {column("claim_deadline_ms")}
             FROM work_items_migration_source ORDER BY rowid"""
         )
 
@@ -283,6 +303,200 @@ class SQLiteAdapter(BaseAdapter):
             raise ValueError(f"Invalid stored attachment path for {name}")
         return expected
 
+    @staticmethod
+    def _legacy_mutation(conn: sqlite3.Connection, item_id: str) -> None:
+        # Serialize the check with the mutation, including filesystem effects.
+        # Once fenced, even terminal items cannot be changed through ID-only APIs.
+        conn.execute("BEGIN IMMEDIATE")
+        row = conn.execute("SELECT claim_epoch FROM work_items WHERE id=?", (item_id,)).fetchone()
+        if row is not None and row[0] > 0:
+            raise ClaimRejected("fenced Work Item requires current owner and epoch")
+
+    @staticmethod
+    def _clock_ms(conn: sqlite3.Connection) -> int:
+        return conn.execute(
+            "SELECT CAST((julianday('now')-2440587.5)*86400000 AS INTEGER)"
+        ).fetchone()[0]
+
+    def _require_claim(self, conn: sqlite3.Connection, claim: WorkItemClaim) -> None:
+        if not isinstance(claim, WorkItemClaim):
+            raise ClaimRejected("typed Work Item claim required")
+        row = conn.execute(
+            "SELECT 1 FROM work_items WHERE id=? AND queue_name=? AND state=? "
+            "AND claim_owner=? AND claim_epoch=? AND claim_deadline_ms>?",
+            (
+                claim.item_id,
+                self._queue_name,
+                State.IN_PROGRESS.value,
+                claim.owner_id,
+                claim.epoch,
+                self._clock_ms(conn),
+            ),
+        ).fetchone()
+        if row is None:
+            raise ClaimRejected("Work Item claim is not current")
+
+    def reserve_fenced(self, owner_id: str, *, lease_seconds: int) -> WorkItemClaim:
+        """Claim or redeliver using DB time, preserving business identity and epoch."""
+        validate_owner(owner_id)
+        validate_lease(lease_seconds)
+        with self._get_conn() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            now_ms = self._clock_ms(conn)
+            row = conn.execute(
+                "SELECT id, claim_epoch FROM work_items WHERE queue_name=? AND "
+                "(state=? OR (state=? AND claim_epoch>0 AND claim_deadline_ms<=?)) "
+                "ORDER BY created_at ASC, rowid ASC LIMIT 1",
+                (self._queue_name, State.PENDING.value, State.IN_PROGRESS.value, now_ms),
+            ).fetchone()
+            if row is None:
+                raise EmptyQueue("No claimable Work Item")
+            claim = WorkItemClaim(row["id"], owner_id, row["claim_epoch"] + 1)
+            now = self._now()
+            conn.execute(
+                "UPDATE work_items SET state=?, claim_owner=?, claim_epoch=?, "
+                "claim_deadline_ms=?, reserved_at=?, updated_at=? WHERE id=?",
+                (
+                    State.IN_PROGRESS.value,
+                    owner_id,
+                    claim.epoch,
+                    now_ms + lease_seconds * 1000,
+                    now,
+                    now,
+                    claim.item_id,
+                ),
+            )
+            conn.commit()
+            return claim
+
+    def renew_fenced(self, claim: WorkItemClaim, *, lease_seconds: int) -> None:
+        validate_lease(lease_seconds)
+        with self._get_conn() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            self._require_claim(conn, claim)
+            conn.execute(
+                "UPDATE work_items SET claim_deadline_ms=? WHERE id=?",
+                (self._clock_ms(conn) + lease_seconds * 1000, claim.item_id),
+            )
+            conn.commit()
+
+    def finish_fenced(
+        self,
+        claim: WorkItemClaim,
+        state: State,
+        *,
+        outputs: tuple[JSONType, ...] = (),
+        message: str | None = None,
+    ) -> list[str]:
+        """Atomically finish and publish parent-linked JSON outputs, or roll back.
+
+        Output attachments, effect deduplication, reviews and retry/dead-letter
+        policy are not implemented by this bounded primitive.
+        """
+        if state not in (State.DONE, State.FAILED) or (state == State.FAILED and not message):
+            raise ValueError("DONE or FAILED with failure message required")
+        if len(outputs) > 64:
+            raise ValueError("at most 64 output Work Items")
+        serialized = [json.dumps(payload, allow_nan=False) for payload in outputs]
+        if sum(len(payload.encode()) for payload in serialized) > 256 * 1024:
+            raise ValueError("output payload byte limit exceeded")
+        ids = [str(uuid.uuid4()) for _ in outputs]
+        with self._get_conn() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            self._require_claim(conn, claim)
+            now = self._now()
+            for item_id, payload in zip(ids, serialized, strict=False):
+                conn.execute(
+                    "INSERT INTO work_items (id,queue_name,parent_id,state,payload,created_at,updated_at) "
+                    "VALUES (?,?,?,?,?,?,?)",
+                    (
+                        item_id,
+                        self._output_queue_name,
+                        claim.item_id,
+                        State.PENDING.value,
+                        payload,
+                        now,
+                        now,
+                    ),
+                )
+            # Recheck expiry at publication after output serialization/insertion.
+            self._require_claim(conn, claim)
+            conn.execute(
+                "UPDATE work_items SET state=?, error_message=?, released_at=?, updated_at=?, "
+                "claim_owner=NULL, claim_deadline_ms=NULL WHERE id=?",
+                (state.value, message, now, now, claim.item_id),
+            )
+            conn.commit()
+        return ids
+
+    @staticmethod
+    def _retry_log_exists(conn: sqlite3.Connection) -> bool:
+        exists = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='actions_fenced_retry_v1'"
+        ).fetchone()
+        if exists:
+            columns = {
+                (row[1], row[2].upper(), row[3], row[5])
+                for row in conn.execute("PRAGMA table_info(actions_fenced_retry_v1)")
+            }
+            expected = {
+                ("item_id", "TEXT", 1, 1),
+                ("epoch", "INTEGER", 1, 2),
+                ("record", "TEXT", 1, 0),
+                ("format", "TEXT", 1, 0),
+                ("created_at", "TEXT", 1, 0),
+            }
+            if columns != expected:
+                raise ValueError("Unknown retry audit schema; no automatic migration")
+        return exists is not None
+
+    def retry_fenced(
+        self,
+        claim: WorkItemClaim,
+        *,
+        evidence: RetryEvidence,
+        verify_receipt: ReceiptVerifier,
+        max_claims: int,
+    ) -> None:
+        # Verification cannot hold a queue writer lock or renew a lost lease.
+        verify_retry(claim, evidence, verify_receipt)
+        with self._get_conn() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            self._require_claim(conn, claim)
+            payload = self._normalize_payload(
+                conn.execute(
+                    "SELECT payload FROM work_items WHERE id=?", (claim.item_id,)
+                ).fetchone()[0]
+            )
+            record = retry_record(claim, evidence, payload, max_claims)
+            if not self._retry_log_exists(conn):
+                conn.execute(
+                    "CREATE TABLE actions_fenced_retry_v1 (item_id TEXT NOT NULL, epoch INTEGER NOT NULL, record TEXT NOT NULL, format TEXT NOT NULL CHECK(format='actions.work-item-retry/v1'), created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(item_id,epoch))"
+                )
+            conn.execute(
+                "INSERT INTO actions_fenced_retry_v1(item_id,epoch,record,format) VALUES (?,?,?,?)",
+                (claim.item_id, claim.epoch, json.dumps(record), "actions.work-item-retry/v1"),
+            )
+            changed = conn.execute(
+                "UPDATE work_items SET state=?,claim_owner=NULL,claim_deadline_ms=NULL,updated_at=? WHERE id=? AND claim_deadline_ms>?",
+                (State.PENDING.value, self._now(), claim.item_id, self._clock_ms(conn)),
+            )
+            if changed.rowcount != 1:
+                raise ClaimRejected("Work Item claim expired before retry release")
+            conn.commit()
+
+    def retry_history(self, item_id: str) -> list[dict]:
+        with self._get_conn() as conn:
+            if not self._retry_log_exists(conn):
+                return []
+            rows = conn.execute(
+                "SELECT format,record FROM actions_fenced_retry_v1 WHERE item_id=? ORDER BY epoch LIMIT 100",
+                (item_id,),
+            ).fetchall()
+            if any(row["format"] != "actions.work-item-retry/v1" for row in rows):
+                raise ValueError("Unknown retry audit format")
+            return [json.loads(row["record"]) for row in rows]
+
     def reserve_input(self) -> str:
         """Reserve the next available input work item."""
         with self._get_conn() as conn:
@@ -292,7 +506,7 @@ class SQLiteAdapter(BaseAdapter):
                     row = conn.execute(
                         """
                         SELECT id FROM work_items
-                        WHERE queue_name = ? AND state = ?
+                        WHERE queue_name = ? AND state = ? AND claim_epoch = 0
                         ORDER BY created_at ASC, rowid ASC
                         LIMIT 1
                         """,
@@ -344,7 +558,9 @@ class SQLiteAdapter(BaseAdapter):
         """Release a reserved input work item."""
         if exception is not None:
             if exception_type is not None or code is not None or message is not None:
-                raise TypeError("release_input() received both exception and split exception fields")
+                raise TypeError(
+                    "release_input() received both exception and split exception fields"
+                )
             exception_type = exception.get("type")
             code = exception.get("code")
             message = exception.get("message")
@@ -357,11 +573,14 @@ class SQLiteAdapter(BaseAdapter):
 
         now = self._now()
         if exception_type is not None:
-            exception_code = exception_type.value if hasattr(exception_type, "value") else str(exception_type)
+            exception_code = (
+                exception_type.value if hasattr(exception_type, "value") else str(exception_type)
+            )
         else:
             exception_code = None
 
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, item_id)
             conn.execute(
                 """
                 UPDATE work_items
@@ -398,6 +617,7 @@ class SQLiteAdapter(BaseAdapter):
         payload_json = json.dumps(payload) if payload is not None else None
 
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, parent_id)
             conn.execute(
                 """
                 INSERT INTO work_items
@@ -473,6 +693,7 @@ class SQLiteAdapter(BaseAdapter):
         now = self._now()
 
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, item_id)
             cursor = conn.execute(
                 """
                 UPDATE work_items
@@ -524,6 +745,7 @@ class SQLiteAdapter(BaseAdapter):
     ) -> None:
         """Add a file to a work item."""
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, item_id)
             self._require_item(conn, item_id)
             item_dir = self._item_directory(item_id)
             file_path = resolve_attachment_path(item_dir, name)
@@ -554,6 +776,7 @@ class SQLiteAdapter(BaseAdapter):
         """Remove a file from a work item."""
         resolve_attachment_path(self._item_directory(item_id), name)
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, item_id)
             cursor = conn.execute(
                 "SELECT file_path FROM work_item_files WHERE work_item_id = ? AND name = ?",
                 (item_id, name),
@@ -635,6 +858,7 @@ class SQLiteAdapter(BaseAdapter):
     def delete_item(self, item_id: str) -> None:
         """Delete a work item and its files."""
         with self._get_conn() as conn:
+            self._legacy_mutation(conn, item_id)
             self._require_item(conn, item_id)
             item_dir = self._item_directory(item_id)
             for row in conn.execute(
@@ -705,7 +929,7 @@ class SQLiteAdapter(BaseAdapter):
             rows = conn.execute(
                 """
                 SELECT id, reserved_at FROM work_items
-                WHERE state = ? AND reserved_at IS NOT NULL
+                WHERE state = ? AND reserved_at IS NOT NULL AND claim_epoch = 0
                 """,
                 (State.IN_PROGRESS.value,),
             ).fetchall()
@@ -721,15 +945,16 @@ class SQLiteAdapter(BaseAdapter):
                     continue
                 if reserved_ts < cutoff:
                     item_id = row["id"]
-                    conn.execute(
+                    changed = conn.execute(
                         """
                         UPDATE work_items
                         SET state = ?, reserved_at = NULL
-                        WHERE id = ?
+                        WHERE id = ? AND claim_epoch = 0 AND state = ?
                         """,
-                        (State.PENDING.value, item_id),
+                        (State.PENDING.value, item_id, State.IN_PROGRESS.value),
                     )
-                    recovered.append(item_id)
+                    if changed.rowcount == 1:
+                        recovered.append(item_id)
 
             conn.commit()
             return recovered

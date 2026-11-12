@@ -1,0 +1,19 @@
+{
+  "scope": "completed synthetic pytest basetemps only",
+  "removed_paths": [
+    "/workspace/knowledge-review/execution-evidence/cancel-red-fixtures",
+    "/workspace/knowledge-review/execution-evidence/final-fixtures",
+    "/workspace/knowledge-review/execution-evidence/first-fixtures",
+    "/workspace/knowledge-review/execution-evidence/qualified-fixtures",
+    "/workspace/knowledge-review/execution-evidence/second-fixtures",
+    "/workspace/knowledge-review/prepare-evidence/final-fixed-fixtures",
+    "/workspace/knowledge-review/prepare-evidence/final-fixtures",
+    "/workspace/knowledge-review/prepare-evidence/first-fixtures",
+    "/workspace/knowledge-review/prepare-evidence/red-fixtures"
+  ],
+  "free_before": 7678660608,
+  "free_after": 8741740544,
+  "source_receipt": "/workspace/knowledge-review/cleanup-review/receipt.json",
+  "preserved": "all parent logs/XML/JSON/source; all RCC homes/artifacts/trust; all installed candidates and handoff datadirs",
+  "inspection_limit": "system daemon descriptors unreadable, no inspectable live references"
+}

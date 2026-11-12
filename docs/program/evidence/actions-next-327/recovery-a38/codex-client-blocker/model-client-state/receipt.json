@@ -1,0 +1,28 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a38",
+  "engine_origin": "/workspace/actions-327-a38/installed-fixed/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "f332a8284e78844abcf6700a600d2891d742b682",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 25310,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2141087250001874,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [],
+  "actual_generated_execution": "NOT_ATTEMPTED in read-only Codex probe",
+  "workspace": "b1b51ebf-2f51-4997-a173-01b4feddb42f",
+  "exit_code": 1,
+  "client": "codex-cli0.159.0-alpha.3",
+  "scope": "actual fresh ephemeral Codex session, existing login, one authorized local read; model result requires transcript inspection"
+}

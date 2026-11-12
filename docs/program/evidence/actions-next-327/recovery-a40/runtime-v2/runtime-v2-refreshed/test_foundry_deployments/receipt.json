@@ -1,0 +1,36 @@
+{
+  "module": "test_foundry_deployments",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a40/runtime-v2-refreshed/selected-pytest.py",
+    "tests/action_server_tests/test_foundry_deployments.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a40/runtime-v2-refreshed/test_foundry_deployments/tests.xml",
+    "--basetemp=/workspace/actions-327-a40/runtime-v2-refreshed/test_foundry_deployments/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 7100485632,
+  "stop_reason": null,
+  "source_sha256": "4794f266db0a5f36b13fad68f74ba6953c8aa148f9eb75feeb47f2ab12b28534",
+  "counts": {
+    "tests": 51,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

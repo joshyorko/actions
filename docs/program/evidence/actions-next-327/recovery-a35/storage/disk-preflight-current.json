@@ -1,0 +1,7 @@
+{
+  "path": "/workspace",
+  "required_free_bytes": 3221225472,
+  "available_bytes": 2788208640,
+  "status": "BLOCKED",
+  "scope": "point-in-time preflight; concurrent writers still require monitoring"
+}

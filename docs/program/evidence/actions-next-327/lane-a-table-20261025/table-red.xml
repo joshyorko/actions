@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="52" failures="2" errors="0" time="0.154829816">
+    <testsuite name="src/semantic-renderer/generic-execution.test.tsx" timestamp="2026-10-25T13:23:35.756Z" hostname="71cd163cf8ad" tests="4" failures="0" errors="0" skipped="4" time="0">
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; never runs on mount; submit returns identity before execute and allows cancellation" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; retains submission identity after uncertainty and rejects replacement input" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; rejects foreign binding in response" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="reopens retained state without admission and continues only unlaunched Run" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-input.test.tsx" timestamp="2026-10-25T13:23:35.759Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="6" time="0">
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="lists then claims exact selected input without autoexecution or payload replacement" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="retains uncertain selection identity and rejects changed item or response" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="rejects a selected-item response before accepting its Run" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="renders explicit queue selection and claim controls with no launch" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal execute" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal refresh" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-layout.test.tsx" timestamp="2026-10-25T13:23:35.761Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="7" time="0">
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="renders declared consumer controls and results within the authored canvas without replacement fields" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for model" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for preview" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for undeclared" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for invisible" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="keeps inspected artifact within the canvas and preserves authored input node identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="does not move a declared private form into an undeclared authored binding" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-output.test.tsx" timestamp="2026-10-25T13:23:35.763Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="6" time="0">
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="loads only explicit associated Run children without claim or adoption" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output run identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output attempt identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output queue identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="renders read-only produced items with explicit load and no adoption controls" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="drops the cached child page when a later authorized read is denied" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-view.test.tsx" timestamp="2026-10-25T13:23:35.764Z" hostname="71cd163cf8ad" tests="1" failures="0" errors="0" skipped="1" time="0">
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="semantic form explicitly submits and shows persistent Run status without mount execution" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/mcp-bridge.test.tsx" timestamp="2026-10-25T13:23:35.765Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="12" time="0">
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.generated_echo without invoking it" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.résumé without invoking it" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;é&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;\ud800&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders semantic state from tool-result metadata and stays read-only" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders a preview reply without enabling its form" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; remounts view state when the immutable app revision changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; respects the app audience projection without exposing hidden details" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves the query fixture adapter and explicit query submission" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves invoice metadata rendering without querying on open" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects malformed schema and binding scope before rendering" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/semantic-components.test.tsx" timestamp="2026-10-25T13:23:35.768Z" hostname="71cd163cf8ad" tests="16" failures="2" errors="0" skipped="14" time="0.154829816">
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; exports semantic components and the renderer" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the canonical PR330 fixture through injected adapters" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the title and revision as text, not markup" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; hides every detail, including title and revision, for empty visibility" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not expose app-only content to the model viewer" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required constructor field as empty and never dispatches" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required toString field as empty and never dispatches" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; dispatches fixture integer and boolean fields as number and boolean" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; validates required booleans and rejects non-integer input" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; resets inputs and ignores a deferred response when capability scope changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; rejects malformed specs and duplicate form fields before rendering controls" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not resolve any binding when the spec hides all audiences" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; projects status, opens artifacts through the typed adapter, and keeps preview inert" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names the keyboard-accessible results region from its table caption" time="0.124684883">
+            <failure message="Unable to find an accessible element with the role &quot;region&quot; and name &quot;Retained records&quot;
+
+Here are the accessible roles:
+
+  table:
+
+  Name &quot;Retained records&quot;:
+  [36m&lt;table[39m
+    [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  caption:
+
+  Name &quot;Retained records&quot;:
+  [36m&lt;caption /&gt;[39m
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name &quot;&quot;:
+  [36m&lt;thead /&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;tbody /&gt;[39m
+
+  --------------------------------------------------
+  row:
+
+  Name &quot;Name&quot;:
+  [36m&lt;tr /&gt;[39m
+
+  Name &quot;First record&quot;:
+  [36m&lt;tr /&gt;[39m
+
+  --------------------------------------------------
+  columnheader:
+
+  Name &quot;Name&quot;:
+  [36m&lt;th[39m
+    [33mscope[39m=[32m&quot;col&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  cell:
+
+  Name &quot;First record&quot;:
+  [36m&lt;td /&gt;[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;semantic-table__scroll&quot;[39m
+      [33mtabindex[39m=[32m&quot;0&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;table[39m
+        [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;caption&gt;[39m
+          [0mRetained records[0m
+        [36m&lt;/caption&gt;[39m
+        [36m&lt;thead&gt;[39m
+          [36m&lt;tr&gt;[39m
+            [36m&lt;th[39m
+              [33mscope[39m=[32m&quot;col&quot;[39m
+            [36m&gt;[39m
+              [0mName[0m
+            [36m&lt;/th&gt;[39m
+          [36m&lt;/tr&gt;[39m
+        [36m&lt;/thead&gt;[39m
+        [36m&lt;tbody&gt;[39m
+          [36m&lt;tr&gt;[39m
+            [36m&lt;td&gt;[39m
+              [0mFirst record[0m
+            [36m&lt;/td&gt;[39m
+          [36m&lt;/tr&gt;[39m
+        [36m&lt;/tbody&gt;[39m
+      [36m&lt;/table&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find an accessible element with the role &quot;region&quot; and name &quot;Retained records&quot;
+
+Here are the accessible roles:
+
+  table:
+
+  Name &quot;Retained records&quot;:
+  &lt;table
+    class=&quot;semantic-table&quot;
+  /&gt;
+
+  --------------------------------------------------
+  caption:
+
+  Name &quot;Retained records&quot;:
+  &lt;caption /&gt;
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name &quot;&quot;:
+  &lt;thead /&gt;
+
+  Name &quot;&quot;:
+  &lt;tbody /&gt;
+
+  --------------------------------------------------
+  row:
+
+  Name &quot;Name&quot;:
+  &lt;tr /&gt;
+
+  Name &quot;First record&quot;:
+  &lt;tr /&gt;
+
+  --------------------------------------------------
+  columnheader:
+
+  Name &quot;Name&quot;:
+  &lt;th
+    scope=&quot;col&quot;
+  /&gt;
+
+  --------------------------------------------------
+  cell:
+
+  Name &quot;First record&quot;:
+  &lt;td /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;semantic-table__scroll&quot;
+      tabindex=&quot;0&quot;
+    &gt;
+      &lt;table
+        class=&quot;semantic-table&quot;
+      &gt;
+        &lt;caption&gt;
+          Retained records
+        &lt;/caption&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th
+              scope=&quot;col&quot;
+            &gt;
+              Name
+            &lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;
+              First record
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/semantic-components.test.tsx:625:31
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names results without a caption and announces empty results" time="0.025314085">
+            <failure message="Unable to find an accessible element with the role &quot;region&quot; and name &quot;Results&quot;
+
+Here are the accessible roles:
+
+  table:
+
+  Name &quot;&quot;:
+  [36m&lt;table[39m
+    [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name &quot;&quot;:
+  [36m&lt;thead /&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;tbody /&gt;[39m
+
+  --------------------------------------------------
+  row:
+
+  Name &quot;Name&quot;:
+  [36m&lt;tr /&gt;[39m
+
+  Name &quot;First record&quot;:
+  [36m&lt;tr /&gt;[39m
+
+  --------------------------------------------------
+  columnheader:
+
+  Name &quot;Name&quot;:
+  [36m&lt;th[39m
+    [33mscope[39m=[32m&quot;col&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  cell:
+
+  Name &quot;First record&quot;:
+  [36m&lt;td /&gt;[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;semantic-table__scroll&quot;[39m
+      [33mtabindex[39m=[32m&quot;0&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;table[39m
+        [33mclass[39m=[32m&quot;semantic-table&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;thead&gt;[39m
+          [36m&lt;tr&gt;[39m
+            [36m&lt;th[39m
+              [33mscope[39m=[32m&quot;col&quot;[39m
+            [36m&gt;[39m
+              [0mName[0m
+            [36m&lt;/th&gt;[39m
+          [36m&lt;/tr&gt;[39m
+        [36m&lt;/thead&gt;[39m
+        [36m&lt;tbody&gt;[39m
+          [36m&lt;tr&gt;[39m
+            [36m&lt;td&gt;[39m
+              [0mFirst record[0m
+            [36m&lt;/td&gt;[39m
+          [36m&lt;/tr&gt;[39m
+        [36m&lt;/tbody&gt;[39m
+      [36m&lt;/table&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find an accessible element with the role &quot;region&quot; and name &quot;Results&quot;
+
+Here are the accessible roles:
+
+  table:
+
+  Name &quot;&quot;:
+  &lt;table
+    class=&quot;semantic-table&quot;
+  /&gt;
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name &quot;&quot;:
+  &lt;thead /&gt;
+
+  Name &quot;&quot;:
+  &lt;tbody /&gt;
+
+  --------------------------------------------------
+  row:
+
+  Name &quot;Name&quot;:
+  &lt;tr /&gt;
+
+  Name &quot;First record&quot;:
+  &lt;tr /&gt;
+
+  --------------------------------------------------
+  columnheader:
+
+  Name &quot;Name&quot;:
+  &lt;th
+    scope=&quot;col&quot;
+  /&gt;
+
+  --------------------------------------------------
+  cell:
+
+  Name &quot;First record&quot;:
+  &lt;td /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;semantic-table__scroll&quot;
+      tabindex=&quot;0&quot;
+    &gt;
+      &lt;table
+        class=&quot;semantic-table&quot;
+      &gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th
+              scope=&quot;col&quot;
+            &gt;
+              Name
+            &lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;
+              First record
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/semantic-components.test.tsx:638:23
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats table row and column data as own-property text" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+</testsuites>

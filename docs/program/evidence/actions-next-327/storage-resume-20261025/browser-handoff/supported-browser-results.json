@@ -1,0 +1,14 @@
+[
+  {
+    "name": "locked-headless-shell",
+    "status": "FAIL",
+    "chromiumSandbox": true,
+    "failure": "No usable sandbox; process terminated before page creation"
+  },
+  {
+    "name": "locked-chromium",
+    "status": "FAIL",
+    "chromiumSandbox": true,
+    "failure": "No usable sandbox; process terminated before page creation"
+  }
+]

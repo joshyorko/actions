@@ -1,0 +1,6 @@
+{
+  "status": "FAIL before server startup",
+  "cause": "random synthetic API key began with a dash; separate argparse value rejected",
+  "correction": "use standard --api-key=value argument; preserve early startup failure if server_log.txt absent",
+  "production_change": false
+}

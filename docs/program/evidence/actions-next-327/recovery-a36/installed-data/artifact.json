@@ -1,0 +1,8 @@
+{
+  "wheel": "actions_runtime-1.1.0a36-cp312-cp312-linux_x86_64.whl",
+  "sha256": "1dc7a2b701351252b3d7a2273fd2a9a2b3c94276a10219a6dd4693390c9ddc3e",
+  "source": "fbde9bc3947804212c930aa65c2884714eb9df2e",
+  "extra": "declared data-duckdb; DuckDB1.4.1",
+  "core": "1.1.0a3",
+  "runtime": "1.1.0a36"
+}

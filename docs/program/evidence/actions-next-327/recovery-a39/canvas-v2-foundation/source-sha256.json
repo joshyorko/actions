@@ -1,0 +1,12 @@
+{
+  "actions/src/actions/canvas_contract/_models.py": "5d856692f499ff2d8e7405c9cb43c6481cad7a3023e6f1c17d3a00e2fe0a8062",
+  "actions/src/actions/canvas_contract/__init__.py": "31fff96858bbc4cb18437326cda9e65256bd47e699661494b2018847fe17527e",
+  "actions/tests/actions_core_tests/mcp_tests/test_canvas_contract_v2.py": "56bf585304c0689f0ef7e35720a9318e5a82e109110a415fecb3c93f2b7752d7",
+  "docs/contracts/canvas/canvas-spec-v2.schema.json": "bdf2efd6736d7446139e3a301bbe55226d9441ca6d9e5db444203b6d7e3d6830",
+  "docs/contracts/canvas/fixtures/semantic-v2.fixture.json": "2c77654c3a291afac597b1d446244c578aceb838e98e7e48d2cb0a42263f2074",
+  "docs/contracts/canvas/fixtures/check-semantic-v2-schema.py": "61b090e4bd70f34372ce50e9063de0bd9c2ef0039c5a68f61145030ff64082e2",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/types.ts": "7008857f01e065120786641be182e77b2c1eb1fbb8f918863b9ee44d85f868f1",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/mcp-bridge.ts": "ed8596bf24bb917c686bace32c97e1bcf907038de5a0fc5246556d1e8731e342",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/mcp-bridge-v2.test.tsx": "6028a2d7c54e806490b62b496fec5e2096ff538785a45961996a2c220218f60f",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx": "86028932867e8199f787d2a0955770eb8c8ebdca22e0338d8c8ddb83b3b8fd0b"
+}

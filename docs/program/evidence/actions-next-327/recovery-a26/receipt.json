@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "group": "completion-restore",
+  "synthetic_auth": true,
+  "engine": "prepared source Runtime",
+  "renderer": "not exercised",
+  "cleanup": "PASS",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "pytest",
+    "tests/action_server_tests/test_datadir_restore.py",
+    "tests/action_server_tests/test_managed_native_completion.py",
+    "tests/action_server_tests/test_runtime_managed_bootstrap.py",
+    "tests/action_server_tests/test_candidate_work_items.py",
+    "tests/action_server_tests/test_managed_work_items_contract.py",
+    "tests/action_server_tests/test_managed_work_items_api.py",
+    "tests/action_server_tests/test_managed_work_items_sql_service.py",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/tests.xml",
+    "--robocorp-log-output=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/log",
+    "--basetemp=/workspace/actions-recovery-327/evidence/a26-source-completion-restore/fixtures"
+  ],
+  "exit_code": 0,
+  "counts": {
+    "skipped": 0,
+    "failure": 0,
+    "error": 0,
+    "tests": 138
+  },
+  "base_source": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "evidence_only_head": "10fa1977607ffd873600e53fb0b929bf9ed157c1",
+  "working_tree_files": {
+    "action_server/src/actions/server/_datadir_restore.py": "0b1a25e12a3b5216b39086c8af52ce45262b9216d7f989a93971ff1adabb3f28",
+    "action_server/tests/action_server_tests/test_datadir_restore.py": "3f742641ec65c1a5c499584e7070ba6be624aa839b2a8b74a1d86ee401598358",
+    "action_server/src/actions/server/managed_work_items/native_completion.py": "3f5c8e29ffdd60badc19ca50b4f48aab032ea4be627c0fd67526df90abe56f63",
+    "action_server/src/actions/server/managed_work_items/sql_service.py": "05feb94e812e4b2786cdc43b6464f870d1d2a2747a6b0f85f0e7ffddf04d7cf9",
+    "action_server/src/actions/server/foundry/bootstrap.py": "928c70f3513faac48376d7904d0d726cbac103514e92c9711659b3ff275c51cc",
+    "action_server/tests/action_server_tests/test_managed_native_completion.py": "568a564a9919c6210315171fc9a11f3362c537078c6a0b0c12cfed422c9fab58",
+    "action_server/tests/action_server_tests/test_runtime_managed_bootstrap.py": "07f83816e290347626153f0d1f17c0b4fde7e75c01441aff21085e8ace4be93d",
+    "action_server/tests/action_server_tests/test_candidate_work_items.py": "42ee1be66e4d56d7dfbfdf6ab0b0638f598301f63f11ddeed2ca3f1e2c1fc987",
+    "action_server/pyproject.toml": "1f96c7390c3cff8012649f4a49e10bc131ab74534078dab64dea1cf78ec4e532",
+    "action_server/src/actions/server/__init__.py": "ea790d30974d7a2de03ff74616c92d7c3686998b022667b6359e29413848d4ae"
+  },
+  "runtime": "1.1.0a26",
+  "limitations": [
+    "source tests with synthetic native publication, no actual native completion RCC readback proof",
+    "offline helper fixture restore, not complete installed Runtime recovery"
+  ],
+  "post_test_changes": {
+    "classification": "isort-only test import ordering",
+    "files": {
+      "action_server/tests/action_server_tests/test_datadir_restore.py": "3d793ae610bed8ca953607da09bfe56cf843ddd0206b4f97a623be17efd5c52c",
+      "action_server/tests/action_server_tests/test_managed_native_completion.py": "135482d79e3f32a191aa2f5dedb0a3f3d4fc912b7fa1f98837e2aa370df7c7f1"
+    }
+  },
+  "package_static": {
+    "typecheck": "468 source files PASS",
+    "lint": "Ruff/check/format/isort PASS; optional Markdown linter absent"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "327-ci-capabilities.log": {
+    "bytes": 4101,
+    "sha256": "ec036e2ca3ac6b763cff19bea9df400e9647f61543af596686dd61415ff72df1",
+    "archive": "327-ci-capabilities.log.gz"
+  },
+  "327-ci-coverage-red.log": {
+    "bytes": 5786,
+    "sha256": "7cc3eeb6d2dee3dde86ee6f9a6a11a4866f3310026fefa9239b7b317a1b1e6aa",
+    "archive": "327-ci-coverage-red.log.gz"
+  },
+  "327-ci-coverage-green.log": {
+    "bytes": 3798,
+    "sha256": "e0df729a6f9e80f81bd1a66856d450e027a121b5ddc60037cb123a71650589e8",
+    "archive": "327-ci-coverage-green.log.gz"
+  },
+  "327-ci-toolkit.log": {
+    "bytes": 14974,
+    "sha256": "04219af884b0f7b58147591c101c85ed8512a375226a87fdfff9949c09f00a9f",
+    "archive": "327-ci-toolkit.log.gz"
+  },
+  "327-ci-static-final.log": {
+    "bytes": 6153,
+    "sha256": "20dac2ed08a35376e040c0d2d803215bf9674583d56d6bc2ebc90eb6a9a5a9c9",
+    "archive": "327-ci-static-final.log.gz"
+  },
+  "327-ci-darwin-typing.log": {
+    "bytes": 3955,
+    "sha256": "689115e9954df81661da3a615c147f9b102b8b342d7edca874da53cbe0aff55b",
+    "archive": "327-ci-darwin-typing.log.gz"
+  },
+  "327-owned-docs-full.log": {
+    "bytes": 4299,
+    "sha256": "f87696ae9e2558187b5fbaab7f24e54db953c95ad411623bd9c59dc6ca6bef36",
+    "archive": "327-owned-docs-full.log.gz"
+  },
+  "327-policy-fixture.log": {
+    "bytes": 4111,
+    "sha256": "369e481463858f0ab37e2fb1349a6c872e1081a989449cf5f31446c4345069ae",
+    "archive": "327-policy-fixture.log.gz"
+  },
+  "owned-docs-red.log": {
+    "bytes": 7667,
+    "sha256": "6b576d5f86b55de7d34e7aae84a71f84aeb4cdab4453bf143d1edbae8422a029",
+    "archive": "owned-docs-red.log.gz"
+  },
+  "owned-docs-green-tests.log": {
+    "bytes": 3923,
+    "sha256": "56cefafbfa19033ea94ba54bf4a332545bf93e1012ac611f4bf6194fbb99543a",
+    "archive": "owned-docs-green-tests.log.gz"
+  },
+  "owned-docs-green-lint.log": {
+    "bytes": 3767,
+    "sha256": "de4e68f82ecdce3126acd5d9292b4a950c036ec2cb5fa6556f1bf9f239474bfa",
+    "archive": "owned-docs-green-lint.log.gz"
+  }
+}

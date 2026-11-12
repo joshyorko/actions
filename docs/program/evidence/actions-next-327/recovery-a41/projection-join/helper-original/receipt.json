@@ -1,0 +1,19 @@
+{
+  "status": "source-component-only",
+  "tests": 48,
+  "passed": 48,
+  "failed": 0,
+  "skipped": 0,
+  "backends": [
+    "SQLite",
+    "owned PostgreSQL"
+  ],
+  "checks": [
+    "Ruff",
+    "format",
+    "isort",
+    "mypy production"
+  ],
+  "historical_failures": "tests3: 4 failed / 40 passed (fixture chunk-size and FK setup corrected); tests4: 44 passed; original logs retained outside delivery",
+  "upstream_disposition": "none"
+}

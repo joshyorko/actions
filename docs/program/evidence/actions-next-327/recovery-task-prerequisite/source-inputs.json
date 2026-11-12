@@ -1,0 +1,19 @@
+{
+  "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "b35d24e9f428cdde9a4d50e3cedd1ecc50c3a09f9cce939d5fce31edd3a3f8e6",
+  "action_server/src/actions/server/run_outputs/detached.py": "fe400084e7fccb33fa666e3fe2a938541f124ce73a3663d9fea1a71051cfd73c",
+  "action_server/src/actions/server/run_outputs/service.py": "c512cb749dbf6dd0c2dddcaacddc78b5def162cbbad02b39d9aa60e00112d417",
+  "action_server/tests/action_server_tests/fixtures.py": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+  "action_server/tests/action_server_tests/foundry_historical_ddl.json": "485b3251f55b2d210596d78076d4051f0d6149fbb2edc9f31bb871f4b4569c2c",
+  "action_server/tests/action_server_tests/mcp/test_alias_history.py": "e829744225b2e3f6ff1ad96a321f4de795225598b3d508a97720b75799ad3da4",
+  "action_server/tests/action_server_tests/mcp/test_resource_history.py": "7bdd07cb28450d19b82256f775efe6f8f70f86262737e6fd9c59dc9bff467ea4",
+  "action_server/tests/action_server_tests/test_database_shared.py": "357cf6cc8b72a4395851b2699a1f15d7f1a6ee214dc8f954d127a9b81c5e8c9c",
+  "action_server/src/actions/server/mcp/task_adapter.py": "ffe44370f702cf6cc0f317b34ee729a36534b0d0945b6b9e8841a37bd3ddc169",
+  "action_server/src/actions/server/mcp/task_wire.py": "2d572be756f0012d5a4cdaa4efad6db70e58b80b0c836d3a7c82b3b741a26615",
+  "action_server/src/actions/server/run_outputs/task_service.py": "7a48f16fbb6a5f7944ca026fff1890d9245c5d8db580e1f3c3c2ead0f042effd",
+  "action_server/tests/action_server_tests/task_schema/LICENSE": "70559d215777f20bb14de53b336db2bb41fc58712f1d6f43e6a7dd2c82b1d6df",
+  "action_server/tests/action_server_tests/task_schema/README.md": "a43c043000f7350846a3f753c1ba3061240a116a483f948e77f561b5ddeb7cb9",
+  "action_server/tests/action_server_tests/task_schema/schema.json": "bf30afb7ac251e3e22c037b7a685f60ef6603031b5484c0d08b1fa0bbe86d460",
+  "action_server/tests/action_server_tests/test_task_adapter.py": "10a78d75c5150428e8365d0c0c88a71c3205ed0171bc825478033d19de4d8beb",
+  "action_server/tests/action_server_tests/test_task_service.py": "c4e91481e5a8d80ea2d10322b20c2890417e1851fc701538772dbecaffd4a40c",
+  "action_server/tests/action_server_tests/test_task_wire.py": "cda5a6118f4aeca9f91064c1b90cd8fbd56128cd87bec54875e7fa951e23f6d7"
+}

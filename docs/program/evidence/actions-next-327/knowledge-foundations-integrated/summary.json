@@ -1,0 +1,22 @@
+{
+  "source_base": "ab09e19d",
+  "passing_composition": {
+    "knowledge_foundation_both_sql": 50,
+    "normalization_and_duckdb": 30,
+    "postgres_versions": 6,
+    "database": 15,
+    "shared_database": 57,
+    "total": 158,
+    "skipped": 0
+  },
+  "original_failures_preserved": {
+    "initial_lint": "two formatting findings",
+    "new_migration_tests": "48 passed / 2 failed: wrong Workspace import",
+    "database_baselines": "13 passed / 2 failed: expected schema22 additions missing"
+  },
+  "full_runtime_typecheck_files": 564,
+  "configured_python_lint": "PASS; optional Markdown lint unavailable",
+  "old21_reader_sha256": "97f4f43fb5536084bc37fa40da2bfe2941a4ca0d40bf14048486eb0fe88c301d",
+  "scope": "source/service foundations; no canonical ingestion/search or installed a38 qualification",
+  "upstream_disposition": "none"
+}

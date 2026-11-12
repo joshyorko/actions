@@ -11,6 +11,39 @@ sys.path.insert(0, str(TOOLKIT_ROOT))
 import toolkit  # noqa: E402
 
 
+def test_combined_invoice_ci_requires_all_real_gates():
+    workflow = yaml.safe_load(
+        (REPOSITORY_ROOT / ".github/workflows/developer_toolkit.yml").read_text()
+    )
+    step = next(
+        step
+        for step in workflow["jobs"]["toolkit"]["steps"]
+        if step.get("name") == "Invoice combined acceptance (Linux primary)"
+    )
+    assert step["if"] == "runner.os == 'Linux' && matrix.lane == 'invoice'"
+    entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
+    assert any(e["lane"] == "invoice" and e["os"] == "ubuntu-24.04" for e in entries)
+    for name in ("BROWSER", "WORKER", "GENERATED", "EFFECTS"):
+        assert step["env"]["ACTIONS_INVOICE_" + name] == "1"
+    assert "-t InvoiceQueryTest" in step["run"]
+    assert "--workers 2" in step["run"]
+
+
+def test_invoice_browser_prepares_renderer_before_verifier(tmp_path, monkeypatch):
+    monkeypatch.setenv("ACTIONS_INVOICE_EVIDENCE_DIR", str(tmp_path))
+    monkeypatch.setenv("ACTIONS_INVOICE_BROWSER", "1")
+    monkeypatch.setenv("ACTIONS_INVOICE_GENERATED", "1")
+    calls = []
+    monkeypatch.setattr(toolkit, "poetry", lambda *args: None)
+    monkeypatch.setattr(
+        toolkit, "run", lambda command, *args, **kwargs: calls.append(command)
+    )
+    toolkit.invoice_query_test()
+    assert ["npm", "run", "build:canvas"] in calls[:-1]
+    assert ["npx", "playwright", "install", "chromium"] in calls[:-1]
+    assert "--browser" in calls[-1] and "--generated" in calls[-1]
+
+
 def test_manifest_defines_cross_platform_developer_tasks() -> None:
     manifest = yaml.safe_load((TOOLKIT_ROOT / "toolkit.yaml").read_text())
 
@@ -26,6 +59,9 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
         "Coverage",
         "FrontendTest",
         "InstallCommunity",
+        "InvoiceQueryTest",
+        "InvoiceReconciliationDemo",
+        "FencedWorkItemsTest",
     }
     assert manifest["ignoreFiles"] == ["../.gitignore"]
     assert manifest["environmentConfigs"] == [
@@ -55,7 +91,7 @@ def test_toolkit_workflow_cache_tracks_all_environment_configs() -> None:
     assert "'developer/setup_windows_amd64.yaml'" in workflow
 
 
-def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
+def test_toolkit_workflow_pins_primary_previous_and_legacy_rcc_assets() -> None:
     workflow = yaml.safe_load(
         (
             REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
@@ -64,7 +100,9 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
     entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
     assert (
         "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}"
-        in (REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml").read_text()
+        in (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
     )
 
     assert {
@@ -77,38 +115,50 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
             "primary",
             "ubuntu-22.04",
             "rcc-linux64",
+            "18.19.8",
+        ): "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
+        (
+            "invoice",
+            "ubuntu-24.04",
+            "rcc-linux64",
+            "18.19.8",
+        ): "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
+        (
+            "primary",
+            "macos-15",
+            "rcc-macosarm64",
+            "18.19.8",
+        ): "bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba",
+        (
+            "primary",
+            "windows-2022",
+            "rcc-windows64.exe",
+            "18.19.8",
+        ): "f5e868af05382731f6675d98ed6ead7c7e95b250466bc5fee054b41817280a89",
+        (
+            "n-1",
+            "ubuntu-22.04",
+            "rcc-linux64",
+            "18.19.7",
+        ): "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+        (
+            "legacy",
+            "ubuntu-22.04",
+            "rcc-linux64",
             "18.19.3",
         ): "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
         (
-            "primary",
+            "legacy",
             "macos-15",
             "rcc-macosarm64",
             "18.19.3",
         ): "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
         (
-            "primary",
+            "legacy",
             "windows-2022",
             "rcc-windows64.exe",
             "18.19.3",
         ): "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
-        (
-            "n-1",
-            "ubuntu-22.04",
-            "rcc-linux64",
-            "18.18.1",
-        ): "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf",
-        (
-            "n-1",
-            "macos-15",
-            "rcc-macosarm64",
-            "18.18.1",
-        ): "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d",
-        (
-            "n-1",
-            "windows-2022",
-            "rcc-windows64.exe",
-            "18.18.1",
-        ): "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b",
     }
 
 
@@ -142,7 +192,9 @@ def test_ci_verifies_bootstrap_environment_isolation() -> None:
     package_smoke = workflow.index("- name: Package task smoke (Linux)")
     assert bootstrap < isolation < package_smoke
     assert 'test -x "${package}/.venv/bin/python"' in workflow
-    assert "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
+    assert (
+        "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
+    )
 
 
 def test_ci_builds_and_launches_community_binary_on_linux() -> None:
@@ -156,12 +208,70 @@ def test_ci_builds_and_launches_community_binary_on_linux() -> None:
     assert "build-" + "community" not in workflow
 
 
+def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
+    workflow = yaml.safe_load(
+        (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
+    )
+    job = workflow["jobs"]["rcc_descriptor"]
+    assert "pull_request" in job["if"] and "release/" in job["if"]
+    assert job["permissions"] == {"contents": "read"}
+    assert job["runs-on"] == "ubuntu-24.04"
+    checkout, install, probe, receipt = job["steps"]
+    assert checkout["with"]["persist-credentials"] is False
+    assert (
+        "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
+        in install["run"]
+    )
+    assert probe["env"]["ACTIONS_REAL_RCC_FD_TEST"] == "1"
+    assert "test_rcc_env_exec_fd_real.py" in probe["run"]
+    assert (
+        receipt["if"] == "always()" and receipt["with"]["if-no-files-found"] == "error"
+    )
+
+
+def test_installed_child_job_uses_step_scoped_runner_context() -> None:
+    workflow = yaml.safe_load(
+        (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
+    )
+    job = workflow["jobs"]["installed_internal_child_vertical"]
+    assert "github.base_ref == 'community'" in job["if"]
+    assert "startsWith(github.base_ref, 'release/')" in job["if"]
+    assert "runner." not in str(job.get("env", {}))
+    assert job["permissions"] == {"contents": "read"}
+    assert job["steps"][0]["with"]["persist-credentials"] is False
+    run = next(
+        step
+        for step in job["steps"]
+        if step.get("name") == "Run installed Action to Robot vertical"
+    )
+    assert "runner.temp" in run["env"]["UV_CACHE_DIR"]
+    assert "minimum_free_bytes=10_803_773_440" in run["run"]
+    script = (
+        REPOSITORY_ROOT / "developer/tests/run_internal_child_vertical_ci.sh"
+    ).read_text()
+    assert "test_real_mcp_action_submits_detached_rcc_robot[sqlite]" in script
+    assert "test_real_child_live_cancellation_probe[sqlite]" in script
+    assert (
+        "test_real_failed_robot_is_not_automatically_retried_after_host_restart[sqlite]"
+        in script
+    )
+    assert (
+        "test_real_crashed_robot_launch_requires_explicit_reconciliation[sqlite]"
+        in script
+    )
+    assert "{case.get('name') for case in cases} != expected" in script
+
+
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     shell = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.sh").read_text()
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
 
     for launcher in (shell, batch):
-        assert "v18.19.3" in launcher
+        assert "v18.19.8" in launcher
         assert "joshyorko/rcc/releases/download" in launcher
         assert "developer" in launcher
         assert "toolkit.yaml" in launcher
@@ -172,7 +282,7 @@ def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
 
 def test_dispatcher_resolves_repository_root() -> None:
     assert toolkit.REPOSITORY_ROOT == REPOSITORY_ROOT
-    assert toolkit.RCC_VERSION == "v18.19.3"
+    assert toolkit.RCC_VERSION == "v18.19.8"
     assert toolkit.PACKAGES == (
         "actions",
         "actions-http-helper",
@@ -206,40 +316,43 @@ def test_coverage_task_passes_its_rcc_python_to_action_server_wheel_tests() -> N
 
 
 def test_doctor_accepts_the_explicit_n_minus_one_matrix_version() -> None:
-    with patch.dict(
-        "os.environ",
-        {
-            "RCC_VERSION": "v18.18.1",
-            "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.18.1",
-        },
-    ), patch("toolkit.shutil.which", return_value="/usr/bin/tool"), patch(
-        "toolkit.run"
+    with (
+        patch.dict(
+            "os.environ",
+            {
+                "RCC_VERSION": "v18.19.3",
+                "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.19.3",
+            },
+        ),
+        patch("toolkit.shutil.which", return_value="/usr/bin/tool"),
+        patch("toolkit.run"),
     ):
         toolkit.doctor()
 
 
 def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
-    with patch.dict(
-        "os.environ",
-        {
-            "VIRTUAL_ENV": "/host/venv",
-            "POETRY_ACTIVE": "1",
-            "CONDA_PREFIX": "/rcc/holotree",
-            "CONDA_DEFAULT_ENV": "rcc",
-            "CONDA_PROMPT_MODIFIER": "(rcc)",
-            "CONDA_SHLVL": "1",
-            "CONDA_EXE": "/rcc/micromamba",
-            "_CE_CONDA": "1",
-            "_CE_M": "1",
-            "PYTHONHOME": "/host/python",
-            "PYTHONPATH": "/host/pythonpath",
-            "PYTHON_EXE": "/rcc/holotree/bin/python3",
-            "ROBOT_ARTIFACTS": "/rcc/artifacts",
-            "ROBOT_ROOT": "/rcc/robot",
-        },
-    ), patch(
-        "toolkit.subprocess.run"
-    ) as run:
+    with (
+        patch.dict(
+            "os.environ",
+            {
+                "VIRTUAL_ENV": "/host/venv",
+                "POETRY_ACTIVE": "1",
+                "CONDA_PREFIX": "/rcc/holotree",
+                "CONDA_DEFAULT_ENV": "rcc",
+                "CONDA_PROMPT_MODIFIER": "(rcc)",
+                "CONDA_SHLVL": "1",
+                "CONDA_EXE": "/rcc/micromamba",
+                "_CE_CONDA": "1",
+                "_CE_M": "1",
+                "PYTHONHOME": "/host/python",
+                "PYTHONPATH": "/host/pythonpath",
+                "PYTHON_EXE": "/rcc/holotree/bin/python3",
+                "ROBOT_ARTIFACTS": "/rcc/artifacts",
+                "ROBOT_ROOT": "/rcc/robot",
+            },
+        ),
+        patch("toolkit.subprocess.run") as run,
+    ):
         toolkit.run(["python", "--version"])
 
     assert "shell" not in run.call_args.kwargs
@@ -270,9 +383,10 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
     (tmp_path / "pyproject.toml").touch()
     scripts = tmp_path / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
 
-    with patch.dict("os.environ", {"PATH": "/rcc/holotree/bin"}), patch(
-        "toolkit.subprocess.run"
-    ) as run:
+    with (
+        patch.dict("os.environ", {"PATH": "/rcc/holotree/bin"}),
+        patch("toolkit.subprocess.run") as run,
+    ):
         toolkit.run(["python", "--version"], cwd=tmp_path)
 
     assert run.call_args.kwargs["env"]["PATH"].split(toolkit.os.pathsep)[0] == str(
@@ -281,11 +395,16 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
 
 
 def test_install_community_builds_installs_and_verifies() -> None:
-    executable = "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
+    executable = (
+        "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
+    )
     target = Path("/custom/bin") / executable
-    with patch.object(toolkit, "poetry") as poetry, patch.object(toolkit, "run") as run, patch.object(
-        toolkit, "resolve_install_target", return_value=target
-    ) as resolve, patch.object(toolkit, "install_executable") as install:
+    with (
+        patch.object(toolkit, "poetry") as poetry,
+        patch.object(toolkit, "run") as run,
+        patch.object(toolkit, "resolve_install_target", return_value=target) as resolve,
+        patch.object(toolkit, "install_executable") as install,
+    ):
         toolkit.install_community()
 
     assert [call.args for call in poetry.call_args_list] == [
@@ -328,25 +447,30 @@ def test_resolve_install_target_uses_existing_executable(tmp_path: Path) -> None
 
 def test_resolve_install_target_uses_posix_fallback_on_path(tmp_path: Path) -> None:
     install_directory = tmp_path / ".local" / "bin"
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "linux"
-    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
-        "os.environ",
-        {"PATH": toolkit.os.pathsep.join((str(install_directory), str(tmp_path)))},
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "linux"),
+        patch.object(toolkit.Path, "home", return_value=tmp_path),
+        patch.dict(
+            "os.environ",
+            {"PATH": toolkit.os.pathsep.join((str(install_directory), str(tmp_path)))},
+        ),
     ):
         assert toolkit.resolve_install_target() == install_directory / "action-server"
 
 
 def test_resolve_install_target_uses_windows_fallback_on_path() -> None:
     local_app_data = Path("/local/appdata")
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "win32"
-    ), patch.dict(
-        "os.environ",
-        {
-            "LOCALAPPDATA": str(local_app_data),
-            "PATH": str(local_app_data / "Programs" / "Actions" / "bin"),
-        },
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "win32"),
+        patch.dict(
+            "os.environ",
+            {
+                "LOCALAPPDATA": str(local_app_data),
+                "PATH": str(local_app_data / "Programs" / "Actions" / "bin"),
+            },
+        ),
     ):
         assert toolkit.resolve_install_target() == Path(
             "/local/appdata/Programs/Actions/bin/action-server.exe"
@@ -357,10 +481,11 @@ def test_resolve_install_target_rejects_fallback_directory_not_on_path(
     tmp_path: Path,
 ) -> None:
     install_directory = tmp_path / ".local" / "bin"
-    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.sys, "platform", "linux"
-    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
-        "os.environ", {"PATH": str(tmp_path / "elsewhere")}
+    with (
+        patch.object(toolkit.shutil, "which", return_value=None),
+        patch.object(toolkit.sys, "platform", "linux"),
+        patch.object(toolkit.Path, "home", return_value=tmp_path),
+        patch.dict("os.environ", {"PATH": str(tmp_path / "elsewhere")}),
     ):
         error = pytest.raises(SystemExit, toolkit.resolve_install_target)
 
@@ -434,9 +559,10 @@ def test_lint_uses_package_configured_gates() -> None:
 
 
 def test_test_uses_package_configured_gates() -> None:
-    with patch.object(toolkit, "toolkit_test"), patch.object(
-        toolkit, "poetry"
-    ) as poetry:
+    with (
+        patch.object(toolkit, "toolkit_test"),
+        patch.object(toolkit, "poetry") as poetry,
+    ):
         toolkit.test()
 
     assert [call.args for call in poetry.call_args_list] == [

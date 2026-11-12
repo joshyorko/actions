@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="2" failures="0" skipped="1" errors="0" time="4.0461480000000005">
+<testsuite name="host-harness.spec.ts" timestamp="2026-10-25T14:30:51.456Z" hostname="" tests="2" failures="0" skipped="1" time="1.556" errors="0">
+<testcase name="official MCP Apps bridge handles fixture calls and host context lifecycle" classname="host-harness.spec.ts" time="1.433">
+</testcase>
+<testcase name="official bridge renders a real Runtime Action result" classname="host-harness.spec.ts">
+<properties>
+<property name="skip" value="Requires the Action Server process fixture.">
+</property>
+</properties>
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

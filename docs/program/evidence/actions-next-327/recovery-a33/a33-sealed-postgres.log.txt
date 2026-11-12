@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_sealed_postgres.py -q --junitxml=/workspace/actions-recovery-327/evidence/a33-sealed-postgres.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a33-sealed-postgres-log (in /workspace/actions/action_server)
+.............                                                            [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a33-sealed-postgres.xml -
+13 passed in 5.80s
+Log (html): /workspace/actions-recovery-327/evidence/a33-sealed-postgres-log/log.html

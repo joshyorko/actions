@@ -12,6 +12,7 @@ import json
 import logging
 from collections.abc import Iterable, Iterator
 from contextlib import ExitStack, contextmanager
+from dataclasses import dataclass
 from typing import Any, Protocol, TypeVar
 from uuid import uuid4
 
@@ -23,13 +24,18 @@ from actions.server.run_outputs.models import (
     RunAccessGrant,
     RunAdmission,
     RunAttempt,
+    RunChildLineage,
     RunOutput,
     RunPin,
     Workspace,
+    run_child_identity_digest,
 )
 from actions.server.run_outputs.types import (
     Actor,
+    AdmittedActionSchema,
     AttemptFence,
+    CanvasResultScope,
+    CapabilitySchemaPort,
     ExecutionSnapshot,
     OutputRef,
     SealReceipt,
@@ -41,12 +47,22 @@ from actions.server.run_outputs.types import (
 MAX_INPUT_BYTES = 256 * 1024
 MAX_RESULT_BYTES = 1024 * 1024
 MAX_OUTPUTS = 64
-OPERATIONS = frozenset({"execute", "read", "cancel"})
+OPERATIONS = frozenset({"execute", "read", "cancel", "review"})
 T = TypeVar("T")
+
+
+@dataclass(frozen=True)
+class RunAdmissionOutcome:
+    run: Run
+    created: bool
 
 
 class AccessDenied(PermissionError):
     """Object unavailable or current actor not authorized; no provider disclosure."""
+
+
+class OutputExpired(AccessDenied):
+    """An authorized attached output is past retention; bytes remain denied."""
 
 
 class FenceRejected(RuntimeError):
@@ -115,7 +131,26 @@ def _snapshot(snapshot: ExecutionSnapshot) -> ExecutionSnapshot:
 
 
 def _admission(snapshot: ExecutionSnapshot) -> tuple[str, str]:
-    canonical = _canonical(snapshot.model_dump(mode="json"), MAX_INPUT_BYTES)
+    payload = snapshot.model_dump(mode="json")
+    # Preserve older snapshots' exact bytes and request fingerprints.
+    if snapshot.data_binding is None:
+        payload.pop("data_binding")
+    if snapshot.canvas_application is None:
+        payload.pop("canvas_application")
+    canonical = _canonical(payload, MAX_INPUT_BYTES)
+    if snapshot.runtime_kind == "invoice/generated-query/v1":
+        if snapshot.canvas_application is None or snapshot.data_binding is None:
+            raise AccessDenied("generated query requires application and source pins")
+        return _key(
+            "actions.generated-invoice-admission/v1",
+            snapshot.workspace_id,
+            snapshot.deployment_id,
+            snapshot.deployment.revision_id.root,
+            _canonical(snapshot.capability.model_dump(mode="json"), MAX_INPUT_BYTES),
+            _canonical(
+                snapshot.canvas_application.model_dump(mode="json"), MAX_INPUT_BYTES
+            ),
+        ), canonical
     return _key(
         "actions.run-admission/v1",
         snapshot.workspace_id,
@@ -133,7 +168,25 @@ def _one(db: Database, cls: type[T], key: str) -> T:
     return rows[0]
 
 
-def _action_identity(db: Database, snapshot: ExecutionSnapshot) -> Action:
+def _action_identity(
+    db: Database,
+    snapshot: ExecutionSnapshot,
+    capabilities: CapabilitySchemaPort | None = None,
+) -> Action | AdmittedActionSchema:
+    if snapshot.capability_authority == "package-revision":
+        if capabilities is None:
+            raise AccessDenied("Package admission authority is unavailable")
+        schema = capabilities.schema_for(snapshot)
+        if not isinstance(schema, AdmittedActionSchema) or (
+            schema.action_id != snapshot.action_id
+            or schema.capability != snapshot.capability
+            or schema.runtime_plan != snapshot.runtime_plan
+            or "sha256:"
+            + hashlib.sha256(schema.input_schema.encode("utf-8")).hexdigest()
+            != snapshot.capability_schema_digest
+        ):
+            raise AccessDenied("Package schema differs from exact Run admission")
+        return schema
     action = _one(db, Action, snapshot.action_id)
     package_id = str(snapshot.capability.package_revision.package_id.root)
     package = _one(db, ActionPackage, package_id)
@@ -158,6 +211,14 @@ def _now(db: Database) -> int:
     with db.cursor() as cursor:
         db.execute_query(cursor, "SELECT " + _now_sql(db))
         return int(cursor.fetchone()[0])
+
+
+def _advance_lifecycle(db: Database, run_id: str, *, now: int | None = None) -> None:
+    """Advance durable lifecycle evidence inside the caller's locked transaction."""
+    pin = _one(db, RunPin, run_id)
+    previous = int(pin.state_updated_ms) if pin.state_updated_ms else 0
+    sampled = _now(db) if now is None else now
+    _update(db, RunPin, run_id, {"state_updated_ms": str(max(previous, sampled))})
 
 
 def _returning(db: Database, sql: str, values: list) -> list:
@@ -204,9 +265,12 @@ def _lease_duration(seconds: int) -> int:
 class RunOutputControlPlane:
     """Trusted admin operations; never installed as an Action/package API."""
 
-    def __init__(self, db: Database):
+    def __init__(
+        self, db: Database, *, capabilities: CapabilitySchemaPort | None = None
+    ):
         _private_diagnostics(db)
         self.db = db
+        self.capabilities = capabilities
 
     def register(self, snapshot: ExecutionSnapshot) -> str:
         snapshot = _snapshot(snapshot)
@@ -223,7 +287,7 @@ class RunOutputControlPlane:
             if not rows:
                 _insert(self.db, Workspace(snapshot.workspace_id, "active", 0))
             _lock_workspace(self.db, snapshot.workspace_id)
-            _action_identity(self.db, snapshot)
+            _action_identity(self.db, snapshot, self.capabilities)
             admissions = self.db.all(RunAdmission, where="id=?", values=[key])
             if admissions:
                 if (
@@ -285,12 +349,14 @@ class RunOutputControlPlane:
                 self.db
             ):
                 raise FenceRejected("recovery must identify an expired current epoch")
-            _update(
-                self.db,
-                RunPin,
-                run_id,
-                {"recovery_epoch": expired_epoch, "recovery_receipt": receipt},
-            )
+            if pin.recovery_epoch != expired_epoch or pin.recovery_receipt != receipt:
+                _update(
+                    self.db,
+                    RunPin,
+                    run_id,
+                    {"recovery_epoch": expired_epoch, "recovery_receipt": receipt},
+                )
+                _advance_lifecycle(self.db, run_id)
 
 
 class ResolvedOutput:
@@ -307,10 +373,106 @@ class ResolvedOutput:
 
 
 class RunOutputService:
-    def __init__(self, db: Database, providers: dict[str, OutputProvider]):
+    def __init__(
+        self,
+        db: Database,
+        providers: dict[str, OutputProvider],
+        *,
+        capabilities: CapabilitySchemaPort | None = None,
+    ):
         _private_diagnostics(db)
         self.db = db
         self.providers = dict(providers)
+        self.capabilities = capabilities
+
+    def _apply_parent_exit_policy(
+        self, pin: RunPin, snapshot: ExecutionSnapshot
+    ) -> None:
+        """Apply a pinned parent's child policy inside its terminal transaction."""
+        lineage = self.db.all(
+            RunChildLineage, where="parent_run_id=?", values=[pin.run_id]
+        )
+        if not lineage:
+            return
+        from actions.server.deployments.foundry_repository import FoundryRepository
+
+        stored = FoundryRepository(self.db).get_revision(snapshot.deployment)
+        if stored is None or stored.revision.ref != snapshot.deployment:
+            raise FenceRejected("parent delegation revision unavailable")
+        policies = [
+            policy
+            for policy in stored.revision.specification.internal_robot_delegations
+            if policy.parent_capability == snapshot.capability
+        ]
+        if len(policies) != 1 or len(lineage) > policies[0].max_children:
+            raise FenceRejected("parent delegation policy unavailable")
+        policy = policies[0]
+        bindings = {item.name: item for item in policy.bindings}
+        for row in sorted(lineage, key=lambda item: item.child_run_id):
+            binding = bindings.get(row.binding_name)
+            if (
+                row.workspace_id != pin.workspace_id
+                or row.parent_run_id != pin.run_id
+                or row.child_run_id == pin.run_id
+                or binding is None
+                or not row.logical_key_digest.startswith("sha256:")
+                or len(row.logical_key_digest) != 71
+                or any(
+                    char not in "0123456789abcdef"
+                    for char in row.logical_key_digest[7:]
+                )
+                or row.identity_digest
+                != run_child_identity_digest(
+                    row.parent_run_id, row.binding_name, row.logical_key_digest
+                )
+            ):
+                raise FenceRejected("child lineage differs from parent policy")
+            child_pin = _lock_run(self.db, row.child_run_id)
+            child_snapshot = self._pinned(child_pin)
+            child = _one(self.db, Run, row.child_run_id)
+            if (
+                child_pin.workspace_id != pin.workspace_id
+                or child_pin.run_id != row.child_run_id
+                or child_pin.admission_principal_id != pin.admission_principal_id
+                or child_snapshot.deployment != binding.target_deployment
+                or child_snapshot.capability != binding.target_capability
+                or child_snapshot.runtime_plan != binding.target_runtime_plan
+            ):
+                raise FenceRejected("child lineage target differs from policy")
+            if policy.parent_exit == "allow-authorized-detach":
+                continue
+            if policy.parent_exit != "cancel-children":
+                raise FenceRejected("parent exit policy unavailable")
+            if child.status in (
+                RunStatus.PASSED,
+                RunStatus.FAILED,
+                RunStatus.CANCELLED,
+            ):
+                continue
+            if child.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
+                raise FenceRejected("child lifecycle unavailable")
+            if child_pin.cancel_requested not in (0, 1):
+                raise FenceRejected("child cancellation state unavailable")
+            if child.status == RunStatus.NOT_RUN:
+                if child_pin.current_attempt_id or child_pin.epoch != 0 or child.result:
+                    raise FenceRejected("pending child lifecycle unavailable")
+            else:
+                if not child_pin.current_attempt_id:
+                    raise FenceRejected("active child Attempt unavailable")
+                child_attempt = _one(self.db, RunAttempt, child_pin.current_attempt_id)
+                if (
+                    child_attempt.run_id != child.id
+                    or child_attempt.workspace_id != pin.workspace_id
+                    or child_attempt.epoch != child_pin.epoch
+                    or child_attempt.state != "running"
+                ):
+                    raise FenceRejected("active child Attempt unavailable")
+            if not child_pin.cancel_requested:
+                _update(self.db, RunPin, row.child_run_id, {"cancel_requested": 1})
+            if child.status == RunStatus.NOT_RUN:
+                _update(self.db, Run, row.child_run_id, {"status": RunStatus.CANCELLED})
+            if not child_pin.cancel_requested or child.status == RunStatus.NOT_RUN:
+                _advance_lifecycle(self.db, row.child_run_id)
 
     def _authorize(
         self, actor: Actor, snapshot: ExecutionSnapshot, operation: str
@@ -344,6 +506,10 @@ class RunOutputService:
                 raise ValueError("invalid or missing operation")
         except (ValueError, TypeError) as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
+        if snapshot.capability_authority == "package-revision":
+            if self.capabilities is None:
+                raise AccessDenied("Package admission authority is unavailable")
+            self.capabilities.authorize(actor, snapshot, operation)
 
     def _pinned(self, pin: RunPin) -> ExecutionSnapshot:
         row = _one(self.db, RunAdmission, pin.run_admission_id)
@@ -372,6 +538,15 @@ class RunOutputService:
         inputs: Any,
         idempotency_key: str,
     ) -> Run:
+        return self.admit_outcome(actor, snapshot, inputs, idempotency_key).run
+
+    def admit_outcome(
+        self,
+        actor: Actor,
+        snapshot: ExecutionSnapshot,
+        inputs: Any,
+        idempotency_key: str,
+    ) -> RunAdmissionOutcome:
         snapshot = _snapshot(snapshot)
         if (
             not isinstance(idempotency_key, str)
@@ -404,7 +579,7 @@ class RunOutputService:
             ):
                 raise AccessDenied("Run/output unavailable or access denied")
             self._authorize(actor, snapshot, "execute")
-            action = _action_identity(self.db, snapshot)
+            action = _action_identity(self.db, snapshot, self.capabilities)
             from jsonschema import validate
             from jsonschema.exceptions import SchemaError, ValidationError
 
@@ -424,7 +599,7 @@ class RunOutputService:
                 ):
                     raise ValueError("idempotency key conflicts with changed request")
                 self._authorize(actor, self._pinned(pin), "execute")
-                return _one(self.db, Run, pin.run_id)
+                return RunAdmissionOutcome(_one(self.db, Run, pin.run_id), False)
             run_id = str(uuid4())
             numbered = _returning(
                 self.db,
@@ -433,12 +608,13 @@ class RunOutputService:
             )
             if len(numbered) != 1:
                 raise RuntimeError("Run counter unavailable")
+            created_ms = _now(self.db)
             run = Run(
                 id=run_id,
                 status=RunStatus.NOT_RUN,
                 action_id=snapshot.action_id,
                 start_time=datetime.datetime.fromtimestamp(
-                    _now(self.db) / 1000, datetime.timezone.utc
+                    created_ms / 1000, datetime.timezone.utc
                 ).isoformat(),
                 run_time=None,
                 inputs=input_json,
@@ -465,9 +641,10 @@ class RunOutputService:
                     0,
                     -1,
                     "",
+                    str(created_ms),
                 ),
             )
-            return run
+            return RunAdmissionOutcome(run, True)
 
     def _fence(self, fence: AttemptFence) -> RunPin:
         fence = AttemptFence.model_validate(fence)
@@ -535,6 +712,7 @@ class RunOutputService:
                 },
             )
             _update(self.db, Run, run_id, {"status": RunStatus.RUNNING})
+            _advance_lifecycle(self.db, run_id, now=now)
             return AttemptFence(
                 run_id=run_id,
                 attempt_id=attempt.id,
@@ -555,6 +733,21 @@ class RunOutputService:
                 [str(now + duration), str(now), fence.attempt_id],
             ):
                 raise FenceRejected("expired Attempt cannot renew")
+
+    def execution_context(
+        self, actor: Actor, fence: AttemptFence
+    ) -> tuple[ExecutionSnapshot, Any]:
+        """Trusted worker read of the pinned snapshot and input under a live fence.
+
+        This grants no ongoing write authority. Stage and publish recheck the
+        fence, cancellation and grants independently after provider execution.
+        """
+        with _transaction(self.db):
+            pin = self._fence(fence)
+            snapshot = self._pinned(pin)
+            self._authorize(actor, snapshot, "execute")
+            run = _one(self.db, Run, fence.run_id)
+            return snapshot, json.loads(run.inputs)
 
     def stage(
         self,
@@ -709,8 +902,20 @@ class RunOutputService:
         return discardable
 
     def publish(
-        self, actor: Actor, fence: AttemptFence, outputs: list[OutputRef], result: Any
+        self,
+        actor: Actor,
+        fence: AttemptFence,
+        outputs: list[OutputRef],
+        result: Any,
+        *,
+        terminal_status: int = RunStatus.PASSED,
     ) -> Run:
+        if (
+            not isinstance(terminal_status, int)
+            or isinstance(terminal_status, bool)
+            or terminal_status not in (RunStatus.PASSED, RunStatus.FAILED)
+        ):
+            raise ValueError("successful or failed terminal publication required")
         if not 1 <= len(outputs) <= MAX_OUTPUTS or len(
             {o.output_id for o in outputs}
         ) != len(outputs):
@@ -730,9 +935,10 @@ class RunOutputService:
             self._authorize(actor, snapshot, "execute")
             run = _one(self.db, Run, fence.run_id)
             attempt = _one(self.db, RunAttempt, fence.attempt_id)
-            if run.status == RunStatus.PASSED:
+            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
                 if (
-                    run.result == envelope
+                    run.status == terminal_status
+                    and run.result == envelope
                     and pin.current_attempt_id == fence.attempt_id
                     and pin.epoch == fence.epoch
                     and attempt.owner_id == fence.owner_id
@@ -771,13 +977,14 @@ class RunOutputService:
                     )
             # The live-lease predicate is evaluated at the terminal write itself.
             self._fence(fence)
+            self._apply_parent_exit_policy(pin, snapshot)
             if not _returning(
                 self.db,
                 "UPDATE run SET status=?, result=? WHERE id=? AND status=? AND EXISTS (SELECT 1 FROM run_pin p JOIN run_attempt a ON a.id=p.current_attempt_id WHERE p.run_id=run.id AND p.current_attempt_id=? AND p.epoch=? AND p.cancel_requested=0 AND a.owner_id=? AND a.state='running' AND CAST(a.lease_deadline_ms AS BIGINT)>"
                 + _now_sql(self.db)
                 + ") RETURNING id",
                 [
-                    RunStatus.PASSED,
+                    terminal_status,
                     envelope,
                     run.id,
                     RunStatus.RUNNING,
@@ -789,26 +996,50 @@ class RunOutputService:
                 raise FenceRejected("publication lease expired")
             for ref in outputs:
                 _update(self.db, RunOutput, ref.output_id, {"state": "final"})
-            _update(self.db, RunAttempt, fence.attempt_id, {"state": "succeeded"})
+            _update(
+                self.db,
+                RunAttempt,
+                fence.attempt_id,
+                {
+                    "state": "succeeded"
+                    if terminal_status == RunStatus.PASSED
+                    else "failed"
+                },
+            )
+            _advance_lifecycle(self.db, run.id)
             return _one(self.db, Run, run.id)
 
     def cancel(self, actor: Actor, run_id: str) -> bool:
         with _transaction(self.db):
             pin = _lock_run(self.db, run_id)
-            self._authorize(actor, self._pinned(pin), "cancel")
+            snapshot = self._pinned(pin)
+            self._authorize(actor, snapshot, "cancel")
             run = _one(self.db, Run, run_id)
             if run.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
                 return False
-            _update(self.db, RunPin, run_id, {"cancel_requested": 1})
+            if run.status == RunStatus.RUNNING:
+                # Cancellation intent is irreversible and fences new child
+                # admission. Record the pinned child policy in the same lock.
+                self._apply_parent_exit_policy(pin, snapshot)
+            if not pin.cancel_requested:
+                _update(self.db, RunPin, run_id, {"cancel_requested": 1})
+                _advance_lifecycle(self.db, run_id)
             return True
 
     @contextmanager
     def resolve(
-        self, actor: Actor, workspace_id: str, handle: str
+        self,
+        actor: Actor,
+        workspace_id: str,
+        handle: str,
+        *,
+        canvas_scope: CanvasResultScope | None = None,
     ) -> Iterator[ResolvedOutput]:
         try:
             canonical_uuid(workspace_id)
             output_id = output_id_from_handle(handle)
+            if canvas_scope is not None:
+                canvas_scope = CanvasResultScope.model_validate(canvas_scope)
         except ValueError as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
         with ExitStack() as owned:
@@ -823,6 +1054,11 @@ class RunOutputService:
                     raise AccessDenied("Run/output unavailable or access denied")
                 snapshot = self._pinned(pin)
                 self._authorize(actor, snapshot, "read")
+                if canvas_scope is not None and (
+                    snapshot.deployment != canvas_scope.deployment
+                    or snapshot.canvas_application != canvas_scope.application
+                ):
+                    raise AccessDenied("Run/output unavailable or access denied")
                 run = _one(self.db, Run, output.run_id)
                 try:
                     attached = json.loads(run.result or "null")
@@ -830,18 +1066,20 @@ class RunOutputService:
                         workspace_id=workspace_id, run_id=run.id, output_id=output.id
                     ).model_dump()
                     if (
-                        run.status != RunStatus.PASSED
+                        run.status not in (RunStatus.PASSED, RunStatus.FAILED)
                         or output.state != "final"
-                        or int(output.expires_ms) <= _now(self.db)
                         or not isinstance(attached, dict)
                         or attached.get("version") != 1
                         or ref not in attached.get("outputs", [])
                     ):
                         raise ValueError("not attached final output")
+                    expired = int(output.expires_ms) <= _now(self.db)
                 except (ValueError, TypeError) as exc:
                     raise AccessDenied(
                         "Run/output unavailable or access denied"
                     ) from exc
+                if expired:
+                    raise OutputExpired("Run/output unavailable or access denied")
                 provider = self.providers.get(output.provider_key)
                 if provider is None or output.provider_key != snapshot.provider_key:
                     raise AccessDenied("Run/output unavailable or access denied")

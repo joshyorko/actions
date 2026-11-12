@@ -1,0 +1,47 @@
+{
+  "status": "SOURCE_CHECKPOINT_NOT_INSTALLED_QUALIFIED",
+  "version": "1.1.0a53",
+  "base_source": "f235de8916487bcae8e97c3bad0f434be7f360c7",
+  "static": {
+    "command": "prepared RCC package gateway: poetry run invoke lint typecheck",
+    "result": "PASS",
+    "mypy_source_files": 654
+  },
+  "focused_original": {
+    "passed": 114,
+    "skipped": 52,
+    "failed": 1,
+    "seconds": 268.2,
+    "failure": "test_orphaned_same_group_child_is_stopped NoSuchProcess observation race while outer subreaper reaped exact child; correction retains absent-or-zombie criterion"
+  },
+  "direct_child": {
+    "passed": 1,
+    "skipped": 1,
+    "scope": "SQLite direct Robot actual child; not installed RCC"
+  },
+  "prior_claimed_subset": {
+    "passed": 42,
+    "skipped": 42,
+    "seconds": 190.39
+  },
+  "prior_failures_preserved": [
+    "initial owner test collection before implementation",
+    "two test-fixture errors before corrected42pass run",
+    "static two optional-type errors and one unused test import corrected",
+    "initial helper cancellation message regression corrected without changing existing assertions",
+    "authority helper dataclass/Pydantic fixture mismatch corrected"
+  ],
+  "aggregate": "separately owned frozen f235de89; current a53 aggregate pending",
+  "installed_rcc_cancellation": "NOT_RUN",
+  "prelaunch_cancel_confirmation": "NOT_IMPLEMENTED",
+  "known_pid1_zombie": 5086,
+  "general_environment_cleanup": "NOT_CLAIMED",
+  "adapter_correction": {
+    "passed": 65,
+    "skipped": 2,
+    "seconds": 12.23,
+    "supervisor": "PASS; exited adoptee reaped, no owned descendants",
+    "scope": "correction follow-up; original combined run remains FAILED"
+  },
+  "review": "independent bounded source review CLEAR; original test observation correction CLEAR"
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "dummy processes and mocked source state only; no RCC/PG/product execution",
+  "tests_passed": 8,
+  "ast": "PASS",
+  "added_cases": [
+    "clean unchanged source plus successful session_finish required",
+    "source fingerprint and dirty detection",
+    "SIGTERM reaches finally and repeated SIGTERM cannot skip cleanup"
+  ],
+  "files": {
+    "progress_plugin.py": "cb8c4bc2bea1e3cb4a3850d44ecef77b0ecf95bb8b8b982f80b2d01a591e819c",
+    "pytest_entry.py": "032e500953190c858e32026c955bcb68ae830aff06c1932ab3714400e22f48e2",
+    "supervise.py": "23d17c7c25cffb0fbe08788c4b01ceae4007b0df693c6996897b1feb0920325a",
+    "test_supervisor.py": "92fd54c1b6af357126d446f3d60ed327264eb638af434e37cf59563073730993"
+  }
+}

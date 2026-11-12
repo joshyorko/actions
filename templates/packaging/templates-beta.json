@@ -8,7 +8,7 @@
         {
             "id": "basic",
             "name": "Basic",
-            "desc": "Simple example showcasing some basic configuration."
+            "desc": "Offline word-count action using Actions Core."
         },
         {
             "id": "advanced",

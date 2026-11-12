@@ -1,0 +1,87 @@
+{
+  "baseline": [
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    }
+  ],
+  "candidate": [
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    },
+    {
+      "code": "UP038",
+      "message": "Use `X | Y` in `isinstance` call instead of `(X, Y)`"
+    }
+  ],
+  "new_test": []
+}

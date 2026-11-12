@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": true,
+      "applicationId": "54fff041-1e91-4354-8715-2faea8de4de5",
+      "bindings": [
+        {
+          "bindingId": "echo",
+          "capabilityId": "action.generated_echo",
+          "packageRevision": {
+            "package_id": "83431822-441f-5d0b-8be4-f4fa09e7ebe4",
+            "revision_id": "sha256:5ee7ce018b3733ab0194332dc04b8195cd573e291c27c23930f19414fddbc57d",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          }
+        }
+      ],
+      "revisionId": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+      "spec": {
+        "bindingIds": [
+          "echo"
+        ],
+        "root": {
+          "children": [
+            {
+              "id": "intro",
+              "text": "Actual installed generic backend",
+              "type": "text"
+            },
+            {
+              "bindingId": "echo",
+              "id": "status-echo",
+              "type": "status"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Ordinary required-input compiled echo",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": true,
+    "applicationId": "54fff041-1e91-4354-8715-2faea8de4de5",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:15537847a3fe64c16234b12cbac1d393c82e74a48e512406add56507124a47a3",
+    "spec": {
+      "bindingIds": [
+        "echo"
+      ],
+      "root": {
+        "children": [
+          {
+            "id": "intro",
+            "text": "Actual installed generic backend",
+            "type": "text"
+          },
+          {
+            "bindingId": "echo",
+            "id": "status-echo",
+            "type": "status"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Ordinary required-input compiled echo",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

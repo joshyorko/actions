@@ -1,0 +1,6 @@
++ poetry run pytest tests/action_server_tests/mcp -m not integration_test -q --junitxml=/workspace/actions-recovery-327/evidence/task-mcp-regression-corrected.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-mcp-regression-corrected-log (in /workspace/actions/action_server)
+........................................................................ [ 50%]
+.......................................................................  [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/task-mcp-regression-corrected.xml -
+143 passed, 18 deselected in 27.09s
+Log (html): /workspace/actions-recovery-327/evidence/task-mcp-regression-corrected-log/log.html

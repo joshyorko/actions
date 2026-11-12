@@ -1,0 +1,16 @@
+[
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_admission_replay_restart_and_exact_schemas[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_admission_replay_restart_and_exact_schemas[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_admission_requires_host_output_actor_workspace_and_live_grants[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_admission_requires_host_output_actor_workspace_and_live_grants[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_duplicate_package_compiles_converge_without_overwriting_or_regranting[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_duplicate_package_compiles_converge_without_overwriting_or_regranting[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_failed_compiler_never_admits_and_tampered_storage_fails_closed[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_failed_compiler_never_admits_and_tampered_storage_fails_closed[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_compilation_requires_explicit_host_execution_admission[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_compilation_requires_explicit_host_execution_admission[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_request_audit_and_grants_rollback_together[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_package_request_audit_and_grants_rollback_together[postgresql]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_explicit_work_item_declaration_survives_registry_restart[sqlite]",
+  "tests/action_server_tests/test_foundry_package_registry.py::test_explicit_work_item_declaration_survives_registry_restart[postgresql]"
+]

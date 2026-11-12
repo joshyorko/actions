@@ -1,0 +1,152 @@
+{
+  "source_sha256": "e393bdd7ebf65248522a114052d2677e1b975b7444f8bfea35bcfb5d431f6253",
+  "cases": [
+    {
+      "failure": null,
+      "raised": null,
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "host-stop",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "host-log-close",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "runtime-stop",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "key-read",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "key-disposal",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "budget",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "receipt",
+      "raised": "OSError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "signal-handler",
+      "raised": "RuntimeError",
+      "phases": [
+        "watchdog-stop",
+        "signal-handler",
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    }
+  ],
+  "scope": "AST extracted cleanup only; all filesystem/process/key operations mocked",
+  "watchdog_cases": [
+    "budget failure cancels owner with sanitized receipt",
+    "watchdog cancellation propagates without cancelling owner"
+  ]
+}

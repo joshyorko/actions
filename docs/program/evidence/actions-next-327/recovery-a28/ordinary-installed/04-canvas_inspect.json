@@ -1,0 +1,252 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "application": {
+        "activeRevisionId": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+        "applicationId": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+        "revisions": [
+          {
+            "active": false,
+            "buildStatus": "not-required",
+            "compilationStatus": "not-required",
+            "importStatus": "not-required",
+            "revisionId": "sha256:2eacd0d0031707c4fa57a4d65228d04881977394db647b4d20bee037902690f2",
+            "spec": {
+              "bindingIds": [],
+              "root": {
+                "children": [
+                  {
+                    "id": "welcome",
+                    "text": "Installed ordinary generated app is ready to compose.",
+                    "type": "text"
+                  },
+                  {
+                    "id": "guidance",
+                    "text": "Describe the interface you want. Add a backend only when it needs one.",
+                    "type": "text"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Installed ordinary generated app",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "not-required",
+            "validationStatus": "passed"
+          },
+          {
+            "active": true,
+            "buildStatus": "passed",
+            "compilationStatus": "succeeded",
+            "importStatus": "passed",
+            "revisionId": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+            "spec": {
+              "bindingIds": [
+                "echo"
+              ],
+              "root": {
+                "children": [
+                  {
+                    "id": "intro",
+                    "text": "Actual installed generic backend",
+                    "type": "text"
+                  },
+                  {
+                    "bindingId": "echo",
+                    "id": "status-echo",
+                    "type": "status"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Ordinary optional compiled echo",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "passed",
+            "validationStatus": "passed"
+          }
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revisions inspected.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "activeRevisionId": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+    "applicationId": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+    "invocationAvailability": "authorized",
+    "invocationDescriptors": [
+      {
+        "bindingId": "echo",
+        "inputMode": "optional",
+        "inputQueue": {
+          "deployment": {
+            "deployment_id": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+            "revision_id": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          },
+          "queue_id": "ordinary-optional",
+          "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+        },
+        "inputSchema": {
+          "properties": {
+            "value": {
+              "description": "",
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "value"
+          ],
+          "type": "object"
+        },
+        "mode": "generic",
+        "snapshot": {
+          "action_id": "7aa1840a-55cf-59a3-833c-57732607be91",
+          "canvas_application": {
+            "app_id": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+            "revision_id": "sha256:f33c8fe35cd9d56077280460c527788e31f28532767ed9e20831b9ce46962096",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          },
+          "capability": {
+            "capability_id": "action.generated_echo",
+            "package_revision": {
+              "package_id": "86c4beec-ddcb-5357-bf7b-3f82f1499c11",
+              "revision_id": "sha256:640f1b6e459bc8b72a48cb0cd9350b2df903c9ce4a1bc9c30d3ddbd94cc61a17",
+              "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+            }
+          },
+          "capability_authority": "package-revision",
+          "capability_schema_digest": "sha256:cdc6f7fa3a3a8ce5d800b65dc02d27fffa3e48b8fdb7cae960dff6baadbb6600",
+          "data_binding": null,
+          "deployment": {
+            "deployment_id": "73d56d34-0f8d-41ab-84a1-4a0aad5e22e1",
+            "revision_id": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          },
+          "output_provider": {
+            "provider_profile_id": "4caa6bee-b1ca-49e1-8ef3-13f06218343e",
+            "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          },
+          "policy": {
+            "policy_id": "15262c33-9b19-41f1-8a66-d5d7bc12410d",
+            "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          },
+          "runtime_kind": "rcc",
+          "runtime_plan": {
+            "package_revision": {
+              "package_id": "86c4beec-ddcb-5357-bf7b-3f82f1499c11",
+              "revision_id": "sha256:640f1b6e459bc8b72a48cb0cd9350b2df903c9ce4a1bc9c30d3ddbd94cc61a17",
+              "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+            },
+            "plan_digest": "sha256:133e1fc2d881405af4cfb846f77587302eca3a18c5cb58521623c99054d78a62"
+          },
+          "worker": {
+            "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "worker_profile_id": "53d70255-9e57-482a-8d82-173a67d06ff1",
+            "workspace_id": "b4cffbc5-297f-4b00-ab5e-bd18b9ad46f4"
+          }
+        },
+        "standaloneAllowed": true
+      }
+    ],
+    "invocationReadiness": "not-checked",
+    "revisions": [
+      {
+        "active": false,
+        "buildStatus": "not-required",
+        "compilationStatus": "not-required",
+        "importStatus": "not-required",
+        "revisionId": "sha256:2eacd0d0031707c4fa57a4d65228d04881977394db647b4d20bee037902690f2",
+        "spec": {
+          "bindingIds": [],
+          "root": {
+            "children": [
+              {
+                "id": "welcome",
+                "text": "Installed ordinary generated app is ready to compose.",
+                "type": "text"
+              },
+              {
+                "id": "guidance",
+                "text": "Describe the interface you want. Add a backend only when it needs one.",
+                "type": "text"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Installed ordinary generated app",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "not-required",
+        "validationStatus": "passed"
+      },
+      {
+        "active": true,
+        "buildStatus": "passed",
+        "compilationStatus": "succeeded",
+        "importStatus": "passed",
+        "revisionId": "sha256:5edb68e95ebdb5b27dbbd175ffcbad461fc3e71ab5611ce51a64c15bd7b3b32c",
+        "spec": {
+          "bindingIds": [
+            "echo"
+          ],
+          "root": {
+            "children": [
+              {
+                "id": "intro",
+                "text": "Actual installed generic backend",
+                "type": "text"
+              },
+              {
+                "bindingId": "echo",
+                "id": "status-echo",
+                "type": "status"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Ordinary optional compiled echo",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "passed",
+        "validationStatus": "passed"
+      }
+    ]
+  },
+  "isError": false,
+  "resultType": "complete"
+}

@@ -1,0 +1,38 @@
+{
+  "result": "failed",
+  "scope": "installed Python consumer only",
+  "producer_version": "7.5.0",
+  "wheel_sha256": "34f5b7c1db29d4def4ba84214d225f6b82d037fa39e3b819eab6fe1ff15898ce",
+  "runtime_version": "1.1.0a38",
+  "runtime-lock.toml_sha256": "ed0a02f97b916e1cc9606763adb2d94a10b40138cb9c15a505fddb36775d11eb",
+  "producer-lock.toml_sha256": "1f7120c436fce2c82ab144aa494796c4ad0b10280bef59965a42decc4671228a",
+  "inspect_sha256": "712342d404b3996738da80090228175125ab85eabbc39a3aa25aab24ce9557bb",
+  "selected_extras": {
+    "actions-runtime": [
+      "data-duckdb"
+    ],
+    "psycopg": [
+      "binary"
+    ],
+    "pyjwt": [
+      "crypto"
+    ]
+  },
+  "producer_command": [
+    "/workspace/lane-d/repo/devutils/.venv/bin/python",
+    "-m",
+    "cyclonedx_py",
+    "environment",
+    "/workspace/lane-d/clean-sbom-consumer/bin/python",
+    "--spec-version",
+    "1.6",
+    "--output-format",
+    "JSON",
+    "--output-reproducible",
+    "--validate",
+    "--output-file",
+    "/workspace/lane-d/producer-qualified/python-consumer.cdx.json"
+  ],
+  "sbom_sha256": "183898f562696bbab4437de84c853dda67cc799ff2431d3038400ee30275aba1",
+  "error": "ValueError: CycloneDX graph differs from active resolved dependencies"
+}

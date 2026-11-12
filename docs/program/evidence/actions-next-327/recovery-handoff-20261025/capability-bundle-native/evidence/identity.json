@@ -1,0 +1,15 @@
+{
+  "head": "595cf5119dbf2f858bcc28109b34de31bdc50f86",
+  "patch_sha256": "609ec189a7c49bc283f4a9e915f8183ca8a1ff9dfbb9800b6a4a5be446bf012c",
+  "sha256": {
+    "/workspace/actions-recovery-327/capability-bundle-draft/action_server/src/actions/server/deployments/capability_bundle.py": "bf9726eec809e18dd749e2b3835a7a02a98131f90d43afc3186ff933d5745922",
+    "/workspace/actions-recovery-327/capability-bundle-draft/action_server/src/actions/server/deployments/capability_bundle_compiler.py": "26e7b569792ea1f62b1a98a4da4a9b71d582758a4c1a3a9cfd8d2debf1c60ecb",
+    "/workspace/actions/action_server/src/actions/server/deployments/package_revision_compiler.py": "6cf4b8e1c17180a86398f1f490a9470946b88b22fd20991a4a6be714c00da6cd",
+    "/workspace/actions/action_server/src/actions/server/bin/rcc-18.19.3": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "/workspace/actions-recovery-327/compiler-core-a3/prepared.json": "d3125f1534d6d67d427c087531a3b7b0e86390ca69ec8f4fe6a3e250f3bca560",
+    "/workspace/actions-recovery-327/compiler-core-a3/core-proof.json": "d7aa24a96b06168e0d5b47fc615aa78aad0df69b98d3d5bfb0b82edcab8a18cb",
+    "/workspace/actions-recovery-327/capability-bundle-native/qualify.py": "304c2a868a38dae23190060f9b384a49a0b037b9528464f363a87d9157020f34",
+    "/workspace/actions-recovery-327/capability-bundle-native/monitor.py": "fbf9446b5080c858518675db67e389cc7ec846fcf9a2bb46a28e2b07ff789a49"
+  },
+  "proof": "native compiler qualification using scratch two-module overlay and current unchanged legacy compiler; not full tree/installed run proof"
+}

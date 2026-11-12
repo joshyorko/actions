@@ -1,0 +1,45 @@
+{
+  "source": "7c855f81346df990f78b9ff501621a49bc781452",
+  "tree": "06a95a979a14492bc42170e7f0a559ce9d1758b2",
+  "container": "acc7b6f04906f7ee568c73c74a43065c5668e75486598a6916ff903518808cb0",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_generic_projection",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a40/projection-helper-joined/selected-pytest.py",
+        "tests/contract_tests/test_generic_projection.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a40/projection-helper-joined/test_generic_projection/tests.xml",
+        "--basetemp=/workspace/actions-327-a40/projection-helper-joined/test_generic_projection/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 9393074176,
+      "stop_reason": null,
+      "source_sha256": "632ebb1673b9c1311d96b4a18be11bfc23607589e968bdbec5a513db6979f307",
+      "counts": {
+        "tests": 70,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

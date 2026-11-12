@@ -1,0 +1,16 @@
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="6.427634">
+<testsuite name="browser-harness.spec.ts" timestamp="2026-10-25T13:47:46.725Z" hostname="" tests="6" failures="0" skipped="0" time="4.092" errors="0">
+<testcase name="renders and dispatches a synthetic component form in a browser" classname="browser-harness.spec.ts" time="0.744">
+</testcase>
+<testcase name="keeps wide results within the page at 320px" classname="browser-harness.spec.ts" time="0.712">
+</testcase>
+<testcase name="keeps wide results within the page at 1280px" classname="browser-harness.spec.ts" time="0.589">
+</testcase>
+<testcase name="announces pending work and a response without dispatch on mount" classname="browser-harness.spec.ts" time="0.684">
+</testcase>
+<testcase name="shows truthful error results and permits retry" classname="browser-harness.spec.ts" time="0.706">
+</testcase>
+<testcase name="shows truthful empty results and permits retry" classname="browser-harness.spec.ts" time="0.657">
+</testcase>
+</testsuite>
+</testsuites>

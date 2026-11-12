@@ -1,0 +1,106 @@
+{
+  "pyjwt": {
+    "missing": [],
+    "extra": [
+      "typing-extensions"
+    ]
+  },
+  "actions-work-items": {
+    "missing": [],
+    "extra": [
+      "psycopg",
+      "redis",
+      "requests"
+    ]
+  },
+  "cryptography": {
+    "missing": [],
+    "extra": [
+      "certifi",
+      "click",
+      "typing-extensions"
+    ]
+  },
+  "fastapi-slim": {
+    "missing": [],
+    "extra": [
+      "python-multipart",
+      "pyyaml",
+      "uvicorn"
+    ]
+  },
+  "httpcore2": {
+    "missing": [],
+    "extra": [
+      "anyio"
+    ]
+  },
+  "httpx2": {
+    "missing": [],
+    "extra": [
+      "click"
+    ]
+  },
+  "jsonschema": {
+    "missing": [],
+    "extra": [
+      "idna"
+    ]
+  },
+  "msgspec": {
+    "missing": [],
+    "extra": [
+      "attrs",
+      "pyyaml"
+    ]
+  },
+  "multidict": {
+    "missing": [],
+    "extra": [
+      "typing-extensions"
+    ]
+  },
+  "oauthlib": {
+    "missing": [],
+    "extra": [
+      "cryptography",
+      "pyjwt"
+    ]
+  },
+  "psycopg": {
+    "missing": [],
+    "extra": [
+      "anyio"
+    ]
+  },
+  "redis": {
+    "missing": [],
+    "extra": [
+      "cryptography",
+      "requests"
+    ]
+  },
+  "sse-starlette": {
+    "missing": [],
+    "extra": [
+      "pydantic",
+      "uvicorn"
+    ]
+  },
+  "starlette": {
+    "missing": [],
+    "extra": [
+      "python-multipart",
+      "pyyaml"
+    ]
+  },
+  "uvicorn": {
+    "missing": [],
+    "extra": [
+      "pyyaml",
+      "typing-extensions",
+      "watchfiles",
+      "websockets"
+    ]
+  }
+}

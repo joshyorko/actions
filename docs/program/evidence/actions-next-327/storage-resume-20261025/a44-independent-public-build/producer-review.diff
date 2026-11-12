@@ -1,0 +1,41 @@
+--- committed/prepare-compiler-managed.py
++++ prepare-public-producer.py
+@@ -45,11 +45,20 @@
+     return text.encode()
+
+ def main():
++    if sys.flags.optimize:
++        raise RuntimeError('Optimized Python disables qualification checks')
+     parser = argparse.ArgumentParser()
+     parser.add_argument('--candidate-base', type=Path, required=True)
+     parser.add_argument('--compiler-root', type=Path, required=True)
++    parser.add_argument('--export-root', type=Path, required=True)
+     args = parser.parse_args()
+     candidate, root = args.candidate_base.resolve(), args.compiler_root.absolute()
++    assert root == Path('/tmp/actions327-a44-offline-v1/compiler') and root.resolve() == root
++    assert all(not p.is_symlink() for p in (root, *root.parents))
++    export_root = args.export_root.absolute()
++    assert not export_root.exists() and not export_root.is_symlink()
++    assert export_root.parent.is_dir() and export_root.parent.stat().st_dev == root.parent.stat().st_dev
++    assert not export_root.is_relative_to(root) and not root.is_relative_to(export_root)
+     assert sys.platform == 'linux' and sys.flags.isolated, 'Linux isolated consumer interpreter required'
+     assert Path(sys.prefix).resolve() == (candidate / 'consumer').resolve(), 'Use candidate consumer Python'
+     assert (candidate / 'source-sha.txt').read_text().strip() == SOURCE
+@@ -185,7 +194,17 @@
+         result = {'candidate_source':SOURCE,'core_wheel_sha256':CORE,'rcc':str(rcc),'rcc_sha256':RCC,'rcc_version':'v18.19.3','prepared_receipt':str(root/'prepared.json'),'robocorp_home':str(root/'robocorp'),'package_yaml_digest':'sha256:'+YAML,'specificationDigest':row['specificationDigest'],'artifactDigest':row['artifactDigest'],'core_proof_sha256':sha(root/'core-proof.json'),'prepared_receipt_sha256':sha(root/'prepared.json')}
+         result.update(capacity_profile='a44-managed-ui-only-v1', source_sha=SOURCE, runtime_version='1.1.0a44', core_version='1.1.0a6', compiler_artifact_digest=row['artifactDigest'], compiler_core_wheel_sha256=CORE, compiler_core_bytes_verified=True, compiler_core_receipt=str(root/'core-proof.json'), compiler_core_receipt_sha256=sha(root/'core-proof.json'))
+         (root/'target-config-fragment.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
+-        print(json.dumps(result,sort_keys=True))
++        # Qualify only this fresh build before any supported export.
++        import runpy
++        helper = runpy.run_path(str(Path(__file__).with_name('qualify-export.py')))
++        evidence = helper['qualify'](root, Path(__file__).parent)
++        export_root.mkdir(mode=0o700)
++        archive = export_root / 'independently-built-public-cache.zip'
++        run([str(rcc), 'holotree', 'export', *helper['CATALOGS'], '--zipfile', str(archive)], 'qualified-export', 120)
++        assert archive.stat().st_size < 100*1024**2, 'Export archive bound'
++        budget()
++        helper['finalize'](root, export_root, Path(__file__).parent, archive, evidence)
++        print(json.dumps({'status':'INDEPENDENT_PUBLIC_BUILD_QUALIFIED','export_root':str(export_root)},sort_keys=True))
+     finally:
+         assert libc.prctl(36,previous.value,0,0,0)==0

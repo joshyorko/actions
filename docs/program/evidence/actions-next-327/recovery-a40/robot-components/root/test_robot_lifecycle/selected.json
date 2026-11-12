@@ -1,0 +1,9 @@
+[
+  "tests/contract_tests/test_robot_lifecycle.py::test_delegates_without_admit_publish_or_terminalize",
+  "tests/contract_tests/test_robot_lifecycle.py::test_uncertain_ack_blocks_blind_retry",
+  "tests/contract_tests/test_robot_lifecycle.py::test_stale_and_selection_mismatch_fail_closed",
+  "tests/contract_tests/test_robot_lifecycle.py::test_staging_requires_intent_and_bounded_bytes",
+  "tests/contract_tests/test_robot_lifecycle.py::test_atomic_journal_rejects_stale_race",
+  "tests/contract_tests/test_robot_lifecycle.py::test_service_stage_rejects_stale_race",
+  "tests/contract_tests/test_robot_lifecycle.py::test_real_run_output_authority_stages_and_rejects_cancel"
+]

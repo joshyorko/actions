@@ -1,0 +1,25 @@
+{
+  "name": "cyclonedx-bom",
+  "version": "7.5.0",
+  "requires_python": "<4,>=3.9",
+  "requires_dist": [
+    "chardet!=6.*,<8,>=5.1",
+    "cyclonedx-python-lib[validation]<12,>=8",
+    "packageurl-python<2,>=0.11",
+    "packaging<27,>=22",
+    "pip-requirements-parser<33,>=32",
+    "tomli<3,>=2.0.1; python_version < \"3.11\""
+  ],
+  "files": [
+    {
+      "filename": "cyclonedx_bom-7.5.0-py3-none-any.whl",
+      "sha256": "a3020e225107214a66cb9c79ae83e3a71640a06d4ff3a0e2f9cb0d238f7061fd",
+      "uploaded": "2026-09-29T15:45:56.567095Z"
+    },
+    {
+      "filename": "cyclonedx_bom-7.5.0.tar.gz",
+      "sha256": "396cc8c9cb7533d25a21f930b45d2699a1839e3ba2be9ba88f8bd61c566b51dc",
+      "uploaded": "2026-09-29T15:45:58.645865Z"
+    }
+  ]
+}

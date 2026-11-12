@@ -1,0 +1,212 @@
+{
+  "schema": "hosted-ci-triage/v1",
+  "repository": "joshyorko/actions",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "pull_request_head": "a4e5b2b66c79da3c083d315cf5865ca70bd4d025",
+  "tested_merge_sha": "615cd23517f0ee76c8be2da45c9839e743dcaeb4",
+  "tested_merge_base_sha": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+  "scope": "Read-only hosted GitHub Actions log review. No reruns, cancellations, workflow changes, publication, issue creation, notifications, or tracked repository edits.",
+  "failures": [
+    {
+      "classification": "actionable_frontend_quality",
+      "dedupe_key": "prettier-generic-layout-test",
+      "workflow": "Frontend Build",
+      "run_id": 40323833314,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833314",
+      "jobs": [
+        {"job_id": 121575280687, "runner": "macos-latest", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833314/job/121575280687", "failed_step": "Frontend Quality"},
+        {"job_id": 121575280890, "runner": "ubuntu-latest", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833314/job/121575280890", "failed_step": "Frontend Quality"}
+      ],
+      "error": "Prettier reports code style issues in apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx; step exits 1.",
+      "proposed_delta": "Format the flagged test file.",
+      "test_command": "cd action_server/frontend && npm run test:quality",
+      "evidence_excerpt": "[warn] apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx; Code style issues found in the above file. Run Prettier with --write to fix."
+    },
+    {
+      "classification": "actionable_frontend_quality",
+      "dedupe_key": "prettier-generic-layout-test",
+      "workflow": "Action Server Frontend tests",
+      "run_id": 40323833518,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833518",
+      "jobs": [
+        {"job_id": 121575281986, "runner": "action-server-frontend-tests", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833518/job/121575281986", "failed_step": "Run frontend tests"}
+      ],
+      "error": "The same Prettier failure as Frontend Build #399; count once.",
+      "proposed_delta": "Same fix as Frontend Build #399.",
+      "test_command": "cd action_server/frontend && npm run test:quality",
+      "evidence_excerpt": "[warn] apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx; Code style issues found in the above file."
+    },
+    {
+      "classification": "windows_checkout_path_blocker",
+      "dedupe_key": "windows-checkout-filename-too-long",
+      "workflow": "Frontend Build",
+      "run_id": 40323833314,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833314",
+      "jobs": [
+        {"job_id": 121575280264, "runner": "windows-latest", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833314/job/121575280264", "failed_step": "Checkout"}
+      ],
+      "error": "Git checkout cannot create a deeply nested tracked evidence file; Filename too long. Test and build steps were skipped.",
+      "proposed_delta": "Shorten or relocate the deeply nested tracked recovery evidence paths, then verify Windows checkout.",
+      "test_command": "Windows checkout of the reviewed source tree; current job never reached build/test steps.",
+      "evidence_excerpt": "error: unable to create file docs/program/evidence/actions-next-327/recovery-a34/host/actual-cells/<id>/execution/<id>/<id>/<id>/source/tests/test_generated_action.py: Filename too long"
+    },
+    {
+      "classification": "windows_checkout_path_blocker",
+      "dedupe_key": "windows-checkout-filename-too-long",
+      "workflow": "HTTP Helper Tests",
+      "run_id": 40323833293,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833293",
+      "jobs": [
+        {"job_id": 121575280723, "runner": "windows-py3.10-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833293/job/121575280723", "failed_step": "Checkout repository and submodules"}
+      ],
+      "error": "Same Windows checkout path error; reported lint/typecheck/docs failures are downstream of checkout failure.",
+      "proposed_delta": "Same path fix as Frontend Build Windows job.",
+      "test_command": "Windows checkout followed by the workflow checks after checkout succeeds.",
+      "evidence_excerpt": "error: unable to create file docs/program/evidence/actions-next-327/recovery-a34/host/actual-cells/<id>/execution/<id>/<id>/<id>/source/tests/test_generated_action.py: Filename too long"
+    },
+    {
+      "classification": "windows_checkout_path_blocker",
+      "dedupe_key": "windows-checkout-filename-too-long",
+      "workflow": "Actions Runtime PYPI Release",
+      "run_id": 40323833388,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833388",
+      "jobs": [
+        {"job_id": 121575282116, "runner": "windows-2022", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833388/job/121575282116", "failed_step": "Checkout repository and submodules"}
+      ],
+      "error": "Same Windows checkout path error before wheel steps. Ubuntu sdist passed; macOS and Ubuntu wheel jobs were cancelled.",
+      "proposed_delta": "Same path fix; requalify the wheel workflow after Windows checkout succeeds.",
+      "test_command": "Windows wheel job after checkout fix.",
+      "evidence_excerpt": "error: unable to create file docs/program/evidence/actions-next-327/recovery-a34/host/actual-cells/<id>/execution/<id>/<id>/<id>/source/tests/test_generated_action.py: Filename too long"
+    },
+    {
+      "classification": "windows_checkout_path_blocker",
+      "dedupe_key": "windows-checkout-filename-too-long",
+      "workflow": "Actions Core Tests",
+      "run_id": 40323833307,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833307",
+      "jobs": [
+        {"job_id": 121575281763, "runner": "windows-py3.10-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833307/job/121575281763", "failed_step": "Checkout repository and submodules"}
+      ],
+      "error": "Same Windows checkout path error before checks.",
+      "proposed_delta": "Same path fix as other Windows jobs.",
+      "test_command": "Windows checkout followed by Core tests after checkout succeeds.",
+      "evidence_excerpt": "error: unable to create file docs/program/evidence/actions-next-327/recovery-a34/host/actual-cells/<id>/execution/<id>/<id>/<id>/source/tests/test_generated_action.py: Filename too long"
+    },
+    {
+      "classification": "windows_checkout_path_blocker",
+      "dedupe_key": "windows-checkout-filename-too-long",
+      "workflow": "Action Server Tests",
+      "run_id": 40323833328,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833328",
+      "jobs": [
+        {"job_id": 121575281038, "runner": "windows-py3.12-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833328/job/121575281038", "failed_step": "Checkout repository and submodules"}
+      ],
+      "error": "Same Windows checkout path error before checks.",
+      "proposed_delta": "Same path fix as other Windows jobs.",
+      "test_command": "Windows checkout followed by Action Server tests after checkout succeeds.",
+      "evidence_excerpt": "error: unable to create file docs/program/evidence/actions-next-327/recovery-a34/host/actual-cells/<id>/execution/<id>/<id>/<id>/source/tests/test_generated_action.py: Filename too long"
+    },
+    {
+      "classification": "actionable_generated_docs",
+      "dedupe_key": "actions-api-docs-out-of-date",
+      "workflow": "Actions Core Tests",
+      "run_id": 40323833307,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833307",
+      "jobs": [
+        {"job_id": 121575281549, "runner": "ubuntu-py3.10-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833307/job/121575281549", "failed_step": "inv docs with checking on files changed"},
+        {"job_id": 121575281842, "runner": "macos-py3.10-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833307/job/121575281842", "failed_step": "inv docs with checking on files changed"}
+      ],
+      "error": "Generated API docs differ in actions/docs/api/README.md, actions.mcp.md, actions.md, and actions.server_integration.md. Ubuntu tests, lint, and typecheck pass before docs check.",
+      "proposed_delta": "Regenerate and review/commit generated API docs.",
+      "test_command": "inv docs, then the workflow docs check",
+      "evidence_excerpt": "RuntimeError: There are uncommitted docs changes. Changes: diff --git a/actions/docs/api/README.md ..."
+    },
+    {
+      "classification": "actionable_owned_docs_validation",
+      "dedupe_key": "devutils-owned-docs-rule-tests",
+      "workflow": "Measured Python coverage gate",
+      "run_id": 40323833319,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833319",
+      "jobs": [
+        {"job_id": 121575280617, "runner": "ubuntu-latest", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833319/job/121575280617", "failed_step": "Measure portable package suite coverage"}
+      ],
+      "error": "test_validation_entrypoint_uses_official_and_owned_rules asserts expected D420 but receives none; test_import_validation_does_not_expand_to_package_descendants asserts expected D212 but receives none.",
+      "proposed_delta": "Align devutils/owned_docs/validation.py with its tested D420/D212 contract.",
+      "test_command": "cd devutils && poetry run pytest tests/test_owned_docs.py -q",
+      "evidence_excerpt": "FAILED tests/test_owned_docs.py::test_validation_entrypoint_uses_official_and_owned_rules - assert False; FAILED tests/test_owned_docs.py::test_import_validation_does_not_expand_to_package_descendants - assert False"
+    },
+    {
+      "classification": "action_server_test_and_fixture_failures",
+      "dedupe_key": "action-server-current-run-ubuntu-failures",
+      "workflow": "Action Server Tests",
+      "run_id": 40323833328,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833328",
+      "jobs": [
+        {"job_id": 121575281174, "runner": "ubuntu-py3.12-devmode", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833328/job/121575281174", "failed_step": "Test (not integration)"}
+      ],
+      "error": "3 failed, 3674 passed, 1639 skipped, 33 errors. Failures: task-policy fixture rejected by private-mode loader; two source-read mutation contract tests did not raise. 33 PostgreSQL cases failed because owned fixture is absent.",
+      "proposed_delta": "Set private permissions in test policy fixture; diagnose and repair source-read post-read change detection; provide owned PostgreSQL test fixture for the required PostgreSQL cases.",
+      "test_command": "cd action_server && poetry run pytest tests/action_server_tests/test_runtime_output_bootstrap.py -k requires_task_policy; cd action_server && poetry run pytest tests/contract_tests/test_source_read.py -k 'changes_during_read or earlier_file_change'",
+      "evidence_excerpt": "FAILED ...test_native_output_transport_requires_task_policy[sqlite-True] - ValueError: Private Task policy unavailable or invalid; FAILED ...test_changes_during_read_are_rejected[bytes] - DID NOT RAISE ValueError; FAILED ...test_earlier_file_change_during_later_read_is_rejected - DID NOT RAISE ValueError; ERROR ... - Failed: owned PostgreSQL fixture required"
+    },
+    {
+      "classification": "platform_and_fixture_prerequisites",
+      "dedupe_key": "action-server-macos-linux-only-docker-mypy",
+      "workflow": "Action Server Tests",
+      "run_id": 40323833328,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833328",
+      "jobs": [
+        {"job_id": 121575280700, "runner": "macos-26-arm64", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833328/job/121575280700", "failed_step": "Test (not integration)"},
+        {"job_id": 121575280700, "runner": "macos-26-arm64", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833328/job/121575280700", "failed_step": "inv typecheck"}
+      ],
+      "error": "macOS test summary: 21 failed, 2199 passed, 2929 skipped, 200 errors; includes filesystem output provider is Linux-only and FileNotFoundError for docker. Mypy reports robot_validation.py:211 cannot determine root and preparation.",
+      "proposed_delta": "Keep Linux-only tests on Linux, configure Docker/owned service requirements for selected tests, and type the reported mypy values.",
+      "test_command": "Platform-scoped Action Server tests plus the configured mypy command after correction.",
+      "evidence_excerpt": "ERROR ... RuntimeError: filesystem output provider is Linux-only; ERROR ... FileNotFoundError: [Errno 2] No such file or directory: 'docker'; robot_validation.py:211:39: error: Cannot determine type of root; ... preparation"
+    },
+    {
+      "classification": "aggregate_coverage_failure",
+      "dedupe_key": "coverage-507-dependent-failures",
+      "workflow": "Measured Python coverage gate",
+      "run_id": 40323833319,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833319",
+      "jobs": [
+        {"job_id": 121575280617, "runner": "ubuntu-latest", "job_url": "https://github.com/joshyorko/actions/actions/runs/40323833319/job/121575280617", "failed_step": "Measure portable package suite coverage"}
+      ],
+      "error": "Terminal failure; failed_gates devutils, action_server, source inventory incomplete; measured 9376 of 12442 statements (75.3577%); baseline_written=false. Coverage receipt reports missing action_server/devutils package reports after child suite failures.",
+      "proposed_delta": "Resolve child suite failures and prerequisites before interpreting or rerunning aggregate coverage; missing package reports are derivative.",
+      "test_command": "rcc run -r developer/toolkit.yaml --dev -t Coverage",
+      "evidence_excerpt": "= 1 failed, 3674 passed, 1641 skipped, 18 warnings, 33 errors =; failed_gates: devutils, action_server, source inventory is incomplete; package coverage report is missing"
+    }
+  ],
+  "publisher_disposition": {
+    "workflow": "Actions Runtime PYPI Release",
+    "run_id": 40323833388,
+    "run_url": "https://github.com/joshyorko/actions/actions/runs/40323833388",
+    "publish_job_id": 121576461581,
+    "publish_job_url": "https://github.com/joshyorko/actions/actions/runs/40323833388/job/121576461581",
+    "publish_job_status": "skipped",
+    "tag_version_check_status": "skipped",
+    "ubuntu_sdist_status": "success",
+    "windows_wheel_status": "failure_before_build_at_checkout",
+    "macos_wheel_status": "cancelled",
+    "ubuntu_wheel_status": "cancelled",
+    "publication_attempted": false,
+    "note": "PR-triggered prerelease/publisher gates were not entered. No release or publishing authority was exercised."
+  },
+  "older_heads_checked": [
+    {"short": "a369a5f", "sha": "a369a5f246d60a5040cfca6443411a4214043d75"},
+    {"short": "ac4880b", "sha": "ac4880b3204889062b8cecd712a31d26665d2427"},
+    {"short": "c384734", "sha": "c384734491db847db6e3daacc74036228a78f1cf"}
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "proposed_delta": "Add concise hosted-CI triage guidance: inspect first failed step/log; classify Windows Filename too long checkout failures before tests; regenerate generated docs when inv docs reports diffs; treat missing Linux/Docker/owned-Postgres prerequisites as unverified harness cells; deduplicate recurring causes across matrix jobs and runs.",
+    "evidence": "Current PR 328 GitHub Actions run/job logs linked above.",
+    "stale_guidance_removed": "none",
+    "remaining_uncertainty": "Whether source-read metadata checks detect all in-place writes on the hosted filesystem remains unresolved."
+  },
+  "upstream_disposition": "none",
+  "external_mutations": "none"
+}

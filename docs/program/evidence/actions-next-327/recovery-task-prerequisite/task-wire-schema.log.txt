@@ -1,0 +1,11 @@
++ poetry run pytest tests/action_server_tests/test_task_wire.py -q --junitxml=/workspace/actions-recovery-327/evidence/task-wire-schema.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-wire-schema-log (in /workspace/actions/action_server)
+....                                                                     [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/task-wire-schema.xml -
+4 passed, 1 warning in 1.25s
+Log (html): /workspace/actions-recovery-327/evidence/task-wire-schema-log/log.html

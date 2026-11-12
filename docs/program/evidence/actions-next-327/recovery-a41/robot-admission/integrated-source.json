@@ -1,0 +1,14 @@
+{
+  "base": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "dirty_source_sha256": {
+    "action_server/src/actions/server/foundry/package_registry.py": "82bd170085efa3cc1fd04124cab351d7a93469a03fc96fad34f5f3400bddadec",
+    "action_server/src/actions/server/foundry/robot_package_admission.py": "333fc2d7951d2d54ada04658e94f73ac720092395e17a023ebe3ac3dcbac10d3",
+    "action_server/src/actions/server/foundry/robot_execution_selection.py": "12d090f371007e9b07c3c1e90ebd508bb566e8478dab12374c17a643e5b4c705"
+  },
+  "tests": {
+    "passed": 96,
+    "failed": 0,
+    "skipped": 0
+  },
+  "scope": "source admission and prebound selection; canonical Robot execution not wired"
+}

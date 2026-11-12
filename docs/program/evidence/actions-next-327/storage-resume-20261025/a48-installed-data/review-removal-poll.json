@@ -1,0 +1,26 @@
+[
+  {
+    "case": "delayed-removal",
+    "status": "PASS",
+    "virtual_seconds": 0.5,
+    "expected_failure": null
+  },
+  {
+    "case": "never-removed",
+    "status": "PASS",
+    "virtual_seconds": 15.0,
+    "expected_failure": "RuntimeError"
+  },
+  {
+    "case": "unknown-error",
+    "status": "PASS",
+    "virtual_seconds": 0.5,
+    "expected_failure": "RuntimeError"
+  },
+  {
+    "case": "inspection-timeout",
+    "status": "PASS",
+    "virtual_seconds": 0.0,
+    "expected_failure": "TimeoutExpired"
+  }
+]

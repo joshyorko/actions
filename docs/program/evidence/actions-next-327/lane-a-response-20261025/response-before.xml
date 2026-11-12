@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="76" failures="3" errors="0" time="3.239408878">
+    <testsuite name="src/query-results/CanvasContractRoundTrip.test.tsx" timestamp="2026-10-25T13:45:19.104Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="2" time="0">
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates the one shared fixture and rejects dynamic binding changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates Python JSON and writes its typed TypeScript round trip" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReconciliation.test.tsx" timestamp="2026-10-25T13:45:19.105Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="2" time="0">
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="shows accurate reconciliation labels and separate integer-cent comparisons" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="rejects unsafe comparison values and foreign invoice identity at the wire boundary" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReviewPanel.test.tsx" timestamp="2026-10-25T13:45:19.106Z" hostname="71cd163cf8ad" tests="5" failures="0" errors="0" skipped="5" time="0">
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="reads saved bytes only on an explicit inspect action before approval" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="requires an explicit offer followed by an explicit approval" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="never treats a denied review as approval" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="dispatches only after a separate approval and explicit execute click" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="shows blocked outcomes and explicit terminal failure download without retrying" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/QueryResultsView.test.tsx" timestamp="2026-10-25T13:45:19.108Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="12" time="0">
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a host result without execution and pages only its pinned handle" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a labelled idle form without accessibility violations" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; rejects blank input locally and submits only the fixed query shape" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; uses the injected status method with the opaque handle" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status success and finalizer after the query changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection while the new result is checking" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection after the view is reopened" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is replaced while a search is pending" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is cleared while a search is pending" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; announces loading and then the empty state" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders the fixed domain error message without accepting its free text" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; hides adapter exception details and exposes a bounded failure" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-execution.test.tsx" timestamp="2026-10-25T13:45:19.111Z" hostname="71cd163cf8ad" tests="4" failures="0" errors="0" skipped="4" time="0">
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; never runs on mount; submit returns identity before execute and allows cancellation" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; retains submission identity after uncertainty and rejects replacement input" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; rejects foreign binding in response" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="reopens retained state without admission and continues only unlaunched Run" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-input.test.tsx" timestamp="2026-10-25T13:45:19.112Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="6" time="0">
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="lists then claims exact selected input without autoexecution or payload replacement" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="retains uncertain selection identity and rejects changed item or response" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="rejects a selected-item response before accepting its Run" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="renders explicit queue selection and claim controls with no launch" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal execute" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal refresh" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-layout.test.tsx" timestamp="2026-10-25T13:45:19.114Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="7" time="0">
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="renders declared consumer controls and results within the authored canvas without replacement fields" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for model" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for preview" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for undeclared" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for invisible" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="keeps inspected artifact within the canvas and preserves authored input node identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="does not move a declared private form into an undeclared authored binding" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-output.test.tsx" timestamp="2026-10-25T13:45:19.115Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="6" time="0">
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="loads only explicit associated Run children without claim or adoption" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output run identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output attempt identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output queue identity" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="renders read-only produced items with explicit load and no adoption controls" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="drops the cached child page when a later authorized read is denied" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-view.test.tsx" timestamp="2026-10-25T13:45:19.116Z" hostname="71cd163cf8ad" tests="4" failures="3" errors="0" skipped="1" time="3.239408878">
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="semantic form explicitly submits and shows persistent Run status without mount execution" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a failed Run" time="1.190800668">
+            <failure message="expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m&lt;html&gt;[39m
+  [36m&lt;head /&gt;[39m
+  [36m&lt;body&gt;[39m
+    [36m&lt;div&gt;[39m
+      [36m&lt;main[39m
+        [33maria-labelledby[39m=[32m&quot;_r_0_&quot;[39m
+        [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;header[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mCanvas view[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mid[39m=[32m&quot;_r_0_&quot;[39m
+          [36m&gt;[39m
+            [0mGeneric job[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;dl[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mRevision[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mAudience[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mModel and app audiences[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/dl&gt;[39m
+        [36m&lt;/header&gt;[39m
+        [36m&lt;div[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;section[39m
+            [33maria-label[39m=[32m&quot;Run job&quot;[39m
+            [33mclass[39m=[32m&quot;semantic-form&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mclass[39m=[32m&quot;semantic-form__title&quot;[39m
+            [36m&gt;[39m
+              [0mRun job[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;form[39m
+              [33maria-busy[39m=[32m&quot;false&quot;[39m
+              [33mnovalidate[39m=[32m&quot;&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;div[39m
+                [33mclass[39m=[32m&quot;semantic-form__field&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;label[39m
+                  [33mfor[39m=[32m&quot;_r_1_-field-0&quot;[39m
+                [36m&gt;[39m
+                  [0mValue[0m
+                [36m&lt;/label&gt;[39m
+                [36m&lt;input[39m
+                  [33maria-invalid[39m=[32m&quot;false&quot;[39m
+                  [33mid[39m=[32m&quot;_r_1_-field-0&quot;[39m
+                  [33mname[39m=[32m&quot;value&quot;[39m
+                  [33mrequired[39m=[32m&quot;&quot;[39m
+                  [33mtype[39m=[32m&quot;text&quot;[39m
+                  [33mvalue[39m=[32m&quot;hello&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/div&gt;[39m
+              [36m&lt;button[39m
+                [33mtype[39m=[32m&quot;submit&quot;[39m
+              [36m&gt;[39m
+                [0mRun job[0m
+              [36m&lt;/button&gt;[39m
+            [36m&lt;/form&gt;[39m
+            [36m&lt;p[39m
+              [33maria-atomic[39m=[32m&quot;true&quot;[39m
+              [33mrole[39m=[32m&quot;status&quot;[39m
+            [36m&gt;[39m
+              [0mRun job: results ready.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;div[39m
+              [33maria-label[39m=[32m&quot;Run job result&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-form__result&quot;[39m
+            [36m/&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div[39m
+              [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;section[39m
+                [33maria-label[39m=[32m&quot;Execution run&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-panel&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;p[39m
+                  [33mclass[39m=[32m&quot;semantic-status semantic-status--error&quot;[39m
+                  [33mrole[39m=[32m&quot;alert&quot;[39m
+                [36m&gt;[39m
+                  [0mfailed[0m
+                [36m&lt;/p&gt;[39m
+                [36m&lt;div[39m
+                  [33mclass[39m=[32m&quot;semantic-actions&quot;[39m
+                [36m&gt;[39m
+                  [36m&lt;button[39m
+                    [33mtype[39m=[32m&quot;button&quot;[39m
+                  [36m&gt;[39m
+                    [0mRefresh status[0m
+                  [36m&lt;/button&gt;[39m
+                [36m&lt;/div&gt;[39m
+              [36m&lt;/section&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/div&gt;[39m
+      [36m&lt;/main&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/body&gt;[39m
+[36m&lt;/html&gt;[39m" type="AssertionError">
+AssertionError: expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;main
+        aria-labelledby=&quot;_r_0_&quot;
+        class=&quot;semantic-canvas&quot;
+      &gt;
+        &lt;header
+          class=&quot;semantic-canvas__header&quot;
+        &gt;
+          &lt;p
+            class=&quot;semantic-canvas__eyebrow&quot;
+          &gt;
+            Canvas view
+          &lt;/p&gt;
+          &lt;h1
+            id=&quot;_r_0_&quot;
+          &gt;
+            Generic job
+          &lt;/h1&gt;
+          &lt;dl
+            class=&quot;semantic-canvas__metadata&quot;
+          &gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Revision
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Revision
+                sha256:2222222222222222222222222222222222222222222222222222222222222222
+              &lt;/dd&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Audience
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Model and app audiences
+              &lt;/dd&gt;
+            &lt;/div&gt;
+          &lt;/dl&gt;
+        &lt;/header&gt;
+        &lt;div
+          class=&quot;semantic-canvas__content&quot;
+        &gt;
+          &lt;section
+            aria-label=&quot;Run job&quot;
+            class=&quot;semantic-form&quot;
+          &gt;
+            &lt;h2
+              class=&quot;semantic-form__title&quot;
+            &gt;
+              Run job
+            &lt;/h2&gt;
+            &lt;form
+              aria-busy=&quot;false&quot;
+              novalidate=&quot;&quot;
+            &gt;
+              &lt;div
+                class=&quot;semantic-form__field&quot;
+              &gt;
+                &lt;label
+                  for=&quot;_r_1_-field-0&quot;
+                &gt;
+                  Value
+                &lt;/label&gt;
+                &lt;input
+                  aria-invalid=&quot;false&quot;
+                  id=&quot;_r_1_-field-0&quot;
+                  name=&quot;value&quot;
+                  required=&quot;&quot;
+                  type=&quot;text&quot;
+                  value=&quot;hello&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;button
+                type=&quot;submit&quot;
+              &gt;
+                Run job
+              &lt;/button&gt;
+            &lt;/form&gt;
+            &lt;p
+              aria-atomic=&quot;true&quot;
+              role=&quot;status&quot;
+            &gt;
+              Run job: results ready.
+            &lt;/p&gt;
+            &lt;div
+              aria-label=&quot;Run job result&quot;
+              class=&quot;semantic-form__result&quot;
+            /&gt;
+          &lt;/section&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;div
+              class=&quot;semantic-stack&quot;
+            &gt;
+              &lt;section
+                aria-label=&quot;Execution run&quot;
+                class=&quot;semantic-panel&quot;
+              &gt;
+                &lt;p
+                  class=&quot;semantic-status semantic-status--error&quot;
+                  role=&quot;alert&quot;
+                &gt;
+                  failed
+                &lt;/p&gt;
+                &lt;div
+                  class=&quot;semantic-actions&quot;
+                &gt;
+                  &lt;button
+                    type=&quot;button&quot;
+                  &gt;
+                    Refresh status
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/section&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+Expected: &quot;Run job: response received.&quot;
+Received: &quot;Run job: results ready.&quot;
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a running Run" time="1.025180602">
+            <failure message="expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m&lt;html&gt;[39m
+  [36m&lt;head /&gt;[39m
+  [36m&lt;body&gt;[39m
+    [36m&lt;div&gt;[39m
+      [36m&lt;main[39m
+        [33maria-labelledby[39m=[32m&quot;_r_2_&quot;[39m
+        [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;header[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mCanvas view[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mid[39m=[32m&quot;_r_2_&quot;[39m
+          [36m&gt;[39m
+            [0mGeneric job[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;dl[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mRevision[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mAudience[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mModel and app audiences[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/dl&gt;[39m
+        [36m&lt;/header&gt;[39m
+        [36m&lt;div[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;section[39m
+            [33maria-label[39m=[32m&quot;Run job&quot;[39m
+            [33mclass[39m=[32m&quot;semantic-form&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mclass[39m=[32m&quot;semantic-form__title&quot;[39m
+            [36m&gt;[39m
+              [0mRun job[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;form[39m
+              [33maria-busy[39m=[32m&quot;false&quot;[39m
+              [33mnovalidate[39m=[32m&quot;&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;div[39m
+                [33mclass[39m=[32m&quot;semantic-form__field&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;label[39m
+                  [33mfor[39m=[32m&quot;_r_3_-field-0&quot;[39m
+                [36m&gt;[39m
+                  [0mValue[0m
+                [36m&lt;/label&gt;[39m
+                [36m&lt;input[39m
+                  [33maria-invalid[39m=[32m&quot;false&quot;[39m
+                  [33mid[39m=[32m&quot;_r_3_-field-0&quot;[39m
+                  [33mname[39m=[32m&quot;value&quot;[39m
+                  [33mrequired[39m=[32m&quot;&quot;[39m
+                  [33mtype[39m=[32m&quot;text&quot;[39m
+                  [33mvalue[39m=[32m&quot;hello&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/div&gt;[39m
+              [36m&lt;button[39m
+                [33mtype[39m=[32m&quot;submit&quot;[39m
+              [36m&gt;[39m
+                [0mRun job[0m
+              [36m&lt;/button&gt;[39m
+            [36m&lt;/form&gt;[39m
+            [36m&lt;p[39m
+              [33maria-atomic[39m=[32m&quot;true&quot;[39m
+              [33mrole[39m=[32m&quot;status&quot;[39m
+            [36m&gt;[39m
+              [0mRun job: results ready.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;div[39m
+              [33maria-label[39m=[32m&quot;Run job result&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-form__result&quot;[39m
+            [36m/&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div[39m
+              [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;section[39m
+                [33maria-label[39m=[32m&quot;Execution run&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-panel&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;p[39m
+                  [33mclass[39m=[32m&quot;semantic-status semantic-status--success&quot;[39m
+                  [33mrole[39m=[32m&quot;status&quot;[39m
+                [36m&gt;[39m
+                  [0mrunning[0m
+                [36m&lt;/p&gt;[39m
+                [36m&lt;div[39m
+                  [33mclass[39m=[32m&quot;semantic-actions&quot;[39m
+                [36m&gt;[39m
+                  [36m&lt;button[39m
+                    [33mtype[39m=[32m&quot;button&quot;[39m
+                  [36m&gt;[39m
+                    [0mRefresh status[0m
+                  [36m&lt;/button&gt;[39m
+                  [36m&lt;button[39m
+                    [33mtype[39m=[32m&quot;button&quot;[39m
+                  [36m&gt;[39m
+                    [0mRequest cancellation[0m
+                  [36m&lt;/button&gt;[39m
+                [36m&lt;/div&gt;[39m
+              [36m&lt;/section&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/div&gt;[39m
+      [36m&lt;/main&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/body&gt;[39m
+[36m&lt;/html&gt;[39m" type="AssertionError">
+AssertionError: expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;main
+        aria-labelledby=&quot;_r_2_&quot;
+        class=&quot;semantic-canvas&quot;
+      &gt;
+        &lt;header
+          class=&quot;semantic-canvas__header&quot;
+        &gt;
+          &lt;p
+            class=&quot;semantic-canvas__eyebrow&quot;
+          &gt;
+            Canvas view
+          &lt;/p&gt;
+          &lt;h1
+            id=&quot;_r_2_&quot;
+          &gt;
+            Generic job
+          &lt;/h1&gt;
+          &lt;dl
+            class=&quot;semantic-canvas__metadata&quot;
+          &gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Revision
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Revision
+                sha256:2222222222222222222222222222222222222222222222222222222222222222
+              &lt;/dd&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Audience
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Model and app audiences
+              &lt;/dd&gt;
+            &lt;/div&gt;
+          &lt;/dl&gt;
+        &lt;/header&gt;
+        &lt;div
+          class=&quot;semantic-canvas__content&quot;
+        &gt;
+          &lt;section
+            aria-label=&quot;Run job&quot;
+            class=&quot;semantic-form&quot;
+          &gt;
+            &lt;h2
+              class=&quot;semantic-form__title&quot;
+            &gt;
+              Run job
+            &lt;/h2&gt;
+            &lt;form
+              aria-busy=&quot;false&quot;
+              novalidate=&quot;&quot;
+            &gt;
+              &lt;div
+                class=&quot;semantic-form__field&quot;
+              &gt;
+                &lt;label
+                  for=&quot;_r_3_-field-0&quot;
+                &gt;
+                  Value
+                &lt;/label&gt;
+                &lt;input
+                  aria-invalid=&quot;false&quot;
+                  id=&quot;_r_3_-field-0&quot;
+                  name=&quot;value&quot;
+                  required=&quot;&quot;
+                  type=&quot;text&quot;
+                  value=&quot;hello&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;button
+                type=&quot;submit&quot;
+              &gt;
+                Run job
+              &lt;/button&gt;
+            &lt;/form&gt;
+            &lt;p
+              aria-atomic=&quot;true&quot;
+              role=&quot;status&quot;
+            &gt;
+              Run job: results ready.
+            &lt;/p&gt;
+            &lt;div
+              aria-label=&quot;Run job result&quot;
+              class=&quot;semantic-form__result&quot;
+            /&gt;
+          &lt;/section&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;div
+              class=&quot;semantic-stack&quot;
+            &gt;
+              &lt;section
+                aria-label=&quot;Execution run&quot;
+                class=&quot;semantic-panel&quot;
+              &gt;
+                &lt;p
+                  class=&quot;semantic-status semantic-status--success&quot;
+                  role=&quot;status&quot;
+                &gt;
+                  running
+                &lt;/p&gt;
+                &lt;div
+                  class=&quot;semantic-actions&quot;
+                &gt;
+                  &lt;button
+                    type=&quot;button&quot;
+                  &gt;
+                    Refresh status
+                  &lt;/button&gt;
+                  &lt;button
+                    type=&quot;button&quot;
+                  &gt;
+                    Request cancellation
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/section&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+Expected: &quot;Run job: response received.&quot;
+Received: &quot;Run job: results ready.&quot;
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a cancel_requested Run" time="1.01873591">
+            <failure message="expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m&lt;html&gt;[39m
+  [36m&lt;head /&gt;[39m
+  [36m&lt;body&gt;[39m
+    [36m&lt;div&gt;[39m
+      [36m&lt;main[39m
+        [33maria-labelledby[39m=[32m&quot;_r_4_&quot;[39m
+        [33mclass[39m=[32m&quot;semantic-canvas&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;header[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__header&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mCanvas view[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mid[39m=[32m&quot;_r_4_&quot;[39m
+          [36m&gt;[39m
+            [0mGeneric job[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;dl[39m
+            [33mclass[39m=[32m&quot;semantic-canvas__metadata&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mRevision[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+            [36m&lt;div&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0mAudience[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mModel and app audiences[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/dl&gt;[39m
+        [36m&lt;/header&gt;[39m
+        [36m&lt;div[39m
+          [33mclass[39m=[32m&quot;semantic-canvas__content&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;section[39m
+            [33maria-label[39m=[32m&quot;Run job&quot;[39m
+            [33mclass[39m=[32m&quot;semantic-form&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mclass[39m=[32m&quot;semantic-form__title&quot;[39m
+            [36m&gt;[39m
+              [0mRun job[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;form[39m
+              [33maria-busy[39m=[32m&quot;false&quot;[39m
+              [33mnovalidate[39m=[32m&quot;&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;div[39m
+                [33mclass[39m=[32m&quot;semantic-form__field&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;label[39m
+                  [33mfor[39m=[32m&quot;_r_5_-field-0&quot;[39m
+                [36m&gt;[39m
+                  [0mValue[0m
+                [36m&lt;/label&gt;[39m
+                [36m&lt;input[39m
+                  [33maria-invalid[39m=[32m&quot;false&quot;[39m
+                  [33mid[39m=[32m&quot;_r_5_-field-0&quot;[39m
+                  [33mname[39m=[32m&quot;value&quot;[39m
+                  [33mrequired[39m=[32m&quot;&quot;[39m
+                  [33mtype[39m=[32m&quot;text&quot;[39m
+                  [33mvalue[39m=[32m&quot;hello&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/div&gt;[39m
+              [36m&lt;button[39m
+                [33mtype[39m=[32m&quot;submit&quot;[39m
+              [36m&gt;[39m
+                [0mRun job[0m
+              [36m&lt;/button&gt;[39m
+            [36m&lt;/form&gt;[39m
+            [36m&lt;p[39m
+              [33maria-atomic[39m=[32m&quot;true&quot;[39m
+              [33mrole[39m=[32m&quot;status&quot;[39m
+            [36m&gt;[39m
+              [0mRun job: results ready.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;div[39m
+              [33maria-label[39m=[32m&quot;Run job result&quot;[39m
+              [33mclass[39m=[32m&quot;semantic-form__result&quot;[39m
+            [36m/&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;div[39m
+              [33mclass[39m=[32m&quot;semantic-stack&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;section[39m
+                [33maria-label[39m=[32m&quot;Execution run&quot;[39m
+                [33mclass[39m=[32m&quot;semantic-panel&quot;[39m
+              [36m&gt;[39m
+                [36m&lt;p[39m
+                  [33mclass[39m=[32m&quot;semantic-status semantic-status--success&quot;[39m
+                  [33mrole[39m=[32m&quot;status&quot;[39m
+                [36m&gt;[39m
+                  [0mcancel requested[0m
+                [36m&lt;/p&gt;[39m
+                [36m&lt;div[39m
+                  [33mclass[39m=[32m&quot;semantic-actions&quot;[39m
+                [36m&gt;[39m
+                  [36m&lt;button[39m
+                    [33mtype[39m=[32m&quot;button&quot;[39m
+                  [36m&gt;[39m
+                    [0mRefresh status[0m
+                  [36m&lt;/button&gt;[39m
+                  [36m&lt;button[39m
+                    [33mtype[39m=[32m&quot;button&quot;[39m
+                  [36m&gt;[39m
+                    [0mRequest cancellation[0m
+                  [36m&lt;/button&gt;[39m
+                [36m&lt;/div&gt;[39m
+              [36m&lt;/section&gt;[39m
+            [36m&lt;/div&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/div&gt;[39m
+      [36m&lt;/main&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/body&gt;[39m
+[36m&lt;/html&gt;[39m" type="AssertionError">
+AssertionError: expected &apos;Run job: results ready.&apos; to be &apos;Run job: response received.&apos; // Object.is equality
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;main
+        aria-labelledby=&quot;_r_4_&quot;
+        class=&quot;semantic-canvas&quot;
+      &gt;
+        &lt;header
+          class=&quot;semantic-canvas__header&quot;
+        &gt;
+          &lt;p
+            class=&quot;semantic-canvas__eyebrow&quot;
+          &gt;
+            Canvas view
+          &lt;/p&gt;
+          &lt;h1
+            id=&quot;_r_4_&quot;
+          &gt;
+            Generic job
+          &lt;/h1&gt;
+          &lt;dl
+            class=&quot;semantic-canvas__metadata&quot;
+          &gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Revision
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Revision
+                sha256:2222222222222222222222222222222222222222222222222222222222222222
+              &lt;/dd&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;dt&gt;
+                Audience
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                Model and app audiences
+              &lt;/dd&gt;
+            &lt;/div&gt;
+          &lt;/dl&gt;
+        &lt;/header&gt;
+        &lt;div
+          class=&quot;semantic-canvas__content&quot;
+        &gt;
+          &lt;section
+            aria-label=&quot;Run job&quot;
+            class=&quot;semantic-form&quot;
+          &gt;
+            &lt;h2
+              class=&quot;semantic-form__title&quot;
+            &gt;
+              Run job
+            &lt;/h2&gt;
+            &lt;form
+              aria-busy=&quot;false&quot;
+              novalidate=&quot;&quot;
+            &gt;
+              &lt;div
+                class=&quot;semantic-form__field&quot;
+              &gt;
+                &lt;label
+                  for=&quot;_r_5_-field-0&quot;
+                &gt;
+                  Value
+                &lt;/label&gt;
+                &lt;input
+                  aria-invalid=&quot;false&quot;
+                  id=&quot;_r_5_-field-0&quot;
+                  name=&quot;value&quot;
+                  required=&quot;&quot;
+                  type=&quot;text&quot;
+                  value=&quot;hello&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;button
+                type=&quot;submit&quot;
+              &gt;
+                Run job
+              &lt;/button&gt;
+            &lt;/form&gt;
+            &lt;p
+              aria-atomic=&quot;true&quot;
+              role=&quot;status&quot;
+            &gt;
+              Run job: results ready.
+            &lt;/p&gt;
+            &lt;div
+              aria-label=&quot;Run job result&quot;
+              class=&quot;semantic-form__result&quot;
+            /&gt;
+          &lt;/section&gt;
+          &lt;div
+            class=&quot;semantic-stack&quot;
+          &gt;
+            &lt;div
+              class=&quot;semantic-stack&quot;
+            &gt;
+              &lt;section
+                aria-label=&quot;Execution run&quot;
+                class=&quot;semantic-panel&quot;
+              &gt;
+                &lt;p
+                  class=&quot;semantic-status semantic-status--success&quot;
+                  role=&quot;status&quot;
+                &gt;
+                  cancel requested
+                &lt;/p&gt;
+                &lt;div
+                  class=&quot;semantic-actions&quot;
+                &gt;
+                  &lt;button
+                    type=&quot;button&quot;
+                  &gt;
+                    Refresh status
+                  &lt;/button&gt;
+                  &lt;button
+                    type=&quot;button&quot;
+                  &gt;
+                    Request cancellation
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/section&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+Expected: &quot;Run job: response received.&quot;
+Received: &quot;Run job: results ready.&quot;
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/mcp-bridge.test.tsx" timestamp="2026-10-25T13:45:19.121Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="12" time="0">
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.generated_echo without invoking it" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.résumé without invoking it" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;é&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;\ud800&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders semantic state from tool-result metadata and stays read-only" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders a preview reply without enabling its form" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; remounts view state when the immutable app revision changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; respects the app audience projection without exposing hidden details" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves the query fixture adapter and explicit query submission" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves invoice metadata rendering without querying on open" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects malformed schema and binding scope before rendering" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/semantic-components.test.tsx" timestamp="2026-10-25T13:45:19.125Z" hostname="71cd163cf8ad" tests="16" failures="0" errors="0" skipped="16" time="0">
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; exports semantic components and the renderer" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the canonical PR330 fixture through injected adapters" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the title and revision as text, not markup" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; hides every detail, including title and revision, for empty visibility" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not expose app-only content to the model viewer" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required constructor field as empty and never dispatches" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required toString field as empty and never dispatches" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; dispatches fixture integer and boolean fields as number and boolean" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; validates required booleans and rejects non-integer input" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; resets inputs and ignores a deferred response when capability scope changes" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; rejects malformed specs and duplicate form fields before rendering controls" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not resolve any binding when the spec hides all audiences" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; projects status, opens artifacts through the typed adapter, and keeps preview inert" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names the keyboard-accessible results region from its table caption" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names results without a caption and announces empty results" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats table row and column data as own-property text" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+</testsuites>

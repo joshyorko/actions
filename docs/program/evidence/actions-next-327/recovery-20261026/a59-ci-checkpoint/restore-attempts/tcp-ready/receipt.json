@@ -1,0 +1,23 @@
+{
+  "status": "FAIL_UNTIL_COLD_RCC_PROOF",
+  "source": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+  "source_tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+  "runtime": "1.1.0a59",
+  "runtime_wheel_sha256": "cca5383bd331bfc68227bf5c2749f867cc3d9e7cc7daaeb3f13fbe9125d5960a",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "engine": "noneditable installed wheel",
+  "composition": "synthetic authorized common services, not ordinary CLI; selected cold RCC acquisition checked separately",
+  "acquire_receipt": "/workspace/327-probes/a59-cold-rcc/acquire.json",
+  "acquire_receipt_sha256": "e3e71258112001f500e81ee5991060bacd5c15d537ea706f08c4062c9da1c6ca",
+  "input_prepared_receipt": "/workspace/327-probes/a53-claimed/compiler/prepared.json",
+  "restored_prepared_receipt": "/workspace/327-probes/a59-coordinated-restore/tcp-ready/evidence/restored-prepared.json",
+  "input_robocorp_home": "/workspace/327-probes/a53-claimed/compiler/robocorp",
+  "restored_robocorp_home": "/workspace/327-probes/a59-cold-rcc/acquire/robocorp",
+  "original_robocorp_home": "/workspace/327-probes/a53-claimed/compiler/robocorp",
+  "archive_sha256": "a7877f1451e0bd3ea0b3d27eee771b5a60b10369846f307e24542d8da685d356",
+  "archive_bytes": 80058651,
+  "original_and_restored_homes_distinct": true,
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "cleanup": "PASS",
+  "source_overlay_modules": []
+}

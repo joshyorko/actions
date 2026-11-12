@@ -1,0 +1,24 @@
+{
+  "source": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "runtime_origin": "/workspace/actions-327-a41/installed-v2/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "versions": {
+    "actions-runtime": "1.1.0a41",
+    "actions-core": "1.1.0a5",
+    "actions-work-items": "0.5.0a2"
+  },
+  "wheels": {
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": {
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "installed_files_verified": 26
+    },
+    "wheels/actions/actions_core-1.1.0a5-py3-none-any.whl": {
+      "sha256": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+      "installed_files_verified": 55
+    },
+    "wheels/action_server/actions_runtime-1.1.0a41-cp312-cp312-linux_x86_64.whl": {
+      "sha256": "fcf70e1f1cc3b91409dd8600622161085281f968b868373d5b62df10e0c4a661",
+      "installed_files_verified": 325
+    }
+  },
+  "status": "PASS_INSTALLED_BYTES_ONLY"
+}

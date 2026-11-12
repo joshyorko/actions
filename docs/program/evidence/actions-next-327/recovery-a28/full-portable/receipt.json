@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "group": "portable",
+  "base_source": "dfe2b06bebea553680d194b89297e594aead030b",
+  "runtime": "1.1.0a28",
+  "scope": "working-tree integration; source hashes recorded separately",
+  "synthetic_auth": true,
+  "engine": "prepared source Runtime",
+  "renderer": "not exercised",
+  "cleanup": "PASS",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "pytest",
+    "tests",
+    "-m",
+    "not integration_test",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/evidence/a28-source-portable/tests.xml",
+    "--robocorp-log-output=/workspace/actions-recovery-327/evidence/a28-source-portable/log",
+    "--basetemp=/workspace/actions-recovery-327/evidence/a28-source-portable/fixtures"
+  ],
+  "exit_code": 1
+}

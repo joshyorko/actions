@@ -1,0 +1,58 @@
+Creating virtualenv actions-runtime-_tTxLM32-py3.12 in /workspace/actions-cloud/cache/pypoetry/virtualenvs
+Building actions-runtime (1.1.0a27)
+Building wheel
+
+PEP517 build of a dependency failed
+
+Backend subprocess exited when trying to invoke build_wheel
+
+    | Command '['/tmp/tmpymlvzlox/.venv/bin/python', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/pyproject_hooks/_in_process/_in_process.py', 'build_wheel', '/tmp/tmpgrwxpj3x']' returned non-zero exit status 1.
+    | 
+    | Traceback (most recent call last):
+    |   File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/pyproject_hooks/_in_process/_in_process.py", line 406, in <module>
+    |     main()
+    |   File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/pyproject_hooks/_in_process/_in_process.py", line 381, in main
+    |     json_out["return_val"] = hook(**hook_input["kwargs"])
+    |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/pyproject_hooks/_in_process/_in_process.py", line 286, in build_wheel
+    |     return _build_backend().build_wheel(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/api.py", line 58, in build_wheel
+    |     return WheelBuilder.make_in(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/wheel.py", line 95, in make_in
+    |     wb.build(target_dir=directory)
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/wheel.py", line 131, in build
+    |     self._copy_module(zip_file)
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/wheel.py", line 307, in _copy_module
+    |     to_add = self.find_files_to_add()
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/builder.py", line 196, in find_files_to_add
+    |     or self.is_excluded(
+    |        ^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/builder.py", line 139, in is_excluded
+    |     if exclude_path.as_posix() in self.find_excluded_files(fmt=self.format):
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/masonry/builders/builder.py", line 101, in find_excluded_files
+    |     vcs_ignored_files = set(vcs.get_ignored_files()) if vcs else set()
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/vcs/git.py", line 274, in get_ignored_files
+    |     output = self.run(*args).strip()
+    |              ^^^^^^^^^^^^^^^
+    |   File "/tmp/tmpymlvzlox/.venv/lib/python3.12/site-packages/poetry/core/vcs/git.py", line 290, in run
+    |     subprocess.check_output(
+    |   File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+    |     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    |     raise CalledProcessError(retcode, process.args,
+    | subprocess.CalledProcessError: Command '['git', '--git-dir', '/workspace/actions-recovery-327/installed-a27/source/action_server/.git', '--work-tree', '/workspace/actions-recovery-327/installed-a27/source/action_server', 'ls-files', '--others', '-i', '--exclude-standard']' returned non-zero exit status 128.
+
+Note: This error originates from the build backend, and is likely not a problem with poetry but one of the following issues with /workspace/actions-recovery-327/installed-a27/source/action_server
+
+  - not supporting PEP 517 builds
+  - not specifying PEP 517 build requirements correctly
+  - the build requirements are incompatible with your operating system or Python version
+  - the build requirements are missing system dependencies (eg: compilers, libraries, headers).
+
+You can verify this by running pip wheel --no-cache-dir --use-pep517 "/workspace/actions-recovery-327/installed-a27/source/action_server".

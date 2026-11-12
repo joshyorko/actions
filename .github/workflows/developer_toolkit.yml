@@ -12,40 +12,54 @@ jobs:
       matrix:
         include:
           - lane: primary
+            rcc_version: 18.19.8
+            os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
+          - lane: invoice
+            rcc_version: 18.19.8
+            os: ubuntu-24.04
+            asset: rcc-linux64
+            sha256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
+          - lane: primary
+            rcc_version: 18.19.8
+            os: macos-15
+            asset: rcc-macosarm64
+            sha256: bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba
+          - lane: primary
+            rcc_version: 18.19.8
+            os: windows-2022
+            asset: rcc-windows64.exe
+            sha256: f5e868af05382731f6675d98ed6ead7c7e95b250466bc5fee054b41817280a89
+          - lane: n-1
+            rcc_version: 18.19.7
+            os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48
+          - lane: legacy
             rcc_version: 18.19.3
             os: ubuntu-22.04
             asset: rcc-linux64
             sha256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
-          - lane: primary
+          - lane: legacy
             rcc_version: 18.19.3
             os: macos-15
             asset: rcc-macosarm64
             sha256: 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266
-          - lane: primary
+          - lane: legacy
             rcc_version: 18.19.3
             os: windows-2022
             asset: rcc-windows64.exe
             sha256: 523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: ubuntu-22.04
-            asset: rcc-linux64
-            sha256: ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: macos-15
-            asset: rcc-macosarm64
-            sha256: 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d
-          - lane: n-1
-            rcc_version: 18.18.1
-            os: windows-2022
-            asset: rcc-windows64.exe
-            sha256: 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b
     runs-on: ${{ matrix.os }}
     env:
       ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
     steps:
       - uses: actions/checkout@v4
+        env:
+          GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.longpaths
+          GIT_CONFIG_VALUE_0: 'true'
       - name: Cache RCC holotree
         uses: actions/cache@v4
         with:
@@ -106,15 +120,187 @@ jobs:
             test -x "${package}/.venv/bin/python"
           done
           rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+      - name: Invoice combined acceptance (Linux primary)
+        if: runner.os == 'Linux' && matrix.lane == 'invoice'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+          ACTIONS_INVOICE_EVIDENCE_DIR: ${{ runner.temp }}/actions327-invoice
+          ACTIONS_INVOICE_BROWSER: '1'
+          ACTIONS_INVOICE_WORKER: '1'
+          ACTIONS_INVOICE_GENERATED: '1'
+          ACTIONS_INVOICE_EFFECTS: '1'
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/actions327-browser
+          OMP_NUM_THREADS: '1'
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import os, shutil
+          if shutil.disk_usage(os.environ['RUNNER_TEMP']).free < 13_849_526_272:
+              raise SystemExit('insufficient free space for bounded invoice acceptance')
+          PY
+          docker pull postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+          printf '%s  %s\n' ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 action_server/src/actions/server/bin/rcc-18.19.8 | sha256sum --check --status -
+          rcc --workers 2 run -r developer/toolkit.yaml --dev -t InvoiceQueryTest
+      - name: Upload combined invoice acceptance receipt
+        if: always() && runner.os == 'Linux' && matrix.lane == 'invoice'
+        uses: actions/upload-artifact@v4
+        with:
+          name: actions327-combined-invoice
+          path: |
+            ${{ runner.temp }}/actions327-invoice/*/receipt.json
+            ${{ runner.temp }}/actions327-invoice/*/*.xml
+            ${{ runner.temp }}/actions327-invoice/*/*.log
+          if-no-files-found: warn
       - name: Package task smoke (Linux)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.lane != 'invoice'
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
         run: rcc run -r developer/toolkit.yaml --dev -t Test
       - name: Build and verify community binary (Linux)
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.lane != 'invoice'
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
         run: rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
+
+  rcc_descriptor:
+    if: github.event_name == 'pull_request' && (github.base_ref == 'community' || startsWith(github.base_ref, 'release/'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install pinned RCC
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          curl --fail --location --silent --show-error \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.8/rcc-linux64 \
+            --output rcc.download
+          printf '%s  %s\n' \
+            ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 \
+            rcc.download | sha256sum --check --status -
+          mv rcc.download rcc
+          chmod +x rcc
+      - name: Verify RCC env exec descriptor forwarding
+        shell: bash
+        env:
+          ACTIONS_REAL_RCC_FD_TEST: '1'
+          ACTIONS_RUNTIME_RCC_BINARY: ${{ github.workspace }}/rcc
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+        run: |
+          set -Eeuo pipefail
+          python3 -m venv "$RUNNER_TEMP/actions-rcc-fd-python"
+          probe_python="$RUNNER_TEMP/actions-rcc-fd-python/bin/python"
+          "$probe_python" -m pip install pytest==8.3.4 psutil==7.2.2
+          "$probe_python" --version
+          "$probe_python" -m pip show pytest psutil
+          git rev-parse HEAD HEAD^{tree}
+          "$probe_python" -c 'import ctypes, os, signal; assert hasattr(os, "pidfd_open") and hasattr(signal, "pidfd_send_signal") and hasattr(ctypes.CDLL(None), "prctl")'
+          "$probe_python" -m pytest -s -q --basetemp "$RUNNER_TEMP/actions-rcc-fd-test" \
+            --junitxml "$RUNNER_TEMP/actions-rcc-fd-junit.xml" \
+            developer/tests/test_rcc_env_exec_fd_real.py
+      - name: Upload RCC descriptor test receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rcc-descriptor-test-receipt
+          path: ${{ runner.temp }}/actions-rcc-fd-junit.xml
+          if-no-files-found: error
+
+  installed_internal_child_vertical:
+    if: github.event_name == 'pull_request' && (github.base_ref == 'community' || startsWith(github.base_ref, 'release/'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.12.19'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.3'
+      - name: Run installed Action to Robot vertical
+        shell: bash
+        env:
+          UV_CACHE_DIR: ${{ runner.temp }}/actions340-uv-cache
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import os, shutil
+          floor = 10_803_773_440
+          reserve = 3_045_752_832
+          if shutil.disk_usage(os.environ['RUNNER_TEMP']).free < floor + reserve:
+              raise SystemExit('insufficient free space for guarded vertical setup')
+          PY
+          guard="$RUNNER_TEMP/actions340-supervisor"
+          uv venv --seed --python 3.12 "$guard"
+          uv pip install --python "$guard/bin/python" pytest==8.3.4 psutil==7.2.2
+          "$guard/bin/python" - <<'PY'
+          import importlib.util, os, sys
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          repo = Path(os.environ['GITHUB_WORKSPACE']).resolve(strict=True)
+          temp = Path(os.environ['RUNNER_TEMP']).resolve(strict=True)
+          home = temp / 'actions340-guard-home'
+          home.mkdir(mode=0o700)
+          source = repo / 'developer/tests/test_rcc_env_exec_fd_real.py'
+          spec = importlib.util.spec_from_file_location('actions340_guard', source)
+          if spec is None or spec.loader is None:
+              raise SystemExit('RCC supervisor unavailable')
+          module = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = module
+          spec.loader.exec_module(module)
+          env = {
+              'PATH': os.environ['PATH'], 'HOME': str(home), 'TMPDIR': str(temp),
+              'RUNNER_TEMP': str(temp), 'GITHUB_WORKSPACE': str(repo),
+              'UV_CACHE_DIR': os.environ['UV_CACHE_DIR'],
+              'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8',
+          }
+          proxies = {'http_proxy', 'https_proxy', 'all_proxy', 'no_proxy'}
+          cas = {'SSL_CERT_FILE', 'SSL_CERT_DIR', 'REQUESTS_CA_BUNDLE', 'CURL_CA_BUNDLE'}
+          for name, value in os.environ.items():
+              if name.lower() in proxies or name in cas:
+                  if name.lower() in proxies - {'no_proxy'}:
+                      parsed = urlsplit(value)
+                      if parsed.username is not None or parsed.password is not None:
+                          raise SystemExit('proxy credentials are not accepted')
+                  env[name] = value
+          log = temp / 'actions340-vertical-command.log'
+          status, stdout, stderr = module._run_reaped(
+              ['bash', '-c', 'exec bash "$1" >"$2" 2>&1', 'actions340',
+               str(repo / 'developer/tests/run_internal_child_vertical_ci.sh'), str(log)],
+              env=env, timeout=4500, disk_paths=(temp,), minimum_free_bytes=10_803_773_440,
+          )
+          sys.stdout.buffer.write(stdout)
+          sys.stderr.buffer.write(stderr)
+          if log.is_file():
+              with log.open('rb') as stream:
+                  stream.seek(max(0, log.stat().st_size - 32768))
+                  sys.stdout.buffer.write(stream.read(32768))
+          raise SystemExit(status)
+          PY
+      - name: Upload installed vertical receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: actions340-installed-child-vertical
+          path: |
+            ${{ runner.temp }}/actions340-vertical-status.txt
+            ${{ runner.temp }}/actions340-real-vertical.*/identity.txt
+            ${{ runner.temp }}/actions340-real-vertical.*/junit.xml
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_runtime-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_core-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_work_items-*.whl
+            ${{ runner.temp }}/actions340-real-vertical.*/wheels/actions_http_helper-*.whl
+          if-no-files-found: warn

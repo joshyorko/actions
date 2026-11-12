@@ -83,7 +83,9 @@ def test_run_id_in_response_header(
         BUILD_ENV_IN_TESTS_TIMEOUT,
         get_in_resources,
     )
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
+    from actions._logging._log_formatting import (
+        pretty_format_logs_from_log_html_contents,
+    )
 
     calculator = get_in_resources("no_conda", "calculator")
     action_server_process.start(
@@ -477,7 +479,9 @@ def test_full_run(
     client: ActionServerClient,
 ) -> None:
     from action_server_tests.fixtures import fix_openapi_json
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
+    from actions._logging._log_formatting import (
+        pretty_format_logs_from_log_html_contents,
+    )
 
     from actions.server._database import Database, str_to_datetime
     from actions.server._models import Run, RunStatus, load_db
@@ -580,7 +584,9 @@ def test_full_run_with_env_build(
         BUILD_ENV_IN_TESTS_TIMEOUT,
         get_in_resources,
     )
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
+    from actions._logging._log_formatting import (
+        pretty_format_logs_from_log_html_contents,
+    )
 
     project = get_in_resources("hello_uv")
     action_server_process.start(

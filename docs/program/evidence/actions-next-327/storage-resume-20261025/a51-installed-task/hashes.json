@@ -1,0 +1,30 @@
+{
+  "terminal-receipt.json": {
+    "sha256": "d7a841ee6aff7cb9093c124298eea89b7204152e41987f29242553ca4802a773",
+    "source": "/workspace/recovery327/a51-claimed-task-terminal/evidence/receipt.json"
+  },
+  "terminal-supervisor.json": {
+    "sha256": "53b48a676027acde144c18ae3adf14599ca25a39b0a38ab7f2a1650f46afd47c",
+    "source": "/workspace/recovery327/a51-claimed-task-terminal-supervisor/receipt.json"
+  },
+  "live-observer-failed-receipt.json": {
+    "sha256": "41f1894bfffcd596481b98474e2bd0e392b7adfea5c79d128c4c6e25f1340aa5",
+    "source": "/workspace/recovery327/a51-claimed-task-live-cancel/evidence/receipt.json"
+  },
+  "live-observer-supervisor.json": {
+    "sha256": "7ac57681847aacfc6d1e2e00f4384a19145a8f57cda5cfdc1360757805ab84ae",
+    "source": "/workspace/recovery327/a51-claimed-task-live-cancel-supervisor/receipt.json"
+  },
+  "rcc-cwd-observation.json": {
+    "sha256": "82f22068ef984e05de74ae34a08c54ed5e89f829df9979283acc2dbb9e0ca26e",
+    "source": "/workspace/recovery327/a51-rcc-observer-probe/observation.json"
+  },
+  "rcc-cwd-supervisor.json": {
+    "sha256": "43d1f2491badb5e0d8ab8bd7a886ed4363d61e3f3795f2923f18a26a737b0d4e",
+    "source": "/workspace/recovery327/a51-rcc-observer-probe/supervisor/receipt.json"
+  },
+  "observer-v2-source-review.json": {
+    "sha256": "4e12e0cf1a591642ced88d68cb162b9246053cb2958cc906e6e41be7aaf0124a",
+    "source": "/workspace/recovery327/claimed-task-a51-live-observer-v2/independent-review.json"
+  }
+}

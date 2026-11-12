@@ -1,0 +1,450 @@
+{
+  "case": "fail",
+  "appId": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+  "queue": {
+    "deployment": {
+      "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+      "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    },
+    "queue_id": "robot-fail-input",
+    "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+  },
+  "snapshot": {
+    "action_id": "7877c068-a139-5833-8291-f253f3f36007",
+    "canvas_application": {
+      "app_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+      "revision_id": "sha256:8ac7591464857230b806e3f0adc6f88cf1122c02421204cff8f6f41179533190",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    },
+    "capability": {
+      "capability_id": "robot.task",
+      "package_revision": {
+        "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+        "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0",
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+      }
+    },
+    "capability_authority": "package-revision",
+    "capability_schema_digest": "sha256:dffdf7089a17486ae99a11cbbb77d376f245839005a91f6d58792ba863bfee6f",
+    "data_binding": null,
+    "deployment": {
+      "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+      "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    },
+    "output_provider": {
+      "provider_profile_id": "61cdfaa5-ce7d-4f7f-a55e-eab16d6680d2",
+      "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    },
+    "policy": {
+      "policy_id": "039f587f-6ca1-4fe6-b764-c2cdc3b6e076",
+      "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    },
+    "runtime_kind": "rcc",
+    "runtime_plan": {
+      "package_revision": {
+        "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+        "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0",
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+      },
+      "plan_digest": "sha256:1e9ff3c6dd9aba2ac802aad54e6047c5f19ed4accf8bd6186bcb491a35844e58"
+    },
+    "worker": {
+      "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "worker_profile_id": "08100126-5f06-45de-bcef-4251829b2233",
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+    }
+  },
+  "claim": {
+    "queue": {
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+      "deployment": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a"
+      },
+      "queue_id": "robot-fail-input"
+    },
+    "item_id": "2bdab68f-0e72-4da8-a6a8-e5dd62fdbac4",
+    "owner_id": "1a8f1b2b-6bd2-427e-a629-b0f446b80503",
+    "epoch": 1
+  },
+  "itemId": "2bdab68f-0e72-4da8-a6a8-e5dd62fdbac4",
+  "runId": "ca45f666-8673-4406-9677-468673cb6046",
+  "execution": {
+    "attemptEpoch": 1,
+    "attemptId": "95c94c0e-7861-4fe2-80d1-b06a0e7ff5cc",
+    "attemptState": "failed",
+    "outputs": [
+      {
+        "handle": "art_JfLKLyVoT8GRfIaL3FX1AA",
+        "mediaType": "application/octet-stream",
+        "name": "robot-stdout.log",
+        "size": 750
+      },
+      {
+        "handle": "art_r2OqgLbCQkmvalTO-qEkCQ",
+        "mediaType": "application/octet-stream",
+        "name": "robot-stderr.log",
+        "size": 134
+      },
+      {
+        "handle": "art_SEPFhm38QcSYoEoeQ5Yxhg",
+        "mediaType": "application/xml",
+        "name": "robot-output.xml",
+        "size": 1188
+      },
+      {
+        "handle": "art_-mAThVvtS2azcC1hTiKxJQ",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55245
+      }
+    ],
+    "runId": "ca45f666-8673-4406-9677-468673cb6046",
+    "runStatus": 3,
+    "state": "failed",
+    "workItemEpoch": 1,
+    "workItemId": "2bdab68f-0e72-4da8-a6a8-e5dd62fdbac4",
+    "workItemState": "FAILED"
+  },
+  "run": {
+    "id": "ca45f666-8673-4406-9677-468673cb6046",
+    "snapshot": {
+      "deployment": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a"
+      },
+      "capability": {
+        "package_revision": {
+          "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+          "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+          "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0"
+        },
+        "capability_id": "robot.task"
+      },
+      "runtime_plan": {
+        "package_revision": {
+          "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+          "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+          "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0"
+        },
+        "plan_digest": "sha256:1e9ff3c6dd9aba2ac802aad54e6047c5f19ed4accf8bd6186bcb491a35844e58"
+      },
+      "worker": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "worker_profile_id": "08100126-5f06-45de-bcef-4251829b2233",
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "policy": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "policy_id": "039f587f-6ca1-4fe6-b764-c2cdc3b6e076",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "output_provider": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "provider_profile_id": "61cdfaa5-ce7d-4f7f-a55e-eab16d6680d2",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "runtime_kind": "rcc",
+      "capability_schema_digest": "sha256:dffdf7089a17486ae99a11cbbb77d376f245839005a91f6d58792ba863bfee6f",
+      "action_id": "7877c068-a139-5833-8291-f253f3f36007",
+      "capability_authority": "package-revision",
+      "data_binding": null,
+      "canvas_application": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "app_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:8ac7591464857230b806e3f0adc6f88cf1122c02421204cff8f6f41179533190"
+      }
+    },
+    "state": "failed",
+    "attempts": [
+      {
+        "id": "95c94c0e-7861-4fe2-80d1-b06a0e7ff5cc",
+        "owner_id": "1a8f1b2b-6bd2-427e-a629-b0f446b80503",
+        "epoch": 1,
+        "state": "failed",
+        "lease_deadline_ms": "1793022809009"
+      }
+    ],
+    "artifacts": [
+      {
+        "handle": "art_JfLKLyVoT8GRfIaL3FX1AA",
+        "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+        "digest": "sha256:cb494ad8f4eca262773bdaf74fab96866019290a0fd950cfee05ed9783349954",
+        "size": 750
+      },
+      {
+        "handle": "art_r2OqgLbCQkmvalTO-qEkCQ",
+        "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+        "digest": "sha256:ceef5e7ce6b1a4a8a55d318d07e9a779e0a38ab85d8a7a5b6c7b7af26c99e6e0",
+        "size": 134
+      },
+      {
+        "handle": "art_SEPFhm38QcSYoEoeQ5Yxhg",
+        "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+        "digest": "sha256:09da891aaa8209504fe3fd5562fb6815f9c940d941a8267368f26122c6f15cd4",
+        "size": 1188
+      },
+      {
+        "handle": "art_-mAThVvtS2azcC1hTiKxJQ",
+        "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+        "digest": "sha256:94ef3210d9de0596beef9d0719534f2dded92ed5531bdc2098bac5f9558d87b9",
+        "size": 55245
+      }
+    ],
+    "result": {
+      "actionResult": {
+        "status": "FAIL",
+        "suite": "Tasks",
+        "task": "Selected"
+      },
+      "claim": {
+        "epoch": 1,
+        "item_id": "2bdab68f-0e72-4da8-a6a8-e5dd62fdbac4",
+        "owner_id": "1a8f1b2b-6bd2-427e-a629-b0f446b80503"
+      },
+      "cleanup": {
+        "descendant_snapshot_complete": true,
+        "errors": [],
+        "live_descendant_pids": [],
+        "wrapper_reaped": true,
+        "zombie_descendant_pids": []
+      },
+      "launch": {
+        "discriminator": "actions.robot-dispatch/v1",
+        "fence": {
+          "attempt_id": "95c94c0e-7861-4fe2-80d1-b06a0e7ff5cc",
+          "epoch": 1,
+          "owner_id": "1a8f1b2b-6bd2-427e-a629-b0f446b80503",
+          "run_id": "ca45f666-8673-4406-9677-468673cb6046"
+        },
+        "launch_id": "924bab74-c445-440e-b9ec-5f48e235a32b",
+        "selection": {
+          "adapter_version": "1",
+          "discriminator": "actions.robot-dispatch/v1",
+          "input_schema": "{\"additionalProperties\":false,\"properties\":{\"text\":{\"maxLength\":512,\"type\":\"string\"}},\"required\":[\"text\"],\"type\":\"object\"}",
+          "inputs": "{\"text\":\"Node a56 modern claimed Robot fail 1793022740840-32361\"}",
+          "output_schema": "{\"additionalProperties\":false,\"properties\":{\"status\":{\"enum\":[\"PASS\",\"FAIL\"]},\"suite\":{\"const\":\"Tasks\"},\"task\":{\"const\":\"Selected\"}},\"required\":[\"suite\",\"task\",\"status\"],\"type\":\"object\"}",
+          "package_yaml_digest": "sha256:a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+          "plan_kind": "rcc",
+          "platform_tag": "linux-x86_64",
+          "python_version": [
+            3,
+            12
+          ],
+          "rcc_artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+          "rcc_specification_digest": "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d",
+          "robot_version": "7.4.2",
+          "snapshot": {
+            "action_id": "7877c068-a139-5833-8291-f253f3f36007",
+            "canvas_application": {
+              "app_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+              "revision_id": "sha256:8ac7591464857230b806e3f0adc6f88cf1122c02421204cff8f6f41179533190",
+              "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+            },
+            "capability": {
+              "capability_id": "robot.task",
+              "package_revision": {
+                "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+                "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0",
+                "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+              }
+            },
+            "capability_authority": "package-revision",
+            "capability_schema_digest": "sha256:dffdf7089a17486ae99a11cbbb77d376f245839005a91f6d58792ba863bfee6f",
+            "data_binding": null,
+            "deployment": {
+              "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+              "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a",
+              "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+            },
+            "output_provider": {
+              "provider_profile_id": "61cdfaa5-ce7d-4f7f-a55e-eab16d6680d2",
+              "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+              "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+            },
+            "policy": {
+              "policy_id": "039f587f-6ca1-4fe6-b764-c2cdc3b6e076",
+              "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+            },
+            "runtime_kind": "rcc",
+            "runtime_plan": {
+              "package_revision": {
+                "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+                "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0",
+                "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+              },
+              "plan_digest": "sha256:1e9ff3c6dd9aba2ac802aad54e6047c5f19ed4accf8bd6186bcb491a35844e58"
+            },
+            "worker": {
+              "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "worker_profile_id": "08100126-5f06-45de-bcef-4251829b2233",
+              "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+            }
+          },
+          "source_digest": "sha256:b46227a37100d448fe4dcb9ab3593f380f509fb220218e43ec6426cf17da50ca",
+          "suite_name": "Tasks",
+          "suite_path": "tasks.robot",
+          "task_name": "Selected"
+        },
+        "selection_encoding": "actions.robot-selection/utf8-json/v1"
+      },
+      "mode": "work-items",
+      "outputs": [
+        {
+          "digest": "sha256:cb494ad8f4eca262773bdaf74fab96866019290a0fd950cfee05ed9783349954",
+          "name": "robot-stdout.log",
+          "observedBytes": 750,
+          "ref": {
+            "output_id": "25f2ca2f-2568-4fc1-917c-868bdc55f500",
+            "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+            "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+          },
+          "size": 750,
+          "truncated": false
+        },
+        {
+          "digest": "sha256:ceef5e7ce6b1a4a8a55d318d07e9a779e0a38ab85d8a7a5b6c7b7af26c99e6e0",
+          "name": "robot-stderr.log",
+          "observedBytes": 134,
+          "ref": {
+            "output_id": "af63aa80-b6c2-4249-af6a-54cefaa12409",
+            "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+            "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+          },
+          "size": 134,
+          "truncated": false
+        },
+        {
+          "digest": "sha256:09da891aaa8209504fe3fd5562fb6815f9c940d941a8267368f26122c6f15cd4",
+          "name": "robot-output.xml",
+          "observedBytes": 1188,
+          "ref": {
+            "output_id": "4843c586-6dfc-41c4-98a0-4a1e43963186",
+            "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+            "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+          },
+          "size": 1188,
+          "truncated": false
+        },
+        {
+          "digest": "sha256:94ef3210d9de0596beef9d0719534f2dded92ed5531bdc2098bac5f9558d87b9",
+          "name": "rcc-receipt.json",
+          "observedBytes": 55245,
+          "ref": {
+            "output_id": "fa601385-5bed-4b66-b370-2d614e22b125",
+            "run_id": "ca45f666-8673-4406-9677-468673cb6046",
+            "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+          },
+          "size": 55245,
+          "truncated": false
+        }
+      ],
+      "packageRevision": {
+        "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+        "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0",
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289"
+      },
+      "publicationFence": {
+        "attempt_id": "95c94c0e-7861-4fe2-80d1-b06a0e7ff5cc",
+        "epoch": 1,
+        "owner_id": "1a8f1b2b-6bd2-427e-a629-b0f446b80503",
+        "run_id": "ca45f666-8673-4406-9677-468673cb6046"
+      },
+      "returnCode": 1,
+      "runtimePlanDigest": "sha256:1e9ff3c6dd9aba2ac802aad54e6047c5f19ed4accf8bd6186bcb491a35844e58",
+      "sourceArtifactDigest": "sha256:b46227a37100d448fe4dcb9ab3593f380f509fb220218e43ec6426cf17da50ca",
+      "status": "FAIL",
+      "version": "actions.robot-execution/v1"
+    }
+  },
+  "item": {
+    "queue": {
+      "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+      "deployment": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a"
+      },
+      "queue_id": "robot-fail-input"
+    },
+    "id": "2bdab68f-0e72-4da8-a6a8-e5dd62fdbac4",
+    "parent_id": null,
+    "queue_state": "FAILED",
+    "business_state": "application_failed",
+    "payload": {
+      "text": "Node a56 modern claimed Robot fail 1793022740840-32361"
+    },
+    "protected_input_digest": "sha256:c59e37aff4b40e7326599dfd49a7a256bf2617feeed2ae17f9e74df4ac4492ed",
+    "snapshot": {
+      "deployment": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "deployment_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:d8a14927734026ef9b52108dfa3db2fc54eefce7002e2b37ab84f879c992bd0a"
+      },
+      "capability": {
+        "package_revision": {
+          "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+          "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+          "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0"
+        },
+        "capability_id": "robot.task"
+      },
+      "runtime_plan": {
+        "package_revision": {
+          "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+          "package_id": "995c103c-e787-5dab-9c1a-80c0ea177260",
+          "revision_id": "sha256:d0152c601ace9e1aade3c9aaba1892ed1bcd5b8c98f11e824ee58d98100984c0"
+        },
+        "plan_digest": "sha256:1e9ff3c6dd9aba2ac802aad54e6047c5f19ed4accf8bd6186bcb491a35844e58"
+      },
+      "worker": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "worker_profile_id": "08100126-5f06-45de-bcef-4251829b2233",
+        "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      "policy": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "policy_id": "039f587f-6ca1-4fe6-b764-c2cdc3b6e076",
+        "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "output_provider": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "provider_profile_id": "61cdfaa5-ce7d-4f7f-a55e-eab16d6680d2",
+        "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "runtime_kind": "rcc",
+      "capability_schema_digest": "sha256:dffdf7089a17486ae99a11cbbb77d376f245839005a91f6d58792ba863bfee6f",
+      "action_id": "7877c068-a139-5833-8291-f253f3f36007",
+      "capability_authority": "package-revision",
+      "data_binding": null,
+      "canvas_application": {
+        "workspace_id": "35264a6f-41e5-459a-8b7f-79ff3c9a7289",
+        "app_id": "00ee7ae2-6e73-4126-9f5d-5cd2e7295a50",
+        "revision_id": "sha256:8ac7591464857230b806e3f0adc6f88cf1122c02421204cff8f6f41179533190"
+      }
+    },
+    "delivery_count": 1,
+    "claim": null,
+    "lease_deadline_ms": null,
+    "available_after_ms": "1793022741768",
+    "created_ms": "1793022741768",
+    "run_ids": [
+      "ca45f666-8673-4406-9677-468673cb6046"
+    ],
+    "child_ids": [],
+    "review_id": null
+  },
+  "artifactSha256": {
+    "robot-stdout.log": "cb494ad8f4eca262773bdaf74fab96866019290a0fd950cfee05ed9783349954",
+    "robot-stderr.log": "ceef5e7ce6b1a4a8a55d318d07e9a779e0a38ab85d8a7a5b6c7b7af26c99e6e0",
+    "robot-output.xml": "09da891aaa8209504fe3fd5562fb6815f9c940d941a8267368f26122c6f15cd4",
+    "rcc-receipt.json": "94ef3210d9de0596beef9d0719534f2dded92ed5531bdc2098bac5f9558d87b9"
+  }
+}

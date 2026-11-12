@@ -1,0 +1,482 @@
+[
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_admission_reload_exact_refs_and_no_compilation_claim[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_admission_reload_exact_refs_and_no_compilation_claim[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-manifest]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-inventory]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-source]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-plan]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-capability]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[sqlite-owner]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-manifest]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-inventory]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-source]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-plan]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-capability]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_tamper_and_scope_denial[postgresql-owner]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_issued_evidence_cannot_change_before_admission[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_issued_evidence_cannot_change_before_admission[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_rcc_retains_exact_host_measurements[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_rcc_retains_exact_host_measurements[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_outer_transaction_cannot_acknowledge_admission[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_outer_transaction_cannot_acknowledge_admission[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_audit_failure_rolls_back_admission_and_replay_is_safe[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_audit_failure_rolls_back_admission_and_replay_is_safe[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_independent_connections_concurrent_admission_is_idempotent[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_independent_connections_concurrent_admission_is_idempotent[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[sqlite-None]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[sqlite-plan1]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[sqlite-plan2]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[postgresql-None]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[postgresql-plan1]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_package_admission",
+    "name": "test_closed_retained_plan_rejects_invalid_carrier[postgresql-plan2]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_prebound_callback_is_sql_only_and_python_path_refuses_robot[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_prebound_callback_is_sql_only_and_python_path_refuses_robot[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[sqlite-source]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[sqlite-grant]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[sqlite-cancel]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[sqlite-epoch]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[sqlite-callback]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[postgresql-source]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[postgresql-grant]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[postgresql-cancel]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[postgresql-epoch]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_live_changes_deny_bound_selection[postgresql-callback]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_preparation_refuses_outer_transaction[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_robot_execution_selection",
+    "name": "test_preparation_refuses_outer_transaction[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_admission_replay_restart_and_exact_schemas[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_admission_replay_restart_and_exact_schemas[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_admission_requires_host_output_actor_workspace_and_live_grants[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_admission_requires_host_output_actor_workspace_and_live_grants[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_duplicate_package_compiles_converge_without_overwriting_or_regranting[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_duplicate_package_compiles_converge_without_overwriting_or_regranting[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_failed_compiler_never_admits_and_tampered_storage_fails_closed[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_failed_compiler_never_admits_and_tampered_storage_fails_closed[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_compilation_requires_explicit_host_execution_admission[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_compilation_requires_explicit_host_execution_admission[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_request_audit_and_grants_rollback_together[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_package_request_audit_and_grants_rollback_together[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_explicit_work_item_declaration_survives_registry_restart[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_foundry_package_registry",
+    "name": "test_explicit_work_item_declaration_survives_registry_restart[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_admission_exact_projection_reload_and_outer_identity[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_admission_exact_projection_reload_and_outer_identity[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_unissued_copy_and_other_actor_denied[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_unissued_copy_and_other_actor_denied[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_requires_live_compile_authority_and_replay_no_grant_resurrection[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_requires_live_compile_authority_and_replay_no_grant_resurrection[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_schema_for_rejects_cross_member_plan[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_schema_for_rejects_cross_member_plan[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_duplicate_logical_requirement_ids_never_issued[sqlite-False]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_duplicate_logical_requirement_ids_never_issued[sqlite-True]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_duplicate_logical_requirement_ids_never_issued[postgresql-False]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_duplicate_logical_requirement_ids_never_issued[postgresql-True]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[sqlite-receipts]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[sqlite-tag]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[sqlite-manifest]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[sqlite-inventory]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[postgresql-receipts]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[postgresql-tag]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[postgresql-manifest]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_reload_rejects_corrupt_evidence[postgresql-inventory]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_admission_sql_failure_rolls_back_rows_grants_and_audit[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_admission_sql_failure_rolls_back_rows_grants_and_audit[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_execute_grant_alone_cannot_compile_and_revocation_blocks_admission[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_execute_grant_alone_cannot_compile_and_revocation_blocks_admission[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_concurrent_identical_admission_has_one_outer_authority[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_concurrent_identical_admission_has_one_outer_authority[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_scoped_selection_cannot_cross_package_and_workspace[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_scoped_selection_cannot_cross_package_and_workspace[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[sqlite-build]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[sqlite-import]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[sqlite-test]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[postgresql-build]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[postgresql-import]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_failed_bundle_compilation_has_no_ready_ack_or_pending[postgresql-test]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_evidence_roundtrip_and_exact_grant_set[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_bundle_evidence_roundtrip_and_exact_grant_set[postgresql]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_selected_logical_requirement_and_unknown_requirement_are_exact[sqlite]",
+    "result": "passed"
+  },
+  {
+    "classname": "tests.action_server_tests.test_bundle_package_registry",
+    "name": "test_selected_logical_requirement_and_unknown_requirement_are_exact[postgresql]",
+    "result": "passed"
+  }
+]

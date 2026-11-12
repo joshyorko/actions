@@ -1,0 +1,11 @@
+{
+  "status": "VERIFIED_LOSSLESS",
+  "archive": "/workspace/actions-recovery-327/evidence/a35-frozen-portable-bounded/fixtures.tar.gz",
+  "sha256": "7de9602540b55729aec2818b3ee10e93fd995c000dacaac1efcae17679e475c4",
+  "archive_bytes": 192279633,
+  "scope": "inactive task-owned synthetic fixtures only; stdout/XML and all other receipts unchanged",
+  "entry_count": 25472,
+  "original_regular_bytes": 1404304714,
+  "manifest_sha256": "b204ff90ec4f9956b0ae88ca5f73bf9e37024b79252462d5da63201e33ebd80f",
+  "local_only": true
+}

@@ -1,0 +1,81 @@
+{
+  "since": 1792926011.1210375,
+  "recent_allocated_bytes_by_prefix": [
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/batch-0",
+      "bytes": 22097920,
+      "files": 103
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/batch-1",
+      "bytes": 17022976,
+      "files": 128
+    },
+    {
+      "prefix": "//workspace/actions/action_server/.pytest_cache",
+      "bytes": 512000,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions/action_server/src",
+      "bytes": 155648,
+      "files": 5
+    },
+    {
+      "prefix": "//workspace/actions/action_server/tests",
+      "bytes": 131072,
+      "files": 4
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/knowledge-foundation-draft/action_server",
+      "bytes": 32768,
+      "files": 5
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/run-retry.py",
+      "bytes": 8192,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/knowledge-codec-evidence/red.log",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/selection.json",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/receipt.md",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/summary.json",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/hashes-before.json",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//workspace/actions-recovery-327/bundle-joined-gate/hashes-after.json",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//tmp/codex-bwrap-synthetic-mount-targets-1000/d40bdb1f454c404f/222403",
+      "bytes": 4096,
+      "files": 1
+    },
+    {
+      "prefix": "//tmp/codex-bwrap-synthetic-mount-targets-1000/063cebc15e007869/222403",
+      "bytes": 4096,
+      "files": 1
+    }
+  ],
+  "note": "mtime scan attribution only; not proof of growth from an earlier allocated-size baseline"
+}

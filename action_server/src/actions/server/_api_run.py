@@ -264,9 +264,9 @@ def get_run_log_html(run_id: str = fastapi.Path(title="ID for run")):
         # Check if we have .robolog files and if so, generate a log.html from them.
         robolog_files: list[Path] = list(artifacts_in.glob("*.robolog"))
         if robolog_files:
-            from robocorp.log import _index_v3 as index
+            from actions.server_integration import get_log_viewer_html
 
-            contents = index.FILE_CONTENTS["index.html"]
+            contents = get_log_viewer_html()
             stream = io.BytesIO()
 
             # Files are as '<name>.robolog`, `<name>_1.robolog`, `<name>_2.robolog`, etc.

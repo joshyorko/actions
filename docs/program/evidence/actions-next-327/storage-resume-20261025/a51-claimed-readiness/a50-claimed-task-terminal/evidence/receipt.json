@@ -1,0 +1,128 @@
+{
+  "supervisor_parent_pid": 191848,
+  "supervisor_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b",
+  "source": "72c8a13e90a4e5bfb6e0ea24e818f7589e75c96b",
+  "manifest_sha256": "535d08fd5ddb776dd6b076b262ba9dceeded123406f37aa2e832dc9272be2714",
+  "harness_sha256": "90f7e3dac1fda0c322d8193a8312c11e7636ea1ecf2d6013f77f722586219970",
+  "live_cancellation": "NOT_RUN",
+  "status": "FAILED",
+  "runtime": "1.1.0a50",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:0a0e5fee81bc3d747aa685d634880e94e344643e942a70733b4280af6d89a8a7",
+  "processes": [
+    {
+      "pid": 191850,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16403667199847405,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 191860,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21454319499753183,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 191962,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16410129399810103,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "222fdb60-801d-4752-b4af-27cdf9b5deb1",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "failure": {
+    "type": "ExceptionGroup",
+    "frames": [
+      {
+        "file": "qualify.py",
+        "function": "main",
+        "line": 414
+      },
+      {
+        "file": "qualify.py",
+        "function": "connect",
+        "line": 137
+      },
+      {
+        "file": "contextlib.py",
+        "function": "__aexit__",
+        "line": 231
+      },
+      {
+        "file": "streamable_http.py",
+        "function": "streamable_http_client",
+        "line": 688
+      },
+      {
+        "file": "_asyncio.py",
+        "function": "__aexit__",
+        "line": 815
+      }
+    ]
+  },
+  "budget": {
+    "fixture_bytes": 1063019,
+    "log_bytes_upper_bound": 10342
+  },
+  "scope": "Installed claimed consumer Robot Tasks, synthetic single owner, terminal success/failure and restart; no live cancellation, multi-principal, browser, producer or child-output qualification"
+}

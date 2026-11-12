@@ -1,0 +1,164 @@
+[
+  {
+    "phase": "build",
+    "specification": "sha256:185139c8765f507b913240020978796013b6d1a67d2de001815b8325397d7854",
+    "artifact": "sha256:a8464ce6d65b33577b262f740c6a4cd4a0e3e8d958a44c3685224e4c7548f21a"
+  },
+  {
+    "phase": "import",
+    "metadata": {
+      "actions_spec_version": "v2",
+      "actions": [
+        {
+          "name": "normalize_words",
+          "line": 2,
+          "file": "actions_impl.py",
+          "docs": "Normalize words to single spaces and lowercase.\n\n    Args:\n        text: Text to normalize.\n    Returns:\n        Normalized text.\n    ",
+          "input_schema": {
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Text to normalize.",
+                "title": "Text"
+              }
+            },
+            "type": "object",
+            "required": [
+              "text"
+            ]
+          },
+          "output_schema": {
+            "type": "string",
+            "description": "Normalized text."
+          },
+          "managed_params_schema": {},
+          "options": {
+            "is_consequential": null,
+            "display_name": null,
+            "kind": "action"
+          }
+        },
+        {
+          "name": "add_counts",
+          "line": 12,
+          "file": "actions_impl.py",
+          "docs": "Add two typed integer counts.\n\n    Args:\n        left: First count.\n        right: Second count.\n    Returns:\n        Sum of counts.\n    ",
+          "input_schema": {
+            "properties": {
+              "left": {
+                "type": "integer",
+                "description": "First count.",
+                "title": "Left"
+              },
+              "right": {
+                "type": "integer",
+                "description": "Second count.",
+                "title": "Right"
+              }
+            },
+            "type": "object",
+            "required": [
+              "left",
+              "right"
+            ]
+          },
+          "output_schema": {
+            "type": "integer",
+            "description": "Sum of counts."
+          },
+          "managed_params_schema": {},
+          "options": {
+            "is_consequential": null,
+            "display_name": null,
+            "kind": "action"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "phase": "tests",
+    "status": "passed"
+  },
+  {
+    "phase": "build",
+    "specification": "sha256:185139c8765f507b913240020978796013b6d1a67d2de001815b8325397d7854",
+    "artifact": "sha256:a8464ce6d65b33577b262f740c6a4cd4a0e3e8d958a44c3685224e4c7548f21a"
+  },
+  {
+    "phase": "import",
+    "metadata": {
+      "actions_spec_version": "v2",
+      "actions": [
+        {
+          "name": "normalize_words",
+          "line": 2,
+          "file": "actions_impl.py",
+          "docs": "Normalize words to single spaces and lowercase.\n\n    Args:\n        text: Text to normalize.\n    Returns:\n        Normalized text.\n    ",
+          "input_schema": {
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Text to normalize.",
+                "title": "Text"
+              }
+            },
+            "type": "object",
+            "required": [
+              "text"
+            ]
+          },
+          "output_schema": {
+            "type": "string",
+            "description": "Normalized text."
+          },
+          "managed_params_schema": {},
+          "options": {
+            "is_consequential": null,
+            "display_name": null,
+            "kind": "action"
+          }
+        },
+        {
+          "name": "add_counts",
+          "line": 12,
+          "file": "actions_impl.py",
+          "docs": "Add two typed integer counts.\n\n    Args:\n        left: First count.\n        right: Second count.\n    Returns:\n        Sum of counts.\n    ",
+          "input_schema": {
+            "properties": {
+              "left": {
+                "type": "integer",
+                "description": "First count.",
+                "title": "Left"
+              },
+              "right": {
+                "type": "integer",
+                "description": "Second count.",
+                "title": "Right"
+              }
+            },
+            "type": "object",
+            "required": [
+              "left",
+              "right"
+            ]
+          },
+          "output_schema": {
+            "type": "integer",
+            "description": "Sum of counts."
+          },
+          "managed_params_schema": {},
+          "options": {
+            "is_consequential": null,
+            "display_name": null,
+            "kind": "action"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "phase": "tests",
+    "status": "passed"
+  }
+]

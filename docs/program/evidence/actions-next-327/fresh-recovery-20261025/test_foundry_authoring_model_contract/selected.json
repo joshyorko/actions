@@ -1,0 +1,7 @@
+[
+  "tests/action_server_tests/test_foundry_authoring_model_contract.py::test_model_tool_schema_resolves_nested_canvas_references",
+  "tests/action_server_tests/test_foundry_authoring_model_contract.py::test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure[sqlite]",
+  "tests/action_server_tests/test_foundry_authoring_model_contract.py::test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure[postgresql]",
+  "tests/action_server_tests/test_foundry_authoring_model_contract.py::test_real_adapter_hides_other_workspace_authored_spec[sqlite]",
+  "tests/action_server_tests/test_foundry_authoring_model_contract.py::test_real_adapter_hides_other_workspace_authored_spec[postgresql]"
+]

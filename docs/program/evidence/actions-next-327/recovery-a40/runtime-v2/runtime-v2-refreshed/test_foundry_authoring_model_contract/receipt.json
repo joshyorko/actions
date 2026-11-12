@@ -1,0 +1,36 @@
+{
+  "module": "test_foundry_authoring_model_contract",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a40/runtime-v2-refreshed/selected-pytest.py",
+    "tests/action_server_tests/test_foundry_authoring_model_contract.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a40/runtime-v2-refreshed/test_foundry_authoring_model_contract/tests.xml",
+    "--basetemp=/workspace/actions-327-a40/runtime-v2-refreshed/test_foundry_authoring_model_contract/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 7100502016,
+  "stop_reason": null,
+  "source_sha256": "d90787e0990bfc46b0f354efab6ccea104bd4bca5028ee72d464d1a127485ce5",
+  "counts": {
+    "tests": 5,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

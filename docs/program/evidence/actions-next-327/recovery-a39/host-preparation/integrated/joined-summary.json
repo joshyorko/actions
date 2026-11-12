@@ -1,0 +1,153 @@
+{
+  "source": "ec514752ae52be847427e8a4302d675100b8c990",
+  "tree": "08a56e418961916a4ec775766fe402da8d23c32d",
+  "container": "2cfeb2aefdc75c181da81673882e21626e1ce5f193305fd7e90738d4174ef804",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_knowledge_host",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a38/host-preparation-integrated/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_host.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_host/tests.xml",
+        "--basetemp=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_host/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 11671207936,
+      "stop_reason": null,
+      "source_sha256": "721184235526fb5b3012f15b3810c70638ba3959c62b98904717b0029d22e398",
+      "counts": {
+        "tests": 11,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_knowledge_host_postgres",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a38/host-preparation-integrated/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_host_postgres.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_host_postgres/tests.xml",
+        "--basetemp=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_host_postgres/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 11070414848,
+      "stop_reason": null,
+      "source_sha256": "620bb8eee9199ff4af11446962452dd3ca322ebee0aef18711326e8044b44c4c",
+      "counts": {
+        "tests": 1,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_knowledge_preparation",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a38/host-preparation-integrated/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_preparation.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_preparation/tests.xml",
+        "--basetemp=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_preparation/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 11585339392,
+      "stop_reason": null,
+      "source_sha256": "eb9a61e580abfb0d42af2130bff6f18f095ea4281f47a57c1d43cfbd50256c27",
+      "counts": {
+        "tests": 56,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_knowledge_execution",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a38/host-preparation-integrated/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_execution.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_execution/tests.xml",
+        "--basetemp=/workspace/actions-327-a38/host-preparation-integrated/test_knowledge_execution/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 11415695360,
+      "stop_reason": null,
+      "source_sha256": "dbe6b91ee4dc6a2146627d2640a319d6927b61410430974356a5b41622bec713",
+      "counts": {
+        "tests": 76,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

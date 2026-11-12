@@ -1,0 +1,663 @@
+{
+  "schema": "actions-next-327-mandatory-priority-ledger/v1",
+  "date": "2026-10-26",
+  "authority": "Original 28-row acceptance matrix at actions/docs/program/actions-next-release-327.md; no new mandatory scope is introduced.",
+  "current_workspace": {
+    "repo": "/workspace/actions",
+    "HEAD": "7b35422e30114a9a7561ab60b3f345990fe3ddb1",
+    "tree": "04d85b04ac07ae4e584ec0edce937c33dce69d3a",
+    "state": "local dirty a60 changes; no a60 wheel built"
+  },
+  "campaign": "NO-GO until original mandatory gates pass or receive a permitted explicit owner disposition.",
+  "measured_next_milestone": {
+    "name": "One exact-source, hosted-green, installed-consumer candidate",
+    "completion_conditions": [
+      "Finish a60 source corrections (native resource expectations and source-browser/CSS fix) on root-owned source.",
+      "Run complete hosted CI and browser/candidate gates at that exact head; resolve Windows/macOS Runtime #393 URI failures and Ubuntu published-Core browser failure.",
+      "Build/install one candidate artifact from that exact accepted source; record source/tree/wheel identities.",
+      "Use that installed candidate for remaining owned product, security, provider and recovery gates; retain owner/protected blockers explicitly."
+    ],
+    "not_an_eta": "This is a gate definition, not an estimated duration or completion percentage."
+  },
+  "evidence_snapshot": {
+    "coverage_515": "SUCCESS at PR head daf41283a8507b4807c404a1683add9c3750d456/tree e27a3b6b1338913f7c241b5f891b94891034435c; Runtime 5349 passed/58 skipped; other package suite gates and cleanup/upload pass, but this does not qualify later local a60 changes.",
+    "runtime_393": "Windows and macOS integration failed the expected resource URI assertion; Ubuntu published-Core/browser acceptance failed AssertionError line 1025.",
+    "local_a60": "Held 7b35422 Windows fixture 226 PASS; current native resource/source-browser/CSS changes have frontend tests/quality PASS and Toolkit230 PASS. Source browser changed from old HTML body 6786/284 to GREEN after CSS wrapping. No a60 wheel built and hosted qualification remains pending.",
+    "a59_data": "Installed direct CSV/Parquet and persisted SQLite authorization service component PASS (same typed result; deny absent grant; persisted revocation; limits/readback). No immutable Data Package/Run/Attempt, PG engine or paging/export. PostgreSQL continuation is explicitly DENIED before execution; no role/container was created.",
+    "a59_restore": "Owned a59 PostgreSQL/object restore plus cold-RCC component PASS; this proves one seeded consumer Run/four artifact byte readbacks on component composition and separate cold acquire, not full Runtime restore. Offline recovery composition is only copied a56 cancelled state plus safe store projection; no API or output readback.",
+    "a59_security": "Installed archive traversal refusal and worker environment constructor closed allowlist PASS on a59 wheel; no child/RCC spawn, live route or sandbox proof.",
+    "old_parquet_claim": "Earlier blanket missing-Parquet statements are stale as component-level facts. They must be updated to show installed CSV/Parquet decoder and SQLite authority-service component evidence, while row 11 remains open for Package/Run, PostgreSQL, retained lifecycle and API acceptance."
+  },
+  "protected_or_owner_blocks": [
+    {
+      "block": "PostgreSQL sealed-Data setup",
+      "state": "DENIED before execution",
+      "detail": "Auto-review rejected planned creation of synthetic DB role/password and grant/role security mutations. Do not use workaround; require explicit new authority or a pre-existing authorized service path."
+    },
+    {
+      "block": "Codex CLI",
+      "state": "pre-initialize failure",
+      "detail": "EROFS using task-local homes; no actual model/MCP call. Keep the original matrix-supported client sequence; do not invent a profile."
+    },
+    {
+      "block": "ChatGPT render and invoice E1",
+      "state": "OWNER",
+      "detail": "Actual host render deferred; invoice E1 is separate. Require owner/operator and exact candidate."
+    },
+    {
+      "block": "Publisher security",
+      "state": "OWNER / SECURITY",
+      "detail": "Identity/token-scope and residual-risk review before publication; no credential/settings changes."
+    },
+    {
+      "block": "Celld experiment",
+      "state": "OPTIONAL / NO-GO",
+      "detail": "Not a release blocker unless owner explicitly includes it."
+    }
+  ],
+  "rows": [
+    {
+      "id": 1,
+      "matrix_row": "Published compatibility baseline — SHIPPED",
+      "priority": "P2",
+      "lane": "Owned qualification",
+      "depends_on": "After accepted final candidate",
+      "original_acceptance": "Preserve public aliases, CLI/API/current packages; qualify actual installed1.0.4 upgrade and safe downgrade/restore.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 729,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "The a57 installed 1.0.4 SQLite queue/attachment cell passed, including official wheel hash/payload verification, relocated fixture read/restart, exact schema refusal with bytes unchanged, and backup rollback. Full coordinated Runtime compatibility remains open.",
+      "remaining_check": "Qualify old/new candidate against coordinated SQL, objects, journals, source/runtime and rollback/replay on the final candidate.",
+      "evidence": "327-probes/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md"
+    },
+    {
+      "id": 2,
+      "matrix_row": "Existing Runtime capability control plane — DRAFT_PR",
+      "priority": "P0",
+      "lane": "Source and hosted qualification",
+      "depends_on": "a60 source fixes -> hosted current-head matrix",
+      "original_acceptance": "Combined current suites, stateless MCPv2/routing, collisions, old aliases and no model catalog growth per app.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 730,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Coverage #515 passed at daf41283/tree e27a3b6, but Runtime #393 failed Windows/macOS resource-URI integration assertions and Ubuntu published-Core browser acceptance. a60 local source-browser/CSS and native-resource changes plus Toolkit229/frontend quality pass are not hosted qualification; no a60 wheel exists.",
+      "remaining_check": "Finish current source corrections and run hosted CI at that exact head across supported OSes, including portable coverage, Runtime integration, published-Core/browser, Toolkit and candidate acceptance; diagnose any remaining assertion.",
+      "evidence": "327-probes/ci515-terminal-watch/receipt.md; /tmp/327-a60-frontend.log; /tmp/327-a60-toolkit.log"
+    },
+    {
+      "id": 3,
+      "matrix_row": "Public MCP Apps authoring and CanvasSpec — DRAFT_PR (#100)",
+      "priority": "P1",
+      "lane": "Product contract qualification",
+      "depends_on": "P0 source green; exact candidate install",
+      "original_acceptance": "Python/TS fixture parity, malformed/alias/depth/reference/visibility negatives, real resource metadata and public authored consumer.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 731,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Earlier MCP Apps bounded contract and a57 UI-only proof do not establish current Python/TypeScript fixture parity, complete malformed input behavior, metadata or public authoring against the final candidate.",
+      "remaining_check": "On the accepted candidate, complete Python/TypeScript fixtures, malformed/alias/depth/reference/visibility negatives, real resource metadata and authored public consumer checks.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 731"
+    },
+    {
+      "id": 4,
+      "matrix_row": "Semantic renderer and official bridge — DRAFT_PR (#99-A)",
+      "priority": "P1",
+      "lane": "Product and owner-host qualification",
+      "depends_on": "P0 source green; exact packaged candidate",
+      "original_acceptance": "Same official MCP Apps View/bridge and Runtime preview; real backend roundtrip, CSP/offline/artifact, unsupported host and scoped negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 732,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "a60 source-browser result is green after CSS wrapping and frontend tests/quality pass; that is local browser evidence. Installed official bridge/backend roundtrip and scoped negatives remain; actual ChatGPT E1 is row 23.",
+      "remaining_check": "Run packaged renderer/bridge against real backend roundtrip, CSP/offline/artifact and unsupported-host/scoped-negative cases, then carry same candidate to owner E1 when available.",
+      "evidence": "/tmp/327-a60-frontend.log; actions/docs/program/actions-next-release-327.md row 732"
+    },
+    {
+      "id": 5,
+      "matrix_row": "Responsive accessible design baseline — DRAFT_PR / SPEC_ONLY gaps",
+      "priority": "P1",
+      "lane": "Product qualification",
+      "depends_on": "P0 source green; packaged UI",
+      "original_acceptance": "Credible bounded component catalog/themes; keyboard/focus/contrast/overflow/loading/error/empty and text fallback on packaged UI. No arbitrary JS/HTML/CSS or mount effects.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 733,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Existing primitives and component slices are partial; full keyboard/focus/contrast/overflow/loading/error/empty/text fallback coverage remains.",
+      "remaining_check": "Run the required-state and accessibility matrix against final packaged UI, covering keyboard/focus/contrast/overflow/loading/error/empty/text fallback.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 733"
+    },
+    {
+      "id": 6,
+      "matrix_row": "First-boot six-tool authoring lifecycle — DRAFT_PR (#71)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 2-5 and exact installed candidate",
+      "original_acceptance": "Fresh no-user-package runtime: external model creates useful app, one atomic revision, validate/activate, revise, fail safely, rollback/restart/reopen; bounded model catalog.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 734,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "No full clean first-boot external-model authoring lifecycle with useful backend, revise/fail/rollback/restart/reopen and two independent apps.",
+      "remaining_check": "Qualify the full no-user-package generated-app lifecycle, including two independent Python apps and failure-safe rollback/restart.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 734"
+    },
+    {
+      "id": 7,
+      "matrix_row": "Generated Python / immutable Package and RuntimePlan — DRAFT_PR (#130/#135)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Row 6 and row 9",
+      "original_acceptance": "Deterministic source/deps/tests and separate source/plan/revision identities; bounded staging; actual RCC prepare and out-of-process import/tests; no source-provided adapter authority; execute pinned generated capability.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 735,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "A compiler-verified immutable Package/RuntimePlan is not joined to typed capability execution through Run/Attempt on the final source.",
+      "remaining_check": "Prove same immutable Package/plan binding through typed execution, Run/Attempt, and sealed outputs on final candidate.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 735"
+    },
+    {
+      "id": 8,
+      "matrix_row": "Workspace binding/deployment/activation resolver — DRAFT_PR (#129)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 7 and 9",
+      "original_acceptance": "Authorized immutable selection, complete package/plan/profile validation, same-transaction revocation/idempotency/CAS/audit, N inflight pins under N+1, rollback/restart/replica/mixed-version negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 736,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Full binding/deployment/activation resolution with exact-source grants, revocation, idempotency/CAS/audit, inflight selection and rollback remains incomplete.",
+      "remaining_check": "Exercise persisted binding/deployment/head selection, concurrent CAS, revocation, audit and rollback on the final installed path.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 736"
+    },
+    {
+      "id": 9,
+      "matrix_row": "Common control SQL / schema migration — DRAFT_PR (#84/#129)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "P0 source green; rows 7, 8, 20",
+      "original_acceptance": "Legacy preservation, fresh/upgraded parity, transactional failure and current common SQL gates; no Canvas side database activation authority.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 737,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Hosted package suites pass at #515 head, but a60 edits still need current-head CI and full schema/migration/provider parity, upgrade/rollback and restore proof remain.",
+      "remaining_check": "Complete current-head SQLite/Postgres schema and migration parity, fresh/upgraded rollback and final restore/downgrade gates.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 737"
+    },
+    {
+      "id": 10,
+      "matrix_row": "Zero-touch plugin boot, launcher and discovery — DRAFT_PR (#71/#99-B)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 2, 9 and exact install",
+      "original_acceptance": "Fresh writable state outside immutable plugin, responsive startup/health/discovery, no initial package/manual per-app MCP registration; local no public listener and authenticated standalone HTTP.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 738,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Installed stdio/plugin discovery, health, attach and process-restart through the same authority are not qualified.",
+      "remaining_check": "Run the installed zero-touch CLI/plugin discovery and attach/health/restart flow through shared authority.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 738"
+    },
+    {
+      "id": 11,
+      "matrix_row": "Named open data / result plane — DRAFT_PR (#131)",
+      "priority": "P1 / environment-blocked",
+      "lane": "Product qualification; protected PG setup",
+      "depends_on": "Existing authorized provider fixture or explicit authorization for required owned PG setup",
+      "original_acceptance": "Unchanged immutable Package over owned DuckDB CSV AND Parquet and real PG; named bounded operations, discovery, retained snapshots/provenance, paging/export/cost/cancel/auth negatives.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 739,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Stale blanket “Parquet missing” summaries are incomplete: a59 installed direct CSV/Parquet decoders and SQLite authority service pass; persisted grant, denial after revocation, row/byte limits and readback are measured. Still absent: immutable Data Package/capability binding, Package/Run/Attempt, generated execution, PostgreSQL engine proof, paging/export/cost and retained lineage. A PostgreSQL attempt was denied before shell/container/role creation; it was not executed.",
+      "remaining_check": "Use existing authorized PostgreSQL service/credentials if available, or keep the gate blocked pending explicit authority; then prove immutable Package admission and execution over DuckDB CSV+Parquet and real PG, retained source identity, scoped negatives, paging/export/cost/cancel. Do not bypass the denial or claim expiry.",
+      "evidence": "327-probes/a59-installed-data/service-path/README.md; 327-probes/a59-installed-data/service-path/package-run/README.md; 327-probes/a59-installed-data/service-path/postgres-block.json"
+    },
+    {
+      "id": 12,
+      "matrix_row": "Bounded Knowledge collections — DRAFT_PR (#131)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 8-9",
+      "original_acceptance": "Expose bounded collection/ingest/search through shared binding/authority; restart/provenance/limits/access and durable long ingestion where used.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 740,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Older bounded PostgreSQL Knowledge cases do not prove current public binding/lifecycle, other providers/corpora, multi-principal and rollback breadth.",
+      "remaining_check": "On final integrated source, qualify provider mapping, multi-principal/revocation, other required providers/corpora and restart/rollback through public binding/lifecycle.",
+      "evidence": "actions/docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/postgres-knowledge/summary.json"
+    },
+    {
+      "id": 13,
+      "matrix_row": "Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 2, 9, 14",
+      "original_acceptance": "Real installed consumer and VSIX across denial/revocation/isolation/restart, general enqueue/retry/dead-letter/logs and native Run lineage; no direct DB/second queue.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 741,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Default trusted host profile, remaining managed operations, isolation/revocation/restart and installed VSIX acceptance remain open.",
+      "remaining_check": "Qualify clean installed consumer/VSIX through existing common SQL/native Run authority across denial, revocation, isolation and restart.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 742"
+    },
+    {
+      "id": 14,
+      "matrix_row": "Fenced business Work Items — DRAFT_PR (#132)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 9, 13, 15",
+      "original_acceptance": "Same queue conformance, denied/stale/duplicate/cancel/restart, atomic output authority; standalone no-Work-Item mode.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 742,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Bounded a56 cancellation and synchronous generic pass/fail do not cover multi-principal, producer/child outputs, policy/fairness/fanout/dead-letter or integrated admission.",
+      "remaining_check": "Run current-source multi-owner and producer/consumer output/fence checks, then queue policy/fairness/dead-letter without adding another queue.",
+      "evidence": "actions/docs/program/evidence/actions-next-327/recovery-20261026/a56-installed/README.md"
+    },
+    {
+      "id": 15,
+      "matrix_row": "Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134)",
+      "priority": "P1",
+      "lane": "Product qualification",
+      "depends_on": "Rows 7-9 and exact candidate",
+      "original_acceptance": "Common activated Deployment/plan resolution, app/model typed execution, revision pinning and explicit recovery; no fallback or uncertain relaunch.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 743,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "a59 owned PostgreSQL/object plus cold-RCC component passes establish one generated consumer Run, four artifact readbacks, stable SQL/object inventories and independently acquired RCC. They do not prove ordinary CLI/whole Runtime recovery, original cache unavailable, cross-version behavior or multiple apps.",
+      "remaining_check": "On accepted candidate, qualify pinned Package deployment -> Run/Attempt -> RCC with typed interaction, approval, artifact and restart/recovery through ordinary supported host.",
+      "evidence": "327-probes/a59-coordinated-restore/generated-journal/evidence/receipt.json; 327-probes/a59-cold-rcc/acquire.json"
+    },
+    {
+      "id": 16,
+      "matrix_row": "WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143)",
+      "priority": "P1",
+      "lane": "Client and product qualification",
+      "depends_on": "Rows 2, 15; supported-client flow",
+      "original_acceptance": "Typed bounded long-job/projection and any required node lineage, cancellation/reconnect; never a second state authority or universal designer requirement by inference.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 744,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Historical a56 Python/MCP bounded Task cancellation exists; current genuine Codex CLI failed EROFS before initialize with task-local homes/no MCP, so no model or MCP acceptance. Do not add new client profiles.",
+      "remaining_check": "Complete only the original supported-client sequence (genuine MCP SDK, fresh Codex CLI, official MCP Apps host) with typed bounded job/Task, Work Item/Run/Attempt, result/artifact and restart/reconnect. Resolve CLI initialize environment first.",
+      "evidence": "327-probes/matrix-current-a59.json row 16; actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/codex-client-next-proof.md"
+    },
+    {
+      "id": 17,
+      "matrix_row": "Exact human approval and authorization negatives — DRAFT_PR",
+      "priority": "P1",
+      "lane": "Product qualification",
+      "depends_on": "Rows 8 and 15",
+      "original_acceptance": "Carry identical invariants into generated app/deployment and all model/app routes; no hidden approval or authorizing by visibility/handle.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 745,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Current exact result/input/source/app/deployment approval races, stale/revoked/cross-scope/altered/duplicate/cancel negatives remain incomplete.",
+      "remaining_check": "Run direct approval and authorization race/substitution/revocation cases through the integrated host routes.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 745"
+    },
+    {
+      "id": 18,
+      "matrix_row": "Retry, effects and dead-letter reconciliation — DRAFT_PR bounded",
+      "priority": "P1",
+      "lane": "Product qualification",
+      "depends_on": "Rows 14-15, 17",
+      "original_acceptance": "Separate safe pre-effect retry, proven idempotent retry and uncertain outcome blocked/reconciled; stale lease/cancel/restart/exhaustion/audit.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 746,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Current generated effects, retry exhaustion/audit and uncertain-outcome reconciliation after cancel/restart are not established.",
+      "remaining_check": "Prove safe pre-effect retry, declared idempotent retry, and uncertain-outcome block/reconcile with stale lease, cancellation, restart and dead-letter evidence.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 746"
+    },
+    {
+      "id": 19,
+      "matrix_row": "Scoped durable artifacts/results — DRAFT_PR (#86)",
+      "priority": "P1",
+      "lane": "Product qualification",
+      "depends_on": "Rows 15, 20, 22, 24",
+      "original_acceptance": "Distinct source/runtime/output/data planes; expiry/retention/privacy and all relevant routes; another Runtime reads without producer routing.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 747,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "A59 artifact readbacks are component evidence; shared/cross-host object provider, exact scope/privacy/expiry, platform support and restored native RunOutput references remain open.",
+      "remaining_check": "Qualify replica/readback, expiry/privacy and negative cross-run/route reads on owned shared storage and final supported platforms; link exact Run and immutable objects.",
+      "evidence": "327-probes/a59-coordinated-restore/generated-journal/evidence/receipt.json"
+    },
+    {
+      "id": 20,
+      "matrix_row": "Retention, restore, upgrade/downgrade — BLOCKED",
+      "priority": "P2",
+      "lane": "Recovery qualification",
+      "depends_on": "Rows 1, 9, 15, 19",
+      "original_acceptance": "Restore SQL+objects+journals/source/runtime artifacts together; preserve Run/effect/audit lineage, GC references and old-version fail-closed behavior.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 748,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Bounded a57 SQLite queue/attachment safe refusal/rollback and a59 PostgreSQL/object plus cold-RCC component PASS exist. a59 recovery composition only copied a56 cancelled state and projected safe store refs; no trusted API, RunOutput or terminal artifact read. Full whole-Runtime state, lineage/GC, clean-host startup/replay and downgrade remain open.",
+      "remaining_check": "Join SQL, objects, journals/effects, source/runtime artifacts and RCC material in an owned clean-host restore; prove ordinary installed startup, preserved lineage/GC and authorized replay/readback; separately verify candidate old/new and fail-closed downgrade.",
+      "evidence": "327-probes/a59-coordinated-restore/generated-journal/evidence/receipt.json; 327-probes/a59-recovery-composition/evidence/receipt.json; actions/docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md"
+    },
+    {
+      "id": 21,
+      "matrix_row": "Reusable invoice template/export — DRAFT_PR (#127)",
+      "priority": "P1",
+      "lane": "Product implementation and qualification",
+      "depends_on": "Rows 6-7, 15, 19, 23",
+      "original_acceptance": "Credential-free runtime-consuming template, exact package/RCC/Canvas pins, deterministic creation/build, smoke/QA/text/errors/artifacts/retry/restart. No copied engine.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 749,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "No final reusable Actions-owned invoice template/export has exact pins and deterministic build with actual approval, RCC result/artifact and authorized export.",
+      "remaining_check": "Converge one owned template on final candidate; prove clean pinned install, approval, real RCC output/artifact, retry/restart and scoped export.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 749"
+    },
+    {
+      "id": 22,
+      "matrix_row": "All-route auth and safe sharing — BLOCKED (#71/#327)",
+      "priority": "P1",
+      "lane": "Security qualification",
+      "depends_on": "Rows 2, 15, 17, 19",
+      "original_acceptance": "Enumerate exact public exceptions and negative-auth/SSRF/path/archive/environment cases across every relevant route before remote sharing.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 750,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "a59 installed domain/security probe passes ZIP traversal refusal and worker environment allowlist on exact wheel. All-sensitive-route early denial, generated app transport/auth/SSRF/path/archive environment, live configuration and safe-sharing checks remain.",
+      "remaining_check": "Finish route-to-policy map and direct denial/side-effect tests for remaining sensitive routes; qualify generated app all-route transport/auth, SSRF/path/archive and host-sharing cases.",
+      "evidence": "327-probes/a59-domain-security/gate-receipt.json; actions/docs/program/evidence/actions-next-327/recovery-20261026/auth-boundaries/README.md"
+    },
+    {
+      "id": 23,
+      "matrix_row": "Actual authenticated ChatGPT E1 — BLOCKED / NEEDS_OPERATOR",
+      "priority": "OWNER",
+      "lane": "Owner-only actual host",
+      "depends_on": "Rows 4 and 21; exact cloud-ready candidate",
+      "original_acceptance": "Actual tool/resource MIME/bridge/render, audience grants, explicit exact review, scoped artifact and restart/reconnect with same identity; preserve denied details.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 751,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Owner ChatGPT a57 CONNECT+RENDER remains deferred; invoice E1 is separate and unperformed. No desktop interaction authority is available to this lane.",
+      "remaining_check": "Owner/operator performs prescribed fresh-state CONNECT and RENDER separately, then invoice E1 on the exact release-ready candidate with actual grants, approval, result/artifact and reconnect. Keep a57/Dakota immutable until authorized.",
+      "evidence": "actions/docs/program/evidence/actions-next-327/recovery-20261026/a57-library-view/installed/CONNECT-RENDER.md"
+    },
+    {
+      "id": 24,
+      "matrix_row": "Homelab-independent distribution and consumers — BLOCKED",
+      "priority": "P2",
+      "lane": "Distribution qualification",
+      "depends_on": "Rows 2, 9, 20 and source acceptance",
+      "original_acceptance": "Reproducible wheels/native/images/locks/checksums/SBOM/provenance, actual installed final consumers, configurable registry/storage, local build/restore without mandatory GitHubCI/GHCR/vendor/Cloudflare/K8s.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 752,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "a59 base/data-duckdb lock/SBOM profiles are bounded; strict raw-vs-active comparison failures remain. Native OS wheels, images, final combined consumers/inventory, configured registry/storage, local build/restore and platform evidence remain.",
+      "remaining_check": "After final source/version acceptance, produce and verify exact wheels/native/images/locks/checksums/SBOM/provenance and clean consumers on required OSes; prove configurable registry/storage and local build/restore. Retain strict checker outcomes.",
+      "evidence": "actions/docs/program/evidence/actions-next-327/recovery-20261026/a59-ci-checkpoint/README.md"
+    },
+    {
+      "id": 25,
+      "matrix_row": "Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified",
+      "priority": "Conditional",
+      "lane": "Scope-gated qualification",
+      "depends_on": "Only if already required by original acceptance / owner clarification",
+      "original_acceptance": "Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 753,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "No controlled Codex/Devsy adapter is qualified. The row itself permits one existing bounded path only if explicitly part of required acceptance; do not expand into a migration/new adapter requirement.",
+      "remaining_check": "Check the original acceptance scope; if this existing path is explicitly required, qualify one synthetic invocation via common admission/Run with scoped source/input/environment/result/cancel. Otherwise record as unqualified scope item, not an added release gate.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 753"
+    },
+    {
+      "id": 26,
+      "matrix_row": "Optional celld experiment — BLOCKED / NO-GO (#326)",
+      "priority": "Conditional / not a current blocker",
+      "lane": "Owner scope decision only",
+      "depends_on": "Only if owner chooses to include optional experiment",
+      "original_acceptance": "If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 754,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Celld remains explicit NO-GO. Optional celld research is not a release blocker unless owner includes it; no implementation or backend change.",
+      "remaining_check": "Keep NO-GO; request owner inclusion/exclusion only if release scope actually depends on it.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 754"
+    },
+    {
+      "id": 27,
+      "matrix_row": "Publisher adversarial source/identity qualification — BLOCKED (#332)",
+      "priority": "OWNER / SECURITY",
+      "lane": "Protected publication qualification",
+      "depends_on": "Owner security evidence before publication",
+      "original_acceptance": "Source-bound tests plus actual publisher identities/token scope and owner-reviewed stolen-credential residual risk before publication.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 755,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Actual publisher identity/token scope and independent stolen-credential residual-risk disposition remain unqualified. No credentials or settings change authorized.",
+      "remaining_check": "Owner reviews actual identities, token scope and residual risk; complete bounded source-bound publisher tests before any publication action.",
+      "evidence": "actions/docs/program/actions-next-release-327.md row 755"
+    },
+    {
+      "id": 28,
+      "matrix_row": "Final combined acceptance / merge / publication — BLOCKED",
+      "priority": "FINAL OWNER DECISION",
+      "lane": "Final acceptance and publication",
+      "depends_on": "All mandatory technical rows and owner gates; row 26 only if explicitly included",
+      "original_acceptance": "Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory.",
+      "matrix_reference": {
+        "path": "docs/program/actions-next-release-327.md",
+        "line": 756,
+        "exact_gate_text_fields": [
+          "Required acceptance",
+          "Dependency / blocker",
+          "Smallest next task",
+          "Genuine owner intervention"
+        ]
+      },
+      "new_evidence_delta": "Current candidate remains NO-GO. Current source changes are unbuilt; coverage #515 is on prior daf41283 head; hosted Runtime #393 failed Windows/macOS integration and Ubuntu published-Core acceptance. Required rows, exact-source release ledger and owner publication approval remain.",
+      "remaining_check": "After all mandatory technical rows pass on one exact source/artifact and protected/operator gates are resolved, prepare source-bound ledger and request separate owner merge/publication decision. Do not request approval before concrete ledger is complete.",
+      "evidence": "327-probes/ci515-terminal-watch/receipt.md; actions/docs/program/actions-next-release-327.md row 756"
+    }
+  ],
+  "canonical_documentation_proposal": {
+    "target": "actions/docs/program/actions-next-release-327.md, current continuation and row 11 evidence cell",
+    "delta": "Replace the stale blanket claim that Parquet/component evidence is missing with exact a59 direct CSV/Parquet plus persisted SQLite authority-service component PASS and its limits (no Package/Run, PostgreSQL, paging/export). Add #515 and #393 platform outcomes and a60 local-only status with no wheel/hosted claim; record bounded a59 PG/object+cold-RCC and store-projection recovery separately from whole Runtime restore. Preserve original 28-row acceptance and owner boundaries. No canonical file changed in this read-only ledger task.",
+    "evidence": [
+      "327-probes/ci515-terminal-watch/receipt.md",
+      "/tmp/327-a60-frontend.log",
+      "/tmp/327-a60-toolkit.log",
+      "327-probes/a59-installed-data/service-path/README.md",
+      "327-probes/a59-installed-data/service-path/postgres-block.json",
+      "327-probes/a59-coordinated-restore/generated-journal/evidence/receipt.json",
+      "327-probes/a59-recovery-composition/evidence/receipt.json",
+      "327-probes/a59-domain-security/gate-receipt.json"
+    ]
+  },
+  "upstream_disposition": "none"
+}

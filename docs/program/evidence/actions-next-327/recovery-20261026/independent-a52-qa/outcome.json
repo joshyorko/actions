@@ -1,0 +1,29 @@
+{
+  "suite": "FAILED",
+  "source_sha": "f235de8916487bcae8e97c3bad0f434be7f360c7",
+  "tree": "b8ab1d0e02a20525ed4e4b3c47523856643a263d",
+  "passed": 5347,
+  "failed": 1,
+  "skipped": 198,
+  "deselected": 3,
+  "duration_seconds": 3312.18,
+  "session_finish": {
+    "counts": {
+      "call:failed": 1,
+      "call:passed": 5347,
+      "call:skipped": 159,
+      "setup:passed": 5507,
+      "setup:skipped": 39,
+      "teardown:passed": 5546
+    },
+    "event": "session_finish",
+    "exitstatus": 1,
+    "time": 1793016812.147191
+  },
+  "postgres_capacity_samples": 57,
+  "postgres_capacity_all_pass": true,
+  "source_unchanged": true,
+  "isolated_fixture_assertions": "2 passed in4.07s, separate diagnostic, full suite remains FAILED",
+  "clean_consumer_original_wheel": "NOT_RUN",
+  "installed_live_cancel": "NOT_RUN"
+}

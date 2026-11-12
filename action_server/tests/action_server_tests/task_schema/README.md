@@ -1,0 +1,1 @@
+Released ext-tasks schema2026-07-28 from modelcontextprotocol/ext-tasks commit b3d28aceaa6d49f5f92258e3d06b61ad6f111e84. schema.json SHA256 bf30afb7ac251e3e22c037b7a685f60ef6603031b5484c0d08b1fa0bbe86d460; Apache2.0 LICENSE retained with trailing blank line normalized. This is a pinned protocol validation fixture, not execution evidence.

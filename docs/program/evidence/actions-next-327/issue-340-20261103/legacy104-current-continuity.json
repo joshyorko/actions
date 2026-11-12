@@ -1,0 +1,50 @@
+{
+  "source_a57": {
+    "commit": "bde511d2ba6318d0b100547cc6e777e53b9ebc80",
+    "tree": "58e3beed765765e13724928d26acefb729d8aeab"
+  },
+  "historical_receipt": "docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/a57-legacy104-restore-receipt.md",
+  "historical_summary": "docs/program/evidence/actions-next-327/recovery-20261026/a58-integrity-checkpoint/legacy104-gate-summary.json",
+  "current_sdk_exact_same_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+  "runtime_modules_unchanged": {
+    "actions/server/_api_work_items.py": {
+      "sha256": "ce4c396419dc4d2b4db92b2a16798c81a1086b72b1d858f7ade1374de3e7e788",
+      "same": true
+    },
+    "actions/server/_work_items_import.py": {
+      "sha256": "3e9b6e802512b989a15843eb553f930c0104675bd8fd722248a1f6914b09630b",
+      "same": true
+    },
+    "actions/server/_work_items_paths.py": {
+      "sha256": "9157912c2d101db34da8a8d859db7486990d5f318da3e8b2a012065dafe48e96",
+      "same": true
+    },
+    "actions/server/_datadir_restore.py": {
+      "sha256": "18c9d3d3d264ccb1637da4cb173edca0db02ddad5bee34c98a037ae9be7224fc",
+      "same": false
+    },
+    "actions/server/_settings.py": {
+      "sha256": "04a317169ed39aec008fa508af856fa130bd29edbb133a61e839b8562f8d4f45",
+      "same": true
+    }
+  },
+  "core_sdk_and_legacy_source_changes": [
+    "action_server/src/actions/server/_datadir_restore.py",
+    "actions/src/actions/internal_runtime/__init__.py",
+    "actions/src/actions/internal_runtime/_context.py",
+    "actions/src/actions/internal_runtime/_fd_transport.py",
+    "actions/src/actions/internal_runtime/_models.py"
+  ],
+  "scope": "Carry only bounded legacy queue/attachment compatibility when exact SDK and gateway closure are unchanged; no relabelled a57 full Runtime execution",
+  "linux_restore_helper_equivalence": {
+    "all_existing_function_and_class_ASTs_equal_after_constant_accessor_normalization": true,
+    "new_helpers": [
+      "validated O_DIRECTORY/O_NOFOLLOW lookup",
+      "validated getuid lookup"
+    ],
+    "actual_installed_linux_values_equal_original_os_values": true,
+    "qualified_definition_count": 13,
+    "assumptions": "Linux POSIX os constants and getuid are not adversarially monkeypatched; unsupported hosts remain fail-closed"
+  },
+  "decision": "Retain historical executed bounded queue/attachment proof for exact same SDK and unchanged legacy gateway closure; current restore helper checked equivalent on qualified Linux. No full a57 Runtime qualification relabelled a60."
+}

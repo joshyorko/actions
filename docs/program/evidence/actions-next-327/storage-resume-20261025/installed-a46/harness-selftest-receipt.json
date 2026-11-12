@@ -1,0 +1,30 @@
+{
+  "source_sha256": "a5b310bee44d20780702e5ccfb83592c173b7b5aef9ee8bf905e5be8f91a72d7",
+  "scope": "dummy child/grandchild only; test-only deadline .5/10 seconds and disk floor0; no external workload",
+  "cases": [
+    {
+      "case": "normal",
+      "status": "PASS",
+      "receipt": "/workspace/recovery327/installed-harness-review/selftest-78737/normal/receipt.json"
+    },
+    {
+      "case": "failure",
+      "status": "PASS",
+      "receipt": "/workspace/recovery327/installed-harness-review/selftest-78737/failure/receipt.json"
+    },
+    {
+      "case": "deadline",
+      "status": "PASS",
+      "receipt": "/workspace/recovery327/installed-harness-review/selftest-78737/deadline/receipt.json"
+    },
+    {
+      "case": "detached",
+      "status": "PASS",
+      "receipt": "/workspace/recovery327/installed-harness-review/selftest-78737/detached/receipt.json"
+    }
+  ],
+  "tree_isolation": "PASS",
+  "active_owned_descendants": [],
+  "final_source_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b",
+  "post_test_change": "Added ACTIONS_KNOWLEDGE_CANDIDATE argparse choice only; AST rechecked; process tests apply to prior source hash."
+}

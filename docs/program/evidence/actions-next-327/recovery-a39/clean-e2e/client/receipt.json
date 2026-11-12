@@ -1,0 +1,338 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a39",
+  "engine_origin": "/workspace/actions-327-a39/installed-combined/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a4"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 56059,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16403636599898164,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 56070,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21410179199847335,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 56351,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21402806399964902,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 56640,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16383195999878808,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "method": "tools/call",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tools/call",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tools/call",
+      "status": "completed",
+      "taskId": "658291f5-add2-4967-8e32-1c074de91e85"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "method": "tools/call",
+      "status": "completed",
+      "taskId": "a4ea6eb1-ba48-481d-92a7-5b1a30b44b06"
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "prepared_artifact": "sha256:ff881cb7903461ed387ab79912105aa0726e91354f8a05b01fd4f337620141d2",
+  "prepared_specification": "sha256:9dee42164c32a71de49bc33b47f60fe3cee391f062d2dd5612cf6ae43e8abed2",
+  "workspace": "81d22bd1-8ae8-421e-9409-cff028bcb1c1",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "two_actions_one_package": true,
+  "restart_preserved": true,
+  "rollback_reactivation": true,
+  "stale_session_rejected": true,
+  "scope": "clean installed a39 ordinary CLI and genuine MCP client; two canonical detached Tasks, real pinned RCC, exact common Run/Attempt identity and restart replay; both app-bound Actions and public sealed artifact bytes, including restart reauthorization",
+  "budget": {
+    "fixture_bytes": 1325063,
+    "log_bytes_upper_bound": 23644
+  }
+}

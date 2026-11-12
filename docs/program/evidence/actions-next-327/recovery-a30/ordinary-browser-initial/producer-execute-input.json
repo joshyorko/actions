@@ -1,0 +1,9 @@
+{
+  "mode": "producer",
+  "phase": "execute",
+  "arguments": {
+    "appId": "94904117-5687-4f8a-a0f0-4acc94f909dc"
+  },
+  "itemId": null,
+  "ndjson": "{\"city\":\"Denver\",\"amount\":12}\n{\"city\":\"Seattle\",\"amount\":7}"
+}

@@ -1,0 +1,304 @@
+{
+  "alternate_root": "/workspace/327-probes/a59-recovery-composition/private-alternate-root/datadir",
+  "authorized_runtime_api_readback": "NOT_PERFORMED: no live stopped-fixture host/API process or permitted credential source; external profile/HMAC/auth/session material was not read or copied",
+  "capture": "/workspace/327-probes/a59-recovery-composition/captured-datadir",
+  "capture_members": {
+    "blobs/52ffde06-841a-4a1d-ac1c-6e50b6627ac9": {
+      "bytes": 103,
+      "sha256": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad"
+    },
+    "blobs/68a08235-488c-490c-9abc-fb52677bbe00": {
+      "bytes": 712,
+      "sha256": "335f52461c0d5c185a660b815bf0b69374dbc2a8d2622fd16282d86006760aa1"
+    },
+    "blobs/8921f419-7b8b-4579-9ea0-0726f7c42a71": {
+      "bytes": 487,
+      "sha256": "60dc762b4b8bbf54c36df0befc6183b63d0f2502e810e074c1e7d00768059f48"
+    },
+    "blobs/8b22aa2f-a63f-4b77-a87a-f12a1310bd4b": {
+      "bytes": 55202,
+      "sha256": "358d5d7f90556643ea07579fa65496e2415860459cf0be21b64be03952a74b3d"
+    },
+    "blobs/f2699bbe-b8b8-4bb5-8925-9172ae1d983c": {
+      "bytes": 963,
+      "sha256": "eca69aaf6217bd91146225e259c273ab6dba5c9f3c6acb54490e40a3ef6f7ad4"
+    },
+    "server.db": {
+      "bytes": 540672,
+      "sha256": "1e133bd0f96538f5a062f962623ea78b9104b7d3da9f4eb93263cef41e085629"
+    }
+  },
+  "cold_rcc": "independent prior a59 cold proof PASS; not included in this restore run",
+  "disk": {
+    "free_bytes_after": 11158147072,
+    "free_bytes_before": 11159404544,
+    "new_bytes_consumed": 1257472,
+    "reserve_floor_bytes": 10737418240,
+    "reserve_preserved": true
+  },
+  "excluded": [
+    "action_server.lock and server_log.txt",
+    "cache and execution artifacts",
+    "external profile/auth/HMAC-key files",
+    "RCC home/cache and generated app/runtime artifacts"
+  ],
+  "fixture_source_candidate": "a56 fixture (not current a59 source)",
+  "installed_a59_readback_method": "Database model/store connection against alternate server.db in two fresh subprocesses; PRAGMA query_only=ON; safe lineage/reference projections only",
+  "installed_a59_store_readback_count": 2,
+  "installed_a59_store_readbacks_equal": true,
+  "installed_runtime": "1.1.0a59",
+  "installed_runtime_wheel_sha256": "cca5383bd331bfc68227bf5c2749f867cc3d9e7cc7daaeb3f13fbe9125d5960a",
+  "legacy_attachment_path_rebase_scope": "workitems.db with supported work_item_files schema only",
+  "legacy_attachment_rebases": 0,
+  "native_run_output_rows": 0,
+  "native_server_db_detected": true,
+  "original_fixture_members_before": {
+    "blobs/52ffde06-841a-4a1d-ac1c-6e50b6627ac9": {
+      "bytes": 103,
+      "sha256": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad"
+    },
+    "blobs/68a08235-488c-490c-9abc-fb52677bbe00": {
+      "bytes": 712,
+      "sha256": "335f52461c0d5c185a660b815bf0b69374dbc2a8d2622fd16282d86006760aa1"
+    },
+    "blobs/8921f419-7b8b-4579-9ea0-0726f7c42a71": {
+      "bytes": 487,
+      "sha256": "60dc762b4b8bbf54c36df0befc6183b63d0f2502e810e074c1e7d00768059f48"
+    },
+    "blobs/8b22aa2f-a63f-4b77-a87a-f12a1310bd4b": {
+      "bytes": 55202,
+      "sha256": "358d5d7f90556643ea07579fa65496e2415860459cf0be21b64be03952a74b3d"
+    },
+    "blobs/f2699bbe-b8b8-4bb5-8925-9172ae1d983c": {
+      "bytes": 963,
+      "sha256": "eca69aaf6217bd91146225e259c273ab6dba5c9f3c6acb54490e40a3ef6f7ad4"
+    },
+    "server.db": {
+      "bytes": 540672,
+      "sha256": "1e133bd0f96538f5a062f962623ea78b9104b7d3da9f4eb93263cef41e085629"
+    }
+  },
+  "original_fixture_unchanged_after": true,
+  "remaining_store_api_authority_gaps": [
+    "ordinary installed Runtime startup/readback on the relocated server.db is unqualified",
+    "fixture came from a56, not the accepted current a59 Runtime source",
+    "RunOutput is empty, so no native object_ref exists to exercise current output-provider rebase/restore",
+    "legacy attachment helper recognizes workitems.db/work_item_files only and does not migrate or rebase native RunOutput refs",
+    "source/package/compiled Runtime artifacts and external providers are not captured in this DB+blob-only cell",
+    "expired Task API refusal and terminal artifact read cannot be established from this cancelled Run because no RunOutput exists and no trusted API caller was used"
+  ],
+  "restore_manifest_sha256": "e60183bcec1144a38e2583e185fb82f9b44609405691a3631e5b04274e578a66",
+  "restored_sqlite_metadata": {
+    "attempt_safe_columns": [
+      [
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        1,
+        "cancelled"
+      ]
+    ],
+    "credential_session_sensitive_table_counts": {
+      "o_auth2_user_data": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0
+    },
+    "fenced_item_safe_columns": [
+      "22a75d16-8c7e-4ec3-8fad-a903bc186d85",
+      "0f18d842-ce0b-44ff-bd11-e1123cddf2c8",
+      "robot-cancel-input",
+      "",
+      "FAILED",
+      1,
+      "0",
+      1,
+      "actions.review-work-item/v1"
+    ],
+    "quick_check": "ok",
+    "run_output_safe_refs": [],
+    "run_pin_safe_columns": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "4682ae4016b8976a146bafb6a5d2389c65e9814e4a3bcc2e287aa1768dc2c7bb",
+      "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+      1,
+      1,
+      -1,
+      "1793021755159"
+    ],
+    "run_safe_columns": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      4,
+      "0f69c475-1924-5c13-91b2-797e861fe6a2",
+      "2026-10-26T13:35:49.641000+00:00",
+      "",
+      1,
+      "action"
+    ],
+    "table_counts": {
+      "action": 0,
+      "action_package": 0,
+      "counter": 1,
+      "fenced_work_item": 1,
+      "foundry_access_grant": 16,
+      "foundry_audit": 10,
+      "foundry_deployment_head": 1,
+      "foundry_deployment_revision": 2,
+      "foundry_package_revision": 1,
+      "foundry_provider_availability": 0,
+      "foundry_provider_revision": 0,
+      "foundry_request": 10,
+      "foundry_source_revision": 0,
+      "invoice_review": 0,
+      "knowledge_collection_revision": 0,
+      "mcp_catalog_name": 0,
+      "mcp_resource_routing": 0,
+      "migration": 1,
+      "o_auth2_user_data": 0,
+      "run": 1,
+      "run_access_grant": 1,
+      "run_admission": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_output": 0,
+      "run_pin": 1,
+      "run_task_receipt": 1,
+      "schedule": 0,
+      "schedule_execution": 0,
+      "schedule_group": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0,
+      "workspace": 1
+    },
+    "task_receipt_lifetime_columns": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "actions.run-task-receipt/claimed-v1",
+        "tools/call",
+        "capability_invoke",
+        "actions.detached-invocation-result/v1",
+        "1793021749641",
+        "600000",
+        "installed-claimed-task-327"
+      ]
+    ]
+  },
+  "runtime_source_commit": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+  "runtime_source_tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+  "source_fixture": "/workspace/327-probes/a56-live-cancellation/datadir",
+  "source_lock_pid_alive": false,
+  "sqlite_metadata_before_and_after": {
+    "attempt_safe_columns": [
+      [
+        "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        1,
+        "cancelled"
+      ]
+    ],
+    "credential_session_sensitive_table_counts": {
+      "o_auth2_user_data": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0
+    },
+    "fenced_item_safe_columns": [
+      "22a75d16-8c7e-4ec3-8fad-a903bc186d85",
+      "0f18d842-ce0b-44ff-bd11-e1123cddf2c8",
+      "robot-cancel-input",
+      "",
+      "FAILED",
+      1,
+      "0",
+      1,
+      "actions.review-work-item/v1"
+    ],
+    "quick_check": "ok",
+    "run_output_safe_refs": [],
+    "run_pin_safe_columns": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "4682ae4016b8976a146bafb6a5d2389c65e9814e4a3bcc2e287aa1768dc2c7bb",
+      "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+      1,
+      1,
+      -1,
+      "1793021755159"
+    ],
+    "run_safe_columns": [
+      "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      4,
+      "0f69c475-1924-5c13-91b2-797e861fe6a2",
+      "2026-10-26T13:35:49.641000+00:00",
+      "",
+      1,
+      "action"
+    ],
+    "table_counts": {
+      "action": 0,
+      "action_package": 0,
+      "counter": 1,
+      "fenced_work_item": 1,
+      "foundry_access_grant": 16,
+      "foundry_audit": 10,
+      "foundry_deployment_head": 1,
+      "foundry_deployment_revision": 2,
+      "foundry_package_revision": 1,
+      "foundry_provider_availability": 0,
+      "foundry_provider_revision": 0,
+      "foundry_request": 10,
+      "foundry_source_revision": 0,
+      "invoice_review": 0,
+      "knowledge_collection_revision": 0,
+      "mcp_catalog_name": 0,
+      "mcp_resource_routing": 0,
+      "migration": 1,
+      "o_auth2_user_data": 0,
+      "run": 1,
+      "run_access_grant": 1,
+      "run_admission": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_output": 0,
+      "run_pin": 1,
+      "run_task_receipt": 1,
+      "schedule": 0,
+      "schedule_execution": 0,
+      "schedule_group": 0,
+      "temp_user_session_data": 0,
+      "trigger": 0,
+      "trigger_invocation": 0,
+      "user_session": 0,
+      "workspace": 1
+    },
+    "task_receipt_lifetime_columns": [
+      [
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+        "actions.run-task-receipt/claimed-v1",
+        "tools/call",
+        "capability_invoke",
+        "actions.detached-invocation-result/v1",
+        "1793021749641",
+        "600000",
+        "installed-claimed-task-327"
+      ]
+    ]
+  },
+  "status": "PASS_OFFLINE_SQLITE_BLOB_CAPTURE_RESTORE_AND_A59_STORE_READS",
+  "task_ttl": {
+    "actual_service_refusal": "NOT_TESTED: API call would require trusted configured caller and current deployment host wiring",
+    "created_ms": 1793021749641,
+    "expired": true,
+    "expires_ms": 1793022349641,
+    "observed_utc_ms": 1793040359724,
+    "ttl_ms": 600000
+  },
+  "upstream_disposition": "none",
+  "whole_runtime_claim": false
+}

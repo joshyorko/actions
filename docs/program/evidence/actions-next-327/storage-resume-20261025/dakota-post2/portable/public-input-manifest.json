@@ -1,0 +1,32 @@
+{
+  "schema": "actions.post2-compiler-inputs/v1",
+  "source_sha": "46488e59f419d6bb55ab594031a0f227b4e0d817",
+  "runtime": {
+    "version": "1.1.0a44.post2",
+    "sha256": "3028ffd9bdaa009e2d937141f6a88fb811dd0b8c84de7a88648975c62b6c5dc4"
+  },
+  "core": {
+    "version": "1.1.0a6",
+    "sha256": "718ea63637f096d26c4de5f82ca736eec1358b197d0a63883c063ad205e0860e"
+  },
+  "work_items": {
+    "version": "0.5.0a2",
+    "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "rcc": {
+    "version": "v18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "package_yaml_sha256": "f7b4173c11a7eef06cf2ecc526d15a7f069efdd4d465f65cb0fb6258d258b4a8",
+  "files": {
+    "verify-core.py": "a69b5a9e9e45b87803c89068c17210891040ee92171b6db0b604e06e5adf554d",
+    "prepare-compiler-managed.py": "2c9c537d3e62846e255a5c9ce0c89cfe9890664004311704aa1bfc1d9f0dfaa1",
+    "package.yaml": "f7b4173c11a7eef06cf2ecc526d15a7f069efdd4d465f65cb0fb6258d258b4a8"
+  },
+  "platform": {
+    "os": "linux",
+    "architecture": "x86_64",
+    "python_implementation": "CPython",
+    "python_version": "3.12"
+  }
+}

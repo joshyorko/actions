@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "source": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "consumer": "/workspace/actions-recovery-327/installed-a25/consumer",
+  "synthetic_auth": true,
+  "processes": [
+    {
+      "pid": 8292,
+      "exit_code": -15,
+      "stopped": true
+    },
+    {
+      "pid": 8481,
+      "exit_code": -15,
+      "stopped": true
+    }
+  ],
+  "created": "01780b5a-c964-4bd6-89e5-7fcfcc4effcd",
+  "screenshots": {
+    "empty-default-queue.png": "a56c4a0ac77381bc0fff4f758120fb965d34b2c66432a7ae644135f1a9286e83",
+    "created-custom-queue.png": "f1e3b5ebafdf10114e0e848d780b4ccbf17845c1b461102e66533f6ae6060ef0",
+    "custom-queue.png": "74c06b73d9c30a7dc3666fa6616f4b29d81356e0e5d27d7e8374042254ef8180",
+    "custom-queue-after-restart.png": "74c06b73d9c30a7dc3666fa6616f4b29d81356e0e5d27d7e8374042254ef8180"
+  }
+}

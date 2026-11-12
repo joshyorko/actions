@@ -1,12 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { z } from "zod";
 import {
     Client,
     StreamableHTTPClientTransport,
 } from "@modelcontextprotocol/client";
 
-const CANVAS_RESOURCE_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1";
+const CANVAS_RESOURCE_URI =
+    "ui://action-canvas/v1/canvas.html?query-fixture=0.1";
 const HARNESS_ORIGIN = `http://127.0.0.1:${process.env.CANVAS_HARNESS_PORT ?? "4180"}`;
 
 const builtCanvasResource = await readFile(
@@ -19,6 +21,24 @@ const inlineModule = builtCanvasResource.match(
 if (!inlineModule)
     throw new Error("Built Canvas resource has no inline module.");
 const moduleHash = createHash("sha256").update(inlineModule).digest("base64");
+const semanticFixture: unknown = JSON.parse(
+    await readFile(
+        new URL(
+            "./src/semantic-renderer/fixtures/canvas-spec-v1.fixture.json",
+            import.meta.url,
+        ),
+        "utf8",
+    ),
+);
+const authoredV2Draft: unknown = JSON.parse(
+    await readFile(
+        new URL(
+            "./src/semantic-renderer/fixtures/authoring-v2-card-draft.fixture.json",
+            import.meta.url,
+        ),
+        "utf8",
+    ),
+);
 
 test("official MCP Apps bridge handles fixture calls and host context lifecycle", async ({
     page,
@@ -47,6 +67,8 @@ test("official MCP Apps bridge handles fixture calls and host context lifecycle"
     await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
     await expect(frame.locator("#query-input")).toHaveValue("alpha");
     await expect(frame.getByTestId("mcp-host-theme")).toHaveText("light");
+    await expect(frame.locator("html")).toHaveAttribute("data-theme", "light");
+    await expect(frame.locator("html")).toHaveCSS("color-scheme", "light");
     await expect(frame.getByTestId("mcp-host-locale")).toHaveText("en-US");
     await expect(frame.getByTestId("mcp-tool-result-state")).toHaveText(
         "success",
@@ -72,17 +94,250 @@ test("official MCP Apps bridge handles fixture calls and host context lifecycle"
     await page.getByRole("button", { name: "Replace host context" }).click();
     await expect(frame.getByTestId("mcp-host-theme")).toHaveText("dark");
     await expect(frame.getByTestId("mcp-host-locale")).toHaveText("fr-FR");
+    await expect(frame.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(frame.locator("html")).toHaveCSS("color-scheme", "dark");
+    await page.evaluate((spec) => {
+        const target = document.querySelector<HTMLIFrameElement>(
+            "iframe[title='Canvas query fixture']",
+        );
+        target?.contentWindow?.postMessage(
+            {
+                jsonrpc: "2.0",
+                method: "ui/notifications/tool-result",
+                params: {
+                    content: [],
+                    _meta: { "actions.canvas": { preview: true, spec } },
+                },
+            },
+            window.location.origin,
+        );
+    }, semanticFixture);
+    await expect(frame.locator(".semantic-form")).toBeVisible();
+    for (const appearance of [
+        {
+            theme: "light",
+            background: "#ffffff",
+            text: "#182230",
+            computedBackground: "rgb(255, 255, 255)",
+            computedText: "rgb(24, 34, 48)",
+        },
+        {
+            theme: "dark",
+            background: "#121212",
+            text: "#eeeeee",
+            computedBackground: "rgb(18, 18, 18)",
+            computedText: "rgb(238, 238, 238)",
+        },
+    ]) {
+        await page.evaluate((styles) => {
+            const target = document.querySelector<HTMLIFrameElement>(
+                "iframe[title='Canvas query fixture']",
+            );
+            target?.contentWindow?.postMessage(
+                {
+                    jsonrpc: "2.0",
+                    method: "ui/notifications/host-context-changed",
+                    params: {
+                        theme: styles.theme,
+                        styles: {
+                            variables: {
+                                "--color-background-primary": styles.background,
+                                "--color-text-primary": styles.text,
+                            },
+                        },
+                    },
+                },
+                window.location.origin,
+            );
+        }, appearance);
+        await expect(frame.locator("html")).toHaveAttribute(
+            "data-theme",
+            appearance.theme,
+        );
+        await expect(frame.locator("html")).toHaveCSS(
+            "color-scheme",
+            appearance.theme,
+        );
+        await expect(frame.locator("html")).toHaveCSS(
+            "--color-background-primary",
+            appearance.background,
+        );
+        await expect(frame.locator("html")).toHaveCSS(
+            "--color-text-primary",
+            appearance.text,
+        );
+        await expect(frame.locator(".semantic-form")).toHaveCSS(
+            "background-color",
+            appearance.computedBackground,
+        );
+        await expect(frame.locator(".semantic-form")).toHaveCSS(
+            "color",
+            appearance.computedText,
+        );
+    }
     await page.getByRole("button", { name: "Remount view" }).click();
     await expect(frame.locator("#query-input")).toHaveValue("alpha");
     await expect(
         frame.getByRole("rowheader", { name: "Alpha guide" }),
     ).toHaveCount(0);
     await expect(frame.getByTestId("mcp-host-theme")).toHaveText("light");
+    await expect(frame.locator("html")).toHaveAttribute("data-theme", "light");
+    await expect(frame.locator("html")).toHaveCSS("color-scheme", "light");
+    expect(
+        await frame
+            .locator("html")
+            .evaluate((root) =>
+                root.style.getPropertyValue("--color-background-primary"),
+            ),
+    ).toBe("");
     await expect(frame.getByText("must-not-render")).toHaveCount(0);
     expect(externalRequests).toEqual([]);
 });
 
-test("official bridge renders a real Runtime Action result", async ({ page }) => {
+test("official bridge keeps unbroken semantic text within a narrow host viewport", async ({
+    page,
+}) => {
+    const externalRequests: string[] = [];
+    await page.route("**/*", async (route) => {
+        const url = new URL(route.request().url());
+        if (url.origin !== HARNESS_ORIGIN) {
+            externalRequests.push(url.href);
+            return route.abort();
+        }
+        if (url.pathname === "/index.html") {
+            return route.fulfill({
+                status: 200,
+                contentType: "text/html; charset=utf-8",
+                headers: {
+                    "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${moduleHash}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+                },
+                body: builtCanvasResource,
+            });
+        }
+        return route.continue();
+    });
+    await page.goto("/host-harness.html");
+    const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+    await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+    await expect(frame.locator("#query-input")).toHaveValue("alpha");
+
+    // The width belongs to the fixture host. The Canvas resource keeps its
+    // original CSS, script hash, and strict response policy.
+    await page
+        .locator("iframe[title='Canvas query fixture']")
+        .evaluate((element) => {
+            element.style.width = "300px";
+        });
+    const longText = "W".repeat(455);
+    const spec = {
+        schemaVersion: "actions.canvas-spec/v1",
+        title: "Narrow viewport text fallback",
+        visibility: ["model", "app"],
+        bindingIds: [],
+        root: {
+            type: "stack",
+            id: "narrow-text-root",
+            children: [{ type: "text", id: "unbroken-text", text: longText }],
+        },
+    };
+    await page.evaluate((fixtureSpec) => {
+        const target = document.querySelector<HTMLIFrameElement>(
+            "iframe[title='Canvas query fixture']",
+        );
+        target?.contentWindow?.postMessage(
+            {
+                jsonrpc: "2.0",
+                method: "ui/notifications/tool-result",
+                params: {
+                    content: [],
+                    _meta: {
+                        "actions.canvas": { preview: true, spec: fixtureSpec },
+                    },
+                },
+            },
+            window.location.origin,
+        );
+    }, spec);
+    const paragraph = frame.locator(".semantic-stack p");
+    await expect(paragraph).toHaveText(longText);
+
+    const measurements = await frame.locator("body").evaluate((body) => {
+        const paragraphElement = body.querySelector(".semantic-stack p");
+        const documentElement = body.ownerDocument.documentElement;
+        if (!paragraphElement)
+            throw new Error("Semantic text paragraph is missing.");
+        return {
+            bodyScrollWidth: body.scrollWidth,
+            bodyClientWidth: body.clientWidth,
+            documentScrollWidth: documentElement.scrollWidth,
+            documentClientWidth: documentElement.clientWidth,
+            paragraphScrollWidth: paragraphElement.scrollWidth,
+            paragraphClientWidth: paragraphElement.clientWidth,
+            paragraphText: paragraphElement.textContent,
+        };
+    });
+    expect(measurements.paragraphText).toBe(longText);
+    expect(measurements.bodyScrollWidth).toBeLessThanOrEqual(
+        measurements.bodyClientWidth,
+    );
+    expect(measurements.documentScrollWidth).toBeLessThanOrEqual(
+        measurements.documentClientWidth,
+    );
+    expect(measurements.paragraphScrollWidth).toBeLessThanOrEqual(
+        measurements.paragraphClientWidth,
+    );
+    expect(externalRequests).toEqual([]);
+});
+
+test("official bridge renders the exact authored v2 card draft", async ({
+    page,
+}) => {
+    await page.route("**/index.html", async (route) => {
+        await route.fulfill({
+            status: 200,
+            contentType: "text/html; charset=utf-8",
+            headers: {
+                "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${moduleHash}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+            },
+            body: builtCanvasResource,
+        });
+    });
+    await page.goto("/host-harness.html");
+    await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+    const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+    await expect(frame.locator("#query-input")).toHaveValue("alpha");
+    await page.evaluate((metadata) => {
+        const target = document.querySelector("iframe");
+        if (!(target instanceof HTMLIFrameElement) || !target.contentWindow) {
+            throw new Error("Canvas frame missing");
+        }
+        target.contentWindow.postMessage(
+            {
+                jsonrpc: "2.0",
+                method: "ui/notifications/tool-result",
+                params: {
+                    content: [
+                        { type: "text", text: "Canvas revision loaded." },
+                    ],
+                    _meta: { "actions.canvas": metadata },
+                },
+            },
+            window.location.origin,
+        );
+    }, authoredV2Draft);
+    await expect(frame.getByRole("alert")).toHaveCount(0);
+    await expect(
+        frame.getByRole("heading", { name: "Dakota connected" }),
+    ).toBeVisible();
+    await expect(
+        frame.getByRole("heading", { name: "Sample one" }),
+    ).toBeVisible();
+    await expect(frame.getByText("Status: Ready")).toHaveCount(2);
+});
+
+test("official bridge renders a real Runtime Action result", async ({
+    page,
+}) => {
     const runtimeUrl = process.env.CANVAS_RUNTIME_MCP_URL;
     test.skip(!runtimeUrl, "Requires the Action Server process fixture.");
     if (!runtimeUrl) return;
@@ -91,7 +346,9 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
         { name: "canvas-runtime-acceptance", version: "0.1.0" },
         { capabilities: {} },
     );
-    await client.connect(new StreamableHTTPClientTransport(new URL(runtimeUrl)));
+    await client.connect(
+        new StreamableHTTPClientTransport(new URL(runtimeUrl)),
+    );
     try {
         const listedTools = await client.listTools();
         const searchTool = listedTools.tools.find(
@@ -108,11 +365,12 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
         const viewContent = resource.contents.find(
             (content) => "text" in content,
         );
-        expect(viewContent && "mimeType" in viewContent && viewContent.mimeType)
-            .toBe("text/html;profile=mcp-app");
-        expect(viewContent && "text" in viewContent ? viewContent.text : null).toBe(
-            builtCanvasResource,
-        );
+        expect(
+            viewContent && "mimeType" in viewContent && viewContent.mimeType,
+        ).toBe("text/html;profile=mcp-app");
+        expect(
+            viewContent && "text" in viewContent ? viewContent.text : null,
+        ).toBe(builtCanvasResource);
 
         const externalRequests: string[] = [];
         await page.route("**/*", async (route) => {
@@ -128,9 +386,10 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
                     headers: {
                         "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${moduleHash}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
                     },
-                    body: viewContent && "text" in viewContent
-                        ? viewContent.text
-                        : "",
+                    body:
+                        viewContent && "text" in viewContent
+                            ? viewContent.text
+                            : "",
                 });
             }
             return route.continue();
@@ -141,7 +400,10 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
                 arguments?: Record<string, unknown>;
             };
             if (!request.name) {
-                return route.fulfill({ status: 400, body: "Missing tool name" });
+                return route.fulfill({
+                    status: 400,
+                    body: "Missing tool name",
+                });
             }
             const result = await client.callTool({
                 name: request.name,
@@ -158,16 +420,202 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
         const frame = page.frameLocator("iframe[title='Canvas query fixture']");
         await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
         await expect(frame.locator("#query-input")).toHaveValue("alpha");
-        await frame.getByRole("button", { name: "Search", exact: true }).click();
+        await frame
+            .getByRole("button", { name: "Search", exact: true })
+            .click();
         await expect(
             frame.getByRole("rowheader", { name: "Alpha guide" }),
         ).toBeVisible();
         await expect(
             frame.getByRole("rowheader", { name: "Alpha checklist" }),
         ).toBeVisible();
-        await frame.getByRole("button", { name: "Check artifact status" }).click();
-        await expect(frame.getByText("Result artifact is ready.")).toBeVisible();
+        await frame
+            .getByRole("button", { name: "Check artifact status" })
+            .click();
+        await expect(
+            frame.getByText("Result artifact is ready."),
+        ).toBeVisible();
         expect(externalRequests).toEqual([]);
+    } finally {
+        await client.close();
+    }
+});
+
+test("official bridge renders a native invoice consumer's persisted table", async ({
+    page,
+}) => {
+    test.setTimeout(90_000);
+    const configPath = process.env.CANVAS_NATIVE_INVOICE_CONFIG;
+    const keyPath = process.env.CANVAS_NATIVE_KEY_FILE;
+    const runtimeUrl = process.env.CANVAS_RUNTIME_MCP_URL;
+    test.skip(
+        !configPath || !keyPath || !runtimeUrl,
+        "Requires an explicitly prepared native invoice app and private local credentials.",
+    );
+    if (!configPath || !keyPath || !runtimeUrl) return;
+    expect(new URL(runtimeUrl).hostname).toBe("127.0.0.1");
+    const config = z
+        .object({ appId: z.string().uuid(), revisionId: z.string() })
+        .parse(JSON.parse(await readFile(configPath, "utf8")));
+    const key = (await readFile(keyPath, "utf8")).trim();
+    const client = new Client(
+        { name: "native-invoice-acceptance", version: "0.1.0" },
+        { capabilities: {} },
+    );
+    await client.connect(
+        new StreamableHTTPClientTransport(new URL(runtimeUrl), {
+            requestInit: { headers: { Authorization: `Bearer ${key}` } },
+        }),
+    );
+    try {
+        const inspected = await client.callTool({
+            name: "canvas_inspect",
+            arguments: { appId: config.appId },
+        });
+        const descriptors = z
+            .object({
+                invocationDescriptors: z.array(
+                    z.object({
+                        bindingId: z.string(),
+                        snapshot: z.record(z.string(), z.unknown()),
+                    }),
+                ),
+            })
+            .parse(inspected.structuredContent);
+        const selected = descriptors.invocationDescriptors.find(
+            (entry) => entry.bindingId === "reconcile",
+        );
+        if (!selected) throw new Error("Exact invoice binding unavailable");
+        const deployment = z
+            .object({
+                workspace_id: z.string(),
+                deployment_id: z.string(),
+                revision_id: z.string(),
+            })
+            .parse(selected.snapshot.deployment);
+        const queued = await fetch(
+            new URL("/api/managed-work-items/v1/operations", runtimeUrl),
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${key}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    operation: "items.enqueue",
+                    queue: {
+                        workspace_id: deployment.workspace_id,
+                        deployment,
+                        queue_id: "invoice_input",
+                    },
+                    snapshot: selected.snapshot,
+                    payload: { customer: "Synthetic" },
+                    idempotency_key: `native-invoice-browser-${crypto.randomUUID()}`,
+                }),
+            },
+        );
+        expect(queued.ok).toBe(true);
+        const item = z
+            .object({
+                result: z.object({ item: z.object({ id: z.string() }) }),
+            })
+            .parse(await queued.json()).result.item;
+        const opened = await client.callTool({
+            name: "canvas_get",
+            arguments: config,
+        });
+        expect(opened.isError).not.toBe(true);
+        const resource = await client.readResource({
+            uri: "ui://action-canvas/v1/canvas.html",
+        });
+        const html = resource.contents.find((content) => "text" in content);
+        if (!html || !("text" in html) || typeof html.text !== "string")
+            throw new Error("Installed Canvas resource missing");
+        const inline = html.text.match(
+            /<script type="module">([\s\S]*?)<\/script>/u,
+        )?.[1];
+        if (!inline) throw new Error("Installed Canvas module missing");
+        const digest = createHash("sha256").update(inline).digest("base64");
+        await page.route("**/index.html?runtime=1", async (route) =>
+            route.fulfill({
+                contentType: "text/html; charset=utf-8",
+                headers: {
+                    "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${digest}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+                },
+                body: html.text,
+            }),
+        );
+        const calls: string[] = [];
+        await page.route("**/__runtime_tool_call", async (route) => {
+            const request = z
+                .object({
+                    name: z.string(),
+                    arguments: z.record(z.string(), z.unknown()),
+                })
+                .parse(route.request().postDataJSON());
+            calls.push(request.name);
+            const result = await client.callTool(request);
+            await route.fulfill({
+                contentType: "application/json",
+                body: JSON.stringify(result),
+            });
+        });
+        await page.goto("/host-harness.html?runtime=1");
+        await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+        const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+        await expect(frame.locator("#query-input")).toHaveValue("alpha");
+        await page.evaluate((result) => {
+            const target = document.querySelector("iframe");
+            if (!(target instanceof HTMLIFrameElement) || !target.contentWindow)
+                throw new Error("Canvas frame missing");
+            target.contentWindow.postMessage(
+                {
+                    jsonrpc: "2.0",
+                    method: "ui/notifications/tool-result",
+                    params: result,
+                },
+                window.location.origin,
+            );
+        }, opened);
+        await frame
+            .getByRole("button", { name: "Load inputs", exact: true })
+            .click();
+        await frame
+            .getByRole("combobox", { name: "Input item for reconcile" })
+            .selectOption(item.id);
+        await frame
+            .getByRole("button", { name: "Claim selected input", exact: true })
+            .click();
+        await expect(
+            frame.getByRole("button", {
+                name: "Continue execution",
+                exact: true,
+            }),
+        ).toBeVisible();
+        expect(calls).not.toContain("canvas_projection");
+        await frame
+            .getByRole("button", { name: "Continue execution", exact: true })
+            .click();
+        await expect(
+            frame.getByRole("cell", { name: "INV-1004", exact: true }),
+        ).toBeVisible({ timeout: 30_000 });
+        await expect(
+            frame.getByRole("cell", { name: "matched", exact: true }),
+        ).toHaveCount(1);
+        await expect(
+            frame.getByRole("cell", { name: "discrepant", exact: true }),
+        ).toHaveCount(3);
+        await frame
+            .getByRole("button", {
+                name: "Inspect result artifact",
+                exact: true,
+            })
+            .click();
+        await expect(
+            frame.getByRole("region", { name: "Authorized result artifact" }),
+        ).toContainText("INV-1004");
+        expect(calls).toContain("canvas_projection");
+        expect(calls).toContain("canvas_artifact");
     } finally {
         await client.close();
     }

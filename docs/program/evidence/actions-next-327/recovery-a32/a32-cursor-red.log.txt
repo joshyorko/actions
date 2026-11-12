@@ -1,0 +1,44 @@
++ poetry run pytest tests/action_server_tests/test_detached_action.py -k run_once_cursor and sqlite and duckdb -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-cursor-red-log (in /workspace/actions/action_server)
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_run_once_cursor_does_not_skip_unconsumed_page_candidates[sqlite-duckdb] _
+
+case = namespace(db=<actions.server._database.Database object at 0x7ff589873800>, actor=Actor(principal_id='0285085e-977f-44c...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7ff588339be0>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7ff5882cb110>
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-159/test_run_once_cursor_does_not_0')
+
+    def test_run_once_cursor_does_not_skip_unconsumed_page_candidates(case, monkeypatch, tmp_path):
+        from actions.server.run_outputs.detached import DetachedActionWorker
+
+        c = case
+        owner, service, caller = setup(c)
+        runs = [owner.admit(caller.actor, service.snapshot, {"value": "hello"}, f"page-{i}") for i in range(3)]
+        pending = owner.pending
+        monkeypatch.setattr(owner, "pending", lambda *args, **kwargs: pending(*args, **dict(kwargs, limit=2)))
+        worker = DetachedActionWorker(owner, caller.actor, caller.worker_id, service.snapshot.worker)
+        monkeypatch.setattr(worker, "execute", lambda ticket, **kwargs: _one(c.db, Run, ticket.fence.run_id))
+        first, cursor = worker.run_once(prepared=None, rcc=tmp_path / "unused", execution_root=tmp_path)
+        second, _ = worker.run_once(prepared=None, rcc=tmp_path / "unused", execution_root=tmp_path, after=cursor)
+        assert first.id == runs[0].id
+>       assert second.id == runs[1].id
+
+E       AssertionError: Failed: assert second.id == runs[1].id
+E       Variables:
+E         second.id = '579bb8d2-02e9-42a6-8458-0891971a31c5'
+E         runs[1].id = 'c5989d45-7539-4af8-9dbc-8594af30b2af'
+
+tests/action_server_tests/test_detached_action.py:463: AssertionError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_detached_action.py::test_run_once_cursor_does_not_skip_unconsumed_page_candidates[sqlite-duckdb]
+1 failed, 79 deselected in 3.36s
+Log (html): /workspace/actions-recovery-327/evidence/a32-cursor-red-log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_detached_action.py', '-k', 'run_once_cursor and sqlite and duckdb', '-q', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-cursor-red-log']' returned non-zero exit status 1.

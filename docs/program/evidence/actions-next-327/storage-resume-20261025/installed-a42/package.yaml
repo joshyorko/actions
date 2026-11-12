@@ -1,0 +1,7 @@
+name: generated-v2-report
+description: Synthetic bounded v2 report
+dependencies:
+  conda-forge:
+    - python=3.12
+  pypi:
+    - actions-core=1.1.0a5

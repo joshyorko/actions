@@ -1,0 +1,36 @@
+{
+  "module": "test_provider_catalog",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a38/operator-integrated/selected-pytest.py",
+    "tests/action_server_tests/test_provider_catalog.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a38/operator-integrated/test_provider_catalog/tests.xml",
+    "--basetemp=/workspace/actions-327-a38/operator-integrated/test_provider_catalog/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 13094658048,
+  "stop_reason": null,
+  "source_sha256": "0a2a03d0f2868063906410c85850c9e78b518aa15e7bad93fca116282304fde3",
+  "counts": {
+    "tests": 18,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

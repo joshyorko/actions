@@ -1,0 +1,268 @@
+{
+  "schema": "actions.release327.foundry-storage/v1",
+  "tested_source": "9ff0061d64e1edf8b644e01a3fe56c77f0b83ce7",
+  "runtime": "1.1.0a7",
+  "sdk": "0.5.0a1",
+  "scope": "Six shared ORM records and additive schema17; storage is not compiler/deployment/authoring admission",
+  "status": "STORAGE_COMPONENT_PASS_FULL_PRODUCT_OPEN",
+  "commands": [
+    {
+      "cwd": ".",
+      "command": "RCC18.19.3 Doctor -> Bootstrap -> ToolkitTest",
+      "result": "PASS;179toolkit tests"
+    },
+    {
+      "cwd": ".",
+      "command": "run-prepared python action_server/scripts/verify_invoice_queries.py --full --worker --worker-runtime /workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/worker-runtime.json --evidence-dir /workspace/actions-327-state/evidence/foundry-storage-frozen-20261023",
+      "result": "PASS4storage+105component+129invoice+130actualRCCworker,zero skips;portable1843pass13skip262deselected16warnings;cleanupPASS"
+    },
+    {
+      "cwd": "action_server",
+      "command": "poetry run inv lint typecheck",
+      "result": "Ruff/isort/formatPASS;mypy402PASS;Markdownlint unavailable"
+    },
+    {
+      "cwd": "devutils",
+      "command": "poetry run pytest tests/test_actions_runtime_release_line.py -q",
+      "result": "9PASS"
+    },
+    {
+      "cwd": "action_server",
+      "command": "affected database and schema tests, then MCP suite and shared fixture regressions",
+      "result": "64PASS2unconfiguredPGskip12deselected;MCP139PASS18deselected;final helper47PASS12deselected;dedicated ownedPG gate separately4PASS0skip"
+    }
+  ],
+  "gate": {
+    "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/receipt.json",
+    "sha256": "f8e548b9884885974dee4205596cfd0ff461ab8adc6d580b3c509d15a0feef9a",
+    "bytes": 64340
+  },
+  "evidence": {
+    "foundry_storage": {
+      "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/foundry_storage.xml",
+      "sha256": "49cd7424105b443dc5daaf30e315c51662b18df41ab74ffd40e71d97c2f4adbb",
+      "bytes": 932,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "4",
+          "time": "1.501",
+          "timestamp": "2026-10-23T12:07:52.808908+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {}
+    },
+    "components": {
+      "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/components.xml",
+      "sha256": "798088e249e307240796c6863e335f42d3e00f7da74422b108d33b2e2f28b09f",
+      "bytes": 17223,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "105",
+          "time": "26.794",
+          "timestamp": "2026-10-23T12:07:56.513588+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {}
+    },
+    "invoice": {
+      "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/invoice.xml",
+      "sha256": "e98c1cd361cfb9836c5c28802638593d7e2fdd641d4b325361da48c6d12605cb",
+      "bytes": 28304,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "129",
+          "time": "14.388",
+          "timestamp": "2026-10-23T12:08:25.867752+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {}
+    },
+    "worker": {
+      "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/worker.xml",
+      "sha256": "36b092305480dc356d611ce6570e0f631b727bb6c9358543dd2895148eb199bc",
+      "bytes": 22636,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "130",
+          "time": "167.947",
+          "timestamp": "2026-10-23T12:08:42.753814+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {}
+    },
+    "portable": {
+      "path": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0/portable.xml",
+      "sha256": "92ba7ba0fbc9d6cfc4415358f202971738b3ae4aaed12a14dd78e174b329e251",
+      "bytes": 310270,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "13",
+          "tests": "1856",
+          "time": "253.069",
+          "timestamp": "2026-10-23T12:11:33.837811+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {
+        "Windows only": 6,
+        "Requires native Windows locking": 1,
+        "native Windows path resolution": 1,
+        "Skip package upload test": 3,
+        "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+        "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1
+      }
+    },
+    "storage-red-20261023.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-red-20261023.xml",
+      "sha256": "fdb4f3068a785d59f16c4eadd86121e615f368ad578ef53bb825497727e9f00d",
+      "bytes": 3084,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "2",
+          "tests": "4",
+          "time": "1.251",
+          "timestamp": "2026-10-23T11:58:06.783243+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {
+        "owned PostgreSQL foundry fixture not configured": 2
+      }
+    },
+    "storage-database-20261023.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-database-20261023.xml",
+      "sha256": "bf71b8ac6abdfb7916fa8cbf25759c03c2a687bae32b9447cae6be3dede64376",
+      "bytes": 21845,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "2",
+          "tests": "66",
+          "time": "7.067",
+          "timestamp": "2026-10-23T12:02:45.943621+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {
+        "owned PostgreSQL foundry fixture not configured": 2
+      }
+    },
+    "history-backdate-red-20261023.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/history-backdate-red-20261023.xml",
+      "sha256": "da68627bdd0225be6b33638b8d74dc82be923d34767f70510d82f85196555f4f",
+      "bytes": 9076,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "0",
+          "tests": "2",
+          "time": "1.670",
+          "timestamp": "2026-10-23T12:04:03.844730+00:00",
+          "hostname": "30a043f8f981"
+        }
+      ],
+      "skips": {}
+    },
+    "storage-static-ready-20261023.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-static-ready-20261023.log",
+      "sha256": "80a3dce109951fede38cd96be6d1eb56e004194cc669c9ce6ebe8f33a69843f2",
+      "bytes": 2383
+    },
+    "toolkit-resume-20261023.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/toolkit-resume-20261023.log",
+      "sha256": "f230be28b8d9ed89a413015b6e8afb0999e475b30102fad1f5bc5205ddd18019",
+      "bytes": 14678
+    },
+    "doctor-resume-20261023.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/doctor-resume-20261023.log",
+      "sha256": "2426f1a382f5d0041709cbb88221e4bb0d2aea43a9449bdffa15df3ca0431183",
+      "bytes": 13654
+    },
+    "bootstrap-resume-20261023.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/bootstrap-resume-20261023.log",
+      "sha256": "b63222146abafb7cc5abfbc2523bed6bab0594387f440fc8f11a5532055b1c25",
+      "bytes": 14219
+    },
+    "storage-version-20261023.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-version-20261023.log",
+      "sha256": "e6f89f40290a2e5fe34e1216f7a4777227b5c4b0ab7e3d4aea5fea3ea9a3b8fa",
+      "bytes": 98
+    }
+  },
+  "retained_clean_wheels": {
+    "actions_runtime-1.1.0a7-cp312-cp312-linux_x86_64.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-wheels-20261023/actions_runtime-1.1.0a7-cp312-cp312-linux_x86_64.whl",
+      "sha256": "6728f28288a51de5d56b91ef47e62da305200f96dbbca310036838a3ad5c404c",
+      "bytes": 1430079
+    },
+    "actions_work_items-0.5.0a1-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-wheels-20261023/actions_work_items-0.5.0a1-py3-none-any.whl",
+      "sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "bytes": 73925
+    },
+    "actions_http_helper-1.0.3-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-wheels-20261023/actions_http_helper-1.0.3-py3-none-any.whl",
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "bytes": 14690
+    },
+    "actions_core-1.0.3-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/storage-wheels-20261023/actions_core-1.0.3-py3-none-any.whl",
+      "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "bytes": 103809
+    }
+  },
+  "failure_receipts": [
+    "Initial2storageFAIL/2unconfiguredPGSKIP: missing model/migration before implementation",
+    "Schema golden1FAIL/1PASS until expected six-table delta regenerated; historical migrations unchanged",
+    "Affected database2FAIL/62PASS/2SKIP: exact table list and invalid backdated fixture retained new indexes",
+    "History migration2FAIL reproduced same invalid fixture; fixed shared helper drops all Foundry records in reverse dependency order; no IF NOT EXISTS weakening",
+    "Wrong cwd/test-path invocations retained as command diagnostics, not executed test failures or passes"
+  ],
+  "provenance": "Exact module/input hashes in underlying frozen receipt; SDK noneditable wheel hash5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0; owned RCC18.19.3 retained Artifact reused; no policy/trust change",
+  "rollback": "Coordinated schema16 SQL/object/journal backup before downgrade; schema17 creates no grants or application activation. Never delete migration marker to reopen new state with older binaries. No production migration executed.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "32lines: complete-model registration, common SQL ownership, raw-row versus admission boundary, dual-engine DDL rollback/fresh-interpreter proof, zero-skip verifier integration, coordinated rollback, sourceZIP versus inventory/logical key distinction, correct legacy fixture backdating",
+    "evidence": "Current4ownedSQL storage cases0skip, frozen4/105/129/130 and1843portable, retained red golden/backdating regressions; source code helpers and schema inspected",
+    "remaining": "Deployment consumer adaptation, compiler preimages/admission, generated authoring/boot, richer renderer, data/Knowledge/general jobs/restore, E1 and release-security gates remain open"
+  },
+  "blocked_external_action": {
+    "action": "Post substantial compiler/shared persistence handoff to existing #101",
+    "status": "denied",
+    "reason": "Automatic approval review said #101 destination was not explicitly authorized (it cited #327/#328 scope). No comment created; no retry or indirect posting to #101. Branch handoff documentation is separately authorized implementation work.",
+    "coordinator_action": "Reaffirm intended #101 destination if still required; independent code/matrix work continued"
+  },
+  "upstream_disposition": "Prior RCC local-carrier upstream report remains draft only; no new external report",
+  "controls": "No community merge, publication/tag, deployment, live auth/tunnel/security/credential change or other repository mutation. Conditional final merge/publication still requires parent exact-evidence confirmation.",
+  "evidence_root": "/workspace/actions-327-state/evidence/foundry-storage-frozen-20261023/db98db72-9281-4b4d-9a28-e895dc3b17d0"
+}

@@ -1,0 +1,15 @@
+[
+  "tests/action_server_tests/test_logical_preparation.py::test_late_result_retained_then_released_once",
+  "tests/action_server_tests/test_logical_preparation.py::test_transfer_blocks_close_until_release",
+  "tests/action_server_tests/test_logical_preparation.py::test_capacity_and_closed_refusal",
+  "tests/action_server_tests/test_logical_preparation.py::test_unbound_helper_archived_bytes",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[none]",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[digest]",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[symlink]",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[oversize]",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[action]",
+  "tests/action_server_tests/test_logical_preparation.py::test_bound_helper_private_context_and_reset[import]",
+  "tests/action_server_tests/test_logical_preparation.py::test_runner_preserves_transferred_owner_on_process_uncertainty",
+  "tests/action_server_tests/test_logical_preparation.py::test_host_settles_late_preparation_but_keeps_failed",
+  "tests/action_server_tests/test_logical_preparation.py::test_runner_cleanup_exception_retains_late_owner"
+]

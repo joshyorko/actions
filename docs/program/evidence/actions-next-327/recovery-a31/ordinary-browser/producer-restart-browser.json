@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "mode": "producer",
+  "phase": "restart",
+  "screenshots": [
+    "producer-restart-mounted.png",
+    "producer-restart-completed.png"
+  ],
+  "producedText": "Produced Work Items\n\nRead-only output items from this Run. Queue: output\n\nLoad produced items\n\ncfaab132-3f5e-482e-bafa-dac12ed86b92 — PENDING\n\n{\"fieldNames\": [\"amount\", \"city\"], \"recordCount\": 1}",
+  "artifactText": "{\"result\":{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":1},\"workItems\":[{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":1}]}"
+}

@@ -1,0 +1,8 @@
+[
+  "tests/action_server_tests/test_foundry_authoring.py::test_empty_library_and_create_compose_a_useful_ui_without_a_package",
+  "tests/action_server_tests/test_foundry_authoring.py::test_preview_is_effect_free_and_validates_spec_and_binding_map",
+  "tests/action_server_tests/test_foundry_authoring.py::test_stale_edits_and_duplicate_requests_are_rejected_or_replayed",
+  "tests/action_server_tests/test_foundry_authoring.py::test_release_is_explicit_failed_build_does_not_replace_active_and_rollback_reopens",
+  "tests/action_server_tests/test_foundry_authoring.py::test_revoked_and_cross_workspace_requests_fail_closed",
+  "tests/action_server_tests/test_foundry_authoring.py::test_app_audience_cannot_apply_or_release"
+]

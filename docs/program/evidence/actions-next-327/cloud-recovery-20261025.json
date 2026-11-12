@@ -1,0 +1,105 @@
+{
+  "schema": "actions.campaign-recovery/v1",
+  "base_source": "58e8f353e84bc1931e3c177e90604e158ea03190",
+  "environment": "replacement saved Actions cloud snapshot; /workspace/actions",
+  "ownership": "sole replacement integrator; old owner released issuecomment-6391710007",
+  "reconstruction": "new legacy queue navigation implementation; NOT old patch byte recovery",
+  "old_session_results": "63473/9888/95020 remain UNKNOWN; no claimed passes",
+  "versions": {
+    "runtime": "1.1.0a25",
+    "core": "1.1.0a2",
+    "sdk": "0.5.0a2"
+  },
+  "tests": {
+    "Doctor": "PASS pinned RCC18.19.3/Python3.12.15/Poetry2.1.1/Node20.19.3",
+    "Bootstrap": "PASS current locks",
+    "ToolkitTest": "179 passed",
+    "queue_regression": "six initial failures; final seven new plus sixteen existing =23 passed",
+    "frontend": "287 Runtime passed; Canvas46 passed/1 optional skipped",
+    "quality": "PASS lint/types/prettier/topology/UI-system",
+    "candidate_bootstrap": "9 passed/1 PostgreSQL fixture skipped; no real PostgreSQL claim"
+  },
+  "retained_failures": [
+    "unactivated /usr/bin/rcc resolves unrelated Qt launcher",
+    "restored old frontend dependencies missing zod/official bridge; original full/quality failures retained before successful npm ci rerun"
+  ],
+  "evidence": {
+    "bootstrap.log": {
+      "sha256": "147d10faf1cd1118c94e43507c9fa1df0bf53911c2d410ba597da73b187f7963",
+      "bytes": 15086,
+      "local_path": "/workspace/actions-recovery-327/evidence/bootstrap.log"
+    },
+    "candidate-bootstrap.log": {
+      "sha256": "c8a700191e357d886a9fac32c5be527eff4ccfdde88b2acadbbb2dabe5e6d540",
+      "bytes": 511,
+      "local_path": "/workspace/actions-recovery-327/evidence/candidate-bootstrap.log"
+    },
+    "candidate-bootstrap.xml": {
+      "sha256": "af927ba12fc1240a8cc1d7f58938b62ea34134c2041d29a59a20c3a23f1f4f57",
+      "bytes": 2090,
+      "local_path": "/workspace/actions-recovery-327/evidence/candidate-bootstrap.xml"
+    },
+    "compiler-prepare.log": {
+      "sha256": "7f51c2f21126da3ac970773ec95963f6721314d013478ad2f731d25a7d314469",
+      "bytes": 2839,
+      "local_path": "/workspace/actions-recovery-327/evidence/compiler-prepare.log"
+    },
+    "frontend-full-locked.log": {
+      "sha256": "0ae99bb5f8230edec799e1850c06950c68168ad6dd78b8c402a307511d7dc1bf",
+      "bytes": 889,
+      "local_path": "/workspace/actions-recovery-327/evidence/frontend-full-locked.log"
+    },
+    "frontend-full.log": {
+      "sha256": "5813614a537d037e9f4b9c97a03a54471af976767883265f9a1e645d291e02bc",
+      "bytes": 6640,
+      "local_path": "/workspace/actions-recovery-327/evidence/frontend-full.log"
+    },
+    "frontend-npm-ci.log": {
+      "sha256": "fdf8d152bd88ebb74239dfccd02fd0a2a7d6ecd1c5e8963be9a2159791a0bb1d",
+      "bytes": 149,
+      "local_path": "/workspace/actions-recovery-327/evidence/frontend-npm-ci.log"
+    },
+    "frontend-quality-locked.log": {
+      "sha256": "e721e81d7947ee0f3db927e128082bc5b0c7eb67300accaed31b90b6d49b0194",
+      "bytes": 1260,
+      "local_path": "/workspace/actions-recovery-327/evidence/frontend-quality-locked.log"
+    },
+    "frontend-quality.log": {
+      "sha256": "bd0a317fb971797163db3b1b3ca57736628776bf8f62c450310905ac942e9f81",
+      "bytes": 3950,
+      "local_path": "/workspace/actions-recovery-327/evidence/frontend-quality.log"
+    },
+    "postgres-pull.log": {
+      "sha256": "9619d79cd9e132a89fd36d5c613e47119f435b2929c44e1c04c4933b247563be",
+      "bytes": 1801,
+      "local_path": "/workspace/actions-recovery-327/evidence/postgres-pull.log"
+    },
+    "queue-navigation-green-final.log": {
+      "sha256": "3ed3a7f69d15a68509802bb18af2ad17eedfb2f255430ca22f806bb8319266ca",
+      "bytes": 232,
+      "local_path": "/workspace/actions-recovery-327/evidence/queue-navigation-green-final.log"
+    },
+    "queue-navigation-green.log": {
+      "sha256": "d3c436fb553177f7d3717f843187f0ceb7cc324f095dacc8188c52944ec671e9",
+      "bytes": 232,
+      "local_path": "/workspace/actions-recovery-327/evidence/queue-navigation-green.log"
+    },
+    "queue-navigation-red.log": {
+      "sha256": "4857169157afacd6ab68cb0c0bdfde1197847f50eb531114a29059c4af00252c",
+      "bytes": 68765,
+      "local_path": "/workspace/actions-recovery-327/evidence/queue-navigation-red.log"
+    },
+    "toolkit-test.log": {
+      "sha256": "734f11e11b3aaf8de40755ebcca3756a23c7715de1d3ec13637ec387ea2bcf9d",
+      "bytes": 14650,
+      "local_path": "/workspace/actions-recovery-327/evidence/toolkit-test.log"
+    }
+  },
+  "remaining": [
+    "installed a25 browser/actual generated execution/official host",
+    "generic queue/profile/input policy",
+    "offline relocated restore draft separately under review",
+    "full original acceptance matrix including client/auth/celld/distribution/publisher owner gates"
+  ],
+  "upstream_disposition": "none"
+}

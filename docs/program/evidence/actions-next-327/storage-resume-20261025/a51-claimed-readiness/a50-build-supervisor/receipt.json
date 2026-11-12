@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "supervisor_pid": 190983,
+  "child_exit_code": 0,
+  "deadline_exceeded": false,
+  "cleanup_errors": [],
+  "live_descendants": [],
+  "log_path": "/workspace/recovery327/a50-build-supervisor/supervisor.jsonl",
+  "stdout_bytes": 22881,
+  "stderr_bytes": 707,
+  "output_policy": "Child output discarded; lifecycle metadata only",
+  "limits": {
+    "seconds": 1800,
+    "free_bytes": 10737418240,
+    "combined_child_output_bytes": 16777216,
+    "outer_log_bytes": 16777216
+  },
+  "termination_requested": false,
+  "elapsed_seconds": 48.304
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "path": "LICENSE",
+    "bytes": 11358,
+    "git_blob": "eea9e50ec92da3170736de9cf077131d78028cbd",
+    "sha256": "3e4fd3f14628823f070a603435a95eff548eae90ba23d7fcbca2f1526c136f3e",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/LICENSE"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/__init__.py",
+    "bytes": 5053,
+    "git_blob": "8443bf76bad99e49611e5e9b9ba5d0d9d0d8200d",
+    "sha256": "ed6b3e41e0e8cf159298d2033eb1286645747a710c1ece63e58c1c0529774c8e",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/__init__.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_adapters/__init__.py",
+    "bytes": 2796,
+    "git_blob": "d1a904b3822278b6893629965dde55ceaf03fa93",
+    "sha256": "e9ed84936ac313503e4854828f12de7fd281e52007b844008d84de5a6604b88f",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_adapters/__init__.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_adapters/_base.py",
+    "bytes": 1831,
+    "git_blob": "4404926baf15d37b230dbbbd9e1b7ea6fb466831",
+    "sha256": "cf29489e07bd9f75a1ef0ceac8a43187d22962d37d6ef19ba8a2b9315fc1437c",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_adapters/_base.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_adapters/_file.py",
+    "bytes": 8636,
+    "git_blob": "1b14287089d5e55247b641d45ee230613a61ee6d",
+    "sha256": "93c45887f447d22a4b8e5c0cdf94aa068134f0e830ddde4ddd8bf86661dd6b05",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_adapters/_file.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_adapters/_robocorp.py",
+    "bytes": 8966,
+    "git_blob": "f11c20aca4f9d1c74c4711a334c58b3d554d764a",
+    "sha256": "be846e15d7cffc8e4dcc96cec8f4c8ba7f0e21869883b87a10715eaaec63e4b1",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_adapters/_robocorp.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_context.py",
+    "bytes": 1423,
+    "git_blob": "aee4b02dc35d267aa1f1433fdb1289cac16eeeef",
+    "sha256": "c4672f3e59f7594e22c840e9d46e41ddfd985c90d35d9469236f50230c1bcaee",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_context.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_exceptions.py",
+    "bytes": 1173,
+    "git_blob": "fc10901de6d3b4418fba0c7850cc1cbf63b5efa2",
+    "sha256": "919dd177103beb9345eef024cf79aeb34a8aac513708bc6ddfab8bad8232d63a",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_exceptions.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_requests.py",
+    "bytes": 6596,
+    "git_blob": "0e9a33b15b2627784298f58dd61ce602e2548e73",
+    "sha256": "105799aca14dd8f6bb2f170e2d429187b21ead9e65d47722c4728c20cbe12b16",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_requests.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_types.py",
+    "bytes": 1675,
+    "git_blob": "dee3b45b550854ec9c09bd85225efa87cb1d9e2d",
+    "sha256": "fd08d13124ee279194ce2aea7535013babe8c33d89898bd7d762d18fbd7bc45e",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_types.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_utils.py",
+    "bytes": 2401,
+    "git_blob": "ea9c14231cdac697c4ccc5e3675231863defbf1d",
+    "sha256": "7338e2099936fd0c6c42e7bbe8883ccc2ec89bc459e447b3f62cdccde152d3ec",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_utils.py"
+  },
+  {
+    "path": "workitems/src/robocorp/workitems/_workitem.py",
+    "bytes": 16557,
+    "git_blob": "b39b15bb51d07a6deb4a4cd7a3628ff56c7c5515",
+    "sha256": "d7a67468f188ef1428bb59edf1962be276b82601d3c2d600d3e2e78c8b5f91fd",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/src/robocorp/workitems/_workitem.py"
+  },
+  {
+    "path": "workitems/tests/workitems_tests/fixtures.py",
+    "bytes": 651,
+    "git_blob": "f13ea4df2cb42936c9d64d29928108ffed89e98e",
+    "sha256": "931127602e4c3f8a7f35e2dde4a1da9c8619ba17dc92a44382428aaca121b1c6",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/tests/workitems_tests/fixtures.py"
+  },
+  {
+    "path": "workitems/tests/workitems_tests/mocks.py",
+    "bytes": 2260,
+    "git_blob": "0307e7d4f5156d5d1da2152c85dc8386d9daea6e",
+    "sha256": "220e13db529310b90180bc89c7c8d7d83fc9ddaa68e0c6b03f0fa0a0bb583c49",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/tests/workitems_tests/mocks.py"
+  },
+  {
+    "path": "workitems/tests/workitems_tests/test_adapters.py",
+    "bytes": 18004,
+    "git_blob": "866974066a4be16d1c47421b76850e4fa3bdb45b",
+    "sha256": "cce12794e13e99bf7b8db17125b79d6de5a2c8f24746a65aaddbb8f36911edfe",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/tests/workitems_tests/test_adapters.py"
+  },
+  {
+    "path": "workitems/tests/workitems_tests/test_email.py",
+    "bytes": 6654,
+    "git_blob": "d81e6b71974a5530be15838dc5f788ec9efca45d",
+    "sha256": "971d12d690a6865ec661f1d7d3557e34f87c493a55e24ba172cca6344ed755af",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/tests/workitems_tests/test_email.py"
+  },
+  {
+    "path": "workitems/tests/workitems_tests/test_workitems.py",
+    "bytes": 12175,
+    "git_blob": "cdcd5d53621a24785d1e55ab5525d30bfad458a8",
+    "sha256": "75a8974f9f581ca939a6825dda51a223eb79e3e5c47f4130735fd6dc9500c75d",
+    "url": "https://raw.githubusercontent.com/robocorp/robocorp/631f5601617e9935620a72c788a98e1012331323/workitems/tests/workitems_tests/test_workitems.py"
+  }
+]

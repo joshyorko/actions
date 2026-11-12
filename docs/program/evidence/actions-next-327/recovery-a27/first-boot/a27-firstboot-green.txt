@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_foundry_boot.py -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-firstboot-green (in /workspace/actions/action_server)
+...........                                                              [100%]
+11 passed in 0.09s
+Log (html): /workspace/actions-recovery-327/evidence/a27-firstboot-green/log.html

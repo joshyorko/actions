@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETED",
+  "removed": [
+    "source",
+    "git-metadata.git"
+  ],
+  "source_sha": "72c8a13e90a4e5bfb6e0ea24e818f7589e75c96b",
+  "generated_inputs_retained_in_exact_wheel": [
+    {
+      "source": "action_server/src/actions/server/bin/rcc-18.19.3",
+      "retained_wheel_member": "actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "source": "action_server/src/actions/server/_static_contents.py",
+      "retained_wheel_member": "actions/server/_static_contents.py",
+      "sha256": "eef41aab430c3a9f97b72cca9ac51b40d93cf0e5679b340d7007a9d9655fddfa"
+    },
+    {
+      "source": "action_server/src/actions/server/_oauth2_config.py",
+      "retained_wheel_member": "actions/server/_oauth2_config.py",
+      "sha256": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b"
+    }
+  ],
+  "before_free_bytes": 13164920832,
+  "after_free_bytes": 13758640128,
+  "reclaimed_bytes": 593719296,
+  "retained": "all wheels,consumer,build and installed payload proof; source commit remains pushed"
+}

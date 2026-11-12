@@ -1,0 +1,132 @@
+{
+  "authority": "https://github.com/joshyorko/actions/issues/327",
+  "draft_pr": "https://github.com/joshyorko/actions/pull/328",
+  "baseline": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+  "source_sha": "f9aa2e7fa5873ad623042c24d84674c138e59188",
+  "release_status": "NOT_READY",
+  "publishable": false,
+  "artifact_metadata_version": "1.0.4",
+  "requested_release_version": "1.1.0 provisional",
+  "platform": "Dakota Linux x86_64; source and local cp312 wheel only",
+  "toolchain": {
+    "rcc": "18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "python": "3.12.15",
+    "poetry": "2.1.1",
+    "toolkit_tests": {
+      "passed": 179,
+      "skipped": 0
+    }
+  },
+  "tests": {
+    "provider_and_common_outputs": {
+      "recorded_tests": 118,
+      "passed": 118,
+      "skipped": 0,
+      "failures": []
+    },
+    "staging_btrfs": {
+      "recorded_tests": 29,
+      "passed": 29,
+      "skipped": 0,
+      "failures": []
+    },
+    "portable": {
+      "recorded_tests": 216,
+      "passed": 209,
+      "skipped": 6,
+      "failures": [
+        {
+          "test": "tests.action_server_tests.mcp.test_alias_history::test_concurrent_processes_serialize_empty_history_allocation[False]",
+          "kind": "failure",
+          "diagnostic": "database is locked"
+        }
+      ]
+    },
+    "portable_complete": false,
+    "portable_stop_reason": "Owned pytest SIGINT after observed failure and high host I/O pressure. Its teardown also raised KeyError. No full PASS.",
+    "fixture_cleanup": "PASS",
+    "runtime_lint_exit": 0,
+    "runtime_typecheck_exit": 0,
+    "runtime_lock_check_exit": 0
+  },
+  "artifacts": {
+    "actions_runtime-1.0.4-cp312-cp312-linux_x86_64.whl": {
+      "sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+      "size": 14446423
+    },
+    "actions_runtime-1.0.4.tar.gz": {
+      "sha256": "ac05edbb85a5c064f4b12ab2c606689132ee4d3245e3e2b4b6a75d076165f32c",
+      "size": 14313582
+    }
+  },
+  "repeated_build_identical": true,
+  "build_preconditions": [
+    "Verified pinned RCC before all inventories",
+    "SOURCE_DATE_EPOCH from source commit",
+    "Public OAuth generated from tracked versioned inputs",
+    "No GitHub Actions, GHCR, Sema4.ai or Cloudflare account used"
+  ],
+  "strict_twine_metadata_exit": 0,
+  "installed_wheel": {
+    "source_sha": "f9aa2e7fa5873ad623042c24d84674c138e59188",
+    "status": "PASS",
+    "wheel_sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+    "installed_module_hashes": {
+      "actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+      "actions/server/deployments/source_staging.py": "fb153888140814e2dacaf4ba28b982af20b8d279a4ee2500a4e59e8995787cb2"
+    },
+    "direct_url_archive_sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+    "real_duckdb_rows": 1,
+    "versions": {
+      "actions-runtime": "1.0.4",
+      "actions-core": "1.0.3",
+      "actions-http-helper": "1.0.3",
+      "actions-work-items": "0.4.4",
+      "mcp": "2.0.0",
+      "duckdb": "1.4.1",
+      "psycopg": "3.3.6"
+    }
+  },
+  "sbom": {
+    "scope": "Isolated installed consumer environment only, not complete release/native/image",
+    "components": 68,
+    "sha256": "11cc2258c6c4b6e7853c116aebda8bb54bbead8b42711c8cdb4187f096191c64"
+  },
+  "real_vs_synthetic": {
+    "real_engines": [
+      "DuckDB CSV-backed local database",
+      "PostgreSQL 15 service"
+    ],
+    "business_data": "synthetic invoices",
+    "artifact_execution": "Installed exact wheel ran a real DuckDB query; module bytes and direct_url SHA matched",
+    "actual_invoice_worker": false,
+    "actual_ChatGPT": false,
+    "celld_lab": false,
+    "homelab_deployment": false
+  },
+  "prior_failures_retained": [
+    "Two initial cancellation test expectation failures",
+    "Four server-cursor prefetched-row failures",
+    "Six Btrfs staging failures before correction",
+    "Cold-build wheel/sdist byte inequality; preseeded successor passed"
+  ],
+  "outstanding": [
+    "Full corrected-source portable suite and SQLite contention diagnosis",
+    "Complete Canvas/review/real-worker/restart invoice workflow",
+    "Generated immutable Canvas revision with activation/rollback",
+    "Durable Work Item owner/epoch/review/retry and SQLite/PostgreSQL conformance",
+    "Broader schema discovery, source snapshot retention, cost metering and knowledge ingest/search",
+    "ChatGPT E1 operator connection after application/auth prerequisites",
+    "Optional celld storage preconditions and two-node fault lab",
+    "Complete native/image, registry/object-storage, SBOM/provenance and deployment rollback qualification"
+  ],
+  "operator_gates": {
+    "ChatGPT": "NEEDS_OPERATOR after engineering prerequisites",
+    "celld": "BLOCKED; disabled and unimplemented. No scope waiver."
+  },
+  "upstream_disposition": "none",
+  "local_evidence_root": "/home/kdlocpanda/.cache/actions-release-327/evidence",
+  "local_candidate": "/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587",
+  "untracked_file_retained": "action_server/src/actions/server/_oauth2_config.py"
+}

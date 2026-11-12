@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "scope": "Node official SDK protocol client; no browser, official-host UI, RCC execution or ChatGPT qualification",
+  "candidate": {
+    "runtime_version": "1.1.0a45",
+    "core_version": "1.1.0a7",
+    "source_sha": "e6e8f0130e6a7cfba2142e1382cbdd1f07901d39",
+    "wheels": {
+      "wheels/action_server/actions_runtime-1.1.0a45-cp312-cp312-linux_x86_64.whl": "455ad5ba228410252959fe3d1fbe0b331efb642e5849f8ecd9041c0ba80ec98c",
+      "wheels/actions/actions_core-1.1.0a7-py3-none-any.whl": "9e8a1e687bbce5e444f2dfdd5890d30176ab84ae68384b5ef6af9c3e86dcea74",
+      "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+    }
+  },
+  "node": "v20.19.3",
+  "lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+  "dependencies": {
+    "client": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@modelcontextprotocol/client/-/client-2.0.0.tgz",
+      "integrity": "sha512-8f1OghQ2rjzIOfqgUCP+8GiUWqRs89njoWLNqAe8kWmDePv3s1fZXseej+QXemssEuuOvLLmLO/kqM3IQHtISw==",
+      "license": "MIT",
+      "dependencies": {
+        "@modelcontextprotocol/core": "2.0.0",
+        "cross-spawn": "^7.0.5",
+        "eventsource": "^3.0.2",
+        "eventsource-parser": "^3.0.0",
+        "jose": "^6.1.3",
+        "pkce-challenge": "^5.0.0",
+        "zod": "^4.2.0"
+      },
+      "engines": {
+        "node": ">=20"
+      }
+    },
+    "core": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/@modelcontextprotocol/core/-/core-2.0.0.tgz",
+      "integrity": "sha512-pJCEwGG7Lfr/+PQp9ZTwKXNeO5wzbfKL7H3MYpCorM4oFBoQrdjnBgEoqG+RjhsvS1FKrDbKux+M1HhlnGWqcA==",
+      "license": "MIT",
+      "dependencies": {
+        "zod": "^4.2.0"
+      },
+      "engines": {
+        "node": ">=20"
+      }
+    }
+  },
+  "checks": [
+    "initialize",
+    "tools and annotations",
+    "Canvas resource MIME and bytes",
+    "synthetic draft authoring, replay and read",
+    "unknown application denial",
+    "missing bearer denied",
+    "wrong bearer denied"
+  ],
+  "server": {
+    "name": "Action Server",
+    "version": ""
+  },
+  "canvas": {
+    "mimeType": "text/html;profile=mcp-app",
+    "sha256": "00bffae0d525fd39616a12ac66a0374fb64f7238333e4c25ec31dcc9d3b0e004",
+    "bytes": 485449
+  },
+  "synthetic_draft": {
+    "appId": "07eac272-caca-478e-ba61-821e713ffa74",
+    "revisionId": "sha256:5f3e91688032bb3dff9cc7b37b732e7fe72f890a317ff56602e7f45b84f0eeff",
+    "activated": false
+  }
+}

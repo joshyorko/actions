@@ -1,0 +1,42 @@
+# Owned logging implementation
+
+Derived from robocorp-log 3.1.2 (Apache-2.0), installed distribution metadata repository https://github.com/robocorp/robocorp/. Original notices, including pytest/MIT attribution in the import hook, are retained. The embedded viewer is retained with the matched encoder and decoder.
+
+Local modifications: owned actions._logging import namespace, generated AST references, self-exclusion filter, mandatory secret/decryption module exclusions, and a distinct rewritten-bytecode cache identity. Historical configuration keys and attribution remain unchanged. Owned lint maintenance removes redundant f-string prefixes, names the suppressed-event no-op, sorts/formats Python source, and initializes FunctionDef type_params on Python 3.12+. Embedded viewer bytes remain unchanged.
+
+Direct dependencies: psutil >=5,<8; tomli >=2.0.1,<3 only on Python <3.11.
+
+Original file SHA256 inventory:
+
+```text
+4b8fdaec763777f3f61d4b33d96f783ebc3e3b47c7b79964b71b629d4992c9b5  __init__.py
+98d0f20baa85041941519019619086afaa392420f13a09c77950262b7113c0fe  _ast_utils.py
+b2d415e7e8fd6fc04d293afa2b3616e072136c757b915e96857c21e588bf87c8  _auto_logging_setup.py
+05c03f458cbe208847204cb231c9a2a65878f18ab5e7191737f923bfc5bb023a  _collect_stats.py
+b2a909034af49f8cb8fe56f298d72d9789123bc793167faab327da7f9866c102  _config.py
+dff9071c90e8aa6a44b4c54c267dc0aea575ac2e50bb9731713abfb4e39127de  _constants.py
+281a7838349735e8b09ab3599a06ae9a3665c968e5fbbe8e89c96663679926f9  _convert_units.py
+378d3a143f9f906499f26dda97693164b273ab0abbb1084777555e07ae06ebef  _decoder.py
+f73f6ebf492171ae9ee64240138cb1cceda2787de34c3edbdb649ee0ffe87299  _decoder_spec.py
+8141ae9913d4e7ec4d1c4aa9845a3e4eb83085d13e58e7f8c9cc3b15e8c19d26  _index_v3.py
+68a5800e93ac52d9476714adb854148ded8541052ddfa149ba56e707a4802d2d  _lifecycle_hooks.py
+cce336b554fd263024fd63c09e62bcd03bd2c2513e7f4424a8544bd49090062c  _log_formatting.py
+25dc646cfc21c8fbc553d73375ea31e21b9e422c360e364f9b37fbad5bf2182f  _log_redacter.py
+a94dde6e61aeddc81c478c49963dff2f52cfea1ee8105a3e5c2518d96bbd0577  _logger_instances.py
+f8f9793345278b183e918066da4dddc5d09dc55959b18ec12f7e23a52ae05600  _null.py
+f3d547935b4d79b23958997b1850b6e76bb621aa9102687f04ff611829661089  _obj_info_repr.py
+0a61a332d46cd8b4381fa1a0ada8a705f66957f9824d57da99bcbaaa37622193  _on_exit_context_manager.py
+d5e57eeb08e0ca6ac09c3b645cadaec705f33fd34518ceb631cc3d61d3a4568d  _rewrite_ast_add_callbacks.py
+7de7f195e1ce83f291fa2eff03828dd42dd802902a4e1dff0008debae18543a7  _rewrite_filtering.py
+f68c13d9212517ca7f5164a3a96b8503b0587f3b5c067a628c71e78a4c2dd7dd  _rewrite_importhook.py
+1f41310d4cd013b2c2381a066ef576c8098f1ce4da332eeebcdcfeccd6901afa  _robo_logger.py
+f60a0482ca1283524ae1546d7e1c0eafef31d4d9c13b98aa11f46d8328f5590a  _robo_output_impl.py
+0494b6e3e33e1cfa15574a21bab8a31b5dfba0bc63e9e15592f631ba6e049a40  _safe_write_to_stream.py
+18266ca1b9da2e22bb08b77a8b87014b5a68f14357939a11778f7b731a585168  _sensitive_variable_names.py
+b891fe0760e4cd501f6737db630090501d6e9da1fbf766f532c02f1687dad5de  _suppress_helper.py
+72575271832742226c9ba9a385bebff741c69b7dfdbf6df5f3e82ff464c18932  console.py
+9674c8d68ef26dfd26ca57a1db84a3a48fc6030faceed4af244a0a0ed4fbf3b7  protocols.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  py.typed
+57112d908160f12fbec508447688663df1c420c97a6063bc49004bf64f515501  pyproject_config.py
+2b38cc7a06f786af5256ec532e36698eae3616cf5f7d33ccbeed2986d7215950  redirect.py
+```

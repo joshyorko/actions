@@ -1,0 +1,162 @@
+{
+  "status": "PASS_INSTALLED_POSTGRES_KNOWLEDGE_A56",
+  "scope": "One bounded installed A56 PostgreSQL Knowledge qualification; not aggregate QA",
+  "source": {
+    "commit": "88846b55e3b455eb44378bd5ba43bb146706661d",
+    "tree": "a65449200ec36981b6ad4002147f19cf8da8a265",
+    "runtime_version": "1.1.0a56",
+    "runtime_wheel_sha256": "f06526ab99c8df7a769a03c67efb771f0bdcf4fbeb00caa74afc85b0c035f046",
+    "installed_origin": "/workspace/327-artifacts/a56/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+    "installed_core": "1.1.0a8",
+    "core_wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "work_items": "0.5.0a2",
+    "work_items_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "compiler": {
+    "prepared_source_commit": "aca51868d14e916c8034c69309e222100d5d50f3",
+    "same_source": false,
+    "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+    "package_yaml_sha256": "a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+    "core_proof_sha256": "15ce604623a341efaeddbffd649caa4dc5f081634d1020a6f9faa347591e6dcb",
+    "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "rcc": "18.19.3"
+  },
+  "fixture": {
+    "postgres_image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "image_id": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+    "tls_fixture_source_sha256": "c588cca3478236276cc38a3ab965ba9100eb8271e591077f84b3d2907490b242",
+    "knowledge_postgres_contract_source_sha256": "620bb8eee9199ff4af11446962452dd3ca322ebee0aef18711326e8044b44c4c",
+    "container_id": "523800e970de74ec29116356e87db1cf2273b64111fea45b5d3c4d205c6c9a62",
+    "container_removed": true
+  },
+  "execution": {
+    "status": "PASS",
+    "actual_generated_execution": "PASS",
+    "public_ingest_pipeline": "passed; RCC exit 0",
+    "public_search_pipeline": "passed; exact orchid query returned one hit; RCC exit 0",
+    "runs": [
+      {
+        "index": 0,
+        "run_id": "2dbea7fd-c3c5-40a1-a489-7f9a3a84a855",
+        "state": "completed",
+        "artifact_count": 5,
+        "rcc_exit_codes": [
+          0
+        ]
+      },
+      {
+        "index": 1,
+        "run_id": "a5200fd7-5c56-49ef-b3b9-78078ded24a0",
+        "state": "completed",
+        "artifact_count": 4,
+        "rcc_exit_codes": [
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "run_id": "eac272ab-f444-43e4-9af6-372cbf6156fd",
+        "state": "failed",
+        "artifact_count": 3,
+        "rcc_exit_codes": [
+          1
+        ]
+      }
+    ],
+    "restart_readback": "passed; run states and artifacts reread by assertions after restart",
+    "protocol_denials": {
+      "missing": 403,
+      "wrong": 403,
+      "host": 421,
+      "origin": 403
+    },
+    "runtime_stops": 4,
+    "forced_kills": 0,
+    "all_lifespan_shutdowns_complete": true
+  },
+  "supervision": {
+    "outer_host_status": "PASS",
+    "outer_exit": 0,
+    "outer_remaining": [],
+    "child_status": "PASS",
+    "child_exit": 0,
+    "child_remaining": [],
+    "controller_status": "PASS",
+    "controller_cleanup_errors": [],
+    "free_bytes_after_controller": 19424854016,
+    "disk_floor_bytes": 10737418240
+  },
+  "private_material_cleanup": {
+    "status": "PRIVATE_SYNTHETIC_MATERIAL_REMOVED_AFTER_SERVICE_CLEANUP",
+    "controller_status": "PASS",
+    "child_supervisor_status": "PASS",
+    "outer_supervisor_status": "PASS",
+    "runtime_shutdowns": 4,
+    "runtime_forced_kills": 0,
+    "container_id": "523800e970de74ec29116356e87db1cf2273b64111fea45b5d3c4d205c6c9a62",
+    "container_absence_after_cleanup": true,
+    "removed_private_file_count": 11,
+    "removed_private_files": [
+      "writer-password",
+      "postgres-ca.pem",
+      "owned-pg-tls/server.csr",
+      "owned-pg-tls/server.key",
+      "owned-pg-tls/ca.srl",
+      "owned-pg-tls/ca.crt",
+      "owned-pg-tls/ca.key",
+      "owned-pg-tls/server.crt",
+      "owned-pg-tls/extensions",
+      "fixture/datadir/provider-state/secrets/b3ed09f3-a5ff-45c2-8d10-d846fae79ea8-76e8490b-9b6d-41ee-9292-2d4ecc28722a",
+      "fixture/datadir/provider-state/secrets/c1d873bf-eab2-4f4d-bf00-fdb79d015fda-742812bd-8620-451a-9fa9-f14002bc03db"
+    ],
+    "synthetic_provider_secret_files_removed": 2
+  },
+  "retained_evidence": {
+    "controller_receipt": "/workspace/327-probes/knowledge-pg-luna/a56/owned/controller/controller-receipt.json",
+    "knowledge_receipt": "/workspace/327-probes/knowledge-pg-luna/a56/owned/controller/fixture/evidence/receipt.json",
+    "preflight_receipt": "/workspace/327-probes/knowledge-pg-luna/a56/preflight2-supervisor-receipt.json",
+    "execution_outer_supervisor": "/workspace/327-probes/knowledge-pg-luna/a56/execution-outer-supervisor-receipt.json",
+    "private_material_cleanup": "/workspace/327-probes/knowledge-pg-luna/a56/private-material-cleanup.json",
+    "controller_sha256": "78abb6850c2b964c586459045d2a1a248fb676442a9d0b8b30851279beb0e2bb",
+    "qualifier_sha256": "54e1c618796c4251549395ea623245f63d311247c98e6aa255d3a34d98cb8a19",
+    "child_supervisor_sha256": "675a2b96c507b2e593b127757c07025821e901badaf21c125fbccfea21ed5aee"
+  },
+  "setup_attempts": [
+    {
+      "status": "FAILED_BEFORE_CONTAINER_START",
+      "reason": "configured controller root parent directory did not exist",
+      "evidence": "preflight-supervisor-receipt.json and preflight.log",
+      "recovery": "created task-local parent only; reran pinned preflight successfully"
+    },
+    {
+      "status": "FAILED_BEFORE_PRIVATE_FILE_REMOVAL",
+      "reason": "first cleanup verifier expected child supervisor receipt at wrong nesting",
+      "evidence": "cleanup-supervisor-receipt.json and cleanup.log"
+    },
+    {
+      "status": "FAILED_BEFORE_PRIVATE_FILE_REMOVAL",
+      "reason": "second cleanup verifier looked for generated TLS files beneath fixture instead of controller root",
+      "evidence": "cleanup2-supervisor-receipt.json and cleanup2.log"
+    },
+    {
+      "status": "PASS",
+      "reason": "corrected exact-path verifier removed only owned generated private material after confirmed service/container cleanup",
+      "evidence": "private-material-cleanup.json and cleanup3-supervisor-receipt.json"
+    }
+  ],
+  "canonical_documentation_proposal": {
+    "file": "docs/skills/repository-operations.md",
+    "status": "proposal for integration; source checkout untouched",
+    "exact_delta": "When a bounded installed-candidate controller imports repository test fixtures or helpers, run that controller inside the prepared RCC toolkit environment so its declared test dependencies are available. Keep process supervision on the host, pin the source files and installed wheel before fixture startup, and retain setup-only failures separately from execution results.",
+    "evidence": [
+      "A55 retained setup-only attempt failed before fixture startup because host controller Python lacked pytest while importing the source fixture.",
+      "A56 RCC gateway preflight and installed PostgreSQL Knowledge run passed with pinned source fixture hashes; outer host pidfd supervisor and dedicated child supervisor both reported empty remaining process sets."
+    ]
+  },
+  "upstream_disposition": "none",
+  "scope_limits": [
+    "Synthetic owned PostgreSQL, generated local authorization, grants and provider material only",
+    "No live credentials or production services",
+    "No Library upload, signed/public release or deployment"
+  ]
+}

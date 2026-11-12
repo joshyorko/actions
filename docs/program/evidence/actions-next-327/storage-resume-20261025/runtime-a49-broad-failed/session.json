@@ -1,0 +1,54 @@
+{
+  "abort_reason": null,
+  "budget": {
+    "heavy_concurrency": "prohibited",
+    "postgres_abort_percent": 90,
+    "postgres_memory_bytes": 3221225472,
+    "postgres_sample_seconds": 60,
+    "postgres_tmpfs_bytes": 2147483648,
+    "workspace_floor_bytes": 10737418240,
+    "workspace_initial_bytes": 13958643712
+  },
+  "excluded_gates": [
+    "browser_origin_acceptance",
+    "native_artifact_test"
+  ],
+  "final_postgres_capacity_reason": null,
+  "initial_free_bytes": 15650074624,
+  "owned_postgres_id": "20adbb5b69c7a87fbc19cc58ec08e1abfc3fdc0906d68d34e488687c018216bb",
+  "owned_postgres_stopped_removed": true,
+  "phase_counts": {
+    "call:failed": 5,
+    "call:passed": 4299,
+    "call:skipped": 169,
+    "setup:passed": 4473,
+    "setup:skipped": 28,
+    "teardown:passed": 4501
+  },
+  "pytest_returncode": 10,
+  "pytest_session_finish": {
+    "counts": {
+      "call:failed": 5,
+      "call:passed": 4299,
+      "call:skipped": 169,
+      "setup:passed": 4473,
+      "setup:skipped": 28,
+      "teardown:passed": 4501
+    },
+    "event": "session_finish",
+    "exitstatus": 1,
+    "time": 1792968008.734006
+  },
+  "source_after": {
+    "source_sha": "5b9c70e00e5e019a751aec5385591e5a2bbd615e",
+    "source_tests_fingerprint": "d77d653088e02848af999d9f86bcb86c0ae1a1c83c68bd3f308072975c498dec",
+    "worktree_clean": true
+  },
+  "source_before": {
+    "source_sha": "5b9c70e00e5e019a751aec5385591e5a2bbd615e",
+    "source_tests_fingerprint": "d77d653088e02848af999d9f86bcb86c0ae1a1c83c68bd3f308072975c498dec",
+    "worktree_clean": true
+  },
+  "source_sha": "5b9c70e00e5e019a751aec5385591e5a2bbd615e",
+  "status": "FAILED"
+}

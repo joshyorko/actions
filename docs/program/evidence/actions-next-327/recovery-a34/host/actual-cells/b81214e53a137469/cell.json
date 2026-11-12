@@ -1,0 +1,13 @@
+{
+  "nodeid": "tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-duckdb-True-True]",
+  "sha256": {
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/rcc-receipt.json": "6ea0b8bfa3dc55990080a6f436baed0ee2c1ef1617c53d4f50d76c820aa18070",
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/input.json": "84fc2d0b0366e31fc254dac31aab91edf9028b3e9e050bda71f87c09dc729e03",
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/tmp/task-host-entered": "0acb8ce4d172d2c8f5067ef0074f0d3a2d37423a6b5b628068d206cd4b3bf449",
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/source/package.yaml": "5dcc9dadd6157278933f036532bcf26643b6c1e100d87fa176e6736f4e8e3bf8",
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/source/generated_actions.py": "567829756f5a729da00cca4a3913fb96edfd8c64c17b57ee4585c7077739768b",
+    "execution/f3d12ad4-1d91-43cc-8bfb-fe533c39fd25/6c839136-5760-49a6-83a9-e295de8a0a33/298210a3-d897-4e91-b2b6-eb61934b54e6/source/tests/test_generated_action.py": "159484c561e6cc5dc007a0bd41f2e350d9b1b698570f3eae90c36428b45c272e",
+    "objects/655b4497-bfbc-48a9-ba06-84cbc0490cba": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+    "objects/966a41ac-a8a0-4f1c-b6ce-b827d8893ddc": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "Retired installed virtualenvs only; wheels, source, byte proofs and all receipts retained",
+  "removed": [
+    "/workspace/recovery327/a42/consumer",
+    "/workspace/recovery327/a44/consumer",
+    "/workspace/recovery327/a44-ui1/consumer"
+  ],
+  "live_references": [],
+  "free_before": 12594380800,
+  "free_after": 13099393024
+}

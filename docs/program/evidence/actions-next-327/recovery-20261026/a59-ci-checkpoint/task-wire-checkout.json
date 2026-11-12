@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "bytes": 102337,
+    "sha256": "b331ec69b50262d825fab025f24fcbb2b5408e3940f22c84e788141f0a053a32",
+    "crlf": 3145
+  },
+  "fixed": {
+    "bytes": 99192,
+    "sha256": "bf30afb7ac251e3e22c037b7a685f60ef6603031b5484c0d08b1fa0bbe86d460",
+    "crlf": 0
+  }
+}

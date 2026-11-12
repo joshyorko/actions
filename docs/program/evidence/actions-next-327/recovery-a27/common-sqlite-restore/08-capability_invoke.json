@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Generic execution completed.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "execution": {
+      "attemptEpoch": 1,
+      "attemptId": "41110ae5-9291-4791-b1bf-587f31ee4a97",
+      "attemptState": "succeeded",
+      "outputs": [
+        {
+          "handle": "art_GKgX3eQFSQuDQvnibNYXsg",
+          "mediaType": "application/json",
+          "name": "generated-action-result.json",
+          "size": 30
+        },
+        {
+          "handle": "art_l-AMSyOARDu_LmbJxfE38g",
+          "mediaType": "application/json",
+          "name": "rcc-receipt.json",
+          "size": 55326
+        },
+        {
+          "handle": "art_L8vnk6flQfSb_ZU7VyQ5IQ",
+          "mediaType": "application/octet-stream",
+          "name": "rcc-stdout.log",
+          "size": 0
+        },
+        {
+          "handle": "art_FvabABiHTcGjSrcfyp55ZQ",
+          "mediaType": "application/octet-stream",
+          "name": "rcc-stderr.log",
+          "size": 103
+        }
+      ],
+      "runId": "eecadfcb-23cb-4ee7-9d04-f543fd973bc4",
+      "runStatus": 2,
+      "state": "completed",
+      "workItemEpoch": 1,
+      "workItemId": "592ea729-3a7d-44bf-b097-e89a1f6a539e",
+      "workItemState": "COMPLETED"
+    }
+  },
+  "isError": false,
+  "resultType": "complete"
+}

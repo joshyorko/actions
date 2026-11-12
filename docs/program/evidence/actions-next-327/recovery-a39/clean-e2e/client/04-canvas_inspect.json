@@ -1,0 +1,388 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "application": {
+        "activeRevisionId": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+        "applicationId": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+        "revisions": [
+          {
+            "active": false,
+            "buildStatus": "not-required",
+            "compilationStatus": "not-required",
+            "importStatus": "not-required",
+            "revisionId": "sha256:37bd3a0c76e941dc8dcd83338160805be586b7f34de1bbaf0269e522db49016a",
+            "spec": {
+              "bindingIds": [],
+              "root": {
+                "children": [
+                  {
+                    "id": "welcome",
+                    "text": "Installed ordinary generated app is ready to compose.",
+                    "type": "text"
+                  },
+                  {
+                    "id": "guidance",
+                    "text": "Describe the interface you want. Add a backend only when it needs one.",
+                    "type": "text"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Installed ordinary generated app",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "not-required",
+            "validationStatus": "passed"
+          },
+          {
+            "active": true,
+            "buildStatus": "passed",
+            "compilationStatus": "succeeded",
+            "importStatus": "passed",
+            "revisionId": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+            "spec": {
+              "bindingIds": [
+                "normalize",
+                "add"
+              ],
+              "root": {
+                "children": [
+                  {
+                    "bindingId": "normalize",
+                    "fields": [
+                      {
+                        "label": "Text",
+                        "name": "text",
+                        "required": true,
+                        "type": "text"
+                      }
+                    ],
+                    "id": "normalize-form",
+                    "submitLabel": "Normalize",
+                    "type": "form"
+                  },
+                  {
+                    "bindingId": "normalize",
+                    "id": "normalize-status",
+                    "type": "status"
+                  },
+                  {
+                    "bindingId": "add",
+                    "fields": [
+                      {
+                        "label": "Left",
+                        "name": "left",
+                        "required": true,
+                        "type": "integer"
+                      },
+                      {
+                        "label": "Right",
+                        "name": "right",
+                        "required": true,
+                        "type": "integer"
+                      }
+                    ],
+                    "id": "add-form",
+                    "submitLabel": "Add",
+                    "type": "form"
+                  },
+                  {
+                    "bindingId": "add",
+                    "id": "add-status",
+                    "type": "status"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Two independently generated Actions",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "passed",
+            "validationStatus": "passed"
+          }
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revisions inspected.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "activeRevisionId": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+    "applicationId": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+    "invocationAvailability": "authorized",
+    "invocationDescriptors": [
+      {
+        "bindingId": "normalize",
+        "inputMode": "none",
+        "inputQueue": null,
+        "inputSchema": {
+          "properties": {
+            "text": {
+              "description": "",
+              "title": "Text",
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object"
+        },
+        "mode": "generic",
+        "snapshot": {
+          "action_id": "35f78e48-1cb5-5362-8515-acc016cf71bd",
+          "canvas_application": {
+            "app_id": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+            "revision_id": "sha256:efc996a6e54493213000b7477c26892d32a7404de174cf128ed41939e33b479d",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "capability": {
+            "capability_id": "action.normalize_words",
+            "package_revision": {
+              "package_id": "50441688-60a3-5ed2-8abf-32fb2377c339",
+              "revision_id": "sha256:8c19ae94f8e06f91287c02665932f707f3b685b628d001b47551e66a49a43ef2",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            }
+          },
+          "capability_authority": "package-revision",
+          "capability_schema_digest": "sha256:c6143eaadb624abc5ca568422a8912550787c1278722df248eb71683d61b04af",
+          "data_binding": null,
+          "deployment": {
+            "deployment_id": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+            "revision_id": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "output_provider": {
+            "provider_profile_id": "914bf60b-62f7-4d16-99cb-da54de628950",
+            "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "policy": {
+            "policy_id": "c0341f83-6edc-4495-ba2d-042acf996f43",
+            "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "runtime_kind": "rcc",
+          "runtime_plan": {
+            "package_revision": {
+              "package_id": "50441688-60a3-5ed2-8abf-32fb2377c339",
+              "revision_id": "sha256:8c19ae94f8e06f91287c02665932f707f3b685b628d001b47551e66a49a43ef2",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            },
+            "plan_digest": "sha256:9880e1a89470a8e5b015917b117d504ab030b34eda5344751fd97375d25964d8"
+          },
+          "worker": {
+            "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "worker_profile_id": "b9438933-c136-42be-a32c-5ee8969e39fa",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          }
+        },
+        "standaloneAllowed": true
+      },
+      {
+        "bindingId": "add",
+        "inputMode": "none",
+        "inputQueue": null,
+        "inputSchema": {
+          "properties": {
+            "left": {
+              "description": "",
+              "title": "Left",
+              "type": "integer"
+            },
+            "right": {
+              "description": "",
+              "title": "Right",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "left",
+            "right"
+          ],
+          "type": "object"
+        },
+        "mode": "generic",
+        "snapshot": {
+          "action_id": "487eea27-b086-5e1e-8f59-a3bac4e06615",
+          "canvas_application": {
+            "app_id": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+            "revision_id": "sha256:efc996a6e54493213000b7477c26892d32a7404de174cf128ed41939e33b479d",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "capability": {
+            "capability_id": "action.add_counts",
+            "package_revision": {
+              "package_id": "50441688-60a3-5ed2-8abf-32fb2377c339",
+              "revision_id": "sha256:8c19ae94f8e06f91287c02665932f707f3b685b628d001b47551e66a49a43ef2",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            }
+          },
+          "capability_authority": "package-revision",
+          "capability_schema_digest": "sha256:f888340101e82734911091cf91520c27f7ecb22ca966d458d44464956c3cd063",
+          "data_binding": null,
+          "deployment": {
+            "deployment_id": "13fc7248-5eeb-40d6-870a-caabc8fb75ee",
+            "revision_id": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "output_provider": {
+            "provider_profile_id": "914bf60b-62f7-4d16-99cb-da54de628950",
+            "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "policy": {
+            "policy_id": "c0341f83-6edc-4495-ba2d-042acf996f43",
+            "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "runtime_kind": "rcc",
+          "runtime_plan": {
+            "package_revision": {
+              "package_id": "50441688-60a3-5ed2-8abf-32fb2377c339",
+              "revision_id": "sha256:8c19ae94f8e06f91287c02665932f707f3b685b628d001b47551e66a49a43ef2",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            },
+            "plan_digest": "sha256:2b0743b37e9f13d90e8b8c3cc35fba2a9faefd495432718f93881f33b3d68a1c"
+          },
+          "worker": {
+            "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "worker_profile_id": "b9438933-c136-42be-a32c-5ee8969e39fa",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          }
+        },
+        "standaloneAllowed": true
+      }
+    ],
+    "invocationReadiness": "not-checked",
+    "revisions": [
+      {
+        "active": false,
+        "buildStatus": "not-required",
+        "compilationStatus": "not-required",
+        "importStatus": "not-required",
+        "revisionId": "sha256:37bd3a0c76e941dc8dcd83338160805be586b7f34de1bbaf0269e522db49016a",
+        "spec": {
+          "bindingIds": [],
+          "root": {
+            "children": [
+              {
+                "id": "welcome",
+                "text": "Installed ordinary generated app is ready to compose.",
+                "type": "text"
+              },
+              {
+                "id": "guidance",
+                "text": "Describe the interface you want. Add a backend only when it needs one.",
+                "type": "text"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Installed ordinary generated app",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "not-required",
+        "validationStatus": "passed"
+      },
+      {
+        "active": true,
+        "buildStatus": "passed",
+        "compilationStatus": "succeeded",
+        "importStatus": "passed",
+        "revisionId": "sha256:77cd4de3d9873932b9cb31bb11d4b171c53e8466d074aa8649acde0c78030a3a",
+        "spec": {
+          "bindingIds": [
+            "normalize",
+            "add"
+          ],
+          "root": {
+            "children": [
+              {
+                "bindingId": "normalize",
+                "fields": [
+                  {
+                    "label": "Text",
+                    "name": "text",
+                    "required": true,
+                    "type": "text"
+                  }
+                ],
+                "id": "normalize-form",
+                "submitLabel": "Normalize",
+                "type": "form"
+              },
+              {
+                "bindingId": "normalize",
+                "id": "normalize-status",
+                "type": "status"
+              },
+              {
+                "bindingId": "add",
+                "fields": [
+                  {
+                    "label": "Left",
+                    "name": "left",
+                    "required": true,
+                    "type": "integer"
+                  },
+                  {
+                    "label": "Right",
+                    "name": "right",
+                    "required": true,
+                    "type": "integer"
+                  }
+                ],
+                "id": "add-form",
+                "submitLabel": "Add",
+                "type": "form"
+              },
+              {
+                "bindingId": "add",
+                "id": "add-status",
+                "type": "status"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Two independently generated Actions",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "passed",
+        "validationStatus": "passed"
+      }
+    ]
+  },
+  "isError": false,
+  "resultType": "complete"
+}

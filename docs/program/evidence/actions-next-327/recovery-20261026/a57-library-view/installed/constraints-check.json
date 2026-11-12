@@ -1,0 +1,9 @@
+{
+  "status": "PASS_INSTALLED_PROFILE_CONSTRAINTS_DRY_RUN",
+  "constraint_file": "constraints-connect-render.txt",
+  "sha256": "5e7417599af87b28b0e82ea95b3b26189dd57f8741417d109a53ab743aa7b83e",
+  "version_constraints": 65,
+  "no_cloud_local_file_urls": true,
+  "installer_tools_excluded": true,
+  "qualification": "pip install --dry-run --no-index of exact three retained wheels with these constraints against the verified clean consumer; not a target install"
+}

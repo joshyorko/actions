@@ -1,0 +1,11 @@
+{
+  "PUBLIC-DEPENDENCIES.json": "c37002cfae0e19d2c3233fa1114682811be7833fa2cae768de4095b0442e8499",
+  "README.md": "47f4f3ad6b5138a8aeaa90c4bc09ba93089e7342a92392571c34893e73a289ed",
+  "prepare-offline-managed.template.py": "2ab65ca615372218a6f32e86f0dbed386fa78f37a6ae2882dd124bd66ee21d61",
+  "prepare-public-producer.py": "08004ba4d681b788d1088e79c5af89de27aa9e14aeac820b9843f8152868ab98",
+  "producer-review.diff": "921df2f7f54b3600756ad2c76f700e7eeb9bb118ed7b9d248bdbbee7c9fb8a4f",
+  "qualify-export.py": "beadd2865f18db7a81b53d4a9c04796467fb9247e9d0f0a68eae877c98e16b53",
+  "review.md": "ab881a95013a7faf9b17fc190b232fcdaae5d65423a13d0eb041a057bdee0271",
+  "validate-public-cache.template.py": "200225e86fc5a6c9d0561440b69a0838809840a277a8194c91abf3fd2441c5fb",
+  "verify-core.py": "a69b5a9e9e45b87803c89068c17210891040ee92171b6db0b604e06e5adf554d"
+}

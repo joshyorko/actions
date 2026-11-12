@@ -1,0 +1,5 @@
+invoice_id,customer,amount_cents,days_overdue,invoice_line_id,po_id,sku,quantity,unit_cents
+INV-1001,Northstar Synthetic Supply,10000,30,INV-1001-L1,PO-2001,WIDGET-A,10,1000
+INV-1002,Beacon Synthetic Parts,11000,20,INV-1002-L1,PO-2002,VALVE-B,5,2200
+INV-1003,Cedar Synthetic Tools,5000,15,INV-1003-L1,PO-2003,BOLT-C,10,500
+INV-1004,Delta Synthetic Office,4600,10,INV-1004-L1,PO-2004,PAPER-D,3,1500

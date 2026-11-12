@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/legacy-1.0.4/consumer/bin/python",
+    "-I",
+    "-B",
+    "/workspace/actions-recovery-327/restore-installed-draft/qualify.py",
+    "--operation",
+    "refuse-schema-6",
+    "--version",
+    "1.0.4",
+    "--datadir",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade-relocated"
+  ],
+  "returncode": 0,
+  "stdout": "{\"version\": \"1.0.4\", \"module\": \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/lib/python3.12/site-packages/actions/server/__init__.py\", \"python\": \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/bin/python\", \"status\": \"EXPECTED_REFUSAL\", \"schema\": 6, \"supported_schema\": 5}\n",
+  "stderr": ""
+}

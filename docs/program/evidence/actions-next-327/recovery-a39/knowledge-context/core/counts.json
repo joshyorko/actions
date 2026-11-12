@@ -1,0 +1,52 @@
+{
+  "red": {
+    "selected": 75,
+    "passed": 60,
+    "failed": 15,
+    "errors": 0,
+    "skipped": 0
+  },
+  "first": {
+    "selected": 75,
+    "passed": 75,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "selected": 79,
+    "passed": 79,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full": {
+    "selected": 411,
+    "passed": 409,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline-prefix": {
+    "selected": 47,
+    "passed": 32,
+    "failed": 15,
+    "errors": 0,
+    "skipped": 0
+  },
+  "collection-fixed": {
+    "selected": 2,
+    "passed": 2,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full-fixed": {
+    "selected": 411,
+    "passed": 411,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "overlapping_runs": true
+}

@@ -1,0 +1,11 @@
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-duckdb-False]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-duckdb-True]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-postgresql-False]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-postgresql-True]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-duckdb-False]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-duckdb-True]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-postgresql-False]
+tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[postgresql-postgresql-True]
+
+8 tests collected in 0.67s
+Log (html): /workspace/actions-recovery-327/task-host-draft/action_server/output/log.html

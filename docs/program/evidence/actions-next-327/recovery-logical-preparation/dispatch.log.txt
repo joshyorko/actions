@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_logical_binding_checkpoint.py::test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch -q --junitxml=/workspace/actions-recovery-327/evidence/task-logical-gate.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-logical-gate-log (in /workspace/actions/action_server)
+.                                                                        [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/task-logical-gate.xml -
+1 passed in 0.54s
+Log (html): /workspace/actions-recovery-327/evidence/task-logical-gate-log/log.html

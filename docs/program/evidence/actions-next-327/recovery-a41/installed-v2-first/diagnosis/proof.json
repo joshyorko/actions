@@ -1,0 +1,12 @@
+{
+  "status": "REPRODUCED",
+  "exception_type": "TypeError",
+  "message": "Object of type Report is not JSON serializable",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/actions-327-a41/helper-diagnosis/reproduce.py\", line 5, in <module>\n    try:exec(compile((b/'helper.py').read_text(),str(b/'helper.py'),'exec'),{})\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/actions-327-a41/helper-diagnosis/helper.py\", line 8, in <module>\n    payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/actions-327-a41/compiler/robocorp/holotree/1c9c512_5a1fac3_170e4263/lib/python3.12/json/__init__.py\", line 238, in dumps\n    **kw).encode(obj)\n          ^^^^^^^^^^^\n  File \"/workspace/actions-327-a41/compiler/robocorp/holotree/1c9c512_5a1fac3_170e4263/lib/python3.12/json/encoder.py\", line 200, in encode\n    chunks = self.iterencode(o, _one_shot=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/actions-327-a41/compiler/robocorp/holotree/1c9c512_5a1fac3_170e4263/lib/python3.12/json/encoder.py\", line 258, in iterencode\n    return _iterencode(o, 0)\n           ^^^^^^^^^^^^^^^^^\n  File \"/workspace/actions-327-a41/compiler/robocorp/holotree/1c9c512_5a1fac3_170e4263/lib/python3.12/json/encoder.py\", line 180, in default\n    raise TypeError(f'Object of type {o.__class__.__name__} '\nTypeError: Object of type Report is not JSON serializable\n",
+  "core_version": "1.1.0a5",
+  "pydantic_version": "2.14.1",
+  "helper_sha256": "0977aa872e6355ce1679bd5636aec0126a3a2e59669bc43162d53f108e439755",
+  "source_sha256": "d7dd251a405bd3bf919a5a089447a3e70ee37e210761f9671206d2c2eeee0e59",
+  "isolated": true,
+  "scope": "actual frozen helper inside exact trusted compiler artifact; independent reproduction, not recovered original child stderr"
+}

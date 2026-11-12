@@ -1,0 +1,153 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a42",
+  "engine_origin": "/workspace/recovery327/a42/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "730f277ce13bd3a123c854c85c1c9fc2c185096c",
+  "installed_versions": {
+    "mcp": "2.0.0",
+    "mcp-types": "2.0.0",
+    "actions-core": "1.1.0a5"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 11302,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21464859399998204,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 11342,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1637701360000392,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 11466,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2143551629999365,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 11669,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11388753400001406,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 11684,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11372182500008421,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 11714,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21413395199988372,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_dispatch",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_projection",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_execution_status",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "prepared_artifact": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3",
+  "prepared_specification": "sha256:be53aff61f24fb805ca5e33ad82888b86357780df42120904022769b9fc6f0b3",
+  "workspace": "d23098d2-1b5c-4c62-b561-601560819463",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "protocol_denials": {
+    "missing": 403,
+    "wrong": 403,
+    "host": 421,
+    "origin": 403
+  },
+  "browser_gate": "BLOCKED: sandboxed Chromium helper configuration; no sandbox override used",
+  "failure_type": "ExceptionGroup",
+  "budget": {
+    "fixture_bytes": 1203723,
+    "log_bytes_upper_bound": 20290
+  }
+}

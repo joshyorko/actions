@@ -69,6 +69,12 @@ def _route_policy(shutdown_enabled: bool) -> dict[_RouteIdentity, str]:
         _identity("APIRoute", "/api/actions/greeter/greet/run", "POST"),
     )
     add(
+        "managed-sql-identity",
+        _identity("APIRoute", "/api/managed-work-items/v1/schema", "GET"),
+        _identity("APIRoute", "/api/managed-work-items/v1/capabilities", "GET"),
+        _identity("APIRoute", "/api/managed-work-items/v1/operations", "POST"),
+    )
+    add(
         "protected-api",
         _identity("APIRoute", "/api/runs", "GET"),
         _identity("APIRoute", "/api/runs/summary", "GET"),
@@ -257,6 +263,12 @@ def test_assembled_auth_route_inventory_stops_before_server_start(
     assert _identity("WebSocketRoute", "/api/ws", "WEBSOCKET") in classified
     assert _identity("WebSocketRoute", "/api/ws/summary", "WEBSOCKET") in classified
     assert _identity("Mount", "/artifacts/{path}") in classified
+    assert (
+        classified[
+            _identity("APIRoute", "/api/managed-work-items/v1/operations", "POST")
+        ]
+        == "managed-sql-identity"
+    )
 
 
 def test_auth_route_inventory_rejects_new_uncategorized_route():

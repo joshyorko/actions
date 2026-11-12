@@ -1,0 +1,175 @@
+{
+  "supervisor_parent_pid": 8456,
+  "supervisor_sha256": "d02ec0cf0c8ca25cefb46487fa2ed473cfc0394e214044cecbe8f42ed50b740e",
+  "source": "aca51868d14e916c8034c69309e222100d5d50f3",
+  "manifest_sha256": "786f9e3b129a823c1cf6e72bd7f14ec530a3779b0b0f2b7ac49069ffc0e0a72c",
+  "harness_sha256": "8d65d66cb613b42345539ef5882489272dc5d7114288fa7d7433506b736a38f3",
+  "live_cancellation": "NOT_RUN",
+  "status": "FAILED",
+  "runtime": "1.1.0a53",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "processes": [
+    {
+      "pid": 8462,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11373981799988542,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 8524,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21412710499998866,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 8627,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 1.0159807220002222,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "ebfac713-edd5-4061-aecf-fb8fc4b26bad",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "failure": {
+    "type": "ExceptionGroup",
+    "frames": [
+      {
+        "file": "qualify-cancel.py",
+        "function": "main",
+        "line": 379
+      },
+      {
+        "file": "qualify-cancel.py",
+        "function": "connect",
+        "line": 133
+      },
+      {
+        "file": "contextlib.py",
+        "function": "__aexit__",
+        "line": 231
+      },
+      {
+        "file": "streamable_http.py",
+        "function": "streamable_http_client",
+        "line": 771
+      },
+      {
+        "file": "_asyncio.py",
+        "function": "__aexit__",
+        "line": 847
+      }
+    ],
+    "nested": [
+      {
+        "type": "ExceptionGroup",
+        "frames": [
+          {
+            "file": "streamable_http.py",
+            "function": "streamable_http_client",
+            "line": 788
+          },
+          {
+            "file": "qualify-cancel.py",
+            "function": "connect",
+            "line": 134
+          },
+          {
+            "file": "session.py",
+            "function": "__aexit__",
+            "line": 514
+          },
+          {
+            "file": "_asyncio.py",
+            "function": "__aexit__",
+            "line": 847
+          }
+        ],
+        "nested": [
+          {
+            "type": "ObservationUnavailable",
+            "frames": [
+              {
+                "file": "qualify-cancel.py",
+                "function": "connect",
+                "line": 137
+              },
+              {
+                "file": "qualify-cancel.py",
+                "function": "exercise_task",
+                "line": 296
+              },
+              {
+                "file": "threads.py",
+                "function": "to_thread",
+                "line": 25
+              },
+              {
+                "file": "thread.py",
+                "function": "run",
+                "line": 59
+              },
+              {
+                "file": "live_observer.py",
+                "function": "observe",
+                "line": 207
+              }
+            ],
+            "nested": [],
+            "safe_message": "exact live Robot child not observed before deadline"
+          }
+        ],
+        "safe_message": null
+      }
+    ],
+    "safe_message": null
+  },
+  "budget": {
+    "fixture_bytes": 941290,
+    "log_bytes_upper_bound": 15849
+  },
+  "scope": "Installed claimed consumer Robot Task live cancellation, child absence before stop, public read/replay/restart; synthetic single owner only"
+}

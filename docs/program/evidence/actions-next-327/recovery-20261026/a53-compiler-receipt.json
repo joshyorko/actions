@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "source": "aca51868d14e916c8034c69309e222100d5d50f3",
+  "installed_payload_members": {
+    "actions-runtime": 339,
+    "actions-core": 87,
+    "actions-work-items": 26
+  },
+  "wheels": {
+    "actions-runtime": "2013b8fc54163d10c3c0edddb3bb1ea8e59cb95b88f9a05a2d810110cdd0d117",
+    "actions-core": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+    "actions-work-items": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "compiler_script_sha256": "de73269964ca708e9670fd3a67a473c362854b9c920983f49ff2987eccda09c3",
+  "package_yaml_digest": "sha256:a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "specification_digest": "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d",
+  "prepared_receipt": "/workspace/327-probes/a53-claimed/compiler/prepared.json",
+  "prepared_receipt_sha256": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0",
+  "core_proof": "/workspace/327-probes/a53-claimed/compiler/core-proof.json",
+  "core_proof_sha256": "15ce604623a341efaeddbffd649caa4dc5f081634d1020a6f9faa347591e6dcb"
+}

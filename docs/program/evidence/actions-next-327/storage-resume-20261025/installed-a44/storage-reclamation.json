@@ -1,0 +1,7 @@
+{
+  "reason": "completed Core a5 materializations only; frozen consumers, wheels, artifact stores and local trust retained",
+  "removed": [
+    "/workspace/recovery327/compiler/robocorp/holotree",
+    "/workspace/recovery327/robot-installed/compiler/robocorp/holotree"
+  ]
+}

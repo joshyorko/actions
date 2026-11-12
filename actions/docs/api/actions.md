@@ -67,7 +67,7 @@ actions run actions.py -a enter_user
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L79)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L80)
 
 ```python
 action(*args, **kwargs)
@@ -87,7 +87,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L175)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L176)
 
 ```python
 action_cache(func)
@@ -99,7 +99,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L210)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L211)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -111,7 +111,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L197)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L198)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -131,7 +131,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L153)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L154)
 
 ```python
 session_cache(func)

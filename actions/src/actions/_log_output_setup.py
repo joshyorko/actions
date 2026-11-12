@@ -11,7 +11,7 @@ def setup_log_output(
     max_files: int = 5,
     log_name: str = "log.html",
 ):
-    from robocorp import log
+    from actions import _logging as log
 
     # This can be called after user code is imported (but still prior to its
     # execution).
@@ -42,7 +42,7 @@ def setup_log_output_to_port() -> Iterator[None]:
             yield
             return
 
-    from robocorp import log
+    from actions import _logging as log
 
     try:
         port = int(port_in_env)

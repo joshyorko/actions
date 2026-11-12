@@ -1,0 +1,30 @@
+spec-version: v2
+
+name: Canvas First Boot Fixture
+description: A credential-free local catalog for the native Action Canvas Runtime.
+version: 0.0.1
+
+dependencies:
+  conda-forge:
+    - python=3.12.12
+    - uv=0.9.26
+  pypi:
+    - actions-core=1.0.3
+
+dev-dependencies:
+  conda-forge:
+    - pytest=8.4.2
+
+dev-tasks:
+  test: pytest -q tests
+
+packaging:
+  exclude:
+    - ./.git/**
+    - ./output/**
+    - ./venv/**
+    - ./.venv/**
+    - ./**/*.pyc
+    - ./**/*.zip
+    - ./**/.env
+    - ./**/__pycache__/**

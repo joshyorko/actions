@@ -1,0 +1,40 @@
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="7.802996">
+<testsuite name="browser-harness.spec.ts" timestamp="2026-10-25T13:34:00.763Z" hostname="" tests="1" failures="1" skipped="0" time="5.675" errors="0">
+<testcase name="announces pending work and completion without dispatch on mount" classname="browser-harness.spec.ts" time="5.675">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|form-pending-before/browser-harness-announces--e4798-n-without-dispatch-on-mount/error-context.md]]
+]]>
+</system-out>
+<failure message="expect(locator).toHaveAttribute(expected) failed" type="expect.toHaveAttribute">
+<![CDATA[  browser-harness.spec.ts:81:1 › announces pending work and completion without dispatch on mount ───
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('region', { name: 'Search synthetic records', exact: true }).locator('form')
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Search synthetic records', exact: true }).locator('form')
+        14 × locator resolved to <form novalidate="">…</form>
+           - unexpected value "null"
+
+
+      86 |     await form.getByRole("button").click();
+      87 |     await page.screenshot({ path: testInfo.outputPath("form-loading.png"), fullPage: true });
+    > 88 |     await expect(form.locator("form")).toHaveAttribute("aria-busy", "true");
+         |                                        ^
+      89 |     await expect(form.getByRole("status")).toHaveText("Search synthetic records: working…");
+      90 |     await expect(form.getByRole("textbox")).toBeDisabled();
+      91 |     await expect(form.getByRole("button")).toBeDisabled();
+        at /workspace/lane-a/action_server/frontend/apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:88:40
+
+    Error Context: ../../../../../../../lane-a-state/receipts/form-pending-before/browser-harness-announces--e4798-n-without-dispatch-on-mount/error-context.md
+]]>
+</failure>
+</testcase>
+</testsuite>
+</testsuites>

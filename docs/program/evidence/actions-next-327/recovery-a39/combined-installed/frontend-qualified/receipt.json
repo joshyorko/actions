@@ -1,0 +1,52 @@
+{
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "node": "v20.19.3",
+  "npm": "10.8.2",
+  "cwd": "/workspace/actions-327-a39/installed-combined/source/action_server/frontend",
+  "commands": [
+    {
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exit_code": 0,
+      "seconds": 26.325,
+      "log": "tests.log"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:quality"
+      ],
+      "exit_code": 0,
+      "seconds": 27.585,
+      "log": "quality.log"
+    }
+  ],
+  "artifacts_unchanged": true,
+  "counts": {
+    "runtime": {
+      "files_passed": 32,
+      "passed": 287,
+      "skipped": 0
+    },
+    "canvas": {
+      "files_passed": 11,
+      "passed": 72,
+      "skipped": 1
+    },
+    "quality_topology_subset": {
+      "files_passed": 1,
+      "files_skipped": 31,
+      "passed": 6,
+      "skipped_by_name_filter": 281
+    },
+    "quality_ui_system_subset": {
+      "files_passed": 1,
+      "passed": 6,
+      "skipped": 0
+    }
+  },
+  "canvas_skip": "CanvasContractRoundTrip.test.tsx: validates Python JSON and writes its typed TypeScript round trip; ACTIONS_CANVAS_PYTHON_JSON_PATH and ACTIONS_CANVAS_TYPESCRIPT_JSON_PATH absent, ACTIONS_CANVAS_REQUIRE_ROUNDTRIP not1"
+}
