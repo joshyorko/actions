@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import ast
-import hashlib
 import importlib.util
 import io
 import json
@@ -78,16 +77,16 @@ def _relocate(value, replacements):
 
 
 def _admission_input(relative: str, repository: Path = ROOT) -> bytes:
-    if repository == ROOT and relative == ADMISSION_INPUTS[0]:
-        # This is a historical measured receipt, not current Runtime evidence.
-        # Bundle its exact module bytes for shallow hosted checkouts; do not
-        # rewrite its measured hash when the current package version changes.
-        content = FIXTURE.with_suffix(".runtime-init.txt").read_bytes()
-        measured = json.loads(FIXTURE.read_text())
-        assert (
-            hashlib.sha256(content).hexdigest() == measured["runtime"]["module_sha256"]
-        )
-        return content
+    if repository == ROOT:
+        # Retained historical inputs are independent of today's changed source
+        # and available in shallow checkouts. Their hashes are never rewritten.
+        suffixes = {
+            ADMISSION_INPUTS[0]: ".runtime-init.txt",
+            ADMISSION_INPUTS[1]: ".canvas-query.zip",
+            ADMISSION_INPUTS[2]: ".package-lock.json",
+            ADMISSION_INPUTS[3]: ".package.yaml",
+        }
+        return FIXTURE.with_suffix(suffixes[relative]).read_bytes()
     return subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=repository)
 
 
@@ -643,3 +642,12 @@ def test_generated_published_gate_matches_generator(tmp_path: Path):
     assert upload["if"] == "always() && matrix.os == 'ubuntu-22.04'"
     assert "receipt.sanitized.json" in upload["with"]["path"]
     assert "published-core-failure-diagnostics.json" in upload["with"]["path"]
+
+
+def test_historical_admission_inputs_do_not_read_current_git(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("historical receipt must use its measured input bytes")
+
+    monkeypatch.setattr(subprocess, "check_output", forbidden)
+    for relative in ADMISSION_INPUTS:
+        assert _admission_input(relative)

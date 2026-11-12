@@ -178,6 +178,15 @@ handoff, not local worktree paths or thread goal statuses as acceptance evidence
 
 ## Candidate wheels and historical migration fixtures
 
+Historical browser-admission receipts must use their retained measured inputs,
+including the frontend lock, template archive and package manifest, rather than
+current HEAD bytes. Keep those byte-bound fixtures non-text in Git attributes so
+CRLF checkout conversion cannot change their hashes. Current source/dependency
+changes require new real acceptance receipts; never rewrite historical hashes or
+weaken production admission to make a unit baseline pass. The shallow-checkout
+fixture and changed-input rejection tests exercise these separate boundaries.
+
+
 Keep the public Runtime 1.0.4 floor canary separate from provisional candidate
 verification. `verify_published_runtime_floor.py` still defaults to exact 1.0.4;
 its reusable installed-wheel verifier accepts an explicitly named candidate
