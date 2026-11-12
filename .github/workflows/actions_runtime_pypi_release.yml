@@ -62,6 +62,23 @@ jobs:
         GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
         GIT_CONFIG_KEY_0: core.longpaths
         GIT_CONFIG_VALUE_0: 'true'
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -142,7 +159,7 @@ jobs:
         os:
         - ubuntu-22.04
         - windows-2022
-        - macos-15
+        - macos-26
         include:
         - os: ubuntu-22.04
           python: '3.12'
@@ -150,7 +167,7 @@ jobs:
         - os: windows-2022
           python: '3.12'
           name: windows
-        - os: macos-15
+        - os: macos-26
           python: '3.12'
           name: macos
     steps:
@@ -160,6 +177,23 @@ jobs:
         GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
         GIT_CONFIG_KEY_0: core.longpaths
         GIT_CONFIG_VALUE_0: 'true'
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -292,6 +326,23 @@ jobs:
         GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
         GIT_CONFIG_KEY_0: core.longpaths
         GIT_CONFIG_VALUE_0: 'true'
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:

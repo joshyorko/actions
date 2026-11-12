@@ -21,7 +21,7 @@ from urllib.request import url2pathname
 EXPECTED_CORE = "1.0.2"
 EXPECTED_HELPER = "1.0.3"
 EXPECTED_RUNTIME = "1.0.4"
-RELEASE_RUNTIME = "1.1.0"
+RELEASE_RUNTIME = "1.1.1"
 EXPECTED_PUBLIC_PACKAGES = {
     "actions-core": {
         "version": EXPECTED_CORE,

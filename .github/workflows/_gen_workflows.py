@@ -49,6 +49,22 @@ RUNTIME_TAG_PREFIX = f"{RUNTIME_DISTRIBUTION_NAME}-"
 RUNTIME_CHANGELOG_PATH = "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"
 
 
+def macos_arm64_guard():
+    return {
+        "name": "Verify macOS26 ARM runner",
+        "if": "runner.os == 'macOS'",
+        "shell": "bash",
+        "working-directory": "${{ runner.temp }}",
+        "run": """set -Eeuo pipefail
+test "$RUNNER_ARCH" = ARM64
+test "$(uname -m)" = arm64
+version=$(sw_vers -productVersion)
+[[ "$version" == 26.* ]]
+printf 'macos-26: architecture=%s os_version=%s\\n' "$(uname -m)" "$version"
+""",
+    }
+
+
 def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     if found is None:
         found = set()
@@ -154,7 +170,15 @@ class BaseWorkflow:
         self.full.update(self.jobs_part())
 
     def setup_python(self, pinned=False):
-        return [
+        guard = (
+            []
+            if self.target in {
+                "actions_runtime_frozen_catalog_rollback.yml",
+                "actions_runtime_rcc_provider_rollback.yml",
+            }
+            else [macos_arm64_guard()]
+        )
+        return guard + [
             # {
             # "name": "Set up Python ${{ matrix.python }}",
             # "uses": "actions/setup-python@v5",
@@ -197,7 +221,7 @@ class BaseWorkflow:
                 },
                 {
                     "name": f"macos-py{pyversion}-devmode",
-                    "os": "macos-15",
+                    "os": "macos-26",
                     "python": pyversion,
                 },
             ],
@@ -210,7 +234,7 @@ class BaseWorkflow:
             "os": [
                 UBUNTU_VERSION,
                 "windows-2022",
-                "macos-15",  # used for the arm64 binary
+                "macos-26",  # used for the arm64 binary
             ],
             "include": [
                 {
@@ -226,7 +250,7 @@ class BaseWorkflow:
                     "asset_path": "action_server/dist/final/action-server.exe",
                 },
                 {
-                    "os": "macos-15",
+                    "os": "macos-26",
                     "python": pyversion,
                     "name": "macos",
                     "asset_path": "action_server/dist/final/action-server",
@@ -240,7 +264,7 @@ class BaseWorkflow:
             "os": [
                 UBUNTU_VERSION,
                 "windows-2022",
-                "macos-15",  # used for the arm64 binary
+                "macos-26",  # used for the arm64 binary
             ],
             "include": [
                 {
@@ -252,7 +276,7 @@ class BaseWorkflow:
                     "python": pyversion,
                 },
                 {
-                    "os": "macos-15",
+                    "os": "macos-26",
                     "python": pyversion,
                 },
             ],
@@ -526,7 +550,7 @@ git merge-base --is-ancestor \"$GITHUB_SHA\" origin/community
                 "run": """set -Eeuo pipefail
 signed=false
 case "$SIGNING_OS" in
-  macos-15) keys="MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME APPLEID APPLETEAMID APPLEIDPASS" ;;
+  macos-26) keys="MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME APPLEID APPLETEAMID APPLEIDPASS" ;;
   windows-2022) keys="VAULT_URL CLIENT_ID TENANT_ID CLIENT_SECRET CERTIFICATE_NAME" ;;
   ubuntu-22.04) keys="" ;;
   *) exit 1 ;;
@@ -3091,7 +3115,7 @@ tag="$GITHUB_REF_NAME"
                     {
                         "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                         "with": {
-                            "name": "action-server-macos-15",
+                            "name": "action-server-macos-26",
                             "path": "macos-arm64/",
                         },
                     },
@@ -3739,7 +3763,7 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                                     "name": "linux",
                                     "python": "3.12",
                                 },
-                                {"os": "macos-15", "name": "macos", "python": "3.12"},
+                                {"os": "macos-26", "name": "macos", "python": "3.12"},
                                 {
                                     "os": "windows-2022",
                                     "name": "windows",

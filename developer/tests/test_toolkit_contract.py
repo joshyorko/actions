@@ -125,7 +125,7 @@ def test_toolkit_workflow_pins_primary_previous_and_legacy_rcc_assets() -> None:
         ): "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6",
         (
             "primary",
-            "macos-15",
+            "macos-26",
             "rcc-macosarm64",
             "18.19.8",
         ): "bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba",
@@ -149,7 +149,7 @@ def test_toolkit_workflow_pins_primary_previous_and_legacy_rcc_assets() -> None:
         ): "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
         (
             "legacy",
-            "macos-15",
+            "macos-26",
             "rcc-macosarm64",
             "18.19.3",
         ): "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",

@@ -1868,9 +1868,10 @@ release asset. Its sorted entries use the exact three binary asset names, so
 each downloaded executable can be checked with `sha256sum -c` without renaming.
 Maintain this behavior in `.github/workflows/_gen_workflows.py` and regenerate
 the workflow; generated YAML is not authoritative. The maintained Homebrew tap
-is `joshyorko/homebrew-tools`; its `action-server` cask mirrors only verified
-Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
-upstream assets exist and their GitHub SHA-256 digests are verified. The tap
+is `joshyorko/homebrew-tools`; its `action-server` cask is Linux x86_64 only.
+Prepare a tap update after the upstream Linux asset exists and its actual
+GitHub SHA-256 digest is verified. The resolver, cask renderer, mirror bundle and
+Linuxbrew install/version gate must agree; do not advertise a missing Mac asset. The tap
 README documents the `action-server-daily` auto-update slot and its manual
 `action=ci` then `action=release` workflow inputs. Do not dispatch the retired
 Sema4AI `publish.yml` workflow.
@@ -7628,3 +7629,74 @@ An observer's registered-active flag is separate from delivery health. Required
 checks may still be running without a new failure/completion event. Compare the
 live exact-head checks with the observer registration before restarting either
 the observer or unchanged CI; silence alone does not establish a stale watcher.
+
+### macOS ARM build-host migrations
+
+Use explicit `macos-26` for the current ARM runner, not its Intel/large variants.
+The runner guard checks both actual `uname -m` and macOS major version before
+toolchain setup; native manifests retain the requested runner label and actual
+host version alongside measured architecture and binary hashes. A runner label
+alone is not an architecture or deployment-compatibility receipt.
+
+Keep the CPython 3.12/3.13 ARM wheel rows, `macosx_12_0_arm64` verifier tags and
+`MACOSX_DEPLOYMENT_TARGET=12.0` when moving the build host. Keep public native
+`macos-arm64` asset names and pinned RCC hashes. Building or testing on macOS26
+does not establish execution on older macOS; review native Mach-O minimum-OS
+load commands and retain older-OS runtime coverage as a separate gate before
+claiming that compatibility. Signing case labels and producer artifact downloads
+must move with the runner. Fixed historical recovery inputs keep their original
+producer job labels rather than being rewritten as new-run evidence.
+
+Prepare a runner migration on a separate QA branch while an existing release
+source/workflow tree is frozen. The native workflow's manual `macos-arm64`
+scope runs only that host; its default still covers all three platforms. A
+manual QA run cannot replace release qualification, whose event, complete-tree,
+job-count and artifact-source checks still apply. Do not rerun successful frozen
+matrices merely to start independent Mac QA or infer passing results from an
+unallocated runner.
+
+The maintained Homebrew `action-server` package now uses the reviewed Linux-only
+contract. It requires a verified stable Linux asset, not a fabricated Mac
+counterpart. Run its package-specific build/install/version check before updating;
+its native Git CI planner should select only the affected package. The manual
+`release-bundle --package-id=action-server` exporter already runs `ciCheck`
+internally; an extra positional `ci-check` word prevents argument parsing.
+Preserve prior mirror releases through a scoped no-prune publisher when required,
+and integrate only verified generated cask data. Never dispatch the retired
+Sema4AI workflow or overwrite immutable upstream artifacts.
+
+A published reduced-platform preparation cannot be expanded through a retry:
+its owned release body, native/PyPI inventory, checksum and recovery copies are
+bound to the original manifest. The current supported complete-platform route
+uses a fresh Runtime version with fresh artifacts and the usual qualification,
+two-backup and validation gates. Never rename an old binary or replace a
+published checksum to simulate the new version. Core/SDK versions and dependency
+locks can remain unchanged for a delivery-only Runtime patch when their contracts
+and declared dependencies are unchanged. Update Runtime package/module version,
+prepared verifier, changelog, example pins and release-identity tests together.
+
+Before replacing an obsolete queued wheel run with qualification for a new
+version, preserve successful sibling ZIPs and source receipts with their GitHub
+digests. Recheck that only the Mac job is unfinished, with no runner or steps,
+before cancellation. A fresh queue request is not proof that capacity is available;
+report the replacement run/job identity and actual assignment separately.
+
+Runner host guards that execute before checkout must explicitly use an existing
+directory such as `${{ runner.temp }}`. A workflow-level package working directory
+does not exist until checkout and can prevent the shell from starting at all;
+that failure proves neither the host architecture nor a build defect. Exercise
+the actual guard with an absent package directory, and keep its architecture and
+OS checks intact when correcting the generator and handwritten workflows.
+
+For native Mach-O provenance, pass the input file before `lipo -verify_arch`
+and its trailing architecture list. A filename after `arm64` is parsed as another
+architecture, so the receipt step can fail after a successful binary build.
+Exercise both ARM64 inputs and rejection of a non-ARM64 frozen or wrapper input
+with real Mach-O tools; retain `otool` load commands for both executables.
+
+Candidate-package version tests must compare the imported module and installed
+distribution against declared package metadata, then derive the numeric release
+tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimate
+patch delivery before the substantive invoice gate can run. Keep the separate
+exact prepared-release identity gate; do not weaken module/distribution origin
+or required JUnit evidence to work around a stale test literal.

@@ -8,6 +8,24 @@ an Actions Runtime release.
 
 ## Unreleased
 
+## actions-runtime-1.1.1
+
+- Prepare complete Linux x86-64, Windows AMD64 and macOS ARM64 delivery,
+  including CPython 3.12/3.13 wheels, native executables and their checksums.
+- Use macOS 26 ARM builders with measured host identity. Preserve the macOS
+  12.0 wheel deployment target, signing policy and pinned RCC 18.19.8.
+- Keep Core 1.1.0, Work Items 0.5.0, dependency security floors and backend
+  feature/storage behavior from 1.1.0. No celld implementation is added.
+- Retain Canvas, named queries, Knowledge and managed Work Items on SQLite and PostgreSQL.
+- Preserve every published 1.1.0 file, checksum, tag and preparation identity.
+
+All three platforms require actual qualification before publication. Existing
+limits on desktop modes, retained-launch reconciliation, recovery and unsigned
+native delivery still apply; a new build host does not prove older-OS execution.
+Unknown retained launches stay blocked pending reconciliation. Existing upgrades
+still require coordinated database backups for rollback; automatic exactly-once
+external effects and universal post-launch recovery are not promised.
+
 ## actions-runtime-1.1.0
 
 - Add persistent Canvas authoring with immutable revisions, explicit activation,

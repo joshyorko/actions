@@ -58,7 +58,7 @@ jobs:
           python: '3.10'
           os: windows-2022
         - name: macos-py3.10-devmode
-          os: macos-15
+          os: macos-26
           python: '3.10'
     steps:
     - name: Checkout repository and submodules
@@ -67,6 +67,23 @@ jobs:
         GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
         GIT_CONFIG_KEY_0: core.longpaths
         GIT_CONFIG_VALUE_0: 'true'
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@v5
       with:

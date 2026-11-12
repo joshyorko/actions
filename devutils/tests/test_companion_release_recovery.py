@@ -17,7 +17,10 @@ def test_recovery_checks_original_tag_and_explicit_interpreter(filename, package
     assert set(inputs) == {"release_tag", "source_sha"}
     for job in data["jobs"].values():
         assert "github.triggering_actor == 'joshyorko'" in job["if"]
+        assert "refs/heads/recovery/core-1.1.0-python310-20261112" in job["if"]
         steps = job["steps"]
+        install = next(step for step in steps if step.get("name") == "Install Poetry")
+        assert '--python "$(command -v python)"' in install["run"]
         checkout = next(
             step for step in steps if step.get("name") == "Checkout repository"
         )
@@ -87,6 +90,11 @@ def test_recovery_source_guard_executes_against_real_git(tmp_path):
         assert (result.returncode == 0) == expected, result.stderr
 
     check(True)
+    env["GITHUB_EVENT_NAME"] = "workflow_dispatch"
+    env["GITHUB_REF"] = "refs/heads/recovery/core-1.1.0-python310-20261112"
+    check(False)  # The recovery branch accepts only the real original source SHA.
+    del env["GITHUB_EVENT_NAME"]
+    del env["GITHUB_REF"]
     env["EXPECTED_SOURCE_SHA"] = "f" * 40
     check(False)
     env["EXPECTED_SOURCE_SHA"] = source

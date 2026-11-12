@@ -23,7 +23,7 @@ jobs:
             sha256: ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6
           - lane: primary
             rcc_version: 18.19.8
-            os: macos-15
+            os: macos-26
             asset: rcc-macosarm64
             sha256: bf11dcee5a1e009a3f5b456bc8a24eb8f3f5d064eb7962c5e90956f13d4dfcba
           - lane: primary
@@ -43,7 +43,7 @@ jobs:
             sha256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
           - lane: legacy
             rcc_version: 18.19.3
-            os: macos-15
+            os: macos-26
             asset: rcc-macosarm64
             sha256: 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266
           - lane: legacy
@@ -55,6 +55,23 @@ jobs:
     env:
       ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
     steps:
+      - name: Verify macOS26 ARM runner
+        if: runner.os == 'macOS'
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        run: 'set -Eeuo pipefail
+
+          test "$RUNNER_ARCH" = ARM64
+
+          test "$(uname -m)" = arm64
+
+          version=$(sw_vers -productVersion)
+
+          [[ "$version" == 26.* ]]
+
+          printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+          '
       - uses: actions/checkout@v4
         env:
           GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}

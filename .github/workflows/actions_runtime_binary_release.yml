@@ -33,7 +33,7 @@ jobs:
         os:
         - ubuntu-22.04
         - windows-2022
-        - macos-15
+        - macos-26
         include:
         - os: ubuntu-22.04
           python: '3.12'
@@ -43,7 +43,7 @@ jobs:
           python: '3.12'
           name: windows
           asset_path: action_server/dist/final/action-server.exe
-        - os: macos-15
+        - os: macos-26
           python: '3.12'
           name: macos
           asset_path: action_server/dist/final/action-server
@@ -54,6 +54,23 @@ jobs:
         GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
         GIT_CONFIG_KEY_0: core.longpaths
         GIT_CONFIG_VALUE_0: 'true'
+    - name: Verify macOS26 ARM runner
+      if: runner.os == 'macOS'
+      shell: bash
+      working-directory: ${{ runner.temp }}
+      run: 'set -Eeuo pipefail
+
+        test "$RUNNER_ARCH" = ARM64
+
+        test "$(uname -m)" = arm64
+
+        version=$(sw_vers -productVersion)
+
+        [[ "$version" == 26.* ]]
+
+        printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
+
+        '
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -132,7 +149,7 @@ jobs:
           }}
         SIGNING_EVENT: ${{ github.event_name }}
         SIGNING_OS: ${{ matrix.os }}
-      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-15)\
+      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-26)\
         \ keys=\"MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME\
         \ APPLEID APPLETEAMID APPLEIDPASS\" ;;\n  windows-2022) keys=\"VAULT_URL CLIENT_ID\
         \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04) keys=\"\"\
@@ -209,7 +226,7 @@ jobs:
         path: windows64/
     - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:
-        name: action-server-macos-15
+        name: action-server-macos-26
         path: macos-arm64/
     - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:
