@@ -8,9 +8,9 @@
   "pins": {
     "rcc": "18.19.8",
     "python": "3.12.15",
-    "actions-runtime": "1.1.0a60",
-    "actions-core": "1.1.0a8",
-    "actions-work-items": "0.5.0a2"
+    "actions-runtime": "1.1.0",
+    "actions-core": "1.1.0",
+    "actions-work-items": "0.5.0"
   },
   "artifact_inputs": [
     "local accepted Runtime wheel",

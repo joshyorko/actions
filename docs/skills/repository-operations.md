@@ -5107,7 +5107,9 @@ from a raw dependency SBOM and from installed-host acceptance.
 
 Stable promotion must update Runtime and companion distribution/module versions,
 Runtime dependency floors, installed SDK checks, invoice worker receipts and
-worker template pins together. Preserve previously qualified immutable Core pins
+worker template pins together, including the directly consumed
+`examples/invoice_reconciliation/template.json` manifest. The invoice example
+checks that all three distribution pins match current package metadata. Preserve previously qualified immutable Core pins
 when adding the stable Knowledge compiler pin; do not rewrite retained alpha
 Package identities. Refresh Poetry locks without upgrading unrelated dependencies.
 A stable Runtime must not publish before its required Core and Work Items versions
