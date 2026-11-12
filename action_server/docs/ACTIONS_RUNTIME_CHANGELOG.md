@@ -18,6 +18,8 @@ an Actions Runtime release.
   durable outputs, and bounded recovery on SQLite and PostgreSQL.
 - Fix Canvas inspection replacing app views, persisted v2 result tables, narrow
   layouts, and app reopening after output retention expires.
+- Raise affected TLS/JWT/HTTP dependency floors to patched versions and rebuild
+  locked native artifacts. Optional backend security qualification stays separate.
 - Use RCC 18.19.8, Core 1.1.0 and Work Items 0.5.0. Preserve the legacy API/import
   aliases; upgraded Runtime databases require coordinated backup for rollback.
 

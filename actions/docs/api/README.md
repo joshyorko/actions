@@ -18,75 +18,75 @@
 
 ## Classes
 
-- [`_action_context.ActionContext`](./actions._action_context.md#class-actioncontext)
-- [`_response.ActionError`](./actions._response.md#class-actionerror): This is a custom error which actions returning a `Response` are expected
-- [`_protocols.ActionsListActionTypedDict`](./actions._protocols.md#class-actionslistactiontypeddict): When `actions list` is run, the output is a
-- [`_protocols.IAction`](./actions._protocols.md#class-iaction)
-- [`_secret.OAuth2Secret`](./actions._secret.md#class-oauth2secret): This class should be used to specify that OAuth2 secrets should be received.
-- [`_request.Request`](./actions._request.md#class-request): Contains the information exposed in a request (such as headers and cookies).
-- [`_response.Response`](./actions._response.md#class-response): The response class provides a way for the user to signal that the action
-- [`_secret.Secret`](./actions._secret.md#class-secret): This class should be used to receive secrets.
-- [`_secret.SecretSpec`](./actions._secret.md#class-secretspec): Metadata for secrets that specifies a tag for identification by external clients.
-- [`_protocols.Status`](./actions._protocols.md#class-status): Action state
-- [`_table.Table`](./actions._table.md#class-table): Table is a simple data structure that represents a table with columns and rows.
-- [`_platforms.AzureOpenAIPlatformParameters`](./actions.agent._platforms.md#class-azureopenaiplatformparameters): Parameters for the Azure OpenAI platform.
-- [`_platforms.BedrockPlatformParameters`](./actions.agent._platforms.md#class-bedrockplatformparameters): Parameters for the Bedrock platform.
-- [`_models.ConversationHistoryParams`](./actions.agent._models.md#class-conversationhistoryparams): Parameters for the conversation history special message.
-- [`_models.ConversationHistorySpecialMessage`](./actions.agent._models.md#class-conversationhistoryspecialmessage): Special message for including the conversation history in a prompt.
-- [`_platforms.CortexPlatformParameters`](./actions.agent._platforms.md#class-cortexplatformparameters): Parameters for the Snowflake Cortex platform.
-- [`_models.DocumentsParams`](./actions.agent._models.md#class-documentsparams): Parameters for the documents special message.
-- [`_models.DocumentsSpecialMessage`](./actions.agent._models.md#class-documentsspecialmessage): Special message for including the documents in a prompt.
-- [`_platforms.GooglePlatformParameters`](./actions.agent._platforms.md#class-googleplatformparameters): Parameters for the Google platform.
-- [`_platforms.GroqPlatformParameters`](./actions.agent._platforms.md#class-groqplatformparameters): Parameters for the Groq platform.
-- [`_models.MemoriesParams`](./actions.agent._models.md#class-memoriesparams): Parameters for the memories special message.
-- [`_models.MemoriesSpecialMessage`](./actions.agent._models.md#class-memoriesspecialmessage): Special message for including the memories in a prompt.
-- [`_platforms.OpenAIPlatformParameters`](./actions.agent._platforms.md#class-openaiplatformparameters): Parameters for the OpenAI platform.
-- [`_models.Prompt`](./actions.agent._models.md#class-prompt): Represents a complete prompt for an AI model interaction.
-- [`_models.PromptAgentMessage`](./actions.agent._models.md#class-promptagentmessage): Represents an agent message in the prompt.
-- [`_models.PromptAudioContent`](./actions.agent._models.md#class-promptaudiocontent): Represents an audio message in the agent system.
-- [`_models.PromptDocumentContent`](./actions.agent._models.md#class-promptdocumentcontent): Represents a document message in the agent system.
-- [`_models.PromptImageContent`](./actions.agent._models.md#class-promptimagecontent): Represents an image message in the agent system.
-- [`_models.PromptTextContent`](./actions.agent._models.md#class-prompttextcontent): Represents a text message in the agent system.
-- [`_models.PromptToolResultContent`](./actions.agent._models.md#class-prompttoolresultcontent): Represents the result of a tool execution in the agent system.
-- [`_models.PromptToolUseContent`](./actions.agent._models.md#class-prompttoolusecontent): Represents a message containing a tool use request from an AI agent.
-- [`_models.PromptUserMessage`](./actions.agent._models.md#class-promptusermessage): Represents a user message in the prompt.
-- [`_platforms.ReductoPlatformParameters`](./actions.agent._platforms.md#class-reductoplatformparameters): Parameters for the Reducto platform.
-- [`_response.ResponseAudioContent`](./actions.agent._response.md#class-responseaudiocontent): Represents audio content generated or referenced in a model's response.
-- [`_response.ResponseDocumentContent`](./actions.agent._response.md#class-responsedocumentcontent): Represents a document generated or referenced in a model's response.
-- [`_response.ResponseImageContent`](./actions.agent._response.md#class-responseimagecontent): Represents an image generated or referenced in a model's response.
-- [`_response.ResponseMessage`](./actions.agent._response.md#class-responsemessage): A response message from a language model hosted on a platform.
-- [`_response.ResponseTextContent`](./actions.agent._response.md#class-responsetextcontent): Represents a text segment in a model's response.
-- [`_response.ResponseToolUseContent`](./actions.agent._response.md#class-responsetoolusecontent): Represents a tool use request generated by the model.
-- [`_response.TokenUsage`](./actions.agent._response.md#class-tokenusage): Represents token usage statistics from a model's response.
-- [`_models.ToolDefinition`](./actions.agent._models.md#class-tooldefinition): Represents the definition of a tool.
+- [`actions.ActionContext`](./actions.md#class-actioncontext)
+- [`actions.ActionError`](./actions.md#class-actionerror): This is a custom error which actions returning a `Response` are expected
+- [`actions.ActionsListActionTypedDict`](./actions.md#class-actionslistactiontypeddict): When `actions list` is run, the output is a
+- [`actions.IAction`](./actions.md#class-iaction)
+- [`actions.OAuth2Secret`](./actions.md#class-oauth2secret): This class should be used to specify that OAuth2 secrets should be received.
+- [`actions.Request`](./actions.md#class-request): Contains the information exposed in a request (such as headers and cookies).
+- [`actions.Response`](./actions.md#class-response): The response class provides a way for the user to signal that the action
+- [`actions.Secret`](./actions.md#class-secret): This class should be used to receive secrets.
+- [`actions.SecretSpec`](./actions.md#class-secretspec): Metadata for secrets that specifies a tag for identification by external clients.
+- [`actions.Status`](./actions.md#class-status): Action state
+- [`actions.Table`](./actions.md#class-table): Table is a simple data structure that represents a table with columns and rows.
+- [`agent.AzureOpenAIPlatformParameters`](./actions.agent.md#class-azureopenaiplatformparameters): Parameters for the Azure OpenAI platform.
+- [`agent.BedrockPlatformParameters`](./actions.agent.md#class-bedrockplatformparameters): Parameters for the Bedrock platform.
+- [`agent.ConversationHistoryParams`](./actions.agent.md#class-conversationhistoryparams): Parameters for the conversation history special message.
+- [`agent.ConversationHistorySpecialMessage`](./actions.agent.md#class-conversationhistoryspecialmessage): Special message for including the conversation history in a prompt.
+- [`agent.CortexPlatformParameters`](./actions.agent.md#class-cortexplatformparameters): Parameters for the Snowflake Cortex platform.
+- [`agent.DocumentsParams`](./actions.agent.md#class-documentsparams): Parameters for the documents special message.
+- [`agent.DocumentsSpecialMessage`](./actions.agent.md#class-documentsspecialmessage): Special message for including the documents in a prompt.
+- [`agent.GooglePlatformParameters`](./actions.agent.md#class-googleplatformparameters): Parameters for the Google platform.
+- [`agent.GroqPlatformParameters`](./actions.agent.md#class-groqplatformparameters): Parameters for the Groq platform.
+- [`agent.MemoriesParams`](./actions.agent.md#class-memoriesparams): Parameters for the memories special message.
+- [`agent.MemoriesSpecialMessage`](./actions.agent.md#class-memoriesspecialmessage): Special message for including the memories in a prompt.
+- [`agent.OpenAIPlatformParameters`](./actions.agent.md#class-openaiplatformparameters): Parameters for the OpenAI platform.
+- [`agent.Prompt`](./actions.agent.md#class-prompt): Represents a complete prompt for an AI model interaction.
+- [`agent.PromptAgentMessage`](./actions.agent.md#class-promptagentmessage): Represents an agent message in the prompt.
+- [`agent.PromptAudioContent`](./actions.agent.md#class-promptaudiocontent): Represents an audio message in the agent system.
+- [`agent.PromptDocumentContent`](./actions.agent.md#class-promptdocumentcontent): Represents a document message in the agent system.
+- [`agent.PromptImageContent`](./actions.agent.md#class-promptimagecontent): Represents an image message in the agent system.
+- [`agent.PromptTextContent`](./actions.agent.md#class-prompttextcontent): Represents a text message in the agent system.
+- [`agent.PromptToolResultContent`](./actions.agent.md#class-prompttoolresultcontent): Represents the result of a tool execution in the agent system.
+- [`agent.PromptToolUseContent`](./actions.agent.md#class-prompttoolusecontent): Represents a message containing a tool use request from an AI agent.
+- [`agent.PromptUserMessage`](./actions.agent.md#class-promptusermessage): Represents a user message in the prompt.
+- [`agent.ReductoPlatformParameters`](./actions.agent.md#class-reductoplatformparameters): Parameters for the Reducto platform.
+- [`agent.ResponseAudioContent`](./actions.agent.md#class-responseaudiocontent): Represents audio content generated or referenced in a model's response.
+- [`agent.ResponseDocumentContent`](./actions.agent.md#class-responsedocumentcontent): Represents a document generated or referenced in a model's response.
+- [`agent.ResponseImageContent`](./actions.agent.md#class-responseimagecontent): Represents an image generated or referenced in a model's response.
+- [`agent.ResponseMessage`](./actions.agent.md#class-responsemessage): A response message from a language model hosted on a platform.
+- [`agent.ResponseTextContent`](./actions.agent.md#class-responsetextcontent): Represents a text segment in a model's response.
+- [`agent.ResponseToolUseContent`](./actions.agent.md#class-responsetoolusecontent): Represents a tool use request generated by the model.
+- [`agent.TokenUsage`](./actions.agent.md#class-tokenusage): Represents token usage statistics from a model's response.
+- [`agent.ToolDefinition`](./actions.agent.md#class-tooldefinition): Represents the definition of a tool.
 - [`api.DiagnosticsTypedDict`](./actions.api.md#class-diagnosticstypeddict)
 - [`api.PositionTypedDict`](./actions.api.md#class-positiontypeddict)
 - [`api.RangeTypedDict`](./actions.api.md#class-rangetypeddict)
-- [`_models.CanvasArtifact`](./actions.canvas_contract._models.md#class-canvasartifact)
-- [`_models.CanvasCard`](./actions.canvas_contract._models.md#class-canvascard)
-- [`_models.CanvasChart`](./actions.canvas_contract._models.md#class-canvaschart)
-- [`_models.CanvasForm`](./actions.canvas_contract._models.md#class-canvasform)
-- [`_models.CanvasFormField`](./actions.canvas_contract._models.md#class-canvasformfield)
-- [`_models.CanvasInspector`](./actions.canvas_contract._models.md#class-canvasinspector)
-- [`_models.CanvasLog`](./actions.canvas_contract._models.md#class-canvaslog)
-- [`_models.CanvasSpec`](./actions.canvas_contract._models.md#class-canvasspec): Closed v1 reader; its canonical serialization is unchanged.
-- [`_models.CanvasSpecV2`](./actions.canvas_contract._models.md#class-canvasspecv2): Explicit v2 reader adding bounded card, chart, log and inspector syntax.
-- [`_models.CanvasSpecValidationError`](./actions.canvas_contract._models.md#class-canvasspecvalidationerror): A CanvasSpec document violates the versioned authoring contract.
-- [`_models.CanvasStack`](./actions.canvas_contract._models.md#class-canvasstack)
-- [`_models.CanvasStackV2`](./actions.canvas_contract._models.md#class-canvasstackv2)
-- [`_models.CanvasStatus`](./actions.canvas_contract._models.md#class-canvasstatus)
-- [`_models.CanvasTable`](./actions.canvas_contract._models.md#class-canvastable)
-- [`_models.CanvasTableColumn`](./actions.canvas_contract._models.md#class-canvastablecolumn)
-- [`_models.CanvasText`](./actions.canvas_contract._models.md#class-canvastext)
-- [`_models.ChildResultReference`](./actions.internal_runtime.md#class-childresultreference): Opaque, metadata-only result reference supplied by an authorized host.
+- [`canvas_contract.CanvasArtifact`](./actions.canvas_contract.md#class-canvasartifact)
+- [`canvas_contract.CanvasCard`](./actions.canvas_contract.md#class-canvascard)
+- [`canvas_contract.CanvasChart`](./actions.canvas_contract.md#class-canvaschart)
+- [`canvas_contract.CanvasForm`](./actions.canvas_contract.md#class-canvasform)
+- [`canvas_contract.CanvasFormField`](./actions.canvas_contract.md#class-canvasformfield)
+- [`canvas_contract.CanvasInspector`](./actions.canvas_contract.md#class-canvasinspector)
+- [`canvas_contract.CanvasLog`](./actions.canvas_contract.md#class-canvaslog)
+- [`canvas_contract.CanvasSpec`](./actions.canvas_contract.md#class-canvasspec): Closed v1 reader; its canonical serialization is unchanged.
+- [`canvas_contract.CanvasSpecV2`](./actions.canvas_contract.md#class-canvasspecv2): Explicit v2 reader adding bounded card, chart, log and inspector syntax.
+- [`canvas_contract.CanvasSpecValidationError`](./actions.canvas_contract.md#class-canvasspecvalidationerror): A CanvasSpec document violates the versioned authoring contract.
+- [`canvas_contract.CanvasStack`](./actions.canvas_contract.md#class-canvasstack)
+- [`canvas_contract.CanvasStackV2`](./actions.canvas_contract.md#class-canvasstackv2)
+- [`canvas_contract.CanvasStatus`](./actions.canvas_contract.md#class-canvasstatus)
+- [`canvas_contract.CanvasTable`](./actions.canvas_contract.md#class-canvastable)
+- [`canvas_contract.CanvasTableColumn`](./actions.canvas_contract.md#class-canvastablecolumn)
+- [`canvas_contract.CanvasText`](./actions.canvas_contract.md#class-canvastext)
+- [`internal_runtime.ChildResultReference`](./actions.internal_runtime.md#class-childresultreference): Opaque, metadata-only result reference supplied by an authorized host.
 - [`internal_runtime.ChildRunContractError`](./actions.internal_runtime.md#class-childruncontracterror): The Action supplied an invalid or unbounded child operation.
-- [`_models.ChildRunHandle`](./actions.internal_runtime.md#class-childrunhandle): Opaque child Run reference; possession grants no read or cancel access.
-- [`_models.ChildRunState`](./actions.internal_runtime.md#class-childrunstate)
-- [`_models.ChildRunStatus`](./actions.internal_runtime.md#class-childrunstatus): Bounded lifecycle plus authorized result references, never raw bytes.
+- [`internal_runtime.ChildRunHandle`](./actions.internal_runtime.md#class-childrunhandle): Opaque child Run reference; possession grants no read or cancel access.
+- [`internal_runtime.ChildRunState`](./actions.internal_runtime.md#class-childrunstate)
+- [`internal_runtime.ChildRunStatus`](./actions.internal_runtime.md#class-childrunstatus): Bounded lifecycle plus authorized result references, never raw bytes.
 - [`internal_runtime.ChildRunUnavailable`](./actions.internal_runtime.md#class-childrununavailable): No trusted Runtime transport is installed in this Action context.
-- [`_extension_points.EPManagedParameters`](./actions._customization._extension_points.md#class-epmanagedparameters): The protocol for a class that describes the managed parameters when
-- [`_managed_parameters.ManagedParameters`](./actions._managed_parameters.md#class-managedparameters): Default implementation of EPManagedParameters.
-- [`_plugin_manager.PluginManager`](./actions._customization._plugin_manager.md#class-pluginmanager): This is a manager of plugins (which we refer to extension points and implementations).
+- [`server_integration.EPManagedParameters`](./actions.server_integration.md#class-epmanagedparameters): The protocol for a class that describes the managed parameters when
+- [`server_integration.ManagedParameters`](./actions.server_integration.md#class-managedparameters): Default implementation of EPManagedParameters.
+- [`server_integration.PluginManager`](./actions.server_integration.md#class-pluginmanager): This is a manager of plugins (which we refer to extension points and implementations).
 
 ## Functions
 

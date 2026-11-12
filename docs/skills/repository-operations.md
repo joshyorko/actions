@@ -5072,7 +5072,38 @@ alias (notably macOS `/var`); storage intentionally rejects symlink ancestors.
 The temporary-alias regression reproduces that rejection without relaxing the
 production storage contract, then exercises the probe using the physical root.
 
+### Cross-platform child transport and generated API checks
+
+The private child descriptor transport accepts only AF_UNIX stream sockets.
+Python 3.10 on Windows implements `socketpair()` with TCP, so POSIX framing
+fixtures must select AF_UNIX explicitly and declare their platform scope. Keep
+TCP rejection in a separate portable test; never broaden the production channel
+to make a Windows fixture pass. This does not qualify child execution on Windows.
+
+Generated class overview links must point to the public page where a reexport is
+rendered, while source inspection still uses its defining module. The generator's
+explicit `doc_module` binding and reexport regression prevent private-module links
+and Python-version-dependent overview output.
+
 ### Manual Runtime release preparation and publication
+
+Before public qualification, compare current dependency alerts with the candidate's
+actual lock versions and shipped paths. Default-branch alert totals do not prove
+candidate exposure or safety. Security floors needed by a published wheel belong
+in package metadata as well as the native-build lock; a lock-only update does not
+constrain a consumer resolver. Keep unsupported developer manifests, optional
+backend dependencies, bundled frontend code and server request boundaries distinct.
+Existing pre-parser form limits and pre-lookup Windows path guards require their
+concrete boundary tests; an old upstream version alone neither proves a reachable
+exploit nor discharges the need for those tests.
+
+Direct source imports are insufficient to classify a frontend advisory: Canvas
+transitively renders MCP client modules through ext-apps even when explicit HTTP
+client imports occur only in browser harnesses. Inspect the bundler's rendered
+module graph and the configured transport. The current Canvas uses the ext-apps
+host bridge without an HTTP OAuth credential provider; an added HTTP OAuth route
+requires fresh issuer/credential advisory review. Keep graph evidence separate
+from a raw dependency SBOM and from installed-host acceptance.
 
 Stable promotion must update Runtime and companion distribution/module versions,
 Runtime dependency floors, installed SDK checks, invoice worker receipts and

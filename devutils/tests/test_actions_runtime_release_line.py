@@ -50,7 +50,7 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert re.fullmatch(r"1\.1\.0a\d+", pyproject["version"])
+    assert pyproject["version"] == "1.1.0"
     assert runtime.__version__ == pyproject["version"]
     assert runtime.version_info == [1, 1, 0]
     # Candidate source advances independently of the exact published floor.
@@ -212,7 +212,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     changelog = (
         ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
     ).read_text()
-    tag = "actions-runtime-1.0.4"
+    tag = "actions-runtime-1.1.0"
     headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
     release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
     release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")
@@ -231,12 +231,14 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     assert "## 1.0.1 - 2026-09-07" in changelog
     selected_body = changelog.split(f"## {tag}\n", 1)[1].split("\n## ", 1)[0]
     assert selected_body.strip()
-    assert "Canvas" not in selected_body
-    assert not re.search(r"\bpublish(?:ed|ation)?\b", selected_body, re.IGNORECASE)
-    unreleased_body = changelog.split("## Unreleased\n", 1)[1].split(f"## {tag}\n", 1)[
-        0
-    ]
-    assert all(issue in unreleased_body for issue in ("#134", "#153", "#211"))
+    assert "Canvas" in selected_body
+    assert "SQLite and PostgreSQL" in selected_body
+    historical_body = changelog.split("## actions-runtime-1.0.4\n", 1)[1].split(
+        "\n## ", 1
+    )[0]
+    assert historical_body.strip()
+    assert "Canvas" not in historical_body
+    assert not re.search(r"\bpublish(?:ed|ation)?\b", historical_body, re.IGNORECASE)
 
 
 def test_legacy_action_server_changelog_is_not_the_runtime_release_source():

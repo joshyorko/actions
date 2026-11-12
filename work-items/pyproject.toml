@@ -29,10 +29,10 @@ Issues = "https://github.com/joshyorko/actions/issues"
 [project.optional-dependencies]
 postgres = ["psycopg[binary]>=3.2,<4"]
 redis = ["redis>=4.5.0"]
-docdb = ["pymongo>=4.3.0"]
-documentdb = ["pymongo>=4.3.0"]
-yorko = ["requests>=2.31.0"]
-all = ["redis>=4.5.0", "pymongo>=4.3.0", "requests>=2.31.0"]
+docdb = ["pymongo>=4.18.3", "dnspython>=2.9.0; python_version >= '3.11'"]
+documentdb = ["pymongo>=4.18.3", "dnspython>=2.9.0; python_version >= '3.11'"]
+yorko = ["requests>=2.31.0", "certifi>=2026.10.19", "urllib3>=2.8.0"]
+all = ["redis>=4.5.0", "pymongo>=4.18.3", "dnspython>=2.9.0; python_version >= '3.11'", "requests>=2.31.0", "certifi>=2026.10.19", "urllib3>=2.8.0"]
 
 [tool.poetry]
 packages = [

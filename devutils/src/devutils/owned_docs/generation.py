@@ -659,12 +659,15 @@ class MarkdownGenerator(object):
 
         return markdown
 
-    def class2md(self, cls: Any, depth: int = 1) -> str:
+    def class2md(
+        self, cls: Any, depth: int = 1, doc_module: Optional[str] = None
+    ) -> str:
         """Takes a class and creates markdown text to document its methods and variables.
 
         Args:
             cls (class): Selected class for markdown generation.
             depth (int, optional): Number of # to append to function name. Defaults to 1.
+            doc_module: Public module page containing this class, including reexports.
 
         Returns:
             str: Markdown documentation for selected class.
@@ -687,7 +690,7 @@ class MarkdownGenerator(object):
                 "type": "class",
                 "name": header,
                 "full_name": header,
-                "module": modname,
+                "module": doc_module or modname,
                 "anchor_tag": _get_anchor_tag("class-" + header),
                 "description": summary,
             }
@@ -832,7 +835,9 @@ class MarkdownGenerator(object):
 
             kind = self._get_class_type(obj)
             class_markdown = self.class2md(
-                obj, depth=depth if kind == ClassTypes.CLASS else depth + 1
+                obj,
+                depth=depth if kind == ClassTypes.CLASS else depth + 1,
+                doc_module=modname,
             )
             if class_markdown:
                 classes[kind].append(_SEPARATOR + class_markdown)

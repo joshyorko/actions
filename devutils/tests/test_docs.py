@@ -52,3 +52,17 @@ def test_alias_normalization_preserves_following_top_level_sections(
     (tmp_path / "README.md").write_text("# API\n")
     normalize_generic_alias_docs(tmp_path, "alias_fixture")
     assert (tmp_path / "alias_fixture.md").read_text() == before + after
+
+
+def test_reexported_class_overview_links_to_generated_public_page():
+    from devutils.owned_docs.generation import MarkdownGenerator
+
+    class Exported:
+        """Publicly reexported class."""
+
+    module = ModuleType("public_fixture")
+    module.__all__ = ["Exported"]
+    module.Exported = Exported
+    generator = MarkdownGenerator()
+    generator.module2md(module)
+    assert "./public_fixture.md#class-exported" in generator.overview2md()

@@ -541,6 +541,16 @@ identifies the executable; its name or integration marker is not artifact proof.
 - An explicitly configured direct input file must already exist, contain a non-empty top-level list, and contain only object items; missing, empty, malformed, envelope-shaped, or non-object-item input raises a path-bearing `ValueError`. A missing direct output file is valid and is created with its parent as a top-level list when an output is saved.
 - No seed invariant: a committed top-level-list direct input fixture is itself the queue. Run producer tasks against that unchanged file; do not seed it, wrap it in a directory envelope, or translate it in a compatibility helper.
 
+## MongoDB dependency security boundary
+
+The DocDB/DocumentDB/all extras require PyMongo >=4.18.3 for the BSON encoding
+and URI-parser fixes. Python >=3.11 also requires dnspython >=2.9.0. Python 3.10
+remains supported for explicit `mongodb://` seed lists; `mongodb+srv://` requires
+the patched DNS parser and is refused before client construction or file creation
+when dnspython is older. Use Python >=3.11 for SRV rather than bypassing the
+check. `test_docdb_dns_boundary.py` covers vulnerable and patched DNS versions,
+case variants, and the explicit-seed control without making network requests.
+
 ## Local Verification
 
 The canonical Bluefin host gate is cwd-independent:

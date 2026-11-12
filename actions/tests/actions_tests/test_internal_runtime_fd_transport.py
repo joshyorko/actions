@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import socket
 import struct
+import sys
 import threading
 from uuid import uuid4
 
@@ -21,6 +22,10 @@ from actions.internal_runtime._fd_transport import (
     MAX_FRAME_BYTES,
     PROTOCOL,
     InternalChildFDTransport,
+)
+
+pytestmark = pytest.mark.skipif(
+    sys.platform == "win32", reason="owned AF_UNIX descriptor transport requires POSIX"
 )
 
 
@@ -81,7 +86,7 @@ def _serve(peer, handler, *, count=1):
 
 @pytest.mark.parametrize("ready", [False, 1, "true", None])
 def test_handshake_rejects_non_boolean_ready_and_closes(ready):
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     thread, errors = _serve(peer, lambda request: _reply(request, {"ready": ready}))
     transport = InternalChildFDTransport(client, timeout_seconds=2)
     with pytest.raises(ChildRunUnavailable):
@@ -92,7 +97,7 @@ def test_handshake_rejects_non_boolean_ready_and_closes(ready):
 
 
 def test_fd_transport_round_trips_only_closed_typed_operations():
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     handle_id = str(uuid4())
     seen = []
     reference = ChildResultReference(
@@ -161,7 +166,7 @@ def test_fd_transport_round_trips_only_closed_typed_operations():
 
 
 def test_fd_transport_bounds_outer_escape_expansion_above_legacy_300_kib():
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     canonical_inputs = json.dumps(
         {"value": "\\" * 130_000},
         ensure_ascii=False,
@@ -199,7 +204,7 @@ def test_fd_transport_bounds_outer_escape_expansion_above_legacy_300_kib():
     ["oversize", "truncated_header", "truncated_body", "malformed_json"],
 )
 def test_fd_transport_rejects_malformed_responses(reply_kind):
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     errors = []
 
     def run_peer():
@@ -229,7 +234,7 @@ def test_fd_transport_rejects_malformed_responses(reply_kind):
 
 
 def test_fd_transport_rejects_a_previously_valid_response_replayed_for_next_call():
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     handle_id = str(uuid4())
     requests = []
     errors = []
@@ -263,7 +268,7 @@ def test_fd_transport_rejects_a_previously_valid_response_replayed_for_next_call
 
 
 def test_fd_transport_call_timeout_closes_owned_socket():
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     received = threading.Event()
 
     def wait_without_reply():
@@ -288,7 +293,7 @@ def test_fd_transport_call_timeout_closes_owned_socket():
 
 @pytest.mark.parametrize("value", ['{"x":1,"x":2}', "[1]", '{ "x": 1 }'])
 def test_fd_transport_requires_canonical_plain_object_input(value):
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     transport = InternalChildFDTransport(client)
     with pytest.raises(ChildRunContractError):
         transport.submit_child_run("billing", "key-1", value)
@@ -300,12 +305,12 @@ def test_fd_transport_requires_canonical_plain_object_input(value):
 
 
 def test_fd_transport_rejects_non_unix_socket_and_invalid_timeout():
-    left, right = socket.socketpair()
+    left, right = socket.socketpair(socket.AF_UNIX)
     left.close()
     right.close()
     with pytest.raises((TypeError, ValueError)):
         InternalChildFDTransport(object())  # type: ignore[arg-type]
-    client, peer = socket.socketpair()
+    client, peer = socket.socketpair(socket.AF_UNIX)
     with pytest.raises(ValueError):
         InternalChildFDTransport(client, timeout_seconds=float("inf"))
     client.close()

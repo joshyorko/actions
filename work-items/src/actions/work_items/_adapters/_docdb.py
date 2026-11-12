@@ -184,6 +184,15 @@ class DocumentDBAdapter(BaseAdapter):
                 # Fallback to required_env to raise the error if still missing
                 self.docdb_uri = required_env("DOCDB_URI")
 
+        if self.docdb_uri.lower().startswith("mongodb+srv://"):
+            from dns.version import hexversion
+
+            if hexversion < 0x020900F0:
+                raise ImportError(
+                    "MongoDB SRV requires dnspython>=2.9.0 (Python>=3.11). "
+                    "On Python 3.10, use an explicit mongodb:// seed list."
+                )
+
         self.docdb_database = required_env("DOCDB_DATABASE")
         self.queue_name = os.getenv("RC_WORKITEM_QUEUE_NAME", "default")
         if auto_append_output_suffix is None:
