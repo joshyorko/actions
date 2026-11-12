@@ -72,7 +72,9 @@ def test_core_release_verifies_pinned_exact_artifacts_before_publish():
     upload = _step(workflow, "verify", "Upload verified Core artifacts")
 
     assert any(
-        step.get("run") == "pipx install poetry==2.1.1" for step in verify["steps"]
+        step.get("run")
+        == 'pipx install --python "$(command -v python)" --force poetry==2.1.1'
+        for step in verify["steps"]
     )
     assert build["run"] == "poetry build"
     assert '"actions_core-$package_version.tar.gz"' in inventory["run"]
