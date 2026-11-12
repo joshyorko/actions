@@ -4285,3 +4285,11 @@ Keep disposable registry rows on nonpublishing qualification/backup branches,
 never in the reviewed default publication registry. Compare tested code blobs to
 the repair commit, retain original owner snapshots before/after, and distinguish
 shared-verifier qualification from unrun default-button activation before merge.
+
+For large raw release ZIPs, a caching GitHub CLI shim can exceed its RPC message
+limit even when metadata requests succeed. In local inspection only, select the
+underlying native GitHub CLI in the child PATH and retain exact archive size,
+GitHub SHA-256, safe extraction and member verification. This does not justify
+rerunning preparation or disabling any integrity check. Seed backup controller
+scripts from the exact frozen release source, not an independently advancing QA
+branch; keep the reviewed branch-only workflow template byte-identical.

@@ -23,7 +23,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-from publish_verified_runtime import verify_artifacts
+from publish_verified_runtime import verify_artifacts, write_manifest
 
 REPOSITORY = "joshyorko/actions"
 MANIFEST = "release-bundle.json"
@@ -35,7 +35,7 @@ REQUIRED = {
     "actions_runtime_tests.yml": 3,
     "actions_runtime_pypi_release.yml": 5,
     "frontend-build-unauthenticated.yml": 3,
-    "developer_toolkit.yml": 6,
+    "developer_toolkit.yml": 10,
     "actions_core_tests.yml": 4,
     "http_helper_tests.yml": 3,
     "coverage-gate.yml": 1,
@@ -117,7 +117,51 @@ def pages(endpoint, key):
     raise ReleaseError("GitHub pagination exceeded bound")
 
 
-def validate_run(run, jobs, *, sha, path, count):
+def release_platforms(platform_profile="all"):
+    require(
+        platform_profile in {"all", "linux-windows"}, "unknown Runtime platform profile"
+    )
+    return {
+        runner: value
+        for runner, value in PLATFORMS.items()
+        if platform_profile == "all" or value[0] != "Darwin"
+    }
+
+
+def require_profile_owner(platform_profile):
+    release_platforms(platform_profile)
+    if platform_profile == "linux-windows":
+        require(
+            os.environ.get("GITHUB_ACTOR") == "joshyorko"
+            and os.environ.get("GITHUB_TRIGGERING_ACTOR") == "joshyorko",
+            "Only joshyorko may select the Linux/Windows release scope",
+        )
+
+
+def excluded_allocation_job(path, job):
+    """Admit only a known Mac job that never acquired a runner or ran a step."""
+    patterns = {
+        "actions_runtime_tests.yml": r"build \(macos-py3\.12-devmode\)",
+        "actions_runtime_pypi_release.yml": r"build-wheels \(macos-15\)",
+        "frontend-build-unauthenticated.yml": r"Build Action Server binary without credentials \(macos-15\)",
+        "developer_toolkit.yml": r"toolkit \((?:primary, 18\.19\.8|legacy, 18\.19\.3), macos-15, rcc-macosarm64, [0-9a-f]+\.\.\.",
+    }
+    pattern = patterns.get(path.rsplit("/", 1)[-1])
+    return bool(
+        pattern
+        and re.fullmatch(pattern, job.get("name", ""))
+        and job.get("labels") == ["macos-15"]
+        and job.get("status") == "completed"
+        and job.get("conclusion") == "cancelled"
+        and isinstance(job.get("runner_id"), int)
+        and not isinstance(job["runner_id"], bool)
+        and job["runner_id"] == 0
+        and job.get("steps") == []
+    )
+
+
+def validate_run(run, jobs, *, sha, path, count, platform_profile="all"):
+    release_platforms(platform_profile)
     require(run.get("head_sha") == sha, "qualification source SHA mismatch")
     require(run.get("path") == path, "qualification workflow path mismatch")
     require(
@@ -131,13 +175,51 @@ def validate_run(run, jobs, *, sha, path, count):
     require(
         run.get("event") in {"pull_request", "push"}, "unexpected qualification event"
     )
+    if platform_profile == "all":
+        require(
+            run.get("status") == "completed" and run.get("conclusion") == "success",
+            "latest exact-head qualification is not successful",
+        )
+        require(
+            len(jobs) == count
+            and all(job.get("conclusion") == "success" for job in jobs),
+            "required qualification jobs missing, skipped, or failed",
+        )
+        return
+    require(len(jobs) == count, "required qualification jobs missing or unexpected")
+    require(len({job["name"] for job in jobs}) == count, "duplicate qualification job")
+    exceptions = []
+    for job in jobs:
+        if job.get("conclusion") == "success":
+            continue
+        if excluded_allocation_job(path, job):
+            exceptions.append(job)
+            continue
+        # This aggregate validates all seven distributions, so cannot execute
+        # without the omitted Mac producer. Preparation verifies the five exact
+        # included distributions independently from their original producer ZIPs.
+        if (
+            path.endswith("/actions_runtime_pypi_release.yml")
+            and job.get("name") == "publish"
+            and job.get("status") == "completed"
+            and job.get("conclusion") == "skipped"
+            and "runner_id" in job
+            and job["runner_id"] is None
+            and job.get("steps") == []
+            and any(excluded_allocation_job(path, item) for item in jobs)
+        ):
+            exceptions.append(job)
+            continue
+        raise ReleaseError(
+            "required qualification job failed, ran then cancelled, or is not an approved allocation exclusion"
+        )
     require(
-        run.get("status") == "completed" and run.get("conclusion") == "success",
-        "latest exact-head qualification is not successful",
-    )
-    require(
-        len(jobs) == count and all(job.get("conclusion") == "success" for job in jobs),
-        "required qualification jobs missing, skipped, or failed",
+        run.get("status") == "completed"
+        and (
+            run.get("conclusion") == "success"
+            or (bool(exceptions) and run.get("conclusion") in {"failure", "cancelled"})
+        ),
+        "latest exact-head qualification has unexplained state",
     )
 
 
@@ -178,8 +260,8 @@ def check_source(root, source, qualification, version):
         f"{source}:action_server/scripts/verify_published_runtime_floor.py",
     )
     require(
-        re.search(rf'^EXPECTED_RUNTIME = "{re.escape(version)}"$', floor, re.M),
-        "installed-wheel verifier version mismatch",
+        re.search(rf'^RELEASE_RUNTIME = "{re.escape(version)}"$', floor, re.M),
+        "prepared Runtime verifier version mismatch",
     )
     changelog = git(
         root, "show", f"{source}:action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"
@@ -325,8 +407,18 @@ def verify_files(directory, manifest):
 
 
 def release_body(manifest, digest):
+    profile = manifest.get("platform_profile", "all")
+    release_platforms(profile)
+    scope = (
+        "Platform scope: Linux/Windows only (x86-64). macOS artifacts are absent "
+        "until a later release. Unallocated macOS jobs are UNVERIFIED, NOT PASSED; "
+        "their original statuses are retained in the preparation evidence.\n\n"
+        if profile == "linux-windows"
+        else ""
+    )
     return (
         f"Actions Runtime {manifest['version']}\n\n"
+        f"{scope}"
         f"{manifest.get('release_notes', '')}\n\n"
         f"Immutable source: {manifest['source_sha']}\n"
         f"Preparation run: {manifest['preparation_run_id']}\n"
@@ -437,6 +529,8 @@ def release_state(version):
 
 def prepare(args):
     root = args.root.resolve()
+    profile = getattr(args, "platform_profile", "all")
+    require_profile_owner(profile)
     control = controller(root, PREPARE_WORKFLOW)
     require(
         os.environ.get("GITHUB_RUN_ATTEMPT") == "1",
@@ -467,9 +561,22 @@ def prepare(args):
             sha=args.qualification_sha,
             path=f".github/workflows/{filename}",
             count=count,
+            platform_profile=profile,
         )
         run["qualified_jobs"] = [
-            {key: job[key] for key in ("id", "name", "conclusion", "html_url")}
+            {
+                key: job[key]
+                for key in (
+                    "id",
+                    "name",
+                    "conclusion",
+                    "html_url",
+                    "status",
+                    "labels",
+                    "runner_id",
+                    "steps",
+                )
+            }
             for job in jobs
         ]
         runs[filename] = run
@@ -502,8 +609,28 @@ def prepare(args):
     downloads.mkdir()
     pypi_run = runs["actions_runtime_pypi_release.yml"]
     dist = args.output / "pypi"
-    artifacts = [download(pypi_run, "actions-runtime-dist", dist)]
-    names = verify_artifacts(dist)
+    artifacts = []
+    lanes = (
+        ("sdist", "Linux", "macOS", "Windows")
+        if profile == "all"
+        else ("sdist", "Linux", "Windows")
+    )
+    if profile == "all":
+        artifacts.append(download(pypi_run, "actions-runtime-dist", dist))
+    else:
+        dist.mkdir()
+        for lane in lanes:
+            target = downloads / f"dist-{lane}"
+            name = "action-server-dist" if lane == "sdist" else f"{lane}-wheels"
+            artifacts.append(download(pypi_run, name, target))
+            for source in target.iterdir():
+                require(
+                    source.is_file() and not (dist / source.name).exists(),
+                    "duplicate or nonregular distribution",
+                )
+                shutil.copy2(source, dist / source.name)
+        write_manifest(dist, platform_profile=profile)
+    names = verify_artifacts(dist, platform_profile=profile)
     require(
         all(
             name.startswith(f"actions_runtime-{args.version}-")
@@ -513,7 +640,7 @@ def prepare(args):
         "distribution version mismatch",
     )
     measured = {}
-    for lane in ("sdist", "Linux", "macOS", "Windows"):
+    for lane in lanes:
         target = downloads / lane
         artifacts.append(download(pypi_run, f"runtime-build-source-{lane}", target))
         proof = json.loads((target / "runtime-build-source.json").read_text())
@@ -550,12 +677,12 @@ def prepare(args):
         )
     require(
         set(measured) == set(names),
-        "producer receipts do not cover all seven distributions",
+        "producer receipts do not cover the exact profile distributions",
     )
     native = args.output / "native"
     native.mkdir()
     native_run = runs["frontend-build-unauthenticated.yml"]
-    for runner, (platform, suffix, binary) in PLATFORMS.items():
+    for runner, (platform, suffix, binary) in release_platforms(profile).items():
         acceptance = downloads / f"acceptance-{runner}"
         # Native manifests retain the actual PR merge checkout identity.
         listing = pages(
@@ -642,6 +769,7 @@ def prepare(args):
     save(evidence / "github-artifacts.json", artifacts)
     result = {
         "schema_version": 1,
+        "platform_profile": profile,
         "repository": REPOSITORY,
         "version": args.version,
         "source_sha": args.source_sha,
@@ -933,10 +1061,14 @@ def verify_bundle(args, *, require_backups=True):
         "preparation run identity/state mismatch; never rerun an original preparation",
     )
     verify_files(args.bundle, manifest)
-    verify_artifacts(args.bundle / "pypi")
+    profile = manifest.get("platform_profile", "all")
+    if profile == "all":
+        verify_artifacts(args.bundle / "pypi")
+    else:
+        verify_artifacts(args.bundle / "pypi", platform_profile=profile)
     native_names = {
         f"actions-runtime-{args.version}-{suffix}"
-        for _, suffix, _ in PLATFORMS.values()
+        for _, suffix, _ in release_platforms(profile).values()
     } | {f"actions-runtime-{args.version}-sha256.txt"}
     require(
         {p.name for p in (args.bundle / "native").iterdir()} == native_names,
@@ -1125,6 +1257,9 @@ def main():
     parser.add_argument("--version", required=True)
     parser.add_argument("--qualification-sha")
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--platform-profile", choices=("all", "linux-windows"), default="all"
+    )
     parser.add_argument("--bundle", type=Path)
     parser.add_argument("--manifest-sha256")
     parser.add_argument("--preparation-run-id", type=int)
