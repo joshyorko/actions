@@ -5289,6 +5289,9 @@ runs, each with an exact registered, present, unexpired bundle artifact and raw
 archive artifact. Same-run duplicate artifacts do not count as independent.
 Registry source/version/original preparation/manifest identities, backup workflow,
 branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
+Register a new version additively: retain earlier bundle records and immutable
+source/manifest identities. A registry-only community update may advance the
+controller without changing the prepared source or its workflow tree.
 Each readiness check downloads both healthy raw archives, verifies actual ZIP
 size/digest, receipt identity, the original ZIP and unchanged manifest digests,
 and every nested member/inventory before counting a copy. An available API row

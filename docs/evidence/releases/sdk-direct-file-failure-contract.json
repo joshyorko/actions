@@ -1,0 +1,47 @@
+{
+  "schema": "actions.sdk-direct-file-failure-contract/v1",
+  "published_versions": {
+    "0.4.4": {
+      "pypi_project_url": "https://pypi.org/project/actions-work-items/0.4.4/",
+      "filename": "actions_work_items-0.4.4-py3-none-any.whl",
+      "wheel_sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0",
+      "relevant_source_sha256": {
+        "actions/work_items/_support.py": "6902ddc8f6b1a6d6136ae29d1630428012f4eb62570b8d7648f64df9c4b9eed2",
+        "actions/work_items/_workitem.py": "d2e3dd97eb123e58d2be6e76856dc5f136b0f9e6c30685f6d0f7d84e7dafab52",
+        "actions/work_items/_adapters/_file.py": "b53c59b0eff5c4f28e6e1b506420e7b7632b5cd4473d18a34cc62e06cfaea3b6"
+      }
+    },
+    "0.5.0": {
+      "pypi_project_url": "https://pypi.org/project/actions-work-items/0.5.0/",
+      "filename": "actions_work_items-0.5.0-py3-none-any.whl",
+      "wheel_sha256": "0aaea32c8e3b9f25a1de40083909d684418e8b4288fd504383233f53b95dcbb4",
+      "relevant_source_sha256": {
+        "actions/work_items/_support.py": "6902ddc8f6b1a6d6136ae29d1630428012f4eb62570b8d7648f64df9c4b9eed2",
+        "actions/work_items/_workitem.py": "d2e3dd97eb123e58d2be6e76856dc5f136b0f9e6c30685f6d0f7d84e7dafab52",
+        "actions/work_items/_adapters/_file.py": "b53c59b0eff5c4f28e6e1b506420e7b7632b5cd4473d18a34cc62e06cfaea3b6"
+      }
+    }
+  },
+  "probe": [
+    {
+      "version": "0.4.4",
+      "error_type": "AttributeError",
+      "message": "'str' object has no attribute 'value'",
+      "release_recorded": false,
+      "probe": "exact published helper/adapter methods; synthetic in-memory storage only"
+    },
+    {
+      "version": "0.5.0",
+      "error_type": "AttributeError",
+      "message": "'str' object has no attribute 'value'",
+      "release_recorded": false,
+      "probe": "exact published helper/adapter methods; synthetic in-memory storage only"
+    }
+  ],
+  "bounded_conclusion": "Both versions share string/enum mismatch on direct-JSON-file failure release; upgrade alone does not fix it. Not evidence of general Core ABI incompatibility.",
+  "limitations": [
+    "Exact published methods with synthetic in-memory storage; not full Windows or native context acceptance.",
+    "Directory-mode exception= protocol is distinct."
+  ],
+  "implementation_changed": false
+}
