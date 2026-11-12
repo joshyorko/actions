@@ -26,7 +26,7 @@ def _step(workflow, job, name):
     )
 
 
-def _run_shell_step(script, cwd, tmp_path, tag="actions-core-1.0.2"):
+def _run_shell_step(script, cwd, tmp_path, tag="actions-core-1.0.2", release_tag=None):
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir(exist_ok=True)
     poetry = fake_bin / "poetry"
@@ -42,6 +42,8 @@ def _run_shell_step(script, cwd, tmp_path, tag="actions-core-1.0.2"):
             "PATH": f"{fake_bin}{os.pathsep}{base_env['PATH']}",
             "PACKAGE_VERSION": "1.0.2",
             "GITHUB_REF_NAME": tag,
+            "RELEASE_TAG": release_tag or tag,
+            "RUNNER_TEMP": str(tmp_path),
         }
     )
     return subprocess.run(
@@ -57,6 +59,9 @@ def test_core_release_verifies_pinned_exact_artifacts_before_publish():
     workflow = _workflow()
     on = workflow.get("on", workflow.get(True))
     assert on["push"]["tags"] == ["actions-core-*"]
+    assert (
+        workflow["env"]["RELEASE_TAG"] == "${{ inputs.release_tag || github.ref_name }}"
+    )
     assert workflow["defaults"]["run"]["working-directory"] == "./actions"
     verify = workflow["jobs"]["verify"]
     assert verify["runs-on"] == "ubuntu-latest"
@@ -113,6 +118,7 @@ def test_core_artifact_inventory_and_manifest_bind_exact_bytes(tmp_path):
 
     built = _run_shell_step(build_step["run"], package_root, tmp_path)
     assert built.returncode == 0, built.stderr
+    assert (tmp_path / "core-actual").read_text().splitlines() == sorted([wheel, sdist])
     expected = {
         name: hashlib.sha256((dist / name).read_bytes()).hexdigest()
         for name in (wheel, sdist)
@@ -158,6 +164,24 @@ def test_core_inventory_rejects_wrong_tag_extra_and_symlink_artifacts(tmp_path):
     (dist / "actions_core-1.0.2-py3-none-any.whl").symlink_to(outside)
     symlink = _run_shell_step(step["run"], package_root, tmp_path)
     assert symlink.returncode != 0
+
+
+@LINUX_RELEASE_SHELL_ONLY
+@pytest.mark.parametrize("selected_tag", ["actions-core-1.0.2", "actions-core-1.0.1"])
+def test_core_recovery_inventory_uses_selected_tag_not_controller_branch(
+    tmp_path, selected_tag
+):
+    step = _step(_workflow(), "verify", "Verify exact Core artifact inventory")
+    package_root = tmp_path / "actions"
+    dist = package_root / "dist"
+    dist.mkdir(parents=True)
+    (dist / "actions_core-1.0.2-py3-none-any.whl").write_bytes(b"wheel")
+    (dist / "actions_core-1.0.2.tar.gz").write_bytes(b"sdist")
+    result = _run_shell_step(
+        step["run"], package_root, tmp_path, tag="community", release_tag=selected_tag
+    )
+    assert (result.returncode == 0) == (selected_tag == "actions-core-1.0.2")
+    assert (dist / "actions-core-manifest.sha256").exists() == (result.returncode == 0)
 
 
 @LINUX_RELEASE_SHELL_ONLY

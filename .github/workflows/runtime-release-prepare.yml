@@ -16,6 +16,12 @@ on:
         description: Exact stable Runtime version already prepared in source (X.Y.Z)
         required: true
         type: string
+      platform_profile:
+        description: Delivery scope (linux-windows explicitly omits unavailable macOS artifacts)
+        required: true
+        type: choice
+        default: all
+        options: [all, linux-windows]
 
 permissions:
   contents: read
@@ -67,10 +73,12 @@ jobs:
           SOURCE_SHA: ${{ inputs.source_sha }}
           QUALIFICATION_SHA: ${{ inputs.qualification_sha }}
           VERSION: ${{ inputs.expected_version }}
+          PLATFORM_PROFILE: ${{ inputs.platform_profile }}
         run: >-
           python action_server/scripts/runtime_release_button.py prepare
           --source-sha "$SOURCE_SHA" --qualification-sha "$QUALIFICATION_SHA"
           --version "$VERSION" --output "$RUNNER_TEMP/runtime-release-bundle"
+          --platform-profile "$PLATFORM_PROFILE"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: runtime-release-bundle-${{ github.run_id }}-1
