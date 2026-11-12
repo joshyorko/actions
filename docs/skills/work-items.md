@@ -1620,3 +1620,51 @@ The private Core child transport frames bounded JSON over an invocation-owned
 local socket and has no caller-supplied parent identity. Socketpair tests prove
 only the local codec: the RCC env-exec forwarding, host binding and installed
 Action-to-Robot path remain unverified, including Windows behavior.
+
+## Local synthetic managed-client fixture
+
+`action_server/scripts/serve_managed_acceptance_fixture.py` starts an explicitly
+opted-in Linux loopback host over the real SQL managed router, MCP facade and
+direct Robot runner. It creates a fresh private state directory and a local
+0600 test bearer; it does not accept an existing unrelated directory or inherited
+execution/Robot/Task profiles. It never transfers a credential, changes networking,
+starts RCC, or adopts a production database. Use the same exact source/dependency
+checkout when resuming owned state. Reference-only synthetic profile identities
+are not registered RCC worker qualification or multi-principal isolation proof.
+
+After the pinned RCC Doctor/Bootstrap setup in this Actions checkout, run from
+the repository root using its prepared interpreter:
+
+```bash
+action_server/.venv/bin/python action_server/scripts/serve_managed_acceptance_fixture.py \
+  --state /absolute/task-owned/new-managed-fixture \
+  --allow-synthetic-owned-fixture
+```
+
+Use the existing QA environment allowlist. `ready.json` records the local origin,
+queue, immutable snapshot, server-held worker, module origins, source commit,
+helper hash and lock hashes. Read its credential file only inside local credential
+provisioning code, never into chat, logs or process arguments. Parent permissions
+are 0700. An explicit `--resume` reopens only private marked fixture state; retain
+and inspect partial failures instead of silently recreating it. Shutdown is owned
+by the caller; the directory persists for evidence and explicit cleanup.
+
+Discover actual tools, managed schema and capabilities with that local bearer.
+The HTTP operations envelope contains `result`; MCP uses structured content.
+Explicit enqueue and claim do not execute. Invoke the generic claim variant with
+that exact snapshot/claim to execute the retained Robot. Its input is
+`{"value":"native-first"}`; a fresh second item exercises another execution, and
+`{"value":"intentional-failure"}` causes a real Robot failure. Read the returned
+Run, Attempt and authorized artifact bytes. The helper has been exercised through
+real HTTP/MCP enqueue/claim/invoke with a succeeded Robot and output XML; this is
+source-host evidence, not an installed Runtime CLI, RCC or native VSIX receipt.
+
+Use live negotiation rather than assuming a source version means Task support.
+The measured helper advertises protocol 2026-07-28, Action Server with an empty
+server-version string, and no Tasks. A merged workspace operation list does not
+establish support for every queue variant. Unsupported operations remain denied.
+Client pre-invocation cancellation/stale-claim rejection must admit no new Run.
+For a dropped invocation response, retain the original request and uncertainty
+across client reload without automatically invoking again. There is no general
+original-request/nonexecution lookup; neither a 404 nor an absent projection is
+permission to execute again.
