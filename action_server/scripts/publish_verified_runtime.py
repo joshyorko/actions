@@ -59,17 +59,31 @@ RECOVERY_WORKFLOW_NAME = "Actions Runtime Recovery"
 PYPI_WORKFLOW_NAME = "Actions Runtime PYPI Release"
 
 
-def _artifact_names(directory: Path) -> list[str]:
+def wheel_rows(platform_profile: str = "all") -> set[tuple[str, str]]:
+    if platform_profile not in {"all", "linux-windows"}:
+        raise VerificationError("unknown Runtime platform profile")
+    return {
+        row
+        for row in EXPECTED_WHEEL_ROWS
+        if platform_profile == "all" or row[1] != "macos"
+    }
+
+
+def _artifact_names(directory: Path, *, platform_profile: str = "all") -> list[str]:
+    expected_rows = wheel_rows(platform_profile)
     files = sorted(path.name for path in directory.iterdir() if path.is_file())
     if MANIFEST_NAME in files:
         files.remove(MANIFEST_NAME)
-    if len(files) != 7:
-        raise VerificationError(f"expected seven artifacts, found {len(files)}")
+    if len(files) != len(expected_rows) + 1:
+        description = "seven" if platform_profile == "all" else "five"
+        raise VerificationError(f"expected {description} artifacts, found {len(files)}")
     sdists = [name for name in files if name.endswith(".tar.gz")]
     if len(sdists) != 1:
         raise VerificationError("expected one sdist")
-    if sum(name.endswith(".whl") for name in files) != 6:
-        raise VerificationError("expected six wheels")
+    if sum(name.endswith(".whl") for name in files) != len(expected_rows):
+        raise VerificationError(
+            "wheel count does not match the Runtime platform profile"
+        )
     sdist_name = sdists[0]
     sdist_match = SDIST_PATTERN.fullmatch(sdist_name)
     if not sdist_match:
@@ -120,13 +134,13 @@ def _artifact_names(directory: Path) -> list[str]:
         if row in rows:
             raise VerificationError("duplicate wheel slot")
         rows.add(row)
-    if rows != EXPECTED_WHEEL_ROWS:
+    if rows != expected_rows:
         raise VerificationError("wheel matrix does not match the approved Runtime rows")
     return files
 
 
-def write_manifest(directory: Path) -> Path:
-    names = _artifact_names(directory)
+def write_manifest(directory: Path, *, platform_profile: str = "all") -> Path:
+    names = _artifact_names(directory, platform_profile=platform_profile)
     manifest = directory / MANIFEST_NAME
     lines = []
     for name in names:
@@ -158,11 +172,11 @@ def merge_downloads(download_root: Path, destination: Path) -> list[str]:
     )
 
 
-def verify_artifacts(directory: Path) -> list[str]:
+def verify_artifacts(directory: Path, *, platform_profile: str = "all") -> list[str]:
     directory = directory.resolve()
     if not directory.is_dir():
         raise VerificationError(f"artifact directory does not exist: {directory}")
-    names = _artifact_names(directory)
+    names = _artifact_names(directory, platform_profile=platform_profile)
     manifest = directory / MANIFEST_NAME
     if not manifest.is_file():
         raise VerificationError("manifest is missing")

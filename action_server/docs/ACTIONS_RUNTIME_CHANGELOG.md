@@ -25,6 +25,10 @@ an Actions Runtime release.
 
 Qualification and limits:
 
+- This 1.1.0 release delivers Linux x86-64 and Windows AMD64 only. macOS
+  artifacts are absent until a later release; unallocated macOS jobs remain
+  unverified, not passed. Included wheel/native provenance and security gates
+  still apply.
 - Real desktop acceptance covers Codex mode in ChatGPT desktop. Genuine
   ChatGPT-mode E1 and native query-result-before-approval are not qualified.
 - Cancellation intent is not terminal process-stop proof. Unknown retained

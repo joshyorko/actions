@@ -5147,19 +5147,55 @@ community with identical complete Git trees. A normal merge may have a different
 commit identity; the bundle retains the actual producer checkout SHAs, qualified
 head, release source and common tree rather than rewriting their provenance.
 
-Preparation requires successful latest exact-head Runtime, Core, HTTP Helper,
+The default `platform_profile=all` preparation requires successful latest exact-head Runtime, Core, HTTP Helper,
 coverage, audit, toolkit and native workflows, including every required job.
 The toolkit currently has eight matrix lanes plus the descriptor and installed
 Action-to-Robot jobs: all ten must pass, including the installed job on a
 community-targeted PR. Update the admission count with workflow expansion; a
 successful run with a stale count is rejected, never partially admitted.
 Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
-and distribution digests separately. All seven distributions must match those
+and distribution digests separately. For the default profile, all seven distributions must match those
 receipts. Each native binary must match its producer manifest and both successful
 frozen/Go-wrapper browser/storage and large-history receipts. Existing wheel
 private-import, published-dependency floor and request-boundary gates remain in
 the canonical producer workflow. A prior source without these new build receipts
 cannot be admitted by substituting historical evidence.
+
+An explicitly authorized `platform_profile=linux-windows` is a separate immutable
+delivery scope, selectable only by the original and triggering `joshyorko` actor.
+It admits exactly the sdist, CPython 3.12/3.13 Linux x86-64 and Windows AMD64 wheels,
+and the two corresponding native binaries plus their checksum file. It never
+downloads or advertises Mac files. The manifest binds this profile; publication,
+backup verification and retries derive the inventory from that reviewed manifest,
+with an absent profile retaining the historical full-platform meaning. Mac support
+requires a later release, not additions to this release's immutable inventory.
+
+The reduced profile still checks every job and the original workflow topology.
+Only specifically recognized Mac Runtime-test, wheel, native and toolkit jobs
+cancelled before runner allocation (`runner_id=0`, no steps) may remain unverified.
+The unstarted wheel aggregation job may be skipped because its seven-file input
+set is unavailable; preparation instead verifies the five included distributions
+against original producer ZIP digests and individual source receipts. Executed
+failures, cancellation after allocation/steps, missing or unexpected jobs and
+non-Mac failures remain blocking. Original conclusions and allocation evidence
+are retained, never rewritten as successes. Release notes explicitly state
+Linux/Windows-only delivery, absent macOS files, and unverified Mac jobs.
+
+Before retrying a hosted allocation failure, inspect runner identity, steps and
+check annotations. A passing `macos-latest` job may resolve to a different OS pool
+than `macos-15`; an operational status page does not disprove a job-specific
+capacity failure. Preserve successful siblings and avoid repeated unchanged
+retries. Neither public action-use permissions nor a self-hosted runner inventory
+establish account hosted-runner quota or a global outage.
+
+Core release recovery can dispatch its existing workflow from `community` with
+the original immutable `release_tag` and full `source_sha`. Both jobs bind the
+checkout to that tag, require merged ancestry and matching package version, and
+only Josh may dispatch or rerun recovery. Select the setup-python interpreter with
+`poetry env use` before synchronization: pipx's Poetry interpreter can otherwise
+select a newer Python than the declared compatibility lane. Never move a failed
+release tag or substitute a new package source during recovery. Existing artifact
+inventory, clean-wheel, digest and publication credential gates still apply.
 
 The current manual native route consumes credential-free qualification binaries.
 It fails closed if **any** existing native signing credential is configured;
