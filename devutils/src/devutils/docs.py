@@ -33,6 +33,7 @@ def normalize_generic_alias_docs(output: Path, package_name: str) -> None:
             line
             for line in overview.split("\n")
             if f"[`builtins.{origin}`]" not in line
+            and f"[`{package_name}.{origin}`]" not in line
         )
         entry = f"- **{name}**"
         if entry not in text:

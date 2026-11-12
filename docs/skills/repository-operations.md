@@ -5083,7 +5083,9 @@ to make a Windows fixture pass. This does not qualify child execution on Windows
 Generated class overview links must point to the public page where a reexport is
 rendered, while source inspection still uses its defining module. The generator's
 explicit `doc_module` binding and reexport regression prevent private-module links
-and Python-version-dependent overview output.
+and Python-version-dependent overview output. GenericAlias normalization removes
+synthetic origin-class entries under both legacy builtin and public-module
+overview labels, preserving the actual exported variable across Python versions.
 
 ### Manual Runtime release preparation and publication
 

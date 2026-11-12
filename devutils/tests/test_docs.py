@@ -6,7 +6,10 @@ import pytest
 from devutils.docs import normalize_generic_alias_docs
 
 
-def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkeypatch):
+@pytest.mark.parametrize("overview_module", ["builtins", "alias_fixture"])
+def test_generic_alias_docs_match_python_310_and_312_renderings(
+    tmp_path, monkeypatch, overview_module
+):
     module = ModuleType("alias_fixture")
     module.__all__ = ["Row"]
     module.Row = list[str]
@@ -27,7 +30,7 @@ def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkey
         module_file.write_text(rendering)
         overview_file.write_text(
             overview
-            + "- [`builtins.list`](./builtins.md#class-list): Built-in mutable sequence.\n"
+            + f"- [`{overview_module}.list`](./{overview_module}.md#class-list): Built-in mutable sequence.\n"
         )
         normalize_generic_alias_docs(tmp_path, "alias_fixture")
         assert module_file.read_text() == canonical
