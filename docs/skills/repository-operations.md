@@ -5196,6 +5196,14 @@ only Josh may dispatch or rerun recovery. Select the setup-python interpreter wi
 select a newer Python than the declared compatibility lane. Never move a failed
 release tag or substitute a new package source during recovery. Existing artifact
 inventory, clean-wheel, digest and publication credential gates still apply.
+When executing a workflow shell step in a test, supply its effective job-level
+environment as well as GitHub's event variables. In recovery, `RELEASE_TAG` is
+the selected immutable tag while `GITHUB_REF_NAME` is the controller branch;
+exercise both a matching and mismatched selected tag so the inventory guard is
+tested rather than failing early on an unrelated missing variable.
+Use `RUNNER_TEMP` for release-step inventory scratch and set it to each test's
+own directory. Global `/tmp/core-*` filenames let parallel shell tests read one
+another's inventories; separate the state rather than serializing the checks.
 
 The current manual native route consumes credential-free qualification binaries.
 It fails closed if **any** existing native signing credential is configured;
@@ -5224,9 +5232,11 @@ CDN, S3, template, credential or security-setting mutation is part of this butto
    controller deliberately does not depend on those events.
 
 Publication reserves a manifest-bound draft before any PyPI upload and stages
-all four native assets there. Only exact missing PyPI files are uploaded, with
+the profile's exact native inventory there (four assets for `all`, three for
+`linux-windows`). Only exact missing PyPI files are uploaded, with
 all existing filename/digest/size entries checked first. The tag and public
-native release follow confirmation of the complete seven-file PyPI set.
+native release follow confirmation of the complete profile-specific PyPI set
+(seven files for `all`, five for `linux-windows`).
 Cross-service publication is not atomic: an interruption can leave a prefix on
 PyPI and a private native draft. Rerun **publication** with the original inputs;
 it reconciles actual remote state first and adds only missing matching files.

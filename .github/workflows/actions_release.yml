@@ -94,10 +94,10 @@ jobs:
           fi
           printf '%s\n' \
             "actions_core-$package_version-py3-none-any.whl" \
-            "actions_core-$package_version.tar.gz" | sort > /tmp/core-expected
+            "actions_core-$package_version.tar.gz" | sort > "$RUNNER_TEMP/core-expected"
           find dist -mindepth 1 -maxdepth 1 -printf '%f\n' | sort \
-            > /tmp/core-actual
-          diff -u /tmp/core-expected /tmp/core-actual
+            > "$RUNNER_TEMP/core-actual"
+          diff -u "$RUNNER_TEMP/core-expected" "$RUNNER_TEMP/core-actual"
           test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2
           test -f "dist/actions_core-$package_version-py3-none-any.whl"
           test ! -L "dist/actions_core-$package_version-py3-none-any.whl"
@@ -200,10 +200,10 @@ jobs:
           printf '%s\n' \
             "actions_core-$package_version-py3-none-any.whl" \
             "actions_core-$package_version.tar.gz" \
-            "actions-core-manifest.sha256" | sort > /tmp/core-expected
+            "actions-core-manifest.sha256" | sort > "$RUNNER_TEMP/core-expected"
           find dist -mindepth 1 -maxdepth 1 -printf '%f\n' | sort \
-            > /tmp/core-actual
-          diff -u /tmp/core-expected /tmp/core-actual
+            > "$RUNNER_TEMP/core-actual"
+          diff -u "$RUNNER_TEMP/core-expected" "$RUNNER_TEMP/core-actual"
           test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 3
           test ! -L dist/actions-core-manifest.sha256
           test ! -L "dist/actions_core-$package_version-py3-none-any.whl"
