@@ -7653,3 +7653,11 @@ manual QA run cannot replace release qualification, whose event, complete-tree,
 job-count and artifact-source checks still apply. Do not rerun successful frozen
 matrices merely to start independent Mac QA or infer passing results from an
 unallocated runner.
+
+A platform-limited Runtime release does not automatically qualify the maintained
+Homebrew `action-server` cask. Its existing resolver requires Linux and Mac
+assets at one version, while the publisher retains only one package release.
+Keep the prior supported cask and referenced Mac assets intact when a new Runtime
+release omits Mac. A per-platform tap update needs a reviewed delivery contract
+that preserves those references; do not remove the Mac block, fabricate an asset,
+or dispatch the retired Sema4AI workflow to force a version bump.

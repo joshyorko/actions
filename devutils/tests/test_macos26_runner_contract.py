@@ -56,6 +56,9 @@ def test_native_manual_mode_is_mac_only_without_changing_default_coverage():
         workflow[True]["workflow_dispatch"]["inputs"]["runner_scope"]["default"]
         == "all"
     )
+    assert workflow["jobs"]["build-external"]["name"] == (
+        "Build Action Server binary without credentials (${{ matrix.os }})"
+    )
     expression = workflow["jobs"]["build-external"]["strategy"]["matrix"]["include"]
     choices = [
         json.loads(value) for value in re.findall(r"fromJSON\('([^']+)'\)", expression)

@@ -26,7 +26,7 @@ defaults:
 
 jobs:
   build-external:
-    name: Build Action Server binary without credentials
+    name: Build Action Server binary without credentials (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     strategy:
