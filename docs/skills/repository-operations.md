@@ -7661,3 +7661,19 @@ Keep the prior supported cask and referenced Mac assets intact when a new Runtim
 release omits Mac. A per-platform tap update needs a reviewed delivery contract
 that preserves those references; do not remove the Mac block, fabricate an asset,
 or dispatch the retired Sema4AI workflow to force a version bump.
+
+A published reduced-platform preparation cannot be expanded through a retry:
+its owned release body, native/PyPI inventory, checksum and recovery copies are
+bound to the original manifest. The current supported complete-platform route
+uses a fresh Runtime version with fresh artifacts and the usual qualification,
+two-backup and validation gates. Never rename an old binary or replace a
+published checksum to simulate the new version. Core/SDK versions and dependency
+locks can remain unchanged for a delivery-only Runtime patch when their contracts
+and declared dependencies are unchanged. Update Runtime package/module version,
+prepared verifier, changelog, example pins and release-identity tests together.
+
+Before replacing an obsolete queued wheel run with qualification for a new
+version, preserve successful sibling ZIPs and source receipts with their GitHub
+digests. Recheck that only the Mac job is unfinished, with no runner or steps,
+before cancellation. A fresh queue request is not proof that capacity is available;
+report the replacement run/job identity and actual assignment separately.

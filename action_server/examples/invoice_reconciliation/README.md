@@ -1,6 +1,6 @@
 # Synthetic invoice reconciliation
 
-Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.0**,
+Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.1**,
 Core **1.1.0**, Work Items **0.5.0**, Python **3.12.15** and RCC **18.19.8**. These candidate
 packages are not assumed to exist on PyPI. The engine remains in Actions; this
 example composes its existing SQL, Canvas/MCP, review, worker and artifact APIs.
@@ -90,7 +90,7 @@ the source SHA and every file hash. Run it from a committed Actions checkout:
 ```bash
 python action_server/examples/invoice_reconciliation/export.py \
   --output /absolute/fresh/owned/export \
-  --runtime-wheel /absolute/owned/actions_runtime-1.1.0-cp312-cp312-linux_x86_64.whl \
+  --runtime-wheel /absolute/owned/actions_runtime-1.1.1-cp312-cp312-linux_x86_64.whl \
   --core-wheel /absolute/owned/actions_core-1.1.0-py3-none-any.whl \
   --sdk-wheel /absolute/owned/actions_work_items-0.5.0-py3-none-any.whl \
   --canvas /absolute/owned/canvas.html

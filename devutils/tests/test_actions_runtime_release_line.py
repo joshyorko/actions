@@ -50,9 +50,9 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.1.0"
+    assert pyproject["version"] == "1.1.1"
     assert runtime.__version__ == pyproject["version"]
-    assert runtime.version_info == [1, 1, 0]
+    assert runtime.version_info == [1, 1, 1]
     # Candidate source advances independently of the exact published floor.
     floor = (
         ROOT / "action_server/scripts/verify_published_runtime_floor.py"
@@ -212,7 +212,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     changelog = (
         ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
     ).read_text()
-    tag = "actions-runtime-1.1.0"
+    tag = "actions-runtime-1.1.1"
     headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
     release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
     release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")
