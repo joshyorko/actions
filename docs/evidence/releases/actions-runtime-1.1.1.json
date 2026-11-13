@@ -418,7 +418,7 @@
       }
     ],
     "all_public_pypi_bytes_match_preparation": true,
-    "native_release_finalization_pending": true
+    "native_release_finalization_pending": false
   },
   "companions": {
     "core": {
