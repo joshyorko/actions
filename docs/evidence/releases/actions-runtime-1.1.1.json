@@ -595,5 +595,39 @@
     "Known direct-JSON-file SDK failure-finalization mismatch is unchanged; see sdk-direct-file-failure-contract.json.",
     "Installed extension composition is independently owned; no new composition proof is inferred from source equality.",
     "Maintained Homebrew cask remains Linux x86-64 only."
-  ]
+  ],
+  "homebrew": {
+    "checked_utc": "2026-11-13T00:17:44.743122+00:00",
+    "package": "joshyorko/tools/action-server",
+    "scope": "Linux x86-64 only; macOS is not supported by this cask",
+    "installed_version": "1.1.1",
+    "sha256": "8c27fbed198aef16c98cdc7a45230fbc4708b06dff1c3523aeddfcdf7840efd0",
+    "size": 104464218,
+    "available_url": "https://github.com/joshyorko/homebrew-tools/releases/download/action-server-1.1.1/actions-runtime-1.1.1-linux64",
+    "actual_mirror_download_install_hash_verified": true,
+    "upstream_native_hash_identical": true,
+    "pr": "https://github.com/joshyorko/homebrew-tools/pull/200",
+    "merge_commit": "71f7dcca3d61ac3f13f24e7f2e3b8e6dc9a032e7",
+    "package_artifact_ci_run": 43334482566,
+    "package_artifact_ci_job": 131587924977,
+    "publisher_run": 43333877181,
+    "mirror_release_url": "https://github.com/joshyorko/homebrew-tools/releases/tag/action-server-1.1.1",
+    "previous_releases_preserved": {
+      "1.0.4": {
+        "asset_names_digests_unchanged": true,
+        "asset_names": [
+          "actions-runtime-1.0.4-linux64",
+          "actions-runtime-1.0.4-macos-arm64"
+        ]
+      },
+      "1.1.0": {
+        "asset_names_digests_unchanged": true,
+        "asset_names": [
+          "actions-runtime-1.1.0-linux64"
+        ],
+        "release_asset_ids_sizes_unchanged": true
+      }
+    },
+    "unrelated_upgrades_or_pruning": false
+  }
 }

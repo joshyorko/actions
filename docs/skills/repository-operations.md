@@ -1871,7 +1871,10 @@ the workflow; generated YAML is not authoritative. The maintained Homebrew tap
 is `joshyorko/homebrew-tools`; its `action-server` cask is Linux x86_64 only.
 Prepare a tap update after the upstream Linux asset exists and its actual
 GitHub SHA-256 digest is verified. The resolver, cask renderer, mirror bundle and
-Linuxbrew install/version gate must agree; do not advertise a missing Mac asset. The tap
+Linuxbrew install/version gate must agree; do not advertise a missing Mac asset.
+Native release coverage and tap support are separate: a full-platform Runtime
+release does not automatically restore Mac support in the Linux-only cask.
+Retained older Mac mirror assets do not advertise current cask support. The tap
 README documents the `action-server-daily` auto-update slot and its manual
 `action=ci` then `action=release` workflow inputs. Do not dispatch the retired
 Sema4AI `publish.yml` workflow.
