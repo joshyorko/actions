@@ -5257,6 +5257,12 @@ artifact available until the release is complete; do not rebuild nondeterministi
 artifacts to resume a partial publication.
 
 GitHub's release API lists private drafts only to callers with push access.
+An owned draft was visible in the authenticated release inventory while its
+tag-specific lookup returned 404 before tag publication. Reconcile its exact
+manifest-bound body, source and asset inventory; a tag lookup alone does not
+prove that no draft exists. Keep reconciliation and a recovery mutation in one
+checked sequence (`set -euo pipefail` or checked subprocess calls), so a failed
+read cannot fall through to an unintended retry.
 Read-only validation therefore checks visible bytes and tag identity and reports
 that private-draft ownership remains the writer's responsibility. It does not
 adopt or authorize an unseen draft. The writer repeats all checks with its

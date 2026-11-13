@@ -1,0 +1,599 @@
+{
+  "schema": "actions.release-verification/v1",
+  "runtime": {
+    "checked_utc": "2026-11-13T00:06:09.300326+00:00",
+    "version": "1.1.1",
+    "release_url": "https://github.com/joshyorko/actions/releases/tag/actions-runtime-1.1.1",
+    "published_at": "2026-11-13T00:00:52Z",
+    "draft": false,
+    "source_sha": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+    "qualification_sha": "9a45770701a666fffd1fcb2a08a19a45374beb53",
+    "platform_profile": "all",
+    "native_files": [
+      {
+        "filename": "actions-runtime-1.1.1-linux64",
+        "url": "https://github.com/joshyorko/actions/releases/download/actions-runtime-1.1.1/actions-runtime-1.1.1-linux64",
+        "sha256": "8c27fbed198aef16c98cdc7a45230fbc4708b06dff1c3523aeddfcdf7840efd0",
+        "size": 104464218
+      },
+      {
+        "filename": "actions-runtime-1.1.1-macos-arm64",
+        "url": "https://github.com/joshyorko/actions/releases/download/actions-runtime-1.1.1/actions-runtime-1.1.1-macos-arm64",
+        "sha256": "6710985b3abf1b87b8719af8dad66d5b63f434a41de0f3eb355cd576fc570e91",
+        "size": 77582306
+      },
+      {
+        "filename": "actions-runtime-1.1.1-sha256.txt",
+        "url": "https://github.com/joshyorko/actions/releases/download/actions-runtime-1.1.1/actions-runtime-1.1.1-sha256.txt",
+        "sha256": "3683f654217b4a9868c1581d13025af2a93093ccbcc87ca6b97c35a55dfef48b",
+        "size": 298
+      },
+      {
+        "filename": "actions-runtime-1.1.1-windows64.exe",
+        "url": "https://github.com/joshyorko/actions/releases/download/actions-runtime-1.1.1/actions-runtime-1.1.1-windows64.exe",
+        "sha256": "0388d7f2e4080ba5c3a800bb556f8f01a65aa4834f3698eceb240888288fd8d2",
+        "size": 71853568
+      }
+    ],
+    "all_anonymous_public_native_downloads_match_preparation": true,
+    "production_input_comparison": {
+      "schema": "actions.production-input-byte-comparison/v1",
+      "checked_utc": "2026-11-12T23:48:50.507800+00:00",
+      "source": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+      "qualified": "9a45770701a666fffd1fcb2a08a19a45374beb53",
+      "qa": "5310adf49be8a6799790f8cb2bdca32c9ccd492d",
+      "baseline": "b3e20f961b5a8c8170c8bf35f1cf82657ccd9205",
+      "scope": [
+        "action_server/src",
+        "actions/src",
+        "work-items/src",
+        "actions-http-helper/src",
+        "common/src",
+        "build_common",
+        "action_server/frontend/apps",
+        "action_server/frontend/src",
+        "action_server/frontend/public",
+        "action_server/frontend/scripts",
+        "action_server/frontend/package.json",
+        "action_server/frontend/package-lock.json",
+        "action_server/frontend/vite.config.ts",
+        "action_server/oauth2",
+        "action_server/pyproject.toml",
+        "action_server/poetry.lock",
+        "action_server/build.py",
+        "actions/pyproject.toml",
+        "actions/poetry.lock",
+        "work-items/pyproject.toml",
+        "work-items/poetry.lock",
+        "actions-http-helper/pyproject.toml",
+        "actions-http-helper/poetry.lock",
+        "developer/setup.yaml",
+        "developer/setup_windows_amd64.yaml",
+        "developer/toolkit.yaml"
+      ],
+      "file_count": 635,
+      "unchanged_files": 633,
+      "differences": [
+        {
+          "path": "action_server/pyproject.toml",
+          "qa_sha256": "cf838b376aef19a54475f1b0c0e3331851456b12e8b6bf272e4044148bc8358b",
+          "source_sha256": "08376bfce41a2f50f09da1a4fd2b2af59e2c5434255eaa9c171f9cde21bae70c",
+          "diff": "diff --git a/action_server/pyproject.toml b/action_server/pyproject.toml\nindex 665ccec6..a568ca04 100644\n--- a/action_server/pyproject.toml\n+++ b/action_server/pyproject.toml\n@@ -1,6 +1,6 @@\n [tool.poetry]\n name = \"actions-runtime\"\n-version = \"1.1.0\"\n+version = \"1.1.1\"\n description = \"Actions Runtime \u2014 serve Python actions through HTTP and MCP\"\n authors = [\"Joshua Yorko\"]\n maintainers = [\"Joshua Yorko\"]\n"
+        },
+        {
+          "path": "action_server/src/actions/server/__init__.py",
+          "qa_sha256": "5fb9da45afbe938dc19103f0b0a5c85f75f47eb87bd16f935323d690ab885f30",
+          "source_sha256": "337332cf83a45cfb79196e602626fe2b81138e49e190dee245f109d9afb237ca",
+          "diff": "diff --git a/action_server/src/actions/server/__init__.py b/action_server/src/actions/server/__init__.py\nindex 6dc1973e..55f18ab8 100644\n--- a/action_server/src/actions/server/__init__.py\n+++ b/action_server/src/actions/server/__init__.py\n@@ -1,7 +1,7 @@\n import re as _re\n from typing import List\n \n-__version__ = \"1.1.0\"\n+__version__ = \"1.1.1\"\n version_info = [int(x) for x in _re.findall(r\"\\d+\", __version__)[:3]]\n \n __all__: List[str] = []\n"
+        }
+      ],
+      "runtime_only_change": "version1.1.0 to1.1.1; companion metadata, dependency locks and security floors unchanged",
+      "qualification": "fresh native3platform and7distribution artifacts; prior installed QA not substituted for these builds",
+      "additional_build_controller_changes": [
+        ".github/workflows/_gen_workflows.py",
+        ".github/workflows/actions_core_tests.yml",
+        ".github/workflows/actions_release.yml",
+        ".github/workflows/actions_runtime_binary_release.yml",
+        ".github/workflows/actions_runtime_pypi_release.yml",
+        ".github/workflows/actions_runtime_recovery.yml",
+        ".github/workflows/actions_runtime_tests.yml",
+        ".github/workflows/developer_toolkit.yml",
+        ".github/workflows/frontend-build-unauthenticated.yml",
+        ".github/workflows/frontend-build.yml",
+        ".github/workflows/http_helper_tests.yml",
+        ".github/workflows/runtime-release-prepare.yml",
+        "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md",
+        "action_server/scripts/publish_verified_runtime.py",
+        "action_server/scripts/runtime_release_button.py",
+        "action_server/scripts/serve_managed_acceptance_fixture.py",
+        "action_server/scripts/test_native_artifact_manifest.py",
+        "action_server/scripts/verify_published_runtime_floor.py",
+        "action_server/scripts/write_native_artifact_manifest.py"
+      ]
+    },
+    "production_input_scope": [
+      "action_server/src",
+      "actions/src",
+      "work-items/src",
+      "actions-http-helper/src",
+      "common/src",
+      "build_common",
+      "action_server/frontend/apps",
+      "action_server/frontend/src",
+      "action_server/frontend/public",
+      "action_server/frontend/scripts",
+      "action_server/frontend/package.json",
+      "action_server/frontend/package-lock.json",
+      "action_server/frontend/vite.config.ts",
+      "action_server/oauth2",
+      "action_server/pyproject.toml",
+      "action_server/poetry.lock",
+      "action_server/build.py",
+      "actions/pyproject.toml",
+      "actions/poetry.lock",
+      "work-items/pyproject.toml",
+      "work-items/poetry.lock",
+      "actions-http-helper/pyproject.toml",
+      "actions-http-helper/poetry.lock",
+      "developer/setup.yaml",
+      "developer/setup_windows_amd64.yaml",
+      "developer/toolkit.yaml"
+    ],
+    "publication_run_id": 43333009507,
+    "publication_attempt": 2,
+    "manifest_sha256": "a725e640abb7ae18ec88ed94091c17016b56b14749bebf6f2765742eef93ec4b",
+    "runtime_pypi_receipt": "runtime111-public-verification.json",
+    "composition_acceptance": "not inferred; existing VSCode owner verifies actual installed composition"
+  },
+  "runtime_pypi": {
+    "checked_utc": "2026-11-13T00:03:58.201437+00:00",
+    "source_sha": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+    "qualification_sha": "9a45770701a666fffd1fcb2a08a19a45374beb53",
+    "platform_profile": "all",
+    "manifest_sha256": "a725e640abb7ae18ec88ed94091c17016b56b14749bebf6f2765742eef93ec4b",
+    "files": [
+      {
+        "filename": "actions_runtime-1.1.1-cp312-cp312-macosx_12_0_arm64.whl",
+        "url": "https://files.pythonhosted.org/packages/b9/f1/248344a90d457cb092fa85df0b2dda07a1a329677eb76b3291f6ad5fdb0b/actions_runtime-1.1.1-cp312-cp312-macosx_12_0_arm64.whl",
+        "sha256": "df8d898d3dac1ca9a3b817395774f5e0744e5e7e2538f04b670e85f5ac6526e8",
+        "size": 14198087,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/b3/1a/a8e2fc91e6b840ba87fa6d1fbc3ea4b2c93deb33b7bd579428165a36743c/actions_runtime-1.1.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "9e6dbe3508437de8eb6c0996523af3fc3e86b832833b55735c1eb0601d2bec16",
+        "size": 15107757,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1-cp312-cp312-win_amd64.whl",
+        "url": "https://files.pythonhosted.org/packages/f0/bd/6cc6d6252364f287a42a10add6f59ec9d97af14259398f070c3da71f7b97/actions_runtime-1.1.1-cp312-cp312-win_amd64.whl",
+        "sha256": "42f0c3392241d3beb7e1b2db680d11fe3a998624d2d493f3ee6f38c67305ea12",
+        "size": 12567746,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1-cp313-cp313-macosx_12_0_arm64.whl",
+        "url": "https://files.pythonhosted.org/packages/ef/d6/d2010bb5ca90c2cf3c1bd03380a9366cbb5d4d5b5614b1b9c677e3578604/actions_runtime-1.1.1-cp313-cp313-macosx_12_0_arm64.whl",
+        "sha256": "bba3682110b70207ff55287806f676d69458cd6872e498caccc769537e548e15",
+        "size": 14198087,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "url": "https://files.pythonhosted.org/packages/ef/2e/cd29aff7339ace2e03054e246262c41e5195ebbbbf49b5045f3de63f579a/actions_runtime-1.1.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "b1561427be68b1bade7646c0a0aa952807b21061b4d831a0819e3e8671a3db6b",
+        "size": 15107754,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1-cp313-cp313-win_amd64.whl",
+        "url": "https://files.pythonhosted.org/packages/a6/40/d5c22fd7e6933c0a61c1b220c4955f50ab74f58f400343e6bb5ac890e2aa/actions_runtime-1.1.1-cp313-cp313-win_amd64.whl",
+        "sha256": "f1bf66b6174461d853ede307367b91c182484d88de9cb92e44f028cba7c955b9",
+        "size": 12567745,
+        "metadata": {
+          "name": "actions-runtime",
+          "version": "1.1.1",
+          "requires_python": ">=3.12,<3.14",
+          "requires_dist": [
+            "actions-core (>=1.1.0,<2.0.0)",
+            "actions-http-helper (>=1.0.3,<2.0.0)",
+            "actions-work-items (>=0.5.0,<0.6.0)",
+            "aiohttp (>=3.14.4,<4.0.0)",
+            "aiosmtplib (>=3.0.0,<4.0.0)",
+            "certifi (>=2026.10.19)",
+            "croniter (>=2.0.0,<3.0.0)",
+            "cryptography (>=50.0.0,<51.0.0)",
+            "duckdb (==1.4.1) ; extra == \"data-duckdb\"",
+            "fastapi-slim (>=0.121.1,<0.122.0)",
+            "httpx2 (>=2.12.0,<3.0.0)",
+            "jsonschema (>=4.23.0,<5.0.0)",
+            "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+            "mcp (>=2.0.0,<3.0.0)",
+            "msgspec (>=0.19,<0.20)",
+            "psutil (>=5.0,<8.0)",
+            "psycopg[binary] (>=3.2.0,<4.0.0)",
+            "pydantic (>=2.12.4,<3.0.0)",
+            "pyjwt (>=2.14.0,<3.0.0)",
+            "pytz (>=2024.1,<2025.0)",
+            "pyyaml (>=6.0.3,<7.0.0)",
+            "redis (>=5.0.0,<6.0.0)",
+            "requests (>=2,<3)",
+            "requests_oauthlib (>=2.0,<3.0)",
+            "rfc8785 (==0.1.4)",
+            "termcolor (>=3.2.0,<4.0.0)",
+            "urllib3 (>=2.8.0,<3.0.0)",
+            "uvicorn (>=0.38.0,<0.39.0)",
+            "watchfiles (>=1.1.1,<2.0.0)",
+            "websockets (>=15.0.1,<16.0.0)"
+          ]
+        }
+      },
+      {
+        "filename": "actions_runtime-1.1.1.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/e5/74/1eeee84634fd56b67e9b9c07082c993e9772de7dd96c3c7bca6076b3114f/actions_runtime-1.1.1.tar.gz",
+        "sha256": "b73e3bebba1d446754acc41e6c1e716fdcaff6246a12412eaced661f579dc7ec",
+        "size": 1803585
+      }
+    ],
+    "all_public_pypi_bytes_match_preparation": true,
+    "native_release_finalization_pending": true
+  },
+  "companions": {
+    "core": {
+      "version": "1.1.0",
+      "source_sha": "739da0897447167f0d4f2dff79567fce2146e007",
+      "files": [
+        {
+          "filename": "actions_core-1.1.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/e4/80/534babcffeb1a0e56d09900f46028299123a66889648da8ad61aa22660e7/actions_core-1.1.0-py3-none-any.whl",
+          "sha256": "38bd11c756cc60d0c028094d6e7f5f3859d724114e2abd48e54f0951e2a3dac6",
+          "size": 480343
+        },
+        {
+          "filename": "actions_core-1.1.0.tar.gz",
+          "url": "https://files.pythonhosted.org/packages/48/a7/642d2990cdd1607719cbb157210aeeb1d7b64a33857b6cd781fa29f59598/actions_core-1.1.0.tar.gz",
+          "sha256": "135bef2b94a45e25b1adff9358dc2082364afc12617e35efc33e78f32d461554",
+          "size": 444848
+        }
+      ],
+      "requires_python": "<4.0,>=3.10",
+      "requires_dist": [
+        "cryptography>=44.0.1",
+        "tomli<3,>=2.0.1; python_version < \"3.11\"",
+        "truststore<1.0,>=0.10",
+        "psutil<8.0,>=5.0",
+        "docstring_parser_fork<0.0.6,>=0.0.5",
+        "pydantic<3.0.0,>=2.11.7",
+        "actions-http-helper<2.0.0,>=1.0.0",
+        "pyyaml<7.0,>=6.0"
+      ],
+      "wheel_byte_identical_to_qualified_candidate": true,
+      "official_inventory_rechecked_utc": "2026-11-13T00:08:10.338823+00:00"
+    },
+    "sdk": {
+      "version": "0.5.0",
+      "source_sha": "739da0897447167f0d4f2dff79567fce2146e007",
+      "files": [
+        {
+          "filename": "actions_work_items-0.5.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/d6/ce/5c97f58b3edb4afbee1e0b80176d3a79fae09e4edebb3fe6c701d24fbb32/actions_work_items-0.5.0-py3-none-any.whl",
+          "sha256": "0aaea32c8e3b9f25a1de40083909d684418e8b4288fd504383233f53b95dcbb4",
+          "size": 74391
+        },
+        {
+          "filename": "actions_work_items-0.5.0.tar.gz",
+          "url": "https://files.pythonhosted.org/packages/34/75/7129b1cd4691d5ba1624dea8463a432927ad0f87dbbabf63ac315bbed1a2/actions_work_items-0.5.0.tar.gz",
+          "sha256": "957366932bfc9adef1808b95a84d3cf0c3a1ba68e1db3ba5c77f9d34ceb983f9",
+          "size": 63823
+        }
+      ],
+      "requires_python": "<4.0,>=3.10",
+      "requires_dist": [
+        "typing-extensions>=4.6.0",
+        "psycopg[binary]<4,>=3.2; extra == \"postgres\"",
+        "redis>=4.5.0; extra == \"redis\"",
+        "pymongo>=4.18.3; extra == \"docdb\"",
+        "dnspython>=2.9.0; python_version >= \"3.11\" and extra == \"docdb\"",
+        "pymongo>=4.18.3; extra == \"documentdb\"",
+        "dnspython>=2.9.0; python_version >= \"3.11\" and extra == \"documentdb\"",
+        "requests>=2.31.0; extra == \"yorko\"",
+        "certifi>=2026.10.19; extra == \"yorko\"",
+        "urllib3>=2.8.0; extra == \"yorko\"",
+        "redis>=4.5.0; extra == \"all\"",
+        "pymongo>=4.18.3; extra == \"all\"",
+        "dnspython>=2.9.0; python_version >= \"3.11\" and extra == \"all\"",
+        "requests>=2.31.0; extra == \"all\"",
+        "certifi>=2026.10.19; extra == \"all\"",
+        "urllib3>=2.8.0; extra == \"all\""
+      ],
+      "wheel_byte_identical_to_qualified_candidate": true,
+      "official_inventory_rechecked_utc": "2026-11-13T00:08:10.458955+00:00"
+    }
+  },
+  "preparation": {
+    "controller_sha": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+    "preparation_run_id": 43331625122,
+    "preparation_run_attempt": 1,
+    "source_sha": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+    "qualification_sha": "9a45770701a666fffd1fcb2a08a19a45374beb53",
+    "tree": "6952b31f53c92c7e408e51147029ef5df6e13926",
+    "platform_profile": "all",
+    "native_signing": "unsigned; all signing credentials required absent by preparation workflow"
+  },
+  "manifest_sha256": "a725e640abb7ae18ec88ed94091c17016b56b14749bebf6f2765742eef93ec4b",
+  "original_bundle_archive": {
+    "created_at": "2026-11-12T23:48:13Z",
+    "digest": "sha256:727a1ace79979a11f1867ed262002d597d92be3e7fa32d3c68b2c7bd835e9768",
+    "expires_at": "2026-12-12T23:48:02Z",
+    "id": 13994904408,
+    "name": "runtime-release-bundle-43331625122-1",
+    "size_in_bytes": 326491993
+  },
+  "original_archive_sha256": "727a1ace79979a11f1867ed262002d597d92be3e7fa32d3c68b2c7bd835e9768",
+  "recovery": {
+    "backups": [
+      {
+        "head_sha": "0b94e6034ad1f527dbffb96dc1f5d64bfe9f7028",
+        "run_id": 43332402933,
+        "bundle": {
+          "id": 13996440034,
+          "digest": "sha256:55606ad3d4e98c65b1268641c05433ac7ef815c3c3751c2a66509d36e19ea3e3",
+          "size_in_bytes": 326491993
+        },
+        "archive": {
+          "id": 13995557330,
+          "digest": "sha256:c156f5c820c5b02709aec525e028319e943c32753e0de84e76d251779db2d898",
+          "size_in_bytes": 326493300
+        }
+      },
+      {
+        "head_sha": "9407f84f58adaece5bc3825b7c4d25b70458babb",
+        "run_id": 43332602924,
+        "bundle": {
+          "id": 13995587256,
+          "digest": "sha256:dfe6867892b076dadae38de4d1ef02ba5d2c608f55301639692468d14b037f3a",
+          "size_in_bytes": 326491993
+        },
+        "archive": {
+          "id": 13996830146,
+          "digest": "sha256:fcf695c38fe4384f0563f228ecc03ac0c7799c2ab149755fc9892aff5fc789a8",
+          "size_in_bytes": 326493300
+        }
+      }
+    ],
+    "manifest_sha256": "a725e640abb7ae18ec88ed94091c17016b56b14749bebf6f2765742eef93ec4b",
+    "original_archive_sha256": "727a1ace79979a11f1867ed262002d597d92be3e7fa32d3c68b2c7bd835e9768",
+    "preparation_run_id": 43331625122,
+    "source_sha": "9bfc6ca5337dac14851e5ef3b2ea3a41485c81b2",
+    "version": "1.1.1"
+  },
+  "read_only_validation_run_id": 43332802385,
+  "publication_recovery": {
+    "publisher_run_id": 43333009507,
+    "successful_attempt": 2,
+    "original_draft_release_id": 443650080,
+    "same_release_published": true,
+    "native_asset_ids_sizes_digests_unchanged_across_resume": true,
+    "owned_manifest_body_unchanged": true,
+    "first_attempt_stop": "immediate post-upload PyPI completeness visibility check",
+    "resume_scope": "only original failed publication writer; no preparation rerun or rebuild"
+  },
+  "previous_release_preservation": {
+    "checked_utc": "2026-11-13T00:03:51.767689+00:00",
+    "version": "1.1.0",
+    "github_release_id_unchanged": true,
+    "github_asset_ids_sizes_digests_unchanged": true,
+    "tag_source_unchanged": "ced70e0879f93054f8a56a067b584c4c31fc3cb3",
+    "pypi_filenames_sizes_digests_unchanged": true,
+    "native_asset_count": 3,
+    "pypi_file_count": 5
+  },
+  "mac_native_producer": {
+    "source_sha": "cbc83f6030bba5fdf33dc3f790f4764502aa675e",
+    "workflow_run_id": "43322521981",
+    "workflow_run_attempt": "1",
+    "platform": "Darwin",
+    "architecture": "arm64",
+    "runner_label": "macos-26",
+    "host_os_version": "26.7.2",
+    "python_version": "3.12.16",
+    "go_version": "go version go1.23.12 darwin/arm64"
+  },
+  "mac_main_executable_minos": "11.0 frozen andGo-wrapper; actual producer otoolreceipt",
+  "mac_wheel_deployment_target": "macosx_12_0_arm64 CPython3.12/3.13",
+  "qualification_checks": {
+    "head": "9a45770701a666fffd1fcb2a08a19a45374beb53",
+    "passed": 34,
+    "scope": "full platform all; nativebrowser/storage/history andinstalledWorkItems, runtime/core/helper/toolkit/coverage/audit"
+  },
+  "limits": [
+    "Older macOS execution is unverified; newer builder is not older-host acceptance.",
+    "Native delivery is unsigned under verified absent-signing-credentials policy.",
+    "SQLite/PostgreSQL scope retained; celld deferred and unadvertised.",
+    "Known direct-JSON-file SDK failure-finalization mismatch is unchanged; see sdk-direct-file-failure-contract.json.",
+    "Installed extension composition is independently owned; no new composition proof is inferred from source equality.",
+    "Maintained Homebrew cask remains Linux x86-64 only."
+  ]
+}
