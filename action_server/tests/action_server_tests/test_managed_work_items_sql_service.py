@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
 from threading import get_ident
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import pytest
 from action_server_tests import test_invoice_review as review_fixtures
@@ -1254,4 +1254,87 @@ def test_retry_is_not_advertised_without_a_reconciliation_adapter(reviewed):
                 expected_epoch=claim_result["claim"]["epoch"],
                 reason="no managed reconciliation adapter is configured",
             ),
+        )
+
+
+def test_more_than_100_items_page_without_loading_entire_queue(reviewed, monkeypatch):
+    """A later-page state match is not lost after the first 100 items."""
+    from actions.work_items._adapters._sql_review import SQLReviewQueue
+
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    proposal = reviews.offer(actor, scope, handle)
+    queue_ref = _queue(reviews, scope)
+    policy = _Policy(queue_ref.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+    queue = reviews.queue(scope)
+    with db.transaction():
+        for index in range(125):
+            item_id, review_id = str(UUID(int=index + 1)), str(uuid4())
+            # Synthetic reviewed records; the production projection still validates
+            # every row against the exact sealed source and current grants.
+            db.insert(
+                InvoiceReview(
+                    review_id,
+                    scope.application.workspace_id,
+                    proposal.binding.run_id,
+                    str(uuid4()),
+                    reviews._json(proposal.binding),
+                    "approved",
+                    item_id,
+                    "",
+                    "",
+                )
+            )
+            queue.seed_input(
+                {
+                    "schema": "actions.invoice-review/v1",
+                    "review_id": review_id,
+                    "binding": proposal.binding.model_dump(mode="json"),
+                },
+                item_id=item_id,
+            )
+            if index == 124:
+                db.update_by_id(FencedWorkItem, item_id, {"state": "FAILED"})
+
+    def unbounded_read_forbidden(self):
+        raise AssertionError("paging must not materialize the entire queue")
+
+    monkeypatch.setattr(SQLReviewQueue, "list_items", unbounded_read_forbidden)
+    cursor = None
+    seen = set()
+    pages = 0
+    matches = []
+    for _ in range(10):
+        page = service.call(
+            _caller(actor),
+            Inspect(operation="items.list", queue=queue_ref, limit=50, cursor=cursor),
+        )
+        ids = [item["id"] for item in page["items"]]
+        matches.extend(
+            item["id"] for item in page["items"] if item["queue_state"] == "FAILED"
+        )
+        assert len(ids) <= 50
+        assert not seen.intersection(ids)
+        seen.update(ids)
+        pages += 1
+        next_cursor = page["next_cursor"]
+        if next_cursor is None:
+            break
+        assert next_cursor != cursor
+        cursor = next_cursor
+    assert len(seen) == 125 and pages == 3
+    assert matches == [str(UUID(int=125))]
+    empty = service.call(
+        _caller(actor),
+        Inspect(
+            operation="items.list", queue=queue_ref, limit=50, cursor=str(UUID(int=125))
+        ),
+    )
+    assert empty["items"] == [] and empty["next_cursor"] is None
+    policy.permissions.clear()
+    with pytest.raises(ManagedError):
+        service.call(
+            _caller(actor),
+            Inspect(operation="items.list", queue=queue_ref, limit=50, cursor=cursor),
         )

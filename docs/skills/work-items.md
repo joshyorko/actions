@@ -78,6 +78,12 @@ descriptor presence and schema discovery do not prove mutation availability.
 
 ### Exact-result review on the Runtime SQL connection
 
+Decision inference must remain separate from `InvoiceReviewService` approval.
+Its review binding protects a sealed invoice result and the input, source,
+application and deployment revisions; it is not a generic decision receipt.
+A decision adapter must preserve these bindings and cannot treat model
+confidence as the `review` grant.
+
 `InvoiceReviewService` makes a pending proposal over an already sealed invoice
 result. Merely opening the Canvas or offering a proposal creates no Work Item.
 The app-only MCP tools require a trusted server-supplied Actor and scope;
@@ -1679,3 +1685,113 @@ For a dropped invocation response, retain the original request and uncertainty
 across client reload without automatically invoking again. There is no general
 original-request/nonexecution lookup; neither a 404 nor an absent projection is
 permission to execute again.
+
+## Optional decision inference
+
+`actions.server.decisions` is a private trusted composition API for issue #363.
+It is not registered in the default HTTP or MCP catalog. It does not add a queue,
+complete an item, select a destination capability, approve a review, or execute
+an effect. The required OpenAI adapter uses native `POST /v1/decisions`.
+There is no Responses, Jev, or Laya fallback.
+
+### Native provider contract
+
+The [official Decisions guide](https://developers.openai.com/api/docs/guides/decisions)
+and [create reference](https://developers.openai.com/api/reference/resources/decisions/methods/create)
+define separate predicate, choice, and score answers. A predicate carries a
+probability. A choice carries its selected value, the complete array of
+per-option probabilities, and separate confidence. A score carries ordered
+zero-based levels and their probability-weighted score. Refusals have their own
+answer type. Do not deserialize this protocol with an RPA.Decision serializer.
+
+`DecisionInput` limits evidence to 8,192 characters and 16 uniquely named
+questions. The composition root must approve and redact extracts before it
+constructs this input. A bounded string alone does not make customer data safe
+to send. No attachment reader, arbitrary path, SQL, remote image URL, or general
+Knowledge resolver is added here.
+
+`OpenAIDecisionsProvider` accepts a trusted `HostedPolicy` and a secret resolver.
+The policy defaults to disabled, allows only `gpt-6-luna`, and bounds request
+bytes, response bytes, and socket inactivity. A body-stream elapsed deadline
+rejects trickling bytes. This is not a strict wall-clock deadline for DNS and
+response headers. Ordinary tests never enable paid egress. A live billed-project
+smoke and credit-grant activation require separate owner authorization.
+
+### Source and installed capability matrix
+
+Source baseline is `585a0de29a9616237bf6fbe108848b572d50b236`.
+The workstation's installed native executable reports Runtime `1.1.1`.
+That version observation does not establish registered services or the contents
+of a newly built wheel.
+
+| Feature | Source-present | Installed/registered | Authorized | Tested | Limitation | Next owner |
+| --- | --- | --- | --- | --- | --- | --- |
+| SDK payload, attachment, lineage and File/SQLite stores | Yes | Runtime dependency declares Work Items 0.5.x | Adapter-specific | Existing package tests | SDK aliases and Python 3.10 contract remain separate from Runtime | SDK owner |
+| Managed queue, claim and review service | Yes | Installed registration unverified | Trusted injected ports and live grants | Real SQL fixtures | Legacy `/api/work-items` grants no managed authority | Runtime integrator |
+| Managed REST and MCP | Yes | Default-off unless configured | Separate read, review and mutation grants | Existing API fixtures | Forbidden 403, stale or changed input 409, unavailable 503 | Runtime integrator |
+| Sealed invoice Data and review | Private | Candidate wheel private composition qualified | Exact application and deployment binding | Real SQLite and PostgreSQL fixtures | Narrow invoice operation, not general #131 Data | Data owner |
+| DuckDB and PostgreSQL source providers | Yes | Activation unverified | Operator-configured versioned provider | Separate provider fixtures | Missing owned service cannot count as acceptance | Data owner |
+| Knowledge ingest/search | Yes | Installed availability unverified | Knowledge authorizer | Existing source tests | Not consumed by this decision composition | #131 owner |
+| Optional Decisions provider and receipt | Private | Candidate wheel composition qualified; no default registration | Exact scoped provider/policy binding plus current Run grants | 99 focused SQLite/PostgreSQL tests passed, one SQLite-only backend case skipped | Native executable, hosted billing and decision-bound approval remain unverified | #363 integrator |
+| Run/Attempt and output authority | Yes | Native version only observed | Current grants and execution fences | Existing Runtime fixtures | Receipt linkage is not parent-child execution admission | Runtime owner |
+
+### Receipt and review boundaries
+
+The decision composition reuses Runtime SQL `FoundryRequest` records. A committed
+reservation precedes inference. Exact source binding, input, options, provider,
+model, and policy identity determine the authoritative receipt. Receipt deduplication is scoped to the authenticated caller and exact
+application/deployment scope. Another authorized caller can produce a separate
+receipt for the same protected input. Delivery
+keys detect conflicting input but do not authorize a second evaluation of the
+same protected identity. A pending reservation retains its timestamp. A reservation left without a
+completed result after a crash requires investigation; restart never retries the provider automatically.
+Sanitized provider failure codes are retained without raw exceptions or response
+bytes. Full evidence text is not stored in the receipt. The separate question-schema
+digest identifies the question contract without retaining its text.
+
+All model scores remain uncalibrated and the recommendation is `NEEDS_REVIEW`.
+The linked `InvoiceReviewService` proposal authorizes only its sealed source
+binding. It does not approve the decision's question, evidence, model, or policy
+revision. Decision-bound approval and resolution remain unsupported until those
+identities participate in the review contract under #92. Source review tests do
+not establish that acceptance gate. General Work Item routing and workflow
+admission remain owned by #132 and #141.
+
+`DecisionService.read` rechecks the current source and scope authority before it
+returns a receipt. It is a private read projection, not a registered operator UI.
+A public projection still requires the #349/#356 transport and publication work.
+Laya, Jev, calibration, automatic routes, exact claimed Work Item composition,
+and general sealed Knowledge inputs are not implemented by this addition.
+
+### Offline qualification
+
+After the pinned RCC Doctor, Bootstrap, and ToolkitTest tasks, run these commands
+from the `action_server` package in its Poetry environment.
+
+```sh
+poetry run pytest tests/action_server_tests/test_decisions.py
+poetry run pytest tests/action_server_tests/test_managed_work_items_sql_service.py
+```
+
+The managed SQL fixture uses the real Runtime SQLite store and a synthetic
+policy port. PostgreSQL cells require `ACTIONS_INVOICE_TEST_POSTGRES` and an
+owned service. Source tests do not establish installed HTTP registration.
+The item paging regression creates 125 synthetic reviewed items, walks bounded
+cursor pages, and finds a failed-state item after the first 100 records.
+Managed `Inspect` does not accept a server-side state filter; a consumer must
+continue bounded cursor traversal when filtering results locally.
+
+Queue summaries and item pages validate persisted queue formats without calling
+`SQLReviewQueue.list_items`, which would materialize the whole queue before
+pagination. Format validation still runs in the owning SQL transaction.
+
+`SyntheticDocumentProvider` accepts only a synthetic `document_type` value and
+reports `synthetic-document/v1` as its model. It does not claim hosted inference.
+The fresh-process replay test opens existing Runtime SQL with `load_db`;
+`create_db` recreates the schema and is not a restart operation. A source-process
+replay test does not qualify the installed native executable.
+
+An installed candidate wheel can qualify the private Python composition while
+the workstation native executable remains unchanged. Record these as separate
+artifacts. Wheel tests do not prove default transport registration or the native
+release gate.

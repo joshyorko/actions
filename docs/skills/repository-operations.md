@@ -1,5 +1,17 @@
 # Repository Operations
 
+## Pinned RCC on a newer workstation
+
+The developer gateway validates RCC `v18.19.8`. A newer `rcc` on `PATH` can fail
+Doctor before any package test runs. Do not override
+`ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION` to hide that mismatch.
+After package Bootstrap, the Action Server build supplies the pinned Linux
+binary at `action_server/src/actions/server/bin/rcc-18.19.8`. Verify its version
+and invoke that binary from the repository root for subsequent toolkit tasks.
+This uses the repository pin without downgrading the workstation installation.
+The repository launcher remains the bootstrap path when the bundled binary is
+not available.
+
 ## OpenAPI, MCP and publication boundaries
 
 OpenAPI schema inclusion, MCP discovery and authorization are separate
