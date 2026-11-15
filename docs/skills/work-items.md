@@ -1795,3 +1795,25 @@ An installed candidate wheel can qualify the private Python composition while
 the workstation native executable remains unchanged. Record these as separate
 artifacts. Wheel tests do not prove default transport registration or the native
 release gate.
+
+### Ordinary Robot example
+
+[`examples/decisions_robot/tasks.robot`](../../examples/decisions_robot/tasks.robot)
+is a serial local SDK example. Its prepared-interpreter commands are in the
+[example README](../../examples/decisions_robot/README.md). It persists typed
+review-only evidence as child output Work Items and leaves source items pending.
+A second Python process replays the persisted decisions without inference.
+A retained `EVALUATING` output fails closed after interruption. This demonstrates
+local persistence; it does not qualify managed claims or decision-bound approval.
+
+`HostedPolicy.project_id` sends the trusted project scope in `OpenAI-Project`.
+Neither the Robot example nor the single-request live smoke patches global
+provider or Requests methods. Hosted execution requires explicit live opt-in,
+a fresh `OPENAI_API_KEY_FILE`, and `OPENAI_PROJECT_ID`. The ordinary task uses
+only synthetic data. An OpenAI task would make three requests; the separate live
+smoke makes one. Neither is authorized merely by providing a secret file.
+
+The native provider identity includes a digest of the trusted hosted project.
+Changing projects changes the protected decision context; an old project receipt
+cannot silently replay under the new project. Credential values never enter that
+identity.

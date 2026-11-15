@@ -38,7 +38,8 @@ venv
 dist/
 
 # Removed old files
-/examples/
+/examples/*
+!/examples/decisions_robot/
 /**/output/
 /action_server/build-binary/*.html
 /action_server/build-binary/*.json

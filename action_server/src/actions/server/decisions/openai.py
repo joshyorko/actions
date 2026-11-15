@@ -23,6 +23,7 @@ class HostedPolicy(Value):
     enabled: bool = False
     secret_ref: str = Field(min_length=1, max_length=128)
     model: Literal["gpt-6-luna"] = "gpt-6-luna"
+    project_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_-]{1,128}$")
     max_input_bytes: int = Field(default=16384, ge=1, le=65536)
     timeout_seconds: int = Field(default=10, ge=1, le=30)
     max_response_bytes: int = Field(default=65536, ge=1, le=262144)
@@ -35,6 +36,12 @@ class OpenAIDecisionsProvider:
         self, policy: HostedPolicy, resolve_secret: Callable[[str], str | None]
     ):
         self.policy = HostedPolicy.model_validate(policy)
+        self.identity = type(self).identity
+        if self.policy.project_id is not None:
+            self.identity += (
+                "/project-"
+                + hashlib.sha256(self.policy.project_id.encode()).hexdigest()
+            )
         self.resolve_secret = resolve_secret
         self._active = threading.Lock()
 
@@ -150,16 +157,19 @@ class OpenAIDecisionsProvider:
                 or "\r" in secret
             ):
                 raise ProviderFailure("credential_unavailable")
+            headers = {
+                "Authorization": "Bearer " + secret,
+                "Content-Type": "application/json",
+            }
+            if self.policy.project_id is not None:
+                headers["OpenAI-Project"] = self.policy.project_id
             deadline = time.monotonic() + self.policy.timeout_seconds
             with requests.Session() as session:
                 session.trust_env = False
                 with session.post(
                     "https://api.openai.com/v1/decisions",
                     data=body,
-                    headers={
-                        "Authorization": "Bearer " + secret,
-                        "Content-Type": "application/json",
-                    },
+                    headers=headers,
                     timeout=min(1, self.policy.timeout_seconds),
                     allow_redirects=False,
                     stream=True,
