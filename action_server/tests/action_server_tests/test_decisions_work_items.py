@@ -577,3 +577,30 @@ def test_unfinished_receipt_checks_workspace_before_revealing_state(claimed):
     with pytest.raises(ProviderFailure, match="evaluation_uncertain"):
         service.read(caller, row.id)
     assert stub.calls == 1
+
+
+def test_integrated_hosted_harness_contract_without_network(
+    claimed, tmp_path, monkeypatch
+):
+    from action_server_tests.test_decisions_managed_live import (
+        test_one_hosted_request_through_managed_robot_review_and_restart,
+    )
+
+    from actions.server.decisions.openai import OpenAIDecisionsProvider
+
+    def no_network(*args, **kwargs):
+        raise AssertionError("offline harness reached network")
+
+    def synthetic_native(self, request):
+        value = Classifier().evaluate(request)
+        return value.model_copy(
+            update={"model": "gpt-6-luna", "request_id": "synthetic-not-live"}
+        )
+
+    monkeypatch.setenv("DECISIONS_MANAGED_LIVE", "1")
+    monkeypatch.setenv("OPENAI_API_KEY_FILE", str(tmp_path / "must-not-be-read"))
+    monkeypatch.setenv("OPENAI_PROJECT_ID", "proj_offline")
+    monkeypatch.delenv("DECISIONS_LIVE_RECEIPT_FILE", raising=False)
+    monkeypatch.setattr("requests.Session.post", no_network)
+    monkeypatch.setattr(OpenAIDecisionsProvider, "evaluate", synthetic_native)
+    test_one_hosted_request_through_managed_robot_review_and_restart(claimed, tmp_path)

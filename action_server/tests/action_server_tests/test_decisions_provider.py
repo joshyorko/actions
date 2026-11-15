@@ -101,3 +101,17 @@ def test_project_change_changes_protected_provider_identity():
     assert first.identity != second.identity
     assert first.identity == rotated.identity
     assert len(first.identity) <= 128
+
+
+@pytest.mark.parametrize("score", [-0.0000001, 2.0000005])
+def test_score_outside_level_range_rejected_even_within_rounding_tolerance(score):
+    from action_server_tests.test_decisions import response
+
+    data = response("score")
+    answer = data["answers"][0]
+    weights = [1.0, 0.0, 0.0] if score < 0 else [0.0, 0.0000005, 1.0]
+    for entry, weight in zip(answer["probabilities"], weights):
+        entry["probability"] = weight
+    answer["score"] = score
+    with pytest.raises(ProviderFailure, match="invalid_response"):
+        OpenAIDecisionsProvider.parse(request("score"), data, None)

@@ -1895,3 +1895,23 @@ publishable after lease expiry. The late-expiry counterexample failed before
 this guard and passes with it. Registered SDK writers use the same host-owned
 Workspace transaction lock; the PostgreSQL two-connection cancellation test
 qualifies that ordering separately from SQLite writer serialization.
+
+The [credit evidence receipt](../program/evidence/decisions-363-credit-evidence.json)
+separates the read-only linked-benefit observation, operator-supplied active-grant
+screenshot, and operator confirmation of the API key's organization. The private
+screenshot and financial amounts are not published. No grant activation or
+billing-ledger query is inferred from those observations.
+
+Native score answers must remain inside the declared zero-based level range even
+when floating-point rounding tolerance accepts the distribution sum. Boundary
+regressions cover negative and above-maximum scores within that tolerance.
+
+`test_decisions_managed_live.py` is a separately opted-in, single-request hosted
+acceptance harness. `DECISIONS_MANAGED_LIVE=1`, a T3-delivered key file, and the
+trusted project are required. Only its SQLite case makes a request; PostgreSQL
+is qualified offline. The actual managed Robot task performs inference and
+idempotent replay, then the fixture records a separate human resolution and
+reopens Runtime SQL in a fresh process without inference. The native adapter
+caps input at 4 KiB, and a second provider invocation is rejected. Ordinary CI
+skips this hosted gate. Its offline harness-contract test forbids network access.
+A prior one-request smoke authorization does not authorize this additional call.

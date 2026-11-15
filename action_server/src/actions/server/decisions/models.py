@@ -106,6 +106,8 @@ class Answer(Value):
         else:
             if self.choice is not None or self.score is None:
                 raise ValueError("invalid score answer")
+            if not 0 <= self.score <= len(question.options) - 1:
+                raise ValueError("score outside declared levels")
             for p in self.probabilities:
                 if (
                     not isinstance(p.value, int)
