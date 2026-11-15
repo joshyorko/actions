@@ -604,3 +604,17 @@ def test_integrated_hosted_harness_contract_without_network(
     monkeypatch.setattr("requests.Session.post", no_network)
     monkeypatch.setattr(OpenAIDecisionsProvider, "evaluate", synthetic_native)
     test_one_hosted_request_through_managed_robot_review_and_restart(claimed, tmp_path)
+
+
+def test_cancelled_claim_keeps_authorized_history_but_never_mutation_authority(claimed):
+    service, stub, caller, command, _, reviewed = claimed
+    receipt = service.evaluate(caller, command)
+    assert reviewed[3].queue(reviewed[5]).cancel(command.claim.item_id)
+    human = ManagedCaller(actor=caller.actor)
+    assert service.read(human, receipt.receipt_id) == receipt
+    assert service.status(human, receipt.receipt_id).claim_current is False
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.resolve(human, receipt, command, "approve")
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.evaluate(caller, command)
+    assert stub.calls == 1

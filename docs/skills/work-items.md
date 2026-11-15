@@ -1921,3 +1921,11 @@ binds the installed wheel, module member hashes, outside-checkout execution,
 real SQLite/PostgreSQL cases, fresh-process replay, and route-inventory repair
 to the exact implementation commit. Hosted integrated acceptance is a distinct,
 owner-authorized gate; offline harness tests do not count as that paid run.
+
+Receipt/status history requires current Workspace, queue and source READ grants
+and the retained scoped item binding, but does not require an old claim to remain
+live. `claim_current` distinguishes historical evidence from a current claim.
+Cancellation, expiry or takeover never revives mutation authority: inference,
+replay-as-work and human resolution still require the live current fence. This
+preserves authorized diagnostics after cancellation without accepting a stale
+worker or rerunning inference.

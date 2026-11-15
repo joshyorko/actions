@@ -89,6 +89,7 @@ class ClaimedDecisionStatus(Value):
     ] = "actions.claimed-decision-status/v1"
     receipt: ClaimedReceipt
     resolution: DecisionResolution | None = None
+    claim_current: bool
 
 
 class ClaimedDecisionService:
@@ -114,6 +115,7 @@ class ClaimedDecisionService:
         permission: Permission,
         *,
         worker: bool,
+        require_live: bool = True,
     ):
         caller = ManagedCaller.model_validate(caller)
         claim = ClaimRef.model_validate(claim)
@@ -125,7 +127,11 @@ class ClaimedDecisionService:
         if worker:
             self.managed._require_worker(claim.owner_id, caller.worker_id)
         scope = self.managed._scope_for_queue(queue)
-        row = self.managed._require_current_claim(queue, claim)
+        row = (
+            self.managed._require_current_claim(queue, claim)
+            if require_live
+            else self.managed._item_row(queue, claim.item_id)
+        )
         _, proposal, payload = self.managed._review_for_item(caller, queue, scope, row)
         self.managed._authorize_review(
             caller.actor,
@@ -423,7 +429,9 @@ class ClaimedDecisionService:
                 raise ManagedError("storage_unavailable") from None
             if str(claim.queue.workspace_id.root) != rows[0].workspace_id:
                 raise ManagedError("storage_unavailable")
-            self._context(caller, claim, Permission.READ, worker=False)
+            self._context(
+                caller, claim, Permission.READ, worker=False, require_live=False
+            )
             if value.get("schema_version") != "actions.claimed-decision/v1":
                 raise ProviderFailure("evaluation_uncertain")
             receipt = ClaimedReceipt.model_validate_json(rows[0].result_json)
@@ -445,7 +453,16 @@ class ClaimedDecisionService:
                 if rows
                 else None
             )
-            return ClaimedDecisionStatus(receipt=receipt, resolution=resolution)
+            current = True
+            try:
+                self.managed._require_current_claim(receipt.claim.queue, receipt.claim)
+            except ManagedError as error:
+                if error.code != "stale_claim":
+                    raise
+                current = False
+            return ClaimedDecisionStatus(
+                receipt=receipt, resolution=resolution, claim_current=current
+            )
 
     def resolve(
         self,

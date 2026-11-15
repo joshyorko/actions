@@ -7724,3 +7724,16 @@ tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimat
 patch delivery before the substantive invoice gate can run. Keep the separate
 exact prepared-release identity gate; do not weaken module/distribution origin
 or required JUnit evidence to work around a stale test literal.
+
+## Temporary storage for verification
+
+Check both the repository disk and the selected temporary filesystem before a
+full package run. A workstation can have ample home-disk capacity while `/tmp`
+is a small tmpfs. Retaining multiple full-suite `--basetemp` trees can exhaust
+that filesystem and invalidate SQLite and interpreter/setup checks.
+
+Use a single task-owned, disk-backed temporary root for heavy local verification
+when `/tmp` cannot hold the run. Set `TMPDIR=/var/tmp` for that task and pass its
+owned test directory through `--basetemp`. Remove completed bulky test trees
+before another full run. Do not interpret ENOSPC-induced failures as product
+regressions or retry them before reclaiming the task's own artifacts.
