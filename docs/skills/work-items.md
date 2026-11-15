@@ -1817,3 +1817,8 @@ The native provider identity includes a digest of the trusted hosted project.
 Changing projects changes the protected decision context; an old project receipt
 cannot silently replay under the new project. Credential values never enter that
 identity.
+
+The retained [offline qualification receipt](../program/evidence/decisions-363-offline.json)
+records the exact source commit and candidate wheel digest. Baseline package
+checks and later affected checks are separate entries. It does not claim paid
+acceptance, managed claim qualification, or decision-bound human approval.
