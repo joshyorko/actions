@@ -1822,3 +1822,14 @@ The retained [offline qualification receipt](../program/evidence/decisions-363-o
 records the exact source commit and candidate wheel digest. Baseline package
 checks and later affected checks are separate entries. It does not claim paid
 acceptance, managed claim qualification, or decision-bound human approval.
+
+### Authorized hosted provider smoke
+
+The [single-request live receipt](../program/evidence/decisions-363-live.json)
+records one successful native `POST /v1/decisions` request with synthetic input,
+the provider request ID, project digest, typed distribution, and reported usage.
+The request body is below the approved 4 KiB bound. The temporary key file is
+removed after use; no credential value or full provider response is retained.
+This qualifies the native provider request only. It does not prove API credit
+activation, the organization's billing ledger, managed Robot execution, or
+decision-bound human approval. A further hosted request needs new authorization.
