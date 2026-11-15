@@ -33,3 +33,24 @@ The optional `BACKEND:openai` task requires `DECISIONS_OPENAI_LIVE=1`,
 requests. Do not enable it without explicit approval. Use the separate
 single-request live smoke first. Request a fresh key through T3's secret prompt;
 never place a key in Robot arguments, Work Items, or source files.
+
+
+## Managed Runtime task
+
+`tasks-managed.robot` is the Runtime composition task. A trusted host injects
+`ClaimedDecisionService`, the authenticated `ManagedCaller`, and a typed
+`ClaimedEvaluation` as objects. Robot does not receive credentials or construct
+its own grants. It evaluates the current claim, requires `NEEDS_REVIEW`, and
+replays the same receipt. Human resolution remains a separate authenticated
+operation and never completes the item or executes a capability.
+
+The real SQLite/PostgreSQL fixture runs this task and its safety cases:
+
+```sh
+action_server/.venv/bin/python -m pytest action_server/tests/action_server_tests/test_decisions_work_items.py
+```
+
+Set the existing `ACTIONS_INVOICE_TEST_POSTGRES` owned-test-service connection
+when qualifying PostgreSQL. Missing PostgreSQL cells are skips, not proof.
+The configured managed HTTP projection is default-off; this task is not a
+standalone authenticated Runtime deployment.

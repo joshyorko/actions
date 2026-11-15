@@ -1,1 +1,1 @@
-"""Optional, review-only Decisions capability; no default transport registration."""
+"""Optional decision services; managed transport requires trusted host injection."""

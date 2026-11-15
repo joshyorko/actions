@@ -1689,9 +1689,10 @@ permission to execute again.
 ## Optional decision inference
 
 `actions.server.decisions` is a private trusted composition API for issue #363.
-It is not registered in the default HTTP or MCP catalog. It does not add a queue,
-complete an item, select a destination capability, approve a review, or execute
-an effect. The required OpenAI adapter uses native `POST /v1/decisions`.
+Its managed HTTP projection is mounted default-off and requires trusted host
+service/authentication injection. It is not added to the MCP catalog.
+It does not add a queue, complete an item, select a destination capability,
+automatically approve an invoice review, or execute an effect. The required OpenAI adapter uses native `POST /v1/decisions`.
 There is no Responses, Jev, or Laya fallback.
 
 ### Native provider contract
@@ -1752,16 +1753,18 @@ digest identifies the question contract without retaining its text.
 All model scores remain uncalibrated and the recommendation is `NEEDS_REVIEW`.
 The linked `InvoiceReviewService` proposal authorizes only its sealed source
 binding. It does not approve the decision's question, evidence, model, or policy
-revision. Decision-bound approval and resolution remain unsupported until those
-identities participate in the review contract under #92. Source review tests do
-not establish that acceptance gate. General Work Item routing and workflow
+revision. `ClaimedDecisionService` records a separate human resolution over
+the exact claim, sealed source, payload, questions, provider, model and policy digest.
+Source invoice approval remains distinct. Neither resolution authorizes a Run,
+completes a Work Item, nor grants an external effect. General interaction UX
+remains under #92. General Work Item routing and workflow
 admission remain owned by #132 and #141.
 
 `DecisionService.read` rechecks the current source and scope authority before it
-returns a receipt. It is a private read projection, not a registered operator UI.
-A public projection still requires the #349/#356 transport and publication work.
-Laya, Jev, calibration, automatic routes, exact claimed Work Item composition,
-and general sealed Knowledge inputs are not implemented by this addition.
+returns a receipt. It is a private read projection. The claimed service has an
+authenticated, default-off HTTP receipt/status projection beside managed Work Items; it is not
+an operator UI. UI work remains under #349/#356. Laya, Jev, calibration,
+automatic routes and general sealed Knowledge inputs are not implemented.
 
 ### Offline qualification
 
@@ -1833,3 +1836,62 @@ removed after use; no credential value or full provider response is retained.
 This qualifies the native provider request only. It does not prove API credit
 activation, the organization's billing ledger, managed Robot execution, or
 decision-bound human approval. A further hosted request needs new authorization.
+
+### Claimed decisions and separate human resolution
+
+`ClaimedDecisionService` consumes a current managed `ClaimRef` and trusted
+`ManagedCaller`. It uses the existing managed SQL service for Workspace/queue
+READ and CLAIM grants, authenticated worker identity, scoped row format,
+uncancelled state, current epoch and database-clock lease checks. Runtime READ
+and EXECUTE grants are required before inference. REVIEW and Runtime review
+grants are required for human resolution. These checks run again after inference
+and on replay; a claim is never renewed implicitly.
+
+The model receives only up to three persisted, typed invoice amount/overdue
+records from the already sealed named result. Customer identifiers, arbitrary
+paths, SQL, source credentials and bulk source payloads are excluded. Reading
+or reviewing this slice never re-runs the source query. Receipt provenance
+retains the source binding, source capability and source Runtime Plan, claim, payload digest,
+question digest, provider/model/policy identity, usage and original actor.
+
+A committed Runtime `FoundryRequest` reservation precedes inference. Duplicate
+requests for the exact protected claim/input share one authoritative receipt.
+A pending or failed evaluation does not trigger automatic inference after
+restart. Changed input, claim epoch, policy or model cannot inherit the old
+answer or approval. Current lease freshness is rechecked; an authorized renewal
+of the same owner/epoch deliberately preserves semantic decision identity.
+Expiry or takeover rejects replay and resolution. Treating each heartbeat as
+new semantic input would cause unnecessary new model calls.
+
+`resolve` records an immutable, idempotent approve/reject decision over the exact
+retained receipt. It does not call `reviews.decide`, seed another Work Item,
+finish the current claim, publish outputs, or admit a Run. Execution remains a
+separate canonical admission path. The status projection includes both the
+immutable recommendation and the separate current human resolution.
+
+The default-off routes share the managed authentication prefix:
+
+- `POST /api/managed-work-items/v1/decisions/evaluate` accepts `ClaimedEvaluation`.
+- `POST /api/managed-work-items/v1/decisions/resolve` binds an explicit human decision to that exact evaluation and receipt.
+- `GET /api/managed-work-items/v1/decisions/{receipt_id}` returns the authorized receipt and resolution.
+
+`start_server(..., claimed_decisions=..., managed_authenticate=...)` is trusted
+composition, not a caller-controlled provider registry. Unconfigured service is
+503, missing identity is 401, denied grants are 403, and stale/changed claims or
+uncertain inference are 409. Request bodies are bounded before deserialization.
+The default host does not silently activate a provider or paid egress.
+
+`examples/decisions_robot/tasks-managed.robot` uses a host-injected service,
+caller and evaluation. Its fixture exercises real Runtime SQL, SDK claim fences,
+sealed Data and the actual Robot Framework task. Robot performs inference and
+replay only. Human resolution runs separately. The ordinary serial example
+remains available without Runtime configuration.
+
+
+Claimed reservation, completed receipt, replay and human resolution writes also
+include the exact owner/epoch, cancellation, format and database-clock lease
+predicate in the SQL statement. A source read cannot leave a late result
+publishable after lease expiry. The late-expiry counterexample failed before
+this guard and passes with it. Registered SDK writers use the same host-owned
+Workspace transaction lock; the PostgreSQL two-connection cancellation test
+qualifies that ordering separately from SQLite writer serialization.
