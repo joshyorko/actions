@@ -7737,3 +7737,9 @@ when `/tmp` cannot hold the run. Set `TMPDIR=/var/tmp` for that task and pass it
 owned test directory through `--basetemp`. Remove completed bulky test trees
 before another full run. Do not interpret ENOSPC-induced failures as product
 regressions or retry them before reclaiming the task's own artifacts.
+
+New managed routes must be classified in the authentication route inventory and
+represented in the full OpenAPI regression fixture. Default-off service
+configuration does not remove a mounted route from either contract. Keep the
+normal schema visibility gate; update the full-spec snapshot only for reviewed
+route additions and rerun `test_server_full_openapi_flag`.
