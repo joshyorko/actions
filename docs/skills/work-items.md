@@ -1915,3 +1915,9 @@ reopens Runtime SQL in a fresh process without inference. The native adapter
 caps input at 4 KiB, and a second provider invocation is rejected. Ordinary CI
 skips this hosted gate. Its offline harness-contract test forbids network access.
 A prior one-request smoke authorization does not authorize this additional call.
+
+The [managed qualification receipt](../program/evidence/decisions-363-managed-qualification.json)
+binds the installed wheel, module member hashes, outside-checkout execution,
+real SQLite/PostgreSQL cases, fresh-process replay, and route-inventory repair
+to the exact implementation commit. Hosted integrated acceptance is a distinct,
+owner-authorized gate; offline harness tests do not count as that paid run.
