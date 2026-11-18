@@ -8,6 +8,7 @@ Repository-local operational knowledge lives here. Read root `AGENTS.md` first, 
 | [Upstream defect reporting](upstream-reporting.md) | Evidence-first ownership checks, issue deduplication, authorized reports, follow-up, and disposition receipts |
 | [Work Items](work-items.md) | `actions-work-items`, adapters, queues, attachments, Action Server integration, and backend support |
 | [Provenance and observability](provenance-observability.md) | Runtime evidence, audit records, OpenTelemetry, receipts, privacy, and support exports |
+| [Canvas authoring](canvas-authoring.md) | Public MCP Apps Canvas resources, safe offline rendering, and text-first tool fallbacks |
 
 Update an existing guide before creating another. Add every new canonical guide to this index in the same commit.
 

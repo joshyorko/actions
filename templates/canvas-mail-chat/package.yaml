@@ -1,0 +1,39 @@
+spec-version: v2
+
+name: Canvas Mail and Chat Example
+description: A local MCP Apps Canvas view with a plain-text fallback.
+version: 0.0.1
+
+dependencies:
+  conda-forge:
+    - python=3.12.12
+    - uv=0.9.26
+  pypi:
+    - actions-core=1.0.3
+
+dev-dependencies:
+  conda-forge:
+    - pytest=8.4.2
+    - ruff=0.14.3
+
+dev-tasks:
+  test: pytest -q tests
+  lint: |
+    ruff check .
+    ruff format --check .
+  prettify: ruff format .
+
+packaging:
+  exclude:
+    - ./.git/**
+    - ./.vscode/**
+    - ./output/**
+    - ./venv/**
+    - ./.venv/**
+    - ./**/*.pyc
+    - ./**/*.zip
+    - ./**/.env
+    - ./**/__MACOSX
+    - ./**/__pycache__/**
+    - ./**/*_cache/**
+    - ./**/.git
