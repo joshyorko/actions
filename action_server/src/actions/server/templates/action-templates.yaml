@@ -1,9 +1,10 @@
 {
-  "hash": "c1f1a160f901fda0f81499705e220fe17b0aeb041ae492066062f3edde6d98c5",
+  "hash": "8e4f642dc750372f647ac15afab366f6695aa898fc5594f05b464dc2183c927a",
   "schema": 1,
   "templates": {
     "advanced": "Advanced - An example showcasing more advanced configuration features of Actions.",
     "basic": "Basic - Offline word-count action using Actions Core.",
+    "canvas-mail-chat": "Canvas Mail and Chat - Synthetic email and chat previews with a plain-text fallback.",
     "canvas-query": "Canvas Query - A local typed Action rendered in the Canvas MCP App View.",
     "mcp-v2-showcase": "MCP v2 Showcase - A local example of the stateless core MCP protocol.",
     "minimal": "Minimal - A bare bone starting template.",

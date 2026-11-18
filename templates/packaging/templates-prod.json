@@ -29,6 +29,11 @@
             "id": "canvas-query",
             "name": "Canvas Query",
             "desc": "A local typed Action rendered in the Canvas MCP App View."
+        },
+        {
+            "id": "canvas-mail-chat",
+            "name": "Canvas Mail and Chat",
+            "desc": "Synthetic email and chat previews with a plain-text fallback."
         }
     ]
 }

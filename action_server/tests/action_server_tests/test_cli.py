@@ -57,6 +57,7 @@ def test_new_list_templates(tmpdir) -> None:
     assert template_names == {
         "advanced",
         "basic",
+        "canvas-mail-chat",
         "canvas-query",
         "mcp-v2-showcase",
         "minimal",

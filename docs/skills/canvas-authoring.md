@@ -28,3 +28,5 @@ This MCP Apps resource contract is separate from the declarative
 `actions.canvas_contract.CanvasSpec` schema. Use the CanvasSpec contract when
 the Runtime consumer accepts that schema; do not treat a CanvasSpec document as
 an MCP Apps HTML resource or invent a binding API.
+
+Create the bundled example with `action-server new --name mail-chat --template canvas-mail-chat`.

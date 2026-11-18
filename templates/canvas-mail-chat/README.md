@@ -16,6 +16,8 @@ require credentials.
 Run the package with an installed Action Server:
 
 ```bash
+action-server new --name mail-chat --template canvas-mail-chat
+cd mail-chat
 action-server start
 ```
 
@@ -33,6 +35,3 @@ The Canvas uses a shared shape for both channels:
 | Title | Subject | Conversation title |
 | Time | Message time | Message time |
 | Preview | Body excerpt | Message excerpt |
-
-The package is a source example under `templates/`; it is not part of the
-generated `action-server new` template bundle.

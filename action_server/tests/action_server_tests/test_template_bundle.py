@@ -124,6 +124,7 @@ def test_embedded_metadata_covers_all_production_templates():
     expected = {
         "advanced",
         "basic",
+        "canvas-mail-chat",
         "canvas-query",
         "minimal",
         "mcp-v2-showcase",
@@ -180,6 +181,7 @@ def test_embedded_templates_are_available_without_network_transport(
     assert {template.name for template in metadata.templates} == {
         "advanced",
         "basic",
+        "canvas-mail-chat",
         "canvas-query",
         "minimal",
         "mcp-v2-showcase",
@@ -279,6 +281,7 @@ def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(
     assert {template.name for template in metadata.templates} == {
         "advanced",
         "basic",
+        "canvas-mail-chat",
         "canvas-query",
         "minimal",
         "mcp-v2-showcase",
