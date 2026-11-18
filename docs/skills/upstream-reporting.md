@@ -5,6 +5,9 @@ coordination finds a possible defect in a dependency or maintained upstream
 repository. Report a verified upstream defect through that repository's issue
 process, then keep the downstream impact linked to its disposition. A paragraph
 in local documentation is not a substitute for an assignable upstream report.
+The reusable agent entry point is
+`.agents/skills/actions-upstream-reporting/SKILL.md`; this guide remains the
+canonical Actions-specific policy.
 
 ## Authority and ownership
 
@@ -17,13 +20,6 @@ assignments, milestones, settings, merging, releases, or publication. Ask for
 the specific authority before those actions. If the target is third-party or
 otherwise outside the explicitly authorized scope, prepare a factual draft and
 request issue-publication authority.
-
-For the 2026-10-09 campaign, the user's task authorization covers issue-only
-reporting of confirmed new defects in explicitly in-scope maintained
-`joshyorko` repositories, including `joshyorko/rcc`, subject to actual account
-permissions and each repository's rules. This campaign scope grants no other
-mutation authority and is not a standing grant for later tasks; verify the
-active task's authority each time.
 
 Before classifying the defect, verify the source owner and repository, the
 actual remote/fork, and the version or immutable revision Actions consumes.
