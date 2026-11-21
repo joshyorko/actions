@@ -1,0 +1,63 @@
+{
+  "schema": "actions.decisions.managed-qualification/v1",
+  "source_commit": "0a0b81e0c1c47cd9cbdc7097b3dbe68db9d47b12",
+  "wheel": {
+    "filename": "actions_runtime-1.1.1-cp312-cp312-linux_x86_64.whl",
+    "sha256": "83eec204255a0a5fe566b8a18afe5d9a418508bdf4ed123118efefac86b92897",
+    "version": "1.1.1",
+    "module_origin": "/tmp/codex-decisions-finish-20261115-GiPdgL/complete-installed/actions/server/decisions/work_items.py",
+    "member_sha256": {
+      "actions/server/decisions/models.py": "40f53ea82fe36d6e3933e84811abe0b0cca7568fedded73e72c86c6b8ba5429e",
+      "actions/server/decisions/work_items.py": "7d40baf6e95e6ad2c6f2571bd84ca0c895a500f57c1363d56de0ff1434cf4ca5",
+      "actions/server/decisions/api.py": "086c01e0d596e312e7da2a127f363ba58797a771c11b1d1e544acd87f7eb3754",
+      "actions/server/_server.py": "1714018c5c436c616ac38009f97b5279454a2c79c4c04347ff01e5a271258494"
+    },
+    "member_bytes_match": true,
+    "executed_outside_checkout": true
+  },
+  "installed_affected_tests": {
+    "passed": 154,
+    "skipped": 6,
+    "backends": [
+      "real SQLite",
+      "real PostgreSQL"
+    ],
+    "coverage": [
+      "managed Robot task",
+      "receipt-bound human resolution",
+      "fresh-process Runtime replay without inference",
+      "worker identity and current permissions",
+      "expired and tampered sealed Data",
+      "late-expiry conditional SQL write",
+      "PostgreSQL two-connection SDK cancellation ordering",
+      "authorized same-epoch renewal",
+      "read-only receipt/resolution projection",
+      "route inventory and early denial",
+      "strict native score bounds"
+    ]
+  },
+  "skip_reasons": [
+    "two hosted acceptance cells are disabled by default",
+    "two restart cells use SQLite only",
+    "two concurrency/harness cells are backend-specific"
+  ],
+  "configured_lint": "passed; optional Markdown lint tool unavailable",
+  "configured_typecheck": "passed,715 files",
+  "regression_evidence": {
+    "late_expiry": "failed before conditional SQL guard; passes after guard",
+    "auth_inventory": "full suite identified four new-route inventory failures; all five inventory/guard cases passed after classification"
+  },
+  "review_dispositions": {
+    "lease_deadline_in_identity": "rejected: authorized same-owner/epoch renewal preserves semantic identity; expiry remains freshly and atomically checked",
+    "postgresql_overlap_uncertainty": "qualified by real two-connection SDK cancellation test using the shared host Workspace lock"
+  },
+  "hosted_provider_smoke": "docs/program/evidence/decisions-363-live.json",
+  "credit_evidence": "docs/program/evidence/decisions-363-credit-evidence.json",
+  "integrated_hosted_robot": {
+    "harness": "action_server/tests/action_server_tests/test_decisions_managed_live.py",
+    "offline_contract_test": "passed with network forbidden",
+    "paid_run": "not executed; requires a separate one-request authorization"
+  },
+  "feature_gate": "default-off trusted host service/authentication injection; no automatic effects, queue completion, Run admission or paid egress",
+  "upstream_disposition": "none"
+}

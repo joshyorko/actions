@@ -1,5 +1,17 @@
 # Repository Operations
 
+## Pinned RCC on a newer workstation
+
+The developer gateway validates RCC `v18.19.8`. A newer `rcc` on `PATH` can fail
+Doctor before any package test runs. Do not override
+`ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION` to hide that mismatch.
+After package Bootstrap, the Action Server build supplies the pinned Linux
+binary at `action_server/src/actions/server/bin/rcc-18.19.8`. Verify its version
+and invoke that binary from the repository root for subsequent toolkit tasks.
+This uses the repository pin without downgrading the workstation installation.
+The repository launcher remains the bootstrap path when the bundled binary is
+not available.
+
 ## OpenAPI, MCP and publication boundaries
 
 OpenAPI schema inclusion, MCP discovery and authorization are separate
@@ -7712,3 +7724,22 @@ tuple with the PEP440 parser. A guard hard-coded to patch zero rejects legitimat
 patch delivery before the substantive invoice gate can run. Keep the separate
 exact prepared-release identity gate; do not weaken module/distribution origin
 or required JUnit evidence to work around a stale test literal.
+
+## Temporary storage for verification
+
+Check both the repository disk and the selected temporary filesystem before a
+full package run. A workstation can have ample home-disk capacity while `/tmp`
+is a small tmpfs. Retaining multiple full-suite `--basetemp` trees can exhaust
+that filesystem and invalidate SQLite and interpreter/setup checks.
+
+Use a single task-owned, disk-backed temporary root for heavy local verification
+when `/tmp` cannot hold the run. Set `TMPDIR=/var/tmp` for that task and pass its
+owned test directory through `--basetemp`. Remove completed bulky test trees
+before another full run. Do not interpret ENOSPC-induced failures as product
+regressions or retry them before reclaiming the task's own artifacts.
+
+New managed routes must be classified in the authentication route inventory and
+represented in the full OpenAPI regression fixture. Default-off service
+configuration does not remove a mounted route from either contract. Keep the
+normal schema visibility gate; update the full-spec snapshot only for reviewed
+route additions and rerun `test_server_full_openapi_flag`.

@@ -1,0 +1,50 @@
+{
+  "schema": "actions.decisions.offline-qualification/v1",
+  "source_commit": "9408cc8ba5f7cfeaceca8a8fedf755af51f32ca3",
+  "wheel": {
+    "filename": "actions_runtime-1.1.1-cp312-cp312-linux_x86_64.whl",
+    "sha256": "fce6d301930448135fdc469ef6134df0eb4901075b1b12676025b08d60f23e7e"
+  },
+  "robot": {
+    "command": "action_server/.venv/bin/python -m robot --outputdir <output> --variable STATE_DIR:<state> examples/decisions_robot/tasks.robot",
+    "first_process_provider_calls": 3,
+    "replay_process_provider_calls": 0,
+    "persisted_decisions": 3,
+    "source_state": "PENDING",
+    "provider": "synthetic-document/v1"
+  },
+  "checks": {
+    "installed_wheel_affected": {
+      "passed": 54,
+      "skipped": 1,
+      "deselected": 0
+    },
+    "baseline_nonintegration_package": {
+      "passed": 3979,
+      "skipped": 1816,
+      "deselected": 290
+    },
+    "baseline_managed_sqlite_postgres_wheel": {
+      "passed": 99,
+      "skipped": 1,
+      "deselected": 0
+    },
+    "configured_lint": "passed; optional Markdown lint tool unavailable",
+    "configured_typecheck": "passed, 711 files",
+    "robot_contracts": "passed, including fresh-process replay, changed input and changed provider scope"
+  },
+  "limits": [
+    "Serial local Robot demonstration; managed claim integration is not qualified.",
+    "Source invoice review does not approve decision input, model or policy.",
+    "Installed candidate wheel is separate from the unchanged native executable.",
+    "Paid OpenAI usage and credit activation have not been verified.",
+    "Body elapsed checks do not provide a strict DNS/header total deadline."
+  ],
+  "hosted": {
+    "executed": false,
+    "paid_execution_authorized": false,
+    "key_delivery": "T3 request_secret only",
+    "project_configuration": "supplied privately by operator"
+  },
+  "upstream_disposition": "none"
+}

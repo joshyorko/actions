@@ -73,6 +73,11 @@ def _route_policy(shutdown_enabled: bool) -> dict[_RouteIdentity, str]:
         _identity("APIRoute", "/api/managed-work-items/v1/schema", "GET"),
         _identity("APIRoute", "/api/managed-work-items/v1/capabilities", "GET"),
         _identity("APIRoute", "/api/managed-work-items/v1/operations", "POST"),
+        _identity("APIRoute", "/api/managed-work-items/v1/decisions/evaluate", "POST"),
+        _identity("APIRoute", "/api/managed-work-items/v1/decisions/resolve", "POST"),
+        _identity(
+            "APIRoute", "/api/managed-work-items/v1/decisions/{receipt_id}", "GET"
+        ),
     )
     add(
         "protected-api",

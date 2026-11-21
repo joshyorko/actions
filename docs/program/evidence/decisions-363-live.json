@@ -1,0 +1,53 @@
+{
+  "schema": "actions.decisions.live-smoke/v1",
+  "at": "2026-11-15T16:50:25.329402+00:00",
+  "request_count": 1,
+  "request_bytes": 382,
+  "input_digest": "sha256:d48154ffbf737e6ba98fa515a254416d26ad1a6f65dff5c2b2b816e8ed921231",
+  "provider_identity": "openai-decisions/rest-v1/gpt-6-luna/project-e48d17dcab1bcf7af9ace2ad75a1374ccaf6b384d40bcc25542f4f39b86aca5a",
+  "project_digest": "sha256:e48d17dcab1bcf7af9ace2ad75a1374ccaf6b384d40bcc25542f4f39b86aca5a",
+  "synthetic_only": true,
+  "credit_activation_verified": false,
+  "organization_billing_ledger_verified": false,
+  "status": "completed",
+  "result": {
+    "answers": [
+      {
+        "name": "document",
+        "kind": "choice",
+        "choice": "invoice",
+        "probability": null,
+        "score": null,
+        "confidence": 1.0,
+        "probabilities": [
+          {
+            "value": "invoice",
+            "probability": 1.0,
+            "label": null
+          },
+          {
+            "value": "credit_note",
+            "probability": 0.0,
+            "label": null
+          },
+          {
+            "value": "other",
+            "probability": 0.0,
+            "label": null
+          }
+        ]
+      }
+    ],
+    "model": "gpt-6-luna",
+    "response_digest": "sha256:2406d47178d4d231ed228ed580f8e5c1790a26557a30f0bff8f5d3cbdb0305b6",
+    "request_id": "req_e2dddf6323854bbf98e05c7d57a1c417",
+    "usage": {
+      "input_tokens": 122,
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 0
+    }
+  },
+  "source_commit": "96b96277860275e0b81a25d2065401edc6a47160",
+  "scope": "Native provider smoke only; not a managed Robot or approval acceptance run."
+}

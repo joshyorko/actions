@@ -1,0 +1,13 @@
+tasks:
+  Classify Synthetic Documents:
+    shell: python -m robot --outputdir output tasks.robot
+
+environmentConfigs:
+  - conda.yaml
+
+artifactsDir: output
+PATH:
+  - .
+PYTHONPATH:
+  - .
+  - ../../action_server/src

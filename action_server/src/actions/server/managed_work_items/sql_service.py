@@ -484,7 +484,8 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         queue = self._queue(scope)
         # The canonical queue rejects unknown persisted row formats before the
         # projection counts them.
-        queue.list_items()
+        with queue.store.transaction():
+            queue._check_format()
         counts = {state.value: 0 for state in State}
         with self.db.cursor() as cursor:
             self.db.execute_query(
@@ -567,7 +568,8 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         if command.cursor is not None and _CURSOR_ID.fullmatch(command.cursor) is None:
             raise ValueError("invalid Work Item cursor")
         queue = self._queue(scope)
-        queue.list_items()  # includes the SDK's fail-closed format check
+        with queue.store.transaction():
+            queue._check_format()
         rows = self.db.select(
             FencedWorkItem,
             "SELECT * FROM fenced_work_item WHERE workspace_id=? AND queue_name=? AND id>? ORDER BY id LIMIT ?",

@@ -1,0 +1,13 @@
+{
+  "schema": "actions.decisions.credit-evidence/v1",
+  "account_link": "active benefit observed through read-only connected preview",
+  "credit_delivery": "available unexpired grant observed in operator-supplied billing screenshot",
+  "project_organization_match": "operator confirmed that the supplied API key belongs to the credited organization",
+  "screenshot_sha256": "1a4596903dd0e0b006ec29b21296870dad83c1ca15ed278797cac6b2715dfa18",
+  "financial_amounts_retained": false,
+  "screenshot_published": false,
+  "billing_ledger_queried": false,
+  "further_activation_performed": false,
+  "billed_project_request": "docs/program/evidence/decisions-363-live.json",
+  "scope": "Credit delivery evidence is screenshot-based; project association is operator-confirmed."
+}

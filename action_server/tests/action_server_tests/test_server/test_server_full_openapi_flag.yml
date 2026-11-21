@@ -2037,6 +2037,49 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Capabilities
+  /api/managed-work-items/v1/decisions/evaluate:
+    post:
+      operationId: evaluate_api_managed_work_items_v1_decisions_evaluate_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Evaluate
+  /api/managed-work-items/v1/decisions/resolve:
+    post:
+      operationId: resolve_api_managed_work_items_v1_decisions_resolve_post
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: Resolve
+  /api/managed-work-items/v1/decisions/{receipt_id}:
+    get:
+      operationId: read_api_managed_work_items_v1_decisions__receipt_id__get
+      parameters:
+      - in: path
+        name: receipt_id
+        required: true
+        schema:
+          title: Receipt Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Read
   /api/managed-work-items/v1/operations:
     post:
       operationId: operation_api_managed_work_items_v1_operations_post

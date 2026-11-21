@@ -21,6 +21,7 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
     from .data_queries.canvas_mcp import InvoiceCanvasMcp
+    from .decisions.work_items import ClaimedDecisionService
     from .foundry.mcp import CanvasMcp
     from .managed_work_items.api import Authenticate as ManagedAuthenticate
     from .managed_work_items.contracts import ManagedWorkItemsPort
@@ -513,6 +514,7 @@ def start_server(
     canvas_foundry: "CanvasMcp | None" = None,
     managed_work_items: "ManagedWorkItemsPort | None" = None,
     managed_authenticate: "ManagedAuthenticate | None" = None,
+    claimed_decisions: "ClaimedDecisionService | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -698,6 +700,12 @@ def start_server(
 
     app.include_router(
         create_managed_work_items_router(managed_work_items, managed_authenticate),
+        include_in_schema=settings.full_openapi_spec,
+    )
+    from .decisions.api import create_router as create_decisions_router
+
+    app.include_router(
+        create_decisions_router(claimed_decisions, managed_authenticate),
         include_in_schema=settings.full_openapi_spec,
     )
     app.include_router(
