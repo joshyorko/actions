@@ -1,0 +1,53 @@
+{
+  "scope": "test-only candidate; no release, deployment, live account or browser qualification",
+  "actions_repository": "joshyorko/actions",
+  "base_branch": "community",
+  "actions_source": "4b836b4fc9e7a01a91557eea8f4e05e6dd80b931",
+  "rcc_source": "fca278bf728f5910acfd720e3ea437a7fa2322fa",
+  "rcc_source_caveat": "RCC owner later advanced PR304; this is not latest-source/release acceptance",
+  "source_archive": {
+    "filename": "actions_runtime-1.1.1.tar.gz",
+    "sha256": "4d5408827402587b21edd2c3842495c8d265444027943292945b93d3a3a946ba",
+    "rcc_bundled": false
+  },
+  "native_wheel": {
+    "filename": "actions_runtime-1.1.1-cp312-cp312-linux_aarch64.whl",
+    "sha256": "c701e24e0bbe6a14c95b33a0ec830c4e519489c917ea41c1dbe277ee6641da19",
+    "rcc_bundled": false,
+    "build": "native pip wheel --no-deps with ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1"
+  },
+  "host": "Pi5-01, native Debian 12 aarch64; Pi5-02 not accessed",
+  "outer_toolchain": "exact candidate RCC, isolated task-owned ROBOCORP_HOME, Python3.12.15/pip25.3",
+  "candidate_override": "child CLI processes only; release digest table remains empty",
+  "harness_sha256": "136e8c9e776e476040517fbd85fb2c3ad53f808b1f15b55fb06ea61413eadcf1",
+  "qualification_exit": 0,
+  "receipt": {
+    "qualification": "candidate-test-only; not release or deployment acceptance",
+    "machine": "aarch64",
+    "python": "3.12.15 (main, Oct 13 2026, 16:55:48) [GCC 15.3.0]",
+    "runtime_version": "1.1.1",
+    "runtime_import": "/tmp/codex-actions-arm64-20261126-BFXclK/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/lib/python3.12/site-packages/actions/server/__init__.py",
+    "installed_wheel_sha256": "c701e24e0bbe6a14c95b33a0ec830c4e519489c917ea41c1dbe277ee6641da19",
+    "rcc_sha256": "7dfb4ace9ac8d96c4eb6344b373931c31a2a8813e8d86fd24d5f31fc3d36ec58",
+    "rcc_version": "v18.19.11",
+    "import_exit": 0,
+    "synthetic_result": "arm64:synthetic",
+    "listener": "127.0.0.1 only; stopped",
+    "temporary_files": "removed"
+  },
+  "captured_log_sha256": "4b5424da1b3089c9f6e8ef2f83d0ea65e88878e6a6e286822f200a20ff9264ca",
+  "raw_receipt_sha256": "a3575a4cc63800cb6a5f121691aab00c19f06363a64280cd2a19e39eb2519e44",
+  "cleanup": {
+    "task_directory_removed": true,
+    "removed_size": "651 MiB",
+    "runtime_listener_stopped": true,
+    "temporary_package_data_removed": true
+  },
+  "unverified": [
+    "official RCC ARM64 release/checksum/trust metadata consumption",
+    "native PyInstaller executable",
+    "ARM64 release workflow inventory",
+    "browser or live-account flows"
+  ],
+  "release_blocker": "Official newly published RCC rcc-linuxarm64 asset plus checksum and source-bound trust metadata, reviewed coordinated version/package-data pins, then release qualification; no candidate production pin."
+}

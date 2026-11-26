@@ -57,6 +57,8 @@ def main():
     environment.pop("PYTHONHOME", None)
     with tempfile.TemporaryDirectory(prefix="runtime-arm64-candidate-") as temporary:
         root = Path(temporary)
+        environment["ACTIONS_HOME"] = str(root / "actions-home")
+        environment["ROBOTS_HOME"] = str(root / "robots-home")
         wrapper = root / "candidate_cli.py"
         wrapper.write_text(
             "from pathlib import Path\n"

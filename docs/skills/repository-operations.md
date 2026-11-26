@@ -7778,15 +7778,27 @@ relabel a wheel containing x64 RCC as ARM64.
 
 For test-only proof after the RCC owner releases the bounded ARM64 test window,
 install a binless candidate Runtime wheel into an isolated RCC test environment.
-Build that wheel with `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` only after
-removing generated RCC bytes from the task-owned checkout's `bin` directory;
-never use this wheel for publication. Run
+Build a binless source distribution with
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` only after temporarily moving generated
+RCC bytes out of the task-owned checkout's `bin` directory (restore them in a
+`finally` block). On the ARM64 host, build its wheel with
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1 python -m pip wheel --no-deps --wheel-dir /absolute/wheelhouse /absolute/candidate.tar.gz`,
+then install that exact local wheel with `python -m pip install --only-binary=:all: /absolute/wheelhouse/<wheel>.whl`.
+Poetry tags even a binless build for its native build host: an x64-host build
+produced `cp312-cp312-linux_x86_64`. Do not retag that artifact for ARM64; build
+natively and require an `aarch64` wheel filename. Never publish these binless
+test artifacts. Run
 `action_server/scripts/verify_linux_arm64_candidate.py --rcc /absolute/candidate --rcc-sha256 <exact-candidate-sha256> --output /absolute/receipt.json`
 inside that environment. The harness rejects x64 hosts and source installs,
 verifies candidate bytes, imports a synthetic package via RCC, invokes its real
 HTTP Action on loopback, stops the listener and removes temporary package/data
-files. Its process-local test override never changes release pins. A passing
+files, including its isolated `ACTIONS_HOME` and `ROBOTS_HOME`. Its process-local test override never changes release pins. A passing
 receipt is candidate acceptance only, not official release or deployment proof.
 Keep the wheel digest, source commit and RCC candidate receipt with that result.
 An unexecuted harness, routing tests or a wheel build alone do not prove native
 install, import, Action execution, browser support or deployment acceptance.
+
+The [sealed candidate example](../program/evidence/linux-arm64-runtime-20261126/candidate.json)
+binds native wheel installation, RCC import and a real synthetic HTTP result to
+exact source/artifact digests. Its older RCC candidate is not acceptance of a
+later RCC commit or the official release.
