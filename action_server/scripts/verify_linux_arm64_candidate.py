@@ -1,8 +1,9 @@
-"""Test-only installed Runtime/RCC candidate proof; never a release pin writer.
+"""Native installed Runtime/RCC smoke; never a release pin writer.
 
 Run inside an isolated RCC test environment on native Linux ARM64. Install the
 candidate Runtime wheel there first; do not run from an editable source install.
-The RCC path/digest override exists only in child CLI processes in this harness.
+The candidate override exists only in child CLI processes. --official uses the
+installed release contract and normal CLI without any override.
 """
 
 import argparse
@@ -22,11 +23,28 @@ import urllib.request
 from pathlib import Path
 
 
+def cli_bootstrap(rcc: Path, digest: str, official: bool) -> str:
+    if official:
+        return "from actions.server.cli import main\nmain()\n"
+    return (
+        "from pathlib import Path\n"
+        "from actions.server import _download_rcc, _rcc_platform\n"
+        f"_rcc_platform.LINUX_ARM64_RELEASE_SHA256[_download_rcc.RCC_VERSION] = {digest!r}\n"
+        f"_download_rcc.get_default_rcc_location = lambda: Path({str(rcc)!r})\n"
+        "from actions.server.cli import main\nmain()\n"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--rcc", type=Path, required=True)
     parser.add_argument("--rcc-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--official",
+        action="store_true",
+        help="Verify the installed official RCC without any candidate override",
+    )
     args = parser.parse_args()
     if sys.platform != "linux" or platform.machine().lower() not in (
         "aarch64",
@@ -41,7 +59,7 @@ def main():
         parser.error("candidate RCC checksum mismatch")
 
     import actions.server
-    from actions.server import _rcc_platform
+    from actions.server import _download_rcc, _rcc_platform
 
     distribution = importlib.metadata.distribution("actions-runtime")
     direct = json.loads(distribution.read_text("direct_url.json") or "{}")
@@ -50,8 +68,18 @@ def main():
     wheel_hash = direct.get("archive_info", {}).get("hashes", {}).get("sha256")
     if not wheel_hash:
         parser.error("installed candidate wheel must retain its direct_url SHA256")
-    _rcc_platform.LINUX_ARM64_RELEASE_SHA256["candidate-test-only"] = actual
-    _rcc_platform.verify_rcc(rcc, "candidate-test-only", "rcc-linuxarm64")
+    version = subprocess.check_output(
+        [str(rcc), "version"], text=True, timeout=10
+    ).strip()
+    if args.official:
+        if version != "v" + _download_rcc.RCC_VERSION:
+            parser.error("official RCC version differs from the installed Runtime pin")
+        if rcc != _download_rcc.get_default_rcc_location().resolve():
+            parser.error("official smoke must use RCC bundled in the installed wheel")
+        _rcc_platform.verify_rcc(rcc, _download_rcc.RCC_VERSION, "rcc-linuxarm64")
+    else:
+        _rcc_platform.LINUX_ARM64_RELEASE_SHA256["candidate-test-only"] = actual
+        _rcc_platform.verify_rcc(rcc, "candidate-test-only", "rcc-linuxarm64")
     environment = os.environ.copy()
     environment.pop("PYTHONPATH", None)
     environment.pop("PYTHONHOME", None)
@@ -60,13 +88,7 @@ def main():
         environment["ACTIONS_HOME"] = str(root / "actions-home")
         environment["ROBOTS_HOME"] = str(root / "robots-home")
         wrapper = root / "candidate_cli.py"
-        wrapper.write_text(
-            "from pathlib import Path\n"
-            "from actions.server import _download_rcc, _rcc_platform\n"
-            f"_rcc_platform.LINUX_ARM64_RELEASE_SHA256[_download_rcc.RCC_VERSION] = {actual!r}\n"
-            f"_download_rcc.get_default_rcc_location = lambda: Path({str(rcc)!r})\n"
-            "from actions.server.cli import main\nmain()\n"
-        )
+        wrapper.write_text(cli_bootstrap(rcc, actual, args.official))
         package = root / "arm64_synthetic"
         package.mkdir()
         (package / "package.yaml").write_text(
@@ -162,16 +184,19 @@ def main():
         args.output.write_text(
             json.dumps(
                 {
-                    "qualification": "candidate-test-only; not release or deployment acceptance",
+                    "qualification": (
+                        "official RCC consumer smoke; not deployment acceptance"
+                        if args.official
+                        else "candidate-test-only; not release or deployment acceptance"
+                    ),
                     "machine": platform.machine(),
                     "python": sys.version,
                     "runtime_version": distribution.version,
                     "runtime_import": str(Path(actions.server.__file__).resolve()),
                     "installed_wheel_sha256": wheel_hash,
                     "rcc_sha256": actual,
-                    "rcc_version": subprocess.check_output(
-                        [str(rcc), "version"], text=True
-                    ).strip(),
+                    "rcc_version": version,
+                    "official_contract": args.official,
                     "import_exit": 0,
                     "synthetic_result": result,
                     "listener": "127.0.0.1 only; stopped",

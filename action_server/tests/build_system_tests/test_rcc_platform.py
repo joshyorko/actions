@@ -172,3 +172,16 @@ def test_candidate_harness_rejects_x64(tmp_path):
     assert result.returncode == 2
     assert "native Linux ARM64 required" in result.stderr
     assert not (tmp_path / "receipt.json").exists()
+
+
+def test_official_harness_does_not_override_release_contract():
+    harness = load_module(
+        "arm64_harness_test", ROOT / "scripts/verify_linux_arm64_candidate.py"
+    )
+    official = harness.cli_bootstrap(Path("/installed/rcc"), "official-digest", True)
+    assert "from actions.server.cli import main" in official
+    assert "LINUX_ARM64_RELEASE_SHA256" not in official
+    assert "get_default_rcc_location" not in official
+    candidate = harness.cli_bootstrap(Path("/candidate/rcc"), "candidate-digest", False)
+    assert "candidate-digest" in candidate
+    assert "get_default_rcc_location" in candidate

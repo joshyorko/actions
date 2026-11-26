@@ -12,6 +12,26 @@ This uses the repository pin without downgrading the workstation installation.
 The repository launcher remains the bootstrap path when the bundled binary is
 not available.
 
+## Stable RCC toolchain identity during subprocess tests
+
+An RCC-backed Poetry virtualenv can symlink its interpreter into a mutable
+holotree space. Reusing the default `user` space for another environment can
+change that alias's Python minor version while the original pytest process is
+still running. In an observed run, the parent retained Python 3.12 while new
+children launched Python 3.14 and could no longer import the installed 3.12
+`actions` and `pydantic` packages. Do not fix this by adding dependencies to the
+wrong interpreter or modifying product imports.
+
+Use a task-specific `--space` consistently with the pinned RCC Doctor and later
+`task script` commands. Confirm `sys.version`, `sys.base_prefix`, interpreter
+symlink targets and the package `pyvenv.cfg` agree before subprocess-heavy tests.
+If repairing an existing task-owned generated venv, bind it only to the verified
+same Python minor/version in that dedicated toolchain; do not change another
+checkout's venv or the shared RCC alias. Rerun the exact failed cases before the
+full package gate. Keep Poetry on PATH by executing package commands through
+the RCC gateway: a direct package Python invocation can pass ordinary tests yet
+fail clean-wheel tests that launch Poetry themselves.
+
 ## OpenAPI, MCP and publication boundaries
 
 OpenAPI schema inclusion, MCP discovery and authorization are separate
@@ -7802,3 +7822,11 @@ The [sealed candidate example](../program/evidence/linux-arm64-runtime-20261126/
 binds native wheel installation, RCC import and a real synthetic HTTP result to
 exact source/artifact digests. Its older RCC candidate is not acceptance of a
 later RCC commit or the official release.
+
+For the official published-release replay, build a native ARM64 wheel with the
+normal build hook enabled so it bundles the newly pinned official RCC. Install
+that wheel and add `--official` to the harness command, passing the installed
+`get_default_rcc_location()` path and the official asset SHA256. This mode
+requires that exact installed location, validates the production digest table,
+and runs the normal CLI without candidate overrides. It remains a local
+consumer smoke, not deployment acceptance.
