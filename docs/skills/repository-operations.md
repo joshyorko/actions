@@ -7743,3 +7743,50 @@ represented in the full OpenAPI regression fixture. Default-off service
 configuration does not remove a mounted route from either contract. Keep the
 normal schema visibility gate; update the full-spec snapshot only for reviewed
 route additions and rerun `test_server_full_openapi_flag`.
+
+## Linux ARM64 Runtime qualification and release gate
+
+The standalone Easy Apply Dockerfile consumes legacy native Action Server
+`action-server-v1.2.2` (`action-server-linux64`), whose tagged downloader pins RCC
+`18.16.0`. This is distinct from `actions-runtime` `1.1.1`, whose build and
+runtime downloaders pin RCC `18.19.8`. Use the maintained Runtime path for new
+Linux ARM64 qualification; a legacy x64 executable is not an ARM64 candidate.
+Source references: [legacy downloader](https://github.com/joshyorko/actions/blob/action-server-v1.2.2/action_server/src/sema4ai/action_server/_download_rcc.py),
+[Runtime downloader](https://github.com/joshyorko/actions/blob/actions-runtime-1.1.1/action_server/src/actions/server/_download_rcc.py).
+
+`action_server/src/actions/server/_rcc_platform.py` is the dependency-free
+architecture contract used by both the Poetry build hook and runtime startup.
+Linux `aarch64`/`arm64` selects `rcc-linuxarm64`; x86-64 selects `rcc-linux64`.
+Unknown architectures fail closed. The ARM64 release checksum table is
+intentionally empty: RCC `18.19.8` has no qualified official Linux ARM64 entry.
+Startup rejects even an existing cached binary before using that entry, and the
+PyInstaller spec validates RCC before collecting it. ARM64 validation requires
+both the pinned SHA256 and little-endian AArch64 ELF64 header. Failed downloads
+must not replace the previous binary.
+
+Before enabling a production ARM64 pin, obtain the newly published official
+`joshyorko/rcc` release, its `rcc-linuxarm64` asset, published checksum and
+source-bound preparation/manifest/native receipt trust metadata. Verify they
+identify the same committed source and exact bytes. Review and pin that digest
+in the contract, then update all relevant version/package-data pins together.
+Do not populate the table from an unreleased build or substitute the x64 asset.
+Release workflows currently ship Linux x64, Windows x64 and macOS ARM64; this
+preparation does not add Linux ARM64 to their publication inventory. Native
+PyInstaller builds must run on ARM64; existing cibuildwheel selectors also need
+an explicit native Linux ARM64 lane before publishing ARM64 wheels. Never
+relabel a wheel containing x64 RCC as ARM64.
+
+For test-only proof after the RCC owner releases the bounded ARM64 test window,
+install a binless candidate Runtime wheel into an isolated RCC test environment.
+Build that wheel with `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` only after
+removing generated RCC bytes from the task-owned checkout's `bin` directory;
+never use this wheel for publication. Run
+`action_server/scripts/verify_linux_arm64_candidate.py --rcc /absolute/candidate --rcc-sha256 <exact-candidate-sha256> --output /absolute/receipt.json`
+inside that environment. The harness rejects x64 hosts and source installs,
+verifies candidate bytes, imports a synthetic package via RCC, invokes its real
+HTTP Action on loopback, stops the listener and removes temporary package/data
+files. Its process-local test override never changes release pins. A passing
+receipt is candidate acceptance only, not official release or deployment proof.
+Keep the wheel digest, source commit and RCC candidate receipt with that result.
+An unexecuted harness, routing tests or a wheel build alone do not prove native
+install, import, Action execution, browser support or deployment acceptance.

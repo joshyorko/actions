@@ -127,46 +127,34 @@ def _download_rcc():
 
     if sys.platform == "win32":
         rcc_path = (
-            CURDIR
-            / "src"
-            / "actions"
-            / "server"
-            / "bin"
-            / f"rcc-{RCC_VERSION}.exe"
+            CURDIR / "src" / "actions" / "server" / "bin" / f"rcc-{RCC_VERSION}.exe"
         )
     else:
-        rcc_path = (
-            CURDIR / "src" / "actions" / "server" / "bin" / f"rcc-{RCC_VERSION}"
-        )
+        rcc_path = CURDIR / "src" / "actions" / "server" / "bin" / f"rcc-{RCC_VERSION}"
 
-    machine = platform.machine()
-    is_64 = not machine or "64" in machine
+    # Build isolation does not install actions.server or its runtime dependencies.
+    import runpy
 
-    # Using joshyorko/rcc GitHub releases
-    # Asset names: rcc-windows64.exe, rcc-macosarm64, rcc-macos64, rcc-linux64
-    if sys.platform == "win32":
-        if is_64:
-            asset_name = "rcc-windows64.exe"
-        else:
-            raise RuntimeError("Unsupported platform (windows 32 bits)")
-
-    elif sys.platform == "darwin":
-        if machine == "arm64":
-            asset_name = "rcc-macosarm64"
-        else:
-            asset_name = "rcc-macos64"
-
-    else:
-        if is_64:
-            asset_name = "rcc-linux64"
-        else:
-            raise RuntimeError("Unsupported platform (linux 32 bits)")
+    contract = runpy.run_path(str(CURDIR / "src/actions/server/_rcc_platform.py"))
+    asset_name = contract["rcc_asset_name"](sys.platform, platform.machine())
+    contract["expected_sha256"](RCC_VERSION, asset_name)
 
     # GitHub releases URL format
     rcc_url = f"https://github.com/joshyorko/rcc/releases/download/v{RCC_VERSION}/{asset_name}"
 
     print(f"Downloading '{rcc_url}' to '{rcc_path}'")
-    return _download_with_resume(rcc_url, rcc_path)
+    import tempfile
+
+    rcc_path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(dir=rcc_path.parent, delete=False) as stream:
+        temporary = Path(stream.name)
+    try:
+        _download_with_resume(rcc_url, temporary)
+        contract["verify_rcc"](temporary, RCC_VERSION, asset_name)
+        temporary.replace(rcc_path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return rcc_path
 
 
 def build(*args, **kwarg):
