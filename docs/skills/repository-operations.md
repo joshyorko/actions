@@ -7830,3 +7830,7 @@ that wheel and add `--official` to the harness command, passing the installed
 requires that exact installed location, validates the production digest table,
 and runs the normal CLI without candidate overrides. It remains a local
 consumer smoke, not deployment acceptance.
+
+The [portable verification receipt](../program/evidence/linux-arm64-runtime-20261126/portable.json)
+separates recovered interpreter/PATH setup failures from the final full portable
+gate and explicitly retains skipped-service uncertainty.

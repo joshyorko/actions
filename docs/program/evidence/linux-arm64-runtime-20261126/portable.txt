@@ -1,0 +1,209 @@
+"/tmp/codex-actions-arm64-20261126-Pext2q/repo/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note: There seems to be multiple users sharing ROBOCORP_HOME, which might cause problems.
+Note: These are the users: [kdlocpanda root].
+To correct this problem, make sure that there is only one user per ROBOCORP_HOME.
+Note! For now, resolved effective environment configuration file is "/tmp/codex-actions-arm64-20261126-Pext2q/repo/developer/setup.yaml".
+####  Progress: 00/15  v18.19.8     0.017s  Context: "kdlocpanda" <kdlocpanda@dakota-nvidia> [linux_amd64/Dudley OS (dakota-nvidia) [id=bluefin-dakota; id-like=org.gnome.os; version=20261106; variant=bluefin-nvidia; image=dudley-os:dakota-nvidia]].
+####  Progress: 01/15  v18.19.8     0.000s  Fresh [private mode] holotree environment add748bd-32d6-aa97-e296-f4425d24f501. (parent/pid: 344176/344199)
+####  Progress: 02/15  v18.19.8     0.000s  Holotree blueprint is "395d1f96045590ab" [linux_amd64 with 19 workers on 20 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+
+# RCC legacy uv target-python cache epoch: 1
+---
+####  Progress: 14/15  v18.19.8     0.195s  Restore space from library [with 19 workers on 20 CPUs; with compression: true].
+Installation plan is: /home/kdlocpanda/.robocorp/holotree/2a6fe41_5a1fac3_59fc7f88/rcc_plan.log
+Environment configuration descriptor is: /home/kdlocpanda/.robocorp/holotree/2a6fe41_5a1fac3_59fc7f88/identity.yaml
+####  Progress: 15/15  v18.19.8     0.457s  Fresh holotree done [with 19 workers on 20 CPUs].
+Note: [Before run] Artifact dir "/tmp/codex-actions-arm64-20261126-Pext2q/repo/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/tmp/codex-actions-arm64-20261126-Pext2q/repo/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/tmp/codex-actions-arm64-20261126-Pext2q/repo/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
++ poetry run pytest tests -m not integration_test -q --junitxml=/tmp/codex-actions-arm64-20261126-Pext2q/portable-final.xml (in /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server)
+...................................ssss..ss............................. [  1%]
+........................................................................ [  2%]
+........................................................................ [  3%]
+........................................................................ [  4%]
+.................sss.sss.sss....ssssssssssss.sss.sss.sss................ [  6%]
+...................................................s.................... [  7%]
+................................s....................................... [  8%]
+........................................................................ [  9%]
+................s.s.s.s..ss....ssss.s.s.s.s...sss.s.s.s.s.s...sss.s..... [ 11%]
+.................s........................ss.s.s..ss.s.s.....sssss.s.s.s [ 12%]
+......ssssss.s.s.s.....sssss.s.s.s.s.s.s.s.s..ss..ss.s..ss.s.s.s..ss.s.s [ 13%]
+............ssssssssssss.s.s.s.s.....sssss........ssssssss.s.s.s.s...... [ 14%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 18%]
+................................................sss.s.s.s.......s.s.s.s. [ 19%]
+.......s.s.s.s.s.s.s.s.s.s.s.s.s.s.s..ss.sss.s.s.s...................... [ 20%]
+......s...sss.s.............sss.sss.sss.sss.....sssssssssssssss.sss.sss. [ 22%]
+sss.sss.sss..ssssss.sss..ssssss.sssssss.s.s.sss.s...ssssssssssss........ [ 23%]
+.........s.s.....................s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s [ 24%]
+.s...ss.s.s.s..........................s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s [ 25%]
+.s.s.s.s.......sss.sss.sss.sss......ssssssssssssssssss.sss.sss.......... [ 26%]
+............sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss. [ 28%]
+.ssssss.sss.sss.sss.sss.sss.sss.sss.sss.sss......ssssssssssssssssss.sss. [ 29%]
+s......ssssss.s.s..s..ss.s.s.s.s.sss.s.s....ssss..ss.sss.sss.sss.sss...s [ 30%]
+ssssssss...sssssssss.sss.sss...sssssssss...sssssssss.sss.sss.sss.sss.sss [ 31%]
+.sss.sss.sss.sss.sss.sss.sssssssssss.s..ss.s.s.s.s.s.s.s.s.s..ss.s.s.s.s [ 33%]
+.........sssssssss.s.s.s.s.s....ssss.s.s.......sssssss.s.s.s.s.s.sss.... [ 34%]
+ssssssssssss.sss.sss.sssssss.sss.sss.......sssssssssssssssssssss.......s [ 35%]
+ssssssssssssssssssss.sss.sss..ssssss..ssssss.sss.sss.sss.sss.sss.sss.sss [ 36%]
+.sss.sss.sss.sss.sss.sss.sss.sss..s.s.s..ss.s..ss.s.s.s.s.sssssss.s.s.s. [ 38%]
+s.s.s..ss............s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s...sss.s.s.s [ 39%]
+.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.s.sssssssss.............. [ 40%]
+.............s.sss.sss.ssss.s.s.s.s.s.s.................sss.sss.sss.sss. [ 41%]
+sss.sss.sss.sss.sss.sss....ssssssssssss.sss.sss.sss.sss.s.s.s.s.s.....ss [ 42%]
+s.sss.sss.sss.......sssssssssssssssssssss.sss.sss.s.s..s.s..s.s.s..s.... [ 44%]
+......sss.sss...sssssssss.sss.sss....ssssssssssss....ssssssssssss.sss.ss [ 45%]
+s.sss.sss.s....ssss....ssss.s.s.s..ss.s.s.s.s.s.s.s.s.s.s.s............. [ 46%]
+.....................................................ssssss.sss.sss..... [ 47%]
+...ssssssssssssssssssssssss.sss.sss.sss.sss............................. [ 49%]
+........................................................................ [ 50%]
+................................s.........sssssssss.s.s.....sss.s......s [ 51%]
+.s...................................................................... [ 52%]
+...................................................................s...s [ 53%]
+ss..............s..ss.s............ssssssssssss..ss.s.s....ssss.s.s....s [ 55%]
+sss.s...................sss....s.s....s.s...s....sss......ssssss..ss.... [ 56%]
+ssss...sss.s.s.s.s.s.s.sss.sss.sss.sss.sss.sss.sss.s.s.s..ss..ss........ [ 57%]
+ssssssss.s.s.s.s.s.s.s.s.s.s.s.s.s.s..........s.s.s..s.s.s.s.s.s.s.s.s.s [ 58%]
+.s..s.s...................................sss........................... [ 60%]
+s...sss.s....ssss.s.s.s.....sssss.s.s.....sssss.s.s.s.s................. [ 61%]
+............................................................s........... [ 62%]
+...............................ssssss.....sssssssssssssss.sss....sssssss [ 63%]
+sssss..ssssss.s.s...sss..ssssss....ssssssssssss.sss.sss................. [ 64%]
+.............................................s.......................... [ 66%]
+................................ssss..ss..ss.s.s....ssss.....sssss.s.s.. [ 67%]
+...sssss........ssssssss.....sssss..ss.....sssss.s.....sssss.s...s...... [ 68%]
+ssssss.s.s.s.s.s...sss.s.s.s.s.s.s.s.s.s.s.s.s....ss.s.s....ssss........ [ 69%]
+..................ssssssssssssssssssssssssss............ssssssssssss.s.. [ 71%]
+....ssssss....ssss.s.s.s.s.s.s.s.s......ssssss.s.s.s.s.s.s.s.s.......... [ 72%]
+...................................s.s.....sssss.s.s.s.s.s.s...sss.s.s.s [ 73%]
+.....sssss..ss....s.sss.sss.sss.sss.sss.sss.sss.s.s..ss........s........ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 77%]
+............................sss.sss.sss.sss.s...........sss.sss.sss.sss. [ 78%]
+sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss.sss..ssssss.sss....sssssssss [ 79%]
+sss.sss.sss........ssssssssssssssssssssssss.sss.sss.sss.sss.sss......... [ 80%]
+........................................................................ [ 82%]
+........................................................................ [ 83%]
+........................................................................ [ 84%]
+.............................ss.......................................s. [ 85%]
+s.s...sss.s............ss............................................... [ 87%]
+.........sss............ssssssssssssssssssssssssssssssssssss...sssssssss [ 88%]
+.s.s.sss....ssssssssssss.sss.............................s......ssssss.. [ 89%]
+ss...........sssssssssss.s.s.s.s...........sssssssssss.................. [ 90%]
+.............................................................s.......... [ 91%]
+........................................................................ [ 93%]
+..........................................ss....s........ssssssss.....ss [ 94%]
+sss.s.s.s.s.s.s.s....................................................... [ 95%]
+.....s.................................................................. [ 96%]
+........................................................................ [ 98%]
+........................................................................ [ 99%]
+.......................................                                  [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508
+  /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+    warnings.warn(
+
+tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 8 warnings
+  /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server/src/actions/server/_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+    log.warn(
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/action_server_tests/test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]
+  /tmp/codex-actions-arm64-20261126-Pext2q/repo/action_server/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py:59: DeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /tmp/codex-actions-arm64-20261126-Pext2q/portable-final.xml -
+4031 passed, 1840 skipped, 293 deselected, 17 warnings in 1105.70s (0:18:25)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.8" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  7:11108
+OK.
+Warning: More than one user is using same ROBOCORP_HOME location! Those users are: kdlocpanda, root!
+Note: Now running rcc v18.19.8. There is newer rcc version v18.19.11 available, released at 10.11.2026.

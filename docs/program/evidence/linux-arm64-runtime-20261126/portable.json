@@ -1,0 +1,63 @@
+{
+  "actions_source": "00662a77b1f8d43cde0a89cf4839490a3a85f74d",
+  "profile": "portable Runtime suite; not integration_test; optional service cases skipped",
+  "command": "rcc-18.19.8 task script --space actions-arm64-runtime-20261126 -r developer/toolkit.yaml -- python <task>/package_pytest.py tests -m \"not integration_test\" -q --junitxml=<task>/portable-final.xml",
+  "package_command": "poetry run pytest tests -m \"not integration_test\" -q",
+  "python": "3.12.15",
+  "toolchain_space": "actions-arm64-runtime-20261126",
+  "initial_result": {
+    "passed": 3915,
+    "failed": 116,
+    "skipped": 1839,
+    "deselected": 293
+  },
+  "observed_setup_failure": "Task venv declared3.12; shared RCC user-space bin/python3 resolved3.14; inspected child cases could not import actions/pydantic. Writer not identified.",
+  "repair": "Only task-owned generated venv rebound to dedicated RCC3.12.15 space; package commands launched through RCC to supply Poetry on PATH. No product workaround.",
+  "recovery": {
+    "first_focused_passed": 26,
+    "original_failed_cases_in_first_focused": 6,
+    "remaining_passed": 109,
+    "final_clean_wheel_case_passed": 1
+  },
+  "final_result": {
+    "passed": 4031,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1840,
+    "deselected": 293,
+    "warnings": 17,
+    "duration_seconds": 1105.543,
+    "gateway_exit": 0
+  },
+  "junit_sha256": "e7bf6287f7bb9a8e0972e03f38fd0674ca1b524d7c9e6d6b9dea9f0e31d7c780",
+  "complete_gateway_log_sha256": "7170e6e8523c1b788cef460002b271f8d3c99f08db6812ec9193375591ab481f",
+  "build_system_tests_passed": 117,
+  "official_mode_tests_passed": 21,
+  "unverified": [
+    "skipped external services",
+    "official RCC ARM64 release consumer replay",
+    "native ARM64 PyInstaller publication inventory",
+    "optional Markdown lint (mdl unavailable)"
+  ],
+  "typecheck": {
+    "result": "passed",
+    "source_files": 717,
+    "log_sha256": "b4a5d7796c51072fced146bb407a4892dae3eddd96f6dcabe324e8ee3b843f64"
+  },
+  "architecture_cases_in_full_suite": {
+    "passed": 21,
+    "skipped": 0
+  },
+  "lint": {
+    "result": "passed",
+    "gates": [
+      "Ruff check",
+      "Ruff format",
+      "isort"
+    ],
+    "optional_markdown_lint": "unavailable; not claimed passed",
+    "log_sha256": "4f7d6ab095aa2c3aaf7464fbcdbd321f7d385fdb72e1af3a9f284dd0d0b4174d"
+  },
+  "started_at_utc": "2026-11-26T22:38:01.174618+00:00",
+  "complete_gateway_log": "portable.txt"
+}
