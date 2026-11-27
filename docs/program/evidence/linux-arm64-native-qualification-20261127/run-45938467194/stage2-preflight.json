@@ -1,0 +1,44 @@
+{
+  "stage": "coordinated source preparation after native PASS",
+  "qualified_prior_source": "93da040e19eb44807c864611789c48d330b5f627",
+  "new_version": "1.1.2",
+  "version_observation": "GitHub tag404, no matching release/draft, PyPI404; protected preparation rechecks before reservation",
+  "inventories": {
+    "native_platforms": 4,
+    "native_assets_including_checksum": 5,
+    "all_distributions": 9,
+    "pypi_jobs": 6,
+    "native_jobs": 4
+  },
+  "local_validation": {
+    "devutils": "399 passed, zero skipped",
+    "ruff_isort_format": "PASS",
+    "helper_mypy": "PASS1sourcefile",
+    "syntax": "4YAML workflows,51 explicit Bash/inlinePython bodies PASS",
+    "poetry_check_lock": "PASS; deprecation warnings retained"
+  },
+  "final_exact_head_ci": "PENDING after push; prior qualification does not substitute",
+  "normal_immutable_preparation": "NOT RUN: requires approved merged community source and matching qualified complete tree",
+  "permissions": "No Pi/merge/tag/publication",
+  "files_sha256": {
+    ".github/workflows/_gen_workflows.py": "5c590d06e865e4f6873c85738bab478762f420c3f2977ec813f7e4c8ea133466",
+    ".github/workflows/actions_runtime_binary_release.yml": "2c150661cfbc6f3c73275ba3461f502bae3869e301497ae841662027fed7997b",
+    ".github/workflows/actions_runtime_pypi_release.yml": "30fc067e1ea25e0018742b32887a079a1a14a54beed20188c5eea7f973beb91b",
+    ".github/workflows/actions_runtime_recovery.yml": "7ac6857e0827e16e4e0de79caf90b2d8407116e4e1291812c363e8927adafee6",
+    ".github/workflows/frontend-build-unauthenticated.yml": "d8c81174a84af94693724019041394a770d37fca818155acea34eb4550cc0072",
+    "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": "766f5bb647e843e64db7c9ebda55568af997d694c6b0ddf8e11985fc29277c33",
+    "action_server/pyproject.toml": "6214b0a76be5ba08ecb77285dd08cf433a598e0fd58b408262a9ca1d1174c198",
+    "action_server/scripts/publish_verified_runtime.py": "ac7f885d35973e06474e53188faedb74cb1790d331584636ea0dd61a0bb287f5",
+    "action_server/scripts/runtime_release_button.py": "687f6295f7642c51c2df90351c8a93e1feefdf2b521e862fb520b33f0ebcfc5b",
+    "action_server/scripts/verify_linux_arm64_wheel.py": "c355bc6a24c28ef07133840d8651bab76db24c31c506e93273e505acb5decb9a",
+    "action_server/scripts/verify_published_runtime_floor.py": "ea96e6014196e4d6f8a530c7fe97b23421d759d8fc11368e7b000e5d4a25b741",
+    "action_server/src/actions/server/__init__.py": "87b9e10f18a088eb72c2ed33f5d7740b2e1b1986353f296ced9780288cf0ff85",
+    "devutils/tests/test_actions_runtime_release_line.py": "df094a88b0b6017d5f3ef11fa970b1c93236046be7fe5d4da8656dc05faf5f00",
+    "devutils/tests/test_linux_arm64_qualification.py": "1078256df1e40899623bb93df20a446004782fee81173b0a00bf1a707b850d26",
+    "devutils/tests/test_macos26_runner_contract.py": "fd72f0de9fcb6874b77fab10b0dd98dad0db7f3cd6ed04da5017eb5bb3c2b6c5",
+    "devutils/tests/test_runtime_platform_profile.py": "8fc3601a978c084a200a6b475af6b17609533e2433e2bf3a011909684b6d76f3",
+    "devutils/tests/test_runtime_registry_floor_canary.py": "3a35912791341c425ffe6fe25dc17a4dacf6e584c66668bdbf1cc45e64c90c27",
+    "devutils/tests/test_runtime_release_workflows.py": "e7d4126cc36b3940a64e7c69d056a7fdc3e85d78a1c132c098053dcc0a0009eb",
+    "docs/skills/repository-operations.md": "deb465cd1133513887293c006a94a17052bf4934a8db1b1aa10823d02bc9194f"
+  }
+}

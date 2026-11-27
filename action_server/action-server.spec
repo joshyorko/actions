@@ -2,9 +2,11 @@
 
 import argparse
 import os
+import platform
 import pprint
 import sys
 import warnings
+from pathlib import Path
 
 # Suppress pkg_resources deprecation warnings from dependencies
 warnings.filterwarnings("ignore", message="pkg_resources is deprecated")
@@ -21,6 +23,8 @@ from PyInstaller.utils.hooks import (
     collect_submodules,
     copy_metadata,
 )
+from actions.server._download_rcc import RCC_VERSION  # noqa: E402
+from actions.server._rcc_platform import rcc_asset_name, verify_rcc  # noqa: E402
 from actions.server._build_common.rcc_bundle import is_rcc_data  # noqa: E402
 from actions.server._build_common.mcp_bundle import is_mcp_runtime_module  # noqa: E402
 
@@ -63,6 +67,13 @@ psycopg_hiddenimports = [
 psycopg_binaries = collect_dynamic_libs("psycopg_binary")
 new_datas = []
 rcc_datas = [data for data in action_server_datas if is_rcc_data(data)]
+# A stale x64 RCC must never enter a Linux ARM64 native bundle.
+rcc_asset = rcc_asset_name(sys.platform, platform.machine())
+if not rcc_datas:
+    raise RuntimeError("Native Runtime build requires its pinned RCC binary")
+for source, _destination in rcc_datas:
+    verify_rcc(Path(source), RCC_VERSION, rcc_asset)
+
 for data in action_server_datas:
     if ".mypy_cache" in data[0]:
         continue

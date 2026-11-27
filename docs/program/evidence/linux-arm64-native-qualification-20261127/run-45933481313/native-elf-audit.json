@@ -1,0 +1,1703 @@
+{
+  "scope": "static ELF input/ABI audit, not target-OS execution proof",
+  "source_sha": "2cec164c17b3b6cbd7527dac42f5dea57fe42f87",
+  "run_id": 45933481313,
+  "artifact_id": 15169632061,
+  "artifact_zip_sha256": "e230fef1c16f06613e2909e94cf5250e0c7c0d2d5c80204eac98e1ba8bb439a6",
+  "elf_count": 181,
+  "max_required_glibc": "GLIBC_2.38",
+  "files": [
+    {
+      "path": "dist/action-server/_internal/_cffi_backend.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "23e198f625ece5106ebdf2f90c7219b1fe204bb6d264021aa5a6dd892195e59a",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/_duckdb.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "24a9f63481cbf41bb41f1ffbd59f72a37b060b753ad0ccaa6191db35f67685c6",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.23",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/actions/server/bin/rcc-18.19.12",
+      "sha256": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+      "machine": "AArch64",
+      "required_glibc": [],
+      "max_required_glibc": null
+    },
+    {
+      "path": "dist/action-server/_internal/aiohttp/_http_parser.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "80e17c20a6c5a216c9fd31b8cb3675d9dab50bb85b84706210a64adda19f8274",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/aiohttp/_http_writer.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "5c9ee5d8c9d9df610167dc50e794d356641dda8e92850a2525ea14ba3c9097c2",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/aiohttp/_websocket/mask.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2aa90bfdba889313b8bf890a14f727ea4fddfd7455392d60d5f3f1a6456ca334",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/aiohttp/_websocket/reader_c.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d5a04fba6beb291b5357a5df70213cb0ca2d414b90ab023770fd78cca925c185",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/charset_normalizer/cd.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "21f9ca6dcd07f65a7ceec131140cd23d388bc09b2b377e83ff03fb6669974553",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/charset_normalizer/md.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ec9c107d6d44c2c72f2425908a1718bfecd39d130fcea7ae68f10a5d75dd5943",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/cryptography/hazmat/bindings/_rust.abi3.so",
+      "sha256": "b52e6ae53c343ce97478ee10d93a0263576d778de65333c234577298d1e9ef07",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.18",
+        "GLIBC_2.25",
+        "GLIBC_2.28",
+        "GLIBC_2.30",
+        "GLIBC_2.33",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/frozenlist/_frozenlist.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "111659811c862ca6e80545ceb2de3437fe4550a7dda72333e425aa3ec0b38c15",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/libbz2.so.1.0",
+      "sha256": "ac19913f44443f68f2e3ca29d79caaa785cd257bb424b028234bb4a2e8745c07",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/libcrypto.so.3",
+      "sha256": "b27a2396652ee28629c94d59d667c417dbffdf2dee84e5bf140bd17d3eedb7d9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25",
+        "GLIBC_2.33",
+        "GLIBC_2.34",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/libffi.so.8",
+      "sha256": "9dd873a938c4d7df76912d01f6a28aa4aa73d583bd20485a0dbfe5aa9673a191",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.27"
+      ],
+      "max_required_glibc": "GLIBC_2.27"
+    },
+    {
+      "path": "dist/action-server/_internal/libgcc_s.so.1",
+      "sha256": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.0",
+        "GLIBC_2.17",
+        "GLIBC_2.34",
+        "GLIBC_2.35"
+      ],
+      "max_required_glibc": "GLIBC_2.35"
+    },
+    {
+      "path": "dist/action-server/_internal/liblzma.so.5",
+      "sha256": "50e9207a39bea9767f8ceaf464655953622ac3bac7ac5d24433f207f810cbd80",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.32",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/libncursesw.so.6",
+      "sha256": "6f9ae096fba985cdf01d240910e1dbb1193b97c27515964de4111f0497bad685",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/libpython3.12.so.1.0",
+      "sha256": "3b7bb403d2d32495309dfb412559ea3a3b20daaa4522ae64b4fa2c639aa8179d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25",
+        "GLIBC_2.26",
+        "GLIBC_2.27",
+        "GLIBC_2.28",
+        "GLIBC_2.29",
+        "GLIBC_2.32",
+        "GLIBC_2.33",
+        "GLIBC_2.34",
+        "GLIBC_2.35",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/libreadline.so.8",
+      "sha256": "926b1d5d4793773021fb3383d797241323a1b68fb2eb4863e67cdf006dddf603",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.33",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/librt/internal.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "94e6ee121de7eae45b38150132fdff09b8e69810f6a671ea051bca19029d37cb",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/libsqlite3.so.0",
+      "sha256": "21d3efd971a6af4cbcb807fad8f08434f1bd942d2b2b81a8a814c5b5cd07c7a8",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.28",
+        "GLIBC_2.29",
+        "GLIBC_2.33",
+        "GLIBC_2.34",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/libssl.so.3",
+      "sha256": "cd89f6e6eea72583e1f1f98f8ea6b0f5e9281d7a0e4262a2e36f648be789d565",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.33"
+      ],
+      "max_required_glibc": "GLIBC_2.33"
+    },
+    {
+      "path": "dist/action-server/_internal/libstdc++.so.6",
+      "sha256": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.18",
+        "GLIBC_2.25",
+        "GLIBC_2.32",
+        "GLIBC_2.33",
+        "GLIBC_2.34",
+        "GLIBC_2.36",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/libtinfo.so.6",
+      "sha256": "2d2f2bb5a2dd09a3f54dfe7847a7f601203a0e3fed210cb58df740d07989f554",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.33"
+      ],
+      "max_required_glibc": "GLIBC_2.33"
+    },
+    {
+      "path": "dist/action-server/_internal/libuuid.so.1",
+      "sha256": "c5e4db4464688e9fa7a67c7219a478927de65450bcb2815fec10cb3e1b5bfc0d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/libz.so.1",
+      "sha256": "52a1d5c0cbffb3596c7f0636cb1af8e131e00eb77ff92d1353057d5161d420d3",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/msgspec/_core.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "5013dece525a4ee256894d02a228a7e384ea42bbd15734f657540943c0b00579",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/multidict/_multidict.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "743f50d31ee7400e3e60b4e562ff1c5111eb092f9b44b416d891df8726e1ef3e",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/__init__.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e4c21f1dd0ff65e6b9d6885fa4aa8638092d2c64895be6155bc2bed163a92c51",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/applytype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "22da2516e993340769626ec039e2ac8a40680fd458fbec5212a05e7ece555811",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/argmap.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "bd7c7b89c36edbe33b66318be2e7a4b02bcbe54199cba8f0f15e89794833b60e",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/binder.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "41f7de22ba1bbf41ba6181d705913c22a498433f25aff802070878df121e9a9a",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/cache.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f65aeb33f0fe0fe402d1b71754d28d34c8dd1222c3323bb0a314a063bab0e36d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checker.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "5b4b641a34f60779e501f4a0d9d689971483ce35aebfff6deca610c7f19236ef",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checker_shared.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "eb8967348012442a0a18a2bc671677d9ab1a503179851eff910f88e2e6dabecd",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checker_state.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "6d8262cc1934055ac0e34d95bab33dc9bdf895e188ef7b38189cffc541ceffcb",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checkexpr.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3d07a02c1427fac03c7ce9de808b7f5843c8e038922c80819bbf4e1ed42b6bd4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checkmember.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e785c0261549e10c015197a752393b35a0fde3dee9a83250b961886a50bf766b",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checkpattern.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "b9d92dcd7f51e9ea8992ac5652e0309abe6b1637d600b2eec2546b306b481e14",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/checkstrformat.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "87fe6daa13fee116b81df3d0874eebdbef78aac84dd846679c04143701bb1e99",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/constant_fold.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1712181e5ac1233b3ddb903defc3a2a822744499c2e2e47dcde8e04e1c2e6e84",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/constraints.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "704d3a8039d5f38de23fe798403e99269248b27d6a5d2ef62ad8441c1a3e6b02",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/copytype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2557f57773f8ca896a3ba98db4219ec41dbf671ed5549e8fa47c81fe4f8cb581",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/defaults.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "0cc236ba1ec7dc54e636862ced4544ad3f01899c2a5c5d9bee5dff04cc67d79d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/erasetype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2022efc4a0fd100b9cd1372237cfc2d6ceee8bd0c2a9fa70e8fb4aa71660e1f2",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/error_formatter.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "7507b0904dc251f10cf51fcfab542b0e58bc8f9c191f6d9d0e5e1599696d64b5",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/errorcodes.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "43cf46443e5cee586859bc174422f2edd0ca34c6845e733944c0bd503b57e450",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/errors.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1951fbda12a4bd130951bd5dc858f3c5ce3d236c796df9c6b93fa92c4f6c1f3c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/expandtype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2b16d82e193ccf448e2a0656f2d420d35d70db66c1aacdea270b888c7da9a985",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/exprtotype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "364960f6959e4f5970ca596df8b841febfd1327371813f93d818abd05f5ec13e",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/fastparse.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "85efa1472fa9e223b1b0b235124d23870c7fc5196ddc554042e19d087423ae85",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/fixup.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "67611fe12fabcd0855d0c073d4658f0e0752ba402f672984362bfef87acb4e32",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/graph_utils.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f6faf2f08d0e60feba3586ca4640f2692fc7cfc63a7a97fd2b679f2b1d378d20",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/infer.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "73728d07cdc31e343a68cb9fa7a62cacd9512f737035cb093bf64520871c5536",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/join.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "36fd2493abf76bfbe8e0c839bd28543031a0096d3e17ba6d05083a74c47e94d3",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/literals.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "bc40c5d3755b202c2dd4595e51a30f1d8cc67cf7d6e8c052a9857d6a2f517720",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/lookup.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "9830b82ba85d8ecb0c05b3a381f6bebad1dcac49c5651e75ad9bd656bf644c27",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/maptype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f53ca1ff224ba01c1dd5a537512db0a94cb131e927f3a629126b43a87f9a1bc9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/meet.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3aa708974cdd5e531218f605784d24dfa6d240bdf97f94eacf8dfc4c67d81257",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/message_registry.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "547083f1aa29521716a4cf50aa99d2f20a167342c103dc21fdbbf79ad0766c26",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/messages.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "367518069bce496fd78febed4f4405b8e7afa4a51c6fb4a1315f25704f2a6f43",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/mro.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "b7e57314b3765eafb07743be0b18fa4bb5dcf916facf61716665beb767ce34e9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/nativeparse.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3d0281f615d6d8b9bd7b5e19dd29c4f7b2041b8c811d714d0f2fe0367d8f7437",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/nodes.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "242cca4d50113aeb4c7e02a16235c5252c1cc61de0a4421ef67d20d6d5e57d81",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/operators.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d992c26fb7899d46a69b6b4d152264bec512088e3e8de4814e9abc9cc4bfe5bb",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/options.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "c4f21b26c061c7167b4a5fda277b3bbffeb07f9c97e40c3a2703034feb2e6668",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/parse.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "7f28313dc33d4530949bb25129cc4d456671f9ede1044018090db2e8492c5d38",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/patterns.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "6f359e87d68f7437a1eb13023a06a187db2db6ef063d32f0642f3073099e2266",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/plugin.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "4f2b3938a679251df6110e61ade0ba4e25106a0f74637bc8e838dc0ffa450ccc",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/plugins/common.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "cc2012dc8fc127321136c456e14f23c383dced52ba211c8c55b90fe5d3ae442f",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/plugins/dataclasses.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "39b9ea2b01cf104c2e59cb266a0bf3506768bfedd91640dc312bfccba3a8f958",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/reachability.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "daf1a0e5cb900e875dccfdfcb6b3679847f7ca7397ef57e770c8b6c8bee08ba9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/scope.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "0818a619634505c01f3a6ba487954536d45789bd9e5a5f16f5c06c5ad37b80fe",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e6f60f0ea8ce26edff6fffe4af4fe95e0974212e54dc5f7a5b42e5cd8b85a665",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal_enum.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2110ffa3e623f911922fbb29fdc5b82f6f4f0c35614ba9825ebe9acbdd77a288",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal_namedtuple.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "43b148f9dd95dd8e6fcf7bff77e17763b10816acc3f676a36cb2330950cf5a4d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal_newtype.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "b05f0eeeeaaf088d9b3eb3ac9ceca67d89a0889ecc3aed51b3ab0fc361272a7c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal_shared.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "4f7e663a2491dc2f9be0f5509701fdc36f919ddcf8ed1973aa72de9001d3cb08",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/semanal_typeddict.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ad19ac05dd52c67b928a419dbfd0bffed12c94a0fc3e074979dd3ebfa55aecbe",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/server/trigger.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e2a68410b7342f6442cdab0c0e11a1257c84efbbfc115f1421e3b5fd368c3cd8",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/sharedparse.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3b2ff6b615f6c0fffcd8754a06d8721db8965e7134f15acc9419d3951561511c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/solve.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2b42a0c6ffbf2e64a68a32ae22610446d85a5026a86b93178f5ee79abd0f0900",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/state.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "8035e2301d797f96ade73f792465dcd2d35c3e14254477751f637a10916ce3aa",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/strconv.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "b16c1c037da44af8c82cc921f36307d2641c8b35e6aa8fbfc1f6a2b9034b6d14",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/subtypes.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ce3c234339b970bc3f08191e514e5c8cbdd625dca5d0583b625554b86c3a5f38",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/traverser.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "95bfa957aa67c72e77d6a4dcfbc332b7ca8bce5a9df3d43cfec0f7cd5c0c5642",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/treetransform.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d922ea87d7aa4a31399226073f78810fa06196fec74b199b63f91955de333e45",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/tvar_scope.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2c9b5bf2fa53c82c2aa76bc3cb953ee7c6f16d81e297e783c2bdbb9b9cf9e800",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/type_visitor.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "a14f52be2f46b6b0d00fde5b41bad1fbe263679d6d24e889d95d4afa139ed51f",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typeanal.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "9254df22b6d2e761ac20233e6d06a49c55e2d99597ed51bdadcd2d61c03f4029",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typeops.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ffbab36836b0f051a67d7161a8271d8c4e2cbcefa38ddb757d088dc46a0e86b1",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/types.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "6a56b5ea96aa0c8ac27c796c96ce48761b326191a4ce7ae863c1ed8e3d2474aa",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/types_utils.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "338137bc1bed7c8fcf706c7a974b0ba7a0829683130da31c96fb8bd71b96d07d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typestate.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d25737eb0c5588bb6a2ed90b58305c41f01deaf9c29f40dd0ff0516986349fbc",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typetraverser.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3e802fced0ac9b0f04bf6a2359e7354d5f0cb328415e85cc0186a18cc3d78273",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typevars.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "61feb2beabfa23c54a03790a94fe8d9cf6c79560a59e81fb51d8e09ed5ae4d05",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/typevartuples.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d181bfb692e64eb345d179ca625177430661efb2d499ef526bfce1feb5021086",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/util.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "37f67b4380cf37d6ca0355e766ad231ad35c4da87cc2fae64377a699d0bf9a97",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/mypy/visitor.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ec72c30cece9716c687e8497755d745d56f1a6c3a198677fe46a522d505c13d9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/propcache/_helpers_c.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "17d92e6996da0e3b11e3126e8d96fa36fdb8014268472f57a971d6b4fe333b92",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psutil/_psutil_linux.abi3.so",
+      "sha256": "d8522ff754398393f40651e12c79ffa05dd818b927ed12c911d8f3da250a08cd",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psutil/_psutil_posix.abi3.so",
+      "sha256": "68e3a4dfa4d23e37c6c65afc2754ff843208d800a4a17bef9358aeda467d9f45",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libcom_err-6d8d18aa.so.2.1",
+      "sha256": "b335a27b7304dfd71b7539777c47d5600930ab63f7c5f47cbb5a12257d60aaae",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libcrypt-258f54d5.so.1.1.0",
+      "sha256": "980d4781ae9ad8d1b2f60be52cfbbf176d32cc62ecf888920f347e9957636ee2",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libcrypto-6aa7cfbd.so.1.1.1k",
+      "sha256": "812beb4bad6faa3bf1e191ad301f7a5a55bbcae360b63dca50ad262f585c4e2d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libcrypto-ce0cb7ba.so.3",
+      "sha256": "a2817306e0fe8c5533190cd48315c6d0f69c80d70b1373f76fba948a29ce4264",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libgssapi_krb5-fe951f80.so.2.2",
+      "sha256": "b8e98fce957511ca70baec649256725b988973a874cd144216aa63d1ab6c19e9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25",
+        "GLIBC_2.27"
+      ],
+      "max_required_glibc": "GLIBC_2.27"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libk5crypto-84470bb3.so.3.1",
+      "sha256": "bfcf150ced08552ec53730d1c5e7a319933043a9920cbf758c53fd6f20376c9c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libkeyutils-fe6e95a9.so.1.6",
+      "sha256": "0d2a628040cf8f759447db3556701af6aa4b5b3e36a7a55d07a944c52ce33d22",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libkrb5-26ef5d84.so.3.3",
+      "sha256": "337ac8f9378ef1cd717309e798a0b4ce87434321ac587211faca130d6da6cba4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libkrb5support-875e89dc.so.0.1",
+      "sha256": "7026a8f13accd3c988f914768ce49a0f2ef905ed83ae3bd014ffecfa98772d3a",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/liblber-83b332c3.so.2.0.200",
+      "sha256": "73ebbb9b5dd098e4981528c8fd65f76aa8d6aecf14f8136ccd771cb287fbb5d2",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libldap-2df85efe.so.2.0.200",
+      "sha256": "e2c244823c539884342dddff56f50261304755073cafdeab5383da63417dd796",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.22"
+      ],
+      "max_required_glibc": "GLIBC_2.22"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libpcre2-8-8701a61e.so.0.7.1",
+      "sha256": "8f1645c7955deb69cc005acb6235b2c44561189aefb1ad2c23376c5876930cf9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libpq-074fb160.so.5.18",
+      "sha256": "0611dc626e66890f46a064f20e62248476a7f8f06db5b0a162a2a9cb836c1eed",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libsasl2-076b3c1f.so.3.0.0",
+      "sha256": "4e4ec55bf66c72705ac0c03b770dc02ed07c27987c5b714e92cdb5c79ede29c0",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libselinux-be7a4dc7.so.1",
+      "sha256": "58019414d2ee2751e77c4afe45c72c880f3f74e053c368b04a01d983f8bbf851",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary.libs/libssl-ac25848f.so.3",
+      "sha256": "1512e8125cfeae7d08e49599db4152ae3211ac7dc7f5a3259732b116487dab02",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary/_psycopg.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "29b118f252916cefe66dab501b2edd90c173bc4552c3fd8759a742d3bb4f07f4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/psycopg_binary/pq.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "3a2bd3dad1c28262ffb3368d5143789e5d9273a333212a769ccc91f0584b35e4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/pydantic_core/_pydantic_core.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "08fc5cbf746f1b30a1e2b9c19abc90343f80b828e2af1e99b61592775db2ad50",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_asyncio.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "86b6fd2a06ee0dee8b9831e5a572f0eb3a081e2e30ae650bd64bc9e3ae63633b",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_bisect.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "6d08d7114fdd2416fe41bfbae188dffd185b384733170be4c6d8284c16d7d6c1",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_blake2.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1bd7211852e25cf2e33de3be5caa6451cef870c17e965614dafb914496d2992d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.25"
+      ],
+      "max_required_glibc": "GLIBC_2.25"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_bz2.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f78d8242ad648b370d5745be493be138af4aee67777ebdf2bbd11f527753a33b",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_cn.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "64ae356284c5c981a283234f974383601c5423d75556a6f37c91e3e2b180dce8",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_hk.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "11fff7540c4318d04202cb1ff066f13d462a134e7d170468f770532384752508",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_iso2022.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "0c3a4febc4b25de21b7198bea26536a6c92eb7fce5431e68458b1797b084f692",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_jp.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "9d0ef7a94925cbb27a5e45ec0586234dbeb372c9a6451f6947afb1e7237ffe0f",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_kr.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "23a0c72e697224dd422bacc0e612ebd1192a5748a69a2e34557ffe33c81f9139",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_codecs_tw.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "24b13967be6723ee201a756d68b7c9c221c48c083b430b27650986b2e80afba3",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_contextvars.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "728ef58c131b1079b3d225b046cca214976caab02cec592687e571d4bdef87bb",
+      "machine": "AArch64",
+      "required_glibc": [],
+      "max_required_glibc": null
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_csv.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "a573923b43a5dd44e3b636894533314ead943cffba09e5e76e34f398f8ea6e5e",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_ctypes.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "cff94f991d3a474b68264ef4cb23b6e58e9df55d49f5e827d088744650a3e8d8",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_curses.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "177682691effb0bd14021d451b16a0812bbcd22e8653bfc409328bc5158eba84",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_datetime.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "c60a775cd638b276992522d2835fa22c1e5e22beeeda7d6ba91b42bbd75712d9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_decimal.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "44886fb1c03e20466095902141634e2d3a289ba8bd34cf1fffe2f843a3da8488",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_elementtree.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "ef3a0091d3c86246e1c9e722f23eff71207ba2537f2814138322cb8247af36cf",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_hashlib.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1bf76c97fa3998e7bffd404319a2be68ebabce8153cc8a6fef54afffec58b758",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_heapq.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "babf5a7143b51a2d0be0c45f0c09725b61ca7d23d722e02033e5fc02244dd697",
+      "machine": "AArch64",
+      "required_glibc": [],
+      "max_required_glibc": null
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_json.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "41299641d5efff084cfc2a334943032fc18ecc09825685faa7d2acd9d6915375",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_lzma.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "11e2694864fab9545bfc6aaf67698c85ae24d7e7c83d45a906268095b7c6d8ac",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_md5.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "880f5badde098498848ff58a97710ec05e98942c6465bdd716925920064a02df",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_multibytecodec.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "cb44c994e566af95ce1780717bd2135c844fc858ca059051084752e0188c16e1",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_multiprocessing.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "350c258a98e15d1684a9e9668e93647ec2e3a38a6068a767e47c0ad505cf3520",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_opcode.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "914f727dac17ff150c2a5738a31cedc1f560731ac63579d3c674e6bdfeb71dcd",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_pickle.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e2ce9ca3a4094a7e735d8cd489a9ac8e63e60c13060c95eef9cd8bd475709c5c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_posixshmem.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "2dd1eadf8fea0a65bc03878f4a5a9e108e6bac94932e439fa572fd45918cb068",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_posixsubprocess.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "39960a8997b2c4e4e1a546699afbfb468462528a2b3753b6127c891f5ed8ba68",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.32",
+        "GLIBC_2.34"
+      ],
+      "max_required_glibc": "GLIBC_2.34"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_queue.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "b0be9e61c16c36cb062599fd94633b8ad2435e449ccb2fcd221278c6c0adca9f",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_random.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "dd3d1737ae7e50818e9c8fad162448357765b846c88f4975e4825eaf870a04f9",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_sha1.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f8277a27c913e62073dd74f04bb0203c0a9dc034da897bdf7537dfdb72ea215b",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_sha2.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "bf6a30b4d8cd2dcefe165aa9c3eaef9cc45bd48742b0865d446384d4e4530103",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_sha3.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "a46a3878b917e3cdfb77e8a0cc351c52d851d24ab37c31cfcd39c27af82e74cc",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_socket.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "474c22139cd82d4b67a3526de592ba043e9a6305965d522cfbb913a993db74ff",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_sqlite3.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "23672d9c2d0d872c5f9390c3fbb0d268f86dd8ebad1eace6dd9b0f032b080f11",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_ssl.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "98db1c9b14ffee77797e4d99b0811b9b278761f5614d3a008618db65b6cd6ac0",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_statistics.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "7ea2e4cd094d3a563933817a00cfc4902913776b0fc4f18d3ee01d85aec08873",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.29"
+      ],
+      "max_required_glibc": "GLIBC_2.29"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_struct.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "c9b992d5cd1eadb017df33b2a7b43c59b88084d986148ccbda37b3f1783cf4cf",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_uuid.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1e930e5520095cf3254af01b0ce6a3f85df88a4edc90fe27142db9f9829772d4",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/_zoneinfo.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "a4ff85a2b21c5ad3263d3703c6bfaf42a420804fd52bd30f19d35528cc30595c",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/array.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "cf5e688b50cb4de1ede03932fa5e1348a9410c25db54eade6b1276d608dcafba",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/binascii.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "277430ab8d185b6d1b27a9e7e0b9b19f4ea01d181b84ee94af11529fe0a726ba",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/fcntl.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "49800e7fb8f6d3f5a69aa2a0f07b4f7e8186d8c46cde245248ff914a14765f3d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.28"
+      ],
+      "max_required_glibc": "GLIBC_2.28"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/grp.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "d948dec081a4d06ac191fbc61188f792e52c2501b205d329d7c71ed062a842d1",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/math.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "5ab779c8bdfa759dd37ffd868f333a74932643b8578b9372a734d44e86a65356",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.29",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/mmap.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "0e27a4d7710ec2c893b9706c9362932ab4b2a460bf109bac849d828a342e1766",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/pyexpat.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "12a69424f47efa9f825fbf0528d6adc1e8f4fb7f65c8f1bdbd26fe3aa2faaa56",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17",
+        "GLIBC_2.38"
+      ],
+      "max_required_glibc": "GLIBC_2.38"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/readline.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "332620e0d6c63cfd2bbd19ae9d751d6b1fc72b3aafd751f3109c1ec59495662d",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/resource.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "37f57d31b2e45491aa15641500e14f278d8b7808faca3d4df0e08bcdff14930e",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/select.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1f066dfa376e8466b57dc58c4c4a8cdedce133654c7b3afede44c2c69f8460d8",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/syslog.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "a0960c41bd933f37993d6009b417b270487867541c1ca616cebfcf176cebb0d7",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/termios.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e502f2a1c381f02a728d5014ed4e3bcd79808deacb99115938bffe7a3ce0bfa0",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/unicodedata.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "f7046471cf0380817ec7cf018a18bf1c0fe994cb6101505c62e01d5e406f0cdc",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/python3.12/lib-dynload/zlib.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "1fa8f3e64874552dafe881ff3968d5ed8e3090d20bf06a438c993f3a0b487261",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/rpds/rpds.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "28cc4787f93b10bb501a0a67bf1ba50b244771fb305ec9072ee3b8b4e74f2891",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/watchfiles/_rust_notify.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "244adf74490cff1c893ac3d8aea4dc7a13bf3b335c6b1295b1e1edc033fcdca0",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/websockets/speedups.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "99ce990f9f9420ca0b00caca4067fc0de785b03e491824652d4ad0af51bce6d6",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/yaml/_yaml.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "edc51c14c75bd17789a97020a8472e051b5adce1a7667d63edc27e4825c23cf2",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/_internal/yarl/_quoting_c.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "9298de1070b0019f4a5b90c0d6f5be5e7440878cace29a0bfa465472f3e053ac",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    },
+    {
+      "path": "dist/action-server/action-server",
+      "sha256": "6b0074642c80c2836e303d8168931b33fc83ee2b090acaacb4c46bac5930aef5",
+      "machine": "AArch64",
+      "required_glibc": [
+        "GLIBC_2.17"
+      ],
+      "max_required_glibc": "GLIBC_2.17"
+    }
+  ]
+}

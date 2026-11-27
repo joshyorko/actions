@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.1.1"
+version = "1.1.2"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -13,7 +13,7 @@ include = [
 	{ path = "oauth2/*.yaml", format = "sdist" },
 	"src/actions/server/_static_contents.py",
 	{ path = "src/actions/server/_oauth2_config.py", format = ["sdist", "wheel"] },
-	{ path = "src/actions/server/bin/rcc-18.19.8*", format = ["sdist", "wheel"] },
+	{ path = "src/actions/server/bin/rcc-18.19.12*", format = ["sdist", "wheel"] },
 	"src/actions/server/templates/action-templates.zip",
 	"src/actions/server/templates/action-templates.yaml",
 ]

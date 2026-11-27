@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "validator_sha256": "c355bc6a24c28ef07133840d8651bab76db24c31c506e93273e505acb5decb9a",
+  "files": {
+    "actions_runtime-1.1.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "3b7ebc3d5331c510c0e6ac15bebc7df14514c743f7ce597437fa4381e852a288",
+    "actions_runtime-1.1.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "6f390ebd7fc93046aeb4aeabb83f960d16427bd355a3037c1dd6e2f22d9fa5c6"
+  }
+}

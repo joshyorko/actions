@@ -229,6 +229,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         "ubuntu",
         "windows",
         "macos",
+        "linux-arm64",
     ]
     assert all("-devmode" not in row["name"] for row in wheel_matrix["include"])
 
@@ -1247,6 +1248,7 @@ def test_binary_release_publishes_downloadable_checksum_manifest(tmp_path):
 
     for relative_path in (
         "linux64/action-server",
+        "linuxarm64/action-server",
         "macos-arm64/action-server",
         "windows64/action-server.exe",
     ):
@@ -1265,6 +1267,7 @@ def test_binary_release_publishes_downloadable_checksum_manifest(tmp_path):
         )
         for relative_path, asset_suffix in (
             ("linux64/action-server", "linux64"),
+            ("linuxarm64/action-server", "linuxarm64"),
             ("macos-arm64/action-server", "macos-arm64"),
             ("windows64/action-server.exe", "windows64.exe"),
         )
@@ -2059,3 +2062,44 @@ def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monke
     with pytest.raises(RuntimeError, match="title"):
         publisher.main()
     assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+@pytest.mark.parametrize("version,count", [("1.1.1", 7), ("1.1.2", 9)])
+def test_versioned_inventory_requires_arm64_without_changing_historical_bundles(
+    tmp_path, version, count
+):
+    publisher = load_publisher()
+    (tmp_path / f"actions_runtime-{version}.tar.gz").write_bytes(b"sdist")
+    for python, platform in publisher.wheel_rows(version=version):
+        tags = publisher.EXPECTED_WHEEL_TAGS[(python, platform)]
+        platforms = ".".join(sorted(tag.platform for tag in tags))
+        (
+            tmp_path
+            / f"actions_runtime-{version}-cp{python}-cp{python}-{platforms}.whl"
+        ).write_bytes(b"wheel")
+    publisher.write_manifest(tmp_path)
+    assert len(publisher.verify_artifacts(tmp_path)) == count
+    if version == "1.1.2":
+        next(tmp_path.glob("*cp313*aarch64.whl")).unlink()
+        with pytest.raises(publisher.VerificationError, match="nine artifacts"):
+            publisher.verify_artifacts(tmp_path)
+
+
+def test_formal_arm64_lane_has_unique_bytes_and_real_rcc_consumer_gate():
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+    )
+    steps = workflow["jobs"]["build-wheels"]["steps"]
+    gate = next(
+        step
+        for step in steps
+        if step.get("name") == "Qualify selected ARM64 wheels in real RCC environments"
+    )
+    assert "--rcc-consumers wheelhouse ." in gate["run"]
+    assert "--verify-evidence wheelhouse arm64-wheel-evidence" in gate["run"]
+    assert gate["if"] == "matrix.os == 'ubuntu-24.04-arm'"
+    assert any("Linux-ARM64" in str(step.get("with", {}).get("name")) for step in steps)
+    assert any(
+        step.get("with", {}).get("name") == "runtime-arm64-wheel-acceptance"
+        for step in steps
+    )

@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 # Note: also referenced in action_server/build.py
 # Using joshyorko/rcc open-source version
-RCC_VERSION = "18.19.8"
+RCC_VERSION = "18.19.12"
 
 
 def get_default_rcc_location() -> Path:
@@ -29,6 +29,11 @@ def download_rcc(
     """
     import os
 
+    from actions.server._rcc_platform import expected_sha256, rcc_asset_name, verify_rcc
+
+    asset_name = rcc_asset_name(sys.platform, platform.machine())
+    expected_sha256(RCC_VERSION, asset_name)
+
     from actions.server._common.system_mutex import timed_acquire_mutex
 
     if target:
@@ -38,34 +43,12 @@ def download_rcc(
 
     if not force:
         if rcc_path.exists():
+            verify_rcc(rcc_path, RCC_VERSION, asset_name)
             return rcc_path
 
         log.info(f"RCC not available at: {rcc_path}. Downloading.")
 
     rcc_path.parent.mkdir(parents=True, exist_ok=True)
-
-    machine = platform.machine()
-    is_64 = not machine or "64" in machine
-
-    # Using joshyorko/rcc GitHub releases
-    # Asset names: rcc-windows64.exe, rcc-macosarm64, rcc-macos64, rcc-linux64
-    if sys.platform == "win32":
-        if is_64:
-            asset_name = "rcc-windows64.exe"
-        else:
-            raise RuntimeError("Unsupported platform (windows 32 bits)")
-
-    elif sys.platform == "darwin":
-        if machine == "arm64":
-            asset_name = "rcc-macosarm64"
-        else:
-            asset_name = "rcc-macos64"
-
-    else:
-        if is_64:
-            asset_name = "rcc-linux64"
-        else:
-            raise RuntimeError("Unsupported platform (linux 32 bits)")
 
     # GitHub releases URL format
     rcc_url = f"https://github.com/joshyorko/rcc/releases/download/v{RCC_VERSION}/{asset_name}"
@@ -81,18 +64,25 @@ def download_rcc(
     ):
         if not force and rcc_path.exists():
             # It was downloaded by some other process while we were waiting for the mutex.
+            verify_rcc(rcc_path, RCC_VERSION, asset_name)
             return rcc_path
 
         import actions_http
 
-        status = actions_http.download_with_resume(
-            rcc_url, rcc_path, make_executable=True, overwrite_existing=True
-        )
-        if status.status in (
-            actions_http.DownloadStatus.HTTP_ERROR,
-            actions_http.DownloadStatus.PARTIAL,
-        ):
-            raise RuntimeError(f"Failed to download RCC: {status.status}")
+        temporary = rcc_path.with_name(rcc_path.name + ".download")
+        try:
+            status = actions_http.download_with_resume(
+                rcc_url, temporary, make_executable=True, overwrite_existing=True
+            )
+            if status.status in (
+                actions_http.DownloadStatus.HTTP_ERROR,
+                actions_http.DownloadStatus.PARTIAL,
+            ):
+                raise RuntimeError(f"Failed to download RCC: {status.status}")
+            verify_rcc(temporary, RCC_VERSION, asset_name)
+            temporary.replace(rcc_path)
+        finally:
+            temporary.unlink(missing_ok=True)
 
     return rcc_path
 

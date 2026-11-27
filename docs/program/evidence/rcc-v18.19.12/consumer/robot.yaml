@@ -1,0 +1,6 @@
+tasks:
+  Qualify:
+    shell: python qualify.py
+environmentConfigs:
+  - setup.yaml
+artifactsDir: output

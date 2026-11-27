@@ -143,7 +143,7 @@ def test_guard_measures_actual_architecture_and_os(
         assert version in result.stdout
 
 
-def test_native_manual_mode_is_mac_only_without_changing_default_coverage():
+def test_native_manual_scopes_preserve_default_platform_coverage():
     workflow = yaml.safe_load(
         (WORKFLOWS / "frontend-build-unauthenticated.yml").read_text()
     )
@@ -159,10 +159,67 @@ def test_native_manual_mode_is_mac_only_without_changing_default_coverage():
         json.loads(value) for value in re.findall(r"fromJSON\('([^']+)'\)", expression)
     ]
     assert [[row["os"] for row in choice] for choice in choices] == [
+        ["ubuntu-24.04-arm"],
         ["macos-26"],
-        ["ubuntu-22.04", "windows-2022", "macos-26"],
+        ["ubuntu-22.04", "windows-2022", "macos-26", "ubuntu-24.04-arm"],
     ]
     assert "inputs.runner_scope == 'macos-arm64'" in expression
+    assert "inputs.runner_scope == 'linux-arm64'" in expression
+
+
+def test_native_arm_manual_scope_retains_binary_history_browser_and_wheel_gates():
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "frontend-build-unauthenticated.yml").read_text()
+    )
+    job = workflow["jobs"]["build-external"]
+    assert job["strategy"]["fail-fast"] is False
+    steps = {step["name"]: step for step in job["steps"]}
+    for name in (
+        "Verify Canvas candidate-source Runtime and browser acceptance",
+        "Verify packaged Work Items browser acceptance (frozen)",
+        "Verify packaged Work Items browser acceptance (Go wrapper)",
+    ):
+        assert "ubuntu-24.04-arm" in steps[name]["if"]
+    for name in (
+        "Verify frozen and Go-wrapper browser and storage behavior",
+        "Verify large stored Run history in frozen and Go-wrapper browsers",
+        "Verify Work Items consumer through frozen and Go runtimes",
+    ):
+        assert "if" not in steps[name]
+    wheels = steps["Build and clean-test native ARM64 wheels"]
+    assert wheels["env"]["CIBW_ARCHS_LINUX"] == "aarch64"
+    assert wheels["env"]["CIBW_BUILD"].split() == [
+        "cp312-manylinux_aarch64",
+        "cp313-manylinux_aarch64",
+    ]
+    assert "verify_published_runtime_floor.py" in wheels["env"]["CIBW_TEST_COMMAND"]
+    assert (
+        "--rcc-consumers"
+        in steps["Qualify selected ARM64 wheels in real RCC environments"]["run"]
+    )
+    upload = steps["Upload qualification-only ARM64 wheels and original receipts"]
+    assert upload["with"]["name"].startswith("linux-arm64-qualification-")
+
+
+def test_arm_wheel_smoke_rejects_non_native_host_before_creating_evidence(
+    tmp_path, monkeypatch, capsys
+):
+    spec = importlib.util.spec_from_file_location(
+        "arm64_wheel_smoke", ROOT / "action_server/scripts/verify_linux_arm64_wheel.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    monkeypatch.setattr(module.platform, "machine", lambda: "x86_64")
+    monkeypatch.setattr(
+        module.sys,
+        "argv",
+        ["smoke", "--rcc-consumers", str(tmp_path / "unused.whl"), str(tmp_path)],
+    )
+    with pytest.raises(SystemExit) as error:
+        module.main()
+    assert error.value.code == 2
+    assert "native Linux ARM64 required" in capsys.readouterr().err
+    assert not (tmp_path / "arm64-wheel-evidence").exists()
 
 
 def test_generated_native_signing_and_download_slots_move_together():

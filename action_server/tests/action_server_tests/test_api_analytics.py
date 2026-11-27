@@ -2,7 +2,7 @@
 Tests for the Analytics API endpoints.
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import pytest
 
@@ -88,7 +88,7 @@ def populated_db(tmp_path):
             db.insert(action2)
 
             # Create runs
-            now = datetime.now()
+            now = datetime.now(timezone.utc)
             today = now.isoformat()
             yesterday = (now - timedelta(days=1)).isoformat()
 

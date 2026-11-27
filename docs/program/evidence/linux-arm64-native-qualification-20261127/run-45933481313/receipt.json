@@ -1,0 +1,18 @@
+{
+  "status": "FAIL",
+  "source_sha": "2cec164c17b3b6cbd7527dac42f5dea57fe42f87",
+  "run_url": "https://github.com/joshyorko/actions/actions/runs/45933481313",
+  "job_id": 140291226022,
+  "native_standalone_go_wrapper_history_browser": "PASS",
+  "wheel_qualification": "FAIL: CP312 consumer exited 2; CP313 not executed",
+  "retention_defect": "Original container-local floor/smoke logs were not uploaded. Job log retains subprocess failure, not hidden parser diagnostic.",
+  "diagnosis": "Existing Action harness requires a real RCC environment; cibuildwheel test environment does not establish RCC_VERSION. Fix uses actual pinned RCC, never spoofs marker.",
+  "abi_scope": "181 ELF files AArch64; bundle highest GLIBC requirement 2.38. Ubuntu 24 ARM proof does not establish Debian 12/Pi standalone compatibility.",
+  "local_fix_validation": {
+    "devutils": "394 passed",
+    "focused_final": "27 passed",
+    "helper_mypy": "PASS",
+    "ruff": "PASS",
+    "workflow_syntax": "PASS"
+  }
+}

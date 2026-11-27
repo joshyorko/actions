@@ -377,6 +377,7 @@ def test_cibuildwheel_checks_each_final_repaired_wheel():
         for platform, architecture in (
             ("macos", "arm64"),
             ("manylinux", "x86_64"),
+            ("manylinux", "aarch64"),
             ("win", "amd64"),
         )
     }

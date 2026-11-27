@@ -46,7 +46,7 @@ def entries():
 
 
 class Executor:
-    rcc_version = "v18.19.8"
+    rcc_version = "v18.19.12"
 
     def __init__(self, names=("alpha", "beta"), fail=None):
         self.names = names

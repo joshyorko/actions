@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "status": "OFFICIAL_RELEASE_VERIFIED",
+  "releaseTag": "v18.19.12",
+  "releaseId": 460057670,
+  "publishedAt": "2026-11-27T01:21:22Z",
+  "sourceSha": "22f64b93130ed54c2280f790d6ee5e178c0533f2",
+  "releaseUrl": "https://github.com/joshyorko/rcc/releases/tag/v18.19.12",
+  "arm64": {
+    "url": "https://github.com/joshyorko/rcc/releases/download/v18.19.12/rcc-linuxarm64",
+    "sha256": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+    "size": 24314018,
+    "downloadedBytesVerified": true,
+    "compiler": "go1.26.9",
+    "goos": "linux",
+    "goarch": "arm64",
+    "vcsModified": false
+  },
+  "index": {
+    "url": "https://github.com/joshyorko/rcc/releases/download/v18.19.12/index.json",
+    "sha256": "26af88f65257b6a5de250572f61c9690d45324c6aa6a8bb3c506e5a606b4addc",
+    "downloadedBytesVerified": true
+  },
+  "allPublishedApiDigestsAndSizesMatchManifest": true,
+  "assets": {
+    "index.json": {
+      "sha256": "26af88f65257b6a5de250572f61c9690d45324c6aa6a8bb3c506e5a606b4addc",
+      "size": 9632
+    },
+    "rcc-linux64": {
+      "sha256": "0a13e78201a71c1bbc19a2ee8ccc86dd60a67ec4ffa8cd3a9a8f254d148849ee",
+      "size": 23310498
+    },
+    "rcc-linuxarm64": {
+      "sha256": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+      "size": 24314018
+    },
+    "rcc-macos64": {
+      "sha256": "db7390a1a7c6be543bd6079c83a6d1b193c93038dce3e2e500713f9bd0f32197",
+      "size": 23365504
+    },
+    "rcc-macosarm64": {
+      "sha256": "9ebad0eb4ea52069ba28dfad341c5741de3f7e4fa4e45b4a19432f65c27b622c",
+      "size": 22012066
+    },
+    "rcc-windows64.exe": {
+      "sha256": "8502b903fe5d462f1ba3ae9fc85a2774424c8b4137c5cb442a9ffb3b71440bfc",
+      "size": 20781568
+    },
+    "rccremote-linux64": {
+      "sha256": "5a30ce22c6badb63ffd2256679da3336f9bf1602cccb0cf66a6fd17757d33cb4",
+      "size": 9470114
+    },
+    "rccremote-linuxarm64": {
+      "sha256": "5597928dc7eaedf2912410469e094cd1c52d52915184d0f49bc1209aefc45711",
+      "size": 8847522
+    },
+    "rccremote-macos64": {
+      "sha256": "44d0f593053de805ac73a339754f01bae8f6818dd8beb7059c871544662d0198",
+      "size": 9661936
+    },
+    "rccremote-macosarm64": {
+      "sha256": "8cbff0ce5aa37b5a8198869570fc3692701e9ffed7af38fb8f8923869a2c3c4b",
+      "size": 9002274
+    },
+    "rccremote-windows64.exe": {
+      "sha256": "870318829eec03244c715193a61edb1b0c0c35df4bb9f977e7c221267153cf76",
+      "size": 9790976
+    }
+  },
+  "preparation": {
+    "runId": 45915012088,
+    "artifactId": 15163238925,
+    "artifactUrl": "https://github.com/joshyorko/rcc/actions/runs/45915012088/artifacts/15163238925",
+    "zipSha256": "4ebc54c3b1b70764916ef3522382daaa1b22e68482d4b425e79453d1d160ff07",
+    "manifestSha256": "76ccef012ddbd78d849dd15da6c147f60ab3ce2c9f531915e0ecd71b5876cc25",
+    "checksumsSha256": "649ac2c197e25d6d2424aaa0de7e83e8ccd651e3bfad5e488da817836ea634c2",
+    "provenanceSha256": "9c9851dc4916b87f9b56736f3c932dab4df2c54707c8119fdd6b276e71f38cd2"
+  },
+  "publisher": {
+    "runId": 45920193677,
+    "conclusion": "success",
+    "approval": [
+      {
+        "comment": "",
+        "environments": [
+          "rcc-production"
+        ],
+        "state": "approved",
+        "user": "joshyorko"
+      }
+    ]
+  },
+  "trust": {
+    "verified": "authenticated GitHub artifact ZIP SHA256, source-bound manifest/checksums/JSON provenance, clean exact-source Go metadata, five-platform native qualification and protected approval; public bytes compared independently",
+    "vendorSignatureVerified": false,
+    "signingLimitation": "No new vendor signature or signed attestation policy; do not describe JSON provenance as a publisher signature. See docs/release-process.md Signing limits."
+  },
+  "qualification": {
+    "fiveNativeJobs": "success in preparation45915012088",
+    "hostedArm64RawReceiptRecovered": true,
+    "hostedArm64ReceiptSha256": "dd471490e06955689bdd69ef2be62288534f80e5751c921e85d5b54175bdcac9",
+    "hostedArm64RobotSha256": "4fa2e93ad88b043edc7b5f8040256235a8d68ef3d0a4fd14f3733a795599ae1f",
+    "hostedArm64ArtifactId": 15161797419,
+    "hostedArm64ArtifactZipSha256": "456b58e5c91154601b613859d75a36391ed270085e055371aa6095616ca2b1f1",
+    "fullReleaseCandidate": "11 gates passed, numeric exit0; full Robot179pass0fail3skip, as directly audited before publication",
+    "fullRobotSkips": [
+      "Released CLI Baselines Replay The Same Native Artifact: missing native archive/all three identified binaries",
+      "Native Revocation Operator Preserves Artifact And Running Decision: RCC_BUNDLE_TEST_ARCHIVE fixture required",
+      "Windows uv-native activation check: Windows-specific"
+    ],
+    "finalPi": {
+      "pass": 11,
+      "fail": 0,
+      "skip": 0,
+      "exitStatus": 0,
+      "source": "original executed assertions/output recovered at T3 activity330,331,337; included verbatim JSON execution records",
+      "excluded": "Windows-tagged test",
+      "rawRobotXmlAvailable": false,
+      "originalArchiveAvailable": false,
+      "originalArchiveSha256": "7eadf894151d3eb341f017bff3981c1274e7164b7e66f70373b09a0cee452ad1",
+      "retentionGap": "Original final-Pi raw XML/archive bytes absent; transcript is execution evidence, not recovered raw reports. Cause unknown.",
+      "gateDecision": "Publication trust gates pass independently with recoverable official native/full11 evidence and verified public byte identity. Original final-Pi execution/assertions are recovered; supplemental raw-log retention remains unsatisfied. Do not claim raw Pi reports are replayable."
+    }
+  },
+  "handoff": {
+    "pinKind": "official release only; no candidate pins",
+    "piOrder": [
+      "Actions",
+      "JATT"
+    ],
+    "rccPiReservation": "released; task cleaned",
+    "pi5-02": "not used",
+    "downstreamAcceptance": "Actions then JATT must reserve and test published pin independently"
+  }
+}

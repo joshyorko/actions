@@ -634,9 +634,9 @@ jobs:
       run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-26)\
         \ keys=\"MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME\
         \ APPLEID APPLETEAMID APPLEIDPASS\" ;;\n  windows-2022) keys=\"VAULT_URL CLIENT_ID\
-        \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04) keys=\"\"\
-        \ ;;\n  *) exit 1 ;;\nesac\npresent=0\nmissing=0\nfor key in $keys; do\n \
-        \ if [[ -n \"${!key:-}\" ]]; then present=$((present + 1)); else missing=$((missing\
+        \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04|ubuntu-24.04-arm)\
+        \ keys=\"\" ;;\n  *) exit 1 ;;\nesac\npresent=0\nmissing=0\nfor key in $keys;\
+        \ do\n  if [[ -n \"${!key:-}\" ]]; then present=$((present + 1)); else missing=$((missing\
         \ + 1)); fi\ndone\nif (( present > 0 && missing > 0 )); then\n  echo \"partial\
         \ signing credentials configured\" >&2\n  exit 1\nfi\nif (( present > 0 ));\
         \ then signed=true; else echo \"all signing credentials absent; using unsigned\

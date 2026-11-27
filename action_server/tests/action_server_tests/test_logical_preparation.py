@@ -147,6 +147,8 @@ def test_unbound_helper_serialization_and_result_boundary(tmp_path, monkeypatch,
         result.write_bytes(b"retained")
     monkeypatch.setattr(sys, "argv", ["helper", str(source), str(inputs), str(result)])
     monkeypatch.setattr(sys, "path", list(sys.path))
+    # The generated child sets HOME; in-process execution must not leak it.
+    monkeypatch.setattr(os, "environ", os.environ.copy())
     helper = GeneratedRccExecution._execution_helper(
         {"module": module, "actionName": "echo"}
     )

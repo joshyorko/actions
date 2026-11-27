@@ -5,12 +5,31 @@
 The developer gateway validates RCC `v18.19.8`. A newer `rcc` on `PATH` can fail
 Doctor before any package test runs. Do not override
 `ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION` to hide that mismatch.
-After package Bootstrap, the Action Server build supplies the pinned Linux
-binary at `action_server/src/actions/server/bin/rcc-18.19.8`. Verify its version
-and invoke that binary from the repository root for subsequent toolkit tasks.
-This uses the repository pin without downgrading the workstation installation.
-The repository launcher remains the bootstrap path when the bundled binary is
-not available.
+The developer gateway pin is independent of the Runtime's bundled RCC pin.
+Verify a bundled binary's version before reusing it for toolkit tasks; the
+Runtime candidate now bundles `18.19.12`, which must not be used to bypass the
+outer gateway's `18.19.8` check. Keep a verified `18.19.8` developer binary or use
+the repository launcher rather than downgrading the workstation installation.
+
+## Stable RCC toolchain identity during subprocess tests
+
+An RCC-backed Poetry virtualenv can symlink its interpreter into a mutable
+holotree space. Reusing the default `user` space for another environment can
+change that alias's Python minor version while the original pytest process is
+still running. In an observed run, the parent retained Python 3.12 while new
+children launched Python 3.14 and could no longer import the installed 3.12
+`actions` and `pydantic` packages. Do not fix this by adding dependencies to the
+wrong interpreter or modifying product imports.
+
+Use a task-specific `--space` consistently with the pinned RCC Doctor and later
+`task script` commands. Confirm `sys.version`, `sys.base_prefix`, interpreter
+symlink targets and the package `pyvenv.cfg` agree before subprocess-heavy tests.
+If repairing an existing task-owned generated venv, bind it only to the verified
+same Python minor/version in that dedicated toolchain; do not change another
+checkout's venv or the shared RCC alias. Rerun the exact failed cases before the
+full package gate. Keep Poetry on PATH by executing package commands through
+the RCC gateway: a direct package Python invocation can pass ordinary tests yet
+fail clean-wheel tests that launch Poetry themselves.
 
 ## OpenAPI, MCP and publication boundaries
 
@@ -1939,8 +1958,9 @@ stages them through `publish_verified_runtime.py --download-root`. The validator
 parses wheel filenames into tag sets, so platform tags in a different order are
 accepted when the set is identical. It still requires the exact package/version,
 the cp312/cp313 interpreter and ABI, the approved manylinux/macOS/Windows tag
-sets, no build tag, exactly seven artifacts, and one wheel for each of the six
-interpreter/platform slots; duplicate tag components and duplicate slots fail.
+sets and no build tag. Runtime 1.1.2+ requires nine artifacts and eight
+interpreter/platform slots; earlier Runtime versions retain seven artifacts/six
+slots; duplicate tag components and duplicate slots fail.
 The job installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
@@ -1959,7 +1979,8 @@ Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
-never rebuilds. It verifies the exact seven artifacts and retained
+never rebuilds. It verifies the exact version-specific inventory (nine files
+for Runtime 1.1.2+, seven for earlier versions) and retained
 `actions-runtime-manifest.sha256`. `--dry-run` then returns without running
 Twine or reading publication credentials; retain a separate strict Twine
 result when admitting metadata. The publishing path requires Twine 6.2.0. With `--publish`,
@@ -1988,7 +2009,7 @@ The `--run-id` provenance gate also applies to dry runs and rejects pull-request
 producers. For nonpublishing admission of independently verified PR artifacts,
 measure the downloaded ZIP and every manifest member, retain the repository,
 workflow, run and artifact identity and actual checkout SHA, tree and ordered
-parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the seven-artifact
+parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the version-specific artifact
 byte inventory; it does not grant tag or publication provenance. A run's API head
 can differ from its actual synthetic merge checkout, so record both identities.
 
@@ -5170,7 +5191,7 @@ Action-to-Robot jobs: all ten must pass, including the installed job on a
 community-targeted PR. Update the admission count with workflow expansion; a
 successful run with a stale count is rejected, never partially admitted.
 Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
-and distribution digests separately. For the default profile, all seven distributions must match those
+and distribution digests separately. For the default profile, all nine distributions (seven before 1.1.2) must match those
 receipts. Each native binary must match its producer manifest and both successful
 frozen/Go-wrapper browser/storage and large-history receipts. Existing wheel
 private-import, published-dependency floor and request-boundary gates remain in
@@ -5179,8 +5200,9 @@ cannot be admitted by substituting historical evidence.
 
 An explicitly authorized `platform_profile=linux-windows` is a separate immutable
 delivery scope, selectable only by the original and triggering `joshyorko` actor.
-It admits exactly the sdist, CPython 3.12/3.13 Linux x86-64 and Windows AMD64 wheels,
-and the two corresponding native binaries plus their checksum file. It never
+It admits exactly the sdist, CPython 3.12/3.13 Linux x86-64/ARM64 and Windows AMD64 wheels,
+and the three corresponding native binaries plus their checksum file (before
+1.1.2: Linux x64/Windows wheels and two native binaries). It never
 downloads or advertises Mac files. The manifest binds this profile; publication,
 backup verification and retries derive the inventory from that reviewed manifest,
 with an absent profile retaining the historical full-platform meaning. Mac support
@@ -5189,8 +5211,9 @@ requires a later release, not additions to this release's immutable inventory.
 The reduced profile still checks every job and the original workflow topology.
 Only specifically recognized Mac Runtime-test, wheel, native and toolkit jobs
 cancelled before runner allocation (`runner_id=0`, no steps) may remain unverified.
-The unstarted wheel aggregation job may be skipped because its seven-file input
-set is unavailable; preparation instead verifies the five included distributions
+The unstarted wheel aggregation job may be skipped because its full input
+set is unavailable; preparation instead verifies the seven included distributions
+(five before 1.1.2)
 against original producer ZIP digests and individual source receipts. Executed
 failures, cancellation after allocation/steps, missing or unexpected jobs and
 non-Mac failures remain blocking. Original conclusions and allocation evidence
@@ -5256,11 +5279,11 @@ CDN, S3, template, credential or security-setting mutation is part of this butto
    controller deliberately does not depend on those events.
 
 Publication reserves a manifest-bound draft before any PyPI upload and stages
-the profile's exact native inventory there (four assets for `all`, three for
-`linux-windows`). Only exact missing PyPI files are uploaded, with
+the profile's exact native inventory there (five assets for `all`, four for
+`linux-windows`; before 1.1.2, four/three respectively). Only exact missing PyPI files are uploaded, with
 all existing filename/digest/size entries checked first. The tag and public
 native release follow confirmation of the complete profile-specific PyPI set
-(seven files for `all`, five for `linux-windows`).
+(nine files for `all`, seven for `linux-windows`; before 1.1.2, seven/five).
 Cross-service publication is not atomic: an interruption can leave a prefix on
 PyPI and a private native draft. Rerun **publication** with the original inputs;
 it reconciles actual remote state first and adds only missing matching files.
@@ -7673,7 +7696,7 @@ producer job labels rather than being rewritten as new-run evidence.
 
 Prepare a runner migration on a separate QA branch while an existing release
 source/workflow tree is frozen. The native workflow's manual `macos-arm64`
-scope runs only that host; its default still covers all three platforms. A
+scope runs only that host; its default covers all four qualified platforms. A
 manual QA run cannot replace release qualification, whose event, complete-tree,
 job-count and artifact-source checks still apply. Do not rerun successful frozen
 matrices merely to start independent Mac QA or infer passing results from an
@@ -7743,3 +7766,202 @@ represented in the full OpenAPI regression fixture. Default-off service
 configuration does not remove a mounted route from either contract. Keep the
 normal schema visibility gate; update the full-spec snapshot only for reviewed
 route additions and rerun `test_server_full_openapi_flag`.
+
+## Linux ARM64 Runtime qualification and release gate
+
+The standalone Easy Apply Dockerfile consumes legacy native Action Server
+`action-server-v1.2.2` (`action-server-linux64`), whose tagged downloader pins RCC
+`18.16.0`. This is distinct from `actions-runtime` `1.1.1`, whose build and
+runtime downloaders at that published tag pin RCC `18.19.8`. This source
+candidate pins the official RCC `18.19.12` release. Use the maintained Runtime path for new
+Linux ARM64 qualification; a legacy x64 executable is not an ARM64 candidate.
+Source references: [legacy downloader](https://github.com/joshyorko/actions/blob/action-server-v1.2.2/action_server/src/sema4ai/action_server/_download_rcc.py),
+[Runtime downloader](https://github.com/joshyorko/actions/blob/actions-runtime-1.1.1/action_server/src/actions/server/_download_rcc.py).
+
+`action_server/src/actions/server/_rcc_platform.py` is the dependency-free
+architecture contract used by both the Poetry build hook and runtime startup.
+Linux `aarch64`/`arm64` selects `rcc-linuxarm64`; x86-64 selects `rcc-linux64`.
+Unknown architectures fail closed. The ARM64 checksum table now admits only
+official RCC `18.19.12`, SHA256
+`e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2`.
+RCC `18.19.8` still has no approved ARM64 entry. Startup rejects unapproved
+versions and mismatched cached bytes before execution, and the
+PyInstaller spec validates RCC before collecting it. ARM64 validation requires
+both the pinned SHA256 and little-endian AArch64 ELF64 header. Failed downloads
+must not replace the previous binary.
+
+Before enabling a production ARM64 pin, obtain the newly published official
+`joshyorko/rcc` release, its `rcc-linuxarm64` asset, published checksum and
+source-bound preparation/manifest/native receipt trust metadata. Verify they
+identify the same committed source and exact bytes. Review and pin that digest
+in the contract, then update all relevant version/package-data pins together.
+Do not populate the table from an unreleased build or substitute the x64 asset.
+Release workflows currently ship Linux x64, Windows x64 and macOS ARM64; this
+preparation does not add Linux ARM64 to their publication inventory. Native
+PyInstaller builds must run on ARM64; existing cibuildwheel selectors also need
+an explicit native Linux ARM64 lane before publishing ARM64 wheels. Never
+relabel a wheel containing x64 RCC as ARM64.
+
+For test-only proof after the RCC owner releases the bounded ARM64 test window,
+install a binless candidate Runtime wheel into an isolated RCC test environment.
+Build a binless source distribution with
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` only after temporarily moving generated
+RCC bytes out of the task-owned checkout's `bin` directory (restore them in a
+`finally` block). On the ARM64 host, build its wheel with
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1 python -m pip wheel --no-deps --wheel-dir /absolute/wheelhouse /absolute/candidate.tar.gz`,
+then install that exact local wheel with `python -m pip install --only-binary=:all: /absolute/wheelhouse/<wheel>.whl`.
+Poetry tags even a binless build for its native build host: an x64-host build
+produced `cp312-cp312-linux_x86_64`. Do not retag that artifact for ARM64; build
+natively and require an `aarch64` wheel filename. Never publish these binless
+test artifacts. Run
+`action_server/scripts/verify_linux_arm64_candidate.py --rcc /absolute/candidate --rcc-sha256 <exact-candidate-sha256> --output /absolute/receipt.json`
+inside that environment. The harness rejects x64 hosts and source installs,
+verifies candidate bytes, imports a synthetic package via RCC, invokes its real
+HTTP Action on loopback, stops the listener and removes temporary package/data
+files, including its isolated `ACTIONS_HOME` and `ROBOTS_HOME`. Its process-local test override never changes release pins. A passing
+receipt is candidate acceptance only, not official release or deployment proof.
+Keep the wheel digest, source commit and RCC candidate receipt with that result.
+An unexecuted harness, routing tests or a wheel build alone do not prove native
+install, import, Action execution, browser support or deployment acceptance.
+
+The [sealed candidate example](../program/evidence/linux-arm64-runtime-20261126/candidate.json)
+binds native wheel installation, RCC import and a real synthetic HTTP result to
+exact source/artifact digests. Its older RCC candidate is not acceptance of a
+later RCC commit or the official release.
+
+For the official published-release replay, build a native ARM64 wheel with the
+normal build hook enabled so it bundles the newly pinned official RCC. Install
+that wheel and add `--official` to the harness command, passing the installed
+`get_default_rcc_location()` path and the official asset SHA256. This mode
+requires that exact installed location, validates the production digest table,
+and runs the normal CLI without candidate overrides. It remains a local
+consumer smoke, not deployment acceptance.
+
+The [portable verification receipt](../program/evidence/linux-arm64-runtime-20261126/portable.json)
+separates recovered interpreter/PATH setup failures from the final full portable
+gate and explicitly retains skipped-service uncertainty.
+
+## Official RCC 18.19.12 provenance boundary
+
+The [preserved release receipt](../program/evidence/rcc-v18.19.12/official-release-receipt.json)
+and exact `verification.tar.gz` bundle bind the public stable tag to source
+`22f64b93130ed54c2280f790d6ee5e178c0533f2`, the ARM64 asset, public index and
+source-bound manifest/checksums/provenance. Bundle SHA256 is
+`ac0d14e5487b531bd569d9300bdb42eb32ad149ab477c51b96c9958813220a4b`.
+The consumer independently checked the public tag, all eleven release API asset
+digests/sizes, downloaded ARM64/index bytes, and the retained sidecar hashes.
+
+Trust is authenticated GitHub digests plus source-bound JSON provenance,
+compiler metadata, native qualification and protected approval. No vendor
+signature or signed-attestation coverage is claimed. The upstream final-Pi
+execution transcript is retained, but its original raw XML/archive is missing;
+do not claim those raw reports are replayable. Recoverable hosted qualification
+is separate evidence. This retention defect is not erased by a downstream
+smoke, and a passing downstream smoke does not establish deployment acceptance.
+
+Current execution gates and generated package data follow `18.19.12` together.
+Read compatibility for immutable `18.19.8` metadata remains explicit; it does
+not authorize executing the older RCC binary as the current primary.
+
+The existing internal-child/descriptor qualification helpers and invoice bundled-binary
+checksum follow the Runtime pin; the outer developer matrix remains `18.19.8`.
+Changing the compiler RCC adapter range intentionally changes generated manifest
+identity, including the default Work Item declaration golden; preserve historical
+read compatibility separately rather than reusing the old execution identity.
+
+Use `--evidence-dir /absolute/new/evidence` for the native smoke to retain original
+import/server logs on both success and failure, plus the raw HTTP response and
+status/Run identifier. Preserve those bytes before removing the task environment;
+a summary or archive hash cannot substitute for missing original reports.
+
+Analytics test timestamps must be UTC-aware: SQLite
+`date('now', 'start of day')` uses UTC, so a naive host-local fixture can report
+zero runs for "today" while UTC and the workstation have different calendar
+dates. Keep the fixture on the production UTC timestamp contract rather than
+changing product date calculations to satisfy a local-time fixture.
+
+The [installed published-pin consumer receipt](../program/evidence/rcc-v18.19.12/consumer.json)
+binds the normal native build hook, bundled official RCC, installed wheel and
+real HTTP Action to exact source/artifact identities. Its original consumer
+archive is separate from the missing upstream final-Pi archive. Extract
+`consumer/original-evidence.tar.gz` into a new directory before checking its
+`consumer-SHA256SUMS`; the adjacent `.txt` files are byte-preserving readable
+aliases, and the checksum paths refer to the original archive layout.
+
+Both compiler and logical-binding zero-requirement goldens include the primary
+RCC adapter range. Update both current-producer goldens when that pin changes;
+do not rewrite historical release evidence to pretend its identity is current.
+
+The Runtime pin is also asserted by `devutils/tests/test_actions_runtime_release_line.py`.
+Run that package gate when changing the embedded RCC identity; `ToolkitTest`
+checks the developer toolkit and does not replace the devutils release-line suite.
+
+Tests that execute a generated child helper with `exec` must isolate `os.environ`
+as well as `sys.argv` and `sys.path`: the helper deliberately assigns its private
+`HOME`. Otherwise subsequent RCC package tests can create environments under a
+previous test's temporary home. Preserve the package server log on environment
+bootstrap failure; pytest's abbreviated `CompletedProcess` assertion can hide
+the actual cause, including a tmpfs `No space left on device` error.
+The [published-pin host receipt](../program/evidence/rcc-v18.19.12/host/receipt.json)
+keeps incomplete diagnostics separate from the later complete portable gate,
+with the final log and compressed JUnit report. A recovered setup failure does
+not turn excluded integration tests or skipped service tests into passes.
+
+Log-retention tests compare the retained bytes with the original closed file
+before deleting it. Do not assume text-mode writes use LF: Windows translates
+newlines to CRLF, and byte-preserving evidence must retain those original bytes.
+
+The nonpublishing native workflow has an explicit `linux-arm64` manual scope
+on `ubuntu-24.04-arm`. After successful exact-head qualification, its default `all` scope includes
+Linux ARM64 alongside the existing Linux x64, Windows x64 and macOS ARM64 rows. The
+manual lane keeps frozen and Go-wrapper Action, browser, storage and history
+gates, and clean-tests CPython 3.12/3.13 manylinux ARM64 wheels with the official
+RCC contract. The clean wheel floor runs inside cibuildwheel; the same repaired
+bytes are then installed into real, private RCC-managed Python environments on
+the native host for RCC import and Action execution. Do not spoof `RCC_VERSION`
+or relax the real-RCC harness guard to make a cibuildwheel virtualenv pass it.
+Container-local files are not automatically host artifacts: preserve clean-test
+stdout in the job log and original RCC consumer logs in the host evidence tree.
+`linux-arm64-qualification-<run>-<attempt>` retains the selected
+wheel bytes, source-bound producer receipt, original Action logs and actual
+tool/container identities; it is deliberately outside the release collector's
+`*-wheels` artifact names. Missing either wheel slot, original logs or matching
+source/wheel/RCC/HTTP receipts fails the qualification evidence gate.
+
+A workflow definition or local contract test is not native qualification.
+Require the exact-head run and retained native receipts to pass before changing
+strict native/wheel/manifest/checksum publication inventories or selecting the
+next unused stable version. Installed-wheel proof does not substitute for the
+frozen and Go-wrapper gates. Preserve every existing platform gate and existing
+CI run; manual qualification does not authorize a merge, tag or publication.
+
+`devutils` does not expose Invoke `lint`/`typecheck` tasks. Use its declared
+Poetry Ruff/isort/mypy commands and full pytest suite. Qualification helpers in
+`action_server/scripts/` also need explicit static-check selection because the
+common Runtime lint/typecheck targets cover `src` and `tests`, not `scripts`.
+
+
+Runtime 1.1.2 and later require nine distributions: the sdist plus CPython
+3.12/3.13 wheels for Linux x64, Linux ARM64, macOS ARM64 and Windows x64.
+Earlier retained Runtime bundles keep their seven-file inventory for recovery.
+The Linux ARM64 producer uses separate `Linux-ARM64-wheels` and
+`runtime-build-source-Linux-ARM64` names, so Linux x64 cannot overwrite its
+receipt. Preparation additionally verifies original real-RCC consumer receipts
+against those exact ARM64 producer bytes and the actual PR merge checkout SHA.
+The strict native inventory adds `linuxarm64` and includes it in the checksum
+manifest. All four native jobs and all six PyPI workflow jobs remain required;
+manual qualification is evidence for admitting the lane, not a substitute for
+the final exact-head PR checks or merged-source preparation.
+
+The Ubuntu 24.04 ARM64 standalone receipt establishes that host only. The
+qualified bundle's highest observed ELF requirement is GLIBC 2.38; a successful
+manylinux wheel or older Pi wheel run does not qualify that standalone on
+Debian 12/Pi. Keep downstream standalone base-OS compatibility explicit.
+
+When preparing Runtime version metadata, update the candidate invoice example
+pin in `action_server/examples/invoice_reconciliation/template.json` and its
+README wheel example together. The existing
+`test_invoice_example_pins_match_candidate_packages` checks Runtime, Core and
+Work Items pins against their package manifests; run the full invoice test
+module before pushing a version change. This is a source consistency gate, not
+an installed invoice or ARM64 runtime acceptance claim.

@@ -1,0 +1,10 @@
+{
+  "failed_source": "8ed900cb1d8eaec37490cc6c9acf39ed1a77a364",
+  "failed_job": "https://github.com/joshyorko/actions/actions/runs/45941976189/job/140318095464",
+  "observed_ci": "1failed,2401passed,3475skipped; sole failure test_invoice_example_pins_match_candidate_packages",
+  "cause": "Invoice example Runtime1.1.1 pin did not match newly prepared1.1.2 package metadata",
+  "repair": "Align invoice template and README; retain existing source consistency assertion",
+  "local_validation": "Full affected invoice module:5passed,0skipped; pinned RCC18.19.8 outer toolkit Python3.12.15",
+  "native_ci_after_fix": "PENDING; no prior result promoted",
+  "upstream_disposition": "none"
+}

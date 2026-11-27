@@ -1,0 +1,10 @@
+Source: https://github.com/joshyorko/actions/actions/runs/45927344728/job/140271668740
+Head: 3a95096fbaa77915a5064c8e1b7b174e462dbe71
+Selected original diagnostic lines from CI tail (not a complete job log):
+2026-11-27T02:27:27.1224627Z [gw0] win32 -- Python 3.12.16 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-11-27T02:27:27.1234802Z E       AssertionError: assert b'original diagnostic\r\n' == b'original diagnostic\n'
+2026-11-27T02:27:27.1242474Z [gw0] win32 -- Python 3.12.16 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-11-27T02:27:27.1252628Z E       AssertionError: assert b'original diagnostic\r\n' == b'original diagnostic\n'
+2026-11-27T02:27:27.1280887Z FAILED build_system_tests\test_rcc_platform.py::test_smoke_retains_original_log_on_success_and_failure[False] - AssertionError: assert b'original diagnostic\r\n' == b'original diagnostic\n'
+2026-11-27T02:27:27.1285448Z FAILED build_system_tests\test_rcc_platform.py::test_smoke_retains_original_log_on_success_and_failure[True] - AssertionError: assert b'original diagnostic\r\n' == b'original diagnostic\n'
+2026-11-27T02:27:27.1289375Z ==== 2 failed, 2317 passed, 3556 skipped, 17 warnings in 398.37s (0:06:38) ====

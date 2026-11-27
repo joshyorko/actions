@@ -179,8 +179,13 @@ def test_profile_notes_and_native_inventory_are_bound_to_manifest():
     assert "Linux/Windows only" in body
     assert "macOS artifacts are absent" in body
     assert "UNVERIFIED, NOT PASSED" in body
-    assert set(button.release_platforms("linux-windows")) == {
+    assert set(button.release_platforms("linux-windows", "1.1.0")) == {
         "ubuntu-22.04",
+        "windows-2022",
+    }
+    assert set(button.release_platforms("linux-windows", "1.1.2")) == {
+        "ubuntu-22.04",
+        "ubuntu-24.04-arm",
         "windows-2022",
     }
     assert set(button.release_platforms("all")) == set(button.PLATFORMS)

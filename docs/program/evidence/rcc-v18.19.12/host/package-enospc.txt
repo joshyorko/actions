@@ -1,0 +1,450 @@
+[2026-11-26 21:02:20] [WARNING] The `spec-version` field is missing from `package.yaml`.
+It's recommended to update your package.yaml file to include the `spec-version` field.
+See: https://github.com/Sema4AI/actions/blob/master/action_server/docs/guides/01-package-yaml.md for more details.
+[2026-11-26 21:02:20] [INFO] Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+[2026-11-26 21:02:29] [ERROR] Error running: /tmp/codex-actions-official-arm64-20261127-B6AlaB/repo/action_server/src/actions/server/bin/rcc-18.19.12 holotree variables --space 0b4eb49d3fd8880a /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_package_zip_no_actions0/test_package/data/.rcc-runtime-sources/1e9ae9b40a145242acece758100d43ea830742f1123863c81fdf96d98ec76385/package.yaml --config /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp.
+ROBOCORP_HOME: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions
+
+Stdout: 
+Stderr: ####  Progress: 00/15  v18.19.12     0.016s  Context: "kdlocpanda" <kdlocpanda@dakota-nvidia> [linux_amd64/Dudley OS (dakota-nvidia) [id=bluefin-dakota; id-like=org.gnome.os; version=20261106; variant=bluefin-nvidia; image=dudley-os:dakota-nvidia]].
+####  Progress: 01/15  v18.19.12     0.000s  Fresh [private mode] holotree environment 132cc0b7-1b38-a794-b0ce-00f6ffe213ed. (parent/pid: 626581/626611)
+####  Progress: 02/15  v18.19.12     0.000s  Holotree blueprint is "0b4eb49d3fd8880a" [linux_amd64 with 19 workers on 20 CPUs from "0b4eb49d3fd8880a"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+---
+####  Progress: 03/15  v18.19.12     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+####  Progress: 04/15  v18.19.12     0.000s  Cleanup holotree stage for fresh install.
+####  Progress: 05/15  v18.19.12     0.000s  Build environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 06/15  v18.19.12     0.000s  Restore partial environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 07/15  v18.19.12     0.013s  Running micromamba phase. (micromamba v2.10.0) [layer: 9c2a20dd4380f66b]
+Process 626627: exit status 1, command: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/micromamba/v2.10.0/micromamba [create --always-copy --no-env --safety-checks enabled --extra-safety-checks --retry-clean-cache --strict-channel-priority --repodata-ttl 57600 -y -f /tmp/conda_6b08e4ac.yaml -p /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t --no-rc] [v18.19.12/626611]
+Fatal [Micromamba [1/1]]: exit status 1
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "micromamba install" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+---  installation plan "53405d4637ac0dba" 2026-11-26T21:02:20-05:00 [force: false, fresh: true| rcc v18.19.12]  ---
+
+---  plan blueprint @0.000s  ---
+
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+
+
+---  micromamba plan @0.006s  ---
+
+Using Cached Shard Index for conda-forge/linux-64                                                   ✔ Done
+Using Cached Shard Index for conda-forge/noarch                                                     ✔ Done
+Fetching and Parsing Packages' Shards                                                           ⧖ Starting
+Fetching and Parsing Packages' Shards                                                     ✔ Done (0.1 sec)
+
+Resolving Environment                                                                           ⧖ Starting
+Resolving Environment                                                                     ✔ Done (0.1 sec)
+
+Transaction
+
+  Prefix: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t
+
+  Updating specs:
+
+   - python=3.10.12
+   - pip=24
+
+
+  Package                Version  Build                 Channel           Size
+────────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────────
+
+  + _openmp_mutex            4.5  20_gnu                conda-forge     Cached
+  + bzip2                  1.0.8  hda65f42_10           conda-forge     Cached
+  + ca-certificates   2026.11.20  hbd8a1cb_0            conda-forge     Cached
+  + ld_impl_linux-64      2.46.1  default_hbd61a6d_103  conda-forge     Cached
+  + libffi                 3.7.0  h81df57d_1            conda-forge     Cached
+  + libgcc                16.2.0  ha9f2e26_7            conda-forge     Cached
+  + libgcc-ng             16.2.0  h69a702a_7            conda-forge       29kB
+  + libgomp               16.2.0  he0feb66_7            conda-forge     Cached
+  + liblzma                5.8.3  hb03c661_1            conda-forge     Cached
+  + liblzma-devel          5.8.3  hb03c661_1            conda-forge      492kB
+  + libnsl                 2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + libsqlite             3.54.1  h0737f62_101          conda-forge     Cached
+  + libuuid               2.42.4  hcfc3c73_1            conda-forge     Cached
+  + libzlib                1.3.2  h25fd6f3_3            conda-forge     Cached
+  + ncurses                  6.6  hdb14827_1            conda-forge     Cached
+  + openssl                3.6.5  h781a0a9_0            conda-forge     Cached
+  + packaging               26.4  pyhc364b38_0          conda-forge     Cached
+  + pip                   24.3.1  pyh8b19718_2          conda-forge     Cached
+  + python               3.10.12  hd12c33a_0_cpython    conda-forge       26MB
+  + readline                 8.3  hd6e31c0_1            conda-forge     Cached
+  + setuptools            84.0.0  pyh332efcf_0          conda-forge      524kB
+  + tk                    8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + tzdata                 2026e  h5d301ff_0            conda-forge     Cached
+  + wheel                 0.48.0  pyhd8ed1ab_0          conda-forge     Cached
+  + xz                     5.8.3  ha02ee65_1            conda-forge       24kB
+  + xz-gpl-tools           5.8.3  ha02ee65_1            conda-forge       40kB
+  + xz-tools               5.8.3  hb03c661_1            conda-forge       96kB
+  + zstd                   1.5.7  hb78ec9c_7            conda-forge     Cached
+
+  Summary:
+
+  Install: 28 packages
+
+  Total download: 27MB
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+warning  libmamba Security Warning: This transaction includes executing package scripts (pre/post-link/unlink) if present. These scripts can contain arbitrary code. Please ensure you trust the package sources.
+
+Transaction starting
+Linking libzlib-1.3.2-h25fd6f3_3
+Linking libgomp-16.2.0-he0feb66_7
+Linking zstd-1.5.7-hb78ec9c_7
+Linking _openmp_mutex-4.5-20_gnu
+Linking ld_impl_linux-64-2.46.1-default_hbd61a6d_103
+Linking libgcc-16.2.0-ha9f2e26_7
+Linking bzip2-1.0.8-hda65f42_10
+Linking libnsl-2.0.1-hb9d3cd8_1
+Linking libuuid-2.42.4-hcfc3c73_1
+Linking libffi-3.7.0-h81df57d_1
+Linking libsqlite-3.54.1-h0737f62_101
+Linking liblzma-5.8.3-hb03c661_1
+Linking ncurses-6.6-hdb14827_1
+Linking tk-8.6.13-noxft_h1df4ec4_4
+Linking libgcc-ng-16.2.0-h69a702a_7
+Linking liblzma-devel-5.8.3-hb03c661_1
+Linking xz-gpl-tools-5.8.3-ha02ee65_1
+Linking xz-tools-5.8.3-hb03c661_1
+Linking readline-8.3-hd6e31c0_1
+Linking xz-5.8.3-ha02ee65_1
+Linking tzdata-2026e-h5d301ff_0
+Linking ca-certificates-2026.11.20-hbd8a1cb_0
+Linking openssl-3.6.5-h781a0a9_0
+Linking python-3.10.12-hd12c33a_0_cpython
+Linking packaging-26.4-pyhc364b38_0
+Linking setuptools-84.0.0-pyh332efcf_0
+error    libmamba Unexpected error while linking package 'setuptools': filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+critical libmamba Transaction cancelled while linking package 'setuptools' (pyh332efcf_0).
+    filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+    All changes from this transaction have been rolled back.
+
+####  Progress: 15/15  v18.19.12     8.882s  Fresh holotree done [with 19 workers on 20 CPUs].
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "environment creation" was FAILURE, reason: "Failed to create environment, reason Could not create environment..". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Failed to create environment, reason Could not create environment..
+[rcc] exit status will be: 6!
+Traceback (most recent call last):
+  File "/tmp/codex-actions-official-arm64-20261127-B6AlaB/repo/action_server/src/actions/server/_rcc.py", line 132, in _run_rcc
+    boutput = check_output(args, timeout=timeout, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kdlocpanda/.robocorp/holotree/2a6fe41_5a1fac3_583dd959/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kdlocpanda/.robocorp/holotree/2a6fe41_5a1fac3_583dd959/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/tmp/codex-actions-official-arm64-20261127-B6AlaB/repo/action_server/src/actions/server/bin/rcc-18.19.12', 'holotree', 'variables', '--space', '0b4eb49d3fd8880a', '/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_package_zip_no_actions0/test_package/data/.rcc-runtime-sources/1e9ae9b40a145242acece758100d43ea830742f1123863c81fdf96d98ec76385/package.yaml', '--config', '/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/temp_dir0/.rcc_config/rcc.yaml', '--json', '--no-retry-build', '--no-pyc-management', '--controller', 'action-server', '--bundled', '--robocorp']' returned non-zero exit status 6.
+[2026-11-26 21:02:29] [CRITICAL] Unable to create environment from:
+/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_package_zip_no_actions0/test_package/data/.rcc-runtime-sources/1e9ae9b40a145242acece758100d43ea830742f1123863c81fdf96d98ec76385/package.yaml
+To recreate the environment, please fix the related package.yaml
+[2026-11-26 21:02:29] [CRITICAL] Error running: /tmp/codex-actions-official-arm64-20261127-B6AlaB/repo/action_server/src/actions/server/bin/rcc-18.19.12 holotree variables --space 0b4eb49d3fd8880a /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_package_zip_no_actions0/test_package/data/.rcc-runtime-sources/1e9ae9b40a145242acece758100d43ea830742f1123863c81fdf96d98ec76385/package.yaml --config /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp.
+ROBOCORP_HOME: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions
+
+Stdout: 
+Stderr: ####  Progress: 00/15  v18.19.12     0.016s  Context: "kdlocpanda" <kdlocpanda@dakota-nvidia> [linux_amd64/Dudley OS (dakota-nvidia) [id=bluefin-dakota; id-like=org.gnome.os; version=20261106; variant=bluefin-nvidia; image=dudley-os:dakota-nvidia]].
+####  Progress: 01/15  v18.19.12     0.000s  Fresh [private mode] holotree environment 132cc0b7-1b38-a794-b0ce-00f6ffe213ed. (parent/pid: 626581/626611)
+####  Progress: 02/15  v18.19.12     0.000s  Holotree blueprint is "0b4eb49d3fd8880a" [linux_amd64 with 19 workers on 20 CPUs from "0b4eb49d3fd8880a"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+---
+####  Progress: 03/15  v18.19.12     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+####  Progress: 04/15  v18.19.12     0.000s  Cleanup holotree stage for fresh install.
+####  Progress: 05/15  v18.19.12     0.000s  Build environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 06/15  v18.19.12     0.000s  Restore partial environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 07/15  v18.19.12     0.013s  Running micromamba phase. (micromamba v2.10.0) [layer: 9c2a20dd4380f66b]
+Process 626627: exit status 1, command: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/micromamba/v2.10.0/micromamba [create --always-copy --no-env --safety-checks enabled --extra-safety-checks --retry-clean-cache --strict-channel-priority --repodata-ttl 57600 -y -f /tmp/conda_6b08e4ac.yaml -p /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t --no-rc] [v18.19.12/626611]
+Fatal [Micromamba [1/1]]: exit status 1
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "micromamba install" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+---  installation plan "53405d4637ac0dba" 2026-11-26T21:02:20-05:00 [force: false, fresh: true| rcc v18.19.12]  ---
+
+---  plan blueprint @0.000s  ---
+
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+
+
+---  micromamba plan @0.006s  ---
+
+Using Cached Shard Index for conda-forge/linux-64                                                   ✔ Done
+Using Cached Shard Index for conda-forge/noarch                                                     ✔ Done
+Fetching and Parsing Packages' Shards                                                           ⧖ Starting
+Fetching and Parsing Packages' Shards                                                     ✔ Done (0.1 sec)
+
+Resolving Environment                                                                           ⧖ Starting
+Resolving Environment                                                                     ✔ Done (0.1 sec)
+
+Transaction
+
+  Prefix: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t
+
+  Updating specs:
+
+   - python=3.10.12
+   - pip=24
+
+
+  Package                Version  Build                 Channel           Size
+────────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────────
+
+  + _openmp_mutex            4.5  20_gnu                conda-forge     Cached
+  + bzip2                  1.0.8  hda65f42_10           conda-forge     Cached
+  + ca-certificates   2026.11.20  hbd8a1cb_0            conda-forge     Cached
+  + ld_impl_linux-64      2.46.1  default_hbd61a6d_103  conda-forge     Cached
+  + libffi                 3.7.0  h81df57d_1            conda-forge     Cached
+  + libgcc                16.2.0  ha9f2e26_7            conda-forge     Cached
+  + libgcc-ng             16.2.0  h69a702a_7            conda-forge       29kB
+  + libgomp               16.2.0  he0feb66_7            conda-forge     Cached
+  + liblzma                5.8.3  hb03c661_1            conda-forge     Cached
+  + liblzma-devel          5.8.3  hb03c661_1            conda-forge      492kB
+  + libnsl                 2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + libsqlite             3.54.1  h0737f62_101          conda-forge     Cached
+  + libuuid               2.42.4  hcfc3c73_1            conda-forge     Cached
+  + libzlib                1.3.2  h25fd6f3_3            conda-forge     Cached
+  + ncurses                  6.6  hdb14827_1            conda-forge     Cached
+  + openssl                3.6.5  h781a0a9_0            conda-forge     Cached
+  + packaging               26.4  pyhc364b38_0          conda-forge     Cached
+  + pip                   24.3.1  pyh8b19718_2          conda-forge     Cached
+  + python               3.10.12  hd12c33a_0_cpython    conda-forge       26MB
+  + readline                 8.3  hd6e31c0_1            conda-forge     Cached
+  + setuptools            84.0.0  pyh332efcf_0          conda-forge      524kB
+  + tk                    8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + tzdata                 2026e  h5d301ff_0            conda-forge     Cached
+  + wheel                 0.48.0  pyhd8ed1ab_0          conda-forge     Cached
+  + xz                     5.8.3  ha02ee65_1            conda-forge       24kB
+  + xz-gpl-tools           5.8.3  ha02ee65_1            conda-forge       40kB
+  + xz-tools               5.8.3  hb03c661_1            conda-forge       96kB
+  + zstd                   1.5.7  hb78ec9c_7            conda-forge     Cached
+
+  Summary:
+
+  Install: 28 packages
+
+  Total download: 27MB
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+warning  libmamba Security Warning: This transaction includes executing package scripts (pre/post-link/unlink) if present. These scripts can contain arbitrary code. Please ensure you trust the package sources.
+
+Transaction starting
+Linking libzlib-1.3.2-h25fd6f3_3
+Linking libgomp-16.2.0-he0feb66_7
+Linking zstd-1.5.7-hb78ec9c_7
+Linking _openmp_mutex-4.5-20_gnu
+Linking ld_impl_linux-64-2.46.1-default_hbd61a6d_103
+Linking libgcc-16.2.0-ha9f2e26_7
+Linking bzip2-1.0.8-hda65f42_10
+Linking libnsl-2.0.1-hb9d3cd8_1
+Linking libuuid-2.42.4-hcfc3c73_1
+Linking libffi-3.7.0-h81df57d_1
+Linking libsqlite-3.54.1-h0737f62_101
+Linking liblzma-5.8.3-hb03c661_1
+Linking ncurses-6.6-hdb14827_1
+Linking tk-8.6.13-noxft_h1df4ec4_4
+Linking libgcc-ng-16.2.0-h69a702a_7
+Linking liblzma-devel-5.8.3-hb03c661_1
+Linking xz-gpl-tools-5.8.3-ha02ee65_1
+Linking xz-tools-5.8.3-hb03c661_1
+Linking readline-8.3-hd6e31c0_1
+Linking xz-5.8.3-ha02ee65_1
+Linking tzdata-2026e-h5d301ff_0
+Linking ca-certificates-2026.11.20-hbd8a1cb_0
+Linking openssl-3.6.5-h781a0a9_0
+Linking python-3.10.12-hd12c33a_0_cpython
+Linking packaging-26.4-pyhc364b38_0
+Linking setuptools-84.0.0-pyh332efcf_0
+error    libmamba Unexpected error while linking package 'setuptools': filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+critical libmamba Transaction cancelled while linking package 'setuptools' (pyh332efcf_0).
+    filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+    All changes from this transaction have been rolled back.
+
+####  Progress: 15/15  v18.19.12     8.882s  Fresh holotree done [with 19 workers on 20 CPUs].
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "environment creation" was FAILURE, reason: "Failed to create environment, reason Could not create environment..". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Failed to create environment, reason Could not create environment..
+[rcc] exit status will be: 6!
+
+[2026-11-26 21:02:29] [CRITICAL] 
+Unable to import action. Please fix the error below and retry.
+It was not possible to bootstrap the RCC environment. Error: Error running: /tmp/codex-actions-official-arm64-20261127-B6AlaB/repo/action_server/src/actions/server/bin/rcc-18.19.12 holotree variables --space 0b4eb49d3fd8880a /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_package_zip_no_actions0/test_package/data/.rcc-runtime-sources/1e9ae9b40a145242acece758100d43ea830742f1123863c81fdf96d98ec76385/package.yaml --config /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp.
+ROBOCORP_HOME: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions
+
+Stdout: 
+Stderr: ####  Progress: 00/15  v18.19.12     0.016s  Context: "kdlocpanda" <kdlocpanda@dakota-nvidia> [linux_amd64/Dudley OS (dakota-nvidia) [id=bluefin-dakota; id-like=org.gnome.os; version=20261106; variant=bluefin-nvidia; image=dudley-os:dakota-nvidia]].
+####  Progress: 01/15  v18.19.12     0.000s  Fresh [private mode] holotree environment 132cc0b7-1b38-a794-b0ce-00f6ffe213ed. (parent/pid: 626581/626611)
+####  Progress: 02/15  v18.19.12     0.000s  Holotree blueprint is "0b4eb49d3fd8880a" [linux_amd64 with 19 workers on 20 CPUs from "0b4eb49d3fd8880a"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+---
+####  Progress: 03/15  v18.19.12     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+####  Progress: 04/15  v18.19.12     0.000s  Cleanup holotree stage for fresh install.
+####  Progress: 05/15  v18.19.12     0.000s  Build environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 06/15  v18.19.12     0.000s  Restore partial environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t".
+####  Progress: 07/15  v18.19.12     0.013s  Running micromamba phase. (micromamba v2.10.0) [layer: 9c2a20dd4380f66b]
+Process 626627: exit status 1, command: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/micromamba/v2.10.0/micromamba [create --always-copy --no-env --safety-checks enabled --extra-safety-checks --retry-clean-cache --strict-channel-priority --repodata-ttl 57600 -y -f /tmp/conda_6b08e4ac.yaml -p /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t --no-rc] [v18.19.12/626611]
+Fatal [Micromamba [1/1]]: exit status 1
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "micromamba install" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+---  installation plan "53405d4637ac0dba" 2026-11-26T21:02:20-05:00 [force: false, fresh: true| rcc v18.19.12]  ---
+
+---  plan blueprint @0.000s  ---
+
+channels:
+- conda-forge
+dependencies:
+- python=3.10.12
+- pip=24
+- pip:
+  - robocorp-actions==0.1.0
+
+
+---  micromamba plan @0.006s  ---
+
+Using Cached Shard Index for conda-forge/linux-64                                                   ✔ Done
+Using Cached Shard Index for conda-forge/noarch                                                     ✔ Done
+Fetching and Parsing Packages' Shards                                                           ⧖ Starting
+Fetching and Parsing Packages' Shards                                                     ✔ Done (0.1 sec)
+
+Resolving Environment                                                                           ⧖ Starting
+Resolving Environment                                                                     ✔ Done (0.1 sec)
+
+Transaction
+
+  Prefix: /tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t
+
+  Updating specs:
+
+   - python=3.10.12
+   - pip=24
+
+
+  Package                Version  Build                 Channel           Size
+────────────────────────────────────────────────────────────────────────────────
+  Install:
+────────────────────────────────────────────────────────────────────────────────
+
+  + _openmp_mutex            4.5  20_gnu                conda-forge     Cached
+  + bzip2                  1.0.8  hda65f42_10           conda-forge     Cached
+  + ca-certificates   2026.11.20  hbd8a1cb_0            conda-forge     Cached
+  + ld_impl_linux-64      2.46.1  default_hbd61a6d_103  conda-forge     Cached
+  + libffi                 3.7.0  h81df57d_1            conda-forge     Cached
+  + libgcc                16.2.0  ha9f2e26_7            conda-forge     Cached
+  + libgcc-ng             16.2.0  h69a702a_7            conda-forge       29kB
+  + libgomp               16.2.0  he0feb66_7            conda-forge     Cached
+  + liblzma                5.8.3  hb03c661_1            conda-forge     Cached
+  + liblzma-devel          5.8.3  hb03c661_1            conda-forge      492kB
+  + libnsl                 2.0.1  hb9d3cd8_1            conda-forge     Cached
+  + libsqlite             3.54.1  h0737f62_101          conda-forge     Cached
+  + libuuid               2.42.4  hcfc3c73_1            conda-forge     Cached
+  + libzlib                1.3.2  h25fd6f3_3            conda-forge     Cached
+  + ncurses                  6.6  hdb14827_1            conda-forge     Cached
+  + openssl                3.6.5  h781a0a9_0            conda-forge     Cached
+  + packaging               26.4  pyhc364b38_0          conda-forge     Cached
+  + pip                   24.3.1  pyh8b19718_2          conda-forge     Cached
+  + python               3.10.12  hd12c33a_0_cpython    conda-forge       26MB
+  + readline                 8.3  hd6e31c0_1            conda-forge     Cached
+  + setuptools            84.0.0  pyh332efcf_0          conda-forge      524kB
+  + tk                    8.6.13  noxft_h1df4ec4_4      conda-forge     Cached
+  + tzdata                 2026e  h5d301ff_0            conda-forge     Cached
+  + wheel                 0.48.0  pyhd8ed1ab_0          conda-forge     Cached
+  + xz                     5.8.3  ha02ee65_1            conda-forge       24kB
+  + xz-gpl-tools           5.8.3  ha02ee65_1            conda-forge       40kB
+  + xz-tools               5.8.3  hb03c661_1            conda-forge       96kB
+  + zstd                   1.5.7  hb78ec9c_7            conda-forge     Cached
+
+  Summary:
+
+  Install: 28 packages
+
+  Total download: 27MB
+
+────────────────────────────────────────────────────────────────────────────────
+
+
+warning  libmamba Security Warning: This transaction includes executing package scripts (pre/post-link/unlink) if present. These scripts can contain arbitrary code. Please ensure you trust the package sources.
+
+Transaction starting
+Linking libzlib-1.3.2-h25fd6f3_3
+Linking libgomp-16.2.0-he0feb66_7
+Linking zstd-1.5.7-hb78ec9c_7
+Linking _openmp_mutex-4.5-20_gnu
+Linking ld_impl_linux-64-2.46.1-default_hbd61a6d_103
+Linking libgcc-16.2.0-ha9f2e26_7
+Linking bzip2-1.0.8-hda65f42_10
+Linking libnsl-2.0.1-hb9d3cd8_1
+Linking libuuid-2.42.4-hcfc3c73_1
+Linking libffi-3.7.0-h81df57d_1
+Linking libsqlite-3.54.1-h0737f62_101
+Linking liblzma-5.8.3-hb03c661_1
+Linking ncurses-6.6-hdb14827_1
+Linking tk-8.6.13-noxft_h1df4ec4_4
+Linking libgcc-ng-16.2.0-h69a702a_7
+Linking liblzma-devel-5.8.3-hb03c661_1
+Linking xz-gpl-tools-5.8.3-ha02ee65_1
+Linking xz-tools-5.8.3-hb03c661_1
+Linking readline-8.3-hd6e31c0_1
+Linking xz-5.8.3-ha02ee65_1
+Linking tzdata-2026e-h5d301ff_0
+Linking ca-certificates-2026.11.20-hbd8a1cb_0
+Linking openssl-3.6.5-h781a0a9_0
+Linking python-3.10.12-hd12c33a_0_cpython
+Linking packaging-26.4-pyhc364b38_0
+Linking setuptools-84.0.0-pyh332efcf_0
+error    libmamba Unexpected error while linking package 'setuptools': filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+critical libmamba Transaction cancelled while linking package 'setuptools' (pyh332efcf_0).
+    filesystem error: cannot copy: No space left on device [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/pkgs/https/conda.anaconda.org/conda-forge/noarch/setuptools-84.0.0-pyh332efcf_0/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER] [/tmp/codex-actions-official-arm64-20261127-B6AlaB/complete-tmp/test_unbound_helper_serializat4/home/.actions/holotree/h61b77f3_493f813dad24d3t/lib/python3.10/site-packages/setuptools/_vendor/wheel-0.46.3.dist-info/INSTALLER]
+    All changes from this transaction have been rolled back.
+
+####  Progress: 15/15  v18.19.12     8.882s  Fresh holotree done [with 19 workers on 20 CPUs].
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "action-server") point of view, "environment creation" was FAILURE, reason: "Failed to create environment, reason Could not create environment..". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Failed to create environment, reason Could not create environment..
+[rcc] exit status will be: 6!
+

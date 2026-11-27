@@ -204,7 +204,7 @@ def test_rcc_retains_exact_host_measurements(admitted, tmp_path):
         robocorp_home=tmp_path,
         package_yaml_digest="sha256:" + hashlib.sha256(yaml).hexdigest(),
         build_identity=RccBuildIdentity("sha256:" + "a" * 64, "sha256:" + "b" * 64),
-        rcc_version="v18.19.8",
+        rcc_version="v18.19.12",
     )
     # Synthetic typed host measurements exercise identity propagation only.
     prep = RccRobotPreparation(Path(sys.executable), env)

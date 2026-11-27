@@ -134,6 +134,35 @@ def get_python_version(pyproject):
     raise RuntimeError(f"Unable to get python version in: {pyproject}")
 
 
+def native_arm64_python_steps(steps):
+    for step in steps:
+        if step.get("name", "").startswith("Install Python"):
+            step["if"] = "matrix.os != 'ubuntu-24.04-arm'"
+        if "astral-sh/setup-uv@" in step.get("uses", ""):
+            step["with"][
+                "version"
+            ] = "${{ matrix.os == 'ubuntu-24.04-arm' && '0.9.26' || '' }}"
+    steps.insert(
+        1,
+        {
+            "name": "Verify native Linux ARM64 runner",
+            "if": "matrix.os == 'ubuntu-24.04-arm'",
+            "shell": "bash",
+            "working-directory": "${{ runner.temp }}",
+            "run": 'set -euo pipefail\ntest "$RUNNER_OS" = Linux\ntest "$RUNNER_ARCH" = ARM64\ntest "$(uname -m)" = aarch64\ndf -h "$HOME" /tmp\ntest "$(df -Pk "$HOME" | awk \'NR == 2 { print $4 }\')" -ge 20971520\n',
+        },
+    )
+    steps.append(
+        {
+            "name": "Set up pinned ARM64 Python",
+            "if": "matrix.os == 'ubuntu-24.04-arm'",
+            "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "with": {"python-version": "3.12.15"},
+        }
+    )
+    return steps
+
+
 class BaseWorkflow:
     fail_fast = False
 
@@ -172,13 +201,14 @@ class BaseWorkflow:
     def setup_python(self, pinned=False):
         guard = (
             []
-            if self.target in {
+            if self.target
+            in {
                 "actions_runtime_frozen_catalog_rollback.yml",
                 "actions_runtime_rcc_provider_rollback.yml",
             }
             else [macos_arm64_guard()]
         )
-        return guard + [
+        steps = guard + [
             # {
             # "name": "Set up Python ${{ matrix.python }}",
             # "uses": "actions/setup-python@v5",
@@ -200,6 +230,13 @@ class BaseWorkflow:
                 "run": f"uv python install {self.minimum_python_version}",
             },
         ]
+
+        if self.target in {
+            "actions_runtime_pypi_release.yml",
+            "actions_runtime_binary_release.yml",
+        }:
+            return native_arm64_python_steps(steps)
+        return steps
 
     def matrix(self, pyversion: str):
         matrix = {
@@ -233,10 +270,17 @@ class BaseWorkflow:
             # Important: Changing os requires updating the related references in this yml.
             "os": [
                 UBUNTU_VERSION,
+                "ubuntu-24.04-arm",
                 "windows-2022",
                 "macos-26",  # used for the arm64 binary
             ],
             "include": [
+                {
+                    "os": "ubuntu-24.04-arm",
+                    "python": "3.12.15",
+                    "name": "linux-arm64",
+                    "asset_path": "action_server/dist/final/action-server",
+                },
                 {
                     "os": UBUNTU_VERSION,
                     "python": pyversion,
@@ -387,7 +431,15 @@ class BaseWorkflow:
             "uses": "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
             if pinned
             else "actions/setup-node@v4",
-            "with": {"node-version": "20.x"},
+            "with": {
+                "node-version": "${{ matrix.os == 'ubuntu-24.04-arm' && '20.19.3' || '20.x' }}"
+                if self.target
+                in {
+                    "actions_runtime_pypi_release.yml",
+                    "actions_runtime_binary_release.yml",
+                }
+                else "20.x"
+            },
         }
 
     def setup_go(self, pinned=False):
@@ -397,7 +449,9 @@ class BaseWorkflow:
             if pinned
             else "actions/setup-go@v5",
             "with": {
-                "go-version": "1.23",
+                "go-version": "${{ matrix.os == 'ubuntu-24.04-arm' && '1.23.6' || '1.23' }}"
+                if self.target == "actions_runtime_binary_release.yml"
+                else "1.23",
                 "cache-dependency-path": "action_server/go-wrapper/go.sum",
             },
         }
@@ -552,7 +606,7 @@ signed=false
 case "$SIGNING_OS" in
   macos-26) keys="MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME APPLEID APPLETEAMID APPLEIDPASS" ;;
   windows-2022) keys="VAULT_URL CLIENT_ID TENANT_ID CLIENT_SECRET CERTIFICATE_NAME" ;;
-  ubuntu-22.04) keys="" ;;
+  ubuntu-22.04|ubuntu-24.04-arm) keys="" ;;
   *) exit 1 ;;
 esac
 present=0
@@ -1659,7 +1713,6 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 },
             ],
         }
-
 
 
 RCC_ROLLBACK_SUMMARY_SCRIPT = r"""import hashlib
@@ -2793,7 +2846,7 @@ rm src/actions/server/bin/rcc* -f
         return steps
 
     def build_manylinux_wheels(self):
-        CIBW_BUILD = "cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64 cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64"
+        CIBW_BUILD = "cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64 cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64 cp312-*manylinux*aarch64 cp313-*manylinux*aarch64"
         return {
             "name": "Build and clean-test wheels",
             "run": f"{run_in_env}python -m cibuildwheel --output-dir wheelhouse",
@@ -2801,15 +2854,17 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
+                "CIBW_ARCHS_LINUX": "${{ matrix.os == 'ubuntu-24.04-arm' && 'aarch64' || 'auto' }}",
+                "CIBW_MANYLINUX_AARCH64_IMAGE": "quay.io/pypa/manylinux2014_aarch64@sha256:31b71c1b6b52aa1369d6aa632fcaad2874a93620556dfb6f99344620e6ccb37b",
                 "CIBW_ENVIRONMENT": "ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}",
                 "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}",
-                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}" ${{ github.event_name == \'pull_request\' && \'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse --candidate-core-wheelhouse {project}/candidate-core-wheelhouse\' || \'\' }}',
+                "CIBW_TEST_COMMAND": "python \"{project}/scripts/verify_published_runtime_floor.py\" --installed-wheel \"{wheel}\" --checkout-root \"{project}\" ${{ github.event_name == 'pull_request' && '--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse --candidate-core-wheelhouse {project}/candidate-core-wheelhouse' || '' }}",
             },
         }
 
     def upload_artifact_manylinux_wheels(self):
         return self.upload_artifact(
-            name="${{ runner.os }}-wheels",
+            name="${{ matrix.os == 'ubuntu-24.04-arm' && 'Linux-ARM64' || runner.os }}-wheels",
             path="action_server/wheelhouse/*",
             pinned=True,
         )
@@ -2826,54 +2881,103 @@ rm src/actions/server/bin/rcc* -f
                 "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
             }
         )
-        steps.append({
-            "name": "Build candidate Core wheel for PR compatibility tests",
-            "if": "github.event_name == 'pull_request'",
-            "working-directory": "actions",
-            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
-        })
-        steps.append({
-            "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
-            "if": "github.event_name == 'pull_request'",
-            "working-directory": "actions-http-helper",
-            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
-        })
-        steps.append({
-            "name": "Build candidate Work Items SDK wheel for PR compatibility tests",
-            "if": "github.event_name == 'pull_request'",
-            "working-directory": "work-items",
-            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-sdk-wheelhouse",
-        })
-        steps.append({
-            "name": "Bind candidate Core wheel to producer checkout",
-            "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-core-wheelhouse --distribution actions-core",
-        })
-        steps.append({
-            "name": "Bind candidate SDK wheel to producer checkout",
-            "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-sdk-wheelhouse",
-        })
+        steps.append(
+            {
+                "name": "Build candidate Core wheel for PR compatibility tests",
+                "if": "github.event_name == 'pull_request'",
+                "working-directory": "actions",
+                "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
+            }
+        )
+        steps.append(
+            {
+                "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+                "if": "github.event_name == 'pull_request'",
+                "working-directory": "actions-http-helper",
+                "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
+            }
+        )
+        steps.append(
+            {
+                "name": "Build candidate Work Items SDK wheel for PR compatibility tests",
+                "if": "github.event_name == 'pull_request'",
+                "working-directory": "work-items",
+                "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-sdk-wheelhouse",
+            }
+        )
+        steps.append(
+            {
+                "name": "Bind candidate Core wheel to producer checkout",
+                "if": "github.event_name == 'pull_request'",
+                "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-core-wheelhouse --distribution actions-core",
+            }
+        )
+        steps.append(
+            {
+                "name": "Bind candidate SDK wheel to producer checkout",
+                "if": "github.event_name == 'pull_request'",
+                "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-sdk-wheelhouse",
+            }
+        )
         steps.append(self.build_manylinux_wheels())
-        steps.append({
-            "name": "Verify Runtime wheel with published Core and Helper",
-            "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse --candidate-core-wheelhouse candidate-core-wheelhouse",
-        })
+        steps.append(
+            {
+                "name": "Verify Runtime wheel with published Core and Helper",
+                "if": "github.event_name == 'pull_request'",
+                "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse --candidate-core-wheelhouse candidate-core-wheelhouse",
+            }
+        )
+        steps.append(
+            {
+                "name": "Qualify selected ARM64 wheels in real RCC environments",
+                "if": "matrix.os == 'ubuntu-24.04-arm'",
+                "timeout-minutes": 35,
+                "run": f"{run_in_env}poetry run python -c 'from actions.server._download_rcc import download_rcc; download_rcc()'\n{run_in_env}poetry run python scripts/verify_linux_arm64_wheel.py --rcc-consumers wheelhouse . ${{{{ github.event_name != 'pull_request' && '--published-dependencies' || '' }}}}\n{run_in_env}poetry run python scripts/verify_linux_arm64_wheel.py --verify-evidence wheelhouse arm64-wheel-evidence",
+            }
+        )
+        steps.append(
+            {
+                "name": "Retain original ARM64 wheel consumer receipts",
+                "if": "always() && matrix.os == 'ubuntu-24.04-arm'",
+                "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "with": {
+                    "name": "runtime-arm64-wheel-acceptance",
+                    "path": "action_server/arm64-wheel-evidence/",
+                    "if-no-files-found": "error",
+                    "retention-days": 30,
+                },
+            }
+        )
         steps.append(self.upload_artifact_manylinux_wheels())
-        steps.extend(self.build_source_receipt("wheelhouse", "${{ runner.os }}"))
+        steps.extend(
+            self.build_source_receipt(
+                "wheelhouse",
+                "${{ matrix.os == 'ubuntu-24.04-arm' && 'Linux-ARM64' || runner.os }}",
+            )
+        )
         return steps
 
     def build_source_receipt(self, directory, lane):
         return [
-            {"name": "Bind distribution bytes to producer checkout", "run": f"{run_in_env}python scripts/write_runtime_build_source.py {directory}"},
-            self.upload_artifact(name=f"runtime-build-source-{lane}", path="action_server/runtime-build-source.json", pinned=True),
+            {
+                "name": "Bind distribution bytes to producer checkout",
+                "run": f"{run_in_env}python scripts/write_runtime_build_source.py {directory}",
+            },
+            self.upload_artifact(
+                name=f"runtime-build-source-{lane}",
+                path="action_server/runtime-build-source.json",
+                pinned=True,
+            ),
         ]
 
     def matrix_runtime_wheels(self, pyversion: str):
         matrix = self.matrix_cibuildwheel(pyversion)
         for name, row in zip(("ubuntu", "windows", "macos"), matrix["include"]):
             row["name"] = name
+        matrix["os"].append("ubuntu-24.04-arm")
+        matrix["include"].append(
+            {"os": "ubuntu-24.04-arm", "python": "3.12.15", "name": "linux-arm64"}
+        )
         return matrix
 
     def publish_steps(self):
@@ -2971,6 +3075,7 @@ mv actions-runtime-dist dist
                     "steps": self.build_sdist_steps(),
                 },
                 "build-wheels": {
+                    "timeout-minutes": 75,
                     "runs-on": "${{ matrix.os }}",
                     "strategy": {
                         "fail-fast": self.fail_fast,
@@ -3038,6 +3143,7 @@ class ActionServerBinaryRelease(BaseWorkflow):
             "run": """set -Eeuo pipefail
 for pair in \
   "linux64/action-server linux64" \
+  "linuxarm64/action-server linuxarm64" \
   "macos-arm64/action-server macos-arm64" \
   "windows64/action-server.exe windows64"; do
   set -- $pair
@@ -3050,6 +3156,7 @@ done
 tag="$GITHUB_REF_NAME"
 {
   sha256sum linux64/action-server | sed "s#  linux64/action-server#  ${tag}-linux64#"
+  sha256sum linuxarm64/action-server | sed "s#  linuxarm64/action-server#  ${tag}-linuxarm64#"
   sha256sum macos-arm64/action-server | sed "s#  macos-arm64/action-server#  ${tag}-macos-arm64#"
   sha256sum windows64/action-server.exe | sed "s#  windows64/action-server.exe#  ${tag}-windows64.exe#"
 } | sort > "${tag}-sha256.txt"
@@ -3127,6 +3234,13 @@ tag="$GITHUB_REF_NAME"
                         },
                     },
                     {
+                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                        "with": {
+                            "name": "action-server-ubuntu-24.04-arm",
+                            "path": "linuxarm64/",
+                        },
+                    },
+                    {
                         "name": "Print contents",
                         "run": """
           pwd
@@ -3152,6 +3266,17 @@ tag="$GITHUB_REF_NAME"
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./linux64/action-server",
                             "asset_name": "${{ github.ref_name }}-linux64",
+                            "tag": "${{ github.ref }}",
+                            "overwrite": False,
+                        },
+                    },
+                    {
+                        "name": "Upload Linux ARM64 binary",
+                        "uses": "svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd",
+                        "with": {
+                            "repo_token": "${{ secrets.GITHUB_TOKEN }}",
+                            "file": "./linuxarm64/action-server",
+                            "asset_name": "${{ github.ref_name }}-linuxarm64",
                             "tag": "${{ github.ref }}",
                             "overwrite": False,
                         },
@@ -3225,9 +3350,9 @@ class ActionServerRuntimeRecovery(BaseWorkflow):
     def __init__(self):
         super().__init__()
         self.full["permissions"] = {"contents": "read", "actions": "read"}
-        self.full["run-name"] = (
-            "Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}"
-        )
+        self.full[
+            "run-name"
+        ] = "Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}"
 
     @override
     def on_part(self, dep_paths):
@@ -3475,7 +3600,7 @@ fi
                         "DESTINATION": path,
                         "GH_TOKEN": "${{ github.token }}",
                     },
-                    "run": f'''set -Eeuo pipefail
+                    "run": f"""set -Eeuo pipefail
 mkdir -p "$DESTINATION"
 gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
 test "$(sha256sum /tmp/runtime-artifact.zip | cut -d' ' -f1)" = "{digest.split(':', 1)[1]}"
@@ -3511,7 +3636,7 @@ with zipfile.ZipFile("/tmp/runtime-artifact.zip") as source:
         with source.open(member) as input_file, open(target, "xb") as output_file:
             output_file.write(input_file.read())
 PY
-''',
+""",
                 }
             )
         return downloads
@@ -3732,11 +3857,16 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                 }
             )
         for platform in ("linux", "macos", "windows"):
-            steps.append({
-                "name": f"Download {platform} signing receipt",
-                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                "with": {"name": f"native-signing-{platform}", "path": f"native-signing/{platform}"},
-            })
+            steps.append(
+                {
+                    "name": f"Download {platform} signing receipt",
+                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                    "with": {
+                        "name": f"native-signing-{platform}",
+                        "path": f"native-signing/{platform}",
+                    },
+                }
+            )
         steps.extend([self.binary_release_normalize(), self.binary_release_publish()])
         return steps
 
@@ -3752,7 +3882,10 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                     "runs-on": "${{ matrix.os }}",
                     "permissions": {"contents": "read"},
                     "defaults": {
-                        "run": {"working-directory": "release-source/action_server", "shell": "bash"}
+                        "run": {
+                            "working-directory": "release-source/action_server",
+                            "shell": "bash",
+                        }
                     },
                     "strategy": {
                         "fail-fast": False,

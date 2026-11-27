@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "source_sha": "93da040e19eb44807c864611789c48d330b5f627",
+  "run_id": 45938467194,
+  "job_id": 140307030249,
+  "original_wheel_artifact_sha256": "deb1a78e182d6c7fd366b6774573115156730d2f85769d1aeaf04fefe6dc0949",
+  "wheel_hashes": {
+    "actions_runtime-1.1.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "3b7ebc3d5331c510c0e6ac15bebc7df14514c743f7ce597437fa4381e852a288",
+    "actions_runtime-1.1.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl": "6f390ebd7fc93046aeb4aeabb83f960d16427bd355a3037c1dd6e2f22d9fa5c6"
+  },
+  "standalone_scope": "Ubuntu24.04 ARM64; not Debian12/Pi qualification",
+  "publication_authorized": false
+}
