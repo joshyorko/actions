@@ -7883,3 +7883,11 @@ archive is separate from the missing upstream final-Pi archive. Extract
 `consumer/original-evidence.tar.gz` into a new directory before checking its
 `consumer-SHA256SUMS`; the adjacent `.txt` files are byte-preserving readable
 aliases, and the checksum paths refer to the original archive layout.
+
+Both compiler and logical-binding zero-requirement goldens include the primary
+RCC adapter range. Update both current-producer goldens when that pin changes;
+do not rewrite historical release evidence to pretend its identity is current.
+
+The Runtime pin is also asserted by `devutils/tests/test_actions_runtime_release_line.py`.
+Run that package gate when changing the embedded RCC identity; `ToolkitTest`
+checks the developer toolkit and does not replace the devutils release-line suite.

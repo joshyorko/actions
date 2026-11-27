@@ -350,7 +350,7 @@ def test_stored_requirement_tamper_is_not_projected(bound):
         g.registry.get_capability(g.capability)
 
 
-def test_zero_requirement_bytes_match_rcc_18_19_8_golden():
+def test_zero_requirement_bytes_match_rcc_18_19_12_golden():
     import hashlib
 
     compiled = compile_fixture().compiled_package
@@ -361,11 +361,11 @@ def test_zero_requirement_bytes_match_rcc_18_19_8_golden():
     )
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()
-        == "d22755228b8a06bd11972e77d2580e88a437dda92aa78a97ae25e5dcbc680b48"
+        == "a89cae62bf34cb9e53be1d90d52a445db0036c56ea0158af46dd38735ce2b307"
     )
     assert (
         hashlib.sha256(compiled.runtime_plan_payload).hexdigest()
-        == "b921c45aa48cbb847145e21dd9a81fcf6fce949b4523f6acfa101cbbaa3411de"
+        == "a5e58a76a114d6d6162b29d91b2789b53f882f7c50a0450bc6ed398bd167feed"
     )
     assert (
         hashlib.sha256(compiled.source_archive).hexdigest()
