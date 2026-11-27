@@ -7891,3 +7891,10 @@ do not rewrite historical release evidence to pretend its identity is current.
 The Runtime pin is also asserted by `devutils/tests/test_actions_runtime_release_line.py`.
 Run that package gate when changing the embedded RCC identity; `ToolkitTest`
 checks the developer toolkit and does not replace the devutils release-line suite.
+
+Tests that execute a generated child helper with `exec` must isolate `os.environ`
+as well as `sys.argv` and `sys.path`: the helper deliberately assigns its private
+`HOME`. Otherwise subsequent RCC package tests can create environments under a
+previous test's temporary home. Preserve the package server log on environment
+bootstrap failure; pytest's abbreviated `CompletedProcess` assertion can hide
+the actual cause, including a tmpfs `No space left on device` error.

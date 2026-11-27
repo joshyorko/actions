@@ -1,0 +1,21 @@
+{
+  "tested_source": "c15a9e2e53dd76bf6c38ae39e9e7681ac09e3960",
+  "python": "3.12.15",
+  "outer_rcc": "18.19.8",
+  "bundled_runtime_rcc": "18.19.12",
+  "full_suite": {
+    "passed": 2232,
+    "failed": 1,
+    "skipped": 1258,
+    "deselected": 293,
+    "complete": false,
+    "failure": "test_package_zip_no_actions: RCC libmamba ENOSPC during environment creation; original server diagnostic retained",
+    "isolated_rerun": "1 passed after scratch cleanup"
+  },
+  "test_only_repair": "Generated helper exec now isolates os.environ to restore HOME; affected logical+package suites27passed3skipped",
+  "lint": "PASS; Markdown lint unavailable",
+  "typecheck": "PASS717files",
+  "devutils": "378passed",
+  "native_runtime_inputs_unchanged_from": "5fffa17e87bba4f1d0014e8ad48633102ac182f6",
+  "remaining_gate": "Full Runtime suite after test HOME isolation repair and hosted CI"
+}
