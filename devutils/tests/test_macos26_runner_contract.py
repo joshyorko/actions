@@ -161,7 +161,7 @@ def test_native_manual_scopes_preserve_default_platform_coverage():
     assert [[row["os"] for row in choice] for choice in choices] == [
         ["ubuntu-24.04-arm"],
         ["macos-26"],
-        ["ubuntu-22.04", "windows-2022", "macos-26"],
+        ["ubuntu-22.04", "windows-2022", "macos-26", "ubuntu-24.04-arm"],
     ]
     assert "inputs.runner_scope == 'macos-arm64'" in expression
     assert "inputs.runner_scope == 'linux-arm64'" in expression

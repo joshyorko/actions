@@ -1,0 +1,13 @@
+{
+  "source_sha": "93da040e19eb44807c864611789c48d330b5f627",
+  "provenance_artifact_id": 15171817080,
+  "provenance_zip_sha256": "970fb1321e1bd6a3da30a9391d0da6d51fedd64a45aa8378ba69c596d9985036",
+  "wrapper_artifact_id": 15171473841,
+  "wrapper_zip_sha256": "df0178f7791e1a997aeb37db5837f5a05bb65999305bfc963526b3ce4eb1c7dd",
+  "verified_original_binary_sha256": {
+    "dist/action-server/action-server": "6b0074642c80c2836e303d8168931b33fc83ee2b090acaacb4c46bac5930aef5",
+    "dist/final/action-server": "792715f795cafcfe55e1f2399a050e93312f1198acb326f06e0d9439b5ab2df3"
+  },
+  "frozen_hash_verified_from": "original provenance TAR",
+  "go_wrapper_hash_verified_from": "original standalone artifact ZIP"
+}

@@ -1958,8 +1958,9 @@ stages them through `publish_verified_runtime.py --download-root`. The validator
 parses wheel filenames into tag sets, so platform tags in a different order are
 accepted when the set is identical. It still requires the exact package/version,
 the cp312/cp313 interpreter and ABI, the approved manylinux/macOS/Windows tag
-sets, no build tag, exactly seven artifacts, and one wheel for each of the six
-interpreter/platform slots; duplicate tag components and duplicate slots fail.
+sets and no build tag. Runtime 1.1.2+ requires nine artifacts and eight
+interpreter/platform slots; earlier Runtime versions retain seven artifacts/six
+slots; duplicate tag components and duplicate slots fail.
 The job installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
@@ -1978,7 +1979,8 @@ Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
-never rebuilds. It verifies the exact seven artifacts and retained
+never rebuilds. It verifies the exact version-specific inventory (nine files
+for Runtime 1.1.2+, seven for earlier versions) and retained
 `actions-runtime-manifest.sha256`. `--dry-run` then returns without running
 Twine or reading publication credentials; retain a separate strict Twine
 result when admitting metadata. The publishing path requires Twine 6.2.0. With `--publish`,
@@ -2007,7 +2009,7 @@ The `--run-id` provenance gate also applies to dry runs and rejects pull-request
 producers. For nonpublishing admission of independently verified PR artifacts,
 measure the downloaded ZIP and every manifest member, retain the repository,
 workflow, run and artifact identity and actual checkout SHA, tree and ordered
-parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the seven-artifact
+parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the version-specific artifact
 byte inventory; it does not grant tag or publication provenance. A run's API head
 can differ from its actual synthetic merge checkout, so record both identities.
 
@@ -5189,7 +5191,7 @@ Action-to-Robot jobs: all ten must pass, including the installed job on a
 community-targeted PR. Update the admission count with workflow expansion; a
 successful run with a stale count is rejected, never partially admitted.
 Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
-and distribution digests separately. For the default profile, all seven distributions must match those
+and distribution digests separately. For the default profile, all nine distributions (seven before 1.1.2) must match those
 receipts. Each native binary must match its producer manifest and both successful
 frozen/Go-wrapper browser/storage and large-history receipts. Existing wheel
 private-import, published-dependency floor and request-boundary gates remain in
@@ -5198,8 +5200,9 @@ cannot be admitted by substituting historical evidence.
 
 An explicitly authorized `platform_profile=linux-windows` is a separate immutable
 delivery scope, selectable only by the original and triggering `joshyorko` actor.
-It admits exactly the sdist, CPython 3.12/3.13 Linux x86-64 and Windows AMD64 wheels,
-and the two corresponding native binaries plus their checksum file. It never
+It admits exactly the sdist, CPython 3.12/3.13 Linux x86-64/ARM64 and Windows AMD64 wheels,
+and the three corresponding native binaries plus their checksum file (before
+1.1.2: Linux x64/Windows wheels and two native binaries). It never
 downloads or advertises Mac files. The manifest binds this profile; publication,
 backup verification and retries derive the inventory from that reviewed manifest,
 with an absent profile retaining the historical full-platform meaning. Mac support
@@ -5208,8 +5211,9 @@ requires a later release, not additions to this release's immutable inventory.
 The reduced profile still checks every job and the original workflow topology.
 Only specifically recognized Mac Runtime-test, wheel, native and toolkit jobs
 cancelled before runner allocation (`runner_id=0`, no steps) may remain unverified.
-The unstarted wheel aggregation job may be skipped because its seven-file input
-set is unavailable; preparation instead verifies the five included distributions
+The unstarted wheel aggregation job may be skipped because its full input
+set is unavailable; preparation instead verifies the seven included distributions
+(five before 1.1.2)
 against original producer ZIP digests and individual source receipts. Executed
 failures, cancellation after allocation/steps, missing or unexpected jobs and
 non-Mac failures remain blocking. Original conclusions and allocation evidence
@@ -5275,11 +5279,11 @@ CDN, S3, template, credential or security-setting mutation is part of this butto
    controller deliberately does not depend on those events.
 
 Publication reserves a manifest-bound draft before any PyPI upload and stages
-the profile's exact native inventory there (four assets for `all`, three for
-`linux-windows`). Only exact missing PyPI files are uploaded, with
+the profile's exact native inventory there (five assets for `all`, four for
+`linux-windows`; before 1.1.2, four/three respectively). Only exact missing PyPI files are uploaded, with
 all existing filename/digest/size entries checked first. The tag and public
 native release follow confirmation of the complete profile-specific PyPI set
-(seven files for `all`, five for `linux-windows`).
+(nine files for `all`, seven for `linux-windows`; before 1.1.2, seven/five).
 Cross-service publication is not atomic: an interruption can leave a prefix on
 PyPI and a private native draft. Rerun **publication** with the original inputs;
 it reconciles actual remote state first and adds only missing matching files.
@@ -7692,7 +7696,7 @@ producer job labels rather than being rewritten as new-run evidence.
 
 Prepare a runner migration on a separate QA branch while an existing release
 source/workflow tree is frozen. The native workflow's manual `macos-arm64`
-scope runs only that host; its default still covers all three platforms. A
+scope runs only that host; its default covers all four qualified platforms. A
 manual QA run cannot replace release qualification, whose event, complete-tree,
 job-count and artifact-source checks still apply. Do not rerun successful frozen
 matrices merely to start independent Mac QA or infer passing results from an
@@ -7908,8 +7912,8 @@ before deleting it. Do not assume text-mode writes use LF: Windows translates
 newlines to CRLF, and byte-preserving evidence must retain those original bytes.
 
 The nonpublishing native workflow has an explicit `linux-arm64` manual scope
-on `ubuntu-24.04-arm`. Its default `all` scope retains the existing Linux x64,
-Windows x64 and macOS ARM64 matrix while ARM64 qualification is staged. The
+on `ubuntu-24.04-arm`. After successful exact-head qualification, its default `all` scope includes
+Linux ARM64 alongside the existing Linux x64, Windows x64 and macOS ARM64 rows. The
 manual lane keeps frozen and Go-wrapper Action, browser, storage and history
 gates, and clean-tests CPython 3.12/3.13 manylinux ARM64 wheels with the official
 RCC contract. The clean wheel floor runs inside cibuildwheel; the same repaired
@@ -7935,3 +7939,21 @@ CI run; manual qualification does not authorize a merge, tag or publication.
 Poetry Ruff/isort/mypy commands and full pytest suite. Qualification helpers in
 `action_server/scripts/` also need explicit static-check selection because the
 common Runtime lint/typecheck targets cover `src` and `tests`, not `scripts`.
+
+
+Runtime 1.1.2 and later require nine distributions: the sdist plus CPython
+3.12/3.13 wheels for Linux x64, Linux ARM64, macOS ARM64 and Windows x64.
+Earlier retained Runtime bundles keep their seven-file inventory for recovery.
+The Linux ARM64 producer uses separate `Linux-ARM64-wheels` and
+`runtime-build-source-Linux-ARM64` names, so Linux x64 cannot overwrite its
+receipt. Preparation additionally verifies original real-RCC consumer receipts
+against those exact ARM64 producer bytes and the actual PR merge checkout SHA.
+The strict native inventory adds `linuxarm64` and includes it in the checksum
+manifest. All four native jobs and all six PyPI workflow jobs remain required;
+manual qualification is evidence for admitting the lane, not a substitute for
+the final exact-head PR checks or merged-source preparation.
+
+The Ubuntu 24.04 ARM64 standalone receipt establishes that host only. The
+qualified bundle's highest observed ELF requirement is GLIBC 2.38; a successful
+manylinux wheel or older Pi wheel run does not qualify that standalone on
+Debian 12/Pi. Keep downstream standalone base-OS compatibility explicit.

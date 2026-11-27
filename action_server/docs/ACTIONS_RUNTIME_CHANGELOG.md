@@ -8,6 +8,14 @@ an Actions Runtime release.
 
 ## Unreleased
 
+## actions-runtime-1.1.2
+
+- Add native Ubuntu 24.04 Linux ARM64 standalone and Go-wrapper delivery, with browser, storage and history acceptance. This does not establish Debian 12/Pi standalone compatibility.
+- Add CPython 3.12/3.13 manylinux ARM64 wheels with clean installed checks and real RCC-managed synthetic Action execution.
+- Pin official RCC v18.19.12 Linux ARM64 bytes and SHA-256 verification; preserve existing Linux x64, Windows x64 and macOS ARM64 gates.
+- Require coordinated native, wheel, manifest and checksum inventories before normal protected preparation/publication.
+- Retain Canvas, named queries, Knowledge and managed Work Items on SQLite and PostgreSQL.
+
 ## actions-runtime-1.1.1
 
 - Prepare complete Linux x86-64, Windows AMD64 and macOS ARM64 delivery,

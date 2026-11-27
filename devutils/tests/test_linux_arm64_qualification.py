@@ -55,6 +55,7 @@ def measured_wheels(tmp_path):
         (root / "action-receipt.json").write_text(
             json.dumps(
                 {
+                    "runtime_version": "1.1.1",
                     "official_contract": True,
                     "installed_wheel_sha256": digest,
                     "rcc_sha256": DIGEST,
@@ -93,6 +94,7 @@ def test_both_wheel_receipts_bind_source_binary_and_action(qualifier, measured_w
         ("wheel.json", "qualification_sha", "c" * 40),
         ("wheel.json", "machine", "x86_64"),
         ("wheel.json", "rcc_environment_version", "18.19.8"),
+        ("action-receipt.json", "runtime_version", "1.1.0"),
         ("action-receipt.json", "official_contract", False),
         ("action-receipt.json", "installed_wheel_sha256", "c" * 64),
         ("action-receipt.json", "rcc_sha256", "c" * 64),

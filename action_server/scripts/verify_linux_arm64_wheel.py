@@ -32,8 +32,11 @@ def isolated_rcc_environment(home: Path, source_sha: str) -> dict[str, str]:
     return environment
 
 
-def rcc_consumers(wheelhouse: Path, project: Path) -> None:
-    from actions.server._download_rcc import RCC_VERSION, get_default_rcc_location
+def rcc_consumers(
+    wheelhouse: Path, project: Path, published_dependencies: bool = False
+) -> None:
+    from actions.server._download_rcc import (RCC_VERSION,
+                                              get_default_rcc_location)
     from actions.server._rcc_platform import verify_rcc
 
     wheels = sorted(wheelhouse.resolve(strict=True).glob("*.whl"))
@@ -80,6 +83,11 @@ def rcc_consumers(wheelhouse: Path, project: Path) -> None:
                             "python",
                             str(project / "scripts/verify_linux_arm64_wheel.py"),
                             "--install-wheel",
+                            *(
+                                ["--published-dependencies"]
+                                if published_dependencies
+                                else []
+                            ),
                             str(wheel),
                             str(project),
                         ],
@@ -131,6 +139,7 @@ def verify_evidence(
             or proof.get("wheel") != wheel.name
             or proof.get("sha256") != wheel_hash
             or proof.get("machine") not in {"aarch64", "arm64"}
+            or action.get("runtime_version") != wheel.name.split("-")[1]
             or action.get("official_contract") is not True
             or action.get("installed_wheel_sha256") != wheel_hash
             or action.get("rcc_sha256") != digest
@@ -167,6 +176,7 @@ def main() -> None:
     modes.add_argument("--verify-evidence", action="store_true")
     modes.add_argument("--rcc-consumers", action="store_true")
     modes.add_argument("--install-wheel", action="store_true")
+    parser.add_argument("--published-dependencies", action="store_true")
     args = parser.parse_args()
     if sys.platform != "linux" or platform.machine().lower() not in {
         "aarch64",
@@ -174,7 +184,9 @@ def main() -> None:
     }:
         parser.error("native Linux ARM64 required")
     if args.rcc_consumers:
-        rcc_consumers(args.wheel, args.project.resolve(strict=True))
+        rcc_consumers(
+            args.wheel, args.project.resolve(strict=True), args.published_dependencies
+        )
         return
     if args.verify_evidence:
         from actions.server._download_rcc import RCC_VERSION
@@ -218,18 +230,19 @@ def main() -> None:
         environment = os.environ.copy()
         environment["ROBOCORP_HOME"] = temporary
         with (evidence / "install.log").open("wb") as log:
-            subprocess.run(
-                [
-                    sys.executable,
-                    str(project / "scripts/install_candidate_core.py"),
-                    str(project / "candidate-core-wheelhouse"),
-                    str(project / "candidate-helper-wheelhouse"),
-                    str(project / "candidate-sdk-wheelhouse"),
-                ],
-                check=True,
-                stdout=log,
-                stderr=subprocess.STDOUT,
-            )
+            if not args.published_dependencies:
+                subprocess.run(
+                    [
+                        sys.executable,
+                        str(project / "scripts/install_candidate_core.py"),
+                        str(project / "candidate-core-wheelhouse"),
+                        str(project / "candidate-helper-wheelhouse"),
+                        str(project / "candidate-sdk-wheelhouse"),
+                    ],
+                    check=True,
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                )
             subprocess.run(
                 [
                     sys.executable,
@@ -257,10 +270,16 @@ def main() -> None:
                     str(wheel),
                     "--checkout-root",
                     str(project),
-                    "--candidate-sdk-wheelhouse",
-                    str(project / "candidate-sdk-wheelhouse"),
-                    "--candidate-core-wheelhouse",
-                    str(project / "candidate-core-wheelhouse"),
+                    *(
+                        []
+                        if args.published_dependencies
+                        else [
+                            "--candidate-sdk-wheelhouse",
+                            str(project / "candidate-sdk-wheelhouse"),
+                            "--candidate-core-wheelhouse",
+                            str(project / "candidate-core-wheelhouse"),
+                        ]
+                    ),
                 ],
                 check=True,
                 env=environment,

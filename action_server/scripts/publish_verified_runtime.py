@@ -13,6 +13,7 @@ from pathlib import Path
 
 from packaging.tags import Tag
 from packaging.utils import parse_sdist_filename, parse_wheel_filename
+from packaging.version import Version
 
 MANIFEST_NAME = "actions-runtime-manifest.sha256"
 RUNTIME_DISTRIBUTION_NAME = "actions-runtime"
@@ -33,6 +34,7 @@ EXPECTED_WHEEL_TAGS = {
             "manylinux1_x86_64",
             "manylinux2014_x86_64",
         ),
+        "manylinux-arm64": ("manylinux_2_17_aarch64", "manylinux2014_aarch64"),
         "macos": ("macosx_12_0_arm64",),
         "windows": ("win_amd64",),
     }.items()
@@ -40,6 +42,8 @@ EXPECTED_WHEEL_TAGS = {
 EXPECTED_WHEEL_ROWS = {
     ("312", "manylinux"),
     ("313", "manylinux"),
+    ("312", "manylinux-arm64"),
+    ("313", "manylinux-arm64"),
     ("312", "macos"),
     ("313", "macos"),
     ("312", "windows"),
@@ -59,36 +63,36 @@ RECOVERY_WORKFLOW_NAME = "Actions Runtime Recovery"
 PYPI_WORKFLOW_NAME = "Actions Runtime PYPI Release"
 
 
-def wheel_rows(platform_profile: str = "all") -> set[tuple[str, str]]:
+def wheel_rows(
+    platform_profile: str = "all", version: str = "1.1.2"
+) -> set[tuple[str, str]]:
     if platform_profile not in {"all", "linux-windows"}:
         raise VerificationError("unknown Runtime platform profile")
     return {
         row
         for row in EXPECTED_WHEEL_ROWS
-        if platform_profile == "all" or row[1] != "macos"
+        if (platform_profile == "all" or row[1] != "macos")
+        and (Version(version) >= Version("1.1.2") or row[1] != "manylinux-arm64")
     }
 
 
 def _artifact_names(directory: Path, *, platform_profile: str = "all") -> list[str]:
-    expected_rows = wheel_rows(platform_profile)
     files = sorted(path.name for path in directory.iterdir() if path.is_file())
     if MANIFEST_NAME in files:
         files.remove(MANIFEST_NAME)
-    if len(files) != len(expected_rows) + 1:
-        description = "seven" if platform_profile == "all" else "five"
-        raise VerificationError(f"expected {description} artifacts, found {len(files)}")
     sdists = [name for name in files if name.endswith(".tar.gz")]
     if len(sdists) != 1:
         raise VerificationError("expected one sdist")
-    if sum(name.endswith(".whl") for name in files) != len(expected_rows):
-        raise VerificationError(
-            "wheel count does not match the Runtime platform profile"
-        )
     sdist_name = sdists[0]
     sdist_match = SDIST_PATTERN.fullmatch(sdist_name)
     if not sdist_match:
         raise VerificationError("unexpected artifact filename")
     version = sdist_match.group("version")
+    expected_rows = wheel_rows(platform_profile, version)
+    count = len(expected_rows) + 1
+    if len(files) != count:
+        description = {5: "five", 7: "seven", 9: "nine"}[count]
+        raise VerificationError(f"expected {description} artifacts, found {len(files)}")
     try:
         sdist_distribution, sdist_version = parse_sdist_filename(sdist_name)
     except ValueError as error:
@@ -157,9 +161,16 @@ def merge_downloads(download_root: Path, destination: Path) -> list[str]:
         if source.name in sources:
             raise VerificationError(f"duplicate artifact basename: {source.name}")
         sources[source.name] = source
-    if len(sources) != 7:
+    # Validate version-specific exact rows before copying; historical bundles
+    # keep their original seven-file inventory.
+    sdists = [name for name in sources if SDIST_PATTERN.fullmatch(name)]
+    if len(sdists) != 1:
+        raise VerificationError("expected one downloaded sdist")
+    version = SDIST_PATTERN.fullmatch(sdists[0]).group("version")
+    count = len(wheel_rows(version=version)) + 1
+    if len(sources) != count:
         raise VerificationError(
-            f"expected seven downloaded artifacts, found {len(sources)}"
+            f"expected {count} downloaded artifacts, found {len(sources)}"
         )
     destination.mkdir(parents=True, exist_ok=True)
     for name, source in sorted(sources.items()):

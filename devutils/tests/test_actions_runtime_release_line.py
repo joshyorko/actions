@@ -50,9 +50,9 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.1.1"
+    assert pyproject["version"] == "1.1.2"
     assert runtime.__version__ == pyproject["version"]
-    assert runtime.version_info == [1, 1, 1]
+    assert runtime.version_info == [1, 1, 2]
     # Candidate source advances independently of the exact published floor.
     floor = (
         ROOT / "action_server/scripts/verify_published_runtime_floor.py"
@@ -86,6 +86,7 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
         "ubuntu-22.04",
         "windows-2022",
         "macos-26",
+        "ubuntu-24.04-arm",
     ]
     assert "cp312-*macos*arm64" in PYPI_WORKFLOW
     assert "cp313-*macos*arm64" in PYPI_WORKFLOW
@@ -168,11 +169,13 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
     upload_names = [step["with"]["asset_name"] for step in upload_steps]
     assert upload_names == [
         "${{ github.ref_name }}-linux64",
+        "${{ github.ref_name }}-linuxarm64",
         "${{ github.ref_name }}-macos-arm64",
         "${{ github.ref_name }}-windows64.exe",
         "${{ github.ref_name }}-sha256.txt",
     ]
     assert [step["with"]["overwrite"] for step in upload_steps] == [
+        False,
         False,
         False,
         False,
@@ -212,7 +215,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     changelog = (
         ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
     ).read_text()
-    tag = "actions-runtime-1.1.1"
+    tag = "actions-runtime-1.1.2"
     headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
     release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
     release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")
