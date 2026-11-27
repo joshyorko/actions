@@ -226,7 +226,8 @@ def test_runtime_primary_and_historical_metadata_pins():
 
 
 @pytest.mark.parametrize("fail", [False, True])
-def test_smoke_retains_original_log_on_success_and_failure(tmp_path, fail):
+@pytest.mark.parametrize("newline", ["\n", "\r\n"])
+def test_smoke_retains_original_log_on_success_and_failure(tmp_path, fail, newline):
     harness = load_module(
         "arm64_retention_test", ROOT / "scripts/verify_linux_arm64_candidate.py"
     )
@@ -235,10 +236,12 @@ def test_smoke_retains_original_log_on_success_and_failure(tmp_path, fail):
     log = tmp_path / "import.log"
     try:
         with harness.retained_log(log, evidence) as stream:
-            stream.write("original diagnostic\n")
+            stream.write("original diagnostic" + newline)
             if fail:
                 raise RuntimeError("synthetic failure")
     except RuntimeError:
         assert fail
+    original = log.read_bytes()
+    assert original
     log.unlink()
-    assert (evidence / "import.log").read_bytes() == b"original diagnostic\n"
+    assert (evidence / "import.log").read_bytes() == original

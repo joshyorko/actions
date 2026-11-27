@@ -7902,3 +7902,7 @@ The [published-pin host receipt](../program/evidence/rcc-v18.19.12/host/receipt.
 keeps incomplete diagnostics separate from the later complete portable gate,
 with the final log and compressed JUnit report. A recovered setup failure does
 not turn excluded integration tests or skipped service tests into passes.
+
+Log-retention tests compare the retained bytes with the original closed file
+before deleting it. Do not assume text-mode writes use LF: Windows translates
+newlines to CRLF, and byte-preserving evidence must retain those original bytes.

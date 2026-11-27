@@ -1,0 +1,19 @@
+{
+  "base": "3a95096fbaa77915a5064c8e1b7b174e462dbe71",
+  "failure_job": "https://github.com/joshyorko/actions/actions/runs/45927344728/job/140271668740",
+  "diagnosis": "Windows text-mode CRLF was retained correctly; the test incorrectly required LF",
+  "repair": "Compare retained bytes against original closed source log; cover LF and CRLF for success and failure",
+  "scope": "test/docs/evidence only; Runtime and native smoke harness unchanged",
+  "focused_gate": {
+    "toolchain": "repository RCC18.19.8 developer toolkit, Python3.12, pytest8.3.4",
+    "command": "python -m pytest --noconftest -c /dev/null <absolute test_rcc_platform.py> -k smoke_retains -q",
+    "passed": 4,
+    "deselected": 23,
+    "warnings": "pytest cache attempted under /dev due null config; no cache was created",
+    "limitation": "stdlib-only test run without package fixtures; not a repeated full package suite or native Windows proof"
+  },
+  "ruff_check": "PASS",
+  "ruff_format": "PASS",
+  "full_portable_suite": "prior exact ab43d514 result remains4035passed1840skipped293deselected; not rerun for this assertion-only edit",
+  "hosted_windows_confirmation": "pending new-head CI"
+}
