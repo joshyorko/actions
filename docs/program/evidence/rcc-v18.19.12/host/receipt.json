@@ -1,9 +1,15 @@
 {
-  "tested_source": "c15a9e2e53dd76bf6c38ae39e9e7681ac09e3960",
+  "tested_source": "ab43d51488e354214cb44beffea3c623767ec742",
   "python": "3.12.15",
   "outer_rcc": "18.19.8",
   "bundled_runtime_rcc": "18.19.12",
-  "full_suite": {
+  "test_only_repair": "Generated helper exec now isolates os.environ to restore HOME; affected logical+package suites27passed3skipped",
+  "lint": "PASS after final test repair; Markdown lint unavailable",
+  "typecheck": "PASS717files",
+  "devutils": "378passed",
+  "native_runtime_inputs_unchanged_from": "5fffa17e87bba4f1d0014e8ad48633102ac182f6",
+  "remaining_gate": "Hosted CI; skipped/excluded integration and service tests remain unverified; native ARM64 PyInstaller/publication inventory not qualified",
+  "earlier_incomplete_suite": {
     "passed": 2232,
     "failed": 1,
     "skipped": 1258,
@@ -12,10 +18,17 @@
     "failure": "test_package_zip_no_actions: RCC libmamba ENOSPC during environment creation; original server diagnostic retained",
     "isolated_rerun": "1 passed after scratch cleanup"
   },
-  "test_only_repair": "Generated helper exec now isolates os.environ to restore HOME; affected logical+package suites27passed3skipped",
-  "lint": "PASS; Markdown lint unavailable",
-  "typecheck": "PASS717files",
-  "devutils": "378passed",
-  "native_runtime_inputs_unchanged_from": "5fffa17e87bba4f1d0014e8ad48633102ac182f6",
-  "remaining_gate": "Full Runtime suite after test HOME isolation repair and hosted CI"
+  "full_suite": {
+    "passed": 4035,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1840,
+    "deselected": 293,
+    "complete": true,
+    "seconds": 632.83,
+    "command": "pytest tests -m 'not integration_test' -q --maxfail=1",
+    "log": "final.txt",
+    "junit": "final.xml.gz"
+  },
+  "runtime_inputs_unchanged": "git diff --quiet native-tested5fffa17e..ab43d514 for action_server/src, build.py, pyproject.toml, poetry.lock, scripts exited0"
 }

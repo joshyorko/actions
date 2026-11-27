@@ -7898,3 +7898,7 @@ as well as `sys.argv` and `sys.path`: the helper deliberately assigns its privat
 previous test's temporary home. Preserve the package server log on environment
 bootstrap failure; pytest's abbreviated `CompletedProcess` assertion can hide
 the actual cause, including a tmpfs `No space left on device` error.
+The [published-pin host receipt](../program/evidence/rcc-v18.19.12/host/receipt.json)
+keeps incomplete diagnostics separate from the later complete portable gate,
+with the final log and compressed JUnit report. A recovered setup failure does
+not turn excluded integration tests or skipped service tests into passes.
