@@ -33,8 +33,8 @@ BACKUP_BRANCH = "backup/runtime-release-bundles"
 RECOVERY_REGISTRY = "action_server/release-bundle-backups.json"
 REQUIRED = {
     "actions_runtime_tests.yml": 3,
-    "actions_runtime_pypi_release.yml": 5,
-    "frontend-build-unauthenticated.yml": 3,
+    "actions_runtime_pypi_release.yml": 6,
+    "frontend-build-unauthenticated.yml": 4,
     "developer_toolkit.yml": 10,
     "actions_core_tests.yml": 4,
     "http_helper_tests.yml": 3,
@@ -43,6 +43,7 @@ REQUIRED = {
 }
 PLATFORMS = {
     "ubuntu-22.04": ("Linux", "linux64", "action-server"),
+    "ubuntu-24.04-arm": ("Linux", "linuxarm64", "action-server"),
     "macos-26": ("Darwin", "macos-arm64", "action-server"),
     "windows-2022": ("Windows", "windows64.exe", "action-server.exe"),
 }
@@ -117,14 +118,18 @@ def pages(endpoint, key):
     raise ReleaseError("GitHub pagination exceeded bound")
 
 
-def release_platforms(platform_profile="all"):
+def release_platforms(platform_profile="all", version="1.1.2"):
     require(
         platform_profile in {"all", "linux-windows"}, "unknown Runtime platform profile"
     )
     return {
         runner: value
         for runner, value in PLATFORMS.items()
-        if platform_profile == "all" or value[0] != "Darwin"
+        if (platform_profile == "all" or value[0] != "Darwin")
+        and (
+            tuple(map(int, version.split("."))) >= (1, 1, 2)
+            or runner != "ubuntu-24.04-arm"
+        )
     }
 
 
@@ -195,8 +200,8 @@ def validate_run(run, jobs, *, sha, path, count, platform_profile="all"):
         if excluded_allocation_job(path, job):
             exceptions.append(job)
             continue
-        # This aggregate validates all seven distributions, so cannot execute
-        # without the omitted Mac producer. Preparation verifies the five exact
+        # This aggregate validates all nine distributions, so cannot execute
+        # without the omitted Mac producer. Preparation verifies the seven exact
         # included distributions independently from their original producer ZIPs.
         if (
             path.endswith("/actions_runtime_pypi_release.yml")
@@ -409,8 +414,13 @@ def verify_files(directory, manifest):
 def release_body(manifest, digest):
     profile = manifest.get("platform_profile", "all")
     release_platforms(profile)
+    architecture_scope = (
+        "Linux x86-64/ARM64; Windows x86-64"
+        if tuple(map(int, manifest["version"].split("."))) >= (1, 1, 2)
+        else "x86-64"
+    )
     scope = (
-        "Platform scope: Linux/Windows only (x86-64). macOS artifacts are absent "
+        f"Platform scope: Linux/Windows only ({architecture_scope}). macOS artifacts are absent "
         "until a later release. Unallocated macOS jobs are UNVERIFIED, NOT PASSED; "
         "their original statuses are retained in the preparation evidence.\n\n"
         if profile == "linux-windows"
@@ -611,9 +621,9 @@ def prepare(args):
     dist = args.output / "pypi"
     artifacts = []
     lanes = (
-        ("sdist", "Linux", "macOS", "Windows")
+        ("sdist", "Linux", "Linux-ARM64", "macOS", "Windows")
         if profile == "all"
-        else ("sdist", "Linux", "Windows")
+        else ("sdist", "Linux", "Linux-ARM64", "Windows")
     )
     if profile == "all":
         artifacts.append(download(pypi_run, "actions-runtime-dist", dist))
@@ -675,6 +685,30 @@ def prepare(args):
         shutil.copy2(
             target / "runtime-build-source.json", evidence / f"package-{lane}.json"
         )
+        if lane == "Linux-ARM64":
+            from verify_linux_arm64_wheel import verify_evidence
+
+            consumer = downloads / "arm64-wheel-consumer"
+            artifacts.append(
+                download(pypi_run, "runtime-arm64-wheel-acceptance", consumer)
+            )
+            selected = downloads / "arm64-selected-wheels"
+            selected.mkdir()
+            for name in proof["files"]:
+                shutil.copy2(dist / name, selected / name)
+            # Source is the producer's actual PR merge checkout, not PR head.
+            verified = verify_evidence(
+                selected,
+                consumer,
+                "18.19.12",
+                "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+                proof["source_sha"],
+            )
+            require(
+                verified == proof["files"],
+                "ARM64 installed consumer bytes differ from producer",
+            )
+            shutil.copytree(consumer, evidence / "arm64-wheel-consumer")
     require(
         set(measured) == set(names),
         "producer receipts do not cover the exact profile distributions",
@@ -712,7 +746,11 @@ def prepare(args):
             git(root, "rev-parse", manifest["source_sha"] + "^{tree}") == tree
             and manifest["platform"] == platform
             and manifest["architecture"].lower()
-            in ({"arm64", "aarch64"} if platform == "Darwin" else {"amd64", "x86_64"}),
+            in (
+                {"arm64", "aarch64"}
+                if runner in {"macos-26", "ubuntu-24.04-arm"}
+                else {"amd64", "x86_64"}
+            ),
             "native checkout tree/platform/architecture mismatch",
         )
         for receipt_name in ("native-acceptance.json", "native-history.json"):
@@ -1068,7 +1106,7 @@ def verify_bundle(args, *, require_backups=True):
         verify_artifacts(args.bundle / "pypi", platform_profile=profile)
     native_names = {
         f"actions-runtime-{args.version}-{suffix}"
-        for _, suffix, _ in release_platforms(profile).values()
+        for _, suffix, _ in release_platforms(profile, args.version).values()
     } | {f"actions-runtime-{args.version}-sha256.txt"}
     require(
         {p.name for p in (args.bundle / "native").iterdir()} == native_names,

@@ -4293,3 +4293,10 @@ GitHub SHA-256, safe extraction and member verification. This does not justify
 rerunning preparation or disabling any integrity check. Seed backup controller
 scripts from the exact frozen release source, not an independently advancing QA
 branch; keep the reviewed branch-only workflow template byte-identical.
+
+A backup branch retaining a newly expanded Runtime inventory must use the exact
+version-aware verifier scripts from the qualified release source. Historical
+seven-file verifiers cannot archive a nine-file ARM64 bundle. Keep the backup
+workflow template unchanged and bind each independent copy request to the same
+original preparation ID, source, version and manifest digest; changing a purpose
+label creates a separate controller push/run, not permission to rebuild bytes.
