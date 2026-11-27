@@ -12,6 +12,7 @@ import importlib.metadata
 import json
 import os
 import platform
+import shutil
 import signal
 import socket
 import subprocess
@@ -20,7 +21,19 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+from contextlib import contextmanager
 from pathlib import Path
+
+
+@contextmanager
+def retained_log(path: Path, evidence_dir: Path | None):
+    with path.open("w+") as stream:
+        try:
+            yield stream
+        finally:
+            if evidence_dir is not None:
+                stream.flush()
+                shutil.copyfile(path, evidence_dir / path.name)
 
 
 def cli_bootstrap(rcc: Path, digest: str, official: bool) -> str:
@@ -40,6 +53,11 @@ def main():
     parser.add_argument("--rcc", type=Path, required=True)
     parser.add_argument("--rcc-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--evidence-dir",
+        type=Path,
+        help="New directory retaining original import/server logs and HTTP result",
+    )
     parser.add_argument(
         "--official",
         action="store_true",
@@ -80,6 +98,8 @@ def main():
     else:
         _rcc_platform.LINUX_ARM64_RELEASE_SHA256["candidate-test-only"] = actual
         _rcc_platform.verify_rcc(rcc, "candidate-test-only", "rcc-linuxarm64")
+    if args.evidence_dir is not None:
+        args.evidence_dir.mkdir(parents=True, exist_ok=False)
     environment = os.environ.copy()
     environment.pop("PYTHONPATH", None)
     environment.pop("PYTHONHOME", None)
@@ -105,7 +125,7 @@ def main():
         )
         datadir = root / "datadir"
         base = [sys.executable, str(wrapper)]
-        with (root / "import.log").open("w+") as log:
+        with retained_log(root / "import.log", args.evidence_dir) as log:
             result = subprocess.run(
                 [*base, "import", "--datadir", str(datadir)],
                 cwd=package,
@@ -120,7 +140,7 @@ def main():
         with socket.socket() as probe:
             probe.bind(("127.0.0.1", 0))
             port = probe.getsockname()[1]
-        with (root / "server.log").open("w+") as log:
+        with retained_log(root / "server.log", args.evidence_dir) as log:
             process = subprocess.Popen(
                 [
                     *base,
@@ -170,7 +190,20 @@ def main():
                     },
                 )
                 with urllib.request.urlopen(request, timeout=120) as response:
-                    result = json.load(response)
+                    body = response.read()
+                    result = json.loads(body)
+                    if args.evidence_dir is not None:
+                        (args.evidence_dir / "action-response.json").write_bytes(body)
+                        (args.evidence_dir / "action-status.json").write_text(
+                            json.dumps(
+                                {
+                                    "status": response.status,
+                                    "run_id": response.headers.get(
+                                        "x-action-server-run-id"
+                                    ),
+                                }
+                            )
+                        )
                 if result != "arm64:synthetic":
                     raise RuntimeError(f"unexpected synthetic result: {result!r}")
             finally:

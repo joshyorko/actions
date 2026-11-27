@@ -157,7 +157,7 @@ jobs:
               raise SystemExit('insufficient free space for bounded invoice acceptance')
           PY
           docker pull postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
-          printf '%s  %s\n' ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 action_server/src/actions/server/bin/rcc-18.19.8 | sha256sum --check --status -
+          printf '%s  %s\n' 0a13e78201a71c1bbc19a2ee8ccc86dd60a67ec4ffa8cd3a9a8f254d148849ee action_server/src/actions/server/bin/rcc-18.19.12 | sha256sum --check --status -
           rcc --workers 2 run -r developer/toolkit.yaml --dev -t InvoiceQueryTest
       - name: Upload combined invoice acceptance receipt
         if: always() && runner.os == 'Linux' && matrix.lane == 'invoice'
@@ -197,10 +197,10 @@ jobs:
         run: |
           set -Eeuo pipefail
           curl --fail --location --silent --show-error \
-            https://github.com/joshyorko/rcc/releases/download/v18.19.8/rcc-linux64 \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.12/rcc-linux64 \
             --output rcc.download
           printf '%s  %s\n' \
-            ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6 \
+            0a13e78201a71c1bbc19a2ee8ccc86dd60a67ec4ffa8cd3a9a8f254d148849ee \
             rcc.download | sha256sum --check --status -
           mv rcc.download rcc
           chmod +x rcc

@@ -5,12 +5,11 @@
 The developer gateway validates RCC `v18.19.8`. A newer `rcc` on `PATH` can fail
 Doctor before any package test runs. Do not override
 `ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION` to hide that mismatch.
-After package Bootstrap, the Action Server build supplies the pinned Linux
-binary at `action_server/src/actions/server/bin/rcc-18.19.8`. Verify its version
-and invoke that binary from the repository root for subsequent toolkit tasks.
-This uses the repository pin without downgrading the workstation installation.
-The repository launcher remains the bootstrap path when the bundled binary is
-not available.
+The developer gateway pin is independent of the Runtime's bundled RCC pin.
+Verify a bundled binary's version before reusing it for toolkit tasks; the
+Runtime candidate now bundles `18.19.12`, which must not be used to bypass the
+outer gateway's `18.19.8` check. Keep a verified `18.19.8` developer binary or use
+the repository launcher rather than downgrading the workstation installation.
 
 ## Stable RCC toolchain identity during subprocess tests
 
@@ -7769,7 +7768,8 @@ route additions and rerun `test_server_full_openapi_flag`.
 The standalone Easy Apply Dockerfile consumes legacy native Action Server
 `action-server-v1.2.2` (`action-server-linux64`), whose tagged downloader pins RCC
 `18.16.0`. This is distinct from `actions-runtime` `1.1.1`, whose build and
-runtime downloaders pin RCC `18.19.8`. Use the maintained Runtime path for new
+runtime downloaders at that published tag pin RCC `18.19.8`. This source
+candidate pins the official RCC `18.19.12` release. Use the maintained Runtime path for new
 Linux ARM64 qualification; a legacy x64 executable is not an ARM64 candidate.
 Source references: [legacy downloader](https://github.com/joshyorko/actions/blob/action-server-v1.2.2/action_server/src/sema4ai/action_server/_download_rcc.py),
 [Runtime downloader](https://github.com/joshyorko/actions/blob/actions-runtime-1.1.1/action_server/src/actions/server/_download_rcc.py).
@@ -7777,9 +7777,11 @@ Source references: [legacy downloader](https://github.com/joshyorko/actions/blob
 `action_server/src/actions/server/_rcc_platform.py` is the dependency-free
 architecture contract used by both the Poetry build hook and runtime startup.
 Linux `aarch64`/`arm64` selects `rcc-linuxarm64`; x86-64 selects `rcc-linux64`.
-Unknown architectures fail closed. The ARM64 release checksum table is
-intentionally empty: RCC `18.19.8` has no qualified official Linux ARM64 entry.
-Startup rejects even an existing cached binary before using that entry, and the
+Unknown architectures fail closed. The ARM64 checksum table now admits only
+official RCC `18.19.12`, SHA256
+`e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2`.
+RCC `18.19.8` still has no approved ARM64 entry. Startup rejects unapproved
+versions and mismatched cached bytes before execution, and the
 PyInstaller spec validates RCC before collecting it. ARM64 validation requires
 both the pinned SHA256 and little-endian AArch64 ELF64 header. Failed downloads
 must not replace the previous binary.
@@ -7834,3 +7836,36 @@ consumer smoke, not deployment acceptance.
 The [portable verification receipt](../program/evidence/linux-arm64-runtime-20261126/portable.json)
 separates recovered interpreter/PATH setup failures from the final full portable
 gate and explicitly retains skipped-service uncertainty.
+
+## Official RCC 18.19.12 provenance boundary
+
+The [preserved release receipt](../program/evidence/rcc-v18.19.12/official-release-receipt.json)
+and exact `verification.tar.gz` bundle bind the public stable tag to source
+`22f64b93130ed54c2280f790d6ee5e178c0533f2`, the ARM64 asset, public index and
+source-bound manifest/checksums/provenance. Bundle SHA256 is
+`ac0d14e5487b531bd569d9300bdb42eb32ad149ab477c51b96c9958813220a4b`.
+The consumer independently checked the public tag, all eleven release API asset
+digests/sizes, downloaded ARM64/index bytes, and the retained sidecar hashes.
+
+Trust is authenticated GitHub digests plus source-bound JSON provenance,
+compiler metadata, native qualification and protected approval. No vendor
+signature or signed-attestation coverage is claimed. The upstream final-Pi
+execution transcript is retained, but its original raw XML/archive is missing;
+do not claim those raw reports are replayable. Recoverable hosted qualification
+is separate evidence. This retention defect is not erased by a downstream
+smoke, and a passing downstream smoke does not establish deployment acceptance.
+
+Current execution gates and generated package data follow `18.19.12` together.
+Read compatibility for immutable `18.19.8` metadata remains explicit; it does
+not authorize executing the older RCC binary as the current primary.
+
+The existing internal-child/descriptor qualification helpers and invoice bundled-binary
+checksum follow the Runtime pin; the outer developer matrix remains `18.19.8`.
+Changing the compiler RCC adapter range intentionally changes generated manifest
+identity, including the default Work Item declaration golden; preserve historical
+read compatibility separately rather than reusing the old execution identity.
+
+Use `--evidence-dir /absolute/new/evidence` for the native smoke to retain original
+import/server logs on both success and failure, plus the raw HTTP response and
+status/Run identifier. Preserve those bytes before removing the task environment;
+a summary or archive hash cannot substitute for missing original reports.

@@ -86,6 +86,7 @@ def test_arm_checksum_and_elf_required(platform_module, tmp_path, monkeypatch):
 
 def test_build_hook_blocks_arm_before_download(monkeypatch):
     build = load_module("rcc_build_test", ROOT / "build.py")
+    monkeypatch.setattr(build, "RCC_VERSION", "unpublished-test")
     monkeypatch.setattr(build.sys, "platform", "linux")
     monkeypatch.setattr(build.platform, "machine", lambda: "aarch64")
     monkeypatch.setattr(
@@ -100,6 +101,7 @@ def test_build_hook_blocks_arm_before_download(monkeypatch):
 def test_runtime_blocks_cached_x64_on_arm(tmp_path, monkeypatch):
     from actions.server import _download_rcc
 
+    monkeypatch.setattr(_download_rcc, "RCC_VERSION", "unpublished-test")
     cached = tmp_path / "rcc"
     cached.write_bytes(b"existing x64 binary")
     monkeypatch.setattr(_download_rcc.sys, "platform", "linux")
@@ -144,7 +146,7 @@ def test_arm_download_verifies_before_replace(tmp_path, monkeypatch, valid):
             _download_rcc.download_rcc(str(target), force=True)
         assert target.read_bytes() == b"previous"
     assert len(urls) == 1
-    assert urls[0].endswith("/v18.19.8/rcc-linuxarm64")
+    assert urls[0].endswith(f"/v{_download_rcc.RCC_VERSION}/rcc-linuxarm64")
     assert not target.with_name("rcc.download").exists()
 
 
@@ -185,3 +187,58 @@ def test_official_harness_does_not_override_release_contract():
     candidate = harness.cli_bootstrap(Path("/candidate/rcc"), "candidate-digest", False)
     assert "candidate-digest" in candidate
     assert "get_default_rcc_location" in candidate
+
+
+def test_official_arm_pin_matches_retained_release(platform_module):
+    import json
+    import tomllib
+
+    receipt = json.loads(
+        (
+            ROOT.parent
+            / "docs/program/evidence/rcc-v18.19.12/official-release-receipt.json"
+        ).read_text()
+    )
+    version = receipt["releaseTag"].removeprefix("v")
+    build = load_module("rcc_release_build_test", ROOT / "build.py")
+    assert build.RCC_VERSION == version
+    assert (
+        platform_module.expected_sha256(version, "rcc-linuxarm64")
+        == receipt["arm64"]["sha256"]
+    )
+    metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
+    assert {
+        "path": f"src/actions/server/bin/rcc-{version}*",
+        "format": ["sdist", "wheel"],
+    } in metadata["tool"]["poetry"]["include"]
+
+
+def test_runtime_primary_and_historical_metadata_pins():
+    from actions.server import _rcc_runtime_adapter
+    from actions.server._download_rcc import RCC_VERSION
+    from actions.server.deployments.package_revision_compiler import (
+        RCC_ADAPTER_VERSION_RANGE,
+    )
+
+    assert _rcc_runtime_adapter.RCC_VERSION == "v" + RCC_VERSION
+    assert RCC_ADAPTER_VERSION_RANGE == "==" + RCC_VERSION
+    assert "v18.19.8" in _rcc_runtime_adapter.RCC_METADATA_VERSIONS
+
+
+@pytest.mark.parametrize("fail", [False, True])
+def test_smoke_retains_original_log_on_success_and_failure(tmp_path, fail):
+    harness = load_module(
+        "arm64_retention_test", ROOT / "scripts/verify_linux_arm64_candidate.py"
+    )
+    evidence = tmp_path / "evidence"
+    evidence.mkdir()
+    log = tmp_path / "import.log"
+    try:
+        with harness.retained_log(log, evidence) as stream:
+            stream.write("original diagnostic\n")
+            if fail:
+                raise RuntimeError("synthetic failure")
+    except RuntimeError:
+        assert fail
+    log.unlink()
+    assert (evidence / "import.log").read_bytes() == b"original diagnostic\n"

@@ -221,7 +221,7 @@ def test_release_pr_descriptor_probe_is_isolated_and_explicit() -> None:
     checkout, install, probe, receipt = job["steps"]
     assert checkout["with"]["persist-credentials"] is False
     assert (
-        "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
+        "0a13e78201a71c1bbc19a2ee8ccc86dd60a67ec4ffa8cd3a9a8f254d148849ee"
         in install["run"]
     )
     assert probe["env"]["ACTIONS_REAL_RCC_FD_TEST"] == "1"

@@ -357,7 +357,7 @@ def test_zero_requirement_bytes_match_rcc_18_19_8_golden():
     # The RCC upgrade changes adapterVersionRange and derived Package identity;
     # it must not change the source archive bytes.
     assert (
-        json.loads(compiled.runtime_plan_payload)["adapterVersionRange"] == "==18.19.8"
+        json.loads(compiled.runtime_plan_payload)["adapterVersionRange"] == "==18.19.12"
     )
     assert (
         hashlib.sha256(compiled.manifest_json).hexdigest()

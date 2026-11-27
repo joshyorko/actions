@@ -5,7 +5,9 @@ from pathlib import Path
 
 # Add only an official joshyorko/rcc release digest after checking its published
 # checksum and trust metadata. Candidate builds must never populate this table.
-LINUX_ARM64_RELEASE_SHA256: dict[str, str] = {}
+LINUX_ARM64_RELEASE_SHA256: dict[str, str] = {
+    "18.19.12": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+}
 
 
 def rcc_asset_name(system: str, machine: str) -> str:

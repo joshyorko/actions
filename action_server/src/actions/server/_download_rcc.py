@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 # Note: also referenced in action_server/build.py
 # Using joshyorko/rcc open-source version
-RCC_VERSION = "18.19.8"
+RCC_VERSION = "18.19.12"
 
 
 def get_default_rcc_location() -> Path:

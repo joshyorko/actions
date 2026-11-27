@@ -1948,7 +1948,7 @@ dependencies:
     )
     action_file = package_dir / "action.py"
     action_file.write_text(
-        "from actions import action\n\n@action\ndef answer() -> str:\n    return 'rcc-v18.19.8'\n"
+        "from actions import action\n\n@action\ndef answer() -> str:\n    return 'rcc-v18.19.12'\n"
     )
     db = Database(tmp_path / "server.db")
     with db.connect():
@@ -1970,7 +1970,7 @@ dependencies:
             assert expected_artifact_digest.startswith("sha256:")
             assert len(expected_artifact_digest) == len("sha256:") + 64
             assert descriptor["kind"] == "rcc"
-            assert descriptor["rcc_version"] == "v18.19.8"
+            assert descriptor["rcc_version"] == "v18.19.12"
             for forbidden in (
                 "PYTHON_EXE",
                 "CONDA_PREFIX",
@@ -2022,7 +2022,7 @@ dependencies:
                         == 0
                     )
                     assert (
-                        json.loads(result_json.read_text())["result"] == "rcc-v18.19.8"
+                        json.loads(result_json.read_text())["result"] == "rcc-v18.19.12"
                     )
                     receipt = handle._rcc_wrapper.receipt_file
                 assert receipt.exists()

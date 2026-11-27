@@ -182,7 +182,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     rcc_version = subprocess.run(
         [str(real_rcc), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.8"
+    assert rcc_version == "v18.19.12"
 
     trace_path = tmp_path / "rcc-argv.jsonl"
     rcc_wrapper = tmp_path / "rcc-trace"

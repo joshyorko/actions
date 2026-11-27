@@ -1,0 +1,87 @@
+{
+  "assetManifestSha256": "76ccef012ddbd78d849dd15da6c147f60ab3ce2c9f531915e0ecd71b5876cc25",
+  "binaryBuildInfo": {
+    "rcc-linux64": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "linux",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rcc-linuxarm64": {
+      "goVersion": "go1.26.9",
+      "goarch": "arm64",
+      "goos": "linux",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rcc-macos64": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "darwin",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rcc-macosarm64": {
+      "goVersion": "go1.26.9",
+      "goarch": "arm64",
+      "goos": "darwin",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rcc-windows64.exe": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "windows",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rccremote-linux64": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "linux",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rccremote-linuxarm64": {
+      "goVersion": "go1.26.9",
+      "goarch": "arm64",
+      "goos": "linux",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rccremote-macos64": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "darwin",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rccremote-macosarm64": {
+      "goVersion": "go1.26.9",
+      "goarch": "arm64",
+      "goos": "darwin",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    },
+    "rccremote-windows64.exe": {
+      "goVersion": "go1.26.9",
+      "goarch": "amd64",
+      "goos": "windows",
+      "vcsModified": false,
+      "vcsRevision": "22f64b93130ed54c2280f790d6ee5e178c0533f2"
+    }
+  },
+  "nativePlatforms": [
+    "darwin_amd64",
+    "darwin_arm64",
+    "linux_amd64",
+    "linux_arm64",
+    "windows_amd64"
+  ],
+  "preparationRunId": 45915012088,
+  "releaseCandidateExitCode": 0,
+  "schemaVersion": 1,
+  "sourceSha": "22f64b93130ed54c2280f790d6ee5e178c0533f2",
+  "version": "v18.19.12"
+}

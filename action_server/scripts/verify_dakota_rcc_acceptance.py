@@ -20,7 +20,7 @@ import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
-RCC_VERSION = "v18.19.8"
+RCC_VERSION = "v18.19.12"
 RCC_SHA256 = "ea8dc96e66d7a81536b03a344b4eaf44bbd94122585954e70290bd466f5de4b6"
 POETRY_VERSION = "Poetry (version 2.1.1)"
 PROOF_TIMEOUT_SECONDS = 2400
@@ -1089,7 +1089,7 @@ def _verify_rcc(
 ) -> tuple[str, str]:
     rcc_value = source_env.get("ACTIONS_RUNTIME_RCC_BINARY")
     if not rcc_value:
-        raise RuntimeError("ACTIONS_RUNTIME_RCC_BINARY must name pinned RCC v18.19.8")
+        raise RuntimeError("ACTIONS_RUNTIME_RCC_BINARY must name pinned RCC v18.19.12")
     rcc = Path(rcc_value).expanduser().resolve()
     if not rcc.is_file() or not os.access(rcc, os.X_OK):
         raise RuntimeError("the pinned RCC executable is unavailable")
@@ -1104,7 +1104,7 @@ def _verify_rcc(
         env=env,
     )
     if result.returncode or result.stdout.strip() != RCC_VERSION:
-        raise RuntimeError("candidate acceptance requires RCC v18.19.8")
+        raise RuntimeError("candidate acceptance requires RCC v18.19.12")
     digest = sha256_file(rcc)
     if digest != RCC_SHA256:
         raise RuntimeError("RCC binary does not match the pinned Linux release digest")

@@ -68,7 +68,7 @@ def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Pa
     rcc_version = subprocess.run(
         [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.8"
+    assert rcc_version == "v18.19.12"
 
     package_dir = tmp_path / "minimal-package"
     package_dir.mkdir(mode=0o700)
@@ -207,7 +207,7 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
     rcc_version = subprocess.run(
         [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
-    assert rcc_version == "v18.19.8"
+    assert rcc_version == "v18.19.12"
 
     # The acceptance process owns both homes. Never inherit or mutate another
     # task's RCC cache, even when this test is run outside the hosted workflow.
@@ -364,7 +364,7 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 }
                 descriptor = load_descriptor(package.env_json)
                 assert descriptor is not None
-                assert descriptor.rcc_version == "v18.19.8"
+                assert descriptor.rcc_version == "v18.19.12"
                 assert descriptor.provider_reference == provider_url
                 settings = Settings(
                     datadir=data_dir, artifacts_dir=tmp_path / "artifacts"
