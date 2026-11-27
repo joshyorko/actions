@@ -9,10 +9,10 @@ on:
   workflow_dispatch:
     inputs:
       runner_scope:
-        description: Nonpublishing qualification scope (default retains every platform)
+        description: Nonpublishing qualification scope (default retains current release platforms)
         type: choice
         default: all
-        options: [all, macos-arm64]
+        options: [all, macos-arm64, linux-arm64]
   push:
     branches:
       - community
@@ -28,11 +28,11 @@ jobs:
   build-external:
     name: Build Action Server binary without credentials (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: ${{ matrix.os == 'ubuntu-24.04-arm' && 75 || 45 }}
     strategy:
       fail-fast: false
       matrix:
-        include: ${{ inputs.runner_scope == 'macos-arm64' && fromJSON('[{"os":"macos-26","python":"3.12"}]') || fromJSON('[{"os":"ubuntu-22.04","python":"3.12"},{"os":"windows-2022","python":"3.12"},{"os":"macos-26","python":"3.12"}]') }}
+        include: ${{ inputs.runner_scope == 'linux-arm64' && fromJSON('[{"os":"ubuntu-24.04-arm","python":"3.12.15"}]') || inputs.runner_scope == 'macos-arm64' && fromJSON('[{"os":"macos-26","python":"3.12"}]') || fromJSON('[{"os":"ubuntu-22.04","python":"3.12"},{"os":"windows-2022","python":"3.12"},{"os":"macos-26","python":"3.12"}]') }}
     
     steps:
       - name: Verify macOS26 ARM runner
@@ -52,6 +52,19 @@ jobs:
           printf ''macos-26: architecture=%s os_version=%s\n'' "$(uname -m)" "$version"
 
           '
+      - name: Verify native Linux ARM64 runner
+        if: matrix.os == 'ubuntu-24.04-arm'
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        run: |
+          set -euo pipefail
+          test "$RUNNER_OS" = Linux
+          test "$RUNNER_ARCH" = ARM64
+          test "$(uname -m)" = aarch64
+          df -h "$HOME" /tmp
+          available_kib=$(df -Pk "$HOME" | awk 'NR == 2 { print $4 }')
+          test "$available_kib" -ge 20971520 || { echo 'Less than 20 GiB free; stop qualification before builds'; exit 1; }
+
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
         env:
@@ -69,12 +82,27 @@ jobs:
         shell: bash
       
       - name: Install the latest version of uv
+        if: matrix.os != 'ubuntu-24.04-arm'
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+
+      - name: Install pinned ARM64 uv
+        if: matrix.os == 'ubuntu-24.04-arm'
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          version: '0.9.26'
       
       - name: Install Python 3.12
-        run: uv python install 3.12
+        if: matrix.os != 'ubuntu-24.04-arm'
+        run: uv python install ${{ matrix.python }}
+
+      - name: Install pinned native ARM64 Python
+        if: matrix.os == 'ubuntu-24.04-arm'
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12.15'
       
       - name: Install devutils requirements
         run: uv run --no-project --python ${{ matrix.python }} python -m pip install --break-system-packages -r ../devutils/requirements.txt
@@ -104,12 +132,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20.x
+          node-version: ${{ matrix.os == 'ubuntu-24.04-arm' && '20.19.3' || '20.x' }}
       
       - name: Setup go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: ${{ matrix.os == 'ubuntu-24.04-arm' && '1.23.6' || '1.23' }}
           cache-dependency-path: action_server/go-wrapper/go.sum
       
       - name: Build frontend from public dependencies
@@ -155,6 +183,31 @@ jobs:
             otool -arch arm64 -l "$binary"
           done > output/native-macos-load-commands.txt
 
+      - name: Verify ARM64 executables and record exact build inputs
+        if: matrix.os == 'ubuntu-24.04-arm'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv run --no-project --python ${{ matrix.python }} poetry run python - <<'PY'
+          import hashlib, json, platform, struct, subprocess, sys
+          from pathlib import Path
+          from actions.server._download_rcc import RCC_VERSION, get_default_rcc_location
+          from actions.server._rcc_platform import verify_rcc
+          rcc = get_default_rcc_location()
+          verify_rcc(rcc, RCC_VERSION, "rcc-linuxarm64")
+          embedded = list(Path("dist/action-server").rglob("rcc-" + RCC_VERSION))
+          assert len(embedded) == 1
+          verify_rcc(embedded[0], RCC_VERSION, "rcc-linuxarm64")
+          paths = [Path("dist/action-server/action-server"), Path("dist/final/action-server")]
+          binaries = {}
+          for path in paths:
+              data = path.read_bytes()
+              assert data[:6] == b"\x7fELF\x02\x01" and struct.unpack_from("<H", data, 18)[0] == 183
+              binaries[str(path)] = hashlib.sha256(data).hexdigest()
+          commands = {"uv": ["uv", "--version"], "node": ["node", "--version"], "go": ["go", "version"], "packages": [sys.executable, "-m", "pip", "freeze"]}
+          Path("output/native-arm64-inputs.json").write_text(json.dumps({"qualification_only": True, "python": sys.version, "machine": platform.machine(), "binaries": binaries, "rcc_version": RCC_VERSION, "rcc_sha256": hashlib.sha256(rcc.read_bytes()).hexdigest(), "tools": {name: subprocess.check_output(command, text=True) for name, command in commands.items()}}, indent=2) + "\n")
+          PY
+
       - name: Create complete native provenance archive
         run: >-
           uv run --no-project --python ${{ matrix.python }} python
@@ -172,7 +225,7 @@ jobs:
         run: npx playwright install chromium
 
       - name: Verify Canvas candidate-source Runtime and browser acceptance
-        if: matrix.os == 'ubuntu-22.04'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04-arm'
         timeout-minutes: 15
         env:
           ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE: '1'
@@ -419,7 +472,7 @@ jobs:
           PY
 
       - name: Upload Canvas candidate-source receipt
-        if: always() && matrix.os == 'ubuntu-22.04'
+        if: always() && (matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04-arm')
         uses: actions/upload-artifact@v4
         with:
           name: canvas-query-candidate-${{ github.run_id }}-${{ github.run_attempt }}
@@ -430,7 +483,7 @@ jobs:
           retention-days: 7
 
       - name: Verify packaged Work Items browser acceptance (frozen)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04-arm' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
@@ -445,7 +498,7 @@ jobs:
           --basetemp "${{ runner.temp }}/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
 
       - name: Verify packaged Work Items browser acceptance (Go wrapper)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04-arm' || matrix.os == 'windows-2022' || matrix.os == 'macos-26'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
@@ -528,6 +581,21 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+      - name: Prepare candidate inputs for ARM64 clean-wheel checks
+        if: matrix.os == 'ubuntu-24.04-arm'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir candidate-core-wheelhouse candidate-helper-wheelhouse candidate-sdk-wheelhouse
+          cp "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/wheels/"*.whl candidate-core-wheelhouse/
+          cp "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/sdk-wheels/"*.whl candidate-sdk-wheelhouse/
+          cd ../actions-http-helper
+          uv run --no-project --python ${{ matrix.python }} poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse
+          cd ../action_server
+          uv run --no-project --python ${{ matrix.python }} python scripts/write_candidate_sdk_producer.py candidate-core-wheelhouse --distribution actions-core
+          uv run --no-project --python ${{ matrix.python }} python scripts/write_candidate_sdk_producer.py candidate-sdk-wheelhouse
+          uv run --no-project --python ${{ matrix.python }} python -m pip install --break-system-packages cibuildwheel==2.23.4
+
       - name: Clean task-owned Work Items RCC home
         if: always()
         env:
@@ -562,6 +630,54 @@ jobs:
           scripts/verify_native_history.py
           --source-sha "${{ github.sha }}"
           --receipt output/native-history.json
+
+      - name: Build and clean-test native ARM64 wheels
+        if: matrix.os == 'ubuntu-24.04-arm'
+        timeout-minutes: 30
+        shell: bash
+        run: |
+          set -euo pipefail
+          df -h "$HOME" /tmp
+          available_kib=$(df -Pk "$HOME" | awk 'NR == 2 { print $4 }')
+          test "$available_kib" -ge 20971520 || { echo 'Less than 20 GiB free; stop before wheel containers'; exit 1; }
+          uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel --output-dir arm64-wheelhouse
+        env:
+          CIBW_ARCHS_LINUX: aarch64
+          CIBW_BUILD: cp312-manylinux_aarch64 cp313-manylinux_aarch64
+          CIBW_ENVIRONMENT: ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BEFORE_TEST: python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse
+          CIBW_TEST_COMMAND: python {project}/scripts/verify_linux_arm64_wheel.py {wheel} {project}
+
+      - name: Bind ARM64 wheel bytes to their producer
+        if: matrix.os == 'ubuntu-24.04-arm'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv run --no-project --python ${{ matrix.python }} poetry run python scripts/verify_linux_arm64_wheel.py --verify-evidence arm64-wheelhouse arm64-wheel-evidence
+          uv run --no-project --python ${{ matrix.python }} python scripts/write_runtime_build_source.py arm64-wheelhouse
+
+      - name: Retain actual ARM64 wheel container identities
+        if: always() && matrix.os == 'ubuntu-24.04-arm'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          docker image ls --digests --no-trunc > output/arm64-wheel-images.txt
+
+      - name: Upload qualification-only ARM64 wheels and original receipts
+        if: always() && matrix.os == 'ubuntu-24.04-arm'
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-arm64-qualification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            action_server/output/native-arm64-inputs.json
+            action_server/output/arm64-wheel-images.txt
+            action_server/runtime-build-source.json
+            action_server/arm64-wheelhouse/
+            action_server/arm64-wheel-evidence/
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Upload native acceptance receipt
         if: always()

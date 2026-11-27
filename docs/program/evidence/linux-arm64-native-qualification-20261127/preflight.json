@@ -1,0 +1,31 @@
+{
+  "qualification": "preflight only; native hosted proof not yet executed",
+  "base": "58f880f8ca187404b06a2f48f217fa3d60e8c01c",
+  "branch": "feat/linux-arm64-runtime-20261126",
+  "python": "3.12.15",
+  "outer_rcc": "18.19.8",
+  "bundled_rcc": "18.19.12",
+  "devutils": {
+    "passed": 391
+  },
+  "toolkit": {
+    "passed": 247,
+    "skipped": 5,
+    "note": "existing gated real-RCC tests; not claimed passed"
+  },
+  "final_focused": {
+    "passed": 23
+  },
+  "ruff_isort": "PASS on changed Python files",
+  "mypy": "PASS new helper;1 source file",
+  "syntax": "YAML, explicit Bash blocks,4 embedded Python blocks compile",
+  "configured_task_note": "devutils has no Invoke lint/typecheck; used declared package tools directly",
+  "source_inputs": {
+    ".github/workflows/frontend-build-unauthenticated.yml": "2b17b2542db8e6b4ddb93fe985ad8578940e8072300e9bc509bc38bbe03e7aea",
+    "action_server/scripts/verify_linux_arm64_wheel.py": "81086fe1427bf202e6b984a60a0b88f21d0b6161fc7799c2316a933b6779ce89",
+    "devutils/tests/test_linux_arm64_qualification.py": "605699001faab7e68d08d35e5d24647fc99e23e1ec507752993ae19fab88537b",
+    "devutils/tests/test_macos26_runner_contract.py": "9f2e98950fe4c5c231102f0c343db287de8b48c2ddbc0de3327d7dd6cf811f83"
+  },
+  "stage_boundary": "default current-platform matrix, strict release inventories and1.1.1 metadata remain unchanged until native qualification passes",
+  "scope": "no Pi, infrastructure provisioning, merge, tag or publication"
+}

@@ -7906,3 +7906,26 @@ not turn excluded integration tests or skipped service tests into passes.
 Log-retention tests compare the retained bytes with the original closed file
 before deleting it. Do not assume text-mode writes use LF: Windows translates
 newlines to CRLF, and byte-preserving evidence must retain those original bytes.
+
+The nonpublishing native workflow has an explicit `linux-arm64` manual scope
+on `ubuntu-24.04-arm`. Its default `all` scope retains the existing Linux x64,
+Windows x64 and macOS ARM64 matrix while ARM64 qualification is staged. The
+manual lane keeps frozen and Go-wrapper Action, browser, storage and history
+gates, and clean-tests CPython 3.12/3.13 manylinux ARM64 wheels with the official
+RCC contract. `linux-arm64-qualification-<run>-<attempt>` retains the selected
+wheel bytes, source-bound producer receipt, original Action logs and actual
+tool/container identities; it is deliberately outside the release collector's
+`*-wheels` artifact names. Missing either wheel slot, original logs or matching
+source/wheel/RCC/HTTP receipts fails the qualification evidence gate.
+
+A workflow definition or local contract test is not native qualification.
+Require the exact-head run and retained native receipts to pass before changing
+strict native/wheel/manifest/checksum publication inventories or selecting the
+next unused stable version. Installed-wheel proof does not substitute for the
+frozen and Go-wrapper gates. Preserve every existing platform gate and existing
+CI run; manual qualification does not authorize a merge, tag or publication.
+
+`devutils` does not expose Invoke `lint`/`typecheck` tasks. Use its declared
+Poetry Ruff/isort/mypy commands and full pytest suite. Qualification helpers in
+`action_server/scripts/` also need explicit static-check selection because the
+common Runtime lint/typecheck targets cover `src` and `tests`, not `scripts`.
