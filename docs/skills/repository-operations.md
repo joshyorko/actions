@@ -7957,3 +7957,11 @@ The Ubuntu 24.04 ARM64 standalone receipt establishes that host only. The
 qualified bundle's highest observed ELF requirement is GLIBC 2.38; a successful
 manylinux wheel or older Pi wheel run does not qualify that standalone on
 Debian 12/Pi. Keep downstream standalone base-OS compatibility explicit.
+
+When preparing Runtime version metadata, update the candidate invoice example
+pin in `action_server/examples/invoice_reconciliation/template.json` and its
+README wheel example together. The existing
+`test_invoice_example_pins_match_candidate_packages` checks Runtime, Core and
+Work Items pins against their package manifests; run the full invoice test
+module before pushing a version change. This is a source consistency gate, not
+an installed invoice or ARM64 runtime acceptance claim.
