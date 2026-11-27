@@ -7869,3 +7869,9 @@ Use `--evidence-dir /absolute/new/evidence` for the native smoke to retain origi
 import/server logs on both success and failure, plus the raw HTTP response and
 status/Run identifier. Preserve those bytes before removing the task environment;
 a summary or archive hash cannot substitute for missing original reports.
+
+Analytics test timestamps must be UTC-aware: SQLite
+`date('now', 'start of day')` uses UTC, so a naive host-local fixture can report
+zero runs for "today" while UTC and the workstation have different calendar
+dates. Keep the fixture on the production UTC timestamp contract rather than
+changing product date calculations to satisfy a local-time fixture.
