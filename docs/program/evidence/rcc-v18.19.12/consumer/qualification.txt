@@ -1,0 +1,291 @@
+"/tmp/codex-actions-official-arm64-20261127-PynpfK/robot.yaml" as robot.yaml is:
+tasks:
+  Qualify:
+    shell: python qualify.py
+environmentConfigs:
+  - setup.yaml
+artifactsDir: output
+
+Note! For now, resolved effective environment configuration file is "/tmp/codex-actions-official-arm64-20261127-PynpfK/setup.yaml".
+####  Progress: 00/15  v18.19.12     0.340s  Context: "" <kdlocpanda@pi5-01> [linux_arm64/Debian GNU/Linux 12 (bookworm) [id=debian; version=12]].
+####  Progress: 01/15  v18.19.12     0.015s  Fresh [private mode] holotree environment f2ed82d3-05ee-42ef-19de-6d702492466e. (parent/pid: 17960/17961)
+####  Progress: 02/15  v18.19.12     0.004s  Holotree blueprint is "e4f66e72f00ef62c" [linux_arm64 with 3 workers on 4 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12.15
+- pip=25.3
+---
+####  Progress: 03/15  v18.19.12     0.007s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+####  Progress: 04/15  v18.19.12     0.009s  Cleanup holotree stage for fresh install.
+####  Progress: 05/15  v18.19.12     0.003s  Build environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/holotree/h2a6fe41_eb558489e116a1t".
+####  Progress: 06/15  v18.19.12     0.007s  Restore partial environment into holotree stage "/tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/holotree/h2a6fe41_eb558489e116a1t".
+Note: Extracting micromamba binary from inside rcc.
+####  Progress: 07/15  v18.19.12     1.022s  Running micromamba phase. (micromamba v2.10.0) [layer: e4f66e72f00ef62c]
+####  Progress: 08/15  v18.19.12    22.613s  Skipping pip install phase -- no pip dependencies.
+####  Progress: 09/15  v18.19.12     1.041s  Post install scripts phase skipped -- no scripts.
+####  Progress: 10/15  v18.19.12     0.229s  Activate environment started phase.
+####  Progress: 11/15  v18.19.12     1.158s  Pip check skipped.
+####  Progress: 12/15  v18.19.12     0.009s  Update installation plan.
+####  Progress: 13/15  v18.19.12     0.003s  Record holotree stage to hololib [with 3 workers on 4 CPUs].
+####  Progress: 14/15  v18.19.12     0.701s  Restore space from library [with 3 workers on 4 CPUs; with compression: true].
+Installation plan is: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.12     2.244s  Fresh holotree done [with 3 workers on 4 CPUs].
+Wanted  Version  Origin  |  No.  |  Available              Version     Origin       |  Status
+------  -------  ------  +  ---  +  ---------              -------     ------       +  ------
+-       -        -       |    1  |  _openmp_mutex          4.5         conda-forge  |  N/A
+-       -        -       |    2  |  bzip2                  1.0.8       conda-forge  |  N/A
+-       -        -       |    3  |  ca-certificates        2026.11.20  conda-forge  |  N/A
+-       -        -       |    4  |  ld_impl_linux-aarch64  2.46.1      conda-forge  |  N/A
+-       -        -       |    5  |  libexpat               2.11.0      conda-forge  |  N/A
+-       -        -       |    6  |  libffi                 3.7.0       conda-forge  |  N/A
+-       -        -       |    7  |  libgcc                 16.2.0      conda-forge  |  N/A
+-       -        -       |    8  |  libgomp                16.2.0      conda-forge  |  N/A
+-       -        -       |    9  |  liblzma                5.8.3       conda-forge  |  N/A
+-       -        -       |   10  |  libnsl                 2.0.1       conda-forge  |  N/A
+-       -        -       |   11  |  libpython              3.12.15     conda-forge  |  N/A
+-       -        -       |   12  |  libsqlite              3.54.1      conda-forge  |  N/A
+-       -        -       |   13  |  libuuid                2.42.4      conda-forge  |  N/A
+-       -        -       |   14  |  libxcrypt              4.4.38      conda-forge  |  N/A
+-       -        -       |   15  |  libzlib                1.3.2       conda-forge  |  N/A
+-       -        -       |   16  |  ncurses                6.6         conda-forge  |  N/A
+-       -        -       |   17  |  openssl                3.6.5       conda-forge  |  N/A
+-       -        -       |   18  |  packaging              26.4        conda-forge  |  N/A
+-       -        -       |   19  |  pip                    25.3        conda-forge  |  N/A
+-       -        -       |   20  |  python                 3.12.15     conda-forge  |  N/A
+-       -        -       |   21  |  readline               8.3         conda-forge  |  N/A
+-       -        -       |   22  |  setuptools             84.2.1      conda-forge  |  N/A
+-       -        -       |   23  |  tk                     8.6.13      conda-forge  |  N/A
+-       -        -       |   24  |  tzdata                 2026e       conda-forge  |  N/A
+-       -        -       |   25  |  wheel                  0.48.0      conda-forge  |  N/A
+-       -        -       |   26  |  zstd                   1.5.7       conda-forge  |  N/A
+------  -------  ------  +  ---  +  ---------              -------     ------       +  ------
+Wanted  Version  Origin  |  No.  |  Available              Version     Origin       |  Status
+
+--
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Processing ./actions_runtime-1.1.1.tar.gz
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: actions-runtime
+  Building wheel for actions-runtime (pyproject.toml): started
+  Building wheel for actions-runtime (pyproject.toml): finished with status 'done'
+  Created wheel for actions-runtime: filename=actions_runtime-1.1.1-cp312-cp312-linux_aarch64.whl size=17398086 sha256=ebc0273bef5bc865ff5770a1006332dacff85da019a2c625149f0697f677ee9a
+  Stored in directory: /tmp/codex-actions-official-arm64-20261127-PynpfK/pip-cache/wheels/45/46/70/4b5b080c3bad9e7ffdb7285759e3d94172ac50f2bba0000289
+Successfully built actions-runtime
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Processing ./wheelhouse/actions_runtime-1.1.1-cp312-cp312-linux_aarch64.whl
+Collecting actions-core<2.0.0,>=1.1.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/actions-core/actions_core-1.1.0-py3-none-any.whl.metadata (5.1 kB)
+Collecting actions-http-helper<2.0.0,>=1.0.3 (from actions-runtime==1.1.1)
+  Downloading https://archive1.piwheels.org/simple/actions-http-helper/actions_http_helper-1.0.3-py3-none-any.whl.metadata (7.6 kB)
+Collecting actions-work-items<0.6.0,>=0.5.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/actions-work-items/actions_work_items-0.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting aiohttp<4.0.0,>=3.14.4 (from actions-runtime==1.1.1)
+  Downloading aiohttp-3.14.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (8.3 kB)
+Collecting aiosmtplib<4.0.0,>=3.0.0 (from actions-runtime==1.1.1)
+  Downloading https://archive1.piwheels.org/simple/aiosmtplib/aiosmtplib-3.0.2-py3-none-any.whl.metadata (3.6 kB)
+Collecting certifi>=2026.10.19 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/certifi/certifi-2026.11.20-py3-none-any.whl.metadata (2.5 kB)
+Collecting croniter<3.0.0,>=2.0.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/croniter/croniter-2.0.7-py2.py3-none-any.whl.metadata (27 kB)
+Collecting cryptography<51.0.0,>=50.0.0 (from actions-runtime==1.1.1)
+  Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl.metadata (4.4 kB)
+Collecting fastapi-slim<0.122.0,>=0.121.1 (from actions-runtime==1.1.1)
+  Downloading https://archive1.piwheels.org/simple/fastapi-slim/fastapi_slim-0.121.3-py3-none-any.whl.metadata (30 kB)
+Collecting httpx2<3.0.0,>=2.12.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/httpx2/httpx2-2.16.2-py3-none-any.whl.metadata (10.0 kB)
+Collecting jsonschema<5.0.0,>=4.23.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/jsonschema/jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting jsonschema-specifications<2025.0.0,>=2024.10.1 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/jsonschema-specifications/jsonschema_specifications-2024.10.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting mcp<3.0.0,>=2.0.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/mcp/mcp-2.3.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting msgspec<0.20,>=0.19 (from actions-runtime==1.1.1)
+  Downloading msgspec-0.19.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (6.9 kB)
+Collecting psutil<8.0,>=5.0 (from actions-runtime==1.1.1)
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (22 kB)
+Collecting psycopg<4.0.0,>=3.2.0 (from psycopg[binary]<4.0.0,>=3.2.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/psycopg/psycopg-3.3.9-py3-none-any.whl.metadata (4.4 kB)
+Collecting pydantic<3.0.0,>=2.12.4 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/pydantic/pydantic-2.14.4-py3-none-any.whl.metadata (143 kB)
+Collecting pyjwt<3.0.0,>=2.14.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/pyjwt/pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+Collecting pytz<2025.0,>=2024.1 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/pytz/pytz-2024.2-py3-none-any.whl.metadata (22 kB)
+Collecting pyyaml<7.0.0,>=6.0.3 (from actions-runtime==1.1.1)
+  Downloading pyyaml-6.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.3 kB)
+Collecting redis<6.0.0,>=5.0.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/redis/redis-5.3.1-py3-none-any.whl.metadata (9.4 kB)
+Collecting requests<3,>=2 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/requests/requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting requests_oauthlib<3.0,>=2.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/requests-oauthlib/requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
+Collecting rfc8785==0.1.4 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/rfc8785/rfc8785-0.1.4-py3-none-any.whl.metadata (3.4 kB)
+Collecting termcolor<4.0.0,>=3.2.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/termcolor/termcolor-3.3.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting urllib3<3.0.0,>=2.8.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/urllib3/urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting uvicorn<0.39.0,>=0.38.0 (from actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/uvicorn/uvicorn-0.38.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting watchfiles<2.0.0,>=1.1.1 (from actions-runtime==1.1.1)
+  Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.9 kB)
+Collecting websockets<16.0.0,>=15.0.1 (from actions-runtime==1.1.1)
+  Downloading websockets-15.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (6.8 kB)
+Collecting docstring_parser_fork<0.0.6,>=0.0.5 (from actions-core<2.0.0,>=1.1.0->actions-runtime==1.1.1)
+  Downloading https://archive1.piwheels.org/simple/docstring-parser-fork/docstring_parser_fork-0.0.5-py3-none-any.whl.metadata (3.3 kB)
+Collecting truststore<1.0,>=0.10 (from actions-core<2.0.0,>=1.1.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/truststore/truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+Collecting types-PyYAML>=6.0.0 (from actions-http-helper<2.0.0,>=1.0.3->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/types-pyyaml/types_pyyaml-6.0.12.20261122-py3-none-any.whl.metadata (1.8 kB)
+Collecting typing-extensions>=4.6.0 (from actions-work-items<0.6.0,>=0.5.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/typing-extensions/typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/aiohappyeyeballs/aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/aiosignal/aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting attrs>=17.3.0 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/attrs/attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading frozenlist-1.8.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (20 kB)
+Collecting multidict<8.0,>=4.5 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading multidict-7.2.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (6.1 kB)
+Collecting propcache>=0.2.0 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading propcache-0.5.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (25 kB)
+Collecting yarl<2.0,>=1.25.1 (from aiohttp<4.0.0,>=3.14.4->actions-runtime==1.1.1)
+  Downloading yarl-1.25.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (111 kB)
+Collecting python-dateutil (from croniter<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/python-dateutil/python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting cffi>=2.0.0 (from cryptography<51.0.0,>=50.0.0->actions-runtime==1.1.1)
+  Downloading cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (2.5 kB)
+Collecting starlette<0.51.0,>=0.40.0 (from fastapi-slim<0.122.0,>=0.121.1->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/starlette/starlette-0.50.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi-slim<0.122.0,>=0.121.1->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/annotated-doc/annotated_doc-0.0.7-py3-none-any.whl.metadata (6.4 kB)
+Collecting anyio>=4.10 (from httpx2<3.0.0,>=2.12.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/anyio/anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting httpcore2==2.16.2 (from httpx2<3.0.0,>=2.12.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/httpcore2/httpcore2-2.16.2-py3-none-any.whl.metadata (28 kB)
+Collecting idna>=3.18 (from httpx2<3.0.0,>=2.12.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/idna/idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting h11>=0.16 (from httpcore2==2.16.2->httpx2<3.0.0,>=2.12.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/h11/h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting referencing>=0.28.4 (from jsonschema<5.0.0,>=4.23.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/referencing/referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.25.0 (from jsonschema<5.0.0,>=4.23.0->actions-runtime==1.1.1)
+  Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (4.1 kB)
+Collecting mcp-types==2.3.0 (from mcp<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/mcp-types/mcp_types-2.3.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting opentelemetry-api>=1.28.0 (from mcp<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/opentelemetry-api/opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+Collecting python-multipart>=0.0.9 (from mcp<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/python-multipart/python_multipart-0.0.34-py3-none-any.whl.metadata (6.3 kB)
+Collecting sse-starlette>=3.0.0 (from mcp<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/sse-starlette/sse_starlette-3.7.1-py3-none-any.whl.metadata (15 kB)
+Collecting typing-inspection>=0.4.1 (from mcp<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/typing-inspection/typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+Collecting psycopg-binary==3.3.9 (from psycopg[binary]<4.0.0,>=3.2.0->actions-runtime==1.1.1)
+  Downloading psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+Collecting annotated-types>=0.6.0 (from pydantic<3.0.0,>=2.12.4->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/annotated-types/annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.50.5 (from pydantic<3.0.0,>=2.12.4->actions-runtime==1.1.1)
+  Downloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (6.6 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2->actions-runtime==1.1.1)
+  Downloading charset_normalizer-3.5.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (43 kB)
+Collecting oauthlib>=3.0.0 (from requests_oauthlib<3.0,>=2.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/oauthlib/oauthlib-4.0.1-py3-none-any.whl.metadata (8.6 kB)
+Collecting click>=7.0 (from uvicorn<0.39.0,>=0.38.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/click/click-8.5.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography<51.0.0,>=50.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/pycparser/pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting tzdata (from python-dateutil->croniter<3.0.0,>=2.0.0->actions-runtime==1.1.1)
+  Downloading https://www.piwheels.org/simple/tzdata/tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Downloading https://www.piwheels.org/simple/rfc8785/rfc8785-0.1.4-py3-none-any.whl (9.2 kB)
+Downloading https://www.piwheels.org/simple/actions-core/actions_core-1.1.0-py3-none-any.whl (480 kB)
+Downloading https://archive1.piwheels.org/simple/actions-http-helper/actions_http_helper-1.0.3-py3-none-any.whl (14 kB)
+Downloading https://www.piwheels.org/simple/actions-work-items/actions_work_items-0.5.0-py3-none-any.whl (74 kB)
+Downloading aiohttp-3.14.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (1.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 7.7 MB/s  0:00:00
+Downloading https://archive1.piwheels.org/simple/aiosmtplib/aiosmtplib-3.0.2-py3-none-any.whl (27 kB)
+Downloading https://www.piwheels.org/simple/croniter/croniter-2.0.7-py2.py3-none-any.whl (21 kB)
+Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_aarch64.whl (4.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 20.2 MB/s  0:00:00
+Downloading https://archive1.piwheels.org/simple/docstring-parser-fork/docstring_parser_fork-0.0.5-py3-none-any.whl (37 kB)
+Downloading https://archive1.piwheels.org/simple/fastapi-slim/fastapi_slim-0.121.3-py3-none-any.whl (109 kB)
+Downloading https://www.piwheels.org/simple/httpx2/httpx2-2.16.2-py3-none-any.whl (97 kB)
+Downloading https://www.piwheels.org/simple/httpcore2/httpcore2-2.16.2-py3-none-any.whl (85 kB)
+Downloading https://www.piwheels.org/simple/jsonschema/jsonschema-4.26.0-py3-none-any.whl (90 kB)
+Downloading https://www.piwheels.org/simple/jsonschema-specifications/jsonschema_specifications-2024.10.1-py3-none-any.whl (18 kB)
+Downloading https://www.piwheels.org/simple/mcp/mcp-2.3.0-py3-none-any.whl (368 kB)
+Downloading https://www.piwheels.org/simple/mcp-types/mcp_types-2.3.0-py3-none-any.whl (69 kB)
+Downloading msgspec-0.19.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (210 kB)
+Downloading multidict-7.2.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (506 kB)
+Downloading psutil-7.2.2-cp36-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (156 kB)
+Downloading https://www.piwheels.org/simple/psycopg/psycopg-3.3.9-py3-none-any.whl (219 kB)
+Downloading psycopg_binary-3.3.9-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl (4.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.1/4.1 MB 17.8 MB/s  0:00:00
+Downloading https://www.piwheels.org/simple/pydantic/pydantic-2.14.4-py3-none-any.whl (494 kB)
+Downloading pydantic_core-2.50.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 22.9 MB/s  0:00:00
+Downloading https://www.piwheels.org/simple/pyjwt/pyjwt-2.15.1-py3-none-any.whl (33 kB)
+Downloading https://www.piwheels.org/simple/pytz/pytz-2024.2-py3-none-any.whl (507 kB)
+Downloading pyyaml-6.0.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (814 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 814.7/814.7 kB 15.9 MB/s  0:00:00
+Downloading https://www.piwheels.org/simple/redis/redis-5.3.1-py3-none-any.whl (272 kB)
+Downloading https://www.piwheels.org/simple/requests/requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (239 kB)
+Downloading https://www.piwheels.org/simple/idna/idna-3.20-py3-none-any.whl (69 kB)
+Downloading https://www.piwheels.org/simple/requests-oauthlib/requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+Downloading https://www.piwheels.org/simple/starlette/starlette-0.50.0-py3-none-any.whl (74 kB)
+Downloading https://www.piwheels.org/simple/anyio/anyio-4.16.0-py3-none-any.whl (134 kB)
+Downloading https://www.piwheels.org/simple/termcolor/termcolor-3.3.0-py3-none-any.whl (7.7 kB)
+Downloading https://www.piwheels.org/simple/truststore/truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading https://www.piwheels.org/simple/urllib3/urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading https://www.piwheels.org/simple/uvicorn/uvicorn-0.38.0-py3-none-any.whl (68 kB)
+Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (454 kB)
+Downloading websockets-15.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (183 kB)
+Downloading yarl-1.25.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (115 kB)
+Downloading https://www.piwheels.org/simple/aiohappyeyeballs/aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+Downloading https://www.piwheels.org/simple/aiosignal/aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading https://www.piwheels.org/simple/annotated-doc/annotated_doc-0.0.7-py3-none-any.whl (5.3 kB)
+Downloading https://www.piwheels.org/simple/annotated-types/annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading https://www.piwheels.org/simple/attrs/attrs-26.1.0-py3-none-any.whl (67 kB)
+Downloading https://www.piwheels.org/simple/certifi/certifi-2026.11.20-py3-none-any.whl (127 kB)
+Downloading cffi-2.1.1-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (222 kB)
+Downloading https://www.piwheels.org/simple/click/click-8.5.1-py3-none-any.whl (126 kB)
+Downloading frozenlist-1.8.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (243 kB)
+Downloading https://www.piwheels.org/simple/h11/h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading https://www.piwheels.org/simple/oauthlib/oauthlib-4.0.1-py3-none-any.whl (161 kB)
+Downloading https://www.piwheels.org/simple/opentelemetry-api/opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+Downloading propcache-0.5.4-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (251 kB)
+Downloading https://www.piwheels.org/simple/python-multipart/python_multipart-0.0.34-py3-none-any.whl (32 kB)
+Downloading https://www.piwheels.org/simple/referencing/referencing-0.37.0-py3-none-any.whl (26 kB)
+Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (373 kB)
+Downloading https://www.piwheels.org/simple/sse-starlette/sse_starlette-3.7.1-py3-none-any.whl (18 kB)
+Downloading https://www.piwheels.org/simple/types-pyyaml/types_pyyaml-6.0.12.20261122-py3-none-any.whl (21 kB)
+Downloading https://www.piwheels.org/simple/typing-extensions/typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading https://www.piwheels.org/simple/typing-inspection/typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Downloading https://www.piwheels.org/simple/pycparser/pycparser-3.12-py3-none-any.whl (62 kB)
+Downloading https://www.piwheels.org/simple/python-dateutil/python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Downloading https://www.piwheels.org/simple/tzdata/tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Installing collected packages: pytz, websockets, urllib3, tzdata, typing-extensions, types-PyYAML, truststore, termcolor, rpds-py, rfc8785, pyyaml, python-multipart, pyjwt, pycparser, psycopg-binary, psutil, propcache, oauthlib, multidict, msgspec, idna, h11, frozenlist, docstring_parser_fork, click, charset_normalizer, certifi, attrs, annotated-types, annotated-doc, aiosmtplib, aiohappyeyeballs, yarl, uvicorn, typing-inspection, requests, referencing, redis, python-dateutil, pydantic-core, psycopg, opentelemetry-api, httpcore2, cffi, anyio, aiosignal, actions-work-items, actions-http-helper, watchfiles, starlette, requests_oauthlib, pydantic, jsonschema-specifications, httpx2, cryptography, croniter, aiohttp, sse-starlette, mcp-types, jsonschema, fastapi-slim, actions-core, mcp, actions-runtime
+
+Successfully installed actions-core-1.1.0 actions-http-helper-1.0.3 actions-runtime-1.1.1 actions-work-items-0.5.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiosignal-1.4.0 aiosmtplib-3.0.2 annotated-doc-0.0.7 annotated-types-0.8.0 anyio-4.16.0 attrs-26.1.0 certifi-2026.11.20 cffi-2.1.1 charset_normalizer-3.5.3 click-8.5.1 croniter-2.0.7 cryptography-50.0.2 docstring_parser_fork-0.0.5 fastapi-slim-0.121.3 frozenlist-1.8.0 h11-0.16.0 httpcore2-2.16.2 httpx2-2.16.2 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2024.10.1 mcp-2.3.0 mcp-types-2.3.0 msgspec-0.19.0 multidict-7.2.1 oauthlib-4.0.1 opentelemetry-api-1.45.2 propcache-0.5.4 psutil-7.2.2 psycopg-3.3.9 psycopg-binary-3.3.9 pycparser-3.12 pydantic-2.14.4 pydantic-core-2.50.5 pyjwt-2.15.1 python-dateutil-4.0.0 python-multipart-0.0.34 pytz-2024.2 pyyaml-6.0.4 redis-5.3.1 referencing-0.37.0 requests-2.34.2 requests_oauthlib-2.0.0 rfc8785-0.1.4 rpds-py-2026.9.1 sse-starlette-3.7.1 starlette-0.50.0 termcolor-3.3.0 truststore-0.10.5 types-PyYAML-6.0.12.20261122 typing-extensions-4.16.0 typing-inspection-0.4.5 tzdata-2026.6 urllib3-2.8.0 uvicorn-0.38.0 watchfiles-1.3.0 websockets-15.0.1 yarl-1.25.1
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.12" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  289:1592
+----  rcc env diff  ----
+Notice: Robot run modified the environment which will slow down the next run.
+        Please inform the robot developer about this. Use --trace for details.
+----  rcc env diff  ----
+OK.

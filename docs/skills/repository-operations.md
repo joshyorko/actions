@@ -7875,3 +7875,11 @@ Analytics test timestamps must be UTC-aware: SQLite
 zero runs for "today" while UTC and the workstation have different calendar
 dates. Keep the fixture on the production UTC timestamp contract rather than
 changing product date calculations to satisfy a local-time fixture.
+
+The [installed published-pin consumer receipt](../program/evidence/rcc-v18.19.12/consumer.json)
+binds the normal native build hook, bundled official RCC, installed wheel and
+real HTTP Action to exact source/artifact identities. Its original consumer
+archive is separate from the missing upstream final-Pi archive. Extract
+`consumer/original-evidence.tar.gz` into a new directory before checking its
+`consumer-SHA256SUMS`; the adjacent `.txt` files are byte-preserving readable
+aliases, and the checksum paths refer to the original archive layout.

@@ -1,0 +1,27 @@
+
+  ⚡️ Starting Action Server... v1.1.1
+
+Using user-specified datadir: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/datadir
+Logs may be found at: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/datadir/server_log.txt.
+Checking migration status for database backend: sqlite
+Operating mode: standard
+StreamableHTTP session manager started
+Initializing scheduler engine...
+Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+  ⏰ Scheduler started (check interval: 10.0s)
+
+  ⚡️ Local MCP endpoint: http://127.0.0.1:35297/mcp
+
+  ⚡️ Local Action Server: http://127.0.0.1:35297
+     Public access: use --expose to expose (OpenAPI only)
+API key authentication enabled. Sign in with your configured key.
+2026-11-26 20:41:09: GET /openapi.json 200 OK
+Updating run run-000-f4015c16-1dba-45de-8be7-a03a7bdce30c with changes: 'status': 1 (see: http://127.0.0.1:35297/runs/run-000-f4015c16-1dba-45de-8be7-a03a7bdce30c)
+Updating run run-000-f4015c16-1dba-45de-8be7-a03a7bdce30c with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.7662132820114493 (see: http://127.0.0.1:35297/runs/run-000-f4015c16-1dba-45de-8be7-a03a7bdce30c)
+2026-11-26 20:41:10: POST /api/actions/arm64-synthetic/echo/run 200 OK
+Stopping scheduler...
+Scheduler engine stopped
+Stopping action server...
+Killing sub-process when exiting action server: python3 (pid: 18412)
+Killing sub-process when exiting action server: python3 (pid: 18430)
+StreamableHTTP session manager shutting down

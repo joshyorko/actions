@@ -1,0 +1,10 @@
+
+  ⚡️ Starting Action Server... v1.1.1
+
+Using user-specified datadir: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/datadir
+Logs may be found at: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/datadir/server_log.txt.
+Database file does not exist. Creating it at: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/datadir/server.db
+Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+Python interpreter path: /tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/temp/7cc3144626d23b32/runtime-arm64-candidate-k5o_uatg/actions-home/holotree/2a6fe41_a78733b_cff87426/bin/python3
+Found new action package: arm64-synthetic
+Found new action: echo

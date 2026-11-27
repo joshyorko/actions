@@ -1,0 +1,45 @@
+{
+  "scope": "installed Runtime candidate consuming official published RCC; no deployment/browser/live account qualification",
+  "rcc_tag": "v18.19.12",
+  "rcc_source": "22f64b93130ed54c2280f790d6ee5e178c0533f2",
+  "actions_source": "5fffa17e87bba4f1d0014e8ad48633102ac182f6",
+  "runtime_code_note": "later analytics change is test fixture only; native replay used exact source above",
+  "wheel": {
+    "actions_source": "5fffa17e87bba4f1d0014e8ad48633102ac182f6",
+    "wheel": "actions_runtime-1.1.1-cp312-cp312-linux_aarch64.whl",
+    "wheel_sha256": "ebc0273bef5bc865ff5770a1006332dacff85da019a2c625149f0697f677ee9a",
+    "source_archive_sha256": "49842533a6997097d87765407c85a5b4035a129801db784fd3861d4ea115bc72",
+    "bundled_rcc_sha256": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+    "build_hook": "normal; no skip-download flag"
+  },
+  "receipt": {
+    "qualification": "official RCC consumer smoke; not deployment acceptance",
+    "machine": "aarch64",
+    "python": "3.12.15 (main, Oct 13 2026, 16:55:48) [GCC 15.3.0]",
+    "runtime_version": "1.1.1",
+    "runtime_import": "/tmp/codex-actions-official-arm64-20261127-PynpfK/rcc-home/holotree/2a6fe41_5a1fac3_9fcd2534/lib/python3.12/site-packages/actions/server/__init__.py",
+    "installed_wheel_sha256": "ebc0273bef5bc865ff5770a1006332dacff85da019a2c625149f0697f677ee9a",
+    "rcc_sha256": "e161f9d750776c376ef19ba15676b166447bc12096d208de2ecbbe51899cb1d2",
+    "rcc_version": "v18.19.12",
+    "official_contract": true,
+    "import_exit": 0,
+    "synthetic_result": "arm64:synthetic",
+    "listener": "127.0.0.1 only; stopped",
+    "temporary_files": "removed"
+  },
+  "http": {
+    "status": 200,
+    "run_id": "run-000-f4015c16-1dba-45de-8be7-a03a7bdce30c"
+  },
+  "candidate_override_used": false,
+  "original_evidence_archive_sha256": "3f862c2457ff8c4c3d00f1dcc6e0362768df1a2f8859773be2ab9ffd1bae4b49",
+  "original_evidence_archive_size": 8250,
+  "cleanup": {
+    "listener_independently_unreachable": true,
+    "port": 35297,
+    "task_root_removed": true,
+    "removed_size": "742 MiB",
+    "pi5_01_reservation": "released after original evidence retrieval and checksum validation"
+  },
+  "trust_limits": "See upstream official-release-receipt.json: JSON provenance is not a publisher signature; original upstream final-Pi raw reports remain unavailable. This consumer retains its own original logs/HTTP bytes."
+}
