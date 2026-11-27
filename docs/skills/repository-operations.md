@@ -7965,3 +7965,11 @@ README wheel example together. The existing
 Work Items pins against their package manifests; run the full invoice test
 module before pushing a version change. This is a source consistency gate, not
 an installed invoice or ARM64 runtime acceptance claim.
+
+When a release expands its artifact inventory, refresh the separate backup
+controller with the exact version-aware verifier scripts from that qualified
+release source before requesting copies. Keep the reviewed backup workflow
+template unchanged. Register copies only after two distinct successful runs
+have retained both the payload and exact original ZIP; preserve every earlier
+registry record and the original preparation/manifest identity. This registry
+update changes no release bytes or default workflow tree.
