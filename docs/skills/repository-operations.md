@@ -7912,7 +7912,13 @@ on `ubuntu-24.04-arm`. Its default `all` scope retains the existing Linux x64,
 Windows x64 and macOS ARM64 matrix while ARM64 qualification is staged. The
 manual lane keeps frozen and Go-wrapper Action, browser, storage and history
 gates, and clean-tests CPython 3.12/3.13 manylinux ARM64 wheels with the official
-RCC contract. `linux-arm64-qualification-<run>-<attempt>` retains the selected
+RCC contract. The clean wheel floor runs inside cibuildwheel; the same repaired
+bytes are then installed into real, private RCC-managed Python environments on
+the native host for RCC import and Action execution. Do not spoof `RCC_VERSION`
+or relax the real-RCC harness guard to make a cibuildwheel virtualenv pass it.
+Container-local files are not automatically host artifacts: preserve clean-test
+stdout in the job log and original RCC consumer logs in the host evidence tree.
+`linux-arm64-qualification-<run>-<attempt>` retains the selected
 wheel bytes, source-bound producer receipt, original Action logs and actual
 tool/container identities; it is deliberately outside the release collector's
 `*-wheels` artifact names. Missing either wheel slot, original logs or matching

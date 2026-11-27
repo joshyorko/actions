@@ -1,14 +1,100 @@
-"""Clean-wheel and official RCC Action proof inside native ARM64 cibuildwheel."""
+"""Qualify selected ARM64 wheel bytes in real private RCC environments."""
 
 import argparse
 import hashlib
 import json
 import os
 import platform
+import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+PYTHON_PINS = {"cp312": "python=3.12.15", "cp313": "python=3.13.9=*_cp313"}
+
+
+def isolated_rcc_environment(home: Path, source_sha: str) -> dict[str, str]:
+    environment = os.environ.copy()
+    for key in (
+        "RCC_VERSION",
+        "VIRTUAL_ENV",
+        "POETRY_ACTIVE",
+        "CONDA_PREFIX",
+        "CONDA_DEFAULT_ENV",
+        "PYTHONHOME",
+        "PYTHONPATH",
+    ):
+        environment.pop(key, None)
+    environment["ROBOCORP_HOME"] = str(home)
+    environment["PYTHONNOUSERSITE"] = "1"
+    environment["ACTIONS_CANDIDATE_SOURCE_SHA"] = source_sha
+    return environment
+
+
+def rcc_consumers(wheelhouse: Path, project: Path) -> None:
+    from actions.server._download_rcc import RCC_VERSION, get_default_rcc_location
+    from actions.server._rcc_platform import verify_rcc
+
+    wheels = sorted(wheelhouse.resolve(strict=True).glob("*.whl"))
+    slots = [wheel.stem.rsplit("-", 3)[1] for wheel in wheels]
+    if sorted(slots) != sorted(PYTHON_PINS):
+        raise ValueError("both CPython ARM64 wheel slots required before RCC setup")
+    rcc = get_default_rcc_location().resolve(strict=True)
+    verify_rcc(rcc, RCC_VERSION, "rcc-linuxarm64")
+    evidence = project / "arm64-wheel-evidence"
+    evidence.mkdir(exist_ok=False)
+    with tempfile.TemporaryDirectory(prefix="arm64-wheel-consumers-") as temporary:
+        root = Path(temporary)
+        environment = isolated_rcc_environment(
+            root / "rcc-home", os.environ["GITHUB_SHA"]
+        )
+        for wheel, slot in zip(wheels, slots):
+            recipe = root / slot
+            recipe.mkdir()
+            setup = {
+                "channels": ["conda-forge"],
+                "dependencies": [PYTHON_PINS[slot], "pip=25.3"],
+            }
+            robot = {
+                "tasks": {"Smoke": {"shell": "python --version"}},
+                "environmentConfigs": ["setup.yaml"],
+                "artifactsDir": "artifacts",
+            }
+            for name, value in (("setup.yaml", setup), ("robot.yaml", robot)):
+                text = json.dumps(value, indent=2) + "\n"
+                (recipe / name).write_text(text)
+                (evidence / f"{wheel.stem}.{name}").write_text(text)
+            try:
+                with (evidence / f"{wheel.stem}.rcc.log").open("wb") as log:
+                    subprocess.run(
+                        [
+                            str(rcc),
+                            "task",
+                            "script",
+                            "--space",
+                            "arm64-wheel-" + slot,
+                            "--robot",
+                            str(recipe / "robot.yaml"),
+                            "--",
+                            "python",
+                            str(project / "scripts/verify_linux_arm64_wheel.py"),
+                            "--install-wheel",
+                            str(wheel),
+                            str(project),
+                        ],
+                        cwd=recipe,
+                        env=environment,
+                        check=True,
+                        timeout=900,
+                        stdout=log,
+                        stderr=subprocess.STDOUT,
+                    )
+            finally:
+                if (recipe / "artifacts").exists():
+                    shutil.copytree(
+                        recipe / "artifacts", evidence / f"{wheel.stem}.rcc-artifacts"
+                    )
 
 
 def verify_evidence(
@@ -49,6 +135,8 @@ def verify_evidence(
             or action.get("installed_wheel_sha256") != wheel_hash
             or action.get("rcc_sha256") != digest
             or action.get("rcc_version") != "v" + version
+            or str(proof.get("rcc_environment_version")).removeprefix("v") != version
+            or not proof.get("rcc_environment_prefix")
             or action.get("import_exit") != 0
             or action.get("synthetic_result") != "arm64:synthetic"
             or status.get("status") != 200
@@ -57,7 +145,14 @@ def verify_evidence(
             != "arm64:synthetic"
         ):
             raise ValueError("ARM64 wheel Action receipt differs from producer bytes")
-        originals = ("floor.log", "smoke.log", "raw/import.log", "raw/server.log")
+        originals = (
+            "install.log",
+            "installed-environment.txt",
+            "floor.log",
+            "smoke.log",
+            "raw/import.log",
+            "raw/server.log",
+        )
         if any(not (root / name).is_file() for name in originals):
             raise ValueError("original ARM64 qualification logs missing")
         measured[wheel.name] = wheel_hash
@@ -68,13 +163,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("wheel", type=Path)
     parser.add_argument("project", type=Path)
-    parser.add_argument("--verify-evidence", action="store_true")
+    modes = parser.add_mutually_exclusive_group(required=True)
+    modes.add_argument("--verify-evidence", action="store_true")
+    modes.add_argument("--rcc-consumers", action="store_true")
+    modes.add_argument("--install-wheel", action="store_true")
     args = parser.parse_args()
     if sys.platform != "linux" or platform.machine().lower() not in {
         "aarch64",
         "arm64",
     }:
         parser.error("native Linux ARM64 required")
+    if args.rcc_consumers:
+        rcc_consumers(args.wheel, args.project.resolve(strict=True))
+        return
     if args.verify_evidence:
         from actions.server._download_rcc import RCC_VERSION
         from actions.server._rcc_platform import LINUX_ARM64_RELEASE_SHA256
@@ -103,11 +204,50 @@ def main() -> None:
         return
     wheel = args.wheel.resolve(strict=True)
     project = args.project.resolve(strict=True)
+    rcc_home = Path(os.environ.get("ROBOCORP_HOME", "/nonexistent-rcc-home")).resolve()
+    if not os.environ.get("RCC_VERSION") or not Path(
+        sys.prefix
+    ).resolve().is_relative_to(rcc_home):
+        parser.error("wheel consumer must run in its real private RCC environment")
+    interpreter = wheel.stem.rsplit("-", 3)[1]
+    if interpreter != f"cp{sys.version_info.major}{sys.version_info.minor}":
+        parser.error("RCC Python ABI differs from selected wheel")
     evidence = project / "arm64-wheel-evidence" / wheel.stem
     evidence.mkdir(parents=True, exist_ok=False)
     with tempfile.TemporaryDirectory(prefix="arm64-wheel-rcc-") as temporary:
         environment = os.environ.copy()
         environment["ROBOCORP_HOME"] = temporary
+        with (evidence / "install.log").open("wb") as log:
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(project / "scripts/install_candidate_core.py"),
+                    str(project / "candidate-core-wheelhouse"),
+                    str(project / "candidate-helper-wheelhouse"),
+                    str(project / "candidate-sdk-wheelhouse"),
+                ],
+                check=True,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+            )
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "install",
+                    "--only-binary=:all:",
+                    wheel.as_uri()
+                    + "#sha256="
+                    + hashlib.sha256(wheel.read_bytes()).hexdigest(),
+                ],
+                check=True,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+            )
+        (evidence / "installed-environment.txt").write_text(
+            subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True)
+        )
         with (evidence / "floor.log").open("wb") as log:
             subprocess.run(
                 [
@@ -157,6 +297,8 @@ def main() -> None:
                 "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
                 "python": sys.version,
                 "machine": platform.machine(),
+                "rcc_environment_version": os.environ["RCC_VERSION"],
+                "rcc_environment_prefix": sys.prefix,
                 "qualification_sha": os.environ["ACTIONS_CANDIDATE_SOURCE_SHA"],
                 "status": "PASS",
             },

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "source_sha": "2cec164c17b3b6cbd7527dac42f5dea57fe42f87",
+  "workflow_run_id": "45933481313",
+  "workflow_run_attempt": "1",
+  "platform": "Linux",
+  "architecture": "aarch64",
+  "runner_label": "ubuntu-24.04-arm",
+  "host_os_version": "7.0.0-1017-azure",
+  "python_version": "3.12.15",
+  "go_version": "go version go1.23.6 linux/arm64",
+  "build_command": "uv run --no-project --python 3.12.15 poetry run inv build-executable --go-wrapper",
+  "artifacts": {
+    "frozen": {
+      "path": "dist/action-server/action-server",
+      "sha256": "6b0074642c80c2836e303d8168931b33fc83ee2b090acaacb4c46bac5930aef5",
+      "embedded_files_sha256": "d0747b4f6c4a20ff33b4ad4622f274aeedb6ea88854aaad09463b8829f3ffac3",
+      "assets_zip_sha256": "d76da5afec967e883abaa5758b26171124e7c1d66b7e19839759bdf6f38150c1",
+      "assets_zip_path": "go-wrapper/assets/assets.zip",
+      "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "wrapper_source_files": [
+        "go-wrapper/main.go",
+        "go-wrapper/process.go",
+        "go-wrapper/go.mod",
+        "go-wrapper/go.sum"
+      ],
+      "frozen_package_tree_sha256": "d7d9da5ec51984c59b2efb325fa6b50c2907f4940f713fbf01a8e50088e36d59",
+      "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+    },
+    "go-wrapper": {
+      "path": "dist/final/action-server",
+      "sha256": "23d5cac13c6b5a464f8986130e5e9d00312b022b24de9fceb15d224524356ca7",
+      "embedded_files_sha256": "d0747b4f6c4a20ff33b4ad4622f274aeedb6ea88854aaad09463b8829f3ffac3",
+      "assets_zip_sha256": "d76da5afec967e883abaa5758b26171124e7c1d66b7e19839759bdf6f38150c1",
+      "assets_zip_path": "go-wrapper/assets/assets.zip",
+      "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "wrapper_source_files": [
+        "go-wrapper/main.go",
+        "go-wrapper/process.go",
+        "go-wrapper/go.mod",
+        "go-wrapper/go.sum"
+      ],
+      "frozen_package_tree_sha256": "d7d9da5ec51984c59b2efb325fa6b50c2907f4940f713fbf01a8e50088e36d59",
+      "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+    }
+  },
+  "artifact_downloads": {
+    "go-wrapper": {
+      "artifact_name": "action-server-unauthenticated-ubuntu-24.04-arm",
+      "archive_path": "action-server"
+    },
+    "frozen": {
+      "artifact_name": "action-server-native-provenance-ubuntu-24.04-arm-45933481313-1",
+      "container_archive_path": "native-artifact-provenance.tar",
+      "tree_archive_path": "dist/action-server",
+      "archive_path": "dist/action-server/action-server",
+      "inventory_archive_path": "output/native-artifact-tree-inventory.json"
+    },
+    "manifest": {
+      "artifact_name": "action-server-native-provenance-ubuntu-24.04-arm-45933481313-1",
+      "container_archive_path": "native-artifact-provenance.tar",
+      "archive_path": "output/native-artifact-manifest.json",
+      "inventory_archive_path": "output/native-artifact-tree-inventory.json"
+    }
+  },
+  "provenance_scope": "checks Git HEAD only (not a clean-source attestation); hashes named file contents and frozen-tree metadata (file reads follow symlinks); no candidate Core wheel is included"
+}

@@ -192,13 +192,17 @@ def test_native_arm_manual_scope_retains_binary_history_browser_and_wheel_gates(
         "cp312-manylinux_aarch64",
         "cp313-manylinux_aarch64",
     ]
-    assert "verify_linux_arm64_wheel.py" in wheels["env"]["CIBW_TEST_COMMAND"]
+    assert "verify_published_runtime_floor.py" in wheels["env"]["CIBW_TEST_COMMAND"]
+    assert (
+        "--rcc-consumers"
+        in steps["Qualify selected ARM64 wheels in real RCC environments"]["run"]
+    )
     upload = steps["Upload qualification-only ARM64 wheels and original receipts"]
     assert upload["with"]["name"].startswith("linux-arm64-qualification-")
 
 
 def test_arm_wheel_smoke_rejects_non_native_host_before_creating_evidence(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, capsys
 ):
     spec = importlib.util.spec_from_file_location(
         "arm64_wheel_smoke", ROOT / "action_server/scripts/verify_linux_arm64_wheel.py"
@@ -207,11 +211,14 @@ def test_arm_wheel_smoke_rejects_non_native_host_before_creating_evidence(
     spec.loader.exec_module(module)
     monkeypatch.setattr(module.platform, "machine", lambda: "x86_64")
     monkeypatch.setattr(
-        module.sys, "argv", ["smoke", str(tmp_path / "unused.whl"), str(tmp_path)]
+        module.sys,
+        "argv",
+        ["smoke", "--rcc-consumers", str(tmp_path / "unused.whl"), str(tmp_path)],
     )
     with pytest.raises(SystemExit) as error:
         module.main()
     assert error.value.code == 2
+    assert "native Linux ARM64 required" in capsys.readouterr().err
     assert not (tmp_path / "arm64-wheel-evidence").exists()
 
 

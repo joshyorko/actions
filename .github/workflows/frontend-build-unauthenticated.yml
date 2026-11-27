@@ -643,11 +643,23 @@ jobs:
           uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel --output-dir arm64-wheelhouse
         env:
           CIBW_ARCHS_LINUX: aarch64
+          CIBW_MANYLINUX_AARCH64_IMAGE: quay.io/pypa/manylinux2014_aarch64@sha256:31b71c1b6b52aa1369d6aa632fcaad2874a93620556dfb6f99344620e6ccb37b
           CIBW_BUILD: cp312-manylinux_aarch64 cp313-manylinux_aarch64
           CIBW_ENVIRONMENT: ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}
           CIBW_BUILD_VERBOSITY: 1
           CIBW_BEFORE_TEST: python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse
-          CIBW_TEST_COMMAND: python {project}/scripts/verify_linux_arm64_wheel.py {wheel} {project}
+          CIBW_TEST_COMMAND: python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}" --candidate-sdk-wheelhouse "{project}/candidate-sdk-wheelhouse" --candidate-core-wheelhouse "{project}/candidate-core-wheelhouse"
+
+      - name: Qualify selected ARM64 wheels in real RCC environments
+        if: matrix.os == 'ubuntu-24.04-arm'
+        timeout-minutes: 35
+        shell: bash
+        run: |
+          set -euo pipefail
+          df -h "$HOME" /tmp
+          available_kib=$(df -Pk "$HOME" | awk 'NR == 2 { print $4 }')
+          test "$available_kib" -ge 20971520 || { echo 'Less than 20 GiB free; stop before RCC consumers'; exit 1; }
+          uv run --no-project --python ${{ matrix.python }} poetry run python scripts/verify_linux_arm64_wheel.py --rcc-consumers arm64-wheelhouse .
 
       - name: Bind ARM64 wheel bytes to their producer
         if: matrix.os == 'ubuntu-24.04-arm'

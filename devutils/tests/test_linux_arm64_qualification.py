@@ -47,6 +47,8 @@ def measured_wheels(tmp_path):
                     "wheel": wheel.name,
                     "sha256": digest,
                     "machine": "aarch64",
+                    "rcc_environment_version": VERSION,
+                    "rcc_environment_prefix": "/tmp/private-rcc/holotree/synthetic",
                 }
             )
         )
@@ -66,7 +68,14 @@ def measured_wheels(tmp_path):
             json.dumps({"status": 200, "run_id": "synthetic"})
         )
         (root / "raw/action-response.json").write_text(json.dumps("arm64:synthetic"))
-        for name in ("floor.log", "smoke.log", "raw/import.log", "raw/server.log"):
+        for name in (
+            "install.log",
+            "installed-environment.txt",
+            "floor.log",
+            "smoke.log",
+            "raw/import.log",
+            "raw/server.log",
+        ):
             (root / name).write_bytes(b"original synthetic diagnostic\r\n")
     return wheels, evidence, measured
 
@@ -83,6 +92,7 @@ def test_both_wheel_receipts_bind_source_binary_and_action(qualifier, measured_w
     [
         ("wheel.json", "qualification_sha", "c" * 40),
         ("wheel.json", "machine", "x86_64"),
+        ("wheel.json", "rcc_environment_version", "18.19.8"),
         ("action-receipt.json", "official_contract", False),
         ("action-receipt.json", "installed_wheel_sha256", "c" * 64),
         ("action-receipt.json", "rcc_sha256", "c" * 64),
@@ -123,3 +133,41 @@ def test_x64_wheel_is_not_an_arm64_slot(qualifier, measured_wheels):
     wheel.rename(wheel.with_name(wheel.name.replace("aarch64", "x86_64")))
     with pytest.raises(ValueError, match="matrix mismatch"):
         qualifier.verify_evidence(wheels, evidence, VERSION, DIGEST, SOURCE)
+
+
+def test_parent_environment_cannot_spoof_an_rcc_created_context(
+    qualifier, tmp_path, monkeypatch
+):
+    monkeypatch.setenv("RCC_VERSION", "fake-outer-version")
+    monkeypatch.setenv("VIRTUAL_ENV", "/shared/unrelated-venv")
+    environment = qualifier.isolated_rcc_environment(tmp_path / "private", SOURCE)
+    assert "RCC_VERSION" not in environment
+    assert "VIRTUAL_ENV" not in environment
+    assert environment["ROBOCORP_HOME"] == str(tmp_path / "private")
+    assert environment["ACTIONS_CANDIDATE_SOURCE_SHA"] == SOURCE
+
+
+def test_only_declared_native_python_abis_have_pinned_rcc_recipes(qualifier):
+    assert qualifier.PYTHON_PINS == {
+        "cp312": "python=3.12.15",
+        "cp313": "python=3.13.9=*_cp313",
+    }
+
+
+def test_version_marker_does_not_allow_install_outside_private_rcc_prefix(
+    qualifier, tmp_path, monkeypatch, capsys
+):
+    wheel = tmp_path / "actions_runtime-1.1.1-cp312-cp312-linux_aarch64.whl"
+    wheel.write_bytes(b"not installed")
+    monkeypatch.setattr(qualifier.platform, "machine", lambda: "aarch64")
+    monkeypatch.setattr(qualifier.sys, "platform", "linux")
+    monkeypatch.setenv("RCC_VERSION", VERSION)
+    monkeypatch.setenv("ROBOCORP_HOME", str(tmp_path / "private-rcc"))
+    monkeypatch.setattr(
+        qualifier.sys, "argv", ["smoke", "--install-wheel", str(wheel), str(tmp_path)]
+    )
+    with pytest.raises(SystemExit) as error:
+        qualifier.main()
+    assert error.value.code == 2
+    assert "real private RCC environment" in capsys.readouterr().err
+    assert not (tmp_path / "arm64-wheel-evidence").exists()
